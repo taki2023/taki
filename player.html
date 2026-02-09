@@ -49,10 +49,11 @@ transition:width .15s linear;
 
 </div>
 
-<!-- Timer RIGHT -->
+<!-- Bigger Timer RIGHT -->
 <div id="timeDisplay" style="
-min-width:70px;
-font-size:11px;
+min-width:90px;
+font-size:14px;
+font-weight:600;
 color:#ffffff;
 text-align:right;
 letter-spacing:0.4px;
@@ -73,7 +74,6 @@ border-radius:6px;
 overflow:hidden;
 ">
 
-<!-- Violet Gradient Fill -->
 <div id="volumeFill" style="
 position:absolute;
 height:100%;
@@ -118,10 +118,32 @@ const volumeFill = document.getElementById('volumeFill');
 const timeDisplay = document.getElementById('timeDisplay');
 const playerBox = document.getElementById('playerBox');
 
+/* Load saved volume + position */
+const savedVolume = localStorage.getItem('musicVolume');
+const savedTime = localStorage.getItem('musicTime');
+
+if(savedVolume !== null){
+audio.volume = savedVolume;
+volumeControl.value = savedVolume;
+volumeFill.style.width = (savedVolume * 100) + '%';
+}
+
+audio.addEventListener('loadedmetadata', ()=>{
+if(savedTime !== null && savedTime < audio.duration){
+audio.currentTime = savedTime;
+}
+updateTimer();
+});
+
 function formatTime(seconds) {
 const mins = Math.floor(seconds / 60);
 const secs = Math.floor(seconds % 60);
 return mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+function updateTimer(){
+timeDisplay.textContent =
+formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
 }
 
 /* Play / Pause */
@@ -137,12 +159,12 @@ playerBox.classList.remove('playingGlow');
 }
 });
 
-/* Progress update */
+/* Progress update + SAVE TIME */
 audio.addEventListener('timeupdate', () => {
 const percent = (audio.currentTime / audio.duration) * 100;
 progressFilled.style.width = percent + '%';
-timeDisplay.textContent =
-formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+updateTimer();
+localStorage.setItem('musicTime', audio.currentTime);
 });
 
 /* Seek */
@@ -152,20 +174,15 @@ const clickX = e.clientX - rect.left;
 audio.currentTime = (clickX / rect.width) * audio.duration;
 });
 
-/* Volume */
+/* Volume + SAVE */
 volumeControl.addEventListener('input', (e) => {
 const val = e.target.value;
 audio.volume = val;
 volumeFill.style.width = (val * 100) + '%';
+localStorage.setItem('musicVolume', val);
 });
 
-/* Metadata */
-audio.addEventListener('loadedmetadata', () => {
-timeDisplay.textContent =
-formatTime(0) + ' / ' + formatTime(audio.duration);
-});
-
-/* Stop glow when song ends */
+/* Stop glow when ended */
 audio.addEventListener('ended', ()=>{
 playerBox.classList.remove('playingGlow');
 playBtn.textContent = '▶';
