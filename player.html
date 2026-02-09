@@ -2,102 +2,126 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Club Music Player</title>
+<title>Elegant Club Music Player</title>
 <style>
 body {
   margin: 0;
-  background: transparent;
-  font-family: Arial, Helvetica, sans-serif;
+  background: #121212;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .player {
-  width: 260px;
-  background: #0f0f0f;
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 0 16px rgba(25,255,208,0.4);
-  color: #19ffd0;
+  width: 280px;
+  background: #1e1e1e;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  color: #eee;
 }
 
 .track {
   font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #00ffcc;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
 .controls {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 button {
-  background: #0f0f0f;
-  border: 2px solid #19ffd0;
-  color: #19ffd0;
-  width: 32px;
-  height: 32px;
+  background: #2c2c2c;
+  border: none;
+  color: #eee;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #444;
+}
+
+.progress-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
-  height: 8px;
-  border-radius: 4px;
-  background: #111;
-  outline: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #333;
+  cursor: pointer;
 }
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #aa66ff;
+  background: #ff6b6b;
   cursor: pointer;
-  border: 2px solid #fff;
-  margin-top: -3px;
+  transition: background 0.2s;
 }
 
-input[type=range]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #aa66ff;
-  cursor: pointer;
-  border: 2px solid #fff;
+input[type=range]::-webkit-slider-thumb:hover {
+  background: #ff8787;
 }
 
-#progress {
-  accent-color: #00ffcc;
-  margin-bottom: 6px;
+.timer {
+  font-size: 12px;
+  width: 40px;
+  text-align: center;
 }
 
-#volume {
-  accent-color: #aa66ff;
+.volume-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+
+.volume-container input[type=range] {
+  height: 4px;
+  background: #333;
+}
+
 </style>
 </head>
-
 <body>
+
 <div class="player">
-  <div class="track">DJVI - Can't let Go</div>
+  <div class="track">🎵 Club Theme</div>
 
   <div class="controls">
     <button id="play">▶</button>
-    <input type="range" id="progress" value="0" min="0" step="1">
   </div>
 
-  <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+  <div class="progress-container">
+    <div class="timer" id="current">0:00</div>
+    <input type="range" id="progress" value="0" min="0" step="1">
+    <div class="timer" id="duration">0:00</div>
+  </div>
+
+  <div class="volume-container">
+    <span>🔊</span>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+  </div>
 
   <audio id="audio">
     <source src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3" type="audio/mpeg">
@@ -109,6 +133,8 @@ const audio = document.getElementById("audio");
 const play = document.getElementById("play");
 const progress = document.getElementById("progress");
 const volume = document.getElementById("volume");
+const currentTimeEl = document.getElementById("current");
+const durationEl = document.getElementById("duration");
 
 // Play/pause button
 play.addEventListener("click", async () => {
@@ -133,17 +159,28 @@ volume.addEventListener("input", () => {
 // Set progress max when metadata loads
 audio.addEventListener("loadedmetadata", () => {
   progress.max = Math.floor(audio.duration);
+  durationEl.textContent = formatTime(audio.duration);
 });
 
 // Update progress as audio plays
 audio.addEventListener("timeupdate", () => {
   progress.value = Math.floor(audio.currentTime);
+  currentTimeEl.textContent = formatTime(audio.currentTime);
 });
 
 // Seek audio when progress is changed
 progress.addEventListener("input", () => {
   audio.currentTime = progress.value;
 });
+
+// Format time mm:ss
+function formatTime(sec) {
+  const minutes = Math.floor(sec / 60);
+  const seconds = Math.floor(sec % 60);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
 </script>
+
 </body>
 </html>
+
