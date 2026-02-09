@@ -11,175 +11,176 @@ text-align:center;
 backdrop-filter:blur(6px);
 " id="playerBox">
 
-  <!-- TOP CONTROLS -->
-  <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+<!-- TOP CONTROLS -->
+<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
 
-    <!-- Play -->
-    <button id="playPauseBtn" style="
-    width:38px;height:38px;border-radius:50%;
-    background:linear-gradient(145deg,#ffb37a,#ff8a70);
-    border:none;cursor:pointer;font-size:15px;
-    box-shadow:0 0 12px rgba(255,176,120,0.55);
-    ">▶</button>
+<button id="playPauseBtn" style="
+width:38px;height:38px;border-radius:50%;
+background:linear-gradient(145deg,#ffb37a,#ff8a70);
+border:none;cursor:pointer;font-size:15px;
+box-shadow:0 0 12px rgba(255,176,120,0.55);
+">▶</button>
 
-    <!-- Progress -->
-    <div id="progressBar" style="
-    flex:1;height:12px;background:rgba(40,25,20,0.6);
-    border-radius:10px;position:relative;cursor:pointer;overflow:hidden;
-    ">
-      <div id="progressFilled" style="
-      height:100%;width:0%;
-      background:linear-gradient(90deg,#ffb37a,#ff8a70);
-      border-radius:10px;position:relative;">
-        
-        <!-- 🔘 PROGRESS KNOB -->
-        <div id="progressKnob" style="
-        position:absolute;
-        right:-6px;
-        top:50%;
-        transform:translateY(-50%);
-        width:14px;height:14px;
-        border-radius:50%;
-        background:#ffd1a3;
-        box-shadow:0 0 6px rgba(255,176,120,0.9);
-        "></div>
-
-      </div>
-    </div>
-
-    <!-- LOOP -->
-    <button id="loopBtn" title="Loop" style="
-    width:36px;height:36px;border-radius:50%;
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.15);
-    cursor:pointer;font-size:15px;color:#fff;
-    ">🔁</button>
-
-    <!-- TIMER -->
-    <div id="timeDisplay" style="
-    min-width:110px;
-    font-size:18px;
-    font-family:Arial, sans-serif;
-    font-weight:700;
-    color:#ffffff;
-    text-align:right;
-    ">0:00 / 0:00</div>
-
+<div id="progressBar" style="
+flex:1;height:12px;background:rgba(40,25,20,0.6);
+border-radius:10px;position:relative;cursor:pointer;overflow:hidden;
+">
+  <div id="progressFilled" style="
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#ffb37a,#ff8a70);
+  border-radius:10px;position:relative;">
+    
+    <!-- 🎯 PROGRESS KNOB -->
+    <div id="progressKnob" style="
+    position:absolute;
+    right:-7px;
+    top:50%;
+    transform:translateY(-50%);
+    width:16px;height:16px;
+    border-radius:50%;
+    background:#ffe0bf;
+    box-shadow:0 0 8px rgba(255,176,120,.9);
+    "></div>
   </div>
+</div>
 
-  <!-- VOLUME -->
-  <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
-    <span id="cutIcon" style="color:#caa6ff;font-size:18px;cursor:pointer;">🔊</span>
+<button id="loopBtn" style="
+width:36px;height:36px;border-radius:50%;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.15);
+cursor:pointer;font-size:15px;color:#fff;
+">🔁</button>
 
-    <div style="
-    position:relative;
-    width:100px;
-    height:6px;
-    background:rgba(40,25,20,0.6);
-    border-radius:6px;
-    overflow:hidden;
-    ">
+<div id="timeDisplay" style="
+min-width:110px;font-size:18px;font-weight:700;
+color:#fff;text-align:right;
+">0:00 / 0:00</div>
 
-      <div id="volumeFill" style="
-      position:absolute;height:100%;width:70%;
-      background:linear-gradient(90deg,#7b4dff,#b388ff,#d1b3ff);
-      transition:width .25s ease;
-      "></div>
+</div>
 
-      <!-- 📏 VOLUME END LINE -->
-      <div style="
-      position:absolute;
-      right:0;
-      top:-4px;
-      width:2px;
-      height:14px;
-      background:rgba(255,255,255,0.6);
-      "></div>
+<!-- VOLUME -->
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;">
+<span id="cutIcon" style="font-size:18px;cursor:pointer;">🔊</span>
 
-      <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7"
-      style="position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;">
-    </div>
-  </div>
+<div id="volumeBar" style="
+position:relative;width:100px;height:6px;
+background:rgba(40,25,20,0.6);
+border-radius:6px;cursor:pointer;
+">
 
-  <audio id="audioPlayer" style="display:none"
-  src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
-  </audio>
+<div id="volumeFill" style="
+position:absolute;height:100%;width:70%;
+background:linear-gradient(90deg,#7b4dff,#b388ff,#d1b3ff);
+border-radius:6px;
+"></div>
+
+<!-- 🔊 VOLUME KNOB -->
+<div id="volumeKnob" style="
+position:absolute;
+left:70%;
+top:-5px;
+width:3px;
+height:16px;
+background:#e8dbff;
+box-shadow:0 0 6px rgba(180,140,255,.9);
+"></div>
+
+<input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7"
+style="position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;">
+</div>
+</div>
+
+<audio id="audioPlayer" style="display:none"
+src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
+</audio>
 </div>
 
 <script>
 const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playPauseBtn');
-const loopBtn = document.getElementById('loopBtn');
 const cutIcon = document.getElementById('cutIcon');
 const progressFilled = document.getElementById('progressFilled');
 const progressBar = document.getElementById('progressBar');
-const volumeControl = document.getElementById('volumeControl');
+const volumeBar = document.getElementById('volumeBar');
 const volumeFill = document.getElementById('volumeFill');
+const volumeKnob = document.getElementById('volumeKnob');
+const volumeControl = document.getElementById('volumeControl');
 const timeDisplay = document.getElementById('timeDisplay');
 
-let lastVolume;
+let lastVolume = 0.7;
 
-let savedVolume = parseFloat(localStorage.getItem('musicVolume')) || 0.7;
-let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
-let savedMute = localStorage.getItem('musicMuted') === 'true';
+/* ICON UPDATE */
+function updateIcon(){
+  cutIcon.textContent = (audio.muted || audio.volume === 0) ? '🔇' : '🔊';
+}
 
-audio.volume = savedVolume;
-audio.muted = savedMute;
-audio.currentTime = savedTime;
+/* VOLUME UI UPDATE */
+function updateVolumeUI(v){
+  volumeFill.style.width = (v*100)+'%';
+  volumeKnob.style.left = (v*100)+'%';
+}
 
-volumeControl.value = savedVolume;
-volumeFill.style.width = (savedVolume*100)+'%';
-lastVolume = savedVolume;
+/* LOAD */
+audio.volume = volumeControl.value;
+updateVolumeUI(audio.volume);
+updateIcon();
 
-cutIcon.textContent = (audio.muted || audio.volume === 0) ? '🔇' : '🔊';
+/* PLAY */
+playBtn.onclick = () => audio.paused ? audio.play() : audio.pause();
+audio.onplay = audio.onpause = () =>
+playBtn.textContent = audio.paused ? '▶' : '❚❚';
 
+/* MUTE */
+cutIcon.onclick = () => {
+  if(!audio.muted){
+    lastVolume = audio.volume;
+    audio.muted = true;
+    updateVolumeUI(0);
+  } else {
+    audio.muted = false;
+    audio.volume = lastVolume;
+    updateVolumeUI(lastVolume);
+  }
+  updateIcon();
+};
+
+/* DRAG VOLUME */
+volumeControl.oninput = e => {
+  audio.muted = false;
+  audio.volume = e.target.value;
+  lastVolume = audio.volume;
+  updateVolumeUI(audio.volume);
+  updateIcon();
+};
+
+/* CLICK VOLUME BAR */
+volumeBar.onclick = e => {
+  const r = volumeBar.getBoundingClientRect();
+  let v = (e.clientX - r.left) / r.width;
+  v = Math.max(0, Math.min(1, v));
+  audio.muted = false;
+  audio.volume = v;
+  lastVolume = v;
+  updateVolumeUI(v);
+  updateIcon();
+};
+
+/* PROGRESS */
 function formatTime(s){
   const m = Math.floor(s/60);
   const sec = Math.floor(s%60);
   return m+':'+(sec<10?'0':'')+sec;
 }
 
-function updateTimer(){
-  timeDisplay.textContent =
-    formatTime(audio.currentTime)+' / '+formatTime(audio.duration || 0);
+audio.ontimeupdate = () => {
   progressFilled.style.width =
     (audio.currentTime/(audio.duration||1))*100+'%';
-  localStorage.setItem('musicTime', audio.currentTime);
-}
-
-playBtn.onclick=()=>{ audio.paused?audio.play():audio.pause(); };
-audio.onplay=audio.onpause=()=>{ playBtn.textContent=audio.paused?'▶':'❚❚'; };
-
-loopBtn.onclick=()=>{
-  audio.loop=!audio.loop;
-  loopBtn.style.background=audio.loop?
-  "rgba(150,100,255,0.35)":"rgba(255,255,255,0.08)";
+  timeDisplay.textContent =
+    formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);
 };
 
-cutIcon.onclick=()=>{
-  if(!audio.muted){
-    lastVolume=audio.volume;
-    audio.muted=true;
-    volumeFill.style.width='0%';
-  } else {
-    audio.muted=false;
-    audio.volume=lastVolume;
-    volumeFill.style.width=(lastVolume*100)+'%';
-  }
-  localStorage.setItem('musicMuted', audio.muted);
+progressBar.onclick = e => {
+  const r = progressBar.getBoundingClientRect();
+  audio.currentTime = ((e.clientX - r.left)/r.width) * audio.duration;
 };
-
-volumeControl.oninput=e=>{
-  audio.volume=e.target.value;
-  volumeFill.style.width=(e.target.value*100)+'%';
-  lastVolume=e.target.value;
-  localStorage.setItem('musicVolume', e.target.value);
-};
-
-progressBar.onclick=e=>{
-  const r=progressBar.getBoundingClientRect();
-  audio.currentTime=((e.clientX-r.left)/r.width)*(audio.duration||0);
-};
-
-audio.ontimeupdate=updateTimer;
 </script>
