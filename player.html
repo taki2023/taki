@@ -1,77 +1,92 @@
-<!-- CUSTOM SIDEBAR MUSIC PLAYER -->
-<div style="width: 92%; margin: 0 auto; background: rgba(0,0,0,0.35); border-radius: 16px; padding: 12px; border: 2px solid rgba(255,176,120,0.45); box-shadow: inset 0 0 10px rgba(0,0,0,.25); text-align: center;">
+<!-- BIG MUSIC PLAYER -->
+<div style="width: 92%; margin: 0 auto; background: rgba(0,0,0,0.35); border-radius: 18px; padding: 14px; border: 2px solid rgba(255,176,120,0.45); box-shadow: inset 0 0 12px rgba(0,0,0,.25); text-align: center;">
 
-  <!-- Timer -->
-  <div id="timeDisplay" style="color: #ffb37a; font-size: 14px; margin-bottom: 8px;">0:00 / 0:00</div>
+  <!-- BIG TIMER -->
+  <div id="timeDisplay2" style="color: #ffb37a; font-size: 20px; font-weight: bold; margin-bottom: 10px;">
+    0:00 / 0:00
+  </div>
 
-  <!-- Player Controls -->
-  <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px;">
-    <!-- Play/Pause Button -->
-    <button id="playPauseBtn" style="width: 36px; height: 36px; border-radius: 50%; background: #ffb37a; border: none; box-shadow: 0 0 12px rgba(255,176,120,0.7); cursor: pointer; transition: 0.25s;">▶️</button>
+  <!-- CONTROLS -->
+  <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px;">
 
-    <!-- Progress Bar -->
-    <div style="flex: 1; height: 10px; background: rgba(28,18,15,0.6); border-radius: 8px; position: relative; cursor: pointer;">
-      <div id="progressFilled" style="height: 100%; width: 0%; background: linear-gradient(90deg,#ffb37a,#ff8a70); border-radius: 8px;"></div>
+    <!-- PLAY / PAUSE -->
+    <button id="playPauseBtn2"
+      style="width: 42px; height: 42px; border-radius: 50%; background: #ffb37a; border: none;
+      box-shadow: 0 0 14px rgba(255,176,120,0.8); cursor: pointer; transition: 0.25s; font-size:16px;">
+      ▶️
+    </button>
+
+    <!-- THICK PROGRESS BAR -->
+    <div id="progressContainer2"
+      style="flex: 1; height: 16px; background: rgba(28,18,15,0.6); border-radius: 10px; position: relative; cursor: pointer;">
+      <div id="progressFilled2"
+        style="height: 100%; width: 0%; background: linear-gradient(90deg,#ffb37a,#ff8a70); border-radius: 10px;">
+      </div>
     </div>
+
   </div>
 
-  <!-- Volume Control -->
-  <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-    <span style="color: #ffb37a; font-size: 18px;">🔊</span>
-    <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7" style="width: 100px; cursor: pointer; background: rgba(28,18,15,0.6); border-radius: 8px; height: 6px;">
+  <!-- VOLUME -->
+  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+    <span style="color:#ffb37a; font-size:18px;">🔊</span>
+    <input id="volumeControl2" type="range" min="0" max="1" step="0.01" value="0.7"
+      style="width: 140px; height:8px; cursor:pointer; background: rgba(28,18,15,0.6); border-radius: 10px;">
   </div>
 
-  <audio id="audioPlayer" src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"></audio>
+  <!-- AUDIO -->
+  <audio id="audioPlayer2"
+    src="YOUR-MUSIC-LINK-HERE.mp3">
+  </audio>
 
 </div>
 
 <script>
-const audio = document.getElementById('audioPlayer');
-const playBtn = document.getElementById('playPauseBtn');
-const progressFilled = document.getElementById('progressFilled');
-const volumeControl = document.getElementById('volumeControl');
-const timeDisplay = document.getElementById('timeDisplay');
+const audio2 = document.getElementById('audioPlayer2');
+const playBtn2 = document.getElementById('playPauseBtn2');
+const progressFilled2 = document.getElementById('progressFilled2');
+const progressContainer2 = document.getElementById('progressContainer2');
+const volumeControl2 = document.getElementById('volumeControl2');
+const timeDisplay2 = document.getElementById('timeDisplay2');
 
-// Format time in minutes:seconds
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return mins + ':' + (secs < 10 ? '0' : '') + secs;
+function formatTime(sec){
+  const m = Math.floor(sec/60);
+  const s = Math.floor(sec%60);
+  return m + ':' + (s<10?'0':'') + s;
 }
 
-// Play/Pause toggle
-playBtn.addEventListener('click', () => {
-  if(audio.paused) {
-    audio.play();
-    playBtn.textContent = '⏸️';
+/* PLAY / PAUSE */
+playBtn2.addEventListener('click', () => {
+  if(audio2.paused){
+    audio2.play();
+    playBtn2.textContent='⏸️';
   } else {
-    audio.pause();
-    playBtn.textContent = '▶️';
+    audio2.pause();
+    playBtn2.textContent='▶️';
   }
 });
 
-// Update progress bar and timer
-audio.addEventListener('timeupdate', () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progressFilled.style.width = percent + '%';
-  timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+/* UPDATE BAR + TIME */
+audio2.addEventListener('timeupdate', () => {
+  const percent = (audio2.currentTime / audio2.duration) * 100;
+  progressFilled2.style.width = percent + '%';
+  timeDisplay2.textContent =
+    formatTime(audio2.currentTime) + ' / ' + formatTime(audio2.duration);
 });
 
-// Click on progress bar to seek
-progressFilled.parentElement.addEventListener('click', (e) => {
-  const width = e.currentTarget.clientWidth;
+/* SEEK */
+progressContainer2.addEventListener('click', e => {
+  const width = progressContainer2.clientWidth;
   const clickX = e.offsetX;
-  const duration = audio.duration;
-  audio.currentTime = (clickX / width) * duration;
+  audio2.currentTime = (clickX / width) * audio2.duration;
 });
 
-// Volume control
-volumeControl.addEventListener('input', (e) => {
-  audio.volume = e.target.value;
+/* VOLUME */
+volumeControl2.addEventListener('input', e => {
+  audio2.volume = e.target.value;
 });
 
-// Update timer once metadata is loaded
-audio.addEventListener('loadedmetadata', () => {
-  timeDisplay.textContent = formatTime(0) + ' / ' + formatTime(audio.duration);
+/* INIT TIME */
+audio2.addEventListener('loadedmetadata', () => {
+  timeDisplay2.textContent = '0:00 / ' + formatTime(audio2.duration);
 });
 </script>
