@@ -23,8 +23,7 @@ box-shadow:0 0 12px rgba(255,176,120,0.55);
 
 <!-- PROGRESS BAR -->
 <div id="progressBar" style="
-flex:1;
-height:12px;
+flex:1;height:12px;
 background:rgba(40,25,20,0.6);
 border-radius:10px;
 position:relative;
@@ -40,14 +39,12 @@ position:relative;
 overflow:visible;
 ">
 
-<!-- 🎯 PROGRESS KNOB (NOT CLIPPED) -->
 <div id="progressKnob" style="
 position:absolute;
 right:-8px;
 top:50%;
 transform:translateY(-50%);
-width:16px;
-height:16px;
+width:16px;height:16px;
 border-radius:50%;
 background:#ffe2c4;
 box-shadow:0 0 8px rgba(255,176,120,.9);
@@ -79,28 +76,24 @@ text-align:right;
 
 <div id="volumeBar" style="
 position:relative;
-width:100px;
-height:6px;
+width:100px;height:6px;
 background:rgba(40,25,20,0.6);
 border-radius:6px;
 cursor:pointer;
 ">
 
 <div id="volumeFill" style="
-position:absolute;
-height:100%;
+position:absolute;height:100%;
 width:70%;
 background:linear-gradient(90deg,#7b4dff,#b388ff,#d1b3ff);
 border-radius:6px;
 "></div>
 
-<!-- 🔊 VOLUME KNOB -->
 <div id="volumeKnob" style="
 position:absolute;
 top:-5px;
 left:70%;
-width:3px;
-height:16px;
+width:3px;height:16px;
 background:#e9ddff;
 box-shadow:0 0 6px rgba(180,140,255,.9);
 "></div>
@@ -123,8 +116,16 @@ const volumeFill = document.getElementById('volumeFill');
 const volumeKnob = document.getElementById('volumeKnob');
 const timeDisplay = document.getElementById('timeDisplay');
 
-let lastVolume = 0.7;
 let draggingVolume = false;
+
+/* LOAD MEMORY */
+let savedVolume = parseFloat(localStorage.getItem('musicVolume'));
+let savedTime = parseFloat(localStorage.getItem('musicTime'));
+let savedMuted = localStorage.getItem('musicMuted') === 'true';
+
+audio.volume = isNaN(savedVolume) ? 0.7 : savedVolume;
+audio.muted = savedMuted;
+if(!isNaN(savedTime)) audio.currentTime = savedTime;
 
 /* ICON */
 function updateIcon(){
@@ -136,15 +137,18 @@ function updateIcon(){
 function setVolume(v){
   v = Math.max(0, Math.min(1, v));
   audio.volume = v;
+  audio.muted = false;
   volumeFill.style.width = (v*100)+'%';
   volumeKnob.style.left = (v*100)+'%';
-  lastVolume = v;
+  localStorage.setItem('musicVolume', v);
+  localStorage.setItem('musicMuted', false);
   updateIcon();
 }
 
-/* LOAD */
-audio.volume = lastVolume;
-setVolume(lastVolume);
+/* INIT UI */
+volumeFill.style.width = (audio.volume*100)+'%';
+volumeKnob.style.left = (audio.volume*100)+'%';
+updateIcon();
 
 /* PLAY */
 playBtn.onclick = () =>
@@ -154,13 +158,15 @@ audio.onplay = audio.onpause =
 
 /* MUTE */
 cutIcon.onclick = () => {
-  if(!audio.muted){
-    audio.muted = true;
-    setVolume(0);
+  audio.muted = !audio.muted;
+  localStorage.setItem('musicMuted', audio.muted);
+  if(audio.muted){
+    volumeFill.style.width = '0%';
+    volumeKnob.style.left = '0%';
   } else {
-    audio.muted = false;
-    setVolume(lastVolume || 0.7);
+    setVolume(audio.volume || 0.7);
   }
+  updateIcon();
 };
 
 /* CLICK VOLUME */
@@ -169,7 +175,7 @@ volumeBar.onclick = e => {
   setVolume((e.clientX - r.left) / r.width);
 };
 
-/* DRAG VOLUME (FIXED) */
+/* DRAG VOLUME */
 volumeBar.onmousedown = () => draggingVolume = true;
 document.onmouseup = () => draggingVolume = false;
 document.onmousemove = e => {
@@ -190,6 +196,7 @@ audio.ontimeupdate = () => {
     (audio.currentTime/(audio.duration||1))*100+'%';
   timeDisplay.textContent =
     formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);
+  localStorage.setItem('musicTime', audio.currentTime);
 };
 
 progressBar.onclick = e => {
@@ -198,3 +205,4 @@ progressBar.onclick = e => {
     ((e.clientX - r.left) / r.width) * audio.duration;
 };
 </script>
+
