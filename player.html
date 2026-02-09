@@ -1,253 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Violet Player</title>
+<!-- 🎵 ELEGANT SIDEBAR MUSIC PLAYER -->
+<div style="
+width:92%;
+margin:0 auto;
+background:linear-gradient(180deg, rgba(25,18,15,0.55), rgba(15,10,8,0.65));
+border-radius:18px;
+padding:14px;
+border:1.5px solid rgba(255,176,120,0.35);
+box-shadow:0 0 18px rgba(0,0,0,.35), inset 0 0 12px rgba(0,0,0,.25);
+text-align:center;
+backdrop-filter:blur(6px);
+" id="playerBox">
 
-<style>
-body{
-  background:#0f0f14;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  font-family:Arial, sans-serif;
-  color:white;
-}
+  <!-- TOP CONTROLS -->
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
 
-.player{
-  width:420px;
-  background:rgba(255,255,255,0.04);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 0 25px rgba(150,80,255,0.15);
-}
+    <!-- Play -->
+    <button id="playPauseBtn" style="
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(145deg,#ffb37a,#ff8a70);
+    border:none;cursor:pointer;font-size:15px;
+    box-shadow:0 0 12px rgba(255,176,120,0.55);
+    ">▶</button>
 
-/* Song Row */
-.song-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.song-logo{
-  font-size:28px;
-  cursor:pointer;
-  transition:0.2s;
-}
-.song-logo:hover{ transform:scale(1.15);} 
-
-.song-title{ flex:1; }
-
-/* Progress Bar */
-.progress-container{
-  position:relative;
-  margin-top:15px;
-}
-
-.progress-bar{
-  width:100%;
-  height:8px;
-  background:#222;
-  border-radius:10px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-}
-
-.progress{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#7a3cff,#c084ff);
-}
-
-.timer{
-  position:absolute;
-  right:0;
-  top:-28px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-/* Volume */
-.volume-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:18px;
-}
-
-.volume-bar{
-  flex:1;
-  height:8px;
-  background:#222;
-  border-radius:10px;
-  overflow:hidden;
-  position:relative;
-}
-
-.volume-fill{
-  height:100%;
-  width:70%;
-  background:linear-gradient(90deg,#7a3cff,#c084ff);
-}
-
-.volume-slider{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:8px;
-  opacity:0;
-  cursor:pointer;
-}
-
-/* Buttons */
-.controls{
-  margin-top:18px;
-  display:flex;
-  justify-content:center;
-  gap:15px;
-}
-
-button{
-  background:#1c1c25;
-  border:none;
-  color:white;
-  padding:10px 14px;
-  border-radius:10px;
-  cursor:pointer;
-}
-button:hover{ background:#2a2a38; }
-
-.loop-active{
-  box-shadow:0 0 10px #a855f7;
-}
-
-/* Glow when playing */
-.playing{
-  box-shadow:0 0 30px rgba(170,90,255,0.45);
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="player" id="player">
-
-  <div class="song-row">
-    <div class="song-logo" id="cutIcon">🔊</div>
-    <div class="song-title">My Song</div>
-  </div>
-
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar">
-      <div class="progress" id="progress"></div>
+    <!-- Progress -->
+    <div id="progressBar" style="
+    flex:1;height:12px;background:rgba(40,25,20,0.6);
+    border-radius:10px;position:relative;cursor:pointer;overflow:hidden;
+    ">
+      <div id="progressFilled" style="
+      height:100%;width:0%;
+      background:linear-gradient(90deg,#ffb37a,#ff8a70);
+      border-radius:10px;"></div>
     </div>
-    <div class="timer" id="timer">0:00</div>
+
+    <!-- LOOP AFTER BAR -->
+    <button id="loopBtn" title="Loop" style="
+    width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    cursor:pointer;font-size:15px;color:#fff;
+    ">🔁</button>
+
+    <!-- BIG TIMER -->
+    <div id="timeDisplay" style="
+    min-width:110px;
+    font-size:18px;
+    font-family:Arial, sans-serif;
+    font-weight:700;
+    color:#ffffff;
+    text-align:right;
+    ">0:00 / 0:00</div>
+
   </div>
 
-  <div class="volume-row">
-    <div>🔉</div>
-    <div class="volume-bar">
-      <div class="volume-fill" id="volumeFill"></div>
-      <input type="range" min="0" max="1" step="0.01" class="volume-slider" id="volumeControl">
+  <!-- VOLUME / CUT -->
+  <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+    <span id="cutIcon" style="color:#caa6ff;font-size:18px;cursor:pointer;">🔊</span>
+
+    <div style="position:relative;width:100px;height:6px;background:rgba(40,25,20,0.6);border-radius:6px;overflow:hidden;">
+      <div id="volumeFill" style="
+      position:absolute;height:100%;width:70%;
+      background:linear-gradient(90deg,#7b4dff,#b388ff,#d1b3ff);
+      "></div>
+      <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7"
+      style="position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;">
     </div>
-    <button id="loopBtn">🔁</button>
   </div>
 
-  <div class="controls">
-    <button id="playBtn">▶️ Play</button>
-  </div>
-
+  <audio id="audioPlayer"
+  src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
+  </audio>
 </div>
 
-<audio id="audio" src="your-song.mp3"></audio>
-
 <script>
-const audio = document.getElementById('audio');
-const playBtn = document.getElementById('playBtn');
-const progress = document.getElementById('progress');
+const audio = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playPauseBtn');
+const loopBtn = document.getElementById('loopBtn');
+const cutIcon = document.getElementById('cutIcon');
+const progressFilled = document.getElementById('progressFilled');
 const progressBar = document.getElementById('progressBar');
-const timer = document.getElementById('timer');
 const volumeControl = document.getElementById('volumeControl');
 const volumeFill = document.getElementById('volumeFill');
-const cutIcon = document.getElementById('cutIcon');
-const loopBtn = document.getElementById('loopBtn');
-const player = document.getElementById('player');
+const timeDisplay = document.getElementById('timeDisplay');
 
-/* Restore volume + last position */
-audio.volume = localStorage.getItem('musicVolume') ? parseFloat(localStorage.getItem('musicVolume')) : 0.7;
-volumeControl.value = audio.volume;
-volumeFill.style.width = (audio.volume*100)+"%";
+/* Memory */
+let savedVolume = localStorage.getItem('musicVolume') ?? 0.7;
+let savedTime = localStorage.getItem('musicTime') ?? 0;
+let savedMute = localStorage.getItem('musicMuted') === 'true';
+let lastVolume = savedVolume; // remember previous volume for mute/unmute
 
-if(localStorage.getItem('musicTime')){
-  audio.currentTime = parseFloat(localStorage.getItem('musicTime'));
+audio.volume = savedVolume;
+volumeControl.value = savedVolume;
+volumeFill.style.width = (savedVolume*100)+'%';
+
+if(savedMute){
+  audio.muted = true;
+  cutIcon.textContent = '🔇';
+} else {
+  audio.muted = false;
+  cutIcon.textContent = '🔊';
 }
 
-/* Play / Pause */
+/* Loaded metadata */
+audio.addEventListener('loadedmetadata',()=>{
+  if(savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
+  updateTimer();
+});
+
+/* Format time */
+function formatTime(s){
+  const m = Math.floor(s/60);
+  const sec = Math.floor(s%60);
+  return m+':'+(sec<10?'0':'')+sec;
+}
+
+/* Update timer and progress */
+function updateTimer(){
+  timeDisplay.textContent = formatTime(audio.currentTime)+' / '+formatTime(audio.duration);
+  progressFilled.style.width = (audio.currentTime/audio.duration*100)+'%';
+  localStorage.setItem('musicTime', audio.currentTime);
+}
+
+/* Update play button symbol */
+function updatePlayButton(){
+  playBtn.textContent = audio.paused ? '▶' : '❚❚';
+}
+
+/* Play/Pause */
 playBtn.onclick = () => {
-  if(audio.paused){
-    audio.play();
-    playBtn.textContent = "⏸ Pause";
-    player.classList.add('playing');
-  }else{
-    audio.pause();
-    playBtn.textContent = "▶️ Play";
-    player.classList.remove('playing');
-  }
+  if(audio.paused) audio.play();
+  else audio.pause();
+  updatePlayButton();
 };
 
-/* Progress update */
-audio.ontimeupdate = () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progress.style.width = percent + "%";
+/* Update button on play/pause events */
+audio.addEventListener('play', updatePlayButton);
+audio.addEventListener('pause', updatePlayButton);
 
-  const m = Math.floor(audio.currentTime/60);
-  const s = Math.floor(audio.currentTime%60).toString().padStart(2,'0');
-  timer.textContent = m+":"+s;
+/* LOOP */
+loopBtn.onclick = () => {
+  audio.loop = !audio.loop;
+  loopBtn.style.background = audio.loop ? "rgba(150,100,255,0.35)" : "rgba(255,255,255,0.08)";
+};
 
-  localStorage.setItem('musicTime', audio.currentTime);
+/* CUT / Mute with memory of last volume */
+cutIcon.onclick = () => {
+  if(!audio.muted){ 
+    // Mute: store current volume, set volume to 0 visually
+    lastVolume = audio.volume;
+    audio.muted = true;
+    volumeFill.style.width = '0%';
+    cutIcon.textContent = '🔇';
+  } else {
+    // Unmute: restore previous volume
+    audio.muted = false;
+    audio.volume = lastVolume;
+    volumeFill.style.width = (lastVolume*100)+'%';
+    cutIcon.textContent = '🔊';
+  }
+  localStorage.setItem('musicMuted', audio.muted);
+  localStorage.setItem('musicVolume', audio.volume);
 };
 
 /* Seek */
-progressBar.onclick = (e)=>{
-  const rect = progressBar.getBoundingClientRect();
-  const percent = (e.clientX - rect.left)/rect.width;
-  audio.currentTime = percent * audio.duration;
+progressBar.onclick = (e) => {
+  const r = progressBar.getBoundingClientRect();
+  audio.currentTime = ((e.clientX - r.left)/r.width) * audio.duration;
 };
 
 /* Volume */
-volumeControl.oninput = ()=>{
-  audio.volume = volumeControl.value;
-  volumeFill.style.width = (audio.volume*100)+"%";
-  localStorage.setItem('musicVolume', audio.volume);
+volumeControl.oninput = (e) => {
+  audio.volume = e.target.value;
+  volumeFill.style.width = (e.target.value*100)+'%';
+  lastVolume = e.target.value; // update lastVolume for mute/unmute
+  localStorage.setItem('musicVolume', e.target.value);
 };
 
-/* Mute / Cut (no restart) */
-let lastVolume = audio.volume;
-cutIcon.onclick = ()=>{
-  if(audio.volume > 0){
-    lastVolume = audio.volume;
-    audio.volume = 0;
-    volumeControl.value = 0;
-    volumeFill.style.width = "0%";
-    cutIcon.textContent = "🔇";
-  }else{
-    audio.volume = lastVolume || 0.7;
-    volumeControl.value = audio.volume;
-    volumeFill.style.width = (audio.volume*100)+"%";
-    cutIcon.textContent = "🔊";
-  }
-  localStorage.setItem('musicVolume', audio.volume);
-};
-
-/* Infinite Loop */
-loopBtn.onclick = ()=>{
-  audio.loop = !audio.loop;
-  loopBtn.classList.toggle('loop-active');
-};
-
-<
+/* Update timer continuously */
+audio.ontimeupdate = updateTimer;
+</script>
