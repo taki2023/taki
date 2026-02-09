@@ -11,23 +11,23 @@ html, body {
     overflow: hidden;
 }
 
-/* Music Player Container styled like sidebar */
+/* Music Player Container styled like sidebar but darker */
 #playerBox {
     width: 100%;
     margin: 0;
     padding: 12px 10px;
     border-radius: 16px;
-    background: rgba(0, 0, 0, 0.40); /* dark translucent like sidebar */
+    background: rgba(0, 0, 0, 0.70); /* darker translucent */
     border: 2px solid rgba(255,176,120,0.45); /* golden outline */
-    box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px inset;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 0 12px inset;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     text-align: center;
 }
 
 /* Bars styled to match sidebar theme */
 #progressBar, #volumeBar {
-    background: rgba(255, 255, 255, 0.08); /* subtle overlay */
+    background: rgba(255, 255, 255, 0.06); /* even subtler overlay */
     border-radius: 8px;
     position: relative;
 }
@@ -35,13 +35,13 @@ html, body {
 #progressFilled, #volumeFill {
     border-radius: 8px;
     background: linear-gradient(90deg, #ffb37a, #ff8a70); /* golden-orange gradient */
-    box-shadow: inset 0 0 6px rgba(255,176,120,0.5);
+    box-shadow: inset 0 0 6px rgba(255,176,120,0.6);
 }
 
 /* Knobs */
 #progressKnob, #volumeKnob {
-    box-shadow: 0 0 6px rgba(255,176,120,0.9);
-    background: #ffe2c4;
+    box-shadow: 0 0 8px rgba(255,176,120,1);
+    background: #ffd8b2;
 }
 
 /* Buttons (play/pause, loop, mute) */
@@ -50,6 +50,7 @@ html, body {
     cursor: pointer;
 }
 </style>
+
 
 <!-- 🎵 Transparent Music Player -->
 <div id="playerBox">
