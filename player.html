@@ -1,6 +1,9 @@
 <!-- CUSTOM SIDEBAR MUSIC PLAYER -->
 <div style="width: 92%; margin: 0 auto; background: rgba(0,0,0,0.35); border-radius: 16px; padding: 12px; border: 2px solid rgba(255,176,120,0.45); box-shadow: inset 0 0 10px rgba(0,0,0,.25); text-align: center;">
 
+  <!-- Timer -->
+  <div id="timeDisplay" style="color: #ffb37a; font-size: 14px; margin-bottom: 8px;">0:00 / 0:00</div>
+
   <!-- Player Controls -->
   <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px;">
     <!-- Play/Pause Button -->
@@ -27,6 +30,14 @@ const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playPauseBtn');
 const progressFilled = document.getElementById('progressFilled');
 const volumeControl = document.getElementById('volumeControl');
+const timeDisplay = document.getElementById('timeDisplay');
+
+// Format time in minutes:seconds
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
 
 // Play/Pause toggle
 playBtn.addEventListener('click', () => {
@@ -39,10 +50,11 @@ playBtn.addEventListener('click', () => {
   }
 });
 
-// Update progress bar
+// Update progress bar and timer
 audio.addEventListener('timeupdate', () => {
   const percent = (audio.currentTime / audio.duration) * 100;
   progressFilled.style.width = percent + '%';
+  timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
 });
 
 // Click on progress bar to seek
@@ -56,5 +68,10 @@ progressFilled.parentElement.addEventListener('click', (e) => {
 // Volume control
 volumeControl.addEventListener('input', (e) => {
   audio.volume = e.target.value;
+});
+
+// Update timer once metadata is loaded
+audio.addEventListener('loadedmetadata', () => {
+  timeDisplay.textContent = formatTime(0) + ' / ' + formatTime(audio.duration);
 });
 </script>
