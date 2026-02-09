@@ -1,10 +1,23 @@
 <style>
+/* Ensure all widths include padding and borders */
+* {
+    box-sizing: border-box;
+}
+
+/* Remove default margins and scroll */
 html, body {
     margin: 0;
     padding: 0;
-    background: transparent !important;
-    height: 100%;
+    background: transparent;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+/* Player container */
+#playerBox {
+    width: 100% !important;   /* fill parent */
+    margin: 0 !important;     /* no extra space */
 }
 </style>
 </style>
