@@ -1,11 +1,8 @@
-<!-- CUSTOM MUSIC PLAYER -->
+<!-- CUSTOM SIDEBAR MUSIC PLAYER -->
 <div style="width: 92%; margin: 0 auto; background: rgba(0,0,0,0.35); border-radius: 16px; padding: 12px; border: 2px solid rgba(255,176,120,0.45); box-shadow: inset 0 0 10px rgba(0,0,0,.25); text-align: center;">
 
-  <!-- Track Info -->
-  <div style="color: #d9d2cc; font-size: 13px; font-weight: bold; margin-bottom: 8px;">🎵 Alan Walker – Faded</div>
-
   <!-- Player Controls -->
-  <div style="display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 10px;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px;">
     <!-- Play/Pause Button -->
     <button id="playPauseBtn" style="width: 36px; height: 36px; border-radius: 50%; background: #ffb37a; border: none; box-shadow: 0 0 12px rgba(255,176,120,0.7); cursor: pointer; transition: 0.25s;">▶️</button>
 
@@ -13,9 +10,12 @@
     <div style="flex: 1; height: 10px; background: rgba(28,18,15,0.6); border-radius: 8px; position: relative; cursor: pointer;">
       <div id="progressFilled" style="height: 100%; width: 0%; background: linear-gradient(90deg,#ffb37a,#ff8a70); border-radius: 8px;"></div>
     </div>
+  </div>
 
-    <!-- Volume Bar -->
-    <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7" style="width: 80px; cursor: pointer; background: rgba(28,18,15,0.6); border-radius: 8px; height: 6px;">
+  <!-- Volume Control -->
+  <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+    <span style="color: #ffb37a; font-size: 18px;">🔊</span>
+    <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7" style="width: 100px; cursor: pointer; background: rgba(28,18,15,0.6); border-radius: 8px; height: 6px;">
   </div>
 
   <audio id="audioPlayer" src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"></audio>
