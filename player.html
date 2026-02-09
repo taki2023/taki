@@ -74,29 +74,40 @@ const play = document.getElementById("play");
 const progress = document.getElementById("progress");
 const volume = document.getElementById("volume");
 
-play.onclick = () => {
-  if (audio.paused) {
-    audio.play();
-    play.textContent = "⏸";
-  } else {
-    audio.pause();
-    play.textContent = "▶";
+// Play/pause button
+play.addEventListener("click", async () => {
+  try {
+    if (audio.paused) {
+      await audio.play();
+      play.textContent = "⏸";
+    } else {
+      audio.pause();
+      play.textContent = "▶";
+    }
+  } catch (err) {
+    console.log("Audio playback failed:", err);
   }
-};
+});
 
-volume.oninput = () => audio.volume = volume.value;
+// Volume control
+volume.addEventListener("input", () => {
+  audio.volume = volume.value;
+});
 
+// Set progress max when metadata loads
 audio.addEventListener("loadedmetadata", () => {
   progress.max = Math.floor(audio.duration);
 });
 
+// Update progress as audio plays
 audio.addEventListener("timeupdate", () => {
   progress.value = Math.floor(audio.currentTime);
 });
 
-progress.oninput = () => {
+// Seek audio when progress is changed
+progress.addEventListener("input", () => {
   audio.currentTime = progress.value;
-};
+});
 </script>
 
 </body>
