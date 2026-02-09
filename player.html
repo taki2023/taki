@@ -97,7 +97,18 @@ volumeFill.style.width = (savedVolume*100)+'%';
 lastVolume = savedVolume;
 
 audio.muted = savedMute;
-cutIcon.textContent = audio.muted ? '🔇' : '🔊';
+
+/* Initial speaker icon */
+cutIcon.textContent = (audio.muted || audio.volume === 0) ? '🔇' : '🔊';
+
+/* Update speaker icon dynamically on volume/mute changes */
+audio.addEventListener('volumechange', () => {
+  if(audio.muted || audio.volume === 0){
+      cutIcon.textContent = '🔇';
+  } else {
+      cutIcon.textContent = '🔊';
+  }
+});
 
 /* Loaded metadata */
 audio.addEventListener('loadedmetadata',()=>{
@@ -147,12 +158,10 @@ cutIcon.onclick = () => {
     lastVolume = audio.volume;
     audio.muted = true;
     volumeFill.style.width = '0%';
-    cutIcon.textContent = '🔇';
   } else {
     audio.muted = false;
     audio.volume = lastVolume;
     volumeFill.style.width = (lastVolume*100)+'%';
-    cutIcon.textContent = '🔊';
   }
   localStorage.setItem('musicMuted', audio.muted);
   localStorage.setItem('musicVolume', audio.volume);
