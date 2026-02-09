@@ -8,17 +8,25 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: transparent;
-    overflow: hidden;
+    background: transparent; /* important for transparency */
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Player container */
 #playerBox {
-    width: 100% !important;   /* fill parent */
-    margin: 0 !important;     /* no extra space */
+    width: 100%;
+    height: 100%; /* fill iframe */
+    margin: 0;
+    padding: 12px;
+    background: rgba(10,14,12,0.50); /* match Chess.com sidebar */
+    border: 2px solid rgba(255,176,120,0.45);
+    border-radius: 16px; /* keeps it nicely rounded */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
 }
+
 </style>
 </style>
 <!-- 🎵 ELEGANT SIDEBAR MUSIC PLAYER -->
