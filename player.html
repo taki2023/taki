@@ -1,5 +1,17 @@
 <style>
-/* Music Player Sidebar Style */
+/* Ensure all widths include padding and borders */
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent !important; /* keep page fully transparent */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Music Player Container styled like sidebar */
 #playerBox {
     width: 92%;
     margin: 0 auto;
@@ -13,24 +25,26 @@
     text-align: center;
 }
 
-/* Progress & Volume Bars inside sidebar style */
+/* Bars styled to match sidebar theme */
 #progressBar, #volumeBar {
-    background: rgba(255, 255, 255, 0.08); /* subtle transparent background */
+    background: rgba(255, 255, 255, 0.08); /* subtle overlay */
     border-radius: 8px;
     position: relative;
 }
 
 #progressFilled, #volumeFill {
     border-radius: 8px;
+    background: linear-gradient(90deg, #ffb37a, #ff8a70); /* golden-orange gradient */
     box-shadow: inset 0 0 6px rgba(255,176,120,0.5);
 }
 
 /* Knobs */
 #progressKnob, #volumeKnob {
     box-shadow: 0 0 6px rgba(255,176,120,0.9);
+    background: #ffe2c4;
 }
 
-/* Buttons */
+/* Buttons (play/pause, loop, mute) */
 #playPauseBtn, #loopBtn, #cutIcon {
     border: none;
     cursor: pointer;
