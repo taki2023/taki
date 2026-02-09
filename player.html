@@ -11,17 +11,8 @@ text-align:center;
 backdrop-filter:blur(6px);
 ">
 
-<!-- Time -->
-<div id="timeDisplay" style="
-color:#ffb37a;
-font-size:13px;
-margin-bottom:10px;
-letter-spacing:0.5px;
-text-shadow:0 0 6px rgba(255,176,120,0.35);
-">0:00 / 0:00</div>
-
 <!-- Controls -->
-<div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px;">
+<div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
 
 <!-- Play Button -->
 <button id="playPauseBtn" style="
@@ -59,19 +50,43 @@ transition:width .15s linear;
 </div>
 </div>
 
+<!-- Timer (moved here, white) -->
+<div id="timeDisplay" style="
+color:#ffffff;
+font-size:12px;
+margin-bottom:12px;
+letter-spacing:0.4px;
+">0:00 / 0:00</div>
+
 <!-- Volume -->
 <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
 <span style="color:#ffb37a; font-size:16px;">🔊</span>
 
-<input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7" style="
+<div style="
+position:relative;
 width:100px;
-cursor:pointer;
-appearance:none;
-height:5px;
-border-radius:6px;
+height:6px;
 background:rgba(40,25,20,0.6);
-outline:none;
+border-radius:6px;
+overflow:hidden;
 ">
+
+<div id="volumeFill" style="
+position:absolute;
+height:100%;
+width:70%;
+background:linear-gradient(90deg,#ffb37a,#ff8a70);
+"></div>
+
+<input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7" style="
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+cursor:pointer;
+">
+
+</div>
 </div>
 
 <audio id="audioPlayer"
@@ -85,6 +100,7 @@ const playBtn = document.getElementById('playPauseBtn');
 const progressFilled = document.getElementById('progressFilled');
 const progressBar = document.getElementById('progressBar');
 const volumeControl = document.getElementById('volumeControl');
+const volumeFill = document.getElementById('volumeFill');
 const timeDisplay = document.getElementById('timeDisplay');
 
 function formatTime(seconds) {
@@ -121,7 +137,9 @@ audio.currentTime = (clickX / rect.width) * audio.duration;
 
 /* Volume */
 volumeControl.addEventListener('input', (e) => {
-audio.volume = e.target.value;
+const val = e.target.value;
+audio.volume = val;
+volumeFill.style.width = (val * 100) + '%';
 });
 
 /* Metadata loaded */
@@ -130,7 +148,7 @@ timeDisplay.textContent =
 formatTime(0) + ' / ' + formatTime(audio.duration);
 });
 
-/* Smooth hover glow */
+/* Hover glow */
 playBtn.addEventListener('mouseenter', ()=>{
 playBtn.style.transform = "scale(1.08)";
 playBtn.style.boxShadow = "0 0 18px rgba(255,176,120,0.9)";
