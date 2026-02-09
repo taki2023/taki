@@ -9,10 +9,10 @@ border:1.5px solid rgba(255,176,120,0.35);
 box-shadow:0 0 18px rgba(0,0,0,.35), inset 0 0 12px rgba(0,0,0,.25);
 text-align:center;
 backdrop-filter:blur(6px);
-">
+" id="playerBox">
 
 <!-- Controls -->
-<div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
+<div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px;">
 
 <!-- Play Button -->
 <button id="playPauseBtn" style="
@@ -30,7 +30,7 @@ transition:all .25s ease;
 <!-- Progress Bar -->
 <div id="progressBar" style="
 flex:1;
-height:8px;
+height:12px;
 background:rgba(40,25,20,0.6);
 border-radius:10px;
 position:relative;
@@ -47,16 +47,22 @@ border-radius:10px;
 transition:width .15s linear;
 "></div>
 
-</div>
-</div>
-
-<!-- Timer (moved here, white) -->
+<!-- Timer inside bar -->
 <div id="timeDisplay" style="
+position:absolute;
+width:100%;
+top:50%;
+left:0;
+transform:translateY(-50%);
+font-size:10px;
 color:#ffffff;
-font-size:12px;
-margin-bottom:12px;
+text-align:center;
+pointer-events:none;
 letter-spacing:0.4px;
 ">0:00 / 0:00</div>
+
+</div>
+</div>
 
 <!-- Volume -->
 <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
@@ -94,6 +100,17 @@ src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL
 </audio>
 </div>
 
+<style>
+@keyframes musicGlow {
+0% { box-shadow:0 0 12px rgba(255,176,120,0.25); }
+50% { box-shadow:0 0 26px rgba(255,176,120,0.55); }
+100% { box-shadow:0 0 12px rgba(255,176,120,0.25); }
+}
+.playingGlow {
+animation: musicGlow 2.2s ease-in-out infinite;
+}
+</style>
+
 <script>
 const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playPauseBtn');
@@ -102,6 +119,7 @@ const progressBar = document.getElementById('progressBar');
 const volumeControl = document.getElementById('volumeControl');
 const volumeFill = document.getElementById('volumeFill');
 const timeDisplay = document.getElementById('timeDisplay');
+const playerBox = document.getElementById('playerBox');
 
 function formatTime(seconds) {
 const mins = Math.floor(seconds / 60);
@@ -114,9 +132,11 @@ playBtn.addEventListener('click', () => {
 if(audio.paused) {
 audio.play();
 playBtn.textContent = '❚❚';
+playerBox.classList.add('playingGlow');
 } else {
 audio.pause();
 playBtn.textContent = '▶';
+playerBox.classList.remove('playingGlow');
 }
 });
 
@@ -142,19 +162,15 @@ audio.volume = val;
 volumeFill.style.width = (val * 100) + '%';
 });
 
-/* Metadata loaded */
+/* Metadata */
 audio.addEventListener('loadedmetadata', () => {
 timeDisplay.textContent =
 formatTime(0) + ' / ' + formatTime(audio.duration);
 });
 
-/* Hover glow */
-playBtn.addEventListener('mouseenter', ()=>{
-playBtn.style.transform = "scale(1.08)";
-playBtn.style.boxShadow = "0 0 18px rgba(255,176,120,0.9)";
-});
-playBtn.addEventListener('mouseleave', ()=>{
-playBtn.style.transform = "scale(1)";
-playBtn.style.boxShadow = "0 0 12px rgba(255,176,120,0.55)";
+/* Stop glow when song ends */
+audio.addEventListener('ended', ()=>{
+playerBox.classList.remove('playingGlow');
+playBtn.textContent = '▶';
 });
 </script>
