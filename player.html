@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Club Music Player</title>
+
+<style>
+body {
+  margin: 0;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.player {
+  width: 240px;
+  background: linear-gradient(135deg,#000,#0b0b0b);
+  border: 2px solid #19ffd0;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 0 16px rgba(25,255,208,.4);
+  color: #19ffd0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button {
+  background: #000;
+  border: 2px solid #19ffd0;
+  color: #19ffd0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+input[type=range] {
+  width: 100%;
+  accent-color: #19ffd0;
+}
+
+.track {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+  <div class="track">🎵 Club Theme</div>
+
+  <div class="controls">
+    <button id="play">▶</button>
+    <input type="range" id="progress" value="0" min="0" step="1">
+  </div>
+
+  <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+
+  <audio id="audio">
+    <source src="PUT_YOUR_MP3_LINK_HERE.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+const play = document.getElementById("play");
+const progress = document.getElementById("progress");
+const volume = document.getElementById("volume");
+
+play.onclick = () => {
+  if (audio.paused) {
+    audio.play();
+    play.textContent = "⏸";
+  } else {
+    audio.pause();
+    play.textContent = "▶";
+  }
+};
+
+volume.oninput = () => audio.volume = volume.value;
+
+audio.addEventListener("loadedmetadata", () => {
+  progress.max = Math.floor(audio.duration);
+});
+
+audio.addEventListener("timeupdate", () => {
+  progress.value = Math.floor(audio.currentTime);
+});
+
+progress.oninput = () => {
+  audio.currentTime = progress.value;
+};
+</script>
+
+</body>
+</html>
