@@ -61,6 +61,7 @@ backdrop-filter:blur(6px);
       <div id="volumeFill" style="
       position:absolute;height:100%;width:70%;
       background:linear-gradient(90deg,#7b4dff,#b388ff,#d1b3ff);
+      transition: width 0.25s ease; /* smooth animation */
       "></div>
       <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.7"
       style="position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;">
@@ -83,23 +84,20 @@ const volumeControl = document.getElementById('volumeControl');
 const volumeFill = document.getElementById('volumeFill');
 const timeDisplay = document.getElementById('timeDisplay');
 
-/* Memory */
-let savedVolume = localStorage.getItem('musicVolume') ?? 0.7;
-let savedTime = localStorage.getItem('musicTime') ?? 0;
+let lastVolume;
+
+/* Load saved settings */
+let savedVolume = parseFloat(localStorage.getItem('musicVolume')) || 0.7;
+let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 let savedMute = localStorage.getItem('musicMuted') === 'true';
-let lastVolume = savedVolume; // remember previous volume for mute/unmute
 
 audio.volume = savedVolume;
 volumeControl.value = savedVolume;
 volumeFill.style.width = (savedVolume*100)+'%';
+lastVolume = savedVolume;
 
-if(savedMute){
-  audio.muted = true;
-  cutIcon.textContent = '🔇';
-} else {
-  audio.muted = false;
-  cutIcon.textContent = '🔊';
-}
+audio.muted = savedMute;
+cutIcon.textContent = audio.muted ? '🔇' : '🔊';
 
 /* Loaded metadata */
 audio.addEventListener('loadedmetadata',()=>{
@@ -146,13 +144,11 @@ loopBtn.onclick = () => {
 /* CUT / Mute with memory of last volume */
 cutIcon.onclick = () => {
   if(!audio.muted){ 
-    // Mute: store current volume, set volume to 0 visually
     lastVolume = audio.volume;
     audio.muted = true;
     volumeFill.style.width = '0%';
     cutIcon.textContent = '🔇';
   } else {
-    // Unmute: restore previous volume
     audio.muted = false;
     audio.volume = lastVolume;
     volumeFill.style.width = (lastVolume*100)+'%';
@@ -168,12 +164,24 @@ progressBar.onclick = (e) => {
   audio.currentTime = ((e.clientX - r.left)/r.width) * audio.duration;
 };
 
-/* Volume */
+/* Volume control: drag */
 volumeControl.oninput = (e) => {
   audio.volume = e.target.value;
   volumeFill.style.width = (e.target.value*100)+'%';
-  lastVolume = e.target.value; // update lastVolume for mute/unmute
+  lastVolume = e.target.value;
   localStorage.setItem('musicVolume', e.target.value);
+};
+
+/* Volume control: click anywhere */
+const volumeBarContainer = volumeFill.parentElement;
+volumeBarContainer.onclick = (e) => {
+  const r = volumeBarContainer.getBoundingClientRect();
+  let newVolume = (e.clientX - r.left) / r.width;
+  newVolume = Math.min(Math.max(newVolume, 0), 1);
+  audio.volume = newVolume;
+  volumeFill.style.width = (newVolume*100)+'%';
+  lastVolume = newVolume;
+  localStorage.setItem('musicVolume', newVolume);
 };
 
 /* Update timer continuously */
