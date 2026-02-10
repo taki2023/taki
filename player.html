@@ -1,75 +1,108 @@
 <style>
-* { box-sizing: border-box; }
-
-html {
-    background: transparent !important;
+/* Reset everything */
+* {
+  box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: transparent !important;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  overflow: hidden;
 }
-/* PLAYER CONTAINER – match sidebar */
+
+/* =========================
+   PLAYER CONTAINER
+   ========================= */
 #playerBox {
-    width: 100%;
-    padding: 0;
-    margin: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 10px 12px;
 
-    background: none !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+  /* DARK SIDEBAR MATCH */
+  background: linear-gradient(
+    180deg,
+    rgba(18,12,10,0.92),
+    rgba(10,8,7,0.95)
+  ) !important;
+
+  /* BORDER (GitHub-like but chilli themed) */
+  border: 2.5px solid rgba(255,176,120,0.55);
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 0 14px rgba(0,0,0,0.55),
+    0 0 14px rgba(255,176,120,0.22);
+
+  overflow: hidden;
 }
 
-/* PROGRESS + VOLUME BAR BASE */
+/* =========================
+   BARS (PROGRESS + VOLUME)
+   ========================= */
 #progressBar,
 #volumeBar {
-    background: linear-gradient(180deg,#1c120f,#120a08);
-    border-radius: 8px;
-    border: 1px solid rgba(255,176,120,.35);
-    box-shadow: inset 0 0 6px rgba(0,0,0,.45);
-    position: relative;
+  height: 10px;
+  background: linear-gradient(
+    180deg,
+    #1a120f,
+    #120a08
+  ) !important;
+
+  border-radius: 10px;
+  border: 1.8px solid rgba(255,176,120,0.45);
+
+  box-shadow:
+    inset 0 0 8px rgba(0,0,0,0.6),
+    0 0 8px rgba(255,176,120,0.15);
 }
 
-/* FILLED PART */
+/* =========================
+   FILLED PART
+   ========================= */
 #progressFilled,
 #volumeFill {
-    border-radius: 8px;
-    background: linear-gradient(90deg,#ffb37a,#ff8a70);
-    box-shadow: inset 0 0 6px rgba(255,170,130,.65);
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #ffb37a,
+    #ff8a70
+  );
+
+  border-radius: 10px;
+
+  box-shadow:
+    inset 0 0 8px rgba(255,170,130,0.75),
+    0 0 10px rgba(255,154,106,0.55);
 }
 
-/* KNOBS */
-#progressKnob {
-    background: #ffd8b2;
-    box-shadow: 0 0 8px rgba(255,176,120,1);
-}
-
+/* =========================
+   KNOBS
+   ========================= */
+#progressKnob,
 #volumeKnob {
-    background: #e9ddff;
-    box-shadow: 0 0 6px rgba(180,140,255,.9);
+  width: 14px;
+  height: 14px;
+
+  background: #ffd7b0;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 10px rgba(255,176,120,0.95),
+    inset 0 0 4px rgba(255,255,255,0.6);
 }
 
-/* BUTTONS */
-#playPauseBtn {
-    box-shadow: 0 0 10px rgba(255,176,120,.6);
-}
-
-/* LOOP BUTTON – outlined */
-#loopBtn {
-    background: rgba(0,0,0,.45);
-    border: 1px solid rgba(255,176,120,.45);
-    color: #ffb37a;
-    box-shadow: inset 0 0 6px rgba(0,0,0,.45);
-}
-
-/* HOVER FEEL (optional but nice) */
-#loopBtn:hover {
-    box-shadow: 0 0 10px rgba(255,176,120,.6);
+/* =========================
+   REMOVE ANY WHITE LAYERS
+   ========================= */
+iframe,
+audio,
+video,
+canvas {
+  background: transparent !important;
 }
 </style>
 
