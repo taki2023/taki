@@ -1,6 +1,5 @@
 <style>
 *{box-sizing:border-box}
-
 html,body{
   margin:0;
   padding:0;
@@ -58,56 +57,39 @@ html,body{
 #volumeKnob{
   background:#e9ddff;
 }
+
+/* BUTTON HOVER */
+#playPauseBtn:hover, #loopBtn:hover, #cutIcon:hover{
+  filter: brightness(1.2);
+}
 </style>
 
 <div id="playerBox">
-
   <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;width:100%;">
-
-    <button id="playPauseBtn" style="
-      width:32px;height:32px;border-radius:50%;
-      background:linear-gradient(145deg,#ffb37a,#ff8a70);
-      border:none;cursor:pointer;
-    ">▶</button>
-
+    <button id="playPauseBtn" style=" width:32px;height:32px;border-radius:50%; background:linear-gradient(145deg,#ffb37a,#ff8a70); border:none;cursor:pointer; ">▶</button>
+    
     <!-- PROGRESS -->
-    <div id="progressBar" style="flex:3;height:8px;">
+    <div id="progressBar" style="flex:1;height:8px;">
       <div id="progressFilled" style="width:0%;position:relative;">
         <div id="progressKnob" style="right:-7px;"></div>
       </div>
     </div>
 
-    <!-- LOOP -->
-    <button id="loopBtn" style="
-      margin-left:14px;
-      width:30px;height:30px;border-radius:50%;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.15);
-      cursor:pointer;color:#fff;
-    ">🔁</button>
-
     <!-- TIME -->
-    <div id="timeDisplay" style="
-      min-width:60px;
-      font-size:11px;
-      font-weight:500;
-      font-family:Inter,Segoe UI,system-ui,sans-serif;
-      color:#f1e7df;
-      text-align:right;
-    ">0:00 / 0:00</div>
+    <div id="timeDisplay" style=" min-width:60px; font-size:11px; font-weight:500; font-family:Inter,Segoe UI,system-ui,sans-serif; color:#f1e7df; text-align:right; ">0:00 / 0:00</div>
   </div>
 
-  <!-- VOLUME -->
+  <!-- VOLUME + LOOP -->
   <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
     <span id="cutIcon" style="cursor:pointer">🔊</span>
     <div id="volumeBar" style="width:90px;height:5px;">
       <div id="volumeFill"></div>
       <div id="volumeKnob"></div>
     </div>
+    <button id="loopBtn" style=" width:30px;height:30px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;color:#fff;">🔁</button>
   </div>
 
-  <audio id="audioPlayer"
-    src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
+  <audio id="audioPlayer" src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
   </audio>
 </div>
 
@@ -145,38 +127,22 @@ syncVolumeUI();
 
 /* ===== PLAY / PAUSE ===== */
 playBtn.onclick = ()=> audio.paused ? audio.play() : audio.pause();
-
-audio.onplay = ()=>{
-  playBtn.textContent='❚❚';
-  localStorage.setItem('musicPlaying',true);
-};
-
-audio.onpause = ()=>{
-  playBtn.textContent='▶';
-  localStorage.setItem('musicPlaying',false);
-};
+audio.onplay = ()=>{ playBtn.textContent='❚❚'; localStorage.setItem('musicPlaying',true); };
+audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlaying',false); };
 
 /* ===== AUTO RESUME ===== */
-if(savedPlaying){
-  audio.play().catch(()=>{});
-}
+if(savedPlaying){ audio.play().catch(()=>{}); }
 
 /* ===== LOOP ===== */
 loopBtn.onclick = ()=>{
   audio.loop = !audio.loop;
   localStorage.setItem('musicLoop',audio.loop);
-  loopBtn.style.background = audio.loop
-    ? 'linear-gradient(145deg,#ffb37a,#ff8a70)'
-    : 'rgba(255,255,255,.08)';
+  loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
 };
-loopBtn.style.background = audio.loop
-  ? 'linear-gradient(145deg,#ffb37a,#ff8a70)'
-  : 'rgba(255,255,255,.08)';
+loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
 
-/* ===== METADATA (ENABLE SEEK AT START) ===== */
-audio.addEventListener('loadedmetadata', ()=>{
-  audio.currentTime = savedTime;
-});
+/* ===== METADATA ===== */
+audio.addEventListener('loadedmetadata', ()=>{ audio.currentTime = savedTime; });
 
 /* ===== TIME / PROGRESS ===== */
 function fmt(s){
@@ -184,7 +150,6 @@ function fmt(s){
   const sec=Math.floor(s%60);
   return m+':'+(sec<10?'0':'')+sec;
 }
-
 audio.ontimeupdate=()=>{
   const p=(audio.currentTime/(audio.duration||1))*100;
   progressFilled.style.width=p+'%';
@@ -192,20 +157,15 @@ audio.ontimeupdate=()=>{
   localStorage.setItem('musicTime',audio.currentTime);
 };
 
-/* ===== SEEK (MOUSE + TOUCH) ===== */
+/* ===== SEEK ===== */
 function seek(e){
   const r=progressBar.getBoundingClientRect();
   const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
   if(!audio.duration) return;
   audio.currentTime=Math.max(0,Math.min(1,x/r.width))*audio.duration;
 }
-progressBar.onmousedown=e=>{
-  seek(e);
-  document.onmousemove=seek;
-  document.onmouseup=()=>document.onmousemove=null;
-};
-progressBar.ontouchstart=seek;
-progressBar.ontouchmove=seek;
+progressBar.onmousedown=e=>{ seek(e); document.onmousemove=seek; document.onmouseup=()=>document.onmousemove=null; };
+progressBar.ontouchstart=seek; progressBar.ontouchmove=seek;
 
 /* ===== VOLUME ===== */
 function setVolume(v){
@@ -216,25 +176,14 @@ function setVolume(v){
   localStorage.setItem('musicMuted',false);
   syncVolumeUI();
 }
-
 function volFromEvent(e){
   const r=volumeBar.getBoundingClientRect();
   const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
   setVolume(x/r.width);
 }
-
-volumeBar.onmousedown=e=>{
-  volFromEvent(e);
-  document.onmousemove=volFromEvent;
-  document.onmouseup=()=>document.onmousemove=null;
-};
-volumeBar.ontouchstart=volFromEvent;
-volumeBar.ontouchmove=volFromEvent;
+volumeBar.onmousedown=e=>{ volFromEvent(e); document.onmousemove=volFromEvent; document.onmouseup=()=>document.onmousemove=null; };
+volumeBar.ontouchstart=volFromEvent; volumeBar.ontouchmove=volFromEvent;
 
 /* ===== MUTE ===== */
-cutIcon.onclick=()=>{
-  audio.muted=!audio.muted;
-  localStorage.setItem('musicMuted',audio.muted);
-  syncVolumeUI();
-};
+cutIcon.onclick=()=>{ audio.muted=!audio.muted; localStorage.setItem('musicMuted',audio.muted); syncVolumeUI(); };
 </script>
