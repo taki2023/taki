@@ -10,7 +10,7 @@ html,body{
   overflow:hidden;
 }
 
-/* PLAYER */
+/* ================= PLAYER ================= */
 #playerBox{
   width:100%;
   height:100%;
@@ -21,7 +21,7 @@ html,body{
   box-shadow:inset 0 0 14px rgba(0,0,0,.55),0 0 14px rgba(255,176,120,.22);
 }
 
-/* BARS */
+/* ================= BARS ================= */
 #progressBar,#volumeBar{
   background:linear-gradient(180deg,#1a120f,#120a08)!important;
   border-radius:10px;
@@ -31,7 +31,7 @@ html,body{
   cursor:pointer;
 }
 
-/* FILLS */
+/* ================= FILLS ================= */
 #progressFilled{
   height:100%;
   background:linear-gradient(90deg,#ffb37a,#ff8a70);
@@ -46,7 +46,7 @@ html,body{
   box-shadow:0 0 10px rgba(160,120,255,.6);
 }
 
-/* KNOBS */
+/* ================= KNOBS ================= */
 #progressKnob,#volumeKnob{
   position:absolute;
   top:50%;
@@ -63,7 +63,7 @@ html,body{
   box-shadow:0 0 8px rgba(160,120,255,1);
 }
 
-/* REMOVE WHITE LAYERS */
+/* ================= CLEAN ================= */
 iframe,audio,video,canvas{background:transparent!important}
 </style>
 
@@ -112,36 +112,71 @@ iframe,audio,video,canvas{background:transparent!important}
     </div>
   </div>
 
-  <audio id="audioPlayer" src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"></audio>
+  <audio id="audioPlayer"
+    src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
+  </audio>
 </div>
 
 <script>
 const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playPauseBtn');
+const loopBtn = document.getElementById('loopBtn');
 const cutIcon = document.getElementById('cutIcon');
 const progressBar = document.getElementById('progressBar');
 const progressFilled = document.getElementById('progressFilled');
-const progressKnob = document.getElementById('progressKnob');
 const volumeBar = document.getElementById('volumeBar');
 const volumeFill = document.getElementById('volumeFill');
 const volumeKnob = document.getElementById('volumeKnob');
 const timeDisplay = document.getElementById('timeDisplay');
 
-/* LOAD MEMORY */
+/* ================= LOAD MEMORY ================= */
 audio.volume = parseFloat(localStorage.getItem('musicVolume')) || 0.7;
+audio.currentTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 audio.muted = localStorage.getItem('musicMuted') === 'true';
+audio.loop = localStorage.getItem('musicLoop') === 'true';
 
-/* ICON */
+const shouldPlay = localStorage.getItem('musicPlaying') === 'true';
+
+/* ================= ICONS ================= */
 function updateIcon(){
   cutIcon.textContent = (audio.muted || audio.volume===0) ? '🔇' : '🔊';
 }
+function updateLoopUI(){
+  loopBtn.style.background = audio.loop
+    ? 'linear-gradient(145deg,#ffb37a,#ff8a70)'
+    : 'rgba(255,255,255,.08)';
+}
 updateIcon();
+updateLoopUI();
 
-/* PLAY */
-playBtn.onclick = ()=> audio.paused ? audio.play() : audio.pause();
-audio.onplay = audio.onpause = ()=> playBtn.textContent = audio.paused ? '▶' : '❚❚';
+/* ================= PLAY / PAUSE ================= */
+playBtn.onclick = ()=>{
+  audio.paused ? audio.play() : audio.pause();
+};
 
-/* TIME */
+audio.onplay = ()=>{
+  playBtn.textContent='❚❚';
+  localStorage.setItem('musicPlaying',true);
+};
+
+audio.onpause = ()=>{
+  playBtn.textContent='▶';
+  localStorage.setItem('musicPlaying',false);
+};
+
+/* AUTO RESUME */
+if(shouldPlay){
+  audio.play().catch(()=>{});
+}
+
+/* ================= LOOP ================= */
+loopBtn.onclick = ()=>{
+  audio.loop = !audio.loop;
+  localStorage.setItem('musicLoop',audio.loop);
+  updateLoopUI();
+};
+
+/* ================= TIME ================= */
 function formatTime(s){
   const m=Math.floor(s/60);
   const sec=Math.floor(s%60);
@@ -151,12 +186,12 @@ function formatTime(s){
 audio.ontimeupdate=()=>{
   const p=(audio.currentTime/(audio.duration||1))*100;
   progressFilled.style.width=p+'%';
-  progressKnob.style.right='-7px';
-  timeDisplay.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);
+  timeDisplay.textContent =
+    formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);
   localStorage.setItem('musicTime',audio.currentTime);
 };
 
-/* SEEK (MOUSE + TOUCH) */
+/* ================= SEEK (MOUSE + TOUCH) ================= */
 function seek(e){
   const r=progressBar.getBoundingClientRect();
   const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
@@ -170,7 +205,7 @@ progressBar.onmousedown=e=>{
 progressBar.ontouchstart=seek;
 progressBar.ontouchmove=seek;
 
-/* VOLUME */
+/* ================= VOLUME ================= */
 function setVolume(v){
   v=Math.max(0,Math.min(1,v));
   audio.volume=v;
@@ -196,7 +231,7 @@ volumeBar.onmousedown=e=>{
 volumeBar.ontouchstart=volFromEvent;
 volumeBar.ontouchmove=volFromEvent;
 
-/* MUTE */
+/* ================= MUTE ================= */
 cutIcon.onclick=()=>{
   audio.muted=!audio.muted;
   localStorage.setItem('musicMuted',audio.muted);
