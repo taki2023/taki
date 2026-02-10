@@ -1,151 +1,112 @@
 <style>
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent !important;
-  overflow: hidden;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  background:transparent!important;
+  overflow:hidden;
 }
 
-#playerBox {
-  width: 100%;
-  height: 100%;
-  padding: 10px 12px;
-  background: linear-gradient(180deg, rgba(18,12,10,0.92), rgba(10,8,7,0.95)) !important;
-  border: 2.5px solid rgba(255,176,120,0.55);
-  border-radius: 16px;
-  box-shadow:
-    inset 0 0 14px rgba(0,0,0,0.55),
-    0 0 14px rgba(255,176,120,0.22);
-  overflow: hidden;
+/* PLAYER */
+#playerBox{
+  width:100%;
+  height:100%;
+  padding:10px 12px;
+  background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
+  border:2.5px solid rgba(255,176,120,.55);
+  border-radius:16px;
+  box-shadow:inset 0 0 14px rgba(0,0,0,.55),0 0 14px rgba(255,176,120,.22);
 }
 
 /* BARS */
-#progressBar,
-#volumeBar {
-  background: linear-gradient(180deg, #1a120f, #120a08);
-  border-radius: 10px;
-  border: 1.6px solid rgba(255,176,120,0.45);
-  box-shadow:
-    inset 0 0 8px rgba(0,0,0,0.6),
-    0 0 8px rgba(255,176,120,0.15);
-  position: relative;
-  cursor: pointer;
+#progressBar,#volumeBar{
+  background:linear-gradient(180deg,#1a120f,#120a08);
+  border-radius:10px;
+  border:1.8px solid rgba(255,176,120,.45);
+  box-shadow:inset 0 0 8px rgba(0,0,0,.6),0 0 8px rgba(255,176,120,.15);
+  position:relative;
+  cursor:pointer;
 }
 
-/* PROGRESS */
-#progressBar {
-  flex: 1;
-  height: 8px;
+/* FILLS */
+#progressFilled{
+  height:100%;
+  background:linear-gradient(90deg,#ffb37a,#ff8a70);
+  border-radius:10px;
 }
 
-#progressFilled {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #ffb37a, #ff8a70);
-  border-radius: 8px;
-  position: relative;
+#volumeFill{
+  height:100%;
+  background:linear-gradient(90deg,#7b4dff,#9d6bff,#c59bff);
+  border-radius:10px;
 }
 
-/* KNOB */
-.knob {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ffe2c4;
-  box-shadow: 0 0 6px rgba(255,176,120,0.9);
+/* KNOBS */
+#progressKnob,#volumeKnob{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#ffd7b0;
 }
 
-/* VOLUME */
-#volumeBar {
-  width: 85px;
-  height: 6px;
-}
-
-#volumeFill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #7b4dff, #b388ff, #d1b3ff);
-  border-radius: 6px;
-}
-
-#volumeKnob {
-  width: 3px;
-  height: 16px;
-  top: -5px;
-  background: #e9ddff;
-  box-shadow: 0 0 6px rgba(180,140,255,0.9);
-}
-
-/* BUTTONS */
-.ctrlBtn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-#playPauseBtn {
-  background: linear-gradient(145deg, #ffb37a, #ff8a70);
-  box-shadow: 0 0 8px rgba(255,176,120,0.55);
-}
-
-#loopBtn {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-/* TIME */
-#timeDisplay {
-  min-width: 70px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #e6e0db;
-  text-align: right;
-  letter-spacing: .3px;
+#volumeKnob{
+  background:#e9ddff;
 }
 </style>
 
 <div id="playerBox">
 
-  <!-- TOP ROW -->
-  <div style="display:flex;align-items:center;gap:8px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;width:100%;">
 
-    <button id="playPauseBtn" class="ctrlBtn">▶</button>
+    <button id="playPauseBtn" style="
+      width:32px;height:32px;border-radius:50%;
+      background:linear-gradient(145deg,#ffb37a,#ff8a70);
+      border:none;cursor:pointer;
+    ">▶</button>
 
-    <div id="progressBar">
-      <div id="progressFilled">
-        <div id="progressKnob" class="knob" style="right:-6px;"></div>
+    <!-- PROGRESS -->
+    <div id="progressBar" style="flex:3;height:8px;">
+      <div id="progressFilled" style="width:0%;position:relative;">
+        <div id="progressKnob" style="right:-7px;"></div>
       </div>
     </div>
 
-    <!-- VOLUME -->
-    <span id="cutIcon" style="font-size:16px;cursor:pointer;">🔊</span>
-
-    <div id="volumeBar">
-      <div id="volumeFill"></div>
-      <div id="volumeKnob" class="knob"></div>
-    </div>
-
     <!-- LOOP -->
-    <button id="loopBtn" class="ctrlBtn">🔁</button>
+    <button id="loopBtn" style="
+      margin-left:14px;
+      width:30px;height:30px;border-radius:50%;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.15);
+      cursor:pointer;color:#fff;
+    ">🔁</button>
 
     <!-- TIME -->
-    <div id="timeDisplay">0:00 / 0:00</div>
-
+    <div id="timeDisplay" style="
+      min-width:60px;
+      font-size:11px;
+      font-weight:500;
+      font-family:Inter,Segoe UI,system-ui,sans-serif;
+      color:#f1e7df;
+      text-align:right;
+    ">0:00 / 0:00</div>
   </div>
 
-  <audio id="audioPlayer" preload="metadata" style="display:none"
+  <!-- VOLUME -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
+    <span id="cutIcon" style="cursor:pointer">🔊</span>
+    <div id="volumeBar" style="width:90px;height:5px;">
+      <div id="volumeFill"></div>
+      <div id="volumeKnob"></div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer"
     src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
   </audio>
 </div>
@@ -162,91 +123,118 @@ const volumeFill = document.getElementById('volumeFill');
 const volumeKnob = document.getElementById('volumeKnob');
 const timeDisplay = document.getElementById('timeDisplay');
 
-/* LOAD STATE */
-audio.volume = parseFloat(localStorage.getItem('vol')) ?? 0.7;
-audio.muted = localStorage.getItem('muted') === 'true';
-audio.loop = localStorage.getItem('loop') === 'true';
-audio.currentTime = parseFloat(localStorage.getItem('time')) || 0;
+/* ===== LOAD STATE ===== */
+const savedVolume = localStorage.getItem('musicVolume');
+const savedMuted = localStorage.getItem('musicMuted') === 'true';
+const savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
+const savedLoop = localStorage.getItem('musicLoop') === 'true';
+const savedPlaying = localStorage.getItem('musicPlaying') === 'true';
 
-if(localStorage.getItem('playing') === 'true'){
+audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.7;
+audio.muted = savedMuted;
+audio.loop = savedLoop;
+
+/* ===== SYNC VOLUME UI ===== */
+function syncVolumeUI(){
+  const v = audio.muted ? 0 : audio.volume;
+  volumeFill.style.width = (v*100)+'%';
+  volumeKnob.style.left = (v*100)+'%';
+  cutIcon.textContent = audio.muted || v===0 ? '🔇' : '🔊';
+}
+syncVolumeUI();
+
+/* ===== PLAY / PAUSE ===== */
+playBtn.onclick = ()=> audio.paused ? audio.play() : audio.pause();
+
+audio.onplay = ()=>{
+  playBtn.textContent='❚❚';
+  localStorage.setItem('musicPlaying',true);
+};
+
+audio.onpause = ()=>{
+  playBtn.textContent='▶';
+  localStorage.setItem('musicPlaying',false);
+};
+
+/* ===== AUTO RESUME ===== */
+if(savedPlaying){
   audio.play().catch(()=>{});
 }
 
-function updateUI(){
-  volumeFill.style.width = (audio.muted ? 0 : audio.volume*100) + '%';
-  volumeKnob.style.left = (audio.muted ? 0 : audio.volume*100) + '%';
-  cutIcon.textContent = (audio.muted || audio.volume === 0) ? '🔇' : '🔊';
-  loopBtn.style.opacity = audio.loop ? '1' : '.5';
-}
-updateUI();
-
-/* PLAY */
-playBtn.onclick = () => audio.paused ? audio.play() : audio.pause();
-audio.onplay = () => { playBtn.textContent = '❚❚'; localStorage.setItem('playing', true); };
-audio.onpause = () => { playBtn.textContent = '▶'; localStorage.setItem('playing', false); };
-
-/* LOOP */
-loopBtn.onclick = () => {
+/* ===== LOOP ===== */
+loopBtn.onclick = ()=>{
   audio.loop = !audio.loop;
-  localStorage.setItem('loop', audio.loop);
-  updateUI();
+  localStorage.setItem('musicLoop',audio.loop);
+  loopBtn.style.background = audio.loop
+    ? 'linear-gradient(145deg,#ffb37a,#ff8a70)'
+    : 'rgba(255,255,255,.08)';
 };
+loopBtn.style.background = audio.loop
+  ? 'linear-gradient(145deg,#ffb37a,#ff8a70)'
+  : 'rgba(255,255,255,.08)';
 
-/* MUTE */
-cutIcon.onclick = () => {
-  audio.muted = !audio.muted;
-  localStorage.setItem('muted', audio.muted);
-  updateUI();
-};
-
-/* VOLUME DRAG */
-function setVolumeFromEvent(e){
-  const r = volumeBar.getBoundingClientRect();
-  const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-  const v = Math.max(0, Math.min(1, x / r.width));
-  audio.volume = v;
-  audio.muted = false;
-  localStorage.setItem('vol', v);
-  localStorage.setItem('muted', false);
-  updateUI();
-}
-['mousedown','touchstart'].forEach(ev =>
-  volumeBar.addEventListener(ev, e => {
-    setVolumeFromEvent(e);
-    const move = ev === 'mousedown' ? 'mousemove' : 'touchmove';
-    const up = ev === 'mousedown' ? 'mouseup' : 'touchend';
-    document.addEventListener(move, setVolumeFromEvent);
-    document.addEventListener(up, ()=>document.removeEventListener(move, setVolumeFromEvent), {once:true});
-  })
-);
-
-/* PROGRESS */
-function format(t){
-  const m = Math.floor(t/60);
-  const s = Math.floor(t%60);
-  return m + ':' + (s<10?'0':'') + s;
-}
-
-audio.addEventListener('timeupdate', ()=>{
-  const p = (audio.currentTime / (audio.duration||1)) * 100;
-  progressFilled.style.width = p + '%';
-  timeDisplay.textContent = format(audio.currentTime) + ' / ' + format(audio.duration||0);
-  localStorage.setItem('time', audio.currentTime);
+/* ===== METADATA (ENABLE SEEK AT START) ===== */
+audio.addEventListener('loadedmetadata', ()=>{
+  audio.currentTime = savedTime;
 });
 
-/* SEEK */
-function seek(e){
-  const r = progressBar.getBoundingClientRect();
-  const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-  audio.currentTime = Math.max(0, Math.min(audio.duration, (x / r.width) * audio.duration));
+/* ===== TIME / PROGRESS ===== */
+function fmt(s){
+  const m=Math.floor(s/60);
+  const sec=Math.floor(s%60);
+  return m+':'+(sec<10?'0':'')+sec;
 }
-['mousedown','touchstart'].forEach(ev =>
-  progressBar.addEventListener(ev, e => {
-    seek(e);
-    const move = ev === 'mousedown' ? 'mousemove' : 'touchmove';
-    const up = ev === 'mousedown' ? 'mouseup' : 'touchend';
-    document.addEventListener(move, seek);
-    document.addEventListener(up, ()=>document.removeEventListener(move, seek), {once:true});
-  })
-);
+
+audio.ontimeupdate=()=>{
+  const p=(audio.currentTime/(audio.duration||1))*100;
+  progressFilled.style.width=p+'%';
+  timeDisplay.textContent = fmt(audio.currentTime)+' / '+fmt(audio.duration||0);
+  localStorage.setItem('musicTime',audio.currentTime);
+};
+
+/* ===== SEEK (MOUSE + TOUCH) ===== */
+function seek(e){
+  const r=progressBar.getBoundingClientRect();
+  const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  if(!audio.duration) return;
+  audio.currentTime=Math.max(0,Math.min(1,x/r.width))*audio.duration;
+}
+progressBar.onmousedown=e=>{
+  seek(e);
+  document.onmousemove=seek;
+  document.onmouseup=()=>document.onmousemove=null;
+};
+progressBar.ontouchstart=seek;
+progressBar.ontouchmove=seek;
+
+/* ===== VOLUME ===== */
+function setVolume(v){
+  v=Math.max(0,Math.min(1,v));
+  audio.volume=v;
+  audio.muted=false;
+  localStorage.setItem('musicVolume',v);
+  localStorage.setItem('musicMuted',false);
+  syncVolumeUI();
+}
+
+function volFromEvent(e){
+  const r=volumeBar.getBoundingClientRect();
+  const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  setVolume(x/r.width);
+}
+
+volumeBar.onmousedown=e=>{
+  volFromEvent(e);
+  document.onmousemove=volFromEvent;
+  document.onmouseup=()=>document.onmousemove=null;
+};
+volumeBar.ontouchstart=volFromEvent;
+volumeBar.ontouchmove=volFromEvent;
+
+/* ===== MUTE ===== */
+cutIcon.onclick=()=>{
+  audio.muted=!audio.muted;
+  localStorage.setItem('musicMuted',audio.muted);
+  syncVolumeUI();
+};
 </script>
