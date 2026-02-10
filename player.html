@@ -1,56 +1,79 @@
 <style>
-/* Ensure all widths include padding and borders */
 * { box-sizing: border-box; }
 
 html, body {
     margin: 0;
     padding: 0;
-    background: transparent !important; /* keep page fully transparent */
+    background: transparent !important;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-/* Music Player Container styled like sidebar but darker */
+/* PLAYER CONTAINER – match sidebar */
 #playerBox {
     width: 100%;
-    margin: 0;
     padding: 12px 10px;
     border-radius: 16px;
-    background: rgba(0, 0, 0, 0.99); /* darker translucent */
-    border: 2px solid rgba(255,176,120,0.45); /* golden outline */
-    box-shadow: rgba(0, 0, 0, 0.35) 0 0 12px inset;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+
+    background: rgba(10,14,12,.55); /* SAME family as sidebar */
+    border: 2px solid rgba(255,176,120,.45);
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,.45),
+        0 0 14px rgba(255,176,120,.08);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     text-align: center;
 }
 
-/* Bars styled to match sidebar theme */
-#progressBar, #volumeBar {
-    background: rgba(255, 255, 255, 0.06); /* even subtler overlay */
+/* PROGRESS + VOLUME BAR BASE */
+#progressBar,
+#volumeBar {
+    background: linear-gradient(180deg,#1c120f,#120a08);
     border-radius: 8px;
+    border: 1px solid rgba(255,176,120,.35);
+    box-shadow: inset 0 0 6px rgba(0,0,0,.45);
     position: relative;
 }
 
-#progressFilled, #volumeFill {
+/* FILLED PART */
+#progressFilled,
+#volumeFill {
     border-radius: 8px;
-    background: linear-gradient(90deg, #ffb37a, #ff8a70); /* golden-orange gradient */
-    box-shadow: inset 0 0 6px rgba(255,176,120,0.6);
+    background: linear-gradient(90deg,#ffb37a,#ff8a70);
+    box-shadow: inset 0 0 6px rgba(255,170,130,.65);
 }
 
-/* Knobs */
-#progressKnob, #volumeKnob {
-    box-shadow: 0 0 8px rgba(255,176,120,1);
+/* KNOBS */
+#progressKnob {
     background: #ffd8b2;
+    box-shadow: 0 0 8px rgba(255,176,120,1);
 }
 
-/* Buttons (play/pause, loop, mute) */
-#playPauseBtn, #loopBtn, #cutIcon {
-    border: none;
-    cursor: pointer;
+#volumeKnob {
+    background: #e9ddff;
+    box-shadow: 0 0 6px rgba(180,140,255,.9);
+}
+
+/* BUTTONS */
+#playPauseBtn {
+    box-shadow: 0 0 10px rgba(255,176,120,.6);
+}
+
+/* LOOP BUTTON – outlined */
+#loopBtn {
+    background: rgba(0,0,0,.45);
+    border: 1px solid rgba(255,176,120,.45);
+    color: #ffb37a;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.45);
+}
+
+/* HOVER FEEL (optional but nice) */
+#loopBtn:hover {
+    box-shadow: 0 0 10px rgba(255,176,120,.6);
 }
 </style>
-
 
 
 <!-- 🎵 Transparent Music Player -->
