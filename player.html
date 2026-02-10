@@ -61,22 +61,23 @@ html,body{
 /* BUTTON HOVER */
 #playPauseBtn:hover, #loopBtn:hover, #cutIcon:hover{
   filter: brightness(1.2);
-  position:relative;
 }
 
-/* TOOLTIP */
+/* TOOLTIP STYLES */
 .tooltip{
-  position:absolute;
-  background:rgba(0,0,0,.8);
-  color:#fff;
-  padding:2px 6px;
-  border-radius:4px;
-  font-size:11px;
-  white-space:nowrap;
+  position:fixed; /* fixed to viewport, always on top */
+  background:#fff;
+  color:#111;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:12px;
+  font-family:Segoe UI,sans-serif;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
   pointer-events:none;
   opacity:0;
   transition:opacity .15s;
-  z-index:10;
+  z-index:9999;
+  white-space:nowrap;
 }
 </style>
 
@@ -207,30 +208,36 @@ volumeBar.ontouchstart=volFromEvent; volumeBar.ontouchmove=volFromEvent;
 /* ===== MUTE ===== */
 cutIcon.onclick=()=>{ audio.muted=!audio.muted; localStorage.setItem('musicMuted',audio.muted); syncVolumeUI(); };
 
-/* ===== TOOLTIP ===== */
-function showTooltip(e, text){
-  tooltip.textContent=text;
-  tooltip.style.left=(e.clientX+10)+'px';
-  tooltip.style.top=(e.clientY+10)+'px';
-  tooltip.style.opacity=1;
+/* ===== TOOLTIP FUNCTIONS ===== */
+function showTooltipAtElement(el, text){
+  tooltip.textContent = text;
+  const rect = el.getBoundingClientRect();
+  tooltip.style.left = rect.left + rect.width/2 - tooltip.offsetWidth/2 + 'px';
+  tooltip.style.top = rect.top - tooltip.offsetHeight - 6 + 'px';
+  tooltip.style.opacity = 1;
 }
-function hideTooltip(){ tooltip.style.opacity=0; }
+
+function hideTooltip(){
+  tooltip.style.opacity = 0;
+}
+
+/* attach tooltip to any button */
+function attachTooltip(el, getText){
+  el.onmouseenter = ()=> showTooltipAtElement(el,getText());
+  el.onmouseleave = hideTooltip;
+}
 
 // Play/Pause tooltip
-playBtn.onmouseenter = e=> showTooltip(e, audio.paused?'Play':'Pause');
-playBtn.onmousemove = e=> showTooltip(e, audio.paused?'Play':'Pause');
-playBtn.onmouseleave = hideTooltip;
-audio.onplay = ()=>{ playBtn.textContent='❚❚'; localStorage.setItem('musicPlaying',true); hideTooltip(); };
-audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlaying',false); hideTooltip(); };
+attachTooltip(playBtn, ()=> audio.paused ? 'Play' : 'Pause');
 
 // Loop tooltip
-loopBtn.onmouseenter = e=> showTooltip(e, 'Loop');
-loopBtn.onmousemove = e=> showTooltip(e, 'Loop');
-loopBtn.onmouseleave = hideTooltip;
+attachTooltip(loopBtn, ()=> 'Loop');
 
-// Mute tooltip
-cutIcon.onmouseenter = e=> showTooltip(e, audio.muted?'Unmute':'Mute');
-cutIcon.onmousemove = e=> showTooltip(e, audio.muted?'Unmute':'Mute');
-cutIcon.onmouseleave = hideTooltip;
-audio.onvolumechange = ()=>{ cutIcon.title = audio.muted?'Unmute':'Mute'; };
+// Mute/Unmute tooltip
+attachTooltip(cutIcon, ()=> audio.muted ? 'Unmute' : 'Mute');
+
+// Update tooltip text dynamically if state changes
+audio.onplay = ()=> { playBtn.textContent='❚❚'; if(tooltip.style.opacity==1) showTooltipAtElement(playBtn,'Pause'); };
+audio.onpause = ()=> { playBtn.textContent='▶'; if(tooltip.style.opacity==1) showTooltipAtElement(playBtn,'Play'); };
+audio.onvolumechange = ()=> { if(tooltip.style.opacity==1) showTooltipAtElement(cutIcon,audio.muted?'Unmute':'Mute'); };
 </script>
