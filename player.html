@@ -61,6 +61,22 @@ html,body{
 /* BUTTON HOVER */
 #playPauseBtn:hover, #loopBtn:hover, #cutIcon:hover{
   filter: brightness(1.2);
+  position:relative;
+}
+
+/* TOOLTIP */
+.tooltip{
+  position:absolute;
+  background:rgba(0,0,0,.8);
+  color:#fff;
+  padding:2px 6px;
+  border-radius:4px;
+  font-size:11px;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .15s;
+  z-index:10;
 }
 </style>
 
@@ -80,7 +96,7 @@ html,body{
   </div>
 
   <!-- VOLUME + LOOP -->
-  <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
+  <div style="display:flex;align-items:center;justify-content:flex-start;gap:6px;">
     <span id="cutIcon" style="cursor:pointer">🔊</span>
     <div id="volumeBar" style="width:90px;height:5px;">
       <div id="volumeFill"></div>
@@ -88,6 +104,9 @@ html,body{
     </div>
     <button id="loopBtn" style=" width:30px;height:30px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;color:#fff;">🔁</button>
   </div>
+
+  <!-- TOOLTIP -->
+  <div id="tooltip" class="tooltip"></div>
 
   <audio id="audioPlayer" src="https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3">
   </audio>
@@ -104,6 +123,7 @@ const volumeBar = document.getElementById('volumeBar');
 const volumeFill = document.getElementById('volumeFill');
 const volumeKnob = document.getElementById('volumeKnob');
 const timeDisplay = document.getElementById('timeDisplay');
+const tooltip = document.getElementById('tooltip');
 
 /* ===== LOAD STATE ===== */
 const savedVolume = localStorage.getItem('musicVolume');
@@ -134,7 +154,7 @@ audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlay
 if(savedPlaying){ audio.play().catch(()=>{}); }
 
 /* ===== LOOP ===== */
-loopBtn.onclick = ()=>{
+loopBtn.onclick = ()=> {
   audio.loop = !audio.loop;
   localStorage.setItem('musicLoop',audio.loop);
   loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
@@ -186,4 +206,31 @@ volumeBar.ontouchstart=volFromEvent; volumeBar.ontouchmove=volFromEvent;
 
 /* ===== MUTE ===== */
 cutIcon.onclick=()=>{ audio.muted=!audio.muted; localStorage.setItem('musicMuted',audio.muted); syncVolumeUI(); };
+
+/* ===== TOOLTIP ===== */
+function showTooltip(e, text){
+  tooltip.textContent=text;
+  tooltip.style.left=(e.clientX+10)+'px';
+  tooltip.style.top=(e.clientY+10)+'px';
+  tooltip.style.opacity=1;
+}
+function hideTooltip(){ tooltip.style.opacity=0; }
+
+// Play/Pause tooltip
+playBtn.onmouseenter = e=> showTooltip(e, audio.paused?'Play':'Pause');
+playBtn.onmousemove = e=> showTooltip(e, audio.paused?'Play':'Pause');
+playBtn.onmouseleave = hideTooltip;
+audio.onplay = ()=>{ playBtn.textContent='❚❚'; localStorage.setItem('musicPlaying',true); hideTooltip(); };
+audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlaying',false); hideTooltip(); };
+
+// Loop tooltip
+loopBtn.onmouseenter = e=> showTooltip(e, 'Loop');
+loopBtn.onmousemove = e=> showTooltip(e, 'Loop');
+loopBtn.onmouseleave = hideTooltip;
+
+// Mute tooltip
+cutIcon.onmouseenter = e=> showTooltip(e, audio.muted?'Unmute':'Mute');
+cutIcon.onmousemove = e=> showTooltip(e, audio.muted?'Unmute':'Mute');
+cutIcon.onmouseleave = hideTooltip;
+audio.onvolumechange = ()=>{ cutIcon.title = audio.muted?'Unmute':'Mute'; };
 </script>
