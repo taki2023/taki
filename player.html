@@ -63,16 +63,16 @@ html,body{
   filter: brightness(1.2);
 }
 
-/* TOOLTIP STYLES */
+/* TOOLTIP STYLES FIXED + SMALLER */
 .tooltip{
   position:fixed; /* fixed to viewport, always on top */
   background:#fff;
   color:#111;
-  padding:4px 8px;
-  border-radius:6px;
-  font-size:12px;
+  padding:2px 6px;
+  border-radius:5px;
+  font-size:11px;
   font-family:Segoe UI,sans-serif;
-  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  box-shadow:0 2px 4px rgba(0,0,0,.25);
   pointer-events:none;
   opacity:0;
   transition:opacity .15s;
@@ -212,8 +212,20 @@ cutIcon.onclick=()=>{ audio.muted=!audio.muted; localStorage.setItem('musicMuted
 function showTooltipAtElement(el, text){
   tooltip.textContent = text;
   const rect = el.getBoundingClientRect();
-  tooltip.style.left = rect.left + rect.width/2 - tooltip.offsetWidth/2 + 'px';
-  tooltip.style.top = rect.top - tooltip.offsetHeight - 6 + 'px';
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
+
+  // Default position: above the button
+  let top = rect.top - tooltipHeight - 6;
+  let left = rect.left + rect.width/2 - tooltipWidth/2;
+
+  // Keep tooltip inside viewport
+  if(top < 4) top = rect.bottom + 6; // flip below if too high
+  if(left < 4) left = 4;
+  if(left + tooltipWidth > window.innerWidth - 4) left = window.innerWidth - tooltipWidth - 4;
+
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
   tooltip.style.opacity = 1;
 }
 
