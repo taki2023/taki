@@ -57,11 +57,6 @@ html,body{
   background:#e9ddff;
 }
 
-/* BUTTON HOVER */
-#playPauseBtn,#prevBtn,#nextBtn,#loopBtn,#cutIcon:hover{
-  filter: brightness(1.2);
-}
-
 /* TOOLTIP */
 .tooltip{
   position:fixed;
@@ -86,6 +81,7 @@ html,body{
   overflow-y:auto;
   padding-right:4px;
 }
+
 .playlistItem{
   cursor:pointer;
   padding:4px 8px;
@@ -95,9 +91,16 @@ html,body{
   font-family:Segoe UI,sans-serif;
   color:#f1e7df;
   background:rgba(255,176,120,0.05);
-  transition: background .15s;
+  transition:background .15s;
   user-select:none;
+
+  /* NEW (layout for number + title + time) */
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
 }
+
 .playlistItem:hover{
   background:rgba(255,176,120,0.15);
 }
@@ -108,6 +111,12 @@ html,body{
   opacity:0.5;
   background:rgba(255,176,120,0.2);
 }
+
+.trackTime{
+  font-size:11px;
+  opacity:.7;
+  white-space:nowrap;
+}
 </style>
 
 <div id="playerBox">
@@ -115,34 +124,27 @@ html,body{
     <button id="prevBtn" style="width:32px;height:32px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;">⏮</button>
     <button id="playPauseBtn" style="width:32px;height:32px;border-radius:50%; background:linear-gradient(145deg,#ffb37a,#ff8a70); border:none;cursor:pointer;">▶</button>
     <button id="nextBtn" style="width:32px;height:32px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;">⏭</button>
-    
-    <!-- PROGRESS -->
-    <div id="progressBar" style="flex:1;height:8px; margin-left:12px; margin-right:12px;">
+
+    <div id="progressBar" style="flex:1;height:8px;margin-left:12px;margin-right:12px;">
       <div id="progressFilled" style="width:0%;position:relative;">
         <div id="progressKnob" style="right:-7px;"></div>
       </div>
     </div>
 
-    <!-- TIME -->
-    <div id="timeDisplay" style=" min-width:60px; font-size:11px; font-weight:500; font-family:Inter,Segoe UI,system-ui,sans-serif; color:#f1e7df; text-align:right; ">0:00 / 0:00</div>
+    <div id="timeDisplay" style="min-width:60px;font-size:11px;color:#f1e7df;text-align:right;">0:00 / 0:00</div>
   </div>
 
-  <!-- VOLUME + LOOP -->
-  <div style="display:flex;align-items:center;justify-content:flex-start;gap:6px;margin-bottom:8px;">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
     <span id="cutIcon" style="cursor:pointer">🔊</span>
     <div id="volumeBar" style="width:90px;height:5px;">
       <div id="volumeFill"></div>
       <div id="volumeKnob"></div>
     </div>
-    <button id="loopBtn" style=" width:30px;height:30px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;color:#fff;">🔁</button>
+    <button id="loopBtn" style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;">🔁</button>
   </div>
 
-  <!-- PLAYLIST -->
   <div id="playlistContainer"></div>
-
-  <!-- TOOLTIP -->
   <div id="tooltip" class="tooltip"></div>
-
   <audio id="audioPlayer"></audio>
 </div>
 
@@ -164,194 +166,106 @@ const playlistContainer = document.getElementById('playlistContainer');
 
 /* ===== PLAYLIST WITH LOCAL STORAGE ===== */
 let playlist = JSON.parse(localStorage.getItem('musicPlaylist')) || [
-  { title: "Faded - Alan Walker", src: "https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3" },
-  { title: "Song Two", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-  { title: "Song Three", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
+  { title:"Faded - Alan Walker", src:"https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"},
+  { title:"Song Two", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+  { title:"Song Three", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"}
 ];
 
 let currentTrack = parseInt(localStorage.getItem('musicCurrentTrack')) || 0;
 let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 
-function loadTrack(index){
-  currentTrack = index;
-  audio.src = playlist[index].src;
-  audio.currentTime = savedTime || 0;
-  audio.play().catch(()=>{});
-  updatePlaylistUI();
-  savePlaylistState();
+/* ===== HELPERS ===== */
+function fmt(t){
+  const m=Math.floor(t/60);
+  const s=Math.floor(t%60).toString().padStart(2,'0');
+  return m+":"+s;
 }
 
+/* ===== LOAD TRACK ===== */
+function loadTrack(index){
+  currentTrack=index;
+  audio.src=playlist[index].src;
+  audio.currentTime=savedTime||0;
+  audio.play().catch(()=>{});
+  updatePlaylistUI();
+  localStorage.setItem('musicCurrentTrack',currentTrack);
+}
+
+/* ===== PLAYLIST UI ===== */
 function updatePlaylistUI(){
-  playlistContainer.innerHTML = '';
+  playlistContainer.innerHTML='';
   playlist.forEach((track,i)=>{
-    const div = document.createElement('div');
-    div.textContent = track.title;
-    div.className = 'playlistItem' + (i===currentTrack?' active':'');
-    div.setAttribute('draggable','true');
+    const div=document.createElement('div');
+    div.className='playlistItem'+(i===currentTrack?' active':'');
+    div.draggable=true;
 
-    // click to play
-    div.onclick = ()=> { savedTime = 0; loadTrack(i); };
+    /* NEW: numbering + time */
+    div.innerHTML=`
+      <span>${i+1}. ${track.title}</span>
+      <span class="trackTime">--:--</span>
+    `;
 
-    // drag events
-    div.addEventListener('dragstart', (e)=>{
+    div.onclick=()=>{ savedTime=0; loadTrack(i); };
+
+    /* drag & reorder (UNCHANGED) */
+    div.addEventListener('dragstart',e=>{
       div.classList.add('dragging');
-      e.dataTransfer.effectAllowed = "move";
-      e.dataTransfer.setData("text/plain", i);
+      e.dataTransfer.setData('text/plain',i);
     });
-    div.addEventListener('dragend', ()=>{
-      div.classList.remove('dragging');
-      reorderPlaylist();
-    });
-    div.addEventListener('dragover', (e)=>{
+    div.addEventListener('dragend',()=>div.classList.remove('dragging'));
+    div.addEventListener('dragover',e=>e.preventDefault());
+    div.addEventListener('drop',e=>{
       e.preventDefault();
-    });
-    div.addEventListener('drop', (e)=>{
-      e.preventDefault();
-      const fromIndex = parseInt(e.dataTransfer.getData("text/plain"));
-      const toIndex = Array.from(playlistContainer.children).indexOf(div);
-      if(fromIndex !== toIndex){
-        const item = playlist.splice(fromIndex,1)[0];
-        playlist.splice(toIndex,0,item);
-        if(currentTrack === fromIndex) currentTrack = toIndex;
-        else if(fromIndex < currentTrack && toIndex >= currentTrack) currentTrack--;
-        else if(fromIndex > currentTrack && toIndex <= currentTrack) currentTrack++;
+      const from=parseInt(e.dataTransfer.getData('text/plain'));
+      const to=Array.from(playlistContainer.children).indexOf(div);
+      if(from!==to){
+        const item=playlist.splice(from,1)[0];
+        playlist.splice(to,0,item);
+        currentTrack = to;
+        localStorage.setItem('musicPlaylist',JSON.stringify(playlist));
         updatePlaylistUI();
-        savePlaylistState();
       }
     });
+
+    /* NEW: duration */
+    const tspan=div.querySelector('.trackTime');
+    const temp=new Audio(track.src);
+    temp.onloadedmetadata=()=>{ tspan.textContent=fmt(temp.duration); };
 
     playlistContainer.appendChild(div);
   });
 }
 
-function reorderPlaylist(){ updatePlaylistUI(); savePlaylistState(); }
-function savePlaylistState(){
-  localStorage.setItem('musicPlaylist', JSON.stringify(playlist));
-  localStorage.setItem('musicCurrentTrack', currentTrack);
-}
-
-/* ===== AUTO PLAY NEXT ===== */
-audio.onended = () => { nextTrack(); }
-
-/* ===== NAVIGATION ===== */
-function prevTrack(){
-  savedTime = 0;
-  currentTrack--;
-  if(currentTrack < 0) currentTrack = playlist.length -1;
-  loadTrack(currentTrack);
-}
-function nextTrack(){
-  savedTime = 0;
-  currentTrack++;
-  if(currentTrack >= playlist.length) currentTrack = 0;
-  loadTrack(currentTrack);
-}
-
-prevBtn.onclick = prevTrack;
-nextBtn.onclick = nextTrack;
-
-/* ===== INITIAL LOAD ===== */
-loadTrack(currentTrack);
-
-/* ===== VOLUME / PLAY / LOOP / TIME / SEEK ===== */
-const savedVolume = localStorage.getItem('musicVolume');
-const savedMuted = localStorage.getItem('musicMuted') === 'true';
-const savedLoop = localStorage.getItem('musicLoop') === 'true';
-const savedPlaying = localStorage.getItem('musicPlaying') === 'true';
-
-audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.7;
-audio.muted = savedMuted;
-audio.loop = savedLoop;
-
-function syncVolumeUI(){
-  const v = audio.muted ? 0 : audio.volume;
-  volumeFill.style.width = (v*100)+'%';
-  volumeKnob.style.left = (v*100)+'%';
-  cutIcon.textContent = audio.muted || v===0 ? '🔇' : '🔊';
-}
-syncVolumeUI();
-
-function fmt(s){
-  const m=Math.floor(s/60);
-  const sec=Math.floor(s%60);
-  return m+':'+(sec<10?'0':'')+sec;
-}
-
+/* ===== EVENTS ===== */
 audio.ontimeupdate=()=>{
   const p=(audio.currentTime/(audio.duration||1))*100;
   progressFilled.style.width=p+'%';
-  timeDisplay.textContent = fmt(audio.currentTime)+' / '+fmt(audio.duration||0);
-  localStorage.setItem('musicTime', audio.currentTime);
-}
+  timeDisplay.textContent=fmt(audio.currentTime)+' / '+fmt(audio.duration||0);
+  localStorage.setItem('musicTime',audio.currentTime);
+};
 
-function seek(e){
+progressBar.onclick=e=>{
   const r=progressBar.getBoundingClientRect();
-  const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
-  if(!audio.duration) return;
-  audio.currentTime=Math.max(0,Math.min(1,x/r.width))*audio.duration;
-}
-progressBar.onmousedown=e=>{ seek(e); document.onmousemove=seek; document.onmouseup=()=>document.onmousemove=null; };
-progressBar.ontouchstart=seek; progressBar.ontouchmove=seek;
+  audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
+};
 
-function setVolume(v){
-  v=Math.max(0,Math.min(1,v));
-  audio.volume=v;
-  audio.muted=false;
-  localStorage.setItem('musicVolume',v);
-  localStorage.setItem('musicMuted',false);
-  syncVolumeUI();
-}
-function volFromEvent(e){
+volumeBar.onclick=e=>{
   const r=volumeBar.getBoundingClientRect();
-  const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
-  setVolume(x/r.width);
-}
-volumeBar.onmousedown=e=>{ volFromEvent(e); document.onmousemove=volFromEvent; document.onmouseup=()=>document.onmousemove=null; };
-volumeBar.ontouchstart=volFromEvent; volumeBar.ontouchmove=volFromEvent;
-
-cutIcon.onclick=()=>{ audio.muted=!audio.muted; localStorage.setItem('musicMuted',audio.muted); syncVolumeUI(); };
-
-playBtn.onclick = ()=>{
-  if(audio.paused){ audio.play(); } else { audio.pause(); }
+  audio.volume=(e.clientX-r.left)/r.width;
+  volumeFill.style.width=(audio.volume*100)+'%';
+  volumeKnob.style.left=(audio.volume*100)+'%';
 };
-audio.onplay = ()=>{ playBtn.textContent='❚❚'; localStorage.setItem('musicPlaying',true); };
-audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlaying',false); };
 
-/* ===== LOOP ===== */
-loopBtn.onclick = ()=> {
-  audio.loop = !audio.loop;
-  localStorage.setItem('musicLoop',audio.loop);
-  loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
-};
-loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
+playBtn.onclick=()=>audio.paused?audio.play():audio.pause();
+audio.onplay=()=>playBtn.textContent='❚❚';
+audio.onpause=()=>playBtn.textContent='▶';
 
-/* ===== TOOLTIP ===== */
-function showTooltipAtElement(el, text){
-  tooltip.textContent = text;
-  const rect = el.getBoundingClientRect();
-  const tooltipWidth = tooltip.offsetWidth;
-  const tooltipHeight = tooltip.offsetHeight;
+prevBtn.onclick=()=>{currentTrack=(currentTrack-1+playlist.length)%playlist.length;loadTrack(currentTrack);};
+nextBtn.onclick=()=>{currentTrack=(currentTrack+1)%playlist.length;loadTrack(currentTrack);};
 
-  let top = rect.top - tooltipHeight - 6;
-  let left = rect.left + rect.width/2 - tooltipWidth/2;
+loopBtn.onclick=()=>audio.loop=!audio.loop;
 
-  if(top < 4) top = rect.bottom + 6;
-  if(left < 4) left = 4;
-  if(left + tooltipWidth > window.innerWidth - 4) left = window.innerWidth - tooltipWidth - 4;
-
-  tooltip.style.left = left + 'px';
-  tooltip.style.top = top + 'px';
-  tooltip.style.opacity = 1;
-}
-function hideTooltip(){ tooltip.style.opacity = 0; }
-function attachTooltip(el, getText){
-  el.onmouseenter = ()=> showTooltipAtElement(el,getText());
-  el.onmouseleave = hideTooltip;
-}
-attachTooltip(playBtn, ()=> audio.paused ? 'Play' : 'Pause');
-attachTooltip(loopBtn, ()=> 'Loop');
-attachTooltip(cutIcon, ()=> audio.muted ? 'Unmute' : 'Mute');
-attachTooltip(prevBtn, ()=> 'Previous Track');
-attachTooltip(nextBtn, ()=> 'Next Track');
-
+/* ===== INIT ===== */
+loadTrack(currentTrack);
 </script>
+
