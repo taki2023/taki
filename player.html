@@ -58,11 +58,11 @@ html,body{
 }
 
 /* BUTTON HOVER */
-#playPauseBtn:hover, #loopBtn:hover, #cutIcon:hover{
+#playPauseBtn,#prevBtn,#nextBtn,#loopBtn,#cutIcon:hover{
   filter: brightness(1.2);
 }
 
-/* TOOLTIP STYLES FIXED + SMALLER */
+/* TOOLTIP */
 .tooltip{
   position:fixed;
   background:#fff;
@@ -111,11 +111,13 @@ html,body{
 </style>
 
 <div id="playerBox">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;width:100%;">
-    <button id="playPauseBtn" style=" width:32px;height:32px;border-radius:50%; background:linear-gradient(145deg,#ffb37a,#ff8a70); border:none;cursor:pointer; ">▶</button>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;width:100%;justify-content:center;">
+    <button id="prevBtn" style="width:32px;height:32px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;">⏮</button>
+    <button id="playPauseBtn" style="width:32px;height:32px;border-radius:50%; background:linear-gradient(145deg,#ffb37a,#ff8a70); border:none;cursor:pointer;">▶</button>
+    <button id="nextBtn" style="width:32px;height:32px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;">⏭</button>
     
     <!-- PROGRESS -->
-    <div id="progressBar" style="flex:1;height:8px;">
+    <div id="progressBar" style="flex:1;height:8px; margin-left:12px; margin-right:12px;">
       <div id="progressFilled" style="width:0%;position:relative;">
         <div id="progressKnob" style="right:-7px;"></div>
       </div>
@@ -147,6 +149,8 @@ html,body{
 <script>
 const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 const loopBtn = document.getElementById('loopBtn');
 const cutIcon = document.getElementById('cutIcon');
 const progressBar = document.getElementById('progressBar');
@@ -158,20 +162,23 @@ const timeDisplay = document.getElementById('timeDisplay');
 const tooltip = document.getElementById('tooltip');
 const playlistContainer = document.getElementById('playlistContainer');
 
-/* ===== PLAYLIST ===== */
-let playlist = [
+/* ===== PLAYLIST WITH LOCAL STORAGE ===== */
+let playlist = JSON.parse(localStorage.getItem('musicPlaylist')) || [
   { title: "Faded - Alan Walker", src: "https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3" },
   { title: "Song Two", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
   { title: "Song Three", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
 ];
 
-let currentTrack = 0;
+let currentTrack = parseInt(localStorage.getItem('musicCurrentTrack')) || 0;
+let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 
 function loadTrack(index){
   currentTrack = index;
   audio.src = playlist[index].src;
+  audio.currentTime = savedTime || 0;
   audio.play().catch(()=>{});
   updatePlaylistUI();
+  savePlaylistState();
 }
 
 function updatePlaylistUI(){
@@ -183,7 +190,7 @@ function updatePlaylistUI(){
     div.setAttribute('draggable','true');
 
     // click to play
-    div.onclick = ()=> loadTrack(i);
+    div.onclick = ()=> { savedTime = 0; loadTrack(i); };
 
     // drag events
     div.addEventListener('dragstart', (e)=>{
@@ -209,6 +216,7 @@ function updatePlaylistUI(){
         else if(fromIndex < currentTrack && toIndex >= currentTrack) currentTrack--;
         else if(fromIndex > currentTrack && toIndex <= currentTrack) currentTrack++;
         updatePlaylistUI();
+        savePlaylistState();
       }
     });
 
@@ -216,14 +224,31 @@ function updatePlaylistUI(){
   });
 }
 
-function reorderPlaylist(){ updatePlaylistUI(); }
+function reorderPlaylist(){ updatePlaylistUI(); savePlaylistState(); }
+function savePlaylistState(){
+  localStorage.setItem('musicPlaylist', JSON.stringify(playlist));
+  localStorage.setItem('musicCurrentTrack', currentTrack);
+}
 
 /* ===== AUTO PLAY NEXT ===== */
-audio.onended = () => {
-  let next = currentTrack + 1;
-  if(next >= playlist.length) next = 0;
-  loadTrack(next);
+audio.onended = () => { nextTrack(); }
+
+/* ===== NAVIGATION ===== */
+function prevTrack(){
+  savedTime = 0;
+  currentTrack--;
+  if(currentTrack < 0) currentTrack = playlist.length -1;
+  loadTrack(currentTrack);
 }
+function nextTrack(){
+  savedTime = 0;
+  currentTrack++;
+  if(currentTrack >= playlist.length) currentTrack = 0;
+  loadTrack(currentTrack);
+}
+
+prevBtn.onclick = prevTrack;
+nextBtn.onclick = nextTrack;
 
 /* ===== INITIAL LOAD ===== */
 loadTrack(currentTrack);
@@ -246,27 +271,18 @@ function syncVolumeUI(){
 }
 syncVolumeUI();
 
-playBtn.onclick = ()=> audio.paused ? audio.play() : audio.pause();
-audio.onplay = ()=>{ playBtn.textContent='❚❚'; localStorage.setItem('musicPlaying',true); };
-audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlaying',false); };
-
-loopBtn.onclick = ()=> {
-  audio.loop = !audio.loop;
-  localStorage.setItem('musicLoop',audio.loop);
-  loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
-};
-loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
-
 function fmt(s){
   const m=Math.floor(s/60);
   const sec=Math.floor(s%60);
   return m+':'+(sec<10?'0':'')+sec;
 }
+
 audio.ontimeupdate=()=>{
   const p=(audio.currentTime/(audio.duration||1))*100;
   progressFilled.style.width=p+'%';
   timeDisplay.textContent = fmt(audio.currentTime)+' / '+fmt(audio.duration||0);
-};
+  localStorage.setItem('musicTime', audio.currentTime);
+}
 
 function seek(e){
   const r=progressBar.getBoundingClientRect();
@@ -295,6 +311,20 @@ volumeBar.ontouchstart=volFromEvent; volumeBar.ontouchmove=volFromEvent;
 
 cutIcon.onclick=()=>{ audio.muted=!audio.muted; localStorage.setItem('musicMuted',audio.muted); syncVolumeUI(); };
 
+playBtn.onclick = ()=>{
+  if(audio.paused){ audio.play(); } else { audio.pause(); }
+};
+audio.onplay = ()=>{ playBtn.textContent='❚❚'; localStorage.setItem('musicPlaying',true); };
+audio.onpause = ()=>{ playBtn.textContent='▶'; localStorage.setItem('musicPlaying',false); };
+
+/* ===== LOOP ===== */
+loopBtn.onclick = ()=> {
+  audio.loop = !audio.loop;
+  localStorage.setItem('musicLoop',audio.loop);
+  loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
+};
+loopBtn.style.background = audio.loop ? 'linear-gradient(145deg,#ffb37a,#ff8a70)' : 'rgba(255,255,255,.08)';
+
 /* ===== TOOLTIP ===== */
 function showTooltipAtElement(el, text){
   tooltip.textContent = text;
@@ -321,7 +351,7 @@ function attachTooltip(el, getText){
 attachTooltip(playBtn, ()=> audio.paused ? 'Play' : 'Pause');
 attachTooltip(loopBtn, ()=> 'Loop');
 attachTooltip(cutIcon, ()=> audio.muted ? 'Unmute' : 'Mute');
-audio.onplay = ()=> { if(tooltip.style.opacity==1) showTooltipAtElement(playBtn,'Pause'); };
-audio.onpause = ()=> { if(tooltip.style.opacity==1) showTooltipAtElement(playBtn,'Play'); };
-audio.onvolumechange = ()=> { if(tooltip.style.opacity==1) showTooltipAtElement(cutIcon,audio.muted?'Unmute':'Mute'); };
+attachTooltip(prevBtn, ()=> 'Previous Track');
+attachTooltip(nextBtn, ()=> 'Next Track');
+
 </script>
