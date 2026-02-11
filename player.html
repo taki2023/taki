@@ -223,6 +223,8 @@ let currentTrack = parseInt(localStorage.getItem('musicCurrentTrack')) || 0;
 let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 
 function loadTrack(index){
+  if (!playlist.length) return; // safety
+
   currentTrack = index;
   audio.src = playlist[index].src;
   audio.currentTime = savedTime || 0;
@@ -230,6 +232,7 @@ function loadTrack(index){
   updatePlaylistUI();
   savePlaylistState();
 }
+
 
 function updatePlaylistUI(){
   playlistContainer.innerHTML = '';
@@ -334,12 +337,14 @@ audio.onended = () => { nextTrack(); }
 
 /* ===== NAVIGATION ===== */
 function prevTrack(){
+  if (!playlist.length) return;
   savedTime = 0;
   currentTrack--;
   if(currentTrack < 0) currentTrack = playlist.length -1;
   loadTrack(currentTrack);
 }
 function nextTrack(){
+  if (!playlist.length) return;
   savedTime = 0;
   currentTrack++;
   if(currentTrack >= playlist.length) currentTrack = 0;
@@ -416,7 +421,11 @@ searchInput.addEventListener('blur', function() {
 
   
 /* ===== INITIAL LOAD ===== */
-loadTrack(currentTrack);
+if (playlist.length > 0) {
+  loadTrack(currentTrack);
+} else {
+  updatePlaylistUI();  // show "No songs in playlist"
+}
 
 /* ===== VOLUME / PLAY / LOOP / TIME / SEEK ===== */
 const savedVolume = localStorage.getItem('musicVolume');
