@@ -78,20 +78,7 @@ html,body{
   z-index:9999;
   white-space:nowrap;
 }
-<!-- SEARCH -->
-<div style="margin-bottom:8px;">
-  <input id="searchInput"
-         type="text"
-         placeholder="Search song..."
-         style="width:100%;
-                padding:6px 8px;
-                border-radius:8px;
-                border:1px solid rgba(255,176,120,.4);
-                background:rgba(0,0,0,.4);
-                color:#fff;
-                font-size:12px;">
-  <div id="searchResults" style="max-height:100px;overflow-y:auto;margin-top:4px;"></div>
-</div>
+
 
 /* PLAYLIST */
 #playlistContainer{
@@ -160,6 +147,21 @@ html,body{
     <button id="loopBtn" style=" width:30px;height:30px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;color:#fff;">🔁</button>
   </div>
 
+<!-- SEARCH -->
+<div style="margin-bottom:8px;">
+  <input id="searchInput"
+         type="text"
+         placeholder="Search song..."
+         style="width:100%;
+                padding:6px 8px;
+                border-radius:8px;
+                border:1px solid rgba(255,176,120,.4);
+                background:rgba(0,0,0,.4);
+                color:#fff;
+                font-size:12px;">
+  <div id="searchResults"
+       style="max-height:100px;overflow-y:auto;margin-top:4px;"></div>
+</div>
   <!-- PLAYLIST -->
   <div id="playlistContainer"></div>
 
