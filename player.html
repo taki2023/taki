@@ -97,6 +97,15 @@ html,body{
   background:rgba(255,176,120,0.05);
   transition: background .15s;
   user-select:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.trackNumber{
+  font-size:11px;
+  opacity:0.6;
+  letter-spacing:1px;
+  min-width:22px;   /* keeps numbers aligned */
 }
 .playlistItem:hover{
   background:rgba(255,176,120,0.15);
@@ -185,7 +194,10 @@ function updatePlaylistUI(){
   playlistContainer.innerHTML = '';
   playlist.forEach((track,i)=>{
     const div = document.createElement('div');
-    div.textContent = track.title;
+    div.innerHTML = `
+  <span class="trackNumber">${String(i+1).padStart(2,'0')}</span>
+  <span>${track.title}</span>
+`;
     div.className = 'playlistItem' + (i===currentTrack?' active':'');
     div.setAttribute('draggable','true');
 
