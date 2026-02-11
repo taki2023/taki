@@ -392,11 +392,12 @@ searchInput.addEventListener('input', function() {
 
   renderSearchResults(filtered);
 });
-document.addEventListener('click', (e) => {
-  if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+searchInput.addEventListener('blur', function() {
+  setTimeout(() => {
     searchResults.innerHTML = '';
-  }
+  }, 150);
 });
+
 
 
   
