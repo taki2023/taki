@@ -237,13 +237,45 @@ function updatePlaylistUI(){
     const div = document.createElement('div');
     div.innerHTML = `
   <span class="trackNumber">${String(i+1).padStart(2,'0')}</span>
-  <span>${track.title}</span>
+  <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+    ${track.title}
+  </span>
+  <span class="removeBtn" style="
+    cursor:pointer;
+    padding:0 6px;
+    font-size:12px;
+    opacity:0.7;
+  ">✖</span>
 `;
     div.className = 'playlistItem' + (i===currentTrack?' active':'');
     div.setAttribute('draggable','true');
 
     // click to play
     div.onclick = ()=> { savedTime = 0; loadTrack(i); };
+// remove button
+const removeBtn = div.querySelector('.removeBtn');
+removeBtn.onclick = (e) => {
+  e.stopPropagation(); // prevent playing when clicking remove
+
+  playlist.splice(i, 1);
+
+  // adjust current track if needed
+  if (i === currentTrack) {
+    if (playlist.length === 0) {
+      audio.pause();
+      audio.src = '';
+      currentTrack = 0;
+    } else {
+      currentTrack = Math.max(0, i - 1);
+      loadTrack(currentTrack);
+    }
+  } else if (i < currentTrack) {
+    currentTrack--;
+  }
+
+  updatePlaylistUI();
+  savePlaylistState();
+};
 
     // drag events
     div.addEventListener('dragstart', (e)=>{
