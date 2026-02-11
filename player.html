@@ -337,19 +337,13 @@ nextBtn.onclick = nextTrack;
 
 
 /* ===== SEARCH SYSTEM ===== */
-searchInput.addEventListener('input', function() {
-  const query = this.value.toLowerCase().trim();
+  function renderSearchResults(list) {
   searchResults.innerHTML = '';
 
-  if (!query) return;
-
-  const results = songDatabase.filter(song =>
-    song.title.toLowerCase().includes(query)
-  );
-
-  results.forEach(song => {
+  list.forEach(song => {
     const div = document.createElement('div');
     div.textContent = song.title;
+
     div.style.cssText = `
       padding:4px 6px;
       font-size:12px;
@@ -359,6 +353,13 @@ searchInput.addEventListener('input', function() {
       background:rgba(255,176,120,0.08);
       color:#f1e7df;
     `;
+
+    div.onmouseenter = () => {
+      div.style.background = 'rgba(255,176,120,0.18)';
+    };
+    div.onmouseleave = () => {
+      div.style.background = 'rgba(255,176,120,0.08)';
+    };
 
     div.onclick = () => {
       const exists = playlist.some(p => p.src === song.src);
@@ -373,7 +374,30 @@ searchInput.addEventListener('input', function() {
 
     searchResults.appendChild(div);
   });
+}
+searchInput.addEventListener('focus', function() {
+  renderSearchResults(songDatabase);
 });
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+
+  if (!query) {
+    renderSearchResults(songDatabase);
+    return;
+  }
+
+  const filtered = songDatabase.filter(song =>
+    song.title.toLowerCase().includes(query)
+  );
+
+  renderSearchResults(filtered);
+});
+document.addEventListener('click', (e) => {
+  if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+    searchResults.innerHTML = '';
+  }
+});
+
 
   
 /* ===== INITIAL LOAD ===== */
