@@ -278,8 +278,7 @@ function updatePlaylistUI(){
     // click to play
     div.onclick = ()=> { savedTime = 0; loadTrack(i); };
 // remove button
-    function deleteTrack(index){
-
+function deleteTrack(index) {
   // Remove the song
   playlist.splice(index, 1);
 
@@ -291,6 +290,7 @@ function updatePlaylistUI(){
     savedTime = 0;
     updatePlaylistUI();
     savePlaylistState();
+    playBtn.textContent = "▶"; // reset play button
     return;
   }
 
@@ -301,15 +301,20 @@ function updatePlaylistUI(){
 
   // If deleted track was the current one
   if (index === currentTrack) {
+    // reset audio but do NOT autoplay
+    audio.pause();
+    savedTime = 0;
     if (currentTrack >= playlist.length) {
       currentTrack = playlist.length - 1;
     }
     loadTrack(currentTrack);
+    playBtn.textContent = "▶"; // ensure play button shows play
   }
 
   updatePlaylistUI();
   savePlaylistState();
 }
+
 
 const removeBtn = div.querySelector('.removeBtn');
 removeBtn.onclick = (e) => {
