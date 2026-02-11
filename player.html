@@ -223,15 +223,24 @@ let currentTrack = parseInt(localStorage.getItem('musicCurrentTrack')) || 0;
 let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 
 function loadTrack(index){
-  if (!playlist.length) return; // safety
+  if (!playlist.length) return;
 
   currentTrack = index;
   audio.src = playlist[index].src;
-  audio.currentTime = savedTime || 0;
+
+  audio.onloadedmetadata = () => {
+    if (savedTime > 0 && savedTime < audio.duration) {
+      audio.currentTime = savedTime;
+    } else {
+      audio.currentTime = 0;
+    }
+  };
+
   audio.play().catch(()=>{});
   updatePlaylistUI();
   savePlaylistState();
 }
+
 
 
 function updatePlaylistUI(){
@@ -459,11 +468,15 @@ audio.ontimeupdate=()=>{
 }
 
 function seek(e){
-  const r=progressBar.getBoundingClientRect();
-  const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
-  if(!audio.duration) return;
-  audio.currentTime=Math.max(0,Math.min(1,x/r.width))*audio.duration;
+  if (!audio.duration || isNaN(audio.duration)) return;
+
+  const r = progressBar.getBoundingClientRect();
+  const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+  const percent = Math.max(0, Math.min(1, x / r.width));
+
+  audio.currentTime = percent * audio.duration;
 }
+
 progressBar.onmousedown=e=>{ seek(e); document.onmousemove=seek; document.onmouseup=()=>document.onmousemove=null; };
 progressBar.ontouchstart=seek; progressBar.ontouchmove=seek;
 
