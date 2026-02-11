@@ -78,6 +78,20 @@ html,body{
   z-index:9999;
   white-space:nowrap;
 }
+<!-- SEARCH -->
+<div style="margin-bottom:8px;">
+  <input id="searchInput"
+         type="text"
+         placeholder="Search song..."
+         style="width:100%;
+                padding:6px 8px;
+                border-radius:8px;
+                border:1px solid rgba(255,176,120,.4);
+                background:rgba(0,0,0,.4);
+                color:#fff;
+                font-size:12px;">
+  <div id="searchResults" style="max-height:100px;overflow-y:auto;margin-top:4px;"></div>
+</div>
 
 /* PLAYLIST */
 #playlistContainer{
@@ -155,6 +169,11 @@ html,body{
   <audio id="audioPlayer"></audio>
 </div>
 
+<script src="songs-db.js"></script>
+<script>
+  // your player script here
+</script>
+
 <script>
 const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playPauseBtn');
@@ -170,6 +189,8 @@ const volumeKnob = document.getElementById('volumeKnob');
 const timeDisplay = document.getElementById('timeDisplay');
 const tooltip = document.getElementById('tooltip');
 const playlistContainer = document.getElementById('playlistContainer');
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
 
 /* ===== PLAYLIST WITH LOCAL STORAGE ===== */
 let playlist = JSON.parse(localStorage.getItem('musicPlaylist')) || [
@@ -262,6 +283,47 @@ function nextTrack(){
 prevBtn.onclick = prevTrack;
 nextBtn.onclick = nextTrack;
 
+
+/* ===== SEARCH SYSTEM ===== */
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
+
+  if (!query) return;
+
+  const results = songDatabase.filter(song =>
+    song.title.toLowerCase().includes(query)
+  );
+
+  results.forEach(song => {
+    const div = document.createElement('div');
+    div.textContent = song.title;
+    div.style.cssText = `
+      padding:4px 6px;
+      font-size:12px;
+      cursor:pointer;
+      border-radius:6px;
+      margin-bottom:2px;
+      background:rgba(255,176,120,0.08);
+      color:#f1e7df;
+    `;
+
+    div.onclick = () => {
+      const exists = playlist.some(p => p.src === song.src);
+      if (!exists) {
+        playlist.push(song);
+        updatePlaylistUI();
+        savePlaylistState();
+      }
+      searchResults.innerHTML = '';
+      searchInput.value = '';
+    };
+
+    searchResults.appendChild(div);
+  });
+});
+
+  
 /* ===== INITIAL LOAD ===== */
 loadTrack(currentTrack);
 
