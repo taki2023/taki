@@ -222,26 +222,25 @@ let playlist = JSON.parse(localStorage.getItem('musicPlaylist')) || [
 let currentTrack = parseInt(localStorage.getItem('musicCurrentTrack')) || 0;
 let savedTime = parseFloat(localStorage.getItem('musicTime')) || 0;
 
-function loadTrack(index){
-  if (!playlist.length) return;
+function loadTrack(index) {
+  if (!playlist.length) return; // safety if playlist empty
 
   currentTrack = index;
   audio.src = playlist[index].src;
 
   audio.onloadedmetadata = () => {
+    // restore saved time if valid
     if (savedTime > 0 && savedTime < audio.duration) {
       audio.currentTime = savedTime;
     } else {
       audio.currentTime = 0;
     }
+    // DO NOT call audio.play() here
   };
 
-  audio.play().catch(()=>{});
   updatePlaylistUI();
   savePlaylistState();
 }
-
-
 
 function updatePlaylistUI(){
   playlistContainer.innerHTML = '';
