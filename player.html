@@ -82,10 +82,10 @@ html,body{
 
 /* PLAYLIST */
 #playlistContainer{
-  max-height: 66px;  /* show only 3 songs */
-  overflow-y: scroll;
+  height: 66px;          /* fixed height */
+  overflow-y: auto;
   padding-right:4px;
-  scrollbar-gutter: stable; /* keeps scrollbar visible */
+  scrollbar-gutter: stable;
 }
 
 /* Scrollbar */
@@ -233,6 +233,19 @@ function loadTrack(index){
 
 function updatePlaylistUI(){
   playlistContainer.innerHTML = '';
+  if (playlist.length === 0) {
+  playlistContainer.innerHTML = `
+    <div style="
+      text-align:center;
+      font-size:11px;
+      opacity:0.5;
+      padding-top:20px;
+    ">
+      No songs in playlist
+    </div>
+  `;
+  return;
+}
   playlist.forEach((track,i)=>{
     const div = document.createElement('div');
     div.innerHTML = `
