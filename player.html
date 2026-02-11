@@ -405,16 +405,24 @@ nextBtn.onclick = nextTrack;
       div.style.background = 'rgba(255,176,120,0.08)';
     };
 
-    div.onclick = () => {
-      const exists = playlist.some(p => p.src === song.src);
-      if (!exists) {
-        playlist.push(song);
-        updatePlaylistUI();
-        savePlaylistState();
-      }
-      searchResults.innerHTML = '';
-      searchInput.value = '';
-    };
+div.onclick = () => {
+  const exists = playlist.some(p => p.src === song.src);
+  if (!exists) {
+    const wasEmpty = playlist.length === 0;  // check if playlist was empty
+    playlist.push(song);
+    savePlaylistState();
+    updatePlaylistUI();
+
+    if (wasEmpty) {  // if it was empty, load the new track immediately
+      currentTrack = 0;
+      savedTime = 0;
+      loadTrack(currentTrack);
+    }
+  }
+  searchResults.innerHTML = '';
+  searchInput.value = '';
+};
+
 
     searchResults.appendChild(div);
   });
