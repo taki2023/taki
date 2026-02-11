@@ -1,0 +1,14 @@
+const songDatabase = [
+  {
+    title: "Faded - Alan Walker",
+    src: "https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"
+  },
+  {
+    title: "Luis Fonsi - Despacito",
+    src: "https://cs1.mp3.pm/download/195259614/S3FXdExiZ3BHUVpFd3VISFpiaXJqVGExbExlYnhxb2lzOWNsajBidmxPUGd1V0dHb242a25Fd1pxc1JVY3lCa2xVa09IZ3BCcERSNktFdFRUS3JQMEhiVEZvNU1uZ1hxUmZzdlIranRWNjNQbzdrQjZQN09ndVhaSXo2ajFNVDE/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm).mp3"
+  },
+  {
+    title: "Sia - Unstoppable",
+    src: "https://cs1.mp3.pm/download/194103041/UjM0Q3oydzJGNWhNbVpacXN1WGNCV2R5WDZITGVRQjN6MFZEMkt1bDlZdTJMbWxHbnpGVnlZdGhJSWZrYU54dnZ3UzJzUVFNU3M3M0pxbTA1ZTZKblNJWXlPc0ZyUUEyQmJacXhIUXYrMWhPVXRsekZ5Y2FiTDROTkZKUmdkekw/Sia_-_Im_unstoppable_today_(mp3.pm).mp3"
+  }
+];
