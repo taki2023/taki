@@ -18,5 +18,9 @@ const songDatabase = [
   {
     title: "Imagine Dragons - Demons",
     src: "https://cs1.mp3.pm/download/41035962/d084QkZodWJUcUZraTljVGtGc2ZGNDBjSUZzU1Z4Mm9MeHppa1J6bUZLOXpDN1BDUHMxNWIzU1o5WVFNeVkxcWdGd0ZWcHpVVjVJYWNMUXJyNkszUzFzTUtUK1pWWlpJZG5zS0F1dTVvQ2pmT0xtS0kwdU9EQndJOEh6dWt5SC8/I_magine_Dragons_-_Demons_(mp3.pm).mp3"
+  },
+  {
+    title: "Cold Play - Yellow ",
+    src: "https://cs1.mp3.pm/download/47513305/d084QkZodWJUcUZraTljVGtGc2ZGNDBjSUZzU1Z4Mm9MeHppa1J6bUZLK0JxTTlQQUZBL2QyaVFrSXlPaC9CQ0t0MHVWV0ZNdWV5WUZwcitrOCtDWUxEUGQ1Z2pIdWYyVm5UL1U4aDBxMGlQU0tqb0NXZllIU2FldjlBdTdYMk4/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"
   }
 ];
