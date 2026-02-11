@@ -81,10 +81,9 @@ html,body{
 
 
 /* PLAYLIST */
-/* PLAYLIST */
 #playlistContainer{
   max-height:180px;
-  overflow-y:auto;
+  overflow-y: scroll; /* always show scrollbar */
   padding-right:4px;
 }
 
@@ -101,6 +100,7 @@ html,body{
 #playlistContainer::-webkit-scrollbar-track{
   background:transparent;
 }
+
 
 .playlistItem{
   cursor:pointer;
