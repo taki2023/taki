@@ -82,7 +82,7 @@ html,body{
 
 /* PLAYLIST */
 #playlistContainer{
-  max-height:180px;
+  max-height: 66px;  /* show only 3 songs */
   overflow-y: scroll;
   padding-right:4px;
   scrollbar-gutter: stable; /* keeps scrollbar visible */
@@ -101,6 +101,7 @@ html,body{
 #playlistContainer::-webkit-scrollbar-track{
   background:transparent;
 }
+
 
 
 .playlistItem{
@@ -179,9 +180,7 @@ html,body{
        style="max-height:100px;overflow-y:auto;margin-top:4px;"></div>
 </div>
   <!-- PLAYLIST -->
-<div id="playlistContainer">
-  <div style="height:200px;"></div> <!-- fake spacer to force scroll -->
-</div>
+
 
 
 
