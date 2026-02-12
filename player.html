@@ -445,25 +445,23 @@ div.onclick = () => {
   savePlaylistState();
   updatePlaylistUI();
 
-  // 🎉 Animation
-  div.style.background = "rgba(120,255,170,0.35)";
+  // 🎉 Soft click animation (no green stay)
   div.style.transform = "scale(0.97)";
-  div.style.opacity = "0.6";
+  div.style.opacity = "0.7";
 
   setTimeout(() => {
-    div.style.opacity = "1";
     div.style.transform = "scale(1)";
-  }, 120);
+    div.style.opacity = "1";
+    div.style.background = "rgba(255,176,120,0.08)"; // restore original
+  }, 150);
 
-  // ✅ Instead of re-rendering everything,
-  // just update this badge
+  // ✅ Update badge only
   const badge = div.querySelector(".addBadge");
   badge.textContent = "✓ Added";
   badge.style.background = "rgba(120,255,170,0.25)";
   badge.style.color = "#7cffb0";
-  div.style.cursor = "default";
 
-  // Remove hover + click
+  div.style.cursor = "default";
   div.onmouseenter = null;
   div.onmouseleave = null;
   div.onclick = null;
@@ -474,6 +472,7 @@ div.onclick = () => {
     loadTrack(currentTrack);
   }
 };
+
     }
 
     searchResults.appendChild(div);
