@@ -576,9 +576,12 @@ playerBox.addEventListener("click", function(e) {
   }
 });
 
-// Prevent clicks inside input/results from closing it
-searchInput.addEventListener("click", e => e.stopPropagation());
-searchResults.addEventListener("click", e => e.stopPropagation());
+document.addEventListener("click", function(e) {
+  if (!e.target.closest("#searchInput") &&
+      !e.target.closest("#searchResults")) {
+    hideSearchResults();
+  }
+}, true);
 
 /* ===== INITIAL LOAD ===== */
 if (playlist.length > 0) {
