@@ -385,46 +385,94 @@ nextBtn.onclick = nextTrack;
 
 
 /* ===== SEARCH SYSTEM ===== */
-  function renderSearchResults(list) {
+function renderSearchResults(list) {
   searchResults.innerHTML = '';
 
   list.forEach(song => {
+
+    const exists = playlist.some(p => p.src === song.src);
+
     const div = document.createElement('div');
-    div.textContent = song.title;
+
+    div.innerHTML = `
+      <span style="
+        flex:1;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      ">
+        ${song.title}
+      </span>
+      <span class="addBadge" style="
+        font-size:11px;
+        padding:2px 6px;
+        border-radius:6px;
+        background:${exists ? 'rgba(120,255,170,0.25)' : 'rgba(255,176,120,0.25)'};
+        color:${exists ? '#7cffb0' : '#ffb37a'};
+      ">
+        ${exists ? '✓ Added' : '+ Add'}
+      </span>
+    `;
 
     div.style.cssText = `
-      padding:4px 6px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:5px 6px;
       font-size:12px;
-      cursor:pointer;
+      cursor:${exists ? 'default' : 'pointer'};
       border-radius:6px;
       margin-bottom:2px;
       background:rgba(255,176,120,0.08);
       color:#f1e7df;
+      transition:background .15s;
     `;
 
-    div.onmouseenter = () => {
-      div.style.background = 'rgba(255,176,120,0.18)';
-    };
-    div.onmouseleave = () => {
-      div.style.background = 'rgba(255,176,120,0.08)';
-    };
+    if (!exists) {
+      div.onmouseenter = () => {
+        div.style.background = 'rgba(255,176,120,0.18)';
+      };
+
+      div.onmouseleave = () => {
+        div.style.background = 'rgba(255,176,120,0.08)';
+      };
+
+      div.onclick = () => {
+        const wasEmpty = playlist.length === 0;
+
+        playlist.push(song);
+        savePlaylistState();
+        updatePlaylistUI();
+
+        if (wasEmpty) {
+          currentTrack = 0;
+          savedTime = 0;
+          loadTrack(currentTrack);
+        }
+
+        renderSearchResults(songDatabase); // refresh badges
+      };
+    }
+
+    searchResults.appendChild(div);
+  });
+}
 
 div.onclick = () => {
-  const exists = playlist.some(p => p.src === song.src);
-  if (!exists) {
-    const wasEmpty = playlist.length === 0;  // check if playlist was empty
-    playlist.push(song);
-    savePlaylistState();
-    updatePlaylistUI();
+  const wasEmpty = playlist.length === 0;
 
-    if (wasEmpty) {  // if it was empty, load the new track immediately
-      currentTrack = 0;
-      savedTime = 0;
-      loadTrack(currentTrack);
-    }
+  playlist.push(song);
+  savePlaylistState();
+  updatePlaylistUI();
+
+  if (wasEmpty) {
+    currentTrack = 0;
+    savedTime = 0;
+    loadTrack(currentTrack);
   }
-  searchResults.innerHTML = '';
-  searchInput.value = '';
+
+  renderSearchResults(songDatabase);
 };
 
 
