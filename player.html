@@ -1,13 +1,6 @@
 <style>
-*{box-sizing:border-box}
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  background:transparent!important;
-  overflow:hidden;
-}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!important;overflow:hidden;}
 
 /* PLAYER */
 #playerBox{
@@ -19,7 +12,7 @@ html,body{
   box-shadow:inset 0 0 14px rgba(0,0,0,.55),0 0 14px rgba(255,176,120,.22);
 }
 
-/* BUTTON ROW */
+/* CONTROLS ROW */
 #controlsRow{
   display:flex;
   align-items:center;
@@ -48,13 +41,45 @@ html,body{
 }
 
 /* VOLUME BAR INLINE */
-#volumeBar{
-  width:90px;
-  height:5px;
-  margin-left:6px;
+#volumeContainer{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
-/* PROGRESS BAR FULL WIDTH */
+#volumeBar{
+  position:relative;
+  width:90px;
+  height:5px;
+  background:linear-gradient(180deg,#1a120f,#120a08);
+  border-radius:10px;
+  border:1.8px solid rgba(255,176,120,.45);
+  box-shadow:inset 0 0 8px rgba(0,0,0,.6),0 0 8px rgba(255,176,120,.15);
+  cursor:pointer;
+}
+
+#volumeFill{
+  height:100%;
+  background:linear-gradient(90deg,#7b4dff,#9d6bff,#c59bff);
+  border-radius:10px;
+  width:70%; /* initial fill, JS will override */
+}
+
+#volumeKnob{
+  position:absolute;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#e9ddff;
+  left:70%; /* initial, JS will update */
+  cursor:pointer;
+  z-index:2;
+}
+
+/* PROGRESS BAR */
 #progressBar{
   width:100%;
   height:8px;
@@ -67,31 +92,25 @@ html,body{
   margin-bottom:4px;
 }
 
-/* FILLS */
 #progressFilled{
   height:100%;
   background:linear-gradient(90deg,#ffb37a,#ff8a70);
   border-radius:10px;
+  width:0%;
+  position:relative;
 }
 
-#volumeFill{
-  height:100%;
-  background:linear-gradient(90deg,#7b4dff,#9d6bff,#c59bff);
-  border-radius:10px;
-}
-
-#progressKnob,#volumeKnob{
+#progressKnob{
   position:absolute;
   top:50%;
-  transform:translateY(-50%);
+  transform:translate(-50%, -50%);
   width:14px;
   height:14px;
   border-radius:50%;
   background:#ffd7b0;
-}
-
-#volumeKnob{
-  background:#e9ddff;
+  right:-7px; /* initial position */
+  cursor:pointer;
+  z-index:2;
 }
 
 /* TIME DISPLAY */
@@ -198,10 +217,12 @@ html,body{
     <button id="playPauseBtn">▶</button>
     <button id="nextBtn">⏭</button>
     <button id="loopBtn">🔁</button>
-    <span id="cutIcon">🔊</span>
-    <div id="volumeBar">
-      <div id="volumeFill"></div>
-      <div id="volumeKnob"></div>
+    <div id="volumeContainer">
+      <span id="cutIcon">🔊</span>
+      <div id="volumeBar">
+        <div id="volumeFill"></div>
+        <div id="volumeKnob"></div>
+      </div>
     </div>
   </div>
 
