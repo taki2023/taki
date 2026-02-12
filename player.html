@@ -438,33 +438,42 @@ function renderSearchResults(list) {
         div.style.background = 'rgba(255,176,120,0.08)';
       };
 
-      div.onclick = () => {
-        const wasEmpty = playlist.length === 0;
+div.onclick = () => {
+  const wasEmpty = playlist.length === 0;
 
-        playlist.push(song);
-        savePlaylistState();
-        updatePlaylistUI();
+  playlist.push(song);
+  savePlaylistState();
+  updatePlaylistUI();
 
-        // 🎉 Fade + glow animation
-        div.style.background = "rgba(120,255,170,0.35)";
-        div.style.transform = "scale(0.97)";
-        div.style.opacity = "0.6";
+  // 🎉 Animation
+  div.style.background = "rgba(120,255,170,0.35)";
+  div.style.transform = "scale(0.97)";
+  div.style.opacity = "0.6";
 
-        setTimeout(() => {
-          div.style.opacity = "1";
-          div.style.transform = "scale(1)";
-        }, 120);
+  setTimeout(() => {
+    div.style.opacity = "1";
+    div.style.transform = "scale(1)";
+  }, 120);
 
-        setTimeout(() => {
-          renderSearchResults(songDatabase);
-        }, 350);
+  // ✅ Instead of re-rendering everything,
+  // just update this badge
+  const badge = div.querySelector(".addBadge");
+  badge.textContent = "✓ Added";
+  badge.style.background = "rgba(120,255,170,0.25)";
+  badge.style.color = "#7cffb0";
+  div.style.cursor = "default";
 
-        if (wasEmpty) {
-          currentTrack = 0;
-          savedTime = 0;
-          loadTrack(currentTrack);
-        }
-      };
+  // Remove hover + click
+  div.onmouseenter = null;
+  div.onmouseleave = null;
+  div.onclick = null;
+
+  if (wasEmpty) {
+    currentTrack = 0;
+    savedTime = 0;
+    loadTrack(currentTrack);
+  }
+};
     }
 
     searchResults.appendChild(div);
@@ -488,11 +497,13 @@ searchInput.addEventListener('input', function() {
 
   renderSearchResults(filtered);
 });
-searchInput.addEventListener('blur', function() {
-  setTimeout(() => {
+document.addEventListener("click", function(e) {
+  if (!e.target.closest("#searchInput") &&
+      !e.target.closest("#searchResults")) {
     searchResults.innerHTML = '';
-  }, 150);
+  }
 });
+
 
 
 
