@@ -289,15 +289,20 @@ function loadTrack(index) {
   currentTrack = index;
   audio.src = playlist[index].src;
 
-  audio.onloadedmetadata = () => {
-    // restore saved time if valid
-    if (savedTime > 0 && savedTime < audio.duration) {
-      audio.currentTime = savedTime;
-    } else {
-      audio.currentTime = 0;
-    }
-    // DO NOT call audio.play() here
-  };
+audio.onloadedmetadata = () => {
+  if (savedTime > 0 && savedTime < audio.duration) {
+    audio.currentTime = savedTime;
+  } else {
+    audio.currentTime = 0;
+  }
+
+  // Immediately update progress UI to match savedTime
+  const p = (audio.currentTime / audio.duration) * 100;
+  progressFilled.style.width = p + '%';
+  progressKnob.style.left = p + '%';
+  timeDisplay.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+};
+
 
   updatePlaylistUI();
   savePlaylistState();
