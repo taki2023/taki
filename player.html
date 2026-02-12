@@ -562,12 +562,34 @@ searchInput.addEventListener('input', function() {
 
   renderSearchResults(filtered);
 });
+const playerBox = document.getElementById('playerBox');
+
+function hideSearchResults() {
+  searchResults.innerHTML = '';
+}
+
+// 1️⃣ Click outside the player box hides the search
 document.addEventListener("click", function(e) {
-  if (!e.target.closest("#searchInput") &&
-      !e.target.closest("#searchResults")) {
-    searchResults.innerHTML = '';
+  if (!playerBox.contains(e.target)) {
+    hideSearchResults();
   }
 });
+
+// 2️⃣ Click inside the player box should NOT hide it
+playerBox.addEventListener("click", function(e) {
+  // If click is inside search input or results, do nothing
+  if (e.target.closest("#searchInput") || e.target.closest("#searchResults")) {
+    return;
+  }
+  // Optional: if you want clicks inside other parts of playerBox to hide
+  // hideSearchResults();
+});
+
+// 3️⃣ Optional: Escape key hides the search
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") hideSearchResults();
+});
+
 
 
 
