@@ -426,7 +426,7 @@ function renderSearchResults(list) {
       margin-bottom:2px;
       background:rgba(255,176,120,0.08);
       color:#f1e7df;
-      transition:background .15s;
+      transition:all .35s ease;
     `;
 
     if (!exists) {
@@ -445,13 +445,25 @@ function renderSearchResults(list) {
         savePlaylistState();
         updatePlaylistUI();
 
+        // 🎉 Fade + glow animation
+        div.style.background = "rgba(120,255,170,0.35)";
+        div.style.transform = "scale(0.97)";
+        div.style.opacity = "0.6";
+
+        setTimeout(() => {
+          div.style.opacity = "1";
+          div.style.transform = "scale(1)";
+        }, 120);
+
+        setTimeout(() => {
+          renderSearchResults(songDatabase);
+        }, 350);
+
         if (wasEmpty) {
           currentTrack = 0;
           savedTime = 0;
           loadTrack(currentTrack);
         }
-
-        renderSearchResults(songDatabase); // refresh badges
       };
     }
 
@@ -459,39 +471,6 @@ function renderSearchResults(list) {
   });
 }
 
-div.onclick = () => {
-  const wasEmpty = playlist.length === 0;
-
-  playlist.push(song);
-  savePlaylistState();
-  updatePlaylistUI();
-
-  // 🎉 Fade + glow animation
-  div.style.transition = "all .35s ease";
-  div.style.background = "rgba(120,255,170,0.35)";
-  div.style.transform = "scale(0.98)";
-  div.style.opacity = "0.6";
-
-  setTimeout(() => {
-    div.style.opacity = "1";
-    div.style.transform = "scale(1)";
-  }, 120);
-
-  setTimeout(() => {
-    renderSearchResults(songDatabase); // refresh badges
-  }, 350);
-
-  if (wasEmpty) {
-    currentTrack = 0;
-    savedTime = 0;
-    loadTrack(currentTrack);
-  }
-};
-
-
-    searchResults.appendChild(div);
-  });
-}
 searchInput.addEventListener('focus', function() {
   renderSearchResults(songDatabase);
 });
