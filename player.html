@@ -466,13 +466,26 @@ div.onclick = () => {
   savePlaylistState();
   updatePlaylistUI();
 
+  // 🎉 Fade + glow animation
+  div.style.transition = "all .35s ease";
+  div.style.background = "rgba(120,255,170,0.35)";
+  div.style.transform = "scale(0.98)";
+  div.style.opacity = "0.6";
+
+  setTimeout(() => {
+    div.style.opacity = "1";
+    div.style.transform = "scale(1)";
+  }, 120);
+
+  setTimeout(() => {
+    renderSearchResults(songDatabase); // refresh badges
+  }, 350);
+
   if (wasEmpty) {
     currentTrack = 0;
     savedTime = 0;
     loadTrack(currentTrack);
   }
-
-  renderSearchResults(songDatabase);
 };
 
 
