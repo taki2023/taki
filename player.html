@@ -79,10 +79,62 @@ html,body{
   white-space:nowrap;
 }
 
+/* BUTTON ROW */
+#controlsRow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+/* BUTTON STYLES */
+#controlsRow button, #cutIcon{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.08);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
+
+/* PLAY BUTTON SPECIAL */
+#playPauseBtn{
+  background:linear-gradient(145deg,#ffb37a,#ff8a70);
+  border:none;
+}
+
+/* PROGRESS BAR FULL WIDTH */
+#progressContainer{
+  width:100%;
+  margin-top:4px;
+}
+#progressBar{
+  width:100%;
+  height:8px;
+}
+
+/* VOLUME + LOOP */
+#volumeRow{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:6px;
+  justify-content:flex-start;
+}
+
+#volumeBar{
+  width:90px;
+  height:5px;
+}
 
 /* PLAYLIST */
 #playlistContainer{
-  height: 66px;          /* fixed height */
+  height: 66px;
   overflow-y: auto;
   padding-right:4px;
   scrollbar-gutter: stable;
@@ -92,18 +144,15 @@ html,body{
 #playlistContainer::-webkit-scrollbar{
   width:6px;
 }
-
 #playlistContainer::-webkit-scrollbar-thumb{
   background:rgba(255,176,120,.6);
   border-radius:10px;
 }
-
 #playlistContainer::-webkit-scrollbar-track{
   background:transparent;
 }
 
-
-
+/* Playlist Items */
 .playlistItem{
   cursor:pointer;
   padding:4px 8px;
@@ -123,7 +172,7 @@ html,body{
   font-size:11px;
   opacity:0.6;
   letter-spacing:1px;
-  min-width:22px;   /* keeps numbers aligned */
+  min-width:22px;
 }
 .playlistItem:hover{
   background:rgba(255,176,120,0.15);
@@ -138,57 +187,44 @@ html,body{
 </style>
 
 <div id="playerBox">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;width:100%;justify-content:center;">
-    <button id="prevBtn" style="width:32px;height:32px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;">⏮</button>
-    <button id="playPauseBtn" style="width:32px;height:32px;border-radius:50%; background:linear-gradient(145deg,#ffb37a,#ff8a70); border:none;cursor:pointer;">▶</button>
-    <button id="nextBtn" style="width:32px;height:32px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;">⏭</button>
-    
-    <!-- PROGRESS -->
-    <div id="progressBar" style="flex:1;height:8px; margin-left:12px; margin-right:12px;">
-      <div id="progressFilled" style="width:0%;position:relative;">
-        <div id="progressKnob" style="right:-7px;"></div>
-      </div>
-    </div>
-
-    <!-- TIME -->
-    <div id="timeDisplay" style=" min-width:60px; font-size:11px; font-weight:500; font-family:Inter,Segoe UI,system-ui,sans-serif; color:#f1e7df; text-align:right; ">0:00 / 0:00</div>
+  <!-- BUTTON ROW -->
+  <div id="controlsRow">
+    <button id="prevBtn">⏮</button>
+    <button id="playPauseBtn">▶</button>
+    <button id="nextBtn">⏭</button>
+    <button id="loopBtn">🔁</button>
+    <span id="cutIcon">🔊</span>
   </div>
 
-  <!-- VOLUME + LOOP -->
-  <div style="display:flex;align-items:center;justify-content:flex-start;gap:6px;margin-bottom:8px;">
-    <span id="cutIcon" style="cursor:pointer">🔊</span>
-    <div id="volumeBar" style="width:90px;height:5px;">
+  <!-- PROGRESS BAR -->
+  <div id="progressContainer">
+    <div id="progressBar">
+      <div id="progressFilled">
+        <div id="progressKnob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIME -->
+  <div id="timeDisplay" style="text-align:right;font-size:11px;color:#f1e7df;margin-top:4px;">0:00 / 0:00</div>
+
+  <!-- VOLUME (optional row if you want it separate) -->
+  <div id="volumeRow">
+    <div id="volumeBar">
       <div id="volumeFill"></div>
       <div id="volumeKnob"></div>
     </div>
-    <button id="loopBtn" style=" width:30px;height:30px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); cursor:pointer;color:#fff;">🔁</button>
   </div>
 
-<!-- SEARCH -->
-<div style="margin-bottom:8px;">
-  <input id="searchInput"
-         type="text"
-         placeholder="Search song..."
-         style="width:100%;
-                padding:6px 8px;
-                border-radius:8px;
-                border:1px solid rgba(255,176,120,.4);
-                background:rgba(0,0,0,.4);
-                color:#fff;
-                font-size:12px;">
-  <div id="searchResults"
-       style="max-height:100px;overflow-y:auto;margin-top:4px;"></div>
-</div>
   <!-- PLAYLIST -->
-<div id="playlistContainer"></div>
-
-
+  <div id="playlistContainer"></div>
 
   <!-- TOOLTIP -->
   <div id="tooltip" class="tooltip"></div>
 
   <audio id="audioPlayer"></audio>
 </div>
+
 
 <script src="songs-db.js"></script>
 
