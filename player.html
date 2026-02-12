@@ -568,14 +568,17 @@ function hideSearchResults() {
   searchResults.innerHTML = '';
 }
 
-// Clicking anywhere in the document
-document.addEventListener("click", function(e) {
-  // If the click is NOT on the search input or search results → hide
+
+// Close search results when clicking anywhere inside the player BUT outside input/results
+playerBox.addEventListener("click", function(e) {
   if (!e.target.closest("#searchInput") && !e.target.closest("#searchResults")) {
-    hideSearchResults();
+    searchResults.innerHTML = '';
   }
 });
 
+// Prevent clicks inside input/results from closing it
+searchInput.addEventListener("click", e => e.stopPropagation());
+searchResults.addEventListener("click", e => e.stopPropagation());
 
 /* ===== INITIAL LOAD ===== */
 if (playlist.length > 0) {
