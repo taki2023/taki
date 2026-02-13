@@ -30,13 +30,24 @@ body {
 fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members")
 .then(r => r.json())
 .then(data => {
-  const newest = data.weekly.slice(0, 8);
+
+  // take weekly list
+  const members = data.weekly;
+
+  // SORT by joined timestamp (newest first)
+  members.sort((a,b) => b.joined - a.joined);
+
+  // take top 8 newest
+  const newest = members.slice(0, 8);
+
   const list = document.getElementById("list");
   list.innerHTML = newest
     .map(u => `<div class="user">${u.username}</div>`)
     .join("");
+
 });
 </script>
+
 
 </body>
 </html>
