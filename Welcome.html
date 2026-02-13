@@ -4,64 +4,93 @@
 <meta charset="UTF-8">
 
 <style>
-body{
+*{box-sizing:border-box;}
+html,body{
   margin:0;
-  background:transparent;
-  font-family: Helvetica, Arial, sans-serif;
-  color:#f6efe9;
+  padding:0;
+  background:transparent!important;
+  font-family:Inter,Segoe UI,system-ui,sans-serif;
+  color:#f1e7df;
 }
 
-/* DARK SIDEBAR CARD — MATCHES CLUB PROGRESS / USEFUL LINKS */
-.wrap{
+/* MATCH PLAYER BOX STYLE */
+#membersBox{
   width:100%;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.65),
-    rgba(12,12,12,0.78)
-  );
+  padding:12px 14px;
+  background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
+  border:2.5px solid rgba(255,176,120,.55);
   border-radius:16px;
-  padding:10px;
-  border:2px solid rgba(255,176,120,0.45);
   box-shadow:
-    inset 0 0 14px rgba(0,0,0,.45),
-    0 0 8px rgba(0,0,0,.35);
+    inset 0 0 14px rgba(0,0,0,.55),
+    0 0 14px rgba(255,176,120,.22);
 }
 
-/* TITLE */
-.title{
-  text-align:center;
-  font-size:14px;
-  font-weight:800;
-  letter-spacing:.4px;
-  margin-bottom:8px;
-  color:#f6efe9;
+/* HEADER — SAME AS MUSIC HEADER STYLE */
+.membersHeader{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  margin-bottom:10px;
+  border-radius:14px;
+  background:linear-gradient(145deg,
+      rgba(255,176,120,.15),
+      rgba(255,138,112,.08)
+  );
+  border:1.5px solid rgba(255,176,120,.4);
+  box-shadow:0 0 12px rgba(255,176,120,.15);
+}
+
+.membersIcon{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  color:white;
+  background:linear-gradient(145deg,#ffb37a,#ff8a70);
+  box-shadow:
+      inset 0 0 10px rgba(0,0,0,.4),
+      0 0 12px rgba(255,176,120,.4);
+}
+
+.membersTitle{
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.5px;
 }
 
 /* MEMBER ROW */
-.row{
+.memberRow{
   display:flex;
   align-items:center;
-  gap:9px;
-  padding:7px 6px;
+  gap:10px;
+  padding:7px 8px;
   border-radius:10px;
+  background:rgba(255,176,120,0.06);
+  margin-bottom:6px;
   transition:.18s;
 }
 
-.row:hover{
-  background: rgba(255,176,120,.14);
+.memberRow:hover{
+  background:rgba(255,176,120,0.18);
 }
 
 /* AVATAR */
-.avatar{
+.memberAvatar{
   width:34px;
   height:34px;
   border-radius:50%;
-  border:1px solid rgba(255,176,120,.55);
+  border:1.5px solid rgba(255,176,120,.6);
+  box-shadow:0 0 8px rgba(255,176,120,.25);
   flex-shrink:0;
 }
 
 /* NAME */
-.name{
+.memberName{
   font-size:13px;
   font-weight:700;
   color:#ffb37a;
@@ -74,9 +103,15 @@ body{
 
 <body>
 
-<div class="wrap">
-  <div class="title">🔥 Newest Members</div>
-  <div id="list">Loading...</div>
+<div id="membersBox">
+
+  <div class="membersHeader">
+    <div class="membersIcon">🔥</div>
+    <div class="membersTitle">Newest Members</div>
+  </div>
+
+  <div id="membersList">Loading...</div>
+
 </div>
 
 <script>
@@ -85,13 +120,12 @@ async function loadNewest(){
   const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
   const d = await r.json();
 
-  // combine pools then sort by newest join timestamp
   const members = [...d.weekly, ...d.monthly];
   members.sort((a,b)=> b.joined - a.joined);
 
   const top3 = members.slice(0,3);
 
-  const box = document.getElementById("list");
+  const box = document.getElementById("membersList");
   box.innerHTML = "";
 
   for(const m of top3){
@@ -104,10 +138,10 @@ async function loadNewest(){
       "https://images.chesscomfiles.com/uploads/v1/user/default_avatar.png";
 
     const row = document.createElement("div");
-    row.className = "row";
+    row.className = "memberRow";
     row.innerHTML = `
-      <img class="avatar" src="${avatar}">
-      <div class="name">${m.username}</div>
+      <img class="memberAvatar" src="${avatar}">
+      <div class="memberName">${m.username}</div>
     `;
 
     box.appendChild(row);
