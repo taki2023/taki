@@ -2,6 +2,10 @@
   Loading newest member...
 </div>
 
+<div id="welcomeBox" style="font-size:18px;font-weight:bold;color:#fff;text-align:center;padding:10px;background:#222;border-radius:10px;">
+  Loading newest member...
+</div>
+
 <script>
 const club = "hot-chilli-checkmate";
 const proxy = "https://corsproxy.io/?"; // Avoid CORS issues
@@ -28,9 +32,12 @@ async function checkForNewMember() {
     const savedNewest = localStorage.getItem(storageKey);
 
     if (!savedNewest) {
-      // First run → just store
+      // First run → welcome the current newest member
+      document.getElementById("welcomeBox").innerHTML =
+        `🎉 Welcome <b>${newest}</b> to the Chillies Army 🔥`;
+
+      // Store it in localStorage
       localStorage.setItem(storageKey, newest);
-      document.getElementById("welcomeBox").innerHTML = "Tracking new members...";
       return;
     }
 
@@ -43,7 +50,7 @@ async function checkForNewMember() {
       localStorage.setItem(storageKey, newest);
     } else {
       document.getElementById("welcomeBox").innerHTML =
-        "No new members yet.";
+        `No new members yet. Last member: <b>${newest}</b>`;
     }
 
   } catch (e) {
@@ -59,3 +66,4 @@ checkForNewMember();
 // Check every 10 seconds
 setInterval(checkForNewMember, 10000);
 </script>
+
