@@ -43,54 +43,37 @@ body{
   
 <script>
 const club = "hot-chilli-checkmate";
-const proxy = "https://api.allorigins.win/raw?url=";
+const proxy = "https://corsproxy.io/?";
 
 async function loadMember(){
   try {
 
     const res = await fetch(
       proxy + encodeURIComponent(
-        `https://api.chess.com/pub/club/${club}/members/all`
+        `https://api.chess.com/pub/club/${club}/members`
       )
     );
 
     const data = await res.json();
 
-    if(!data || !data.members || data.members.length === 0){
+    if(!data.all_time || data.all_time.length === 0){
       document.getElementById("welcomeBox").innerHTML = "No members found.";
       return;
     }
 
-    // Take last member from full list
-    const username = data.members[data.members.length - 1].username;
+    // Take last username from all_time list
+    const username = data.all_time[data.all_time.length - 1];
 
-    const playerRes = await fetch(
-      proxy + encodeURIComponent(
-        `https://api.chess.com/pub/player/${username}`
-      )
-    );
-
-    const player = await playerRes.json();
-
-    const avatar = player.avatar 
-      ? player.avatar 
-      : "https://images.chesscomfiles.com/uploads/v1/user/0.1/default_avatar.png";
-
-    document.getElementById("welcomeBox").innerHTML = `
-      <img src="${avatar}">
-      <div>
-        👋 Welcome <span style="color:#ff8c4a;font-weight:bold;">${username}</span><br>
-        to the Chillies Army 🔥
-      </div>
-    `;
+    document.getElementById("welcomeBox").innerHTML =
+      `👋 Welcome <b>${username}</b> to the Chillies Army 🔥`;
 
   } catch(e){
-    document.getElementById("welcomeBox").innerHTML = "Could not load member.";
+    document.getElementById("welcomeBox").innerHTML = "Error loading member.";
   }
 }
 
 loadMember();
-setInterval(loadMember, 3000);
 </script>
+
 </body>
 </html>
