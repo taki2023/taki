@@ -2,23 +2,24 @@
 
 <script>
 const club = "hot-chilli-checkmate";
-const proxy = "https://corsproxy.io/?";
 const storageKey = "clubMembers";
+
+// Example serverless CORS-friendly API endpoint
+const corsProxy = "https://api.allorigins.win/get?url="; 
 
 async function fetchMembers() {
   try {
-    const res = await fetch(
-      proxy + encodeURIComponent(`https://api.chess.com/pub/club/${club}/members`)
-    );
-    const data = await res.json();
+    const url = encodeURIComponent(`https://api.chess.com/pub/club/${club}/members`);
+    const res = await fetch(corsProxy + url);
+    const textData = await res.json();
 
-    if (!data.all_time || !Array.isArray(data.all_time)) {
-      throw new Error("Unexpected API response");
-    }
+    // allorigins wraps the response in a contents field
+    const data = JSON.parse(textData.contents);
 
-    // Sort by joined timestamp descending
-    const sorted = data.all_time.sort((a, b) => b.joined - a.joined);
-    return sorted;
+    if (!data.all_time || !Array.isArray(data.all_time)) throw new Error("Unexpected API format");
+
+    // Sort by joined timestamp (newest first)
+    return data.all_time.sort((a, b) => b.joined - a.joined);
 
   } catch (err) {
     console.error("Fetch error:", err);
@@ -33,15 +34,9 @@ async function checkForNewMember() {
     return;
   }
 
-  const savedData = JSON.parse(localStorage.getItem(storageKey));
-
-  if (!savedData) {
-    localStorage.setItem(storageKey, JSON.stringify(currentList));
-    document.getElementById("welcomeBox").innerHTML = "Tracking new members...";
-    return;
-  }
-
+  const savedData = JSON.parse(localStorage.getItem(storageKey)) || [];
   const savedUsernames = savedData.map(m => m.username);
+
   const newest = currentList.find(m => !savedUsernames.includes(m.username));
 
   if (newest) {
@@ -56,6 +51,6 @@ async function checkForNewMember() {
 // Run immediately
 checkForNewMember();
 
-// Check every 2 minutes
-setInterval(checkForNewMember, 120000);
+// Repeat every 2 minutes
+setInterval(checkForNewMember, 1200);
 </script>
