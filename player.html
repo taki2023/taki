@@ -572,10 +572,12 @@ function hideSearchResults() {
 /* ===== SEARCH CLOSE FIX FOR IFRAME ===== */
 
 // Hide when input loses focus
-searchInput.addEventListener("blur", function () {
+searchInput.addEventListener("blur", function (e) {
   setTimeout(() => {
-    searchResults.innerHTML = '';
-  }, 150); // small delay allows clicking result first
+    if (!searchResults.matches(':hover')) {
+      searchResults.innerHTML = '';
+    }
+  }, 150);
 });
 
 // Also hide when iframe itself loses focus
