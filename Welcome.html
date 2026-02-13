@@ -1,53 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  background:transparent;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
+
+#welcomeBox{
+  width:260px;
+  padding:12px;
+  background:#181210;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  border:1px solid rgba(255,120,60,.3);
+}
+
+#welcomeBox img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+}
+.username{
+  font-weight:bold;
+  color:#ff8c4a;
+}
+</style>
+</head>
+
+<body>
+
+<div id="welcomeBox">
+  Loading...
+</div>
+
 <script>
-const clubName = "hot-chilli-checkmate";
+const club = "hot-chilli-checkmate";
 const proxy = "https://api.allorigins.win/raw?url=";
 
-async function getLatestMember() {
+async function loadMember(){
   try {
 
-    const response = await fetch(
-      proxy + encodeURIComponent(`https://api.chess.com/pub/club/${clubName}/members`)
+    // Get weekly members list directly
+    const res = await fetch(
+      proxy + encodeURIComponent(
+        `https://api.chess.com/pub/club/${club}/members/weekly`
+      )
     );
 
-    const data = await response.json();
+    const data = await res.json();
 
-    let username = null;
-
-    if (data.weekly && data.weekly.length > 0) {
-      username = data.weekly[data.weekly.length - 1];
-    } else if (data.all_time && data.all_time.length > 0) {
-      username = data.all_time[data.all_time.length - 1];
-    }
-
-    if (!username) {
+    if(!data || !data.members || data.members.length === 0){
       document.getElementById("welcomeBox").innerHTML = "No members found.";
       return;
     }
 
+    // Last member in weekly list
+    const username = data.members[data.members.length - 1].username;
+
+    // Fetch player data
     const playerRes = await fetch(
-      proxy + encodeURIComponent(`https://api.chess.com/pub/player/${username}`)
+      proxy + encodeURIComponent(
+        `https://api.chess.com/pub/player/${username}`
+      )
     );
 
-    const playerData = await playerRes.json();
+    const player = await playerRes.json();
 
-    const avatar = playerData.avatar
-      ? playerData.avatar
+    const avatar = player.avatar 
+      ? player.avatar 
       : "https://images.chesscomfiles.com/uploads/v1/user/0.1/default_avatar.png";
 
     document.getElementById("welcomeBox").innerHTML = `
       <img src="${avatar}">
-      <div class="text">
+      <div>
         👋 Welcome <span class="username">${username}</span><br>
         to the Chillies Army 🔥
       </div>
     `;
 
-  } catch (err) {
+  } catch(e){
     document.getElementById("welcomeBox").innerHTML = "Could not load member.";
   }
 }
 
-getLatestMember();
-setInterval(getLatestMember, 300000);
+loadMember();
+setInterval(loadMember, 300000);
 </script>
 
+</body>
+</html>
