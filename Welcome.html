@@ -8,48 +8,59 @@ body{
   margin:0;
   background:transparent;
   font-family: Helvetica, Arial, sans-serif;
-  color:#f2ebe7;
+  color:#f6efe9;
 }
 
-/* MATCH SIDEBAR CARD */
+/* DARK SIDEBAR CARD — MATCHES CLUB PROGRESS / USEFUL LINKS */
 .wrap{
   width:100%;
-  background: rgba(0,0,0,0.35);
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.65),
+    rgba(12,12,12,0.78)
+  );
   border-radius:16px;
-  padding:8px;
+  padding:10px;
   border:2px solid rgba(255,176,120,0.45);
-  box-shadow: inset 0 0 10px rgba(0,0,0,.25);
+  box-shadow:
+    inset 0 0 14px rgba(0,0,0,.45),
+    0 0 8px rgba(0,0,0,.35);
 }
 
-/* match sidebar heading feel */
+/* TITLE */
 .title{
   text-align:center;
   font-size:14px;
   font-weight:800;
   letter-spacing:.4px;
-  margin-bottom:6px;
-  color:#f2ebe7;
+  margin-bottom:8px;
+  color:#f6efe9;
 }
 
+/* MEMBER ROW */
 .row{
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:6px 6px;
+  gap:9px;
+  padding:7px 6px;
   border-radius:10px;
+  transition:.18s;
 }
 
 .row:hover{
-  background: rgba(255,176,120,.10);
+  background: rgba(255,176,120,.14);
 }
 
+/* AVATAR */
 .avatar{
-  width:32px;
-  height:32px;
+  width:34px;
+  height:34px;
   border-radius:50%;
   border:1px solid rgba(255,176,120,.55);
+  flex-shrink:0;
 }
 
+/* NAME */
 .name{
   font-size:13px;
   font-weight:700;
@@ -70,26 +81,36 @@ body{
 
 <script>
 async function loadNewest(){
+
   const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
   const d = await r.json();
 
+  // combine pools then sort by newest join timestamp
   const members = [...d.weekly, ...d.monthly];
   members.sort((a,b)=> b.joined - a.joined);
+
   const top3 = members.slice(0,3);
 
   const box = document.getElementById("list");
   box.innerHTML = "";
 
   for(const m of top3){
-    const pr = await fetch("https://api.chess.com/pub/player/"+m.username);
-    const pj = await pr.json();
-    const avatar = pj.avatar || "https://images.chesscomfiles.com/uploads/v1/user/default_avatar.png";
 
-    box.innerHTML += `
-      <div class="row">
-        <img class="avatar" src="${avatar}">
-        <div class="name">${m.username}</div>
-      </div>`;
+    const pr = await fetch("https://api.chess.com/pub/player/" + m.username);
+    const pj = await pr.json();
+
+    const avatar =
+      pj.avatar ||
+      "https://images.chesscomfiles.com/uploads/v1/user/default_avatar.png";
+
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `
+      <img class="avatar" src="${avatar}">
+      <div class="name">${m.username}</div>
+    `;
+
+    box.appendChild(row);
   }
 }
 
