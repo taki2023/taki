@@ -5,11 +5,51 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
 /* PLAYER */
 #playerBox{
   width:100%;
-  padding:10px 12px;
+  padding:12px 14px;
   background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
   border:2.5px solid rgba(255,176,120,.55);
   border-radius:16px;
   box-shadow:inset 0 0 14px rgba(0,0,0,.55),0 0 14px rgba(255,176,120,.22);
+}
+
+/* ===== MUSIC HEADER ===== */
+#musicHeader{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  margin-bottom:10px;
+  border-radius:14px;
+  background:linear-gradient(145deg,
+      rgba(255,176,120,.15),
+      rgba(255,138,112,.08)
+  );
+  border:1.5px solid rgba(255,176,120,.4);
+  box-shadow:0 0 12px rgba(255,176,120,.15);
+}
+
+.musicIcon{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  color:white;
+  background:linear-gradient(145deg,#ffb37a,#ff8a70);
+  box-shadow:
+      inset 0 0 10px rgba(0,0,0,.4),
+      0 0 12px rgba(255,176,120,.4);
+}
+
+.musicTitle{
+  font-family:Inter,Segoe UI,system-ui,sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:#f1e7df;
+  letter-spacing:.5px;
 }
 
 /* CONTROLS ROW */
@@ -21,10 +61,9 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
 }
 
 /* BUTTONS */
-/* BUTTONS - smaller size */
 #controlsRow button, #cutIcon{
-  width:24px;   /* smaller */
-  height:24px;  /* smaller */
+  width:24px;
+  height:24px;
   border-radius:50%;
   border:1px solid rgba(255,255,255,.15);
   background:rgba(255,255,255,.08);
@@ -32,17 +71,16 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:15px; /* smaller icon size */
+  font-size:15px;
 }
-
 
 #playPauseBtn{
   background:linear-gradient(145deg,#ffb37a,#ff8a70);
   border:none;
-  font-size:16px; /* keep slightly larger than others */
+  font-size:16px;
 }
 
-/* VOLUME BAR INLINE */
+/* VOLUME */
 #volumeContainer{
   position:relative;
   display:flex;
@@ -65,7 +103,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   height:100%;
   background:linear-gradient(90deg,#7b4dff,#9d6bff,#c59bff);
   border-radius:10px;
-  width:70%; /* initial fill, JS will override */
+  width:70%;
 }
 
 #volumeKnob{
@@ -76,12 +114,12 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   height:14px;
   border-radius:50%;
   background:#e9ddff;
-  left:70%; /* initial, JS will update */
+  left:70%;
   cursor:pointer;
   z-index:2;
 }
 
-/* PROGRESS BAR */
+/* PROGRESS */
 #progressBar{
   width:100%;
   height:8px;
@@ -110,12 +148,12 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   height:14px;
   border-radius:50%;
   background:#ffd7b0;
-  right:-7px; /* initial position */
+  right:-7px;
   cursor:pointer;
   z-index:2;
 }
 
-/* TIME DISPLAY */
+/* TIME */
 #timeDisplay{
   font-size:11px;
   font-family:Inter,Segoe UI,system-ui,sans-serif;
@@ -147,7 +185,6 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   height:85px;
   overflow-y:auto;
   padding-right:4px;
-  scrollbar-gutter: stable;
 }
 
 #playlistContainer::-webkit-scrollbar{
@@ -161,7 +198,6 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   background:transparent;
 }
 
-/* Playlist Items */
 .playlistItem{
   cursor:pointer;
   padding:4px 8px;
@@ -172,26 +208,16 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   color:#f1e7df;
   background:rgba(255,176,120,0.05);
   transition: background .15s;
-  user-select:none;
   display:flex;
   align-items:center;
   gap:8px;
 }
-.trackNumber{
-  font-size:11px;
-  opacity:0.6;
-  letter-spacing:1px;
-  min-width:22px;
-}
+
 .playlistItem:hover{
   background:rgba(255,176,120,0.15);
 }
 .playlistItem.active{
   background:rgba(255,176,120,0.3);
-}
-.dragging{
-  opacity:0.5;
-  background:rgba(255,176,120,0.2);
 }
 
 /* TOOLTIP */
@@ -208,12 +234,19 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
   opacity:0;
   transition:opacity .15s;
   z-index:9999;
-  white-space:nowrap;
 }
 </style>
 
+
 <div id="playerBox">
-  <!-- CONTROLS ROW -->
+
+  <!-- MUSIC HEADER -->
+  <div id="musicHeader">
+    <div class="musicIcon">♪</div>
+    <div class="musicTitle">Chill Vibes</div>
+  </div>
+
+  <!-- CONTROLS -->
   <div id="controlsRow">
     <button id="prevBtn">⏮</button>
     <button id="playPauseBtn">▶</button>
@@ -228,24 +261,19 @@ html,body{margin:0;padding:0;width:100%;height:100%;background:transparent!impor
     </div>
   </div>
 
-  <!-- PROGRESS BAR -->
-<div id="progressBar">
-  <div id="progressFilled"></div>
-  <div id="progressKnob"></div>
-</div>
+  <!-- PROGRESS -->
+  <div id="progressBar">
+    <div id="progressFilled"></div>
+    <div id="progressKnob"></div>
+  </div>
 
-
-  <!-- TIME -->
   <div id="timeDisplay">0:00 / 0:00</div>
 
-  <!-- SEARCH -->
   <input id="searchInput" type="text" placeholder="Search song...">
   <div id="searchResults"></div>
 
-  <!-- PLAYLIST -->
   <div id="playlistContainer"></div>
 
-  <!-- TOOLTIP -->
   <div id="tooltip" class="tooltip"></div>
 
   <audio id="audioPlayer"></audio>
