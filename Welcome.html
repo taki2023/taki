@@ -1,5 +1,3 @@
-
-
 <div id="welcomeBox">Loading...</div>
 
 <script>
@@ -8,46 +6,50 @@ const proxy = "https://corsproxy.io/?";
 const storageKey = "clubMembers";
 
 async function fetchMembers() {
-  const res = await fetch(
-    proxy + encodeURIComponent(`https://api.chess.com/pub/club/${club}/members`)
-  );
-  const data = await res.json();
-  
-  // Use the all_time array and sort by 'joined' descending
-  const sorted = data.all_time.sort((a, b) => b.joined - a.joined);
-  return sorted; // return full sorted array
+  try {
+    const res = await fetch(
+      proxy + encodeURIComponent(`https://api.chess.com/pub/club/${club}/members`)
+    );
+    const data = await res.json();
+
+    if (!data.all_time || !Array.isArray(data.all_time)) {
+      throw new Error("Unexpected API response");
+    }
+
+    // Sort by joined timestamp descending
+    const sorted = data.all_time.sort((a, b) => b.joined - a.joined);
+    return sorted;
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+    return null;
+  }
 }
 
 async function checkForNewMember() {
-  try {
-    const currentList = await fetchMembers();
+  const currentList = await fetchMembers();
+  if (!currentList) {
+    document.getElementById("welcomeBox").innerHTML = "Error fetching members.";
+    return;
+  }
 
-    const savedData = JSON.parse(localStorage.getItem(storageKey));
+  const savedData = JSON.parse(localStorage.getItem(storageKey));
 
-    // First time loading → just store
-    if (!savedData) {
-      localStorage.setItem(storageKey, JSON.stringify(currentList));
-      document.getElementById("welcomeBox").innerHTML = "Tracking new members...";
-      return;
-    }
+  if (!savedData) {
+    localStorage.setItem(storageKey, JSON.stringify(currentList));
+    document.getElementById("welcomeBox").innerHTML = "Tracking new members...";
+    return;
+  }
 
-    // Compare and find the newest member
-    const savedUsernames = savedData.map(member => member.username);
-    const newest = currentList.find(member => !savedUsernames.includes(member.username));
+  const savedUsernames = savedData.map(m => m.username);
+  const newest = currentList.find(m => !savedUsernames.includes(m.username));
 
-    if (newest) {
-      document.getElementById("welcomeBox").innerHTML =
-        `🎉 NEW RECRUIT!<br><b>${newest.username}</b> joined the Chillies Army 🔥`;
-
-      // Update stored data
-      localStorage.setItem(storageKey, JSON.stringify(currentList));
-    } else {
-      document.getElementById("welcomeBox").innerHTML = "No new members yet.";
-    }
-
-  } catch (e) {
-    console.error(e);
-    document.getElementById("welcomeBox").innerHTML = "Error checking members.";
+  if (newest) {
+    document.getElementById("welcomeBox").innerHTML =
+      `🎉 NEW RECRUIT!<br><b>${newest.username}</b> joined the Chillies Army 🔥`;
+    localStorage.setItem(storageKey, JSON.stringify(currentList));
+  } else {
+    document.getElementById("welcomeBox").innerHTML = "No new members yet.";
   }
 }
 
@@ -57,4 +59,3 @@ checkForNewMember();
 // Check every 2 minutes
 setInterval(checkForNewMember, 120000);
 </script>
-
