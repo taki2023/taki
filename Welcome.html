@@ -61,11 +61,11 @@ async function loadMember(){
       return;
     }
 
-    // Take last username from all_time list
-    const username = data.all_time[data.all_time.length - 1];
+    const lastMember = data.all_time[data.all_time.length - 1];
+    const username = lastMember.username;
 
     document.getElementById("welcomeBox").innerHTML =
-      `👋 Welcome <b>${username}</b> to the Chillies Army 🔥`;
+      `👋 Welcome <b>${username}</b><br>to the Chillies Army 🔥`;
 
   } catch(e){
     document.getElementById("welcomeBox").innerHTML = "Error loading member.";
