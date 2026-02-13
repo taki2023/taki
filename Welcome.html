@@ -1,46 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-  background:transparent;
-  font-family:Arial, sans-serif;
-  overflow:hidden;
-}
-
-#welcomeBox{
-  width:260px;
-  padding:12px;
-  background:#181210;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#fff;
-  border:1px solid rgba(255,120,60,.3);
-}
-
-#welcomeBox img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-}
-.username{
-  font-weight:bold;
-  color:#ff8c4a;
-}
-</style>
-</head>
-
-<body>
-
-<div id="welcomeBox">
-  Loading...
-</div>
-
 <script>
 const club = "hot-chilli-checkmate";
 const proxy = "https://api.allorigins.win/raw?url=";
@@ -48,10 +5,9 @@ const proxy = "https://api.allorigins.win/raw?url=";
 async function loadMember(){
   try {
 
-    // Get weekly members list directly
     const res = await fetch(
       proxy + encodeURIComponent(
-        `https://api.chess.com/pub/club/${club}/members/weekly`
+        `https://api.chess.com/pub/club/${club}/members/all`
       )
     );
 
@@ -62,10 +18,9 @@ async function loadMember(){
       return;
     }
 
-    // Last member in weekly list
+    // Take last member from full list
     const username = data.members[data.members.length - 1].username;
 
-    // Fetch player data
     const playerRes = await fetch(
       proxy + encodeURIComponent(
         `https://api.chess.com/pub/player/${username}`
@@ -81,7 +36,7 @@ async function loadMember(){
     document.getElementById("welcomeBox").innerHTML = `
       <img src="${avatar}">
       <div>
-        👋 Welcome <span class="username">${username}</span><br>
+        👋 Welcome <span style="color:#ff8c4a;font-weight:bold;">${username}</span><br>
         to the Chillies Army 🔥
       </div>
     `;
@@ -94,6 +49,3 @@ async function loadMember(){
 loadMember();
 setInterval(loadMember, 300000);
 </script>
-
-</body>
-</html>
