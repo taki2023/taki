@@ -1,82 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-  background:transparent;
-  font-family:Arial, sans-serif;
-  overflow:hidden;
-}
-
-#welcomeBox{
-  width:260px;
-  padding:12px;
-  background:#181210;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#fff;
-  border:1px solid rgba(255,120,60,.3);
-}
-
-#welcomeBox img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-}
-.username{
-  font-weight:bold;
-  color:#ff8c4a;
-}
-</style>
-</head>
-
-<body>
-
-<div id="welcomeBox">
-  Loading...
+<div id="welcomeBox" style="font-size:18px;font-weight:bold;color:#fff;text-align:center;padding:10px;background:#222;border-radius:10px;">
+  Loading newest member...
 </div>
-  
+
 <script>
 const club = "hot-chilli-checkmate";
-const proxy = "https://corsproxy.io/?";
+const proxy = "https://corsproxy.io/?"; // Avoid CORS issues
+const storageKey = "clubMembers";
 
-async function loadMember(){
+// Fetch all members with timestamps
+async function fetchMembers() {
+  const res = await fetch(
+    proxy + encodeURIComponent(`https://api.chess.com/pub/club/${club}/members`)
+  );
+  const data = await res.json();
+  return data.all_time; // Array of {username, joined}
+}
+
+async function checkForNewMember() {
   try {
+    const currentList = await fetchMembers();
 
-    const res = await fetch(
-      proxy + encodeURIComponent(
-        `https://api.chess.com/pub/club/${club}/members`
-      )
-    );
+    // Find the newest member by joined timestamp
+    const newestObj = currentList.reduce((a, b) => a.joined > b.joined ? a : b);
+    const newest = newestObj.username;
 
-    const data = await res.json();
+    // Load previous newest member from localStorage
+    const savedNewest = localStorage.getItem(storageKey);
 
-    if(!data.all_time || data.all_time.length === 0){
-      document.getElementById("welcomeBox").innerHTML = "No members found.";
+    if (!savedNewest) {
+      // First run → just store
+      localStorage.setItem(storageKey, newest);
+      document.getElementById("welcomeBox").innerHTML = "Tracking new members...";
       return;
     }
 
-    // Sort by joined timestamp (newest first)
-    const newest = data.all_time.sort((a, b) => b.joined - a.joined)[0];
+    if (savedNewest !== newest) {
+      // New member detected!
+      document.getElementById("welcomeBox").innerHTML =
+        `🎉 NEW RECRUIT!<br><b>${newest}</b> joined the Chillies Army 🔥`;
 
-    const username = newest.username;
+      // Update localStorage
+      localStorage.setItem(storageKey, newest);
+    } else {
+      document.getElementById("welcomeBox").innerHTML =
+        "No new members yet.";
+    }
 
+  } catch (e) {
+    console.log(e);
     document.getElementById("welcomeBox").innerHTML =
-      `👋 Welcome <b>${username}</b><br>to the Chillies Army 🔥`;
-
-  } catch(e){
-    document.getElementById("welcomeBox").innerHTML = "Error loading member.";
+      "Error checking members.";
   }
 }
 
-loadMember();
+// Run immediately
+checkForNewMember();
+
+// Check every 10 seconds
+setInterval(checkForNewMember, 10000);
 </script>
-
-
-</body>
-</html>
