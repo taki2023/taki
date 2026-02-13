@@ -4,50 +4,80 @@
 <meta charset="UTF-8">
 <style>
 body {
+  margin:0;
   background: transparent;
-  font-family: Arial;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
+
 .box {
-  background: rgba(0,0,0,.6);
-  border-radius: 12px;
+  background: rgba(0,0,0,.55);
+  border-radius: 14px;
   padding: 10px;
-  border: 1px solid #ffb078;
+  border: 1px solid rgba(255,176,120,.6);
 }
-.user {
-  padding: 4px 0;
+
+.row {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:6px 0;
+}
+
+.row img {
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid #ffb078;
+}
+
+.name {
+  font-size:14px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="box">
   <b>🔥 Newest Members</b>
   <div id="list">Loading...</div>
 </div>
 
 <script>
-fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members")
-.then(r => r.json())
-.then(data => {
+async function loadNewest() {
 
-  // take weekly list
-  const members = data.weekly;
+  const res = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
+  const data = await res.json();
 
-  // SORT by joined timestamp (newest first)
-  members.sort((a,b) => b.joined - a.joined);
+  // merge lists for safety
+  const members = [...data.weekly, ...data.monthly];
 
-  // take top 8 newest
-  const newest = members.slice(0, 8);
+  // sort newest first
+  members.sort((a,b)=> b.joined - a.joined);
 
-  const list = document.getElementById("list");
-  list.innerHTML = newest
-    .map(u => `<div class="user">${u.username}</div>`)
-    .join("");
+  const top3 = members.slice(0,3);
 
-});
+  const container = document.getElementById("list");
+  container.innerHTML = "";
+
+  for (const m of top3) {
+    const p = await fetch("https://api.chess.com/pub/player/" + m.username);
+    const profile = await p.json();
+
+    const avatar = profile.avatar || "https://images.chesscomfiles.com/uploads/v1/user/default_avatar.png";
+
+    container.innerHTML += `
+      <div class="row">
+        <img src="${avatar}">
+        <div class="name">${m.username}</div>
+      </div>
+    `;
+  }
+}
+
+loadNewest();
 </script>
-
 
 </body>
 </html>
