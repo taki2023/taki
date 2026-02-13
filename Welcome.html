@@ -22,19 +22,21 @@ async function checkForNewMember() {
   try {
     const currentList = await fetchMembers();
 
-    // Find the newest member by joined timestamp
-    const newestObj = currentList.reduce((a, b) => a.joined > b.joined ? a : b);
+    if (!currentList || currentList.length === 0) {
+      document.getElementById("welcomeBox").innerHTML = "No members found.";
+      return;
+    }
+
+    // Correctly find the member with the largest "joined" timestamp
+    const newestObj = currentList.reduce((a, b) => (a.joined > b.joined ? a : b));
     const newest = newestObj.username;
 
-    // Load previous newest member from localStorage
     const savedNewest = localStorage.getItem(storageKey);
 
     if (!savedNewest) {
       // First run → welcome the current newest member
       document.getElementById("welcomeBox").innerHTML =
         `🎉 Welcome <b>${newest}</b> to the Chillies Army 🔥`;
-
-      // Store it in localStorage
       localStorage.setItem(storageKey, newest);
       return;
     }
@@ -43,8 +45,6 @@ async function checkForNewMember() {
       // New member detected!
       document.getElementById("welcomeBox").innerHTML =
         `🎉 NEW RECRUIT!<br><b>${newest}</b> joined the Chillies Army 🔥`;
-
-      // Update localStorage
       localStorage.setItem(storageKey, newest);
     } else {
       document.getElementById("welcomeBox").innerHTML =
