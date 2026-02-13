@@ -1,67 +1,60 @@
 
 
-<div id="welcomeBox" style="font-size:18px;font-weight:bold;color:#fff;text-align:center;padding:10px;background:#222;border-radius:10px;">
-  Loading newest member...
-</div>
+<div id="welcomeBox">Loading...</div>
 
 <script>
 const club = "hot-chilli-checkmate";
-const proxy = "https://corsproxy.io/?"; // Avoid CORS issues
+const proxy = "https://corsproxy.io/?";
 const storageKey = "clubMembers";
 
-// Fetch all members with timestamps
 async function fetchMembers() {
   const res = await fetch(
     proxy + encodeURIComponent(`https://api.chess.com/pub/club/${club}/members`)
   );
   const data = await res.json();
-  return data.all_time; // Array of {username, joined}
+  
+  // Use the all_time array and sort by 'joined' descending
+  const sorted = data.all_time.sort((a, b) => b.joined - a.joined);
+  return sorted; // return full sorted array
 }
 
 async function checkForNewMember() {
   try {
     const currentList = await fetchMembers();
 
-    if (!currentList || currentList.length === 0) {
-      document.getElementById("welcomeBox").innerHTML = "No members found.";
+    const savedData = JSON.parse(localStorage.getItem(storageKey));
+
+    // First time loading → just store
+    if (!savedData) {
+      localStorage.setItem(storageKey, JSON.stringify(currentList));
+      document.getElementById("welcomeBox").innerHTML = "Tracking new members...";
       return;
     }
 
-    // Correctly find the member with the largest "joined" timestamp
-    const newestObj = currentList.reduce((a, b) => (a.joined > b.joined ? a : b));
-    const newest = newestObj.username;
+    // Compare and find the newest member
+    const savedUsernames = savedData.map(member => member.username);
+    const newest = currentList.find(member => !savedUsernames.includes(member.username));
 
-    const savedNewest = localStorage.getItem(storageKey);
-
-    if (!savedNewest) {
-      // First run → welcome the current newest member
+    if (newest) {
       document.getElementById("welcomeBox").innerHTML =
-        `🎉 Welcome <b>${newest}</b> to the Chillies Army 🔥`;
-      localStorage.setItem(storageKey, newest);
-      return;
-    }
+        `🎉 NEW RECRUIT!<br><b>${newest.username}</b> joined the Chillies Army 🔥`;
 
-    if (savedNewest !== newest) {
-      // New member detected!
-      document.getElementById("welcomeBox").innerHTML =
-        `🎉 NEW RECRUIT!<br><b>${newest}</b> joined the Chillies Army 🔥`;
-      localStorage.setItem(storageKey, newest);
+      // Update stored data
+      localStorage.setItem(storageKey, JSON.stringify(currentList));
     } else {
-      document.getElementById("welcomeBox").innerHTML =
-        `No new members yet. Last member: <b>${newest}</b>`;
+      document.getElementById("welcomeBox").innerHTML = "No new members yet.";
     }
 
   } catch (e) {
-    console.log(e);
-    document.getElementById("welcomeBox").innerHTML =
-      "Error checking members.";
+    console.error(e);
+    document.getElementById("welcomeBox").innerHTML = "Error checking members.";
   }
 }
 
 // Run immediately
 checkForNewMember();
 
-// Check every 10 seconds
-setInterval(checkForNewMember, 10000);
+// Check every 2 minutes
+setInterval(checkForNewMember, 120000);
 </script>
 
