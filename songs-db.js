@@ -22,5 +22,9 @@ const songDatabase = [
   {
     title: "Cold Play - Yellow ",
     src: "https://cs1.mp3.pm/download/47513305/d084QkZodWJUcUZraTljVGtGc2ZGNDBjSUZzU1Z4Mm9MeHppa1J6bUZLK0JxTTlQQUZBL2QyaVFrSXlPaC9CQ0t0MHVWV0ZNdWV5WUZwcitrOCtDWUxEUGQ1Z2pIdWYyVm5UL1U4aDBxMGlQU0tqb0NXZllIU2FldjlBdTdYMk4/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"
+  },
+    {
+    title: "ZAYDE WOLF,SAM TINNESZ,EDVN - MANIAC ",
+    src: "https://cs1.mp3.pm/download/241568747/VjVJcE16anBzcThWWUdPOXVSaVhKMEJPbXNYdDdBaU02SHZnc2ZrNFlQcEJMUHdSdjNxaURCTEhMYktaa0NqZy9sMldyU1ZVU1U5aXdwRlQyZ2NIQjdSK2txaGZLUjRHUGRobFl0SXh1UERaZ28vVm1UUmNPdnBnMDFWcDVNTlU/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm).mp3"
   }
 ];
