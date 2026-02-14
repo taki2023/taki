@@ -136,9 +136,10 @@ async function loadNewest(){
     const pr = await fetch("https://api.chess.com/pub/player/" + m.username);
     const pj = await pr.json();
 
-    const avatar =
-      pj.avatar ||
-      "https://images.chesscomfiles.com/uploads/v1/user/default_avatar.png";
+const avatar =
+  pj.avatar ||
+  "https://yourdomain.com/images/default-pawn.png";
+
 
     const row = document.createElement("div");
     row.className = "memberRow";
