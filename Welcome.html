@@ -10,16 +10,20 @@ html,body{
   background:transparent!important;
   font-family:Inter,Segoe UI,system-ui,sans-serif;
   color:#f1e7df;
+  height:100%;
 }
 
-/* MAIN BOX */
+/* MAIN BOX — fixed height for 3 rows + header + welcome */
 #membersBox{
   width:100%;
+  height:260px; /* header + welcome + 3 members ~ 260px */
   padding:14px 15px;
   background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
   border:2.5px solid rgba(255,176,120,.55);
   border-radius:16px;
   box-shadow: inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(255,176,120,.22);
+  display:flex;
+  flex-direction:column;
 }
 
 /* HEADER */
@@ -41,7 +45,7 @@ html,body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
+  font-size:24px;
   background:linear-gradient(145deg,#ffb37a,#ff8a70);
 }
 
@@ -52,15 +56,15 @@ html,body{
 }
 
 .membersWelcome{
-  font-size:12px;
+  font-size:13px;
   margin:6px 6px 12px;
   color:#f1e7df;
   opacity:.95;
 }
 
-/* MEMBERS LIST — FIXED HEIGHT FOR 3 ROWS */
+/* MEMBERS LIST — fixed, no scroll */
 #membersList{
-  height:207px; /* 3 rows * 69px each */
+  flex:1;
   overflow:hidden;
 }
 
@@ -100,7 +104,7 @@ html,body{
   border:2.5px solid rgba(255,176,120,.9);
   box-shadow: 0 0 0 3px rgba(255,176,120,.25), 0 0 12px rgba(255,176,120,.35);
   transition:.25s;
-  object-fit:cover; /* ensures consistent height */
+  object-fit:cover;
 }
 
 .memberRow:hover .memberAvatar{
@@ -125,7 +129,7 @@ html,body{
 }
 
 .memberRating{
-  font-size:12px;
+  font-size:11.5px;
   color:#ffe7cf;
   opacity:.95;
 }
@@ -137,15 +141,18 @@ html,body{
 </head>
 <body>
 <div id="membersBox">
+
   <div class="membersHeader">
     <div class="membersIcon">🔥</div>
     <div class="membersTitle">Newest Members</div>
   </div>
+
   <div class="membersWelcome">
     Welcome and thanks for joining the Chillies Army.
   </div>
+
   <div id="membersList">
-    <!-- placeholders — instant height -->
+    <!-- placeholders -->
     <div class="memberRow">
       <a class="memberLink">
         <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
@@ -174,6 +181,7 @@ html,body{
       </a>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -185,7 +193,7 @@ async function loadNewest(){
     members.sort((a,b)=> b.joined - a.joined);
     const top3 = members.slice(0,3);
     const box = document.getElementById("membersList");
-    box.innerHTML = ""; // replace placeholders instantly
+    box.innerHTML = ""; // replace placeholders
 
     for(const m of top3){
       const pj = await (await fetch("https://api.chess.com/pub/player/" + m.username)).json();
@@ -213,7 +221,6 @@ async function loadNewest(){
           </div>
         </a>
       `;
-
       box.appendChild(row);
     }
   } catch{
