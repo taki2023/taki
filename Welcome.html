@@ -185,19 +185,20 @@ html,body{
 </div>
 
 <script>
-async function loadNewest(){
-  try{
+async function loadNewest() {
+  try {
     const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
     const d = await r.json();
     const members = [...d.weekly, ...d.monthly];
-    members.sort((a,b)=> b.joined - a.joined);
-    const top3 = members.slice(0,3);
-    const box = document.getElementById("membersList");
-    box.innerHTML = ""; // replace placeholders
+    members.sort((a, b) => b.joined - a.joined);
+    const top3 = members.slice(0, 3);
 
-    for(const m of top3){
-      const pj = await (await fetch("https://api.chess.com/pub/player/" + m.username)).json();
-      const stats = await (await fetch("https://api.chess.com/pub/player/" + m.username + "/stats")).json();
+    // Fetch all player data and stats in parallel
+    const promises = top3.map(async (m) => {
+      const [pj, stats] = await Promise.all([
+        fetch("https://api.chess.com/pub/player/" + m.username).then(res => res.json()),
+        fetch("https://api.chess.com/pub/player/" + m.username + "/stats").then(res => res.json())
+      ]);
 
       const ratings = [
         {type:"Rapid", value: stats.chess_rapid?.last?.rating},
@@ -209,26 +210,38 @@ async function loadNewest(){
       const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—", value:"—"};
       const avatar = pj.avatar || "https://taki2023.github.io/taki/default-pawn.png";
 
-      const row = document.createElement("div");
-      row.className = "memberRow";
+      return {
+        username: m.username,
+        avatar,
+        ratingType: best.type,
+        ratingValue: best.value
+      };
+    });
 
-      row.innerHTML = `
+    const membersData = await Promise.all(promises);
+
+    // Build all rows in one go
+    const box = document.getElementById("membersList");
+    box.innerHTML = membersData.map(m => `
+      <div class="memberRow">
         <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
-          <img class="memberAvatar" src="${avatar}">
+          <img class="memberAvatar" src="${m.avatar}">
           <div class="memberText">
             <div class="memberName">@${m.username}</div>
-            <div class="memberRating">${best.type}: ${best.value}</div>
+            <div class="memberRating">${m.ratingType}: ${m.ratingValue}</div>
           </div>
         </a>
-      `;
-      box.appendChild(row);
-    }
-  } catch{
+      </div>
+    `).join("");
+
+  } catch (err) {
+    console.error(err);
     document.getElementById("membersList").innerHTML = "Unable to load members.";
   }
 }
 
 window.addEventListener("DOMContentLoaded", loadNewest);
 </script>
+
 </body>
 </html>
