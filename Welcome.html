@@ -30,7 +30,7 @@ html,body{
   align-items:center;
   gap:12px;
   padding:10px 12px;
-  margin-bottom:10px;
+  margin-bottom:6px;
   border-radius:14px;
   background:linear-gradient(145deg,
       rgba(255,176,120,.15),
@@ -56,6 +56,18 @@ html,body{
   letter-spacing:.5px;
 }
 
+/* WELCOME TEXT */
+.membersWelcome{
+  font-size:12px;
+  line-height:1.35;
+  margin:6px 4px 12px;
+  padding:8px 10px;
+  border-radius:10px;
+  background:rgba(255,176,120,0.08);
+  border:1px solid rgba(255,176,120,.28);
+  color:#ffd9b8;
+}
+
 /* MEMBER ROW */
 .memberRow{
   display:flex;
@@ -78,6 +90,7 @@ html,body{
   align-items:center;
   gap:10px;
   text-decoration:none;
+  width:100%;
 }
 
 /* AVATAR */
@@ -89,7 +102,13 @@ html,body{
   box-shadow:0 0 8px rgba(255,176,120,.25);
 }
 
-/* NAME */
+/* NAME + RATING WRAP */
+.memberText{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
 .memberName{
   font-size:13px;
   font-weight:700;
@@ -97,6 +116,12 @@ html,body{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+}
+
+.memberRating{
+  font-size:11px;
+  opacity:.85;
+  color:#ffe7cf;
 }
 
 .memberLink:hover .memberName{
@@ -112,6 +137,11 @@ html,body{
   <div class="membersHeader">
     <div class="membersIcon">🔥</div>
     <div class="membersTitle">Newest Members</div>
+  </div>
+
+  <div class="membersWelcome">
+    Welcome and thanks for joining the Chillies Army! 🌶️  
+    We’re growing stronger every day — glad to have you with us.
   </div>
 
   <div id="membersList">Loading...</div>
@@ -136,9 +166,18 @@ async function loadNewest(){
     const pr = await fetch("https://api.chess.com/pub/player/" + m.username);
     const pj = await pr.json();
 
-const avatar =
-  pj.avatar ||
-  "https://taki2023.github.io/taki/default-pawn.png";
+    const statsR = await fetch("https://api.chess.com/pub/player/" + m.username + "/stats");
+    const stats = await statsR.json();
+
+    const rapid =
+      stats.chess_rapid?.last?.rating ||
+      stats.chess_blitz?.last?.rating ||
+      stats.chess_bullet?.last?.rating ||
+      "—";
+
+    const avatar =
+      pj.avatar ||
+      "https://taki2023.github.io/taki/default-pawn.png";
 
     const row = document.createElement("div");
     row.className = "memberRow";
@@ -149,7 +188,11 @@ const avatar =
          target="_blank">
 
         <img class="memberAvatar" src="${avatar}">
-        <div class="memberName">@${m.username}</div>
+        
+        <div class="memberText">
+          <div class="memberName">@${m.username}</div>
+          <div class="memberRating">Rating: ${rapid}</div>
+        </div>
 
       </a>
     `;
