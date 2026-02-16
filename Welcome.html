@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <style>
 *{box-sizing:border-box;}
 html,body{
@@ -20,9 +19,7 @@ html,body{
   background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
   border:2.5px solid rgba(255,176,120,.55);
   border-radius:16px;
-  box-shadow:
-    inset 0 0 14px rgba(0,0,0,.55),
-    0 0 14px rgba(255,176,120,.22);
+  box-shadow: inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(255,176,120,.22);
 }
 
 /* HEADER */
@@ -32,10 +29,7 @@ html,body{
   gap:12px;
   padding:10px 12px;
   border-radius:14px;
-  background:linear-gradient(145deg,
-      rgba(255,176,120,.15),
-      rgba(255,138,112,.08)
-  );
+  background:linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));
   border:1.5px solid rgba(255,176,120,.4);
   margin-bottom:8px;
 }
@@ -64,11 +58,10 @@ html,body{
   opacity:.95;
 }
 
-/* MEMBERS LIST — AUTO HEIGHT */
+/* MEMBERS LIST — FIXED HEIGHT FOR 3 ROWS */
 #membersList{
-  display:flex;
-  flex-direction:column;
-  gap:7px; /* spacing between rows */
+  height:207px; /* 3 rows * 69px each */
+  overflow:hidden;
 }
 
 /* MEMBER ROW */
@@ -79,6 +72,7 @@ html,body{
   padding:9px 10px;
   border-radius:12px;
   background:rgba(255,176,120,0.06);
+  margin-bottom:7px;
   transition:.22s;
   border:1px solid rgba(255,176,120,.12);
 }
@@ -104,18 +98,14 @@ html,body{
   height:44px;
   border-radius:50%;
   border:2.5px solid rgba(255,176,120,.9);
-  box-shadow:
-    0 0 0 3px rgba(255,176,120,.25),
-    0 0 12px rgba(255,176,120,.35);
+  box-shadow: 0 0 0 3px rgba(255,176,120,.25), 0 0 12px rgba(255,176,120,.35);
   transition:.25s;
   object-fit:cover; /* ensures consistent height */
 }
 
 .memberRow:hover .memberAvatar{
   transform:scale(1.06);
-  box-shadow:
-    0 0 0 4px rgba(255,176,120,.35),
-    0 0 18px rgba(255,176,120,.55);
+  box-shadow: 0 0 0 4px rgba(255,176,120,.35), 0 0 18px rgba(255,176,120,.55);
 }
 
 /* TEXT */
@@ -145,22 +135,17 @@ html,body{
 }
 </style>
 </head>
-
 <body>
-
 <div id="membersBox">
-
   <div class="membersHeader">
     <div class="membersIcon">🔥</div>
     <div class="membersTitle">Newest Members</div>
   </div>
-
   <div class="membersWelcome">
     Welcome and thanks for joining the Chillies Army.
   </div>
-
   <div id="membersList">
-    <!-- placeholders — instant content -->
+    <!-- placeholders — instant height -->
     <div class="memberRow">
       <a class="memberLink">
         <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
@@ -189,7 +174,6 @@ html,body{
       </a>
     </div>
   </div>
-
 </div>
 
 <script>
@@ -197,39 +181,31 @@ async function loadNewest(){
   try{
     const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
     const d = await r.json();
-
     const members = [...d.weekly, ...d.monthly];
     members.sort((a,b)=> b.joined - a.joined);
     const top3 = members.slice(0,3);
-
     const box = document.getElementById("membersList");
-    box.innerHTML = "";
+    box.innerHTML = ""; // replace placeholders instantly
 
     for(const m of top3){
-
       const pj = await (await fetch("https://api.chess.com/pub/player/" + m.username)).json();
       const stats = await (await fetch("https://api.chess.com/pub/player/" + m.username + "/stats")).json();
 
       const ratings = [
-        {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
-        {type:"Blitz",  value: stats.chess_blitz?.last?.rating},
+        {type:"Rapid", value: stats.chess_rapid?.last?.rating},
+        {type:"Blitz", value: stats.chess_blitz?.last?.rating},
         {type:"Bullet", value: stats.chess_bullet?.last?.rating},
-        {type:"Daily",  value: stats.chess_daily?.last?.rating}
+        {type:"Daily", value: stats.chess_daily?.last?.rating}
       ].filter(x => x.value);
 
-      const best = ratings.length
-        ? ratings.sort((a,b)=>b.value-a.value)[0]
-        : {type:"—", value:"—"};
-
+      const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—", value:"—"};
       const avatar = pj.avatar || "https://taki2023.github.io/taki/default-pawn.png";
 
       const row = document.createElement("div");
       row.className = "memberRow";
 
       row.innerHTML = `
-        <a class="memberLink"
-           href="https://www.chess.com/member/${m.username}"
-           target="_blank">
+        <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
           <img class="memberAvatar" src="${avatar}">
           <div class="memberText">
             <div class="memberName">@${m.username}</div>
@@ -240,13 +216,6 @@ async function loadNewest(){
 
       box.appendChild(row);
     }
-
-    // Auto-resize iframe height
-    const totalHeight = document.getElementById("membersBox").offsetHeight;
-    if(window.parent !== window){
-      window.parent.postMessage({type:"resize", height: totalHeight}, "*");
-    }
-
   } catch{
     document.getElementById("membersList").innerHTML = "Unable to load members.";
   }
@@ -254,6 +223,5 @@ async function loadNewest(){
 
 window.addEventListener("DOMContentLoaded", loadNewest);
 </script>
-
 </body>
 </html>
