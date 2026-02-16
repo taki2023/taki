@@ -8,18 +8,24 @@
 html,body{
   margin:0;
   padding:0;
+  height:100%;
   background:transparent!important;
   font-family:Inter,Segoe UI,system-ui,sans-serif;
-  color:#f1e7df;
+  color:#ffffff;
 }
 
-/* MATCH PLAYER BOX STYLE */
+/* MAIN BOX — FLEX HEIGHT SAFE */
 #membersBox{
   width:100%;
+  height:100%;
   padding:12px 14px;
+  display:flex;
+  flex-direction:column;
+
   background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
   border:2.5px solid rgba(255,176,120,.55);
   border-radius:16px;
+
   box-shadow:
     inset 0 0 14px rgba(0,0,0,.55),
     0 0 14px rgba(255,176,120,.22);
@@ -30,13 +36,13 @@ html,body{
   align-items:center;
   gap:12px;
   padding:10px 12px;
-  margin-bottom:6px;
   border-radius:14px;
   background:linear-gradient(145deg,
       rgba(255,176,120,.15),
       rgba(255,138,112,.08)
   );
   border:1.5px solid rgba(255,176,120,.4);
+  margin-bottom:8px;
 }
 
 .membersIcon{
@@ -54,18 +60,22 @@ html,body{
   font-size:15px;
   font-weight:600;
   letter-spacing:.5px;
+  color:#ffffff;
 }
 
-/* WELCOME TEXT */
+/* SIMPLE WELCOME TEXT — NO BOX */
 .membersWelcome{
   font-size:12px;
   line-height:1.35;
-  margin:6px 4px 12px;
-  padding:8px 10px;
-  border-radius:10px;
-  background:rgba(255,176,120,0.08);
-  border:1px solid rgba(255,176,120,.28);
-  color:#ffd9b8;
+  margin:6px 6px 10px;
+  color:#ffffff;
+  opacity:.95;
+}
+
+/* LIST AREA — AUTO FIT HEIGHT */
+#membersList{
+  overflow:auto;
+  flex:1;
 }
 
 /* MEMBER ROW */
@@ -84,7 +94,6 @@ html,body{
   background:rgba(255,176,120,0.18);
 }
 
-/* CLICKABLE LINK */
 .memberLink{
   display:flex;
   align-items:center;
@@ -93,7 +102,6 @@ html,body{
   width:100%;
 }
 
-/* AVATAR */
 .memberAvatar{
   width:34px;
   height:34px;
@@ -102,7 +110,6 @@ html,body{
   box-shadow:0 0 8px rgba(255,176,120,.25);
 }
 
-/* NAME + RATING WRAP */
 .memberText{
   display:flex;
   flex-direction:column;
@@ -112,7 +119,7 @@ html,body{
 .memberName{
   font-size:13px;
   font-weight:700;
-  color:#ffb37a;
+  color:#ffffff;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -120,8 +127,8 @@ html,body{
 
 .memberRating{
   font-size:11px;
-  opacity:.85;
-  color:#ffe7cf;
+  color:#ffffff;
+  opacity:.9;
 }
 
 .memberLink:hover .memberName{
@@ -140,7 +147,7 @@ html,body{
   </div>
 
   <div class="membersWelcome">
-    Welcome and thanks for joining the Chillies Army!🌶️  
+    Welcome and thanks for joining the Chillies Army.
   </div>
 
   <div id="membersList">Loading...</div>
@@ -168,7 +175,6 @@ async function loadNewest(){
     const statsR = await fetch("https://api.chess.com/pub/player/" + m.username + "/stats");
     const stats = await statsR.json();
 
-    // collect available ratings
     const ratings = [
       {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
       {type:"Blitz",  value: stats.chess_blitz?.last?.rating},
@@ -176,7 +182,6 @@ async function loadNewest(){
       {type:"Daily",  value: stats.chess_daily?.last?.rating}
     ].filter(x => x.value);
 
-    // pick highest
     let best = {type:"—", value:"—"};
     if(ratings.length){
       best = ratings.sort((a,b)=>b.value-a.value)[0];
@@ -210,7 +215,6 @@ async function loadNewest(){
 
 loadNewest();
 </script>
-
 
 </body>
 </html>
