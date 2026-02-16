@@ -8,19 +8,15 @@
 html,body{
   margin:0;
   padding:0;
-  height:100%;
   background:transparent!important;
   font-family:Inter,Segoe UI,system-ui,sans-serif;
   color:#f1e7df;
 }
 
-/* MAIN BOX */
+/* MAIN BOX — NATURAL HEIGHT */
 #membersBox{
   width:100%;
-  height:100%;
   padding:14px 15px;
-  display:flex;
-  flex-direction:column;
 
   background:linear-gradient(180deg,rgba(18,12,10,.92),rgba(10,8,7,.95));
   border:2.5px solid rgba(255,176,120,.55);
@@ -69,12 +65,6 @@ html,body{
   opacity:.95;
 }
 
-/* LIST */
-#membersList{
-  overflow:auto;
-  flex:1;
-}
-
 /* MEMBER ROW */
 .memberRow{
   display:flex;
@@ -88,7 +78,6 @@ html,body{
   border:1px solid rgba(255,176,120,.12);
 }
 
-/* HOVER EFFECT */
 .memberRow:hover{
   background:rgba(255,176,120,0.22);
   transform:translateY(-2px);
@@ -169,7 +158,6 @@ html,body{
 
 <script>
 async function loadNewest(){
-
   try{
     const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
     const d = await r.json();
@@ -183,11 +171,8 @@ async function loadNewest(){
 
     for(const m of top3){
 
-      const pr = await fetch("https://api.chess.com/pub/player/" + m.username);
-      const pj = await pr.json();
-
-      const statsR = await fetch("https://api.chess.com/pub/player/" + m.username + "/stats");
-      const stats = await statsR.json();
+      const pj = await (await fetch("https://api.chess.com/pub/player/" + m.username)).json();
+      const stats = await (await fetch("https://api.chess.com/pub/player/" + m.username + "/stats")).json();
 
       const ratings = [
         {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
@@ -196,14 +181,11 @@ async function loadNewest(){
         {type:"Daily",  value: stats.chess_daily?.last?.rating}
       ].filter(x => x.value);
 
-      let best = {type:"—", value:"—"};
-      if(ratings.length){
-        best = ratings.sort((a,b)=>b.value-a.value)[0];
-      }
+      const best = ratings.length
+        ? ratings.sort((a,b)=>b.value-a.value)[0]
+        : {type:"—", value:"—"};
 
-      const avatar =
-        pj.avatar ||
-        "https://taki2023.github.io/taki/default-pawn.png";
+      const avatar = pj.avatar || "https://taki2023.github.io/taki/default-pawn.png";
 
       const row = document.createElement("div");
       row.className = "memberRow";
@@ -212,26 +194,22 @@ async function loadNewest(){
         <a class="memberLink"
            href="https://www.chess.com/member/${m.username}"
            target="_blank">
-
           <img class="memberAvatar" src="${avatar}">
-          
           <div class="memberText">
             <div class="memberName">@${m.username}</div>
             <div class="memberRating">${best.type}: ${best.value}</div>
           </div>
-
         </a>
       `;
 
       box.appendChild(row);
     }
   }
-  catch(e){
+  catch{
     document.getElementById("membersList").innerHTML = "Unable to load members.";
   }
 }
 
-/* ensure DOM is ready */
 window.addEventListener("DOMContentLoaded", loadNewest);
 </script>
 
