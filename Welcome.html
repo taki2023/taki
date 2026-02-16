@@ -169,11 +169,19 @@ async function loadNewest(){
     const statsR = await fetch("https://api.chess.com/pub/player/" + m.username + "/stats");
     const stats = await statsR.json();
 
-    const rapid =
-      stats.chess_rapid?.last?.rating ||
-      stats.chess_blitz?.last?.rating ||
-      stats.chess_bullet?.last?.rating ||
-      "—";
+    // collect available ratings
+    const ratings = [
+      {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
+      {type:"Blitz",  value: stats.chess_blitz?.last?.rating},
+      {type:"Bullet", value: stats.chess_bullet?.last?.rating},
+      {type:"Daily",  value: stats.chess_daily?.last?.rating}
+    ].filter(x => x.value);
+
+    // pick highest
+    let best = {type:"—", value:"—"};
+    if(ratings.length){
+      best = ratings.sort((a,b)=>b.value-a.value)[0];
+    }
 
     const avatar =
       pj.avatar ||
@@ -191,7 +199,7 @@ async function loadNewest(){
         
         <div class="memberText">
           <div class="memberName">@${m.username}</div>
-          <div class="memberRating">Rating: ${rapid}</div>
+          <div class="memberRating">${best.type}: ${best.value}</div>
         </div>
 
       </a>
@@ -203,6 +211,7 @@ async function loadNewest(){
 
 loadNewest();
 </script>
+
 
 </body>
 </html>
