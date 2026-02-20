@@ -1,7 +1,7 @@
 const songDatabase = [
   {
     title: "Faded - Alan Walker",
-    src: "https://cs1.mp3.pm/download/196179361/M0wyQ0lNU3lsSmcrcWVXSFZhSTFtTmZPTm9GL1VtLzMwNXNaZkpWU1FsTGdEcTNxcVFxVjd0dE1uM0dDdkx6Y0lxWk5tRDZqME5uR0NZa1NKeURsdTJZOTB1RVY3bFJlRWJ3UysyMXIvd0pvT21IY2doQ3UycWppcC9hYnc1Uzc/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"
+    src: "https://cs1.mp3.pm/download/196179361/VTJhUDVRMkhwZlZtbUZzS1JKU0xlT2d6UnVRTnpOb0F5STFnSThzNDh3SHZRbzgweWtjRkQ1eHFZZ2pFS1BVVGZYOVBiNVJhUXlGNVFNL1diSnB2YmIyTjVMemNpRzA3aTJQZVRZaUM4Ty93UW5yNXp6cWI5TTNzMWNpSk1WT1E/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"
   },
   {
     title: "Luis Fonsi - Despacito",
