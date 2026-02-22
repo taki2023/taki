@@ -20,8 +20,12 @@ html, body {
   padding: 12px;
   max-height: 238px;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #e9c7c0 rgba(36,26,24,.35);
+  scrollbar-width: none; /* Firefox: hide scrollbar */
+}
+
+/* Hide scrollbar for Webkit browsers */
+#membersBox::-webkit-scrollbar {
+  display: none;
 }
 
 /* Member card */
@@ -76,24 +80,14 @@ html, body {
   margin-bottom: 3px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 140px;
+  text-overflow: ellipsis; /* <-- ensures "..." for long names */
+  max-width: 140px; /* adjust width as needed */
 }
 
 /* Rating */
 .memberRating {
   font-size: 11px;
   opacity: .85;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #e9c7c0;
-  border-radius: 10px;
 }
 </style>
 </head>
