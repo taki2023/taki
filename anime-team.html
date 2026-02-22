@@ -9,34 +9,37 @@
 html, body{
   margin:0;
   padding:0;
-  background:#1f2733 !important;   /* force dark */
-  color:#eaeaea;
+  background:transparent !important; /* IMPORTANT so it blends */
   font-family:Arial,Helvetica,sans-serif;
+  color:#eaeaea;
 }
 
-/* outer pad so it blends with sidebar card */
+/* Outer wrapper */
 #membersBox{
-  padding:8px;
+  padding:6px 4px;
 }
 
-/* member card */
+/* Member card (match sidebar style) */
 .memberRow{
   display:flex;
   align-items:center;
   gap:12px;
   padding:10px;
-  border-radius:16px;
-  background:#1a2233;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.15);
   margin-bottom:10px;
-  transition:.25s;
+  transition:all .25s ease;
 }
 
+/* Hover effect SAME as sidebar buttons */
 .memberRow:hover{
   transform:translateY(-3px);
   background:#d6b26a;
+  box-shadow:0 8px 20px rgba(0,0,0,.6);
 }
 
+/* Clickable link */
 .memberLink{
   display:flex;
   align-items:center;
@@ -44,29 +47,50 @@ html, body{
   text-decoration:none;
   width:100%;
   color:#eaeaea;
+  transition:.25s;
 }
 
 .memberRow:hover .memberLink{
   color:#000;
 }
 
+/* Avatar */
 .memberAvatar{
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
   border-radius:50%;
   border:2px solid #d6b26a;
   object-fit:cover;
+  transition:.25s;
 }
 
+.memberRow:hover .memberAvatar{
+  border-color:#000;
+}
+
+/* Name */
 .memberName{
   font-weight:800;
   font-size:14px;
+  margin-bottom:3px;
 }
 
+/* Rating */
 .memberRating{
   font-size:12px;
   opacity:.85;
 }
+
+/* Small scrollbar styling */
+::-webkit-scrollbar{
+  width:6px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#d6b26a;
+  border-radius:10px;
+}
+
 </style>
 </head>
 
