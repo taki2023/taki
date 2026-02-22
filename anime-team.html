@@ -4,60 +4,37 @@
 <meta charset="UTF-8">
 <style>
 *{box-sizing:border-box;}
+
 html,body{
   margin:0;
   padding:0;
-  background:transparent!important;
+  background:transparent !important;
   font-family: Arial, Helvetica, sans-serif;
   color:#eaeaea;
 }
 
-/* OUTER PANEL — matches sidebar cards */
+/* REMOVE OUTER PANEL LOOK */
 #membersBox{
   width:100%;
-  padding:12px;
-  background: rgba(255,255,255,.10);
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.15);
-}
-
-/* GOLD HEADER — same as sidebar sections */
-.membersHeader{
-  text-align:center;
-  background:#d6b26a;
-  color:#000;
-  font-weight:800;
-  padding:6px;
-  border-radius:14px;
-  margin-bottom:8px;
-  font-size:14px;
-}
-
-/* WELCOME TEXT */
-.membersWelcome{
-  font-size:12px;
-  opacity:.85;
-  text-align:center;
-  margin-bottom:10px;
 }
 
 /* LIST */
 #membersList{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:12px;
 }
 
-/* MEMBER ROW — same as sidebar buttons */
+/* MEMBER ROW */
 .memberRow{
   background:#1a2233;
-  border-radius:14px;
+  border-radius:16px;
   border:1px solid rgba(255,255,255,.15);
-  transition:.25s;
+  transition:.25s ease;
 }
 
 .memberRow:hover{
-  transform:translateY(-3px);
+  transform:translateY(-4px);
   background:#d6b26a;
   box-shadow:0 8px 20px rgba(0,0,0,.6);
 }
@@ -66,8 +43,8 @@ html,body{
 .memberLink{
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:10px;
+  gap:12px;
+  padding:12px;
   text-decoration:none;
   color:#eaeaea;
 }
@@ -78,8 +55,8 @@ html,body{
 
 /* AVATAR */
 .memberAvatar{
-  width:42px;
-  height:42px;
+  width:46px;
+  height:46px;
   border-radius:50%;
   object-fit:cover;
   border:2px solid #d6b26a;
@@ -93,7 +70,7 @@ html,body{
 }
 
 .memberName{
-  font-size:13px;
+  font-size:14px;
   font-weight:800;
   white-space:nowrap;
   overflow:hidden;
@@ -101,7 +78,7 @@ html,body{
 }
 
 .memberRating{
-  font-size:11.5px;
+  font-size:12px;
   opacity:.9;
 }
 </style>
@@ -110,47 +87,7 @@ html,body{
 <body>
 
 <div id="membersBox">
-
-  <div class="membersHeader"> NEWEST MEMBERS</div>
-
-  <div class="membersWelcome">
-    Welcome to the Anime Team Army!
-  </div>
-
-  <div id="membersList">
-
-    <!-- placeholders -->
-    <div class="memberRow">
-      <a class="memberLink">
-        <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
-        <div class="memberText">
-          <div class="memberName">@loading</div>
-          <div class="memberRating">—</div>
-        </div>
-      </a>
-    </div>
-
-    <div class="memberRow">
-      <a class="memberLink">
-        <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
-        <div class="memberText">
-          <div class="memberName">@loading</div>
-          <div class="memberRating">—</div>
-        </div>
-      </a>
-    </div>
-
-    <div class="memberRow">
-      <a class="memberLink">
-        <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
-        <div class="memberText">
-          <div class="memberName">@loading</div>
-          <div class="memberRating">—</div>
-        </div>
-      </a>
-    </div>
-
-  </div>
+  <div id="membersList"></div>
 </div>
 
 <script>
