@@ -2,106 +2,102 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <style>
-*{box-sizing:border-box;}
+* { box-sizing: border-box; }
 
-html, body{
-  margin:0;
-  padding:0;
-  background: rgba(20,30,45,0.75); /* exact sidebar dark blue */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: rgba(28,60,40,.65); /* sidebar style */
   border-radius: 20px;
-  font-family:Arial,Helvetica,sans-serif;
-  color:#eaeaea;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #eaeaea;
+  overflow: hidden;
 }
 
-/* Outer wrapper */
-#membersBox{
-  padding:6px 4px;
+/* Outer container */
+#membersBox {
+  padding: 12px;
+  max-height: 238px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #e9c7c0 rgba(36,26,24,.35);
 }
 
-/* Member card (match sidebar style) */
-.memberRow{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:10px;
-  border-radius:18px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  margin-bottom:10px;
-  transition:all .25s ease;
+/* Member card */
+.memberRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(40,85,55,.35); /* matches sidebar blocks */
+  border: 1px solid rgba(120,180,140,.25);
+  margin-bottom: 10px;
+  transition: all .25s ease;
 }
 
-/* Hover effect SAME as sidebar buttons */
-.memberRow:hover{
-  transform:translateY(-3px);
-  background:#d6b26a;
-  box-shadow:0 8px 20px rgba(0,0,0,.6);
+/* Hover effect */
+.memberRow:hover {
+  transform: translateY(-3px);
+  background: #e9c7c0;
+  color: #3b2f2b;
+  box-shadow: 0 8px 20px rgba(0,0,0,.6);
 }
 
-/* Clickable link */
-.memberLink{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  width:100%;
-  color:#eaeaea;
-  transition:.25s;
-}
-
-.memberRow:hover .memberLink{
-  color:#000;
+/* Link wrapper */
+.memberLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  width: 100%;
+  color: inherit;
 }
 
 /* Avatar */
-.memberAvatar{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  border:2px solid #d6b26a;
-  object-fit:cover;
-  transition:.25s;
+.memberAvatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid #78b48c;
+  object-fit: cover;
+  transition: .25s;
 }
 
-.memberRow:hover .memberAvatar{
-  border-color:#000;
+.memberRow:hover .memberAvatar {
+  border-color: #3b2f2b;
 }
 
 /* Name */
-.memberName{
-  font-weight:800;
-  font-size:12px;
-  margin-bottom:3px;
-
-  white-space:nowrap;          /* keep in one line */
-  overflow:hidden;             /* hide overflow */
-  text-overflow:ellipsis;      /* add ... */
-  max-width:140px;             /* prevent pushing outside */
+.memberName {
+  font-weight: 800;
+  font-size: 12px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
 }
 
 /* Rating */
-.memberRating{
-  font-size:11px;
-  opacity:.85;
+.memberRating {
+  font-size: 11px;
+  opacity: .85;
 }
 
-/* Small scrollbar styling */
-::-webkit-scrollbar{
-  width:6px;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-::-webkit-scrollbar-thumb{
-  background:#d6b26a;
-  border-radius:10px;
+::-webkit-scrollbar-thumb {
+  background: #e9c7c0;
+  border-radius: 10px;
 }
-
 </style>
 </head>
-
 <body>
-
 <div id="membersBox"></div>
 
 <script>
@@ -152,6 +148,5 @@ async function loadNewest() {
 
 loadNewest();
 </script>
-
 </body>
 </html>
