@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <style>
 *{box-sizing:border-box;}
 
@@ -9,43 +10,42 @@ html,body{
   margin:0;
   padding:0;
   background:transparent !important;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color:transparent !important;
+  font-family:Arial,Helvetica,sans-serif;
   color:#eaeaea;
 }
 
-/* REMOVE OUTER PANEL LOOK */
+/* container — transparent so sidebar shows through */
 #membersBox{
   width:100%;
+  padding:8px 6px;
+  background:transparent !important;
 }
 
-/* LIST */
-#membersList{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-/* MEMBER ROW */
+/* member card */
 .memberRow{
-  background:#1a2233;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px;
   border-radius:16px;
+  background:#1a2233;
   border:1px solid rgba(255,255,255,.15);
-  transition:.25s ease;
+  margin-bottom:10px;
+  transition:.25s;
 }
 
 .memberRow:hover{
-  transform:translateY(-4px);
+  transform:translateY(-3px);
   background:#d6b26a;
-  box-shadow:0 8px 20px rgba(0,0,0,.6);
 }
 
-/* LINK */
 .memberLink{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:12px;
   text-decoration:none;
+  width:100%;
   color:#eaeaea;
 }
 
@@ -53,54 +53,43 @@ html,body{
   color:#000;
 }
 
-/* AVATAR */
 .memberAvatar{
-  width:46px;
-  height:46px;
+  width:44px;
+  height:44px;
   border-radius:50%;
-  object-fit:cover;
   border:2px solid #d6b26a;
-}
-
-/* TEXT */
-.memberText{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
+  object-fit:cover;
 }
 
 .memberName{
-  font-size:14px;
   font-weight:800;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:14px;
 }
 
 .memberRating{
   font-size:12px;
-  opacity:.9;
+  opacity:.85;
 }
 </style>
 </head>
 
 <body>
 
-<div id="membersBox">
-  <div id="membersList"></div>
-</div>
+<div id="membersBox"></div>
 
 <script>
 async function loadNewest() {
   try {
+
     const r = await fetch("https://api.chess.com/pub/club/anime-team-3/members");
     const d = await r.json();
+
     const members = [...d.weekly, ...d.monthly];
     members.sort((a,b)=>b.joined-a.joined);
     const top3 = members.slice(0,3);
 
-    const promises = top3.map(async (m)=>{
-      const [pj, stats] = await Promise.all([
+    const rows = await Promise.all(top3.map(async m=>{
+      const [pj,stats] = await Promise.all([
         fetch("https://api.chess.com/pub/player/"+m.username).then(r=>r.json()),
         fetch("https://api.chess.com/pub/player/"+m.username+"/stats").then(r=>r.json())
       ]);
@@ -116,35 +105,26 @@ async function loadNewest() {
         ? ratings.sort((a,b)=>b.v-a.v)[0]
         : {t:"—",v:"—"};
 
-      return {
-        username:m.username,
-        avatar: pj.avatar || "https://taki2023.github.io/taki/default-pawn.png",
-        rt:best.t,
-        rv:best.v
-      };
-    });
-
-    const data = await Promise.all(promises);
-
-    const box = document.getElementById("membersList");
-    box.innerHTML = data.map(m=>`
+      return `
       <div class="memberRow">
         <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
-          <img class="memberAvatar" src="${m.avatar}">
-          <div class="memberText">
+          <img class="memberAvatar" src="${pj.avatar || 'https://taki2023.github.io/taki/default-pawn.png'}">
+          <div>
             <div class="memberName">@${m.username}</div>
-            <div class="memberRating">${m.rt}: ${m.rv}</div>
+            <div class="memberRating">${best.t}: ${best.v}</div>
           </div>
         </a>
-      </div>
-    `).join("");
+      </div>`;
+    }));
+
+    document.getElementById("membersBox").innerHTML = rows.join("");
 
   } catch(e){
-    document.getElementById("membersList").innerHTML="Unable to load members";
+    document.getElementById("membersBox").innerHTML="Unable to load members";
   }
 }
 
-window.addEventListener("DOMContentLoaded", loadNewest);
+loadNewest();
 </script>
 
 </body>
