@@ -72,8 +72,13 @@ html, body{
 /* Name */
 .memberName{
   font-weight:800;
-  font-size:11.5px;
+  font-size:12px;
   margin-bottom:3px;
+
+  white-space:nowrap;          /* keep in one line */
+  overflow:hidden;             /* hide overflow */
+  text-overflow:ellipsis;      /* add ... */
+  max-width:140px;             /* prevent pushing outside */
 }
 
 /* Rating */
