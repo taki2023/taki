@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+padding:0;
+background:linear-gradient(135deg,#2c241c,#3a2f24);
+font-family:Georgia,serif;
+color:#f5e6c8;
+overflow:hidden;
+}
+
+/* Stone texture */
+body::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 25% 30%, rgba(255,255,255,.03) 2px, transparent 3px),
+radial-gradient(circle at 70% 60%, rgba(0,0,0,.15) 2px, transparent 3px);
+pointer-events:none;
+}
+
+/* Golden glow animation */
+@keyframes goldGlow{
+0%{box-shadow:0 0 10px rgba(212,175,55,.4);}
+50%{box-shadow:0 0 25px rgba(255,215,120,.9);}
+100%{box-shadow:0 0 10px rgba(212,175,55,.4);}
+}
+
+@keyframes shimmer{
+0%{background-position:-200px 0;}
+100%{background-position:200px 0;}
+}
+
+.container{
+padding:18px;
+}
+
+.title{
+text-align:center;
+font-size:22px;
+font-weight:900;
+letter-spacing:2px;
+color:#f0d78a;
+padding:10px;
+border-radius:14px;
+animation:goldGlow 3s infinite ease-in-out;
+}
+
+.gold-bar{
+background:linear-gradient(90deg,#c6a44b,#f5e6b0,#c6a44b);
+background-size:200% auto;
+animation:shimmer 4s linear infinite;
+color:#2b1f14;
+font-weight:900;
+padding:6px;
+border-radius:10px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.panel{
+background:rgba(60,48,35,.85);
+border-radius:18px;
+padding:14px;
+margin-top:14px;
+border:1px solid rgba(212,175,55,.25);
+box-shadow:0 8px 25px rgba(0,0,0,.7);
+}
+
+.button{
+display:block;
+text-align:center;
+margin:8px 0;
+background:rgba(92,70,45,.8);
+padding:10px;
+border-radius:14px;
+color:#f5e6c8;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.button:hover{
+transform:translateY(-4px);
+background:#f5e6b0;
+color:#2b1f14;
+box-shadow:0 10px 25px rgba(0,0,0,.7);
+}
+
+img{
+width:100%;
+border-radius:18px;
+border:2px solid rgba(212,175,55,.5);
+box-shadow:0 12px 30px rgba(0,0,0,.8);
+margin-top:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">♔ CHESS KINGDOM ♚</div>
+
+<img src="PUT-YOUR-PFP-LINK-HERE">
+
+<div class="panel">
+<div class="gold-bar">🏰 ENTER THE ROYAL REALM</div>
+<div style="text-align:center;font-size:14px;line-height:1.6;">
+♜ Where kings rise and pawns become legends.<br>
+⚔ Battle across ancient ruins.<br>
+👑 Claim your crown.
+</div>
+</div>
+
+<div class="panel">
+<div class="gold-bar">⚔ ROYAL EVENTS</div>
+<a href="https://www.chess.com/clubs/upcomingevents/chess-kingdom" class="button">
+♞ View Kingdom Battles
+</a>
+</div>
+
+<div class="panel">
+<div class="gold-bar">📜 ROYAL COUNCIL</div>
+<a href="YOUR-DISCORD-LINK" class="button">
+⚜ Enter the Great Hall
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
