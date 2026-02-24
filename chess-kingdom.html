@@ -8,14 +8,14 @@
 html,body{
   margin:0;
   padding:0;
-  background:transparent!important;
+  background:rgba(35,30,25,0.98)!important; /* almost transparent but safe */
   font-family: Georgia, serif;
   color:#f5e6c8;
 }
 
-/* MEMBERS LIST ONLY */
-#membersList{
-  padding:10px;
+/* MAIN WRAPPER */
+#membersWrapper{
+  padding:12px;
 }
 
 /* MEMBER ROW */
@@ -25,9 +25,9 @@ html,body{
   gap:12px;
   padding:8px 10px;
   border-radius:12px;
-  background: rgba(90,70,50,.7);
+  background: rgba(90,70,50,.75);
   margin-bottom:10px;
-  border:1px solid rgba(200,170,120,.2);
+  border:1px solid rgba(200,170,120,.25);
   transition:.25s ease;
 }
 
@@ -92,15 +92,17 @@ html,body{
 
 <body>
 
-<div id="membersList">
-  <div class="memberRow">
-    <a class="memberLink">
-      <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
-      <div class="memberText">
-        <div class="memberName">@loading</div>
-        <div class="memberRating">— : —</div>
-      </div>
-    </a>
+<div id="membersWrapper">
+  <div id="membersList">
+    <div class="memberRow">
+      <a class="memberLink">
+        <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
+        <div class="memberText">
+          <div class="memberName">@loading</div>
+          <div class="memberRating">— : —</div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -154,7 +156,7 @@ async function loadNewest() {
 
   } catch (err) {
     document.getElementById("membersList").innerHTML =
-      "<div style='text-align:center; opacity:.8;'>The Kingdom's records are temporarily unavailable.</div>";
+      "<div style='text-align:center; opacity:.8;'>Kingdom records unavailable.</div>";
   }
 }
 
