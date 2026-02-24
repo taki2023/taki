@@ -11,58 +11,11 @@ html,body{
   background:transparent!important;
   font-family: Georgia, serif;
   color:#f5e6c8;
-  height:100%;
 }
 
-/* MAIN BOX */
-#membersBox{
-  width:100%;
-  height:auto;
-  padding:14px;
-  background: rgba(60,50,40,.75);
-  border-radius:18px;
-  border:1px solid rgba(200,170,120,.25);
-  box-shadow:0 8px 25px rgba(0,0,0,.6);
-  display:flex;
-  flex-direction:column;
-}
-
-/* HEADER */
-.membersHeader{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 12px;
-  border-radius:12px;
-  background: linear-gradient(90deg,#caa85a,#e8c27a,#caa85a);
-  color:#2a1f12;
-  font-weight:800;
-  margin-bottom:10px;
-  justify-content:center;
-  text-align:center;
-}
-
-.membersIcon{
-  font-size:18px;
-}
-
-.membersTitle{
-  font-size:14px;
-  letter-spacing:.5px;
-}
-
-/* WELCOME */
-.membersWelcome{
-  font-size:12.5px;
-  margin-bottom:12px;
-  text-align:center;
-  opacity:.9;
-}
-
-/* MEMBERS LIST */
+/* MEMBERS LIST ONLY */
 #membersList{
-  flex:1;
-  overflow:hidden;
+  padding:10px;
 }
 
 /* MEMBER ROW */
@@ -72,10 +25,10 @@ html,body{
   gap:12px;
   padding:8px 10px;
   border-radius:12px;
-  background: rgba(90,70,50,.6);
-  margin-bottom:8px;
-  border:1px solid rgba(200,170,120,.15);
-  transition:.25s;
+  background: rgba(90,70,50,.7);
+  margin-bottom:10px;
+  border:1px solid rgba(200,170,120,.2);
+  transition:.25s ease;
 }
 
 .memberRow:hover{
@@ -83,6 +36,7 @@ html,body{
   transform:translateY(-2px);
 }
 
+/* LINK */
 .memberLink{
   display:flex;
   align-items:center;
@@ -98,12 +52,13 @@ html,body{
   height:42px;
   border-radius:50%;
   border:2px solid rgba(200,170,120,.6);
-  transition:.25s;
   object-fit:cover;
+  transition:.25s;
 }
 
 .memberRow:hover .memberAvatar{
   transform:scale(1.05);
+  border-color:#2a1f12;
 }
 
 /* TEXT */
@@ -136,30 +91,17 @@ html,body{
 </head>
 
 <body>
-<div id="membersBox">
 
-  <div class="membersHeader">
-    <div class="membersIcon">👑</div>
-    <div class="membersTitle">Newest Knights</div>
+<div id="membersList">
+  <div class="memberRow">
+    <a class="memberLink">
+      <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="memberText">
+        <div class="memberName">@loading</div>
+        <div class="memberRating">— : —</div>
+      </div>
+    </a>
   </div>
-
-  <div class="membersWelcome">
-    The latest warriors to enter the Kingdom.
-  </div>
-
-  <div id="membersList">
-    <!-- placeholders -->
-    <div class="memberRow">
-      <a class="memberLink">
-        <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
-        <div class="memberText">
-          <div class="memberName">@loading</div>
-          <div class="memberRating">— : —</div>
-        </div>
-      </a>
-    </div>
-  </div>
-
 </div>
 
 <script>
@@ -211,7 +153,8 @@ async function loadNewest() {
     `).join("");
 
   } catch (err) {
-    document.getElementById("membersList").innerHTML = "The Kingdom's records are temporarily unavailable.";
+    document.getElementById("membersList").innerHTML =
+      "<div style='text-align:center; opacity:.8;'>The Kingdom's records are temporarily unavailable.</div>";
   }
 }
 
