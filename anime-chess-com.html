@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{box-sizing:border-box;}
+
+html, body {
+  margin:0;
+  padding:0;
+  background: rgba(35,30,25,0.98)!important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color:#fff;
+}
+
+/* MAIN WRAPPER */
+#membersWrapper{
+  padding:12px;
+}
+
+/* MEMBER ROW */
+.memberRow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 10px;
+  border-radius:12px;
+  background: rgba(20,20,25,0.9);
+  margin-bottom:10px;
+  border:1px solid rgba(10,132,255,0.25);
+  transition:0.25s ease;
+}
+
+.memberRow:hover{
+  background: rgba(0,122,255,0.15);
+  transform: translateY(-2px);
+}
+
+/* LINK */
+.memberLink{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  width:100%;
+  color:inherit;
+}
+
+/* AVATAR */
+.memberAvatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:2px solid rgba(10,132,255,0.6);
+  object-fit:cover;
+  transition:0.25s;
+}
+
+.memberRow:hover .memberAvatar{
+  transform: scale(1.05);
+  border-color: #00c7ff;
+}
+
+/* TEXT */
+.memberText{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.memberName{
+  font-size:12px;
+  font-weight:700;
+  color:#f5e6c8;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.memberRating{
+  font-size:11px;
+  color:#f5e6c8;
+  opacity:.85;
+}
+
+.memberRow:hover .memberName,
+.memberRow:hover .memberRating{
+  color:#00c7ff;
+}
+</style>
+</head>
+
+<body>
+
+<div id="membersWrapper">
+  <div style="text-align:center; margin-bottom:12px;">
+    <div style="display:inline-block; background: linear-gradient(90deg, #007aff, #00c7ff); color:#1a1a1c; font-weight:800; padding:8px 14px; border-radius:14px; font-size:13px; letter-spacing:1px; text-transform:uppercase; box-shadow:0 4px 10px rgba(0,122,255,0.3);">
+      Newest Members of Anime Chess
+    </div>
+  </div>
+
+  <div id="membersList">
+    <div class="memberRow">
+      <a class="memberLink">
+        <img class="memberAvatar" src="https://taki2023.github.io/taki/default-pawn.png">
+        <div class="memberText">
+          <div class="memberName">@loading</div>
+          <div class="memberRating">— : —</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+async function loadNewest() {
+  try {
+    const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
+    const d = await r.json();
+    const members = [...d.weekly, ...d.monthly];
+    members.sort((a, b) => b.joined - a.joined);
+    const top3 = members.slice(0, 3);
+
+    const promises = top3.map(async (m) => {
+      const [pj, stats] = await Promise.all([
+        fetch("https://api.chess.com/pub/player/" + m.username).then(res => res.json()),
+        fetch("https://api.chess.com/pub/player/" + m.username + "/stats").then(res => res.json())
+      ]);
+
+      const ratings = [
+        {type:"Rapid", value: stats.chess_rapid?.last?.rating},
+        {type:"Blitz", value: stats.chess_blitz?.last?.rating},
+        {type:"Bullet", value: stats.chess_bullet?.last?.rating},
+        {type:"Daily", value: stats.chess_daily?.last?.rating}
+      ].filter(x => x.value);
+
+      const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—", value:"—"};
+      const avatar = pj.avatar || "https://taki2023.github.io/taki/default-pawn.png";
+
+      return {
+        username: m.username,
+        avatar,
+        ratingType: best.type,
+        ratingValue: best.value
+      };
+    });
+
+    const membersData = await Promise.all(promises);
+
+    const box = document.getElementById("membersList");
+    box.innerHTML = membersData.map(m => `
+      <div class="memberRow">
+        <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
+          <img class="memberAvatar" src="${m.avatar}">
+          <div class="memberText">
+            <div class="memberName">@${m.username}</div>
+            <div class="memberRating">${m.ratingType}: ${m.ratingValue}</div>
+          </div>
+        </a>
+      </div>
+    `).join("");
+
+  } catch (err) {
+    document.getElementById("membersList").innerHTML =
+      "<div style='text-align:center; opacity:.6;'>Kingdom records unavailable.</div>";
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadNewest);
+</script>
+
+</body>
+</html>
