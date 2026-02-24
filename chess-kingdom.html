@@ -109,7 +109,7 @@ html,body{
 <script>
 async function loadNewest() {
   try {
-    const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
+    const r = await fetch("https://api.chess.com/pub/club/group-2d2e38fb055862e7f9e99db0fc370565/members");
     const d = await r.json();
     const members = [...d.weekly, ...d.monthly];
     members.sort((a, b) => b.joined - a.joined);
