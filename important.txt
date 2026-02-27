@@ -1,0 +1,3 @@
+ID: 5
+TITLE: 🚨 URGENT TOURNAMENT UPDATE
+MESSAGE: The arena is moved to 6PM CET today. Be on time!
