@@ -5,7 +5,7 @@ const songDatabase = [
   },
   {
     title: "Luis Fonsi - Despacito",
-    src: "https://github.com/taki2023/taki/blob/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3"
+    src: "https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3"
   },
   {
     title: "Sia - Unstoppable",
