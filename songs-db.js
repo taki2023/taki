@@ -17,7 +17,7 @@ const songDatabase = [
   },
   {
     title: "Imagine Dragons - Demons",
-    src: "https://cs1.mp3.pm/download/41035962/d084QkZodWJUcUZraTljVGtGc2ZGNDBjSUZzU1Z4Mm9MeHppa1J6bUZLOXpDN1BDUHMxNWIzU1o5WVFNeVkxcWdGd0ZWcHpVVjVJYWNMUXJyNkszUzFzTUtUK1pWWlpJZG5zS0F1dTVvQ2pmT0xtS0kwdU9EQndJOEh6dWt5SC8/I_magine_Dragons_-_Demons_(mp3.pm).mp3"
+    src: "https://github.com/taki2023/taki/blob/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3"
   },
   {
     title: "Cold Play - Yellow ",
