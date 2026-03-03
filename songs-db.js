@@ -21,7 +21,7 @@ const songDatabase = [
   },
   {
     title: "Cold Play - Yellow ",
-    src: "https://cs1.mp3.pm/download/47513305/d084QkZodWJUcUZraTljVGtGc2ZGNDBjSUZzU1Z4Mm9MeHppa1J6bUZLK0JxTTlQQUZBL2QyaVFrSXlPaC9CQ0t0MHVWV0ZNdWV5WUZwcitrOCtDWUxEUGQ1Z2pIdWYyVm5UL1U4aDBxMGlQU0tqb0NXZllIU2FldjlBdTdYMk4/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"
+    src: "https://github.com/taki2023/taki/blob/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"
   },
     {
     title: "ZAYDE WOLF,SAM TINNESZ,EDVN - MANIAC ",
