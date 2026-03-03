@@ -17,11 +17,11 @@ const songDatabase = [
   },
   {
     title: "Imagine Dragons - Demons",
-    src: "https://github.com/taki2023/taki/blob/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3"
+    src: "https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3"
   },
   {
     title: "Cold Play - Yellow ",
-    src: "https://github.com/taki2023/taki/blob/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"
+    src: "https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"
   },
     {
     title: "ZAYDE WOLF,SAM TINNESZ,EDVN - MANIAC ",
