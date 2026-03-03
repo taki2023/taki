@@ -13,7 +13,7 @@ const songDatabase = [
   },
   {
     title: "Imagine Dragons - Believer",
-    src: "https://github.com/taki2023/taki/blob/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3"
+    src: "https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3"
   },
   {
     title: "Imagine Dragons - Demons",
@@ -25,6 +25,6 @@ const songDatabase = [
   },
     {
     title: "ZAYDE WOLF,SAM TINNESZ,EDVN - MANIAC ",
-    src: "https://cs1.mp3.pm/download/241568747/VjVJcE16anBzcThWWUdPOXVSaVhKMEJPbXNYdDdBaU02SHZnc2ZrNFlQcEJMUHdSdjNxaURCTEhMYktaa0NqZy9sMldyU1ZVU1U5aXdwRlQyZ2NIQjdSK2txaGZLUjRHUGRobFl0SXh1UERaZ28vVm1UUmNPdnBnMDFWcDVNTlU/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm).mp3"
+    src: "https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3"
   }
 ];
