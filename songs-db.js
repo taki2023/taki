@@ -1,7 +1,7 @@
 const songDatabase = [
   {
     title: "Faded - Alan Walker",
-    src: "https://github.com/taki2023/taki/blob/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3"
+    src: "https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3"
   },
   {
     title: "Luis Fonsi - Despacito",
