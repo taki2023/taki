@@ -1,7 +1,7 @@
 const songDatabase = [
   {
     title: "Faded - Alan Walker",
-    src: "https://cs1.mp3.pm/download/196179361/VTJhUDVRMkhwZlZtbUZzS1JKU0xlT2d6UnVRTnpOb0F5STFnSThzNDh3SHZRbzgweWtjRkQ1eHFZZ2pFS1BVVGZYOVBiNVJhUXlGNVFNL1diSnB2YmIyTjVMemNpRzA3aTJQZVRZaUM4Ty93UW5yNXp6cWI5TTNzMWNpSk1WT1E/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm).mp3"
+    src: "https://github.com/taki2023/taki/blob/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3"
   },
   {
     title: "Luis Fonsi - Despacito",
