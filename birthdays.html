@@ -54,29 +54,34 @@ html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,
 </div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbzzMoguDCj1IEDbYPSavWMLzhWfhJ8Ebv-K-Oj2ZUL4i0uIK2TgfSFdiCZ8XTYkceHq/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyGKgRC2bQ8VYcARprYFPSY4P2X4v4NHtI1XWvXzYNJNPEBVaPUEgVRNFnAikNO1W4/exec';
 const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 for(let i=1;i<=12;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i;document.getElementById("month").appendChild(opt);}
 for(let i=1;i<=31;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i;document.getElementById("day").appendChild(opt);}
 
 async function saveBirthday(){
-  const user=document.getElementById("username").value.trim();
-  const month=parseInt(document.getElementById("month").value);
-  const day=parseInt(document.getElementById("day").value);
-  const note=document.getElementById("note").value.trim();
-  const msg=document.getElementById("formMessage");
+  const user = document.getElementById("username").value.trim();
+  const month = parseInt(document.getElementById("month").value);
+  const day = parseInt(document.getElementById("day").value);
+  const note = document.getElementById("note").value.trim();
+  const msg = document.getElementById("formMessage");
 
-  if(!user||!month||!day){msg.textContent="Fill username, month and day!";return;}
-  msg.textContent="";
+  if(!user || !month || !day){ 
+    msg.textContent = "Fill username, month and day!"; 
+    return; 
+  }
+  msg.textContent = "";
 
   try{
-    const res=await fetch(API_URL,{
+    const res = await fetch(API_URL, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({Username:user,Month:month,Day:day,Note:note})
+      body: JSON.stringify({Username:user, Month:month, Day:day, Note:note})
     });
-    const result=await res.json();
+
+    const result = await res.json();
+
     if(result.success){
       document.getElementById("username").value="";
       document.getElementById("month").value="";
@@ -84,9 +89,12 @@ async function saveBirthday(){
       document.getElementById("note").value="";
       loadBirthdays();
     } else {
-      msg.textContent="Error saving: "+result.error;
+      msg.textContent = "Error saving: " + result.error;
     }
-  } catch(e){msg.textContent="Error saving data!";}
+
+  } catch(e){
+    msg.textContent = "Error saving data!";
+  }
 }
 
 function getNextDate(month,day){const today=new Date();const b=new Date(today.getFullYear(),month-1,day);if(b<today)b.setFullYear(today.getFullYear()+1);return b;}
