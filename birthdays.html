@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-/* SAME CHILLIES DESIGN */
 *{box-sizing:border-box;}
 html,body{
   margin:0;
@@ -50,31 +49,46 @@ html,body{
   font-weight:700;
 }
 
+/* FORM */
 .bForm{
   display:flex;
   gap:8px;
   margin-bottom:12px;
+  flex-wrap: wrap;
 }
 
 .bForm input, .bForm select{
-  flex:1;
-  padding:7px 8px;
-  border-radius:10px;
+  flex:1 1 100px;
+  padding:8px 10px;
+  border-radius:12px;
   border:1px solid rgba(255,176,120,.35);
   background:rgba(0,0,0,.35);
   color:#fff;
-  font-size:12px;
+  font-size:13px;
+  transition: all 0.2s ease;
+}
+
+.bForm input:focus, .bForm select:focus{
+  outline:none;
+  border-color:#ffb37a;
+  background:rgba(0,0,0,.5);
 }
 
 .bForm button{
-  padding:7px 12px;
-  border-radius:10px;
+  padding:8px 16px;
+  border-radius:12px;
   border:1px solid rgba(255,176,120,.45);
   background:linear-gradient(90deg,#ffb37a,#ff8a70);
   font-weight:800;
   cursor:pointer;
+  transition: all 0.2s ease;
 }
 
+.bForm button:hover{
+  transform:scale(1.05);
+}
+
+/* BIRTHDAY ROW */
 .bRow{
   display:flex;
   align-items:center;
@@ -120,26 +134,15 @@ html,body{
 
   <div class="bForm">
     <input type="text" id="username" placeholder="Chess Username">
-<select id="month">
-  <option value="">Month</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-</select>
+    
+    <select id="month">
+      <option value="">Month</option>
+    </select>
 
-<select id="day">
-  <option value="">Day</option>
-  ${[...Array(31)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
-</select>
+    <select id="day">
+      <option value="">Day</option>
+    </select>
+
     <input type="text" id="note" placeholder="Note (e.g., Rapid Specialist)">
     <button onclick="saveBirthday()">Save</button>
   </div>
@@ -149,6 +152,23 @@ html,body{
 
 <script>
 const API_URL = 'https://sheetdb.io/api/v1/29mvil2u3pj5s';
+
+// Populate month and day dynamically
+const monthSelect = document.getElementById("month");
+for(let i=1;i<=12;i++){
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = i;
+  monthSelect.appendChild(opt);
+}
+
+const daySelect = document.getElementById("day");
+for(let i=1;i<=31;i++){
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = i;
+  daySelect.appendChild(opt);
+}
 
 // Save birthday to SheetDB
 async function saveBirthday(){
@@ -180,7 +200,7 @@ function getNextDate(month, day){
   return b;
 }
 
-// Load next 3 birthdays
+// Load next 5 birthdays
 async function loadBirthdays(){
   const res = await fetch(API_URL);
   const data = await res.json();
@@ -188,7 +208,7 @@ async function loadBirthdays(){
   const upcoming = data
     .map(b=>({username:b.Username, month:parseInt(b.Month), day:parseInt(b.Day), note:b.Note}))
     .sort((a,b)=> getNextDate(a.month,a.day) - getNextDate(b.month,b.day))
-    .slice(0,3);
+    .slice(0,5);
 
   const promises = upcoming.map(async b=>{
     let avatar = "https://taki2023.github.io/taki/default-pawn.png";
