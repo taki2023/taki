@@ -56,13 +56,23 @@ html,body{
 /* FORM */
 .bForm{
   display:flex;
-  flex-wrap: wrap;
+  flex-direction:column;
   gap:8px;
   margin-bottom:12px;
 }
 
-.bForm input, .bForm select{
-  flex:1 1 100px;
+.bRowInputs{
+  display:flex;
+  gap:8px;
+}
+
+.bRowInputs select{
+  flex:1;
+}
+
+.bForm input,
+.bForm select{
+  width:100%;
   padding:8px 10px;
   border-radius:12px;
   border:1px solid rgba(255,176,120,.35);
@@ -71,16 +81,17 @@ html,body{
   font-size:12px;
   transition:.2s;
   appearance:none;
-  cursor:pointer;
 }
 
-.bForm input:focus, .bForm select:focus{
+.bForm input:focus,
+.bForm select:focus{
   outline:none;
   border-color:#ffb37a;
   background:rgba(0,0,0,.5);
 }
 
 .bForm button{
+  width:100%;
   padding:8px 16px;
   border-radius:12px;
   border:1px solid rgba(255,176,120,.45);
@@ -162,6 +173,24 @@ html,body{
   color:#ffd9b8;
 }
 
+.countdown{
+  font-weight:800;
+  color:#ffcc66;
+  text-shadow:0 0 6px rgba(255,204,102,.8);
+}
+
+.today{
+  font-weight:900;
+  color:#ffd700;
+  text-shadow:0 0 10px rgba(255,215,0,1);
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow{
+  from{ text-shadow:0 0 6px rgba(255,215,0,.6);}
+  to{ text-shadow:0 0 16px rgba(255,215,0,1);}
+}
+
 .bNote{
   font-size:10.5px;
   color:#fff;
@@ -178,18 +207,23 @@ html,body{
   </div>
 
   <div class="bForm">
-    <input type="text" id="username" placeholder="Chess.com Username">
-    
-    <select id="month">
-      <option value="">Month</option>
-    </select>
 
-    <select id="day">
-      <option value="">Day</option>
-    </select>
+    <input type="text" id="username" placeholder="Chess.com Username">
+
+    <div class="bRowInputs">
+      <select id="month">
+        <option value="">Month</option>
+      </select>
+
+      <select id="day">
+        <option value="">Day</option>
+      </select>
+    </div>
 
     <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
+
     <button onclick="saveBirthday()">Save</button>
+
   </div>
 
   <div id="birthdayList"></div>
@@ -200,7 +234,6 @@ html,body{
 const API_URL = 'https://sheetdb.io/api/v1/29mvil2u3pj5s';
 const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-// Populate month/day selects
 const monthSelect = document.getElementById("month");
 for(let i=1;i<=12;i++){
   const opt = document.createElement("option");
@@ -217,7 +250,6 @@ for(let i=1;i<=31;i++){
   daySelect.appendChild(opt);
 }
 
-// Save birthday
 async function saveBirthday(){
   const user = document.getElementById("username").value.trim();
   const month = parseInt(document.getElementById("month").value);
@@ -239,7 +271,6 @@ async function saveBirthday(){
   loadBirthdays();
 }
 
-// Next birthday date
 function getNextDate(month, day){
   const today = new Date();
   const b = new Date(today.getFullYear(), month-1, day);
@@ -247,7 +278,6 @@ function getNextDate(month, day){
   return b;
 }
 
-// Date suffix
 function getDateSuffix(day){
   if(day >= 11 && day <= 13) return 'th';
   switch(day % 10){
@@ -258,7 +288,6 @@ function getDateSuffix(day){
   }
 }
 
-// Load next 3 birthdays
 async function loadBirthdays(){
   const res = await fetch(API_URL);
   const data = await res.json();
@@ -278,12 +307,20 @@ async function loadBirthdays(){
     const nextDate = getNextDate(b.month,b.day);
     const diffDays = Math.ceil((nextDate - new Date()) / (1000*60*60*24));
     const suffix = getDateSuffix(b.day);
+
+    let countdownHTML = "";
+    if(diffDays === 0){
+      countdownHTML = `<span class="today">TODAY 🎉</span>`;
+    } else {
+      countdownHTML = `<span class="countdown">in ${diffDays} day${diffDays>1?'s':''}</span>`;
+    }
+
     return { 
       username:b.username, 
       avatar, 
       note:b.note,
       date: `${b.day}${suffix} ${monthNames[b.month-1]}`,
-      countdown: diffDays 
+      countdownHTML
     }
   });
 
@@ -295,8 +332,8 @@ async function loadBirthdays(){
         <img class="bAvatar" src="${m.avatar}">
         <div class="bText">
           <div class="bName">@${m.username}</div>
-          <div class="bDate">${m.date}</div>
-          <div class="bNote">${m.note || ""} (in ${m.countdown} day${m.countdown>1?'s':''})</div>
+          <div class="bDate">${m.date} • ${m.countdownHTML}</div>
+          <div class="bNote">${m.note || ""}</div>
         </div>
       </a>
     </div>
