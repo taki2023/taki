@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{box-sizing:border-box;}
+html,body{
+  margin:0;
+  padding:0;
+  background:transparent!important;
+  font-family:Inter,Segoe UI,system-ui,sans-serif;
+  color:#f1e7df;
+}
+
+#birthdayBox{
+  width:100%;
+  padding:14px 15px;
+  background:linear-gradient(180deg, rgba(18,12,10,.92), rgba(10,8,7,.95));
+  border:2.5px solid rgba(255,176,120,.55);
+  border-radius:16px;
+  box-shadow: inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(255,176,120,.22);
+}
+
+/* HEADER */
+.bHeader{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));
+  border:1.5px solid rgba(255,176,120,.4);
+  margin-bottom:12px;
+}
+
+.bIcon{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:linear-gradient(145deg,#ffb37a,#ff8a70);
+}
+
+.bTitle{
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+/* FORM */
+.bForm{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.bForm input{
+  flex:1;
+  padding:7px 8px;
+  border-radius:10px;
+  border:1px solid rgba(255,176,120,.35);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  font-size:12px;
+}
+
+.bForm button{
+  padding:7px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,176,120,.45);
+  background:linear-gradient(90deg,#ffb37a,#ff8a70);
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* LIST */
+.bRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px;
+  border-radius:12px;
+  background:rgba(255,176,120,0.06);
+  margin-bottom:6px;
+}
+
+.bAvatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:2px solid rgba(255,176,120,.8);
+  object-fit:cover;
+}
+
+.bName{
+  font-size:13px;
+  font-weight:800;
+  color:#ffb37a;
+}
+
+.bDate{
+  font-size:11.5px;
+  opacity:.9;
+}
+</style>
+</head>
+<body>
+
+<div id="birthdayBox">
+
+  <div class="bHeader">
+    <div class="bIcon">🎂</div>
+    <div class="bTitle">Next Chillies Birthdays</div>
+  </div>
+
+  <div class="bForm">
+    <input type="text" id="username" placeholder="Chess Username">
+    <input type="date" id="birthday">
+    <button onclick="saveBirthday()">Save</button>
+  </div>
+
+  <div id="birthdayList"></div>
+
+</div>
+
+<script>
+const STORAGE_KEY = "chillies_birthdays";
+
+function saveBirthday(){
+  const user = document.getElementById("username").value.trim();
+  const date = document.getElementById("birthday").value;
+  if(!user || !date) return alert("Fill both fields!");
+
+  let data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  data.push({username:user, birthday:date});
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+  document.getElementById("username").value="";
+  loadBirthdays();
+}
+
+function getNextDate(dateStr){
+  const today = new Date();
+  const b = new Date(dateStr);
+  b.setFullYear(today.getFullYear());
+  if(b < today) b.setFullYear(today.getFullYear()+1);
+  return b;
+}
+
+async function loadBirthdays(){
+  const box = document.getElementById("birthdayList");
+  let data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+  data.sort((a,b)=> getNextDate(a.birthday)-getNextDate(b.birthday));
+  const next3 = data.slice(0,3);
+
+  const promises = next3.map(async m=>{
+    const pj = await fetch("https://api.chess.com/pub/player/"+m.username)
+      .then(r=>r.json()).catch(()=>null);
+    return {
+      username:m.username,
+      avatar: pj?.avatar || "https://taki2023.github.io/taki/default-pawn.png",
+      date:getNextDate(m.birthday).toLocaleDateString()
+    }
+  });
+
+  const members = await Promise.all(promises);
+
+  box.innerHTML = members.map(m=>`
+    <div class="bRow">
+      <a href="https://www.chess.com/member/${m.username}" target="_blank">
+        <img class="bAvatar" src="${m.avatar}">
+      </a>
+      <div>
+        <div class="bName">@${m.username}</div>
+        <div class="bDate">${m.date}</div>
+      </div>
+    </div>
+  `).join("");
+}
+
+window.addEventListener("DOMContentLoaded", loadBirthdays);
+</script>
+
+</body>
+</html>
