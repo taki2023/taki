@@ -5,55 +5,25 @@
 <style>
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,Segoe UI,system-ui,sans-serif;color:#f1e7df;height:460px;}
-
-#birthdayBox {
-  width:100%;
-  height:100%;
-  padding:14px 15px;
-  background:linear-gradient(180deg, rgba(18,12,10,.92), rgba(10,8,7,.95));
-  border:2.5px solid rgba(255,176,120,.55);
-  border-radius:16px;
-  box-shadow: inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(255,176,120,.22);
-  display:flex;
-  flex-direction:column;
-}
-
-/* HEADER */
-.bHeader{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:10px 12px;
-  border-radius:14px;
-  background:linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));
-  border:1.5px solid rgba(255,176,120,.4);
-  margin-bottom:8px;
-}
+#birthdayBox{width:100%;height:100%;padding:14px 15px;background:linear-gradient(180deg, rgba(18,12,10,.92), rgba(10,8,7,.95));border:2.5px solid rgba(255,176,120,.55);border-radius:16px;box-shadow:inset 0 0 14px rgba(0,0,0,.55),0 0 14px rgba(255,176,120,.22);display:flex;flex-direction:column;}
+.bHeader{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));border:1.5px solid rgba(255,176,120,.4);margin-bottom:8px;}
 .bIcon{width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(145deg,#ffb37a,#ff8a70);}
 .bTitle{font-size:15px;font-weight:700;letter-spacing:.5px;}
-
-/* FORM */
 .bForm{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .bRowInputs{display:flex;gap:8px;}
 .bRowInputs select{flex:1;}
 .bForm input,.bForm select{width:100%;padding:8px 10px;border-radius:12px;border:1px solid rgba(255,176,120,.35);background:rgba(0,0,0,.35);color:#fff;font-size:12px;transition:.2s;appearance:none;}
 .bForm input:focus,.bForm select:focus{outline:none;border-color:#ffb37a;background:rgba(0,0,0,.5);}
-
-/* Smaller Save Button */
 .bForm button{align-self:flex-start;padding:7px 18px;border-radius:12px;border:1px solid rgba(255,176,120,.45);background:linear-gradient(90deg,#ffb37a,#ff8a70);font-weight:800;cursor:pointer;transition: all 0.2s ease;}
 .bForm button:hover{transform:scale(1.05);}
-
-/* Inline message next to button */
 .formRow{display:flex;align-items:center;gap:10px;}
 .formMessage{font-size:11px;color:#ffb37a;min-height:14px;}
-
-/* BIRTHDAY LIST */
 #birthdayList{flex:1;overflow:auto;}
 .bRow{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;background:rgba(255,176,120,0.06);margin-bottom:7px;transition:.22s;border:1px solid rgba(255,176,120,.12);}
 .bRow:hover{background:rgba(255,176,120,0.22);transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.35);border-color:rgba(255,176,120,.35);}
 .bRow a{display:flex;align-items:center;gap:12px;text-decoration:none;width:100%;}
-.bAvatar{width:40px;height:40px;border-radius:50%;border:2.5px solid rgba(255,176,120,.9);box-shadow:0 0 0 3px rgba(255,176,120,.25), 0 0 12px rgba(255,176,120,.35);transition:.25s;object-fit:cover;}
-.bRow:hover .bAvatar{transform:scale(1.06);box-shadow:0 0 0 4px rgba(255,176,120,.35), 0 0 18px rgba(255,176,120,.55);}
+.bAvatar{width:40px;height:40px;border-radius:50%;border:2.5px solid rgba(255,176,120,.9);box-shadow:0 0 0 3px rgba(255,176,120,.25),0 0 12px rgba(255,176,120,.35);transition:.25s;object-fit:cover;}
+.bRow:hover .bAvatar{transform:scale(1.06);box-shadow:0 0 0 4px rgba(255,176,120,.35),0 0 18px rgba(255,176,120,.55);}
 .bText{display:flex;flex-direction:column;min-width:0;}
 .bName{font-size:12px;font-weight:800;color:#ffb37a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .bDate{font-size:10.5px;color:#ffd9b8;}
@@ -61,7 +31,6 @@ html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,
 </style>
 </head>
 <body>
-
 <div id="birthdayBox">
   <div class="bHeader">
     <div class="bIcon">🎂</div>
@@ -70,17 +39,14 @@ html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,
 
   <div class="bForm">
     <input type="text" id="username" placeholder="Chess.com Username">
-
     <div class="bRowInputs">
       <select id="month"><option value="">Month</option></select>
       <select id="day"><option value="">Day</option></select>
     </div>
-
     <div class="formRow">
       <button onclick="saveBirthday()">Save</button>
       <div class="formMessage" id="formMessage"></div>
     </div>
-
     <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
   </div>
 
@@ -88,11 +54,11 @@ html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,
 </div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxyLLQxt53CSnbPIelEUobh95UyRH7luFHjSX8GW9h0Yc5mZbmMXZUl9HpDc9Fa1Kk/exec';
-const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const API_URL = 'https://script.google.com/macros/s/AKfycbzzMoguDCj1IEDbYPSavWMLzhWfhJ8Ebv-K-Oj2ZUL4i0uIK2TgfSFdiCZ8XTYkceHq/exec';
+const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-for(let i=1;i<=12;i++){ const opt=document.createElement("option"); opt.value=i; opt.textContent=i; document.getElementById("month").appendChild(opt);}
-for(let i=1;i<=31;i++){ const opt=document.createElement("option"); opt.value=i; opt.textContent=i; document.getElementById("day").appendChild(opt);}
+for(let i=1;i<=12;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i;document.getElementById("month").appendChild(opt);}
+for(let i=1;i<=31;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i;document.getElementById("day").appendChild(opt);}
 
 async function saveBirthday(){
   const user=document.getElementById("username").value.trim();
@@ -101,16 +67,16 @@ async function saveBirthday(){
   const note=document.getElementById("note").value.trim();
   const msg=document.getElementById("formMessage");
 
-  if(!user || !month || !day){ msg.textContent="Fill username, month and day!"; return; }
+  if(!user||!month||!day){msg.textContent="Fill username, month and day!";return;}
   msg.textContent="";
 
   try{
-    const res = await fetch(API_URL,{
+    const res=await fetch(API_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({Username:user, Month:month, Day:day, Note:note})
+      body:JSON.stringify({Username:user,Month:month,Day:day,Note:note})
     });
-    const result = await res.json();
+    const result=await res.json();
     if(result.success){
       document.getElementById("username").value="";
       document.getElementById("month").value="";
@@ -120,36 +86,28 @@ async function saveBirthday(){
     } else {
       msg.textContent="Error saving: "+result.error;
     }
-  } catch(e){
-    msg.textContent="Error saving data!";
-  }
+  } catch(e){msg.textContent="Error saving data!";}
 }
 
-function getNextDate(month, day){
-  const today=new Date();
-  const b=new Date(today.getFullYear(), month-1, day);
-  if(b<today) b.setFullYear(today.getFullYear()+1);
-  return b;
-}
-function getDateSuffix(day){ if(day>=11 && day<=13) return 'th'; switch(day%10){ case 1: return 'st'; case 2: return 'nd'; case 3: return 'rd'; default: return 'th';}}
+function getNextDate(month,day){const today=new Date();const b=new Date(today.getFullYear(),month-1,day);if(b<today)b.setFullYear(today.getFullYear()+1);return b;}
+function getDateSuffix(day){if(day>=11&&day<=13)return 'th';switch(day%10){case 1:return 'st';case 2:return 'nd';case 3:return 'rd';default:return 'th';}}
 
 async function loadBirthdays(){
   try{
     const res=await fetch(API_URL);
     const data=await res.json();
-    const upcoming = data
-      .map(b=>({username:b.Username, month:parseInt(b.Month), day:parseInt(b.Day), note:b.Note}))
-      .sort((a,b)=> getNextDate(a.month,a.day) - getNextDate(b.month,b.day))
+    const upcoming=data.map(b=>({username:b.Username,month:parseInt(b.Month),day:parseInt(b.Day),note:b.Note}))
+      .sort((a,b)=>getNextDate(a.month,a.day)-getNextDate(b.month,b.day))
       .slice(0,3);
 
-    const members = await Promise.all(upcoming.map(async b=>{
+    const members=await Promise.all(upcoming.map(async b=>{
       let avatar="https://taki2023.github.io/taki/default-pawn.png";
-      try{ const pj=await fetch("https://api.chess.com/pub/player/"+b.username).then(r=>r.json()); if(pj.avatar) avatar=pj.avatar;}catch(e){}
+      try{const pj=await fetch("https://api.chess.com/pub/player/"+b.username).then(r=>r.json());if(pj.avatar)avatar=pj.avatar;}catch(e){}
       const nextDate=getNextDate(b.month,b.day);
       const diffDays=Math.ceil((nextDate-new Date())/(1000*60*60*24));
       const suffix=getDateSuffix(b.day);
-      const countdownText = diffDays===0 ? "TODAY 🎉" : `in ${diffDays} day${diffDays>1?'s':''}`;
-      return {username:b.username, avatar, note:b.note, date:`${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}`};
+      const countdownText=diffDays===0?"TODAY 🎉":`in ${diffDays} day${diffDays>1?'s':''}`;
+      return {username:b.username,avatar,note:b.note,date:`${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}`};
     }));
 
     document.getElementById("birthdayList").innerHTML=members.map(m=>`
@@ -159,19 +117,19 @@ async function loadBirthdays(){
           <div class="bText">
             <div class="bName">@${m.username}</div>
             <div class="bDate">${m.date}</div>
-            <div class="bNote">${m.note || ""}</div>
+            <div class="bNote">${m.note||""}</div>
           </div>
         </a>
-      </div>
-    `).join("");
+      </div>`).join("");
 
   } catch(e){
     document.getElementById("birthdayList").innerHTML="<div style='color:#ffb37a;font-size:12px;'>Failed to load birthdays.</div>";
+    console.error(e);
   }
 }
 
-window.saveBirthday = saveBirthday;
-window.addEventListener("DOMContentLoaded", loadBirthdays);
+window.saveBirthday=saveBirthday;
+window.addEventListener("DOMContentLoaded",loadBirthdays);
 </script>
 </body>
 </html>
