@@ -37,18 +37,18 @@ html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,
     <div class="bTitle">Next Birthdays</div>
   </div>
 
-  <div class="bForm">
-    <input type="text" id="username" placeholder="Chess.com Username">
-    <div class="bRowInputs">
-      <select id="month"><option value="">Month</option></select>
-      <select id="day"><option value="">Day</option></select>
-    </div>
-    <div class="formRow">
-      <button onclick="saveBirthday()">Save</button>
-      <div class="formMessage" id="formMessage"></div>
-    </div>
-    <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
+<div class="bForm">
+  <input type="text" id="username" placeholder="Chess.com Username">
+  <div class="bRowInputs">
+    <select id="month"><option value="">Month</option></select>
+    <select id="day"><option value="">Day</option></select>
   </div>
+  <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
+  <div class="formRow">
+    <button onclick="saveBirthday()">Save</button>
+    <div class="formMessage" id="formMessage"></div>
+  </div>
+</div>
 
   <div id="birthdayList"></div>
 </div>
