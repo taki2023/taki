@@ -1,82 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Next Birthdays</title>
 <style>
-  body { font-family: Arial, sans-serif; background:#1e1e1e; color:#fff; text-align:center; padding:20px; }
-  .birthday { margin:10px 0; padding:10px; background:#333; border-radius:8px; }
-  input, button { padding:8px; margin:5px; border-radius:5px; border:none; }
-  input { width: 80px; }
-  button { background:#ff5555; color:#fff; cursor:pointer; }
+/* SAME CHILLIES DESIGN */
+*{box-sizing:border-box;}
+html,body{
+  margin:0;
+  padding:0;
+  background:transparent!important;
+  font-family:Inter,Segoe UI,system-ui,sans-serif;
+  color:#f1e7df;
+}
+
+#birthdayBox{
+  width:100%;
+  padding:14px 15px;
+  background:linear-gradient(180deg, rgba(18,12,10,.92), rgba(10,8,7,.95));
+  border:2.5px solid rgba(255,176,120,.55);
+  border-radius:16px;
+  box-shadow: inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(255,176,120,.22);
+}
+
+/* HEADER */
+.bHeader{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));
+  border:1.5px solid rgba(255,176,120,.4);
+  margin-bottom:12px;
+}
+
+.bIcon{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:linear-gradient(145deg,#ffb37a,#ff8a70);
+}
+
+.bTitle{
+  font-size:15px;
+  font-weight:700;
+}
+
+.bForm{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.bForm input{
+  flex:1;
+  padding:7px 8px;
+  border-radius:10px;
+  border:1px solid rgba(255,176,120,.35);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  font-size:12px;
+}
+
+.bForm button{
+  padding:7px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,176,120,.45);
+  background:linear-gradient(90deg,#ffb37a,#ff8a70);
+  font-weight:800;
+  cursor:pointer;
+}
+
+.bRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px;
+  border-radius:12px;
+  background:rgba(255,176,120,0.06);
+  margin-bottom:6px;
+}
+
+.bAvatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:2px solid rgba(255,176,120,.8);
+  object-fit:cover;
+}
+
+.bName{
+  font-size:13px;
+  font-weight:800;
+  color:#ffb37a;
+}
+
+.bDate{
+  font-size:11.5px;
+}
 </style>
 </head>
 <body>
 
-<h2>Next 3 Birthdays</h2>
-<div id="birthdays"></div>
+<div id="birthdayBox">
+  <div class="bHeader">
+    <div class="bIcon">🎂</div>
+    <div class="bTitle">Next Chillies Birthdays</div>
+  </div>
 
-<h3>Submit Your Birthday</h3>
-<input type="text" id="username" placeholder="Username">
-<input type="number" id="month" placeholder="Month" min="1" max="12">
-<input type="number" id="day" placeholder="Day" min="1" max="31">
-<input type="text" id="note" placeholder="Note">
-<br>
-<button onclick="submitBirthday()">Save Birthday</button>
+  <div class="bForm">
+    <input type="text" id="username" placeholder="Chess Username">
+    <input type="date" id="birthday">
+    <button onclick="saveBirthday()">Save</button>
+  </div>
+
+  <div id="birthdayList"></div>
+</div>
 
 <script>
 const API_URL = 'https://sheetdb.io/api/v1/29mvil2u3pj5s';
 
-// Fetch and show next 3 birthdays
-async function loadBirthdays() {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    const today = new Date();
-    
-    const upcoming = data
-        .map(b => ({
-            username: b.Username,
-            note: b.Note,
-            date: new Date(today.getFullYear(), b.Month - 1, b.Day)
-        }))
-        .sort((a,b) => a.date - b.date)
-        .slice(0,3);
-    
-    const container = document.getElementById('birthdays');
-    container.innerHTML = upcoming.map(b => 
-        `<div class="birthday"><strong>${b.username}</strong>: ${b.date.getDate()}/${b.date.getMonth()+1} - ${b.note}</div>`
-    ).join('');
+// Add a new birthday to SheetDB
+async function saveBirthday(){
+  const user = document.getElementById("username").value.trim();
+  const date = document.getElementById("birthday").value;
+  if(!user || !date) return alert("Fill both fields!");
+
+  await fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ data: { Username:user, Month:new Date(date).getMonth()+1, Day:new Date(date).getDate() } })
+  });
+
+  document.getElementById("username").value="";
+  document.getElementById("birthday").value="";
+  loadBirthdays();
 }
 
-// Submit a new birthday
-async function submitBirthday() {
-    const username = document.getElementById('username').value.trim();
-    const month = parseInt(document.getElementById('month').value);
-    const day = parseInt(document.getElementById('day').value);
-    const note = document.getElementById('note').value.trim();
-
-    if(!username || !month || !day) {
-        alert("Please fill in all fields!");
-        return;
-    }
-
-    await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json' },
-        body: JSON.stringify({ data: { Username: username, Month: month, Day: day, Note: note } })
-    });
-
-    // Clear form
-    document.getElementById('username').value = '';
-    document.getElementById('month').value = '';
-    document.getElementById('day').value = '';
-    document.getElementById('note').value = '';
-
-    loadBirthdays(); // Refresh list
+// Compute next birthday date
+function getNextDate(month, day){
+  const today = new Date();
+  const b = new Date(today.getFullYear(), month-1, day);
+  if(b < today) b.setFullYear(today.getFullYear()+1);
+  return b;
 }
 
-// Initial load
-loadBirthdays();
+// Load next 3 birthdays
+async function loadBirthdays(){
+  const res = await fetch(API_URL);
+  const data = await res.json();
+
+  const upcoming = data
+    .map(b=>({username:b.Username, month:parseInt(b.Month), day:parseInt(b.Day)}))
+    .sort((a,b)=> getNextDate(a.month,a.day) - getNextDate(b.month,b.day))
+    .slice(0,3);
+
+  const promises = upcoming.map(async b=>{
+    let avatar = "https://taki2023.github.io/taki/default-pawn.png";
+    try{
+      const pj = await fetch("https://api.chess.com/pub/player/"+b.username).then(r=>r.json());
+      if(pj.avatar) avatar = pj.avatar;
+    }catch(e){}
+    return { username:b.username, avatar, date: getNextDate(b.month,b.day).toLocaleDateString() }
+  });
+
+  const members = await Promise.all(promises);
+
+  document.getElementById("birthdayList").innerHTML = members.map(m=>`
+    <div class="bRow">
+      <a href="https://www.chess.com/member/${m.username}" target="_blank">
+        <img class="bAvatar" src="${m.avatar}">
+      </a>
+      <div>
+        <div class="bName">@${m.username}</div>
+        <div class="bDate">${m.date}</div>
+      </div>
+    </div>
+  `).join("");
+}
+
+window.saveBirthday = saveBirthday;
+window.addEventListener("DOMContentLoaded", loadBirthdays);
 </script>
 </body>
 </html>
