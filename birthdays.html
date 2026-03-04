@@ -71,7 +71,7 @@ async function saveBirthday(){
     msg.textContent = "Fill username, month and day!"; 
     return; 
   }
-  msg.textContent = "";
+  msg.textContent = "Saving...";
 
   try{
     const res = await fetch(API_URL, {
@@ -80,20 +80,26 @@ async function saveBirthday(){
       body: JSON.stringify({Username:user, Month:month, Day:day, Note:note})
     });
 
+    // Check if we got JSON
     const result = await res.json();
 
     if(result.success){
+      msg.textContent = "Saved successfully ✅";
       document.getElementById("username").value="";
       document.getElementById("month").value="";
       document.getElementById("day").value="";
       document.getElementById("note").value="";
       loadBirthdays();
     } else {
-      msg.textContent = "Error saving: " + result.error;
+      // Show exact error returned by Apps Script
+      msg.textContent = "Error saving: " + (result.error || "Unknown error");
+      console.error("Save Error:", result);
     }
 
   } catch(e){
-    msg.textContent = "Error saving data!";
+    // Show exact network/JS error
+    msg.textContent = "Error saving data! " + e.message;
+    console.error("Fetch Error:", e);
   }
 }
 
