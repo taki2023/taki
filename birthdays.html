@@ -10,11 +10,12 @@ html,body{
   background:transparent!important;
   font-family:Inter,Segoe UI,system-ui,sans-serif;
   color:#f1e7df;
-  height:460px;
+  height:460px;   /* Total fixed iframe height */
 }
 
 #birthdayBox {
   width: 100%;
+  height:100%;
   padding: 14px 15px;
   background: linear-gradient(180deg, rgba(18,12,10,.92), rgba(10,8,7,.95));
   border: 2.5px solid rgba(255,176,120,.55);
@@ -56,23 +57,19 @@ html,body{
 /* FORM */
 .bForm{
   display:flex;
-  flex-direction:column;
+  flex-direction: column;
   gap:8px;
   margin-bottom:12px;
 }
 
-.bRowInputs{
+.bFormRow{
   display:flex;
   gap:8px;
 }
 
-.bRowInputs select{
+.bFormRow input,
+.bFormRow select{
   flex:1;
-}
-
-.bForm input,
-.bForm select{
-  width:100%;
   padding:8px 10px;
   border-radius:12px;
   border:1px solid rgba(255,176,120,.35);
@@ -83,21 +80,14 @@ html,body{
   appearance:none;
 }
 
-.bForm input:focus,
-.bForm select:focus{
+.bFormRow input:focus,
+.bFormRow select:focus{
   outline:none;
   border-color:#ffb37a;
   background:rgba(0,0,0,.5);
 }
 
-/* Save button row */
-.bButtonRow{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.bForm button{
+.bFormRow button{
   padding:7px 18px;
   border-radius:12px;
   border:1px solid rgba(255,176,120,.45);
@@ -107,7 +97,7 @@ html,body{
   transition: all 0.2s ease;
 }
 
-.bForm button:hover{
+.bFormRow button:hover{
   transform:scale(1.05);
 }
 
@@ -120,8 +110,9 @@ html,body{
 
 /* BIRTHDAY LIST */
 #birthdayList{
-  height:140px;      /* Fixed visible area for names */
-  overflow:hidden;
+  flex:1;
+  overflow-y:auto;
+  margin-top:4px;
 }
 
 .bRow{
@@ -202,26 +193,14 @@ html,body{
   </div>
 
   <div class="bForm">
-
-    <input type="text" id="username" placeholder="Chess.com Username">
-
-    <div class="bRowInputs">
-      <select id="month">
-        <option value="">Month</option>
-      </select>
-
-      <select id="day">
-        <option value="">Day</option>
-      </select>
-    </div>
-
-    <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
-
-    <div class="bButtonRow">
+    <div class="bFormRow">
+      <input type="text" id="username" placeholder="Chess.com Username">
+      <select id="month"><option value="">Month</option></select>
+      <select id="day"><option value="">Day</option></select>
       <button onclick="saveBirthday()">Save</button>
-      <div class="formMessage" id="formMessage"></div>
     </div>
-
+    <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
+    <div class="formMessage" id="formMessage"></div>
   </div>
 
   <div id="birthdayList"></div>
@@ -311,15 +290,9 @@ async function loadBirthdays(){
     const nextDate = getNextDate(b.month,b.day);
     const diffDays = Math.ceil((nextDate - new Date()) / (1000*60*60*24));
     const suffix = getDateSuffix(b.day);
-
     let countdownText = diffDays === 0 ? "TODAY 🎉" : `in ${diffDays} day${diffDays>1?'s':''}`;
 
-    return { 
-      username:b.username, 
-      avatar, 
-      note:b.note,
-      date: `${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}`
-    }
+    return { username:b.username, avatar, note:b.note, date: `${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}` }
   });
 
   const members = await Promise.all(promises);
@@ -341,5 +314,6 @@ async function loadBirthdays(){
 window.saveBirthday = saveBirthday;
 window.addEventListener("DOMContentLoaded", loadBirthdays);
 </script>
+
 </body>
 </html>
