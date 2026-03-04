@@ -157,12 +157,12 @@ html,body{
   text-overflow:ellipsis;
 }
 
-.bNote{
+.bDate{
   font-size:11.5px;
   color:#ffd9b8;
 }
 
-.bDate{
+.bNote{
   font-size:11.5px;
   color:#fff;
 }
@@ -198,6 +198,7 @@ html,body{
 
 <script>
 const API_URL = 'https://sheetdb.io/api/v1/29mvil2u3pj5s';
+const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 // Populate month/day selects
 const monthSelect = document.getElementById("month");
@@ -246,7 +247,18 @@ function getNextDate(month, day){
   return b;
 }
 
-// Load next 5 birthdays
+// Date suffix
+function getDateSuffix(day){
+  if(day >= 11 && day <= 13) return 'th';
+  switch(day % 10){
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
+  }
+}
+
+// Load next 3 birthdays
 async function loadBirthdays(){
   const res = await fetch(API_URL);
   const data = await res.json();
@@ -254,7 +266,7 @@ async function loadBirthdays(){
   const upcoming = data
     .map(b=>({username:b.Username, month:parseInt(b.Month), day:parseInt(b.Day), note:b.Note}))
     .sort((a,b)=> getNextDate(a.month,a.day) - getNextDate(b.month,b.day))
-    .slice(0,5);
+    .slice(0,3);
 
   const promises = upcoming.map(async b=>{
     let avatar = "https://taki2023.github.io/taki/default-pawn.png";
@@ -262,13 +274,15 @@ async function loadBirthdays(){
       const pj = await fetch("https://api.chess.com/pub/player/"+b.username).then(r=>r.json());
       if(pj.avatar) avatar = pj.avatar;
     }catch(e){}
+
     const nextDate = getNextDate(b.month,b.day);
     const diffDays = Math.ceil((nextDate - new Date()) / (1000*60*60*24));
+    const suffix = getDateSuffix(b.day);
     return { 
       username:b.username, 
       avatar, 
       note:b.note,
-      date: `${b.month}/${b.day}`, // no year
+      date: `${b.day}${suffix} ${monthNames[b.month-1]}`,
       countdown: diffDays 
     }
   });
@@ -281,8 +295,8 @@ async function loadBirthdays(){
         <img class="bAvatar" src="${m.avatar}">
         <div class="bText">
           <div class="bName">@${m.username}</div>
-          <div class="bNote">${m.note || ""}</div>
-          <div class="bDate">${m.date} (in ${m.countdown} day${m.countdown>1?'s':''})</div>
+          <div class="bDate">${m.date}</div>
+          <div class="bNote">${m.note || ""} (in ${m.countdown} day${m.countdown>1?'s':''})</div>
         </div>
       </a>
     </div>
