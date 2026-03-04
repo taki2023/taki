@@ -56,7 +56,7 @@ html,body{
   margin-bottom:12px;
 }
 
-.bForm input{
+.bForm input, .bForm select{
   flex:1;
   padding:7px 8px;
   border-radius:10px;
@@ -99,8 +99,14 @@ html,body{
   color:#ffb37a;
 }
 
+.bNote{
+  font-size:11.5px;
+  color:#ffd9b8;
+}
+
 .bDate{
   font-size:11.5px;
+  color:#fff;
 }
 </style>
 </head>
@@ -114,7 +120,15 @@ html,body{
 
   <div class="bForm">
     <input type="text" id="username" placeholder="Chess Username">
-    <input type="date" id="birthday">
+    <select id="month">
+      <option value="">Month</option>
+      ${[...Array(12)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
+    </select>
+    <select id="day">
+      <option value="">Day</option>
+      ${[...Array(31)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
+    </select>
+    <input type="text" id="note" placeholder="Note (e.g., Rapid Specialist)">
     <button onclick="saveBirthday()">Save</button>
   </div>
 
@@ -124,24 +138,29 @@ html,body{
 <script>
 const API_URL = 'https://sheetdb.io/api/v1/29mvil2u3pj5s';
 
-// Add a new birthday to SheetDB
+// Save birthday to SheetDB
 async function saveBirthday(){
   const user = document.getElementById("username").value.trim();
-  const date = document.getElementById("birthday").value;
-  if(!user || !date) return alert("Fill both fields!");
+  const month = parseInt(document.getElementById("month").value);
+  const day = parseInt(document.getElementById("day").value);
+  const note = document.getElementById("note").value.trim();
+  
+  if(!user || !month || !day) return alert("Fill username, month and day!");
 
   await fetch(API_URL, {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ data: { Username:user, Month:new Date(date).getMonth()+1, Day:new Date(date).getDate() } })
+    body: JSON.stringify({ data: { Username:user, Month:month, Day:day, Note:note } })
   });
 
   document.getElementById("username").value="";
-  document.getElementById("birthday").value="";
+  document.getElementById("month").value="";
+  document.getElementById("day").value="";
+  document.getElementById("note").value="";
   loadBirthdays();
 }
 
-// Compute next birthday date
+// Get next birthday date
 function getNextDate(month, day){
   const today = new Date();
   const b = new Date(today.getFullYear(), month-1, day);
@@ -155,7 +174,7 @@ async function loadBirthdays(){
   const data = await res.json();
 
   const upcoming = data
-    .map(b=>({username:b.Username, month:parseInt(b.Month), day:parseInt(b.Day)}))
+    .map(b=>({username:b.Username, month:parseInt(b.Month), day:parseInt(b.Day), note:b.Note}))
     .sort((a,b)=> getNextDate(a.month,a.day) - getNextDate(b.month,b.day))
     .slice(0,3);
 
@@ -165,7 +184,15 @@ async function loadBirthdays(){
       const pj = await fetch("https://api.chess.com/pub/player/"+b.username).then(r=>r.json());
       if(pj.avatar) avatar = pj.avatar;
     }catch(e){}
-    return { username:b.username, avatar, date: getNextDate(b.month,b.day).toLocaleDateString() }
+    const nextDate = getNextDate(b.month,b.day);
+    const diffDays = Math.ceil((nextDate - new Date()) / (1000*60*60*24));
+    return { 
+      username:b.username, 
+      avatar, 
+      note:b.note,
+      date: nextDate.toLocaleDateString(), 
+      countdown: diffDays 
+    }
   });
 
   const members = await Promise.all(promises);
@@ -177,7 +204,8 @@ async function loadBirthdays(){
       </a>
       <div>
         <div class="bName">@${m.username}</div>
-        <div class="bDate">${m.date}</div>
+        <div class="bNote">${m.note || ""}</div>
+        <div class="bDate">${m.date} (in ${m.countdown} day${m.countdown>1?'s':''})</div>
       </div>
     </div>
   `).join("");
