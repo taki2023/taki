@@ -120,14 +120,26 @@ html,body{
 
   <div class="bForm">
     <input type="text" id="username" placeholder="Chess Username">
-    <select id="month">
-      <option value="">Month</option>
-      ${[...Array(12)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
-    </select>
-    <select id="day">
-      <option value="">Day</option>
-      ${[...Array(31)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
-    </select>
+<select id="month">
+  <option value="">Month</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+
+<select id="day">
+  <option value="">Day</option>
+  ${[...Array(31)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
+</select>
     <input type="text" id="note" placeholder="Note (e.g., Rapid Specialist)">
     <button onclick="saveBirthday()">Save</button>
   </div>
