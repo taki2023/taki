@@ -10,7 +10,7 @@ html,body{
   background:transparent!important;
   font-family:Inter,Segoe UI,system-ui,sans-serif;
   color:#f1e7df;
-  height:460px;   /* Total fixed iframe height */
+  height:460px;
 }
 
 #birthdayBox {
@@ -90,9 +90,14 @@ html,body{
   background:rgba(0,0,0,.5);
 }
 
-/* Smaller Save Button */
+/* Save button row */
+.bButtonRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
 .bForm button{
-  align-self:flex-start;
   padding:7px 18px;
   border-radius:12px;
   border:1px solid rgba(255,176,120,.45);
@@ -212,8 +217,10 @@ html,body{
 
     <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
 
-    <button onclick="saveBirthday()">Save</button>
-    <div class="formMessage" id="formMessage"></div>
+    <div class="bButtonRow">
+      <button onclick="saveBirthday()">Save</button>
+      <div class="formMessage" id="formMessage"></div>
+    </div>
 
   </div>
 
