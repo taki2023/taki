@@ -37,79 +37,67 @@ html,body{margin:0;padding:0;background:transparent!important;font-family:Inter,
     <div class="bTitle">Next Birthdays</div>
   </div>
 
-<div class="bForm">
-  <input type="text" id="username" placeholder="Chess.com Username">
-  <div class="bRowInputs">
-    <select id="month"><option value="">Month</option></select>
-    <select id="day"><option value="">Day</option></select>
+  <div class="bForm">
+    <input type="text" id="username" placeholder="Chess.com Username">
+    <div class="bRowInputs">
+      <select id="month"><option value="">Month</option></select>
+      <select id="day"><option value="">Day</option></select>
+    </div>
+    <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
+    <div class="formRow">
+      <button onclick="saveBirthday()">Save</button>
+      <div class="formMessage" id="formMessage"></div>
+    </div>
   </div>
-  <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
-  <div class="formRow">
-    <button onclick="saveBirthday()">Save</button>
-    <div class="formMessage" id="formMessage"></div>
-  </div>
-</div>
 
   <div id="birthdayList"></div>
 </div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxCOqVoPs7rQLo_p1f0ZLJHRfuEc0En7DNJPsX-n4_bJt02TIwJFjxkdOwdgchLRW9k/exec';
+const API_URL = "https://script.google.com/macros/s/AKfycbwlfeoWrelPvqRd34KHdMLjkXEjHfTRHImqCfNhY4RBjADYQOw-SHPzGJkURi3xn9kq/exec"; // <-- replace with your Web App URL
 const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 for(let i=1;i<=12;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i;document.getElementById("month").appendChild(opt);}
 for(let i=1;i<=31;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i;document.getElementById("day").appendChild(opt);}
 
+// ---------------- Save birthday ----------------
 async function saveBirthday(){
-  const user = document.getElementById("username").value.trim();
-  const month = parseInt(document.getElementById("month").value);
-  const day = parseInt(document.getElementById("day").value);
-  const note = document.getElementById("note").value.trim();
-  const msg = document.getElementById("formMessage");
-
-  if(!user || !month || !day){ 
-    msg.textContent = "Fill username, month and day!"; 
-    return; 
-  }
-  msg.textContent = "Saving...";
-
+  const user=document.getElementById("username").value.trim();
+  const month=parseInt(document.getElementById("month").value);
+  const day=parseInt(document.getElementById("day").value);
+  const note=document.getElementById("note").value.trim();
+  const msg=document.getElementById("formMessage");
+  if(!user||!month||!day){ msg.textContent="Fill username, month and day!"; return;}
+  msg.textContent="Saving...";
   try{
-    const res = await fetch(API_URL, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({Username:user, Month:month, Day:day, Note:note})
-    });
-
-    // Check if we got JSON
-    const result = await res.json();
-
+    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({Username:user,Month:month,Day:day,Note:note})});
+    const result=await res.json();
     if(result.success){
-      msg.textContent = "Saved successfully ✅";
+      msg.textContent="Saved successfully ✅";
       document.getElementById("username").value="";
       document.getElementById("month").value="";
       document.getElementById("day").value="";
       document.getElementById("note").value="";
       loadBirthdays();
     } else {
-      // Show exact error returned by Apps Script
-      msg.textContent = "Error saving: " + (result.error || "Unknown error");
-      console.error("Save Error:", result);
+      msg.textContent="Error saving: "+(result.error||"Unknown error");
+      console.error("Save Error:",result);
     }
-
-  } catch(e){
-    // Show exact network/JS error
-    msg.textContent = "Error saving data! " + e.message;
-    console.error("Fetch Error:", e);
-  }
+  }catch(e){msg.textContent="Error saving: "+e.message;console.error(e);}
 }
 
+// ---------------- Load birthdays ----------------
 function getNextDate(month,day){const today=new Date();const b=new Date(today.getFullYear(),month-1,day);if(b<today)b.setFullYear(today.getFullYear()+1);return b;}
 function getDateSuffix(day){if(day>=11&&day<=13)return 'th';switch(day%10){case 1:return 'st';case 2:return 'nd';case 3:return 'rd';default:return 'th';}}
 
 async function loadBirthdays(){
+  const list=document.getElementById("birthdayList");
+  list.innerHTML="Loading...";
   try{
     const res=await fetch(API_URL);
     const data=await res.json();
+    if(!Array.isArray(data))throw new Error(JSON.stringify(data));
+
     const upcoming=data.map(b=>({username:b.Username,month:parseInt(b.Month),day:parseInt(b.Day),note:b.Note}))
       .sort((a,b)=>getNextDate(a.month,a.day)-getNextDate(b.month,b.day))
       .slice(0,3);
@@ -124,7 +112,7 @@ async function loadBirthdays(){
       return {username:b.username,avatar,note:b.note,date:`${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}`};
     }));
 
-    document.getElementById("birthdayList").innerHTML=members.map(m=>`
+    list.innerHTML=members.map(m=>`
       <div class="bRow">
         <a href="https://www.chess.com/member/${m.username}" target="_blank">
           <img class="bAvatar" src="${m.avatar}">
@@ -136,9 +124,9 @@ async function loadBirthdays(){
         </a>
       </div>`).join("");
 
-  } catch(e){
-    document.getElementById("birthdayList").innerHTML="<div style='color:#ffb37a;font-size:12px;'>Failed to load birthdays.</div>";
-    console.error(e);
+  }catch(e){
+    list.innerHTML=`<div style='color:#ffb37a;font-size:12px;'>Failed to load birthdays: ${e.message}</div>`;
+    console.error("Load Error:",e);
   }
 }
 
