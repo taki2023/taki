@@ -90,9 +90,10 @@ html,body{
   background:rgba(0,0,0,.5);
 }
 
+/* Smaller Save Button */
 .bForm button{
-  width:100%;
-  padding:8px 16px;
+  align-self:flex-start;
+  padding:7px 18px;
   border-radius:12px;
   border:1px solid rgba(255,176,120,.45);
   background:linear-gradient(90deg,#ffb37a,#ff8a70);
@@ -103,6 +104,13 @@ html,body{
 
 .bForm button:hover{
   transform:scale(1.05);
+}
+
+/* Inline message */
+.formMessage{
+  font-size:11px;
+  color:#ffb37a;
+  min-height:14px;
 }
 
 /* BIRTHDAY LIST */
@@ -173,24 +181,6 @@ html,body{
   color:#ffd9b8;
 }
 
-.countdown{
-  font-weight:800;
-  color:#ffcc66;
-  text-shadow:0 0 6px rgba(255,204,102,.8);
-}
-
-.today{
-  font-weight:900;
-  color:#ffd700;
-  text-shadow:0 0 10px rgba(255,215,0,1);
-  animation: glow 1s infinite alternate;
-}
-
-@keyframes glow{
-  from{ text-shadow:0 0 6px rgba(255,215,0,.6);}
-  to{ text-shadow:0 0 16px rgba(255,215,0,1);}
-}
-
 .bNote{
   font-size:10.5px;
   color:#fff;
@@ -223,6 +213,7 @@ html,body{
     <input type="text" id="note" placeholder="Note (e.g., Blunder Master)">
 
     <button onclick="saveBirthday()">Save</button>
+    <div class="formMessage" id="formMessage"></div>
 
   </div>
 
@@ -255,8 +246,14 @@ async function saveBirthday(){
   const month = parseInt(document.getElementById("month").value);
   const day = parseInt(document.getElementById("day").value);
   const note = document.getElementById("note").value.trim();
+  const msg = document.getElementById("formMessage");
   
-  if(!user || !month || !day) return alert("Fill username, month and day!");
+  if(!user || !month || !day){
+    msg.textContent = "Fill username, month and day!";
+    return;
+  }
+
+  msg.textContent = "";
 
   await fetch(API_URL, {
     method:'POST',
@@ -308,19 +305,13 @@ async function loadBirthdays(){
     const diffDays = Math.ceil((nextDate - new Date()) / (1000*60*60*24));
     const suffix = getDateSuffix(b.day);
 
-    let countdownHTML = "";
-    if(diffDays === 0){
-      countdownHTML = `<span class="today">TODAY 🎉</span>`;
-    } else {
-      countdownHTML = `<span class="countdown">in ${diffDays} day${diffDays>1?'s':''}</span>`;
-    }
+    let countdownText = diffDays === 0 ? "TODAY 🎉" : `in ${diffDays} day${diffDays>1?'s':''}`;
 
     return { 
       username:b.username, 
       avatar, 
       note:b.note,
-      date: `${b.day}${suffix} ${monthNames[b.month-1]}`,
-      countdownHTML
+      date: `${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}`
     }
   });
 
@@ -332,7 +323,7 @@ async function loadBirthdays(){
         <img class="bAvatar" src="${m.avatar}">
         <div class="bText">
           <div class="bName">@${m.username}</div>
-          <div class="bDate">${m.date} • ${m.countdownHTML}</div>
+          <div class="bDate">${m.date}</div>
           <div class="bNote">${m.note || ""}</div>
         </div>
       </a>
