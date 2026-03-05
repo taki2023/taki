@@ -70,7 +70,16 @@ async function saveBirthday(){
   if(!user||!month||!day){ msg.textContent="Fill username, month and day!"; return;}
   msg.textContent="Saving...";
   try{
-    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({Username:user,Month:month,Day:day,Note:note})});
+    const formData = new FormData();
+formData.append("Username", user);
+formData.append("Month", month);
+formData.append("Day", day);
+formData.append("Note", note);
+
+const res = await fetch(API_URL,{
+  method:'POST',
+  body:formData
+});
     const result=await res.json();
     if(result.success){
       msg.textContent="Saved successfully ✅";
