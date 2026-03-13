@@ -5,82 +5,108 @@
 
 <style>
 body{
-  margin:0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg,#0f0f0f,#1a1a1a);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(180deg,#0c0c0c,#1b1b1b);
+color:#fff;
+display:flex;
+justify-content:center;
+padding:12px;
 }
 
 #box{
-  text-align:center;
-  padding:18px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,0.15);
-  width:340px;
+width:340px;
+border-radius:20px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(8px);
+border:1px solid rgba(255,255,255,0.15);
+padding:18px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
+/* TITLE */
 .title{
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:6px;
-  color:#ff4d4d;
-}
-
-.subtitle{
-  font-size:13px;
-  color:#ddd;
-  margin-bottom:8px;
+text-align:center;
+font-size:21px;
+font-weight:800;
+color:#ff5a5a;
+margin-bottom:6px;
 }
 
 .details{
-  font-size:12px;
-  color:#bbb;
-  margin-bottom:10px;
+text-align:center;
+font-size:13px;
+color:#bbb;
+margin-bottom:4px;
 }
 
+.subtitle{
+text-align:center;
+font-size:12px;
+color:#ddd;
+margin-bottom:10px;
+}
+
+/* COUNTDOWN */
 #countdown{
-  font-size:26px;
-  font-weight:bold;
-  letter-spacing:2px;
-  margin:10px 0 18px 0;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+letter-spacing:2px;
+margin:12px 0 18px 0;
+color:#ffffff;
 }
 
+/* JOIN BUTTON */
 .joinBtn{
-  display:inline-block;
-  text-decoration:none;
-  background:#ff3c3c;
-  color:white;
-  padding:14px 30px;
-  border-radius:12px;
-  font-size:18px;
-  font-weight:bold;
-  box-shadow:0 0 15px rgba(255,60,60,0.6);
-  animation:pulse 1.6s infinite;
-  margin-bottom:14px;
+display:block;
+text-align:center;
+background:#ff3c3c;
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+box-shadow:0 0 14px rgba(255,60,60,0.6);
+animation:pulse 1.6s infinite;
+margin-bottom:18px;
 }
 
 @keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
 }
 
-.prizes{
-  text-align:left;
-  font-size:12px;
-  line-height:1.5;
-  margin-top:10px;
+/* SECTION BOX */
+.sectionBox{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:14px;
+padding:10px 12px;
+margin-bottom:12px;
 }
 
-.section{
-  margin-top:10px;
-  font-weight:bold;
-  color:#ffd76a;
+.sectionTitle{
+font-weight:bold;
+color:#ffd76a;
+margin-bottom:6px;
+font-size:13px;
+}
+
+.prizeItem{
+font-size:12px;
+line-height:1.55;
+margin-bottom:2px;
+}
+
+.footer{
+text-align:center;
+font-size:12px;
+color:#ddd;
+margin-top:6px;
+font-weight:bold;
 }
 </style>
 </head>
@@ -91,60 +117,58 @@ body{
 
 <div class="title">🌶️ Hot Chilli Giveaway Tournament</div>
 
-<div class="details">
-24h • 3+0 • Unrated Blitz
-</div>
+<div class="details">24h • 3+0 • Unrated Blitz</div>
 
-<div class="subtitle">
-Registration opens 1 hour before the tournament ⏳
-</div>
+<div class="subtitle">Registration opens 1 hour before the tournament ⏳</div>
 
 <div id="countdown">Loading...</div>
 
-<a class="joinBtn" href="https://www.chess.com/play/arena/31035887" target="_blank">
+<a class="joinBtn" href="https://www.chess.com/play/arena/31035887">
 JOIN
 </a>
 
-<div class="prizes">
+<div class="sectionBox">
+<div class="sectionTitle">🏆 Individual Prizes</div>
 
-<div class="section">🏆 Individual Prizes :</div>
+<div class="prizeItem">🥇 1st Place : Diamond Membership 💎 + Promotion + 🎉 10 Cheers</div>
+<div class="prizeItem">🥈 2nd Place : Promotion 📢 + 🎉 10 Cheers</div>
+<div class="prizeItem">🥉 3rd Place : 🎉 10 Cheers</div>
+<div class="prizeItem">🏅 4th–20th Place : 🎉 5 Cheers each</div>
+<div class="prizeItem">🔥 Bonus : Score 30 points → 🪜 Cheer</div>
+</div>
 
-🥇 1st Place : Diamond Membership 💎 + Promotion of your courses/blog/YouTube channel/Twitch + 🎉 10 Cheers<br>
-🥈 2nd Place : Promotion of your courses/blog/YouTube/Twitch 📢 + 🎉 10 Cheers<br>
-🥉 3rd Place : 10 Cheers 🎉<br>
-🏅 4th–20th Place : 5 Cheers each 🎉<br>
-🔥 Bonus Reward : Anyone who scores 30 points will 🪜Cheer
+<div class="sectionBox">
+<div class="sectionTitle">🏆 Team Prizes</div>
 
-<div class="section">🏆 Team Prizes :</div>
+<div class="prizeItem">🥇 1st Place Club : Custom club sidebar design 🎨</div>
+<div class="prizeItem">🥈 2nd Place Club : Advertisement 📢</div>
+<div class="prizeItem">🥉 3rd Place Club : Partnership 🤝</div>
+</div>
 
-🥇 1st Place Club : A fully custom design for your club sidebar 🎨<br>
-🥈 2nd Place Club : Advertisement 📢<br>
-🥉 3rd Place Club : Partnership 🤝
-
-<br><b>Good luck everyone!</b>
-
+<div class="footer">
+Good luck everyone!
 </div>
 
 </div>
 
 <script>
-const targetDate = new Date("2026-03-14T12:00:00+01:00").getTime();
+const targetDate=new Date("2026-03-14T12:00:00+01:00").getTime();
 
 function updateCountdown(){
-  const now = new Date().getTime();
-  const diff = targetDate - now;
+const now=new Date().getTime();
+const diff=targetDate-now;
 
-  if(diff <= 0){
-    document.getElementById("countdown").innerHTML = "Tournament Started!";
-    return;
-  }
+if(diff<=0){
+document.getElementById("countdown").innerHTML="Tournament Started!";
+return;
+}
 
-  const hours = Math.floor(diff / (1000*60*60));
-  const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
-  const seconds = Math.floor((diff % (1000*60))/1000);
+const hours=Math.floor(diff/(1000*60*60));
+const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+const seconds=Math.floor((diff%(1000*60))/1000);
 
-  document.getElementById("countdown").innerHTML =
-    hours + "h " + minutes + "m " + seconds + "s";
+document.getElementById("countdown").innerHTML=
+hours+"h "+minutes+"m "+seconds+"s";
 }
 
 setInterval(updateCountdown,1000);
@@ -152,4 +176,4 @@ updateCountdown();
 </script>
 
 </body>
-</html>
+</html>>
