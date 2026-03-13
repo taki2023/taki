@@ -69,9 +69,9 @@ html, body {
 
 /* COUNTDOWN */
 #countText {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  color: #fff;
+  color: #ffb37a;
   margin-bottom: 4px;
 }
 
@@ -84,7 +84,7 @@ html, body {
 
 /* INFO TEXT */
 .info {
-  font-size: 11px;
+  font-size: 12px;
   color: #fff;
   line-height: 1.4;
   margin-bottom: 14px;
@@ -161,11 +161,11 @@ function updateCountdown() {
   if(now < startDate) {
     // Before tournament
     diff = startDate - now;
-    countText = "Starts in:";
+    countText = "Starts in :";
   } else if(now < startDate + tournamentDuration) {
     // Tournament running
     diff = startDate + tournamentDuration - now;
-    countText = "Remaining time:";
+    countText = "Remaining time :";
   } else {
     // Tournament ended
     document.getElementById("countText").innerText = "Ended, congrats to the winners!";
