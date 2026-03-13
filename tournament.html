@@ -12,31 +12,42 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  height:100vh;
 }
 
 #box{
   text-align:center;
-  padding:20px;
+  padding:18px;
   border-radius:20px;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(6px);
   border:1px solid rgba(255,255,255,0.15);
-  width:320px;
+  width:340px;
 }
 
 .title{
   font-size:20px;
   font-weight:bold;
-  margin-bottom:10px;
+  margin-bottom:6px;
   color:#ff4d4d;
+}
+
+.subtitle{
+  font-size:13px;
+  color:#ddd;
+  margin-bottom:8px;
+}
+
+.details{
+  font-size:12px;
+  color:#bbb;
+  margin-bottom:10px;
 }
 
 #countdown{
   font-size:26px;
   font-weight:bold;
   letter-spacing:2px;
-  margin:15px 0 25px 0;
+  margin:10px 0 18px 0;
 }
 
 .joinBtn{
@@ -44,16 +55,13 @@ body{
   text-decoration:none;
   background:#ff3c3c;
   color:white;
-  padding:14px 28px;
+  padding:14px 30px;
   border-radius:12px;
   font-size:18px;
   font-weight:bold;
   box-shadow:0 0 15px rgba(255,60,60,0.6);
-  animation:pulse 1.5s infinite;
-}
-
-.joinBtn:hover{
-  background:#ff5555;
+  animation:pulse 1.6s infinite;
+  margin-bottom:14px;
 }
 
 @keyframes pulse{
@@ -61,18 +69,62 @@ body{
   50%{transform:scale(1.08);}
   100%{transform:scale(1);}
 }
+
+.prizes{
+  text-align:left;
+  font-size:12px;
+  line-height:1.5;
+  margin-top:10px;
+}
+
+.section{
+  margin-top:10px;
+  font-weight:bold;
+  color:#ffd76a;
+}
 </style>
 </head>
 
 <body>
 
 <div id="box">
-  <div class="title">🌶 Hot Chilli Giveaway Tournament</div>
-  <div id="countdown">Loading...</div>
 
-  <a class="joinBtn" href="https://www.chess.com/play/arena/31035887" target="_blank">
-  JOIN
-  </a>
+<div class="title">🌶️ Hot Chilli Giveaway Tournament</div>
+
+<div class="details">
+24h • 3+0 • Unrated Blitz
+</div>
+
+<div class="subtitle">
+Registration opens 1 hour before the tournament ⏳
+</div>
+
+<div id="countdown">Loading...</div>
+
+<a class="joinBtn" href="https://www.chess.com/play/arena/31035887" target="_blank">
+JOIN
+</a>
+
+<div class="prizes">
+
+<div class="section">🏆 Individual Prizes :</div>
+
+🥇 1st Place : Diamond Membership 💎 + Promotion of your courses/blog/YouTube channel/Twitch + 🎉 10 Cheers<br>
+🥈 2nd Place : Promotion of your courses/blog/YouTube/Twitch 📢 + 🎉 10 Cheers<br>
+🥉 3rd Place : 10 Cheers 🎉<br>
+🏅 4th–20th Place : 5 Cheers each 🎉<br>
+🔥 Bonus Reward : Anyone who scores 30 points will 🪜Cheer
+
+<div class="section">🏆 Team Prizes :</div>
+
+🥇 1st Place Club : A fully custom design for your club sidebar 🎨<br>
+🥈 2nd Place Club : Advertisement 📢<br>
+🥉 3rd Place Club : Partnership 🤝
+
+<br><b>Good luck everyone!</b>
+
+</div>
+
 </div>
 
 <script>
