@@ -4,137 +4,153 @@
 <meta charset="UTF-8">
 
 <style>
-body{
-  margin:0;
+/* 🔥 OUTER GRADIENT OUTLINE */
+#outerBox {
+  width: 92%;
+  margin: 12px auto;
+  border-radius: 22px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    rgba(255,176,120,0.45),
+    rgba(190,90,60,0.45),
+    rgba(255,176,120,0.45)
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* 🔥 MAIN SIDEBAR BACKGROUND */
+#box {
+  width: 100%;
+  border-radius: 20px;
+  background-color: rgba(10,14,12,0.55);
+  padding: 16px;
+  text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg,#0f0f0f,#1a1a1a);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:100vh;
+  color: #f2ebe7;
+  box-sizing: border-box;
 }
 
-#box{
-  text-align:center;
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,0.15);
-  width:340px;
+/* 🌶 TITLE BADGE */
+.title {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.55);
+  color: #ffb37a;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  border: 1px solid rgba(255,176,120,0.45);
+  box-shadow: 0 0 14px rgba(255,176,120,0.12);
+  margin-bottom: 14px;
 }
 
-.title{
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:10px;
-  color:#ff4d4d;
+/* COUNTDOWN */
+#countdown {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffb37a;
+  margin: 12px 0;
 }
 
-#countdown{
-  font-size:26px;
-  font-weight:bold;
-  letter-spacing:2px;
-  margin:15px 0 15px 0;
+/* INFO TEXT */
+.info {
+  font-size: 12.5px;
+  color: #eae4e1;
+  line-height: 1.4;
+  margin-bottom: 14px;
 }
 
-.info{
-  font-size:14px;
-  line-height:1.4;
-  color:#dddddd;
-  margin-bottom:20px;
+/* BUTTONS */
+.joinBtn, .detailsBtn {
+  display: block;
+  width: 92%;
+  margin: 6px auto;
+  padding: 10px 0;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.25s ease;
+  border: 1px solid rgba(255,176,120,0.22);
 }
 
-.joinBtn{
-  display:block;
-  text-decoration:none;
-  background:#ff3c3c;
-  color:white;
-  padding:14px 28px;
-  border-radius:12px;
-  font-size:18px;
-  font-weight:bold;
-  box-shadow:0 0 15px rgba(255,60,60,0.6);
-  animation:pulse 1.5s infinite;
-  margin-bottom:12px;
+/* JOIN BUTTON */
+.joinBtn {
+  background: #ff3c3c;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(255,60,60,0.5);
+  animation: pulse 1.5s infinite;
 }
 
-.detailsBtn{
-  display:block;
-  text-decoration:none;
-  background:#444;
-  color:white;
-  padding:10px 20px;
-  border-radius:10px;
-  font-size:14px;
+.joinBtn:hover {
+  background: #ff5555;
 }
 
-.detailsBtn:hover{
-  background:#555;
+/* DETAILS BUTTON */
+.detailsBtn {
+  background: rgba(32,22,20,0.65);
+  color: #ffb37a;
+  font-size: 13px;
 }
 
-.joinBtn:hover{
-  background:#ff5555;
+.detailsBtn:hover {
+  background: rgba(255,176,120,0.25);
+  box-shadow: 0 0 10px rgba(255,176,120,0.6);
 }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
+/* PULSE ANIMATION */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 </style>
 
 </head>
 <body>
 
-<div id="box">
+<div id="outerBox">
+  <div id="box">
+    <div class="title">🌶 Hot Chilli Giveaway Tournament</div>
 
-<div class="title">🌶 Hot Chilli Giveaway Tournament</div>
+    <div id="countdown">Loading...</div>
 
-<div id="countdown">Loading...</div>
+    <div class="info">
+      24h long • Unrated • 3+0 Blitz<br>
+      Registration opens <b>1 hour before</b> the tournament.
+    </div>
 
-<div class="info">
-24h long • Unrated • 3+0 Blitz<br>
-Registration opens <b>1 hour before</b> the tournament.
-</div>
-
-<a class="joinBtn" href="https://www.chess.com/play/arena/31035887">
-JOIN
-</a>
-
-<a class="detailsBtn" href="https://www.chess.com/blog/TakieddineGOUMRI/hot-chilli-giveaway-tournament">
-Click for Details
-</a>
-
+    <a class="joinBtn" href="https://www.chess.com/play/arena/31035887">JOIN</a>
+    <a class="detailsBtn" href="https://www.chess.com/blog/TakieddineGOUMRI/hot-chilli-giveaway-tournament">Click for Details</a>
+  </div>
 </div>
 
 <script>
-
 const targetDate = new Date("2026-03-14T12:00:00+01:00").getTime();
 
 function updateCountdown(){
+  const now = new Date().getTime();
+  const diff = targetDate - now;
 
-const now = new Date().getTime();
-const diff = targetDate - now;
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML = "Tournament Started!";
+    return;
+  }
 
-if(diff <= 0){
-document.getElementById("countdown").innerHTML = "Tournament Started!";
-return;
+  const hours = Math.floor(diff / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
+  const seconds = Math.floor((diff % (1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+    hours + "h " + minutes + "m " + seconds + "s";
 }
 
-const hours = Math.floor(diff / (1000*60*60));
-const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
-const seconds = Math.floor((diff % (1000*60))/1000);
-
-document.getElementById("countdown").innerHTML =
-hours + "h " + minutes + "m " + seconds + "s";
-
-}
-
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 updateCountdown();
-
 </script>
 
 </body>
