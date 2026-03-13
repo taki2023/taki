@@ -11,23 +11,23 @@ background:linear-gradient(180deg,#0c0c0c,#1b1b1b);
 color:#fff;
 display:flex;
 justify-content:center;
-padding:12px;
+padding:10px;
 }
 
 #box{
-width:340px;
-border-radius:20px;
+width:100%;
+max-width:100%;
+border-radius:18px;
 background:rgba(255,255,255,0.05);
-backdrop-filter:blur(8px);
 border:1px solid rgba(255,255,255,0.15);
 padding:18px;
-box-shadow:0 0 20px rgba(0,0,0,0.6);
+box-sizing:border-box;
 }
 
 /* TITLE */
 .title{
 text-align:center;
-font-size:21px;
+font-size:22px;
 font-weight:800;
 color:#ff5a5a;
 margin-bottom:6px;
@@ -50,41 +50,59 @@ margin-bottom:10px;
 /* COUNTDOWN */
 #countdown{
 text-align:center;
-font-size:26px;
+font-size:28px;
 font-weight:bold;
 letter-spacing:2px;
 margin:12px 0 18px 0;
-color:#ffffff;
 }
 
 /* JOIN BUTTON */
+.joinContainer{
+position:relative;
+margin-bottom:20px;
+}
+
 .joinBtn{
 display:block;
 text-align:center;
 background:#ff3c3c;
 color:white;
 text-decoration:none;
-padding:14px;
+padding:15px;
 border-radius:12px;
 font-size:18px;
 font-weight:bold;
 box-shadow:0 0 14px rgba(255,60,60,0.6);
 animation:pulse 1.6s infinite;
-margin-bottom:18px;
 }
 
 @keyframes pulse{
 0%{transform:scale(1);}
-50%{transform:scale(1.08);}
+50%{transform:scale(1.07);}
 100%{transform:scale(1);}
+}
+
+/* MOUSE POINTER */
+.pointer{
+position:absolute;
+right:10px;
+top:-10px;
+font-size:28px;
+animation:pointerMove 1.4s infinite;
+}
+
+@keyframes pointerMove{
+0%{transform:translateY(0);}
+50%{transform:translateY(8px);}
+100%{transform:translateY(0);}
 }
 
 /* SECTION BOX */
 .sectionBox{
 background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.1);
-border-radius:14px;
-padding:10px 12px;
+border-radius:12px;
+padding:10px;
 margin-bottom:12px;
 }
 
@@ -104,7 +122,6 @@ margin-bottom:2px;
 .footer{
 text-align:center;
 font-size:12px;
-color:#ddd;
 margin-top:6px;
 font-weight:bold;
 }
@@ -123,9 +140,12 @@ font-weight:bold;
 
 <div id="countdown">Loading...</div>
 
+<div class="joinContainer">
+<div class="pointer">🖱️</div>
 <a class="joinBtn" href="https://www.chess.com/play/arena/31035887">
 JOIN
 </a>
+</div>
 
 <div class="sectionBox">
 <div class="sectionTitle">🏆 Individual Prizes</div>
@@ -173,6 +193,10 @@ hours+"h "+minutes+"m "+seconds+"s";
 
 setInterval(updateCountdown,1000);
 updateCountdown();
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
