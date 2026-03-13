@@ -5,6 +5,7 @@
 
 <style>
 * { box-sizing: border-box; }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -17,6 +18,7 @@ html, body {
 /* 🔥 OUTER BOX */
 #outerBox {
   width: 100%;
+  height: 305px;
   border-radius: 16px;
   padding: 14px;
   background: linear-gradient(180deg, rgba(18,12,10,.92), rgba(10,8,7,.95));
@@ -35,6 +37,7 @@ html, body {
   text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 /* 💎 TITLE HEADER */
@@ -46,7 +49,7 @@ html, body {
   border-radius: 14px;
   background: linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));
   border: 1.5px solid rgba(255,176,120,.4);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .tIcon {
@@ -79,7 +82,7 @@ html, body {
   font-size: 18px;
   font-weight: 700;
   color: #ffb37a;
-  margin: 0 0 12px 0;
+  margin: 0 0 10px 0;
 }
 
 /* INFO TEXT */
@@ -87,15 +90,15 @@ html, body {
   font-size: 12px;
   color: #fff;
   line-height: 1.4;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 /* BUTTONS */
 .joinBtn, .detailsBtn {
   display: block;
   width: 70%;
-  margin: 6px auto;
-  padding: 10px 0;
+  margin: 5px auto;
+  padding: 9px 0;
   border-radius: 12px;
   font-weight: 700;
   text-decoration: none;
@@ -132,6 +135,7 @@ html, body {
 
 <div id="outerBox">
   <div id="box">
+
     <div class="tHeader">
       <div class="tIcon">💎</div>
       <div class="tTitle">Giveaway MCA</div>
@@ -145,45 +149,50 @@ html, body {
       Registration opens <b>1 hour before</b>.
     </div>
 
-<a class="joinBtn" href="https://www.chess.com/play/arena/31047665" target="_blank">JOIN</a>
-<a class="detailsBtn" href="https://www.chess.com/blog/TakieddineGOUMRI/hot-chilli-giveaway-tournament" target="_blank">Click for Details</a>
+    <a class="joinBtn" href="https://www.chess.com/play/arena/31047665" target="_blank">JOIN</a>
+
+    <a class="detailsBtn" href="https://www.chess.com/blog/TakieddineGOUMRI/hot-chilli-giveaway-tournament" target="_blank">
+      Click for Details
+    </a>
+
   </div>
 </div>
 
 <script>
 const startDate = new Date("2026-03-14T12:00:00+01:00").getTime();
-const tournamentDuration = 24*60*60*1000; // 24 hours in ms
+const tournamentDuration = 24*60*60*1000;
 const oneHour = 60*60*1000;
 
 function updateCountdown() {
+
   const now = new Date().getTime();
   let diff, countText;
-
   const infoTextEl = document.getElementById("infoText");
 
   if(now < startDate) {
-    // Before tournament
+
     diff = startDate - now;
     countText = "Starts in :";
 
-    // Check if we are within 1 hour before start
-    if(diff <= oneHour) {
+    if(diff <= oneHour){
       infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Registrations are open!';
-    } else {
+    }else{
       infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Registration opens <b>1 hour before</b>.';
     }
 
-  } else if(now < startDate + tournamentDuration) {
-    // Tournament running
+  } else if(now < startDate + tournamentDuration){
+
     diff = startDate + tournamentDuration - now;
     countText = "Remaining time :";
     infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Collect as many pts as u can !';
+
   } else {
-    // Tournament ended
+
     document.getElementById("countText").innerText = "Ended 🎉🏆✨ !";
     document.getElementById("countdown").innerText = "0h 0m 0s";
     infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Congrats to the winners🏅!';
     return;
+
   }
 
   const hours = Math.floor(diff / (1000*60*60));
@@ -191,10 +200,11 @@ function updateCountdown() {
   const seconds = Math.floor((diff % (1000*60)) / 1000);
 
   document.getElementById("countText").innerText = countText;
-  document.getElementById("countdown").innerText = `${hours}h ${minutes}m ${seconds}s`;
+  document.getElementById("countdown").innerText = hours+"h "+minutes+"m "+seconds+"s";
+
 }
 
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown,1000);
 updateCountdown();
 </script>
 
