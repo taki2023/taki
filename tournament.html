@@ -33,19 +33,31 @@ html, body {
   text-align: center;
   font-family: Inter,Segoe UI,system-ui,sans-serif;
   color: #f1e7df;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 🌶 TITLE BADGE */
-.title {
-  display: inline-block;
-  padding: 6px 14px;
+/* 🏆 TITLE BADGE (like birthday box) */
+.tHeader{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
   border-radius: 14px;
   background: linear-gradient(145deg, rgba(255,176,120,.15), rgba(255,138,112,.08));
   border: 1.5px solid rgba(255,176,120,.4);
-  font-weight: 700;
-  font-size: 15px;
-  color: #ffb37a;
   margin-bottom: 12px;
+}
+
+.tIcon{
+  font-size: 24px;
+}
+
+.tTitle{
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffb37a;
+  letter-spacing: .5px;
 }
 
 /* COUNTDOWN */
@@ -108,7 +120,10 @@ html, body {
 
 <div id="outerBox">
   <div id="box">
-    <div class="title">🌶️ Hot Chilli Giveaway Tournament</div>
+    <div class="tHeader">
+      <div class="tIcon">🏆</div>
+      <div class="tTitle">Hot Chilli Giveaway Tournament</div>
+    </div>
 
     <div id="countdown">Loading...</div>
 
