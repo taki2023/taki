@@ -22,7 +22,7 @@ body{
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(6px);
   border:1px solid rgba(255,255,255,0.15);
-  width:320px;
+  width:340px;
 }
 
 .title{
@@ -36,11 +36,18 @@ body{
   font-size:26px;
   font-weight:bold;
   letter-spacing:2px;
-  margin:15px 0 25px 0;
+  margin:15px 0 15px 0;
+}
+
+.info{
+  font-size:14px;
+  line-height:1.4;
+  color:#dddddd;
+  margin-bottom:20px;
 }
 
 .joinBtn{
-  display:inline-block;
+  display:block;
   text-decoration:none;
   background:#ff3c3c;
   color:white;
@@ -50,6 +57,21 @@ body{
   font-weight:bold;
   box-shadow:0 0 15px rgba(255,60,60,0.6);
   animation:pulse 1.5s infinite;
+  margin-bottom:12px;
+}
+
+.detailsBtn{
+  display:block;
+  text-decoration:none;
+  background:#444;
+  color:white;
+  padding:10px 20px;
+  border-radius:10px;
+  font-size:14px;
+}
+
+.detailsBtn:hover{
+  background:#555;
 }
 
 .joinBtn:hover{
@@ -62,41 +84,57 @@ body{
   100%{transform:scale(1);}
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div id="box">
-  <div class="title">🌶 Hot Chilli Giveaway Tournament</div>
-  <div id="countdown">Loading...</div>
 
-  <a class="joinBtn" href="https://www.chess.com/play/arena/31035887" target="_blank">
-  JOIN
-  </a>
+<div class="title">🌶 Hot Chilli Giveaway Tournament</div>
+
+<div id="countdown">Loading...</div>
+
+<div class="info">
+24h long • Unrated • 3+0 Blitz<br>
+Registration opens <b>1 hour before</b> the tournament.
+</div>
+
+<a class="joinBtn" href="https://www.chess.com/play/arena/31035887">
+JOIN
+</a>
+
+<a class="detailsBtn" href="https://www.chess.com/blog/TakieddineGOUMRI/hot-chilli-giveaway-tournament">
+Click for Details
+</a>
+
 </div>
 
 <script>
+
 const targetDate = new Date("2026-03-14T12:00:00+01:00").getTime();
 
 function updateCountdown(){
-  const now = new Date().getTime();
-  const diff = targetDate - now;
 
-  if(diff <= 0){
-    document.getElementById("countdown").innerHTML = "Tournament Started!";
-    return;
-  }
+const now = new Date().getTime();
+const diff = targetDate - now;
 
-  const hours = Math.floor(diff / (1000*60*60));
-  const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
-  const seconds = Math.floor((diff % (1000*60))/1000);
+if(diff <= 0){
+document.getElementById("countdown").innerHTML = "Tournament Started!";
+return;
+}
 
-  document.getElementById("countdown").innerHTML =
-    hours + "h " + minutes + "m " + seconds + "s";
+const hours = Math.floor(diff / (1000*60*60));
+const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
+const seconds = Math.floor((diff % (1000*60))/1000);
+
+document.getElementById("countdown").innerHTML =
+hours + "h " + minutes + "m " + seconds + "s";
+
 }
 
 setInterval(updateCountdown,1000);
 updateCountdown();
+
 </script>
 
 </body>
