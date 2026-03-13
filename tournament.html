@@ -153,6 +153,7 @@ html, body {
 <script>
 const startDate = new Date("2026-03-14T12:00:00+01:00").getTime();
 const tournamentDuration = 24*60*60*1000; // 24 hours in ms
+const oneHour = 60*60*1000;
 
 function updateCountdown() {
   const now = new Date().getTime();
@@ -164,7 +165,14 @@ function updateCountdown() {
     // Before tournament
     diff = startDate - now;
     countText = "Starts in :";
-    infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Registration opens <b>1 hour before</b>.';
+
+    // Check if we are within 1 hour before start
+    if(diff <= oneHour) {
+      infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Registrations are open!';
+    } else {
+      infoTextEl.innerHTML = '24h long • Unrated • 3+0 Blitz<br>Registration opens <b>1 hour before</b>.';
+    }
+
   } else if(now < startDate + tournamentDuration) {
     // Tournament running
     diff = startDate + tournamentDuration - now;
