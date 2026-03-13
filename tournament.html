@@ -5,125 +5,61 @@
 
 <style>
 body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:linear-gradient(180deg,#0c0c0c,#1b1b1b);
-color:#fff;
-display:flex;
-justify-content:center;
-padding:10px;
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg,#0f0f0f,#1a1a1a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
 }
 
 #box{
-width:100%;
-max-width:100%;
-border-radius:18px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.15);
-padding:18px;
-box-sizing:border-box;
+  text-align:center;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.15);
+  width:320px;
 }
 
-/* TITLE */
 .title{
-text-align:center;
-font-size:18px;
-font-weight:800;
-color:#ff5a5a;
-margin-bottom:6px;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#ff4d4d;
 }
 
-.details{
-text-align:center;
-font-size:12px;
-color:#bbb;
-margin-bottom:4px;
-}
-
-.subtitle{
-text-align:center;
-font-size:11px;
-color:#ddd;
-margin-bottom:10px;
-}
-
-/* COUNTDOWN */
 #countdown{
-text-align:center;
-font-size:26px;
-font-weight:bold;
-letter-spacing:2px;
-margin:12px 0 18px 0;
-}
-
-/* JOIN BUTTON */
-.joinContainer{
-position:relative;
-margin-bottom:20px;
+  font-size:26px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin:15px 0 25px 0;
 }
 
 .joinBtn{
-display:block;
-text-align:center;
-background:#ff3c3c;
-color:white;
-text-decoration:none;
-padding:30px;
-border-radius:12px;
-font-size:17px;
-font-weight:bold;
-box-shadow:0 0 14px rgba(255,60,60,0.6);
-animation:pulse 1.2s infinite;
+  display:inline-block;
+  text-decoration:none;
+  background:#ff3c3c;
+  color:white;
+  padding:14px 28px;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
+  box-shadow:0 0 15px rgba(255,60,60,0.6);
+  animation:pulse 1.5s infinite;
+}
+
+.joinBtn:hover{
+  background:#ff5555;
 }
 
 @keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
-}
-
-/* MOUSE POINTER */
-.pointer{
-position:absolute;
-right:10px;
-top:-10px;
-font-size:28px;
-animation:pointerMove 1.4s infinite;
-}
-
-@keyframes pointerMove{
-0%{transform:translateY(0);}
-50%{transform:translateY(8px);}
-100%{transform:translateY(0);}
-}
-
-/* SECTION BOX */
-.sectionBox{
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:12px;
-padding:10px;
-margin-bottom:12px;
-}
-
-.sectionTitle{
-font-weight:bold;
-color:#ffd76a;
-margin-bottom:6px;
-font-size:13px;
-}
-
-.prizeItem{
-font-size:11px;
-line-height:1.55;
-margin-bottom:2px;
-}
-
-.footer{
-text-align:center;
-font-size:11px;
-margin-top:6px;
-font-weight:bold;
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
 }
 </style>
 </head>
@@ -131,64 +67,32 @@ font-weight:bold;
 <body>
 
 <div id="box">
+  <div class="title">🌶 Hot Chilli Giveaway Tournament</div>
+  <div id="countdown">Loading...</div>
 
-<div class="title">🌶️ Hot Chilli Giveaway Tournament</div>
-
-<div class="details">24h • 3+0 • Unrated Blitz</div>
-
-<div class="subtitle">Registration opens 1 hour before the tournament ⏳</div>
-
-<div id="countdown">Loading...</div>
-
-<div class="joinContainer">
-<div class="pointer">🖱️</div>
-<a class="joinBtn" href="https://www.chess.com/play/arena/31035887">
-JOIN
-</a>
-</div>
-
-<div class="sectionBox">
-<div class="sectionTitle">🏆 Individual Prizes</div>
-
-<div class="prizeItem">🥇 1st Place : Diamond Membership 💎 + Promotion + 🎉 10 Cheers</div>
-<div class="prizeItem">🥈 2nd Place : Promotion 📢 + 🎉 10 Cheers</div>
-<div class="prizeItem">🥉 3rd Place : 🎉 10 Cheers</div>
-<div class="prizeItem">🏅 4th–20th Place : 🎉 5 Cheers each</div>
-<div class="prizeItem">🔥 Bonus : Score 30 points → 🪜 Cheer</div>
-</div>
-
-<div class="sectionBox">
-<div class="sectionTitle">🏆 Team Prizes</div>
-
-<div class="prizeItem">🥇 1st Place Club : Custom club sidebar design 🎨</div>
-<div class="prizeItem">🥈 2nd Place Club : Advertisement 📢</div>
-<div class="prizeItem">🥉 3rd Place Club : Partnership 🤝</div>
-</div>
-
-<div class="footer">
-Good luck everyone!
-</div>
-
+  <a class="joinBtn" href="https://www.chess.com/play/arena/31035887" target="_blank">
+  JOIN
+  </a>
 </div>
 
 <script>
-const targetDate=new Date("2026-03-14T12:00:00+01:00").getTime();
+const targetDate = new Date("2026-03-14T12:00:00+01:00").getTime();
 
 function updateCountdown(){
-const now=new Date().getTime();
-const diff=targetDate-now;
+  const now = new Date().getTime();
+  const diff = targetDate - now;
 
-if(diff<=0){
-document.getElementById("countdown").innerHTML="Tournament Started!";
-return;
-}
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML = "Tournament Started!";
+    return;
+  }
 
-const hours=Math.floor(diff/(1000*60*60));
-const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
-const seconds=Math.floor((diff%(1000*60))/1000);
+  const hours = Math.floor(diff / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
+  const seconds = Math.floor((diff % (1000*60))/1000);
 
-document.getElementById("countdown").innerHTML=
-hours+"h "+minutes+"m "+seconds+"s";
+  document.getElementById("countdown").innerHTML =
+    hours + "h " + minutes + "m " + seconds + "s";
 }
 
 setInterval(updateCountdown,1000);
@@ -197,7 +101,3 @@ updateCountdown();
 
 </body>
 </html>
-</script>
-
-</body>
-</html>>
