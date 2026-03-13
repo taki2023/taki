@@ -140,8 +140,7 @@ html, body {
     <div id="countText">Starts in:</div>
     <div id="countdown">Loading...</div>
 
-    <div class="info">
-      24h long • Unrated • 3+0 Blitz<br>
+    <div class="info" id="infoText">
       Registration opens <b>1 hour before</b>.
     </div>
 
@@ -156,20 +155,25 @@ const tournamentDuration = 24*60*60*1000; // 24 hours in ms
 
 function updateCountdown() {
   const now = new Date().getTime();
-  let diff, countText, countdownText;
+  let diff, countText;
+
+  const infoTextEl = document.getElementById("infoText");
 
   if(now < startDate) {
     // Before tournament
     diff = startDate - now;
-    countText = "Starts in :";
+    countText = "Starts in:";
+    infoTextEl.innerHTML = 'Registration opens <b>1 hour before</b>.';
   } else if(now < startDate + tournamentDuration) {
     // Tournament running
     diff = startDate + tournamentDuration - now;
-    countText = "Remaining time :";
+    countText = "Remaining time:";
+    infoTextEl.innerHTML = "Collect as many pts as u can!";
   } else {
     // Tournament ended
     document.getElementById("countText").innerText = "Ended, congrats to the winners!";
     document.getElementById("countdown").innerText = "0h 0m 0s";
+    infoTextEl.innerHTML = "Congrats to the winners!";
     return;
   }
 
