@@ -131,6 +131,7 @@ html, body {
 </style>
 
 </head>
+
 <body>
 
 <div id="outerBox">
@@ -149,7 +150,9 @@ html, body {
       Registration opens <b>1 hour before</b>.
     </div>
 
-    <a class="joinBtn" href="https://www.chess.com/play/arena/31047665" target="_blank">JOIN</a>
+    <a class="joinBtn" href="https://www.chess.com/play/arena/31047665" target="_blank">
+      JOIN
+    </a>
 
     <a class="detailsBtn" href="https://www.chess.com/blog/TakieddineGOUMRI/hot-chilli-giveaway-tournament" target="_blank">
       Click for Details
@@ -160,28 +163,13 @@ html, body {
 
 <script>
 
-const startDate = Date.UTC(2026, 2, 14, 11, 0, 0); // 12:00 CET
+const startDate = new Date("2026-03-14T11:00:00Z").getTime(); // 12:00 CET
 const tournamentDuration = 24*60*60*1000;
 const oneHour = 60*60*1000;
 
-let timeOffset = 0;
-
-async function syncClock(){
-  try{
-    const res = await fetch("https://worldtimeapi.org/api/timezone/Etc/UTC");
-    const data = await res.json();
-    const serverTime = new Date(data.utc_datetime).getTime();
-    const localTime = Date.now();
-    timeOffset = serverTime - localTime;
-  }catch(e){
-    console.log("Time sync failed, using device time.");
-  }
-}
-
 function updateCountdown(){
 
-  const now = Date.now() + timeOffset;
-
+  const now = Date.now();
   let diff, countText;
   const infoTextEl = document.getElementById("infoText");
 
@@ -216,17 +204,13 @@ function updateCountdown(){
   const seconds = Math.floor((diff % (1000*60)) / 1000);
 
   document.getElementById("countText").innerText = countText;
-  document.getElementById("countdown").innerText = hours+"h "+minutes+"m "+seconds+"s";
+  document.getElementById("countdown").innerText =
+    hours + "h " + minutes + "m " + seconds + "s";
 
 }
 
-async function start(){
-  await syncClock();
-  updateCountdown();
-  setInterval(updateCountdown,1000);
-}
-
-start();
+setInterval(updateCountdown,1000);
+updateCountdown();
 
 </script>
 
