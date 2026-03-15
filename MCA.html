@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>MCA Standings</title>
 <style>
 body {
   margin:0;
@@ -26,7 +21,7 @@ body {
 
 .title {
   text-align:center;
-  font-size:18px;
+  font-size:20px; /* slightly bigger */
   font-weight:900;
   color:#ffb37a;
   margin-bottom:6px;
@@ -34,7 +29,7 @@ body {
 
 .subtitle {
   text-align:center;
-  font-size:13px;
+  font-size:14px; /* slightly bigger */
   color:#e6ded8;
   margin-bottom:14px;
 }
@@ -90,94 +85,14 @@ body {
 }
 
 .name {
-  font-size:13px;
+  font-size:16px; /* bigger for medal and rank */
   font-weight:bold;
   color:#6ecbff;
 }
 
 .points {
-  font-size:12px;
+  font-size:14px; /* bigger points and cheers */
   color:#d7ccc7;
   white-space:nowrap;
 }
 </style>
-</head>
-<body>
-
-<div class="card">
-  <div class="inner">
-    <div class="title">🏆 MCA Standings</div>
-    <div class="subtitle">Hot Chilli CheckMate 🌶️</div>
-    <div class="players" id="players"></div>
-  </div>
-</div>
-
-<script>
-let players=[
-  ["StrategicBrit",111],
-  ["Nat-2024",98],
-  ["ahad5389",67],
-  ["Daniel2040",58],
-  ["vednu",46],
-  ["Taki",37],
-  ["Milgoze",29],
-  ["solarsystem3105",19],
-  ["TrofAndy",19],
-  ["ResurgenceOfVoid",17],
-  ["secondacountofacupcake",5],
-  ["Tengen_Uzuui",3],
-  ["N-H-13",2],
-  ["Scorapo_Va",2],
-  ["BlitzNyx",2],
-  ["AlonebyQ3",2],
-  ["CheXmaster15",2],
-  ["pistachio-nut1",2]
-];
-
-// Sort by points
-players.sort((a,b)=>b[1]-a[1]);
-
-const container=document.getElementById("players");
-const maxScore=players[0][1];
-
-async function render(){
-  for(let i=0;i<players.length;i++){
-    let rank=i+1;
-    let user=players[i][0];
-    let pts=players[i][1];
-    let cheers=5;
-    let medal="🏅";
-    if(rank==1){cheers=20; medal="🥇"}
-    else if(rank==2){cheers=15; medal="🥈"}
-    else if(rank==3){cheers=10; medal="🥉"}
-    else if(rank==4){cheers=7; medal="🏅"}
-    else if(rank==5){cheers=7; medal="🏅"}
-
-    let avatar="https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif";
-    try{
-      let r=await fetch(`https://api.chess.com/pub/player/${user}`);
-      let d=await r.json();
-      if(d.avatar) avatar=d.avatar;
-    }catch{}
-
-    let width=(pts/maxScore)*100;
-
-    let row=document.createElement("div");
-    row.className="player";
-    row.innerHTML=`
-      <div class="bar" style="width:${width}%"></div>
-      <img class="avatar" src="${avatar}">
-      <div class="info">
-        <div class="name">${medal} #${rank} @${user}</div>
-        <div class="points">${pts} pts • ${cheers} Cheers 🎉</div>
-      </div>
-    `;
-    container.appendChild(row);
-  }
-}
-
-render();
-</script>
-
-</body>
-</html>
