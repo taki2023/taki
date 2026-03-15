@@ -1,6 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MCA Standings</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:transparent;
+}
+
+.card{
+width:100%;
+border-radius:20px;
+padding:2px;
+background:linear-gradient(45deg,rgba(255,176,120,.45),rgba(190,90,60,.45),rgba(255,176,120,.45));
+}
+
+.inner{
+background:rgba(10,14,12,.65);
+border-radius:18px;
+padding:16px;
+box-shadow:inset 0 0 14px rgba(0,0,0,.5);
+}
+
+.title{
+text-align:center;
+font-size:18px;
+font-weight:900;
+color:#ffb37a;
+letter-spacing:.6px;
+margin-bottom:6px;
+}
+
+.subtitle{
+text-align:center;
+font-size:13px;
+color:#e6ded8;
+margin-bottom:14px;
+}
+
+hr{
+border:0;
+height:1px;
+background:linear-gradient(90deg,transparent,rgba(255,176,120,.35),transparent);
+margin:12px 0;
+}
+
+.players{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.player{
+display:flex;
+align-items:center;
+gap:10px;
+position:relative;
+}
+
+.avatar{
+width:42px;
+height:42px;
+border-radius:50%;
+border:2px solid rgba(255,176,120,.6);
+z-index:2;
+}
+
+.info{
+flex:1;
+z-index:2;
+}
+
+.name{
+font-size:13px;
+font-weight:bold;
+color:#6ecbff;
+}
+
+.points{
+font-size:12px;
+color:#d7ccc7;
+}
+
+.bar{
+position:absolute;
+left:0;
+top:0;
+height:100%;
+border-radius:10px;
+background:linear-gradient(90deg,#ff944d,#ff5c33);
+opacity:.35;
+width:0%;
+transition:width 1.2s ease;
+}
+
+.player:nth-child(1) .bar{
+background:linear-gradient(90deg,#ffd700,#ffb300);
+}
+
+.player:nth-child(2) .bar{
+background:linear-gradient(90deg,#cfd8dc,#90a4ae);
+}
+
+.player:nth-child(3) .bar{
+background:linear-gradient(90deg,#ffb74d,#ff8f00);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<div class="inner">
+
+<div class="title">🏆 MCA Arena Standings</div>
+<div class="subtitle">Hot Chilli Pepper Chess Club 🌶️</div>
+
+<hr>
+
+<div class="players" id="players"></div>
+
+</div>
+</div>
+
 <script>
 
-let players = [
+let players=[
 ["StrategicBrit",111],
 ["Nat-2024",98],
 ["ahad5389",67],
@@ -19,12 +149,14 @@ let players = [
 ["AlonebyQ3",2],
 ["CheXmaster15",2],
 ["pistachio-nut1",2]
-];
+]
 
-// sort by score
-players.sort((a,b)=>b[1]-a[1]);
+// sort leaderboard
+players.sort((a,b)=>b[1]-a[1])
 
-const container=document.getElementById("players");
+let maxScore=players[0][1]
+
+const container=document.getElementById("players")
 
 players.forEach(async (p,i)=>{
 
@@ -33,12 +165,11 @@ let user=p[0]
 let pts=p[1]
 
 let cheers=5
-let medal=""
+let medal="🏅"
 
 if(rank==1){cheers=20; medal="🥇"}
 else if(rank==2){cheers=15; medal="🥈"}
 else if(rank==3){cheers=10; medal="🥉"}
-else medal="🏅"
 
 let avatar="https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif"
 
@@ -48,14 +179,21 @@ let d=await r.json()
 if(d.avatar) avatar=d.avatar
 }catch{}
 
+let width=(pts/maxScore)*100
+
 let html=`
 
 <div class="player">
+
+<div class="bar" style="width:${width}%"></div>
+
 <img class="avatar" src="${avatar}">
-<div>
+
+<div class="info">
 <div class="name">${medal} #${rank} @${user}</div>
 <div class="points">${pts} pts • ${cheers} Cheers 🎉</div>
 </div>
+
 </div>
 
 `
@@ -65,3 +203,6 @@ container.innerHTML+=html
 })
 
 </script>
+
+</body>
+</html>
