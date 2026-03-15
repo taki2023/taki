@@ -12,7 +12,6 @@ body {
 
 .card {
   width:100%;
-  margin: 12px auto;
   border-radius:20px;
   padding:0.1px;
   background: linear-gradient(45deg, rgba(255,176,120,.45), rgba(190,90,60,.45), rgba(255,176,120,.45));
@@ -101,11 +100,8 @@ hr {
 
 <div class="card">
   <div class="inner">
-    <!-- Title -->
     <div class="title">🏆 MCA Standings</div>
-    <!-- Subtitle -->
     <div class="subtitle">Hot Chilli CheckMate 🌶️</div>
-    <!-- Players Grid -->
     <div class="players" id="players"></div>
     <hr />
     <div class="footer">🎉 Thank you and let's conquer chess.com together 🌶️</div>
@@ -134,6 +130,7 @@ let players=[
   ["pistachio-nut1",2]
 ];
 
+// Sort by points descending
 players.sort((a,b)=>b[1]-a[1]);
 
 const container=document.getElementById("players");
@@ -162,13 +159,14 @@ async function render(){
     playerDiv.innerHTML=`
       <img class="avatar" src="${avatar}" data-username="${user}">
       <div class="info">
-        <div class="name" data-username="${user}">${medal} @${user}</div>
+        <div class="name" data-username="${user}">#${rank} ${medal} @${user}</div>
         <div class="points">${pts} pts • ${cheers} Cheers 🎉</div>
       </div>
     `;
     container.appendChild(playerDiv);
   }
 
+  // Make avatars and usernames clickable for profile popup
   const clickable = document.querySelectorAll('.avatar, .name');
   clickable.forEach(el=>{
     el.addEventListener('click', ()=>{
