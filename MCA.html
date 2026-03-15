@@ -31,7 +31,6 @@ text-align:center;
 font-size:18px;
 font-weight:900;
 color:#ffb37a;
-letter-spacing:.6px;
 margin-bottom:6px;
 }
 
@@ -40,13 +39,6 @@ text-align:center;
 font-size:13px;
 color:#e6ded8;
 margin-bottom:14px;
-}
-
-hr{
-border:0;
-height:1px;
-background:linear-gradient(90deg,transparent,rgba(255,176,120,.35),transparent);
-margin:12px 0;
 }
 
 .players{
@@ -60,6 +52,8 @@ display:flex;
 align-items:center;
 gap:10px;
 position:relative;
+padding:6px;
+border-radius:10px;
 }
 
 .avatar{
@@ -121,8 +115,6 @@ background:linear-gradient(90deg,#ffb74d,#ff8f00);
 <div class="title">🏆 MCA Arena Standings</div>
 <div class="subtitle">Hot Chilli Pepper Chess Club 🌶️</div>
 
-<hr>
-
 <div class="players" id="players"></div>
 
 </div>
@@ -136,7 +128,7 @@ let players=[
 ["ahad5389",67],
 ["Daniel2040",58],
 ["vednu",46],
-["TakiEddineGOUMRI",37],
+["TakieddineGOUMRI",37],
 ["Milgoze",29],
 ["solarsystem3105",19],
 ["TrofAndy",19],
@@ -151,18 +143,20 @@ let players=[
 ["pistachio-nut1",2]
 ]
 
-// sort leaderboard
+// Sort leaderboard BEFORE rendering
 players.sort((a,b)=>b[1]-a[1])
-
-let maxScore=players[0][1]
 
 const container=document.getElementById("players")
 
-players.forEach(async (p,i)=>{
+const maxScore=players[0][1]
+
+async function render(){
+
+for(let i=0;i<players.length;i++){
 
 let rank=i+1
-let user=p[0]
-let pts=p[1]
+let user=players[i][0]
+let pts=players[i][1]
 
 let cheers=5
 let medal="🏅"
@@ -181,10 +175,10 @@ if(d.avatar) avatar=d.avatar
 
 let width=(pts/maxScore)*100
 
-let html=`
+let row=document.createElement("div")
+row.className="player"
 
-<div class="player">
-
+row.innerHTML=`
 <div class="bar" style="width:${width}%"></div>
 
 <img class="avatar" src="${avatar}">
@@ -193,14 +187,15 @@ let html=`
 <div class="name">${medal} #${rank} @${user}</div>
 <div class="points">${pts} pts • ${cheers} Cheers 🎉</div>
 </div>
-
-</div>
-
 `
 
-container.innerHTML+=html
+container.appendChild(row)
 
-})
+}
+
+}
+
+render()
 
 </script>
 
