@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MCA Standings</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:transparent;
+}
+
+.card{
+width:100%;
+border-radius:20px;
+padding:2px;
+background:linear-gradient(45deg,rgba(255,176,120,.45),rgba(190,90,60,.45),rgba(255,176,120,.45));
+}
+
+.inner{
+background:rgba(10,14,12,.55);
+border-radius:18px;
+padding:14px;
+box-shadow:inset 0 0 14px rgba(0,0,0,.45);
+}
+
+.title{
+text-align:center;
+font-size:17px;
+font-weight:900;
+color:#ffb37a;
+letter-spacing:.6px;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+font-size:13px;
+color:#f2ebe7;
+font-weight:600;
+margin-bottom:14px;
+}
+
+.players{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px 14px;
+}
+
+.player{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.avatar{
+width:44px;
+height:44px;
+border-radius:50%;
+border:2px solid rgba(255,176,120,.6);
+}
+
+.name{
+font-size:12px;
+font-weight:bold;
+color:#6ecbff;
+}
+
+.points{
+font-size:12px;
+color:#cfc6c1;
+}
+
+hr{
+border:0;
+height:1px;
+background:linear-gradient(90deg,transparent,rgba(255,176,120,.35),transparent);
+margin:12px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<div class="inner">
+
+<div class="title">🏆 MCA Arena Standings</div>
+
+<div class="subtitle">
+Latest MCA leaderboard
+</div>
+
+<hr>
+
+<div class="players" id="players"></div>
+
+</div>
+</div>
+
+<script>
+
+const players = [
+["StrategicBrit",111],
+["Nat-2024",98],
+["ahad5389",67],
+["Daniel2040",58],
+["vednu",46],
+["TakiEddineGOUMRI",37],
+["Milgoze",29],
+["solarsystem3105",19],
+["TrofAndy",19],
+["ResurgenceOfVoid",17],
+["secondacountofacupcake",5],
+["Tengen_Uzuui",3],
+["N-H-13",2],
+["Scorapo_Va",2],
+["BlitzNyx",2],
+["AlonebyQ3",2],
+["CheXmaster15",2],
+["pistachio-nut1",2]
+];
+
+const container=document.getElementById("players");
+
+players.forEach(async p=>{
+
+let user=p[0]
+let pts=p[1]
+
+let avatar="https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif"
+
+try{
+let r=await fetch(`https://api.chess.com/pub/player/${user}`)
+let d=await r.json()
+if(d.avatar) avatar=d.avatar
+}catch{}
+
+let html=`
+
+<div class="player">
+<img class="avatar" src="${avatar}">
+<div>
+<div class="name">@${user}</div>
+<div class="points">${pts} pts</div>
+</div>
+</div>
+
+`
+
+container.innerHTML+=html
+
+})
+
+</script>
+
+</body>
+</html>
