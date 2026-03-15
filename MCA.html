@@ -106,7 +106,7 @@ body {
 
 <div class="card">
   <div class="inner">
-    <div class="title">🏆 MCA Arena Standings</div>
+    <div class="title">🏆 MCA Standings</div>
     <div class="subtitle">Hot Chilli CheckMate 🌶️</div>
     <div class="players" id="players"></div>
   </div>
@@ -150,6 +150,8 @@ async function render(){
     if(rank==1){cheers=20; medal="🥇"}
     else if(rank==2){cheers=15; medal="🥈"}
     else if(rank==3){cheers=10; medal="🥉"}
+    else if(rank==4){cheers=7; medal="🏅"}
+    else if(rank==5){cheers=7; medal="🏅"}
 
     let avatar="https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif";
     try{
