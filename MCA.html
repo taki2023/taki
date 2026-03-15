@@ -12,95 +12,88 @@ body {
 
 .card {
   width:100%;
+  margin: 12px auto;
   border-radius:20px;
-  padding:2px;
-  background:linear-gradient(45deg,rgba(255,176,120,.45),rgba(190,90,60,.45),rgba(255,176,120,.45));
+  padding:0.1px;
+  background: linear-gradient(45deg, rgba(255,176,120,.45), rgba(190,90,60,.45), rgba(255,176,120,.45));
 }
 
 .inner {
-  background:rgba(10,14,12,.65);
-  border-radius:18px;
-  padding:16px;
-  box-shadow:inset 0 0 14px rgba(0,0,0,.5);
+  background: rgba(10,14,12,.55);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: inset 0 0 14px rgba(0,0,0,.45);
 }
 
 .title {
   text-align:center;
-  font-size:20px; 
+  font-size:17px;
   font-weight:900;
   color:#ffb37a;
-  margin-bottom:6px;
+  letter-spacing:.6px;
+  margin-bottom:8px;
 }
 
 .subtitle {
   text-align:center;
-  font-size:14px; 
-  color:#e6ded8;
+  font-size:13px;
+  font-weight:600;
+  color:#f2ebe7;
   margin-bottom:14px;
 }
 
 .players {
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px 14px;
 }
 
 .player {
   display:flex;
   align-items:center;
-  position:relative;
-  padding:6px;
-  border-radius:10px;
-  overflow:hidden;
+  gap:10px;
 }
-
-.bar {
-  position:absolute;
-  left:0;
-  top:0;
-  height:100%;
-  border-radius:10px;
-  background:linear-gradient(90deg,#ff944d,#ff5c33);
-  opacity:.35;
-  width:0%;
-  transition:width 1.2s ease;
-  z-index:1;
-}
-
-.player:nth-child(1) .bar { background:linear-gradient(90deg,#ffd700,#ffb300);}
-.player:nth-child(2) .bar { background:linear-gradient(90deg,#cfd8dc,#90a4ae);}
-.player:nth-child(3) .bar { background:linear-gradient(90deg,#ffb74d,#ff8f00);}
 
 .avatar {
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
   border-radius:50%;
   border:2px solid rgba(255,176,120,.6);
-  z-index:2;
   flex-shrink:0;
-  cursor:pointer; /* show pointer for clickable avatar */
+  cursor:pointer;
 }
 
 .info {
-  flex:1;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:2;
-  padding-left:10px;
+  flex-direction:column;
+  justify-content:center;
 }
 
 .name {
-  font-size:16px; 
+  font-size:14px;
   font-weight:bold;
   color:#6ecbff;
-  cursor:pointer; /* show pointer for clickable username */
+  cursor:pointer;
 }
 
 .points {
-  font-size:14px; 
-  color:#d7ccc7;
-  white-space:nowrap;
+  font-size:12px;
+  color:#cfc6c1;
+}
+
+hr {
+  border:0;
+  height:1px;
+  background: linear-gradient(90deg,transparent,rgba(255,176,120,.35),transparent);
+  margin:10px 0;
+}
+
+.footer {
+  text-align:center;
+  font-size:13px;
+  font-weight:bold;
+  color:#f2ebe7;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -108,9 +101,14 @@ body {
 
 <div class="card">
   <div class="inner">
+    <!-- Title -->
     <div class="title">🏆 MCA Standings</div>
+    <!-- Subtitle -->
     <div class="subtitle">Hot Chilli CheckMate 🌶️</div>
+    <!-- Players Grid -->
     <div class="players" id="players"></div>
+    <hr />
+    <div class="footer">🎉 Thank you and let's conquer chess.com together 🌶️</div>
   </div>
 </div>
 
@@ -136,11 +134,9 @@ let players=[
   ["pistachio-nut1",2]
 ];
 
-// Sort by points
 players.sort((a,b)=>b[1]-a[1]);
 
 const container=document.getElementById("players");
-const maxScore=players[0][1];
 
 async function render(){
   for(let i=0;i<players.length;i++){
@@ -152,8 +148,7 @@ async function render(){
     if(rank==1){cheers=20; medal="🥇"}
     else if(rank==2){cheers=15; medal="🥈"}
     else if(rank==3){cheers=10; medal="🥉"}
-    else if(rank==4){cheers=7; medal="🏅"}
-    else if(rank==5){cheers=7; medal="🏅"}
+    else if(rank==4 || rank==5){cheers=7; medal="🏅"}
 
     let avatar="https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif";
     try{
@@ -162,27 +157,23 @@ async function render(){
       if(d.avatar) avatar=d.avatar;
     }catch{}
 
-    let width=(pts/maxScore)*100;
-
-    let row=document.createElement("div");
-    row.className="player";
-    row.innerHTML=`
-      <div class="bar" style="width:${width}%"></div>
+    let playerDiv=document.createElement("div");
+    playerDiv.className="player";
+    playerDiv.innerHTML=`
       <img class="avatar" src="${avatar}" data-username="${user}">
       <div class="info">
-        <div class="name" data-username="${user}">${medal} #${rank} @${user}</div>
+        <div class="name" data-username="${user}">${medal} @${user}</div>
         <div class="points">${pts} pts • ${cheers} Cheers 🎉</div>
       </div>
     `;
-    container.appendChild(row);
+    container.appendChild(playerDiv);
   }
 
-  // Make avatars and usernames clickable for Chess.com profile popup
+  // Make avatars and usernames clickable for profile popup
   const clickable = document.querySelectorAll('.avatar, .name');
   clickable.forEach(el=>{
     el.addEventListener('click', ()=>{
       const username = el.getAttribute('data-username');
-      // Trigger Chess.com profile popup
       const event = new CustomEvent('chesscomProfile', {detail: {username}});
       window.dispatchEvent(event);
     });
