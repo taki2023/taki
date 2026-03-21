@@ -8,7 +8,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(180deg, rgba(50,35,90,.92), rgba(30,20,60,.95));
+  background: rgba(70,50,110,.45); /* SAME as your sections */
+  backdrop-filter: blur(8px);
   border-radius: 20px;
   font-family: Arial, Helvetica, sans-serif;
   color: #f3ecff;
@@ -41,7 +42,7 @@ html, body {
   transition: all .25s ease;
 }
 
-/* Hover effect — purple glow */
+/* Hover */
 .memberRow:hover {
   transform: translateY(-4px) scale(1.02);
   background: #b58cff;
@@ -49,7 +50,7 @@ html, body {
   box-shadow: 0 10px 22px rgba(0,0,0,.65);
 }
 
-/* Link wrapper */
+/* Link */
 .memberLink {
   display: flex;
   align-items: center;
@@ -142,14 +143,10 @@ async function loadNewest() {
     document.getElementById("membersBox").innerHTML = rows.join("");
 
   } catch(e){
-    document.getElementById("membersBox").innerHTML="Unable to load members";
+    document.getElementById("membersBox").innerHTML = ""; // removed error text
   }
 }
 
-loadNewest();
-</script>
-</body>
-</html>
 loadNewest();
 </script>
 </body>
