@@ -8,7 +8,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: transparent; /* 🔥 IMPORTANT */
+  background: linear-gradient(180deg, rgba(50,35,90,.92), rgba(30,20,60,.95));
+  border-radius: 20px;
   font-family: Arial, Helvetica, sans-serif;
   color: #f3ecff;
   overflow: hidden;
@@ -16,10 +17,15 @@ html, body {
 
 /* Outer container */
 #membersBox {
-  padding: 10px;
+  padding: 12px;
   max-height: 245px;
   overflow-y: auto;
   scrollbar-width: none;
+}
+
+/* Hide scrollbar (Chrome) */
+#membersBox::-webkit-scrollbar {
+  display: none;
 }
 
 /* Member card */
@@ -28,19 +34,29 @@ html, body {
   align-items: center;
   gap: 12px;
   padding: 10px;
-  border-radius: 16px;
-  background: rgba(120,90,170,.55); /* 🔥 MATCH SIDEBAR */
+  border-radius: 18px;
+  background: rgba(120,90,170,.55);
   border: 1px solid rgba(200,170,255,.25);
   margin-bottom: 10px;
   transition: all .25s ease;
 }
 
-/* Hover effect */
+/* Hover effect — purple glow */
 .memberRow:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-4px) scale(1.02);
   background: #b58cff;
   color: #ffffff;
   box-shadow: 0 10px 22px rgba(0,0,0,.65);
+}
+
+/* Link wrapper */
+.memberLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  width: 100%;
+  color: inherit;
 }
 
 /* Avatar */
@@ -50,22 +66,30 @@ html, body {
   border-radius: 50%;
   border: 2px solid rgba(200,170,255,.6);
   object-fit: cover;
+  transition: .25s;
 }
 
 .memberRow:hover .memberAvatar {
   border-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255,255,255,.6);
 }
 
 /* Name */
 .memberName {
   font-weight: 800;
   font-size: 12px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
 }
 
 /* Rating */
 .memberRating {
   font-size: 11px;
   opacity: .9;
+  color: #e6d6ff;
 }
 
 .memberRow:hover .memberRating {
@@ -118,10 +142,14 @@ async function loadNewest() {
     document.getElementById("membersBox").innerHTML = rows.join("");
 
   } catch(e){
-    document.getElementById("membersBox").innerHTML = ""; // removed error text
+    document.getElementById("membersBox").innerHTML="Unable to load members";
   }
 }
 
+loadNewest();
+</script>
+</body>
+</html>
 loadNewest();
 </script>
 </body>
