@@ -1,3 +1,11 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { box-sizing: border-box; }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -60,3 +68,62 @@ html, body {
   font-size: 11px;
   opacity: .9;
 }
+
+.memberRow:hover .memberRating {
+  color: #ffffff;
+}
+</style>
+</head>
+<body>
+<div id="membersBox"></div>
+
+<script>
+async function loadNewest() {
+  try {
+    const r = await fetch("https://api.chess.com/pub/club/anime-team-3/members");
+    const d = await r.json();
+
+    const members = [...d.weekly, ...d.monthly];
+    members.sort((a,b)=>b.joined-a.joined);
+    const top3 = members.slice(0,3);
+
+    const rows = await Promise.all(top3.map(async m=>{
+      const [pj,stats] = await Promise.all([
+        fetch("https://api.chess.com/pub/player/"+m.username).then(r=>r.json()),
+        fetch("https://api.chess.com/pub/player/"+m.username+"/stats").then(r=>r.json())
+      ]);
+
+      const ratings=[
+        {t:"Rapid",v:stats.chess_rapid?.last?.rating},
+        {t:"Blitz",v:stats.chess_blitz?.last?.rating},
+        {t:"Bullet",v:stats.chess_bullet?.last?.rating},
+        {t:"Daily",v:stats.chess_daily?.last?.rating}
+      ].filter(x=>x.v);
+
+      const best = ratings.length
+          ? ratings.sort((a,b)=>b.v-a.v)[0]
+          : {t:"—",v:"—"};
+
+      return `
+      <div class="memberRow">
+        <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
+          <img class="memberAvatar" src="${pj.avatar || 'https://taki2023.github.io/taki/default-pawn.png'}">
+          <div>
+            <div class="memberName">@${m.username}</div>
+            <div class="memberRating">${best.t}: ${best.v}</div>
+          </div>
+        </a>
+      </div>`;
+    }));
+
+    document.getElementById("membersBox").innerHTML = rows.join("");
+
+  } catch(e){
+    document.getElementById("membersBox").innerHTML = ""; // removed error text
+  }
+}
+
+loadNewest();
+</script>
+</body>
+</html>
