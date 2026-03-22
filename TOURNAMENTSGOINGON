@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{box-sizing:border-box;}
+html,body{
+  margin:0;
+  padding:0;
+  background:transparent!important;
+  font-family:Inter,Segoe UI,system-ui,sans-serif;
+  color:#f1e7df;
+}
+
+/* MAIN BOX */
+#membersBox{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(180deg, rgba(15,15,35,.85), rgba(8,8,20,.9));
+  border:2px solid rgba(255,176,120,.45);
+  border-radius:16px;
+  box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 0 12px rgba(255,176,120,.2);
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER */
+.membersHeader{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:12px;
+  background:rgba(255,176,120,.08);
+  border:1px solid rgba(255,176,120,.35);
+}
+
+.membersIcon{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  background:linear-gradient(145deg,#ffb347,#ff8a00);
+}
+
+.membersTitle{
+  font-size:14px;
+  font-weight:700;
+}
+
+.membersWelcome{
+  font-size:12px;
+  margin:8px 4px 12px;
+  color:#ddd;
+}
+
+/* LIST */
+#membersList{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* ROW */
+.memberRow{
+  display:flex;
+  align-items:center;
+  padding:8px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,176,120,.15);
+  transition:.2s;
+}
+
+.memberRow:hover{
+  transform:translateY(-2px);
+  background:rgba(255,176,120,0.15);
+  box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+
+/* LINK */
+.memberLink{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  width:100%;
+}
+
+/* AVATAR */
+.memberAvatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:2px solid rgba(255,176,120,.8);
+  box-shadow:0 0 10px rgba(255,176,120,.3);
+  object-fit:cover;
+}
+
+/* TEXT */
+.memberName{
+  font-size:13px;
+  font-weight:700;
+  color:#ffb347;
+}
+
+.memberRating{
+  font-size:11px;
+  color:#ddd;
+}
+
+/* FOOTER */
+.membersFooter{
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,176,120,.2);
+  text-align:center;
+  font-size:12px;
+  color:#bbb;
+}
+</style>
+</head>
+
+<body>
+
+<div id="membersBox">
+
+  <div class="membersHeader">
+    <div class="membersIcon">🔥</div>
+    <div class="membersTitle">New Members</div>
+  </div>
+
+  <div class="membersWelcome">
+    Welcome to the club 👑
+  </div>
+
+  <div id="membersList">
+    loading...
+  </div>
+
+  <div class="membersFooter" id="membersCount">
+    Members: ...
+  </div>
+
+</div>
+
+<script>
+async function loadNewest(){
+  try{
+    const r = await fetch("https://api.chess.com/pub/club/tournamentsgoingon/members");
+    const d = await r.json();
+
+    const allMembers = [...d.weekly, ...d.monthly];
+    allMembers.sort((a,b)=>b.joined-a.joined);
+
+    const top3 = allMembers.slice(0,3);
+
+    const promises = top3.map(async (m)=>{
+      const [pj, stats] = await Promise.all([
+        fetch("https://api.chess.com/pub/player/"+m.username).then(r=>r.json()),
+        fetch("https://api.chess.com/pub/player/"+m.username+"/stats").then(r=>r.json())
+      ]);
+
+      const ratings=[
+        {type:"Rapid",value:stats.chess_rapid?.last?.rating},
+        {type:"Blitz",value:stats.chess_blitz?.last?.rating},
+        {type:"Bullet",value:stats.chess_bullet?.last?.rating}
+      ].filter(x=>x.value);
+
+      const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—",value:"—"};
+
+      return {
+        username:m.username,
+        avatar: pj.avatar || "https://taki2023.github.io/taki/default-pawn.png",
+        ratingType:best.type,
+        ratingValue:best.value
+      };
+    });
+
+    const membersData = await Promise.all(promises);
+
+    document.getElementById("membersList").innerHTML =
+      membersData.map(m=>`
+        <div class="memberRow">
+          <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
+            <img class="memberAvatar" src="${m.avatar}">
+            <div>
+              <div class="memberName">@${m.username}</div>
+              <div class="memberRating">${m.ratingType}: ${m.ratingValue}</div>
+            </div>
+          </a>
+        </div>
+      `).join("");
+
+    // TOTAL COUNT
+    document.getElementById("membersCount").innerHTML =
+      "👥 Members: <b>" + allMembers.length + "</b>";
+
+  }catch(err){
+    console.error(err);
+    document.getElementById("membersList").innerHTML="Failed to load";
+  }
+}
+
+loadNewest();
+</script>
+
+</body>
+</html>
