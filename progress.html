@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Club Progress</title>
+
+<style>
+
+/* PAGE */
+body{
+  background:#f5efe8;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.container{
+  width:100%;
+  max-width:900px;
+  margin:40px auto;
+  padding:30px;
+  background:#fff3e0;
+  border-radius:20px;
+}
+
+/* TITLE */
+.sec-label{
+  display:flex;
+  align-items:center;
+  font-size:26px;
+  font-weight:900;
+  color:#e65100;
+  margin-bottom:30px;
+}
+
+.dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#ff7043;
+  margin-right:10px;
+}
+
+/* PROGRESS WRAPPER */
+.progress-wrapper{
+  position:relative;
+  width:100%;
+  height:200px;
+}
+
+.progress-svg{
+  width:100%;
+  height:100%;
+}
+
+/* MILESTONES */
+.milestone{
+  position:absolute;
+  transform:translate(-50%, -50%);
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#ff7043;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-weight:900;
+  color:white;
+  box-shadow:0 6px 0 #bf360c;
+}
+
+.milestone span{
+  font-size:14px;
+  margin-top:4px;
+}
+
+.milestone.bottom{
+  top:160px;
+}
+
+.milestone.top{
+  top:60px;
+}
+
+.milestone.locked{
+  background:#ffe0b2;
+  color:#ffb347;
+  box-shadow:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sec-label">
+  <div class="dot"></div>
+  Club Progress 🎉
+</div>
+
+<div class="progress-wrapper">
+
+<svg viewBox="0 0 1000 200" class="progress-svg">
+
+  <!-- Background path -->
+  <path
+    d="
+      M 100 60
+      Q 230 160 370 60
+      Q 520 160 670 60
+      Q 820 160 950 60
+    "
+    fill="none"
+    stroke="#ffe0b2"
+    stroke-width="6"
+    stroke-linecap="round"
+  />
+
+  <!-- Active progress -->
+  <path
+    d="
+      M 100 60
+      Q 230 160 370 60
+      Q 520 160 670 60
+      Q 820 160 950 60
+    "
+    fill="none"
+    stroke="url(#grad)"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-dasharray="3000"
+    stroke-dashoffset="600"
+  />
+
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff7043"/>
+      <stop offset="100%" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
+
+</svg>
+
+<!-- Milestones -->
+<div class="milestone top" style="left:10%;">10<span>Nov 21</span></div>
+<div class="milestone bottom" style="left:23%;">50<span>Nov 23</span></div>
+<div class="milestone top" style="left:37%;">100<span>Nov 27</span></div>
+<div class="milestone bottom" style="left:52%;">200<span>Dec 12</span></div>
+<div class="milestone top" style="left:67%;">300<span>Jan 11</span></div>
+<div class="milestone bottom" style="left:82%;">500<span>Feb 06</span></div>
+<div class="milestone top locked" style="left:95%;">?<span>1000+</span></div>
+
+</div>
+
+</div>
+
+</body>
+</html>
