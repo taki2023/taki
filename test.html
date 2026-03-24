@@ -137,9 +137,7 @@ body{
 
 .lbtn{
   display:flex;
-  align-items:center;   
-  justify-content:flex-start;  /* ensures left alignment */
-  gap:10px;             /* slightly more breathing space */
+  align-items:center;
   padding:11px 13px;
   border-radius:16px;
   background:#fff;
@@ -160,18 +158,16 @@ body{
 }
 .lbtn .ico{
   font-size:16px;
-  width:22px;        /* fixed width = clean alignment */
-  text-align:center;
+  width:auto;          
+  margin-right:6px;    /* small clean gap */
   flex-shrink:0;
 }
+
 .lbtn span{
-  flex:1;
   text-align:left;
-  white-space:nowrap;      /* prevents line break */
-  overflow:hidden;
+  white-space:nowrap;
   text-overflow:ellipsis;  /* adds "..." if too long */
 }
-
 .lbtn .arr{
   color:#ff7043;
   font-size:16px;
@@ -179,6 +175,7 @@ body{
   margin-left:auto;
   transition:transform .2s ease, color .2s ease;
 }
+
 .lbtn:hover .arr{
   transform:translateX(4px);
   color:#e64a19;
