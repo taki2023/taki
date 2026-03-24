@@ -96,41 +96,33 @@ body{
   opacity:.5;
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;               /* original spacing */
-  max-height: 210px;
-  overflow-y: auto;
-  padding: 6px 6px;       /* enough space for first/last hover shadow */
-  box-sizing: border-box;
-}
+/* LINKS */
+.links{display:flex;flex-direction:column;gap:7px;}
 
-/* Prevent text from wrapping inside button without breaking layout */
-.lbtn span {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.lbtn{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 13px;
+  border-radius:16px;
+  background:#fff;
+  border:2px solid #ffe0b2;
+  color:#bf360c;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
 
-/* Custom scrollbar */
-.links::-webkit-scrollbar {
-  width: 6px;
+  box-shadow:0 3px 0 #ffcc80;
+  transition:all .15s ease;
 }
-.links::-webkit-scrollbar-track {
-  background: #fff8f0;
-  border-radius: 3px;
+.lbtn:hover{
+  background:#fff3e0;
+  border-color:#ff7043;
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 #ff7043;
 }
-.links::-webkit-scrollbar-thumb {
-  background: #ffb347;
-  border-radius: 3px;
-}
+.lbtn .ico{font-size:17px;width:22px;text-align:center;}
+.lbtn span{flex:1;}
+.lbtn .arr{color:#ffb347;}
 
-/* Firefox */
-.links {
-  scrollbar-width: thin;
-  scrollbar-color: #ffb347 #fff8f0;
-}
 /* PROGRESS */
 .prog-track{
   height:18px;border-radius:20px;
@@ -290,16 +282,16 @@ body{
   </div>
 
   <!-- LINKS -->
-<div class="sec-label"><div class="dot"></div>Quick Links</div>
-<div class="links">
-    <a class="lbtn" href="#"><span class="ico">🤯</span><span>Solve a Puzzle</span><span class="arr">›</span></a>
-    <a class="lbtn" href="#"><span class="ico">🎞</span><span>Watch My Game</span><span class="arr">›</span></a>
-    <a class="lbtn" href="#"><span class="ico">🤔</span><span>Guess the Elo</span><span class="arr">›</span></a>
-    <a class="lbtn" href="#"><span class="ico">♔</span><span>Opening Traps</span><span class="arr">›</span></a>
-    <a class="lbtn" href="#"><span class="ico">🏆</span><span>Leaderboard</span><span class="arr">›</span></a>
-    <a class="lbtn" href="#"><span class="ico">📅</span><span>2025 Recap</span><span class="arr">›</span></a>
-    <a class="lbtn" href="#"><span class="ico">⭐</span><span>Rate Our Club!</span><span class="arr">›</span></a>
-</div>
+  <div class="sec-label"><div class="dot"></div>Quick Links</div>
+  <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
+      <a class="lbtn" href="#"><span class="ico">🤯</span><span>Solve a Puzzle</span><span class="arr">›</span></a>
+      <a class="lbtn" href="#"><span class="ico">🎞</span><span>Watch My Game</span><span class="arr">›</span></a>
+      <a class="lbtn" href="#"><span class="ico">🤔</span><span>Guess the Elo</span><span class="arr">›</span></a>
+      <a class="lbtn" href="#"><span class="ico">♔</span><span>Opening Traps</span><span class="arr">›</span></a>
+      <a class="lbtn" href="#"><span class="ico">🏆</span><span>Leaderboard</span><span class="arr">›</span></a>
+      <a class="lbtn" href="#"><span class="ico">📅</span><span>2025 Recap</span><span class="arr">›</span></a>
+      <a class="lbtn" href="#"><span class="ico">⭐</span><span>Rate Our Club!</span><span class="arr">›</span></a>
+  </div>
 
   <div class="div"></div>
 
@@ -328,6 +320,7 @@ body{
     <div class="sec-label"><div class="dot"></div>Invite Friends 🙌</div>
     <div class="invite-box">
       <div class="invite-title">Spread the spice! 🌶</div>
+      <div class="invite-sub">Invite your friends and grow the Chillies army !</div>
       <button class="copy-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/hot-chilli-checkmate/join');this.innerHTML='✓ Copied!';setTimeout(()=>{this.innerHTML='🔗 Copy Invite Link'},1500);">
         🔗 Copy Invite Link
       </button>
