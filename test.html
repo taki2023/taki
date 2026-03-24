@@ -347,32 +347,48 @@ body{
 
 <div class="progress-wrapper">
 
-  <svg viewBox="0 0 300 120" class="progress-svg">
+<svg viewBox="0 0 300 120" class="progress-svg">
 
-    <path
-      d="M10 60 Q 50 10, 90 60 T 170 60 T 250 60"
-      fill="none"
-      stroke="#ffe0b2"
-      stroke-width="4"
-      stroke-linecap="round"/>
+  <!-- Background path -->
+  <path
+    d="
+      M10 18
+      C40 18, 40 78, 70 78
+      C100 78, 100 18, 130 18
+      C160 18, 160 78, 190 78
+      C220 78, 220 18, 250 18
+      C280 18, 280 78, 290 78
+    "
+    fill="none"
+    stroke="#ffe0b2"
+    stroke-width="4"
+    stroke-linecap="round"/>
 
-    <path
-      d="M10 60 Q 50 10, 90 60 T 170 60 T 250 60"
-      fill="none"
-      stroke="url(#grad)"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-dasharray="1000"
-      stroke-dashoffset="210"/>
+  <!-- Active progress -->
+  <path
+    d="
+      M10 18
+      C40 18, 40 78, 70 78
+      C100 78, 100 18, 130 18
+      C160 18, 160 78, 190 78
+      C220 78, 220 18, 250 18
+      C280 18, 280 78, 290 78
+    "
+    fill="none"
+    stroke="url(#grad)"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-dasharray="1000"
+    stroke-dashoffset="210"/>
 
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#ff7043"/>
-        <stop offset="100%" stop-color="#ffb347"/>
-      </linearGradient>
-    </defs>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff7043"/>
+      <stop offset="100%" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
 
-  </svg>
+</svg>
 
   <div class="milestone" style="left:10%; top:18px;">10<br><span>Nov 21</span></div>
   <div class="milestone bottom" style="left:23%;">50<br><span>Nov 23</span></div>
