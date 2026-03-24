@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Hot Chilli Sidebar</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -22,24 +21,18 @@ body{
   background:#fff8f0;
   border-radius:28px;
   border:3px solid #ffb347;
-  position:relative;
   transition:box-shadow .3s ease;
 }
-.sb:hover{
-  box-shadow:0 15px 50px rgba(255,140,0,.25);
-}
+.sb:hover{box-shadow:0 15px 50px rgba(255,140,0,.25);}
 
 /* TOP */
 .sb-top{
-  background:linear-gradient(135deg,#ff7043 0%,#ff9a3c 60%,#ffb347 100%);
+  background:linear-gradient(135deg,#ff7043,#ffb347);
   border-radius:24px 24px 0 0;
-  padding:18px 16px 18px;
+  padding:18px 16px 22px;
   text-align:center;
   position:relative;
-  overflow:hidden;
 }
-
-/* CURVE */
 .sb-top::before{
   content:'';
   position:absolute;
@@ -58,12 +51,9 @@ body{
 .chilli-deco.left{left:8px;transform:rotate(-20deg);}
 .chilli-deco.right{right:8px;transform:rotate(20deg);}
 
-/* TITLE */
 .club-title{
   font-family:'Fredoka One',cursive;
   font-size:19px;color:#fff;
-  text-shadow:0 2px 0 rgba(0,0,0,.15);
-  position:relative;z-index:1;
 }
 .club-sub{
   font-size:11px;font-weight:700;
@@ -74,14 +64,37 @@ body{
 }
 
 /* INNER */
-.inner{padding:14px 14px 18px;}
+.inner{padding:14px;}
+
+/* WELCOME */
+.welcome{
+  text-align:center;
+  margin-bottom:14px;
+}
+.welcome-title{
+  font-family:'Fredoka One',cursive;
+  font-size:15px;
+  color:#e85d04;
+  margin-bottom:6px;
+}
+.welcome-sub{
+  font-size:12px;
+  font-weight:700;
+  color:#bf360c;
+  margin-bottom:8px;
+}
+.welcome img{
+  width:100%;
+  border-radius:14px;
+  border:2px solid #ffb347;
+}
 
 /* SECTION */
 .sec-label{
   display:flex;align-items:center;gap:7px;
   font-family:'Fredoka One',cursive;
   font-size:14px;color:#e85d04;
-  margin-bottom:10px;margin-top:2px;
+  margin-bottom:10px;
 }
 .sec-label .dot{
   width:8px;height:8px;border-radius:50%;
@@ -96,9 +109,27 @@ body{
   opacity:.5;
 }
 
-/* LINKS */
-.links{display:flex;flex-direction:column;gap:7px;}
+/* SCROLLABLE LINKS */
+.links{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  max-height:210px; /* 👈 scroll height */
+  overflow-y:auto;
+  padding-right:4px;
+}
 
+/* SCROLLBAR */
+.links::-webkit-scrollbar{width:6px;}
+.links::-webkit-scrollbar-thumb{
+  background:#ffb347;
+  border-radius:10px;
+}
+.links::-webkit-scrollbar-track{
+  background:#fff3e0;
+}
+
+/* BUTTONS */
 .lbtn{
   display:flex;align-items:center;gap:10px;
   padding:11px 13px;
@@ -109,17 +140,14 @@ body{
   font-size:13px;
   font-weight:800;
   text-decoration:none;
-
   box-shadow:0 3px 0 #ffcc80;
-  transition:all .15s ease;
+  transition:.15s;
 }
 .lbtn:hover{
-  background:#fff3e0;
-  border-color:#ff7043;
   transform:translateY(-2px);
   box-shadow:0 6px 0 #ff7043;
 }
-.lbtn .ico{font-size:17px;width:22px;text-align:center;}
+.lbtn .ico{width:22px;text-align:center;}
 .lbtn span{flex:1;}
 .lbtn .arr{color:#ffb347;}
 
@@ -145,88 +173,28 @@ body{
   font-size:10px;font-weight:900;color:#fff;
 }
 
-/* MILESTONES */
-.milestones{
-  display:flex;justify-content:space-between;
-  flex-wrap:wrap;gap:6px;
-}
-.ms{
-  display:flex;flex-direction:column;align-items:center;
-}
-.ms-dot{
-  width:22px;height:22px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:8px;font-weight:900;
-  border:2px solid transparent;
-}
-.ms-dot.done{
-  background:#ff7043;color:#fff;
-  border-color:#e64a19;
-  box-shadow:0 3px 0 #bf360c,0 0 8px rgba(255,112,67,.6);
-}
-.ms-dot.locked{
-  background:#ffe0b2;color:#ffb347;
-  border-color:#ffcc80;
-}
-.ms-lbl{font-size:9px;font-weight:800;color:#e65100;}
-.ms-lbl.locked{color:#ffb347;}
-
-.prog-legend{
-  display:flex;gap:12px;margin-top:8px;
-  font-size:11px;font-weight:700;color:#bf360c;
-}
-.leg-dot{width:10px;height:10px;border-radius:50%;}
-
 /* INVITE */
 .invite-box{
   background:#fff;border-radius:16px;
   border:2px dashed #ffb347;
   padding:13px;text-align:center;
 }
-.invite-title{
-  font-family:'Fredoka One',cursive;
-  font-size:15px;color:#e85d04;margin-bottom:5px;
-}
-.invite-sub{
-  font-size:12px;font-weight:600;color:#bf360c;
-  margin-bottom:11px;
-}
-
-/* BUTTON */
 .copy-btn{
-  display:inline-flex;align-items:center;gap:7px;
   padding:11px 20px;border-radius:50px;
   background:linear-gradient(135deg,#ff7043,#ff8a50);
-  border:none;color:#fff;
-  font-size:13px;font-weight:900;
+  border:none;color:#fff;font-weight:900;
   cursor:pointer;
-  box-shadow:0 5px 0 #bf360c;
-  transition:all .15s ease;
-}
-.copy-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 7px 0 #bf360c;
-}
-.copy-btn:active{
-  transform:translateY(2px);
-  box-shadow:0 3px 0 #bf360c;
 }
 
 /* SOCIAL */
 .socials{display:flex;gap:9px;}
 .s-btn{
-  flex:1;display:flex;align-items:center;justify-content:center;
-  gap:7px;padding:11px;
-  border-radius:14px;
-  font-size:12.5px;font-weight:800;
+  flex:1;text-align:center;
+  padding:11px;border-radius:14px;
   color:#fff;text-decoration:none;
-  box-shadow:0 4px 0 rgba(0,0,0,.15);
-  transition:all .15s;
+  font-weight:800;
 }
-.s-btn:hover{
-  transform:translateY(-2px);
-}
-.s-btn.wa{background:linear-gradient(135deg,#25c95b,#1faa4a);}
+.s-btn.wa{background:#25c95b;}
 .s-btn.ig{background:linear-gradient(135deg,#f9a825,#e91e63,#9c27b0);}
 
 /* FOOTER */
@@ -251,7 +219,14 @@ body{
 
   <div class="inner">
 
-    <!-- LINKS -->
+    <!-- 🔥 WELCOME -->
+    <div class="welcome">
+      <div class="welcome-title">Welcome, Challenger! ♟️</div>
+      <div class="welcome-sub">Step into the heat and sharpen your game 🔥</div>
+      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif">
+    </div>
+
+    <!-- QUICK LINKS -->
     <div class="sec-label"><div class="dot"></div>Quick Links</div>
     <div class="links">
       <a class="lbtn" href="#"><span class="ico">🤯</span><span>Solve a Puzzle</span><span class="arr">›</span></a>
@@ -269,30 +244,13 @@ body{
     <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
     <div class="prog-track"><div class="prog-fill"></div></div>
 
-    <div class="milestones">
-      <div class="ms"><div class="ms-dot done">10</div><div class="ms-lbl">Nov 21</div></div>
-      <div class="ms"><div class="ms-dot done">50</div><div class="ms-lbl">Nov 23</div></div>
-      <div class="ms"><div class="ms-dot done">100</div><div class="ms-lbl">Nov 27</div></div>
-      <div class="ms"><div class="ms-dot done">200</div><div class="ms-lbl">Dec 12</div></div>
-      <div class="ms"><div class="ms-dot done">300</div><div class="ms-lbl">Jan 11</div></div>
-      <div class="ms"><div class="ms-dot done">500</div><div class="ms-lbl">Feb 06</div></div>
-      <div class="ms"><div class="ms-dot locked">?</div><div class="ms-lbl locked">1000+</div></div>
-    </div>
-
-    <div class="prog-legend">
-      <span><div class="leg-dot" style="background:#ff7043;"></div> Reached!</span>
-      <span><div class="leg-dot" style="background:#ffe0b2;border:1px solid #ffb347;"></div> Coming soon</span>
-    </div>
-
     <div class="div"></div>
 
     <!-- INVITE -->
     <div class="sec-label"><div class="dot"></div>Invite Friends 🙌</div>
     <div class="invite-box">
-      <div class="invite-title">Spread the spice! 🌶</div>
-      <div class="invite-sub">Know someone who loves chess?<br>Invite them!</div>
-      <button class="copy-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/hot-chilli-checkmate/join');this.innerHTML='✓ Copied!';setTimeout(()=>{this.innerHTML='🔗 Copy Invite Link'},1500);">
-        🔗 Copy Invite Link
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/hot-chilli-checkmate/join');this.innerHTML='✓ Copied!';setTimeout(()=>{this.innerHTML='Copy Invite Link'},1500);">
+        Copy Invite Link
       </button>
     </div>
 
@@ -301,8 +259,8 @@ body{
     <!-- SOCIAL -->
     <div class="sec-label"><div class="dot"></div>Find Us Online</div>
     <div class="socials">
-      <a class="s-btn wa" href="#">💬 WhatsApp</a>
-      <a class="s-btn ig" href="#">📷 Instagram</a>
+      <a class="s-btn wa" href="#">WhatsApp</a>
+      <a class="s-btn ig" href="#">Instagram</a>
     </div>
 
     <div class="footer">🌶 Hot Chilli Checkmate © 2026 ♞</div>
