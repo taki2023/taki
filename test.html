@@ -97,35 +97,32 @@ body{
 }
 
 /* Quick Links container fixes */
-.links{
-  display:flex;
-  flex-direction:column;
-  gap:7px; /* keep your original gap */
-  max-height:210px;
-  overflow-y:auto;
-  padding:4px 0;       /* add top/bottom padding to avoid clipping hover */
-  box-sizing:border-box;
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* original spacing */
+  max-height: 210px;
+  overflow-y: auto;
+  padding: 6px 4px; /* prevent first/last hover clipping */
+  box-sizing: border-box;
 }
 
-/* Prevent text from breaking to two lines */
-.lbtn span{
-  flex:1;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+/* Prevent text from wrapping but keep buttons intact */
+.lbtn {
+  white-space: nowrap; /* prevent line breaks inside button */
 }
 
-/* Custom scrollbar matching sidebar style */
+/* Scrollbar styles */
 .links::-webkit-scrollbar {
-  width:6px;
+  width: 6px;
 }
 .links::-webkit-scrollbar-track {
-  background:#fff8f0; /* match sidebar background */
-  border-radius:3px;
+  background: #fff8f0; /* matches sidebar background */
+  border-radius: 3px;
 }
 .links::-webkit-scrollbar-thumb {
-  background:#ffb347; /* sidebar accent */
-  border-radius:3px;
+  background: #ffb347; /* sidebar accent color */
+  border-radius: 3px;
 }
 
 /* Firefox scrollbar */
@@ -133,7 +130,6 @@ body{
   scrollbar-width: thin;
   scrollbar-color: #ffb347 #fff8f0;
 }
-
 /* PROGRESS */
 .prog-track{
   height:18px;border-radius:20px;
