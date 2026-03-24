@@ -347,58 +347,72 @@ body{
 
 <div class="progress-wrapper">
 
-<svg viewBox="0 0 300 120" class="progress-svg">
+  <svg viewBox="0 0 300 120" class="progress-svg">
 
-  <!-- Background path -->
-  <path
-    d="
-      M10 18
-      C40 18, 40 78, 70 78
-      C100 78, 100 18, 130 18
-      C160 18, 160 78, 190 78
-      C220 78, 220 18, 250 18
-      C280 18, 280 78, 290 78
-    "
-    fill="none"
-    stroke="#ffe0b2"
-    stroke-width="4"
-    stroke-linecap="round"/>
+    <!-- Background path -->
+    <path
+      d="
+        M10 18
+        C40 18, 40 78, 70 78
+        C100 78, 100 18, 130 18
+        C160 18, 160 78, 190 78
+        C220 78, 220 18, 250 18
+        C280 18, 280 78, 290 78
+      "
+      fill="none"
+      stroke="#ffe0b2"
+      stroke-width="4"
+      stroke-linecap="round"/>
 
-  <!-- Active progress -->
-  <path
-    d="
-      M10 18
-      C40 18, 40 78, 70 78
-      C100 78, 100 18, 130 18
-      C160 18, 160 78, 190 78
-      C220 78, 220 18, 250 18
-      C280 18, 280 78, 290 78
-    "
-    fill="none"
-    stroke="url(#grad)"
-    stroke-width="4"
-    stroke-linecap="round"
-    stroke-dasharray="1000"
-    stroke-dashoffset="210"/>
+    <!-- Active progress -->
+    <path
+      d="
+        M10 18
+        C40 18, 40 78, 70 78
+        C100 78, 100 18, 130 18
+        C160 18, 160 78, 190 78
+        C220 78, 220 18, 250 18
+        C280 18, 280 78, 290 78
+      "
+      fill="none"
+      stroke="url(#grad)"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-dasharray="1000"
+      stroke-dashoffset="1000"
+      class="progress-active"/>
 
-  <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff7043"/>
-      <stop offset="100%" stop-color="#ffb347"/>
-    </linearGradient>
-  </defs>
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff7043"/>
+        <stop offset="100%" stop-color="#ffb347"/>
+      </linearGradient>
+    </defs>
 
-</svg>
+  </svg>
 
-<div class="milestone" style="left:10%; top:18px;">10<br><span>Nov 21</span></div>
-<div class="milestone bottom" style="left:23%;">50<br><span>Nov 23</span></div>
-<div class="milestone" style="left:37%; top:18px;">100<br><span>Nov 27</span></div>
-<div class="milestone bottom" style="left:52%;">200<br><span>Dec 12</span></div>
-<div class="milestone" style="left:67%; top:18px;">300<br><span>Jan 11</span></div>
-<div class="milestone bottom" style="left:82%;">500<br><span>Feb 06</span></div>
-<div class="milestone locked" style="left:95%; top:18px;">?<br><span>1000+</span></div>
+  <!-- Milestones -->
+  <div class="milestone" style="left:10%; top:18px;">10<br><span>Nov 21</span></div>
+  <div class="milestone bottom" style="left:23%;">50<br><span>Nov 23</span></div>
+  <div class="milestone" style="left:37%; top:18px;">100<br><span>Nov 27</span></div>
+  <div class="milestone bottom" style="left:52%;">200<br><span>Dec 12</span></div>
+  <div class="milestone" style="left:67%; top:18px;">300<br><span>Jan 11</span></div>
+  <div class="milestone bottom" style="left:82%;">500<br><span>Feb 06</span></div>
+  <div class="milestone locked" style="left:95%; top:18px;">?<br><span>1000+</span></div>
 
 </div>
+
+<!-- Add this at the end of your <style> -->
+<style>
+.progress-active {
+  animation: draw 2s forwards;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+</style>
+
 
 <div class="div"></div>
    
