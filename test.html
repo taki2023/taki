@@ -100,28 +100,31 @@ body{
 .links {
   display: flex;
   flex-direction: column;
-  gap: 7px; /* original spacing */
+  gap: 7px;          /* original spacing */
   max-height: 210px;
   overflow-y: auto;
-  padding: 6px 4px; /* prevent first/last hover clipping */
+  padding: 6px 0;    /* prevents hover clipping at top/bottom */
   box-sizing: border-box;
 }
 
-/* Prevent text from wrapping but keep buttons intact */
-.lbtn {
-  white-space: nowrap; /* prevent line breaks inside button */
+/* Prevent inner text from wrapping, but don't break button layout */
+.lbtn span {
+  display: block;           /* ensure proper layout */
+  white-space: nowrap;      /* keep text on one line */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Scrollbar styles */
+/* Custom scrollbar */
 .links::-webkit-scrollbar {
   width: 6px;
 }
 .links::-webkit-scrollbar-track {
-  background: #fff8f0; /* matches sidebar background */
+  background: #fff8f0;      /* matches sidebar background */
   border-radius: 3px;
 }
 .links::-webkit-scrollbar-thumb {
-  background: #ffb347; /* sidebar accent color */
+  background: #ffb347;      /* sidebar accent color */
   border-radius: 3px;
 }
 
