@@ -97,8 +97,28 @@ body{
 }
 
 /* LINKS */
-.links{display:flex;align-items:left;gap:7px;}
+.links{display:flex;display-items:column;gap:7px;}
+/* Scrollbar styling */
+.links::-webkit-scrollbar {
+  width: 6px;
+}
+.links::-webkit-scrollbar-track {
+  background: #fff3e0;
+  border-radius: 3px;
+}
+.links::-webkit-scrollbar-thumb {
+  background: #ff7043;
+  border-radius: 3px;
+}
+.links::-webkit-scrollbar-thumb:hover {
+  background: #ff8a50;
+}
 
+/* Firefox scrollbar */
+.links {
+  scrollbar-width: thin;
+  scrollbar-color: #ff7043 #fff3e0;
+}
 .lbtn{
   display:flex;align-items:left;gap:5px;
   padding:11px 13px;
