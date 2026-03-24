@@ -97,7 +97,22 @@ body{
 }
 
 /* LINKS */
-.links{display:flex;flex-direction: column;;gap:7px;}
+.links {
+  display:flex;
+  flex-direction: column;
+  gap:7px;
+  max-height:210px;
+  overflow-y:auto;
+  padding:4px 4px;      /* add top/bottom padding */
+}
+
+.links .lbtn:first-child {
+  margin-top:4px;      /* prevents top cropping */
+}
+
+.links .lbtn:last-child {
+  margin-bottom:4px;   /* prevents bottom cropping */
+}
 /* Scrollbar styling */
 .links::-webkit-scrollbar {
   width: 6px;
