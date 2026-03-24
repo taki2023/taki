@@ -135,7 +135,9 @@ body{
   scrollbar-color: #ff7043 #fff3e0;
 }
 .lbtn{
-  display:flex;align-items:left;gap:5px;
+  display:flex;
+  align-items:center;   
+  gap:10px;             /* slightly more breathing space */
   padding:11px 13px;
   border-radius:16px;
   background:#fff;
@@ -155,8 +157,21 @@ body{
   box-shadow:0 6px 0 #ff7043;
 }
 .lbtn .ico{font-size:16px;width:20px;text-align:left;}
-.lbtn span{flex:1;}
-.lbtn .arr{color:#ffb347;}
+.lbtn span{
+  flex:1;
+  text-align:left;
+}
+.lbtn .arr{
+  color:#ff7043;
+  font-size:16px;
+  font-weight:900;
+  margin-left:auto;
+  transition:transform .2s ease, color .2s ease;
+}
+.lbtn:hover .arr{
+  transform:translateX(4px);
+  color:#e64a19;
+}
 
 /* PROGRESS */
 .prog-track{
