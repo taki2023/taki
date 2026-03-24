@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Perfect Progress</title>
+<title>Perfect Alignment</title>
 <style>
 body{
   background:#efe3d3;
@@ -10,7 +10,6 @@ body{
 }
 
 .wrapper{
-  width:100%;
   max-width:1000px;
   margin:40px auto;
   padding:40px;
@@ -18,38 +17,23 @@ body{
   border-radius:25px;
 }
 
-h2{
-  color:#e65100;
-  font-weight:900;
-  margin-bottom:40px;
-}
-
 svg{
   width:100%;
   height:auto;
 }
 
-/* Text styling */
-.label{
-  font-size:22px;
+text{
   font-weight:900;
-  fill:white;
   text-anchor:middle;
-}
-
-.date{
-  font-size:16px;
-  font-weight:700;
   fill:white;
-  text-anchor:middle;
 }
 
-.locked{
-  fill:#f5d6a3;
+.small{
+  font-size:14px;
 }
 
-.locked-text{
-  fill:#e09c3f;
+.big{
+  font-size:20px;
 }
 </style>
 </head>
@@ -57,57 +41,59 @@ svg{
 <body>
 
 <div class="wrapper">
-<h2>Club Progress 🎉</h2>
 
 <svg viewBox="0 0 1000 300">
 
-  <!-- PERFECT CURVE -->
-  <path
-    d="
-      M 100 100
-      Q 200 220 300 100
-      Q 400 220 500 100
-      Q 600 220 700 100
-      Q 800 220 900 100
-    "
-    fill="none"
-    stroke="#f28c38"
-    stroke-width="8"
-    stroke-linecap="round"
-  />
+<!-- THE MAGIC FIX -->
+<path d="
+M 100 100
+Q 150 160 200 220
+T 300 100
+T 400 220
+T 500 100
+T 600 220
+T 700 100
+T 800 220
+T 900 100
+"
+fill="none"
+stroke="#f28c38"
+stroke-width="8"
+stroke-linecap="round"
+/>
 
-  <!-- TOP CIRCLES (y = 100) -->
-  <circle cx="100" cy="100" r="55" fill="#ff7043"/>
-  <circle cx="300" cy="100" r="55" fill="#ff7043"/>
-  <circle cx="500" cy="100" r="55" fill="#ff7043"/>
-  <circle cx="900" cy="100" r="55" class="locked"/>
+<!-- CIRCLES -->
+<circle cx="100" cy="100" r="50" fill="#ff7043"/>
+<circle cx="200" cy="220" r="50" fill="#ff7043"/>
+<circle cx="300" cy="100" r="50" fill="#ff7043"/>
+<circle cx="400" cy="220" r="50" fill="#ff7043"/>
+<circle cx="500" cy="100" r="50" fill="#ff7043"/>
+<circle cx="600" cy="220" r="50" fill="#ff7043"/>
+<circle cx="700" cy="100" r="50" fill="#ff7043"/>
+<circle cx="800" cy="220" r="50" fill="#ff7043"/>
+<circle cx="900" cy="100" r="50" fill="#f5d6a3"/>
 
-  <!-- BOTTOM CIRCLES (y = 220) -->
-  <circle cx="200" cy="220" r="55" fill="#ff7043"/>
-  <circle cx="400" cy="220" r="55" fill="#ff7043"/>
-  <circle cx="700" cy="220" r="55" fill="#ff7043"/>
+<!-- TEXT -->
+<text x="100" y="95" class="big">10</text>
+<text x="100" y="120" class="small">Nov 21</text>
 
-  <!-- TEXT -->
-  <text x="100" y="95" class="label">10</text>
-  <text x="100" y="120" class="date">Nov 21</text>
+<text x="200" y="215" class="big">50</text>
+<text x="200" y="240" class="small">Nov 23</text>
 
-  <text x="200" y="215" class="label">50</text>
-  <text x="200" y="240" class="date">Nov 23</text>
+<text x="300" y="95" class="big">100</text>
+<text x="300" y="120" class="small">Nov 27</text>
 
-  <text x="300" y="95" class="label">100</text>
-  <text x="300" y="120" class="date">Nov 27</text>
+<text x="400" y="215" class="big">200</text>
+<text x="400" y="240" class="small">Dec 12</text>
 
-  <text x="400" y="215" class="label">200</text>
-  <text x="400" y="240" class="date">Dec 12</text>
+<text x="500" y="95" class="big">300</text>
+<text x="500" y="120" class="small">Jan 11</text>
 
-  <text x="500" y="95" class="label">300</text>
-  <text x="500" y="120" class="date">Jan 11</text>
+<text x="600" y="215" class="big">500</text>
+<text x="600" y="240" class="small">Feb 06</text>
 
-  <text x="700" y="215" class="label">500</text>
-  <text x="700" y="240" class="date">Feb 06</text>
-
-  <text x="900" y="95" class="label locked-text">?</text>
-  <text x="900" y="120" class="date locked-text">1000+</text>
+<text x="900" y="95" class="big" fill="#e09c3f">?</text>
+<text x="900" y="120" class="small" fill="#e09c3f">1000+</text>
 
 </svg>
 
