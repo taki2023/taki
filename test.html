@@ -328,8 +328,8 @@ body{
 .progress-wrapper {
   position: relative;
   width: 100%;
-  height: 120px; /* zig-zag area */
-  margin: 14px auto;
+  height: 85px;        /* ↓ smaller = removes empty space */
+  margin: 6px auto;    /* ↓ less top & bottom spacing */
 }
 
 .progress-svg {
@@ -702,7 +702,7 @@ function updateProgress() {
   // create points for zig-zag
   const points = milestones.map((m, i) => {
     const x = paddingX + (i / (milestones.length - 1)) * (wrapperWidth - 2 * paddingX);
-    const y = i % 2 === 0 ? wrapperHeight * 0.7 : wrapperHeight * 0.3;
+    const y = i % 2 === 0 ? wrapperHeight * 0.65 : wrapperHeight * 0.35;
     m.style.left = `${x}px`;
     m.style.top = `${y}px`;
     return `${x},${y}`;
