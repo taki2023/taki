@@ -629,11 +629,13 @@ body{
 <!-- Animate the line -->
 <style>
 .progress-active {
-  animation: draw 3s forwards;
+  stroke-dasharray: 1000;   /* total length of the line */
+  stroke-dashoffset: 1000;  /* start fully hidden */
+  animation: draw 3s forwards; /* animate to reveal */
 }
 
 @keyframes draw {
-  to { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 0; } /* gradually reveal the line */
 }
 </style>
 
@@ -676,8 +678,7 @@ function updateProgress() {
 
   const wrapperWidth = wrapper.clientWidth;
   const wrapperHeight = wrapper.clientHeight;
-
-  const paddingX = 30; // space from left and right edges
+  const paddingX = 30;
 
   // create points for zig-zag
   const points = milestones.map((m, i) => {
@@ -688,9 +689,14 @@ function updateProgress() {
     return `${x},${y}`;
   });
 
-  const pointsStr = points.join(" ");
-  bgLine.setAttribute("points", pointsStr);
-  activeLine.setAttribute("points", pointsStr);
+  // full line
+  bgLine.setAttribute("points", points.join(" "));
+
+  // line that stops at 500
+  // find the index of milestone with data-value="500"
+  const stopIndex = milestones.findIndex(m => m.dataset.value === "500");
+  const activePoints = points.slice(0, stopIndex + 1);
+  activeLine.setAttribute("points", activePoints.join(" "));
 }
 
 // initial update & on resize
