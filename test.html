@@ -76,16 +76,24 @@ body{
 /* INNER */
 .inner{padding:14px 14px 18px;}
 
-/* SECTION */
-.sec-label{
-  display:flex;align-items:center;gap:7px;
-  font-family:'Fredoka One',cursive;
-  font-size:14px;color:#e85d04;
-  margin-bottom:10px;margin-top:2px;
+/* SECTION LABELS WITH DOT */
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;              /* space between dot and text */
+  font-family: 'Fredoka One', cursive;
+  font-size: 14px;
+  color: #e85d04;
+  margin-bottom: 10px;
+  margin-top: 2px;
 }
-.sec-label .dot{
-  width:8px;height:8px;border-radius:50%;
-  background:#ff7043;
+
+.sec-label .dot {
+  width: 10px;            /* slightly bigger for visibility */
+  height: 10px;
+  border-radius: 50%;
+  background: #ff7043;    /* spicy orange color */
+  flex-shrink: 0;         /* prevents shrinking in flex */
 }
 
 /* DIVIDER */
@@ -529,7 +537,7 @@ body{
 <!-- Add this at the end of your <style> -->
 <style>
 .progress-active {
-  animation: draw 2s forwards;
+  animation: draw 3s forwards;
 }
 
 @keyframes draw {
