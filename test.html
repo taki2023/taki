@@ -284,6 +284,70 @@ body{
   color:#ffb347;
   box-shadow:none;
 }
+
+/* NEWEST MEMBERS SECTION */
+.members-box{
+  background:#fff;
+  border-radius:18px;
+  border:2px solid #ffe0b2;
+  padding:12px;
+  margin-bottom:14px;
+}
+
+.members-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.member-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:14px;
+  background:#fff8f0;
+  border:2px solid #ffe0b2;
+  text-decoration:none;
+  transition:all .15s ease;
+}
+
+.member-item:hover{
+  background:#fff3e0;
+  border-color:#ff7043;
+  transform:translateY(-2px);
+  box-shadow:0 5px 0 #ff7043;
+}
+
+.member-avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:2px solid #ff7043;
+  object-fit:cover;
+  flex-shrink:0;
+}
+
+.member-info{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.member-name{
+  font-size:12px;
+  font-weight:800;
+  color:#e85d04;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.member-rating{
+  font-size:10.5px;
+  font-weight:700;
+  color:#bf360c;
+}
 </style>
 </head>
 
@@ -329,7 +393,21 @@ body{
       Play sharp. Think spicy. Win big.
     </div>
   </div>
+<!-- NEWEST MEMBERS -->
+<div class="sec-label"><div class="dot"></div>New Chillies 🔥</div>
 
+<div class="members-box">
+  <div class="members-list" id="membersList">
+    <!-- Loading placeholders -->
+    <div class="member-item">
+      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="member-info">
+        <div class="member-name">@loading</div>
+        <div class="member-rating">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- LINKS -->
   <div class="sec-label"><div class="dot"></div>Quick Links</div>
   <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
@@ -440,6 +518,61 @@ body{
 
   </div>
 </div>
+<script>
+async function loadNewest() {
+  try {
+    const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
+    const d = await r.json();
 
+    const members = [...d.weekly, ...d.monthly];
+    members.sort((a, b) => b.joined - a.joined);
+    const top3 = members.slice(0, 3);
+
+    const promises = top3.map(async (m) => {
+      const [pj, stats] = await Promise.all([
+        fetch("https://api.chess.com/pub/player/" + m.username).then(res => res.json()),
+        fetch("https://api.chess.com/pub/player/" + m.username + "/stats").then(res => res.json())
+      ]);
+
+      const ratings = [
+        {type:"Rapid", value: stats.chess_rapid?.last?.rating},
+        {type:"Blitz", value: stats.chess_blitz?.last?.rating},
+        {type:"Bullet", value: stats.chess_bullet?.last?.rating},
+        {type:"Daily", value: stats.chess_daily?.last?.rating}
+      ].filter(x => x.value);
+
+      const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—", value:"—"};
+      const avatar = pj.avatar || "https://taki2023.github.io/taki/default-pawn.png";
+
+      return {
+        username: m.username,
+        avatar,
+        ratingType: best.type,
+        ratingValue: best.value
+      };
+    });
+
+    const membersData = await Promise.all(promises);
+
+    const box = document.getElementById("membersList");
+
+    box.innerHTML = membersData.map(m => `
+      <a class="member-item" href="https://www.chess.com/member/${m.username}" target="_blank">
+        <img class="member-avatar" src="${m.avatar}">
+        <div class="member-info">
+          <div class="member-name">@${m.username}</div>
+          <div class="member-rating">${m.ratingType}: ${m.ratingValue}</div>
+        </div>
+      </a>
+    `).join("");
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("membersList").innerHTML = "Unable to load members.";
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadNewest);
+</script>
 </body>
 </html>
