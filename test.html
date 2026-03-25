@@ -676,10 +676,11 @@ function updateProgress() {
   const wrapperWidth = wrapper.clientWidth;
   const wrapperHeight = wrapper.clientHeight;
 
+  const paddingX = 30; // space from left and right edges
+
   // create points for zig-zag
   const points = milestones.map((m, i) => {
-    const x = (i / (milestones.length - 1)) * wrapperWidth;
-    // alternate top/bottom for zig-zag
+    const x = paddingX + (i / (milestones.length - 1)) * (wrapperWidth - 2 * paddingX);
     const y = i % 2 === 0 ? wrapperHeight * 0.7 : wrapperHeight * 0.3;
     m.style.left = `${x}px`;
     m.style.top = `${y}px`;
