@@ -81,8 +81,12 @@ body{
   margin-top:3px;
 }
 
-/* INNER */
-.inner{padding:14px 14px 18px;}
+.inner{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  padding:14px 20px 18px;
+}
 
 /* SECTION LABEL */
 .sec-label{
@@ -109,8 +113,9 @@ body{
 /* HAND-DRAWN SEPARATOR */
 .div{
   width:100%;
+  max-width:980px;
   height:18px;
-  margin:10px 0 14px;
+  margin:10px auto 14px;
   position:relative;
   opacity:.95;
 }
@@ -149,7 +154,7 @@ body{
   filter:blur(.15px);
 }
 
-/* second slightly offset stroke for hand-drawn effect */
+/* second stroke */
 .div::after{
   top:8px;
   left:4px;
@@ -323,38 +328,43 @@ body{
 .progress-wrapper{
   position:relative;
   width:100%;
-  height:120px;
-  margin-top:10px;
+  max-width:980px;
+  height:180px;
+  margin:14px auto 0;
+  padding:0 10px;
 }
 
 .progress-svg{
   width:100%;
   height:100%;
+  display:block;
 }
 
 .milestone{
   position:absolute;
   transform:translateX(-50%);
   text-align:center;
-  font-size:9px;
+  font-size:12px;
   font-weight:900;
   color:#fff;
   background:#ff7043;
-  padding:4px 6px;
-  border-radius:20px;
-  box-shadow:0 3px 0 #bf360c;
+  padding:7px 10px;
+  border-radius:999px;
+  box-shadow:0 4px 0 #bf360c;
+  min-width:52px;
+  line-height:1.15;
 }
 
 .milestone span{
   display:block;
-  font-size:8px;
+  font-size:11px;
   font-weight:800;
-  color:FFFFFF;
+  color:#FFFFFF;
   margin-top:4px;
 }
 
 .milestone.bottom{
-  top:78px;
+  top:108px;
 }
 
 .milestone.locked{
@@ -552,42 +562,46 @@ body{
 
 <div class="progress-wrapper">
 
- <svg viewBox="0 0 300 120" class="progress-svg">
+<svg viewBox="0 0 1000 180" class="progress-svg" preserveAspectRatio="none">
   <!-- Background path -->
   <path
     d="
-      M30 18
-      Q50 48, 69 78
-      Q90 48, 111 18
-      Q133 48, 156 78
-      Q179 48, 201 18
-      Q223 48, 246 78
-      Q265 48, 285 18
+      M40 40
+      Q100 95, 160 150
+      Q220 95, 280 40
+      Q340 95, 400 150
+      Q460 95, 520 40
+      Q580 95, 640 150
+      Q700 95, 760 40
+      Q820 95, 880 150
+      Q920 105, 960 40
     "
     fill="none"
     stroke="#ffe0b2"
-    stroke-width="4"
+    stroke-width="6"
     stroke-linecap="round"/>
-  
+
   <!-- Active progress -->
   <path
     d="
-      M30 18
-      Q50 48, 69 78
-      Q90 48, 111 18
-      Q133 48, 156 78
-      Q179 48, 201 18
-      Q223 48, 246 78
-      Q265 48, 285 18
+      M40 40
+      Q100 95, 160 150
+      Q220 95, 280 40
+      Q340 95, 400 150
+      Q460 95, 520 40
+      Q580 95, 640 150
+      Q700 95, 760 40
+      Q820 95, 880 150
+      Q920 105, 960 40
     "
     fill="none"
     stroke="url(#grad)"
-    stroke-width="4"
+    stroke-width="6"
     stroke-linecap="round"
-    stroke-dasharray="1000"
-    stroke-dashoffset="1000"
+    stroke-dasharray="2000"
+    stroke-dashoffset="2000"
     class="progress-active"/>
-  
+
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#ff7043"/>
@@ -597,13 +611,13 @@ body{
 </svg>
 
   <!-- Milestones -->
-<div class="milestone" style="left:10%; top:18px;">10<br><span>Nov 21</span></div>
+<div class="milestone" style="left:10%; top:20px;">10<br><span>Nov 21</span></div>
 <div class="milestone bottom" style="left:23%;">50<br><span>Nov 23</span></div>
-<div class="milestone" style="left:37%; top:18px;">100<br><span>Nov 27</span></div>
+<div class="milestone" style="left:37%; top:20px;">100<br><span>Nov 27</span></div>
 <div class="milestone bottom" style="left:52%;">200<br><span>Dec 12</span></div>
-<div class="milestone" style="left:67%; top:18px;">300<br><span>Jan 11</span></div>
+<div class="milestone" style="left:67%; top:20px;">300<br><span>Jan 11</span></div>
 <div class="milestone bottom" style="left:82%;">500<br><span>Feb 06</span></div>
-<div class="milestone locked" style="left:95%; top:18px;">?<br><span>1000+</span></div>
+<div class="milestone locked" style="left:95%; top:20px;">?<br><span>1000+</span></div>
 
 </div>
 
