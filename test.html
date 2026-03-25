@@ -328,6 +328,14 @@ body{
   flex-shrink:0;
 }
 
+/* MAKE THE INFO TAKE FULL WIDTH */
+.member-info{
+  display:flex;
+  flex-direction:column;
+  flex:1;        /* fills available width */
+  min-width:0;   /* important for text overflow & auto spacing */
+}
+
 .member-name{
   font-size:12px;
   font-weight:800;
@@ -351,7 +359,7 @@ body{
 }
 
 .member-joined{
-  margin-left:auto;   /* 👈 pushes timer fully right */
+  margin-left:auto;   /* pushes timer fully to the right */
   color:#ff7043;
   font-weight:800;
   white-space:nowrap;
