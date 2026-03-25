@@ -328,8 +328,7 @@ body{
 .progress-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1100px;
-  height: 180px; /* adjusted for optimized SVG */
+  height: 80px; /* responsive height */
   margin: 14px auto 0;
 }
 
@@ -340,45 +339,39 @@ body{
 }
 
 .progress-active {
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  stroke-width: 4; /* slightly thinner for balance */
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  animation: draw 4s forwards; /* smoother animation */
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: draw 3s forwards;
 }
 
 @keyframes draw {
   to { stroke-dashoffset: 0; }
 }
 
-/* Milestones */
 .milestone {
   position: absolute;
   transform: translateX(-50%);
   text-align: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   color: #fff;
   background: #ff7043;
-  padding: 6px 8px; /* adjusted for larger min-width */
+  padding: 4px 6px;
   border-radius: 999px;
-  box-shadow: 0 4px 0 #bf360c;
-  min-width: 50px; /* prevents text overflow */
+  box-shadow: 0 2px 0 #bf360c;
+  min-width: 35px;
   line-height: 1.1;
+  top: calc(50% - 10px); /* vertically centered relative to SVG */
   z-index: 2;
-  transition: all 0.2s ease;
 }
 
 .milestone span {
   display: block;
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 800;
-  color: #fff;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
-/* Locked milestone */
 .milestone.locked {
   background: #f3d19a;
   color: #f39c12;
@@ -594,30 +587,28 @@ body{
 <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
 
 <div class="progress-wrapper">
-  <svg viewBox="0 0 1000 180" class="progress-svg" preserveAspectRatio="none">
+  <svg viewBox="0 0 100 20" class="progress-svg" preserveAspectRatio="none">
     <!-- background line -->
     <polyline
-      points="90,60 230,120 390,60 510,120 650,60 810,120 940,60"
+      points="10,6 23,14 39,6 51,14 65,6 81,14 94,6"
       fill="none"
       stroke="#ffe0b2"
-      stroke-width="4"
+      stroke-width="1"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
-
     <!-- active line -->
     <polyline
-      points="90,60 230,120 390,60 510,120 650,60 810,120 940,60"
+      points="10,6 23,14 39,6 51,14 65,6 81,14 94,6"
       fill="none"
       stroke="url(#grad)"
-      stroke-width="4"
+      stroke-width="1"
       stroke-linecap="round"
       stroke-linejoin="round"
-      stroke-dasharray="2000"
-      stroke-dashoffset="2000"
+      stroke-dasharray="200"
+      stroke-dashoffset="200"
       class="progress-active"
     />
-
     <defs>
       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#ff7043"/>
@@ -626,14 +617,14 @@ body{
     </defs>
   </svg>
 
-  <!-- Milestones aligned exactly with line -->
-  <div class="milestone" style="left:9%; top:55px;">10<br><span>Nov 21</span></div>
-  <div class="milestone" style="left:23%; top:115px;">50<br><span>Nov 23</span></div>
-  <div class="milestone" style="left:39%; top:55px;">100<br><span>Nov 27</span></div>
-  <div class="milestone" style="left:51%; top:115px;">200<br><span>Dec 12</span></div>
-  <div class="milestone" style="left:65%; top:55px;">300<br><span>Jan 11</span></div>
-  <div class="milestone" style="left:81%; top:115px;">500<br><span>Feb 06</span></div>
-  <div class="milestone locked" style="left:94%; top:55px;">?<br><span>1000+</span></div>
+  <!-- Milestones -->
+  <div class="milestone" style="left:10%;">10<br><span>Nov 21</span></div>
+  <div class="milestone" style="left:23%;">50<br><span>Nov 23</span></div>
+  <div class="milestone" style="left:39%;">100<br><span>Nov 27</span></div>
+  <div class="milestone" style="left:51%;">200<br><span>Dec 12</span></div>
+  <div class="milestone" style="left:65%;">300<br><span>Jan 11</span></div>
+  <div class="milestone" style="left:81%;">500<br><span>Feb 06</span></div>
+  <div class="milestone locked" style="left:94%;">?<br><span>1000+</span></div>
 </div>
 
 <!-- Animate the line -->
