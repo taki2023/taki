@@ -76,38 +76,29 @@ body{
 /* INNER */
 .inner{padding:14px 14px 18px;}
 
-/* FUN CARTOON SECTION LABEL */
+/* SECTION LABEL */
 .sec-label {
   display: flex;
   align-items: center;
-  gap: 10px;               /* more playful spacing */
+  gap: 8px;               /* space between dot and text */
   font-family: 'Fredoka One', cursive;
-  font-size: 15px;
+  font-size: 14px;
   color: #e85d04;
-  margin-bottom: 14px;
-  margin-top: 6px;
+  margin-bottom: 10px;
+  margin-top: 2px;
   position: relative;
 }
 
-/* Bubbly dot */
+/* DOT */
 .sec-label .dot {
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: #ff7043;
+  background: #ff7043;    /* spicy orange color */
   flex-shrink: 0;
-  box-shadow: 0 2px 0 #ffa65c, 0 0 4px #ffb347; /* gives a cartoony pop */
-  animation: bounce 1.2s infinite alternate; /* subtle bounce */
 }
 
-/* bounce animation for the dot */
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-4px) scale(1.05); }
-  100% { transform: translateY(0); }
-}
-
-/* CARTOON-FRIENDLY SECTION SEPARATOR */
+/* CARTOONISH WAVY SEPARATOR LINE */
 .div {
   height: 8px;                /* thicker for cartoonish feel */
   margin: 16px 0;
@@ -118,22 +109,13 @@ body{
     #fff3e0 8px 16px
   );
   position: relative;
-  box-shadow: 0 2px 4px rgba(255,180,100,0.4); /* playful glow */
-  transform: skewY(-3deg);     /* slight tilt for fun */
-  animation: wiggle 3s ease-in-out infinite alternate; /* subtle wiggle */
-}
-
-/* subtle wiggling animation to make the separator feel alive */
-@keyframes wiggle {
-  0% { transform: skewY(-3deg); }
-  50% { transform: skewY(2deg); }
-  100% { transform: skewY(-3deg); }
-}
-
-/* Optional: hover pop effect for extra fun */
-.div:hover {
-  transform: skewY(0deg) scaleX(1.05);
-  box-shadow: 0 4px 6px rgba(255,180,100,0.6);
+  box-shadow: 0 2px 4px rgba(255,180,100,0.4); /* soft playful shadow */
+  clip-path: polygon(
+    0% 50%, 5% 55%, 10% 45%, 15% 50%, 20% 55%, 25% 45%, 
+    30% 50%, 35% 55%, 40% 45%, 45% 50%, 50% 55%, 55% 45%, 
+    60% 50%, 65% 55%, 70% 45%, 75% 50%, 80% 55%, 85% 45%, 
+    90% 50%, 95% 55%, 100% 50%
+  ); /* creates fixed wavy line */
 }
 
 /* DIVIDER */
