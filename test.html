@@ -76,7 +76,7 @@ body{
 /* INNER */
 .inner{padding:14px 14px 18px;}
 
-/* SECTION LABELS WITH DOT */
+/* SECTION LABELS WITH DOT - consistent across all sections */
 .sec-label {
   display: flex;
   align-items: center;
@@ -86,13 +86,14 @@ body{
   color: #e85d04;
   margin-bottom: 10px;
   margin-top: 2px;
+  line-height: 1;         /* ensures vertical alignment */
 }
 
 .sec-label .dot {
-  width: 12px;            /* slightly bigger for visibility */
-  height: 10px;
+  width: 12px;            /* consistent size for all sections */
+  height: 12px;           /* make it square for uniformity */
   border-radius: 50%;
-  background: #ff7043;    /* spicy orange color */
+  background: #ff7043;    /* same spicy orange */
   flex-shrink: 0;         /* prevents shrinking in flex */
 }
 
@@ -427,7 +428,7 @@ body{
   </div>
    <div class="div"></div>
 <!-- NEWEST MEMBERS -->
-<div class="sec-label"><div class="dot"></div><span>New Chillies 🔥</span></div>
+   <div class="sec-label"><div class="dot"></div>New Chillies 🔥</div>
 <div class="members-box">
   <div class="members-list" id="membersList">
     <!-- 3 loading placeholders -->
@@ -465,7 +466,7 @@ body{
 </div>
    <div class="div"></div>
   <!-- LINKS -->
-  <div class="sec-label"><div class="dot"></div><span>Quick Links 🔗</span></div>
+  <div class="sec-label"><div class="dot"></div>Quick Links 🔗</div>
   <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
       <a class="lbtn" href="#"><span class="ico">🧩</span><span>Solve a Puzzle</span><span class="arr">›</span></a>
       <a class="lbtn" href="#"><span class="ico">🎬</span><span>Watch My Game</span><span class="arr">›</span></a>
