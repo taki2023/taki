@@ -328,8 +328,8 @@ body{
 .progress-wrapper {
   position: relative;
   width: 100%;
-  height: 80px; /* responsive height */
-  margin: 14px auto 0;
+  height: 60px; /* adjust height as needed */
+  margin: 20px auto;
 }
 
 .progress-svg {
@@ -339,8 +339,8 @@ body{
 }
 
 .progress-active {
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
   animation: draw 3s forwards;
 }
 
@@ -352,22 +352,20 @@ body{
   position: absolute;
   transform: translateX(-50%);
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
   color: #fff;
   background: #ff7043;
   padding: 4px 6px;
   border-radius: 999px;
-  box-shadow: 0 2px 0 #bf360c;
-  min-width: 35px;
-  line-height: 1.1;
-  top: calc(50% - 10px); /* vertically centered relative to SVG */
+  top: 50%; /* vertically centered on the line */
+  transform: translate(-50%, -50%);
   z-index: 2;
 }
 
 .milestone span {
   display: block;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 800;
   margin-top: 2px;
 }
@@ -381,6 +379,7 @@ body{
 .milestone.locked span {
   color: #f5b041;
 }
+
 
 /* Milestone hover effect */
 .milestone:hover {
@@ -590,23 +589,23 @@ body{
   <svg viewBox="0 0 100 20" class="progress-svg" preserveAspectRatio="none">
     <!-- background line -->
     <polyline
-      points="10,6 23,14 39,6 51,14 65,6 81,14 94,6"
+      points="0,10 20,10 40,10 60,10 80,10 100,10"
       fill="none"
       stroke="#ffe0b2"
-      stroke-width="1"
+      stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <!-- active line -->
     <polyline
-      points="10,6 23,14 39,6 51,14 65,6 81,14 94,6"
+      points="0,10 20,10 40,10 60,10 80,10 100,10"
       fill="none"
       stroke="url(#grad)"
-      stroke-width="1"
+      stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      stroke-dasharray="200"
-      stroke-dashoffset="200"
+      stroke-dasharray="1000"
+      stroke-dashoffset="1000"
       class="progress-active"
     />
     <defs>
@@ -618,13 +617,12 @@ body{
   </svg>
 
   <!-- Milestones -->
-  <div class="milestone" style="left:10%;">10<br><span>Nov 21</span></div>
-  <div class="milestone" style="left:23%;">50<br><span>Nov 23</span></div>
-  <div class="milestone" style="left:39%;">100<br><span>Nov 27</span></div>
-  <div class="milestone" style="left:51%;">200<br><span>Dec 12</span></div>
-  <div class="milestone" style="left:65%;">300<br><span>Jan 11</span></div>
-  <div class="milestone" style="left:81%;">500<br><span>Feb 06</span></div>
-  <div class="milestone locked" style="left:94%;">?<br><span>1000+</span></div>
+  <div class="milestone" style="left:0%;">10<br><span>Nov 21</span></div>
+  <div class="milestone" style="left:20%;">50<br><span>Nov 23</span></div>
+  <div class="milestone" style="left:40%;">100<br><span>Nov 27</span></div>
+  <div class="milestone" style="left:60%;">200<br><span>Dec 12</span></div>
+  <div class="milestone" style="left:80%;">300<br><span>Jan 11</span></div>
+  <div class="milestone" style="left:100%;">500<br><span>Feb 06</span></div>
 </div>
 
 <!-- Animate the line -->
