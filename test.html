@@ -361,7 +361,6 @@ body{
   to { stroke-dashoffset: 0; }
 }
 
-/* Milestones */
 .milestone {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -373,12 +372,14 @@ body{
   padding: 4px 6px;
   border-radius: 999px;
   z-index: 2;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  cursor: pointer;
 }
 
 .milestone:hover {
-  transform: translate(-50%, -55%);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transform: translate(-50%, -60%) scale(1.05); /* smooth lift & slight grow */
+  box-shadow: 0 5px 0 #bf360c; /* similar shadow to invite button */
+  background: linear-gradient(135deg, #ff7043, #ff8a50); /* subtle gradient on hover */
 }
 
 .milestone span {
