@@ -86,7 +86,6 @@ body{
   color: #e85d04;
   margin-bottom: 10px;
   margin-top: 2px;
-  position: relative;
 }
 
 /* DOT */
@@ -94,36 +93,37 @@ body{
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ff7043;    /* spicy orange color */
+  background: #ff7043;
   flex-shrink: 0;
 }
 
 /* FUN CARTOONISH WAVY SEPARATOR */
 .div {
   width: 100%;
-  height: 12px;                  /* thick for cartoonish feel */
+  height: 6px;              /* thickness of the line */
   margin: 14px 0;
   background: #ffb347;
-  border-radius: 6px;            /* rounded edges */
+  border-radius: 4px;
   position: relative;
-  overflow: hidden;
 }
 
-/* Add wavy overlay using pseudo-element */
+/* Add hand-drawn irregular wiggly effect */
 .div::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: -25%;
-  width: 150%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    45deg,
-    #fff3e0 0 12px,
-    #ffb347 12px 24px
-  );
-  border-radius: 6px;
-  transform: rotate(-2deg);
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ff7043;
+  border-radius: 2px;
+  box-shadow: 
+    2px -1px 0 #ff7043, 
+    4px 1px 0 #ff7043, 
+    6px -1px 0 #ff7043,
+    8px 1px 0 #ff7043,
+    10px -1px 0 #ff7043,
+    12px 1px 0 #ff7043;
 }
 
 /* DIVIDER */
