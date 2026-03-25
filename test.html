@@ -100,29 +100,40 @@ body{
   animation: bounce 1.2s infinite alternate; /* subtle bounce */
 }
 
-/* optional small bounce animation */
+/* bounce animation for the dot */
 @keyframes bounce {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px) scale(1.05); }
+  100% { transform: translateY(0); }
 }
 
-/* playful wavy separator line under the label */
-.sec-label::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 100%;
-  height: 6px;
+/* CARTOON-FRIENDLY SECTION SEPARATOR */
+.div {
+  height: 8px;                /* thicker for cartoonish feel */
+  margin: 16px 0;
+  border-radius: 12px;
   background: repeating-linear-gradient(
-    90deg,
-    #ffb347 0 6px,
-    #fff3e0 6px 12px
+    45deg,
+    #ffb347 0 8px,
+    #fff3e0 8px 16px
   );
-  border-radius: 3px;
-  filter: drop-shadow(0 1px 0 #ffa65c); /* gives fun pop/shadow */
-  z-index: -1;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(255,180,100,0.4); /* playful glow */
+  transform: skewY(-3deg);     /* slight tilt for fun */
+  animation: wiggle 3s ease-in-out infinite alternate; /* subtle wiggle */
+}
+
+/* subtle wiggling animation to make the separator feel alive */
+@keyframes wiggle {
+  0% { transform: skewY(-3deg); }
+  50% { transform: skewY(2deg); }
+  100% { transform: skewY(-3deg); }
+}
+
+/* Optional: hover pop effect for extra fun */
+.div:hover {
+  transform: skewY(0deg) scaleX(1.05);
+  box-shadow: 0 4px 6px rgba(255,180,100,0.6);
 }
 
 /* DIVIDER */
