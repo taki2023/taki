@@ -561,23 +561,23 @@ body{
 <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
 
 <div class="progress-wrapper">
-  <svg viewBox="0 0 1000 220" class="progress-svg" preserveAspectRatio="none">
+  <svg viewBox="0 0 1000 180" class="progress-svg" preserveAspectRatio="none">
     <!-- background line -->
     <polyline
-      points="90,60 230,170 390,60 510,170 650,60 810,170 940,60"
+      points="90,60 230,120 390,60 510,120 650,60 810,120 940,60"
       fill="none"
       stroke="#ffe0b2"
-      stroke-width="8"
+      stroke-width="4"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
 
     <!-- active line -->
     <polyline
-      points="90,60 230,170 390,60 510,170 650,60 810,170 940,60"
+      points="90,60 230,120 390,60 510,120 650,60 810,120 940,60"
       fill="none"
       stroke="url(#grad)"
-      stroke-width="8"
+      stroke-width="4"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-dasharray="2000"
@@ -593,17 +593,17 @@ body{
     </defs>
   </svg>
 
-  <!-- EXACT checkpoint centers -->
-  <div class="milestone" style="left:9%; top:15px;">10<br><span>Nov 21</span></div>
-  <div class="milestone" style="left:23%; top:120px;">50<br><span>Nov 23</span></div>
-  <div class="milestone" style="left:39%; top:15px;">100<br><span>Nov 27</span></div>
-  <div class="milestone" style="left:51%; top:120px;">200<br><span>Dec 12</span></div>
-  <div class="milestone" style="left:65%; top:15px;">300<br><span>Jan 11</span></div>
-  <div class="milestone" style="left:81%; top:120px;">500<br><span>Feb 06</span></div>
-  <div class="milestone locked" style="left:94%; top:15px;">?<br><span>1000+</span></div>
+  <!-- Milestones aligned exactly with line -->
+  <div class="milestone" style="left:9%; top:55px;">10<br><span>Nov 21</span></div>
+  <div class="milestone" style="left:23%; top:115px;">50<br><span>Nov 23</span></div>
+  <div class="milestone" style="left:39%; top:55px;">100<br><span>Nov 27</span></div>
+  <div class="milestone" style="left:51%; top:115px;">200<br><span>Dec 12</span></div>
+  <div class="milestone" style="left:65%; top:55px;">300<br><span>Jan 11</span></div>
+  <div class="milestone" style="left:81%; top:115px;">500<br><span>Feb 06</span></div>
+  <div class="milestone locked" style="left:94%; top:55px;">?<br><span>1000+</span></div>
 </div>
 
-<!-- Add this at the end of your <style> -->
+<!-- Animate the line -->
 <style>
 .progress-active {
   animation: draw 3s forwards;
