@@ -361,10 +361,10 @@ body{
   to { stroke-dashoffset: 0; }
 }
 
-/* Milestone hover like invite button */
+/* Milestone base style */
 .milestone {
   position: absolute;
-  transform: translate(-30%, -30%);
+  transform: translate(-50%, -50%);
   text-align: center;
   font-size: 11px;
   font-weight: 900;
@@ -373,13 +373,8 @@ body{
   padding: 4px 6px;
   border-radius: 999px;
   z-index: 2;
-  transition: all 0.15s ease; /* same as invite button */
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* subtle and smooth */
   cursor: pointer;
-}
-
-.milestone:hover {
-  transform: translate(-30%, -35%); /* subtle lift */
-  box-shadow: 0 6px 0 #bf360c;      /* same as copy button shadow */
 }
 
 .milestone span {
@@ -399,11 +394,10 @@ body{
   color: #f5b041;
 }
 
-
-/* Milestone hover effect */
+/* Hover effect - subtle lift, like invite button */
 .milestone:hover {
-  transform: translate(-30%, -3px);
-  box-shadow: 0 6px 0 #bf360c;
+  transform: translate(-50%, -55%); /* small upward lift */
+  box-shadow: 0 4px 0 #bf360c;      /* subtle shadow */
 }
 
 /* Responsive adjustments */
@@ -414,6 +408,11 @@ body{
   .milestone { 
     font-size: 10px; 
     padding: 5px 6px;
+  }
+
+  .milestone:hover {
+    transform: translate(-50%, -52%); /* slightly smaller lift on mobile */
+    box-shadow: 0 3px 0 #bf360c;
   }
 }
 
