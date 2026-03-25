@@ -348,6 +348,12 @@ body{
   font-weight:700;
   color:#bf360c;
 }
+  .member-joined{
+  font-size:9.5px;
+  font-weight:800;
+  color:#ff7043;
+  margin-top:2px;
+}
 </style>
 </head>
 
@@ -404,6 +410,7 @@ body{
       <div class="member-info">
         <div class="member-name">@loading</div>
         <div class="member-rating">Loading...</div>
+        <div class="member-joined">--</div>
       </div>
     </div>
   </div>
@@ -519,6 +526,30 @@ body{
   </div>
 </div>
 <script>
+let newestCache = [];
+
+function timeAgo(timestamp) {
+  const now = Date.now();
+  const diffSeconds = Math.floor((now - (timestamp * 1000)) / 1000);
+
+  if (diffSeconds < 60) return `${diffSeconds}s ago`;
+
+  const minutes = Math.floor(diffSeconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+
+  const weeks = Math.floor(days / 7);
+  if (weeks < 4) return `${weeks}w ago`;
+
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
+
 async function loadNewest() {
   try {
     const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
@@ -548,23 +579,13 @@ async function loadNewest() {
         username: m.username,
         avatar,
         ratingType: best.type,
-        ratingValue: best.value
+        ratingValue: best.value,
+        joined: m.joined
       };
     });
 
-    const membersData = await Promise.all(promises);
-
-    const box = document.getElementById("membersList");
-
-    box.innerHTML = membersData.map(m => `
-      <a class="member-item" href="https://www.chess.com/member/${m.username}" target="_blank">
-        <img class="member-avatar" src="${m.avatar}">
-        <div class="member-info">
-          <div class="member-name">@${m.username}</div>
-          <div class="member-rating">${m.ratingType}: ${m.ratingValue}</div>
-        </div>
-      </a>
-    `).join("");
+    newestCache = await Promise.all(promises);
+    renderMembers();
 
   } catch (err) {
     console.error(err);
@@ -572,7 +593,25 @@ async function loadNewest() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", loadNewest);
+function renderMembers() {
+  const box = document.getElementById("membersList");
+
+  box.innerHTML = newestCache.map(m => `
+    <a class="member-item" href="https://www.chess.com/member/${m.username}" target="_blank">
+      <img class="member-avatar" src="${m.avatar}">
+      <div class="member-info">
+        <div class="member-name">@${m.username}</div>
+        <div class="member-rating">${m.ratingType}: ${m.ratingValue}</div>
+        <div class="member-joined">⏱ ${timeAgo(m.joined)}</div>
+      </div>
+    </a>
+  `).join("");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadNewest();
+  setInterval(renderMembers, 60000); // refresh time every 60s
+});
 </script>
 </body>
 </html>
