@@ -77,45 +77,93 @@ body{
 .inner{padding:14px 14px 18px;}
 
 /* SECTION LABEL */
-.sec-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;               /* space between dot and text */
-  font-family: 'Fredoka One', cursive;
-  font-size: 14px;
-  color: #e85d04;
-  margin-bottom: 4px;     /* reduced so line sits close */
-  margin-top: 6px;
-  position: relative;
+.sec-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:'Fredoka One',cursive;
+  font-size:14px;
+  color:#e85d04;
+  margin-bottom:2px;
+  margin-top:6px;
+  position:relative;
 }
 
 /* DOT */
-.sec-label .dot {
-  width: 12px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ff7043;
-  flex-shrink: 0;
+.sec-label .dot{
+  width:12px;
+  height:10px;
+  border-radius:50%;
+  background:#ff7043;
+  flex-shrink:0;
 }
 
-/* CARTOON HAND-DRAWN SEPARATOR */
-.div {
-  height: 8px;            /* height of SVG container */
-  margin: 8px 0 14px 0;   /* spacing around separator */
-  overflow: hidden;       /* prevent overflow */
+/* HAND-DRAWN SEPARATOR */
+.div{
+  width:100%;
+  height:18px;
+  margin:10px 0 14px;
+  position:relative;
+  opacity:.95;
 }
 
-.div svg {
-  width: 100%;
-  height: 100%;
+.div::before,
+.div::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:6px;
+  border-radius:999px;
 }
 
-.div path {
-  fill: transparent;
-  stroke: #ff7043;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* first stroke */
+.div::before{
+  top:4px;
+  background:
+    radial-gradient(circle at 2% 50%, #f0a789 0 6px, transparent 7px),
+    radial-gradient(circle at 98% 50%, #f0a789 0 6px, transparent 7px),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      #f0a789 4%,
+      #eea386 12%,
+      #f1a98d 24%,
+      #eba184 37%,
+      #f0a789 50%,
+      #eca286 63%,
+      #f1aa8e 77%,
+      #eea386 90%,
+      #f0a789 96%,
+      transparent 100%
+    );
+  transform:rotate(-0.35deg);
+  filter:blur(.15px);
+}
+
+/* second slightly offset stroke for hand-drawn effect */
+.div::after{
+  top:8px;
+  left:4px;
+  width:calc(100% - 8px);
+  background:
+    radial-gradient(circle at 2% 50%, #f0a789 0 5px, transparent 6px),
+    radial-gradient(circle at 98% 50%, #f0a789 0 5px, transparent 6px),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      #f2ab90 5%,
+      #ef9f81 16%,
+      #f0a789 28%,
+      #eda287 41%,
+      #f1ab91 56%,
+      #eca185 71%,
+      #f0a789 86%,
+      #f2ab90 95%,
+      transparent 100%
+    );
+  transform:rotate(0.45deg);
+  opacity:.82;
 }
 /* DIVIDER */
 .div{
