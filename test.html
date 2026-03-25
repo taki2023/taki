@@ -98,24 +98,32 @@ body{
   flex-shrink: 0;
 }
 
-/* CARTOONISH WAVY SEPARATOR LINE */
+/* FUN CARTOONISH WAVY SEPARATOR */
 .div {
-  height: 8px;                /* thicker for cartoonish feel */
-  margin: 16px 0;
-  border-radius: 12px;
+  width: 100%;
+  height: 12px;                  /* thick for cartoonish feel */
+  margin: 14px 0;
+  background: #ffb347;
+  border-radius: 6px;            /* rounded edges */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add wavy overlay using pseudo-element */
+.div::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -25%;
+  width: 150%;
+  height: 100%;
   background: repeating-linear-gradient(
     45deg,
-    #ffb347 0 8px,
-    #fff3e0 8px 16px
+    #fff3e0 0 12px,
+    #ffb347 12px 24px
   );
-  position: relative;
-  box-shadow: 0 2px 4px rgba(255,180,100,0.4); /* soft playful shadow */
-  clip-path: polygon(
-    0% 50%, 5% 55%, 10% 45%, 15% 50%, 20% 55%, 25% 45%, 
-    30% 50%, 35% 55%, 40% 45%, 45% 50%, 50% 55%, 55% 45%, 
-    60% 50%, 65% 55%, 70% 45%, 75% 50%, 80% 55%, 85% 45%, 
-    90% 50%, 95% 55%, 100% 50%
-  ); /* creates fixed wavy line */
+  border-radius: 6px;
+  transform: rotate(-2deg);
 }
 
 /* DIVIDER */
