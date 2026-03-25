@@ -84,69 +84,38 @@ body{
   font-family: 'Fredoka One', cursive;
   font-size: 14px;
   color: #e85d04;
-  margin-bottom: 10px;
-  margin-top: 2px;
+  margin-bottom: 4px;     /* reduced so line sits close */
+  margin-top: 6px;
+  position: relative;
 }
 
 /* DOT */
 .sec-label .dot {
-  width: 10px;
+  width: 12px;
   height: 10px;
   border-radius: 50%;
   background: #ff7043;
   flex-shrink: 0;
 }
 
-/* FUN CARTOONISH WAVY SEPARATOR */
+/* CARTOON HAND-DRAWN SEPARATOR */
 .div {
-  width: 100%;
-  height: 6px;              /* thickness of the base line */
-  margin: 14px 0;
-  background: #ffb347;
-  border-radius: 4px;
-  position: relative;
+  height: 8px;            /* height of SVG container */
+  margin: 8px 0 14px 0;   /* spacing around separator */
+  overflow: hidden;       /* prevent overflow */
 }
 
-/* Hand-drawn wiggly effect */
-.div::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
+.div svg {
   width: 100%;
-  height: 3px;             /* thickness of the bumps */
-  background: #ff7043;
-  border-radius: 2px;
-  box-shadow: 
-    0px -2px 0 #ff7043,
-    10px 2px 0 #ff7043,
-    20px -3px 0 #ff7043,
-    30px 2px 0 #ff7043,
-    40px -2px 0 #ff7043,
-    50px 3px 0 #ff7043,
-    60px -3px 0 #ff7043,
-    70px 2px 0 #ff7043,
-    80px -2px 0 #ff7043,
-    90px 3px 0 #ff7043,
-    100px -3px 0 #ff7043,
-    110px 2px 0 #ff7043,
-    120px -2px 0 #ff7043,
-    130px 3px 0 #ff7043,
-    140px -3px 0 #ff7043,
-    150px 2px 0 #ff7043,
-    160px -2px 0 #ff7043,
-    170px 3px 0 #ff7043,
-    180px -3px 0 #ff7043,
-    190px 2px 0 #ff7043,
-    200px -2px 0 #ff7043,
-    210px 3px 0 #ff7043,
-    220px -3px 0 #ff7043,
-    230px 2px 0 #ff7043,
-    240px -2px 0 #ff7043,
-    250px 3px 0 #ff7043,
-    260px -3px 0 #ff7043,
-    270px 2px 0 #ff7043,
-    280px -2px 0 #ff7043;
+  height: 100%;
+}
+
+.div path {
+  fill: transparent;
+  stroke: #ff7043;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 /* DIVIDER */
 .div{
@@ -517,7 +486,22 @@ body{
 </div>
    <div class="div"></div>
   <!-- LINKS -->
-  <div class="sec-label"><div class="dot"></div>Quick Links 🔗</div>
+  <div class="sec-label"><div class="dot"></div><span>Quick Links 🔗</span></div>
+<div class="div">
+  <svg viewBox="0 0 300 8" preserveAspectRatio="none">
+    <path d="
+      M0 4
+      C5 2, 15 6, 30 4
+      C45 2, 55 6, 70 4
+      C85 2, 95 6, 110 4
+      C125 2, 135 6, 150 4
+      C165 2, 175 6, 190 4
+      C205 2, 215 6, 230 4
+      C245 2, 255 6, 270 4
+      C285 2, 295 6, 300 4
+    "/>
+  </svg>
+</div>
   <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
       <a class="lbtn" href="#"><span class="ico">🧩</span><span>Solve a Puzzle</span><span class="arr">›</span></a>
       <a class="lbtn" href="#"><span class="ico">🎬</span><span>Watch My Game</span><span class="arr">›</span></a>
