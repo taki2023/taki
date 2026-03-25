@@ -298,8 +298,10 @@ body{
   display:flex;
   flex-direction:column;
   gap:8px;
+  min-height:130px; /* reserve space so box doesn't shrink then grow */
 }
 
+/* Each member card */
 .member-item{
   display:flex;
   align-items:center;
@@ -310,6 +312,7 @@ body{
   border:2px solid #ffe0b2;
   text-decoration:none;
   transition:all .15s ease;
+  min-height:44px; /* ensures placeholders have consistent height */
 }
 
 .member-item:hover{
@@ -319,6 +322,7 @@ body{
   box-shadow:0 5px 0 #ff7043;
 }
 
+/* Avatar */
 .member-avatar{
   width:38px;
   height:38px;
@@ -328,14 +332,15 @@ body{
   flex-shrink:0;
 }
 
-/* MAKE THE INFO TAKE FULL WIDTH */
+/* Info container */
 .member-info{
   display:flex;
   flex-direction:column;
-  flex:1;        /* fills available width */
-  min-width:0;   /* important for text overflow & auto spacing */
+  flex:1;
+  min-width:0; /* ensures ellipsis works */
 }
 
+/* Member name */
 .member-name{
   font-size:12px;
   font-weight:800;
@@ -345,6 +350,7 @@ body{
   text-overflow:ellipsis;
 }
 
+/* Meta (rating + joined timer) */
 .member-meta{
   display:flex;
   align-items:center;
@@ -354,10 +360,12 @@ body{
   font-weight:700;
 }
 
+/* Rating */
 .member-rating{
   color:#bf360c;
 }
 
+/* Joined timer aligned right */
 .member-joined{
   margin-left:auto;   /* pushes timer fully to the right */
   color:#ff7043;
@@ -409,18 +417,37 @@ body{
       Play sharp. Think spicy. Win big.
     </div>
   </div>
-<!-- NEWEST MEMBERS -->
-<div class="sec-label"><div class="dot"></div>New Chillies 🔥</div>
-
 <div class="members-box">
   <div class="members-list" id="membersList">
-    <!-- Loading placeholders -->
+    <!-- 3 loading placeholders -->
     <div class="member-item">
       <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
       <div class="member-info">
         <div class="member-name">@loading</div>
-        <div class="member-rating">Loading...</div>
-        <div class="member-joined">--</div>
+        <div class="member-meta">
+          <span class="member-rating">Loading...</span>
+          <span class="member-joined">--</span>
+        </div>
+      </div>
+    </div>
+    <div class="member-item">
+      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="member-info">
+        <div class="member-name">@loading</div>
+        <div class="member-meta">
+          <span class="member-rating">Loading...</span>
+          <span class="member-joined">--</span>
+        </div>
+      </div>
+    </div>
+    <div class="member-item">
+      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="member-info">
+        <div class="member-name">@loading</div>
+        <div class="member-meta">
+          <span class="member-rating">Loading...</span>
+          <span class="member-joined">--</span>
+        </div>
       </div>
     </div>
   </div>
