@@ -343,16 +343,23 @@ body{
   text-overflow:ellipsis;
 }
 
-.member-rating{
+.member-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   font-size:10.5px;
   font-weight:700;
+  margin-top:2px;
+}
+
+.member-rating{
   color:#bf360c;
 }
-  .member-joined{
-  font-size:9.5px;
-  font-weight:800;
+
+.member-joined{
   color:#ff7043;
-  margin-top:2px;
+  font-weight:800;
+  white-space:nowrap;
 }
 </style>
 </head>
@@ -601,8 +608,10 @@ function renderMembers() {
       <img class="member-avatar" src="${m.avatar}">
       <div class="member-info">
         <div class="member-name">@${m.username}</div>
-        <div class="member-rating">${m.ratingType}: ${m.ratingValue}</div>
-        <div class="member-joined">⏱ ${timeAgo(m.joined)}</div>
+<div class="member-meta">
+  <span class="member-rating">${m.ratingType}: ${m.ratingValue}</span>
+  <span class="member-joined">⏱ ${timeAgo(m.joined)}</span>
+</div>
       </div>
     </a>
   `).join("");
