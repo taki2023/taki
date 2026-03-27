@@ -354,8 +354,8 @@ body{
 }
 .member-avatar{ width:38px; height:38px; border-radius:50%; border:2px solid #d93020; object-fit:cover; flex-shrink:0; }
 .member-info{ display:flex; flex-direction:column; flex:1; min-width:0; }
-.member-name{ font-size:12px; font-weight:800; color:#c73520; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.member-meta{ display:flex; align-items:center; width:100%; margin-top:2px; font-size:10.5px; font-weight:700; }
+.member-name{ font-size:11px; font-weight:800; color:#c73520; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.member-meta{ display:flex; align-items:center; width:100%; margin-top:2px; font-size:10px; font-weight:700; }
 .member-rating{ color:#9a2010; }
 .member-joined{ margin-left:auto; color:#d93020; font-weight:800; white-space:nowrap; }
  
@@ -436,7 +436,7 @@ body{
   background:linear-gradient(135deg,#d93020,#e84535);
   border:none;
   color:#fff;
-  font-size:12px;
+  font-size:11px;
   font-weight:900;
   font-family:'Nunito',sans-serif;
   cursor:pointer;
@@ -448,7 +448,7 @@ body{
 .bday-save-btn:active{ transform:translateY(2px); box-shadow:0 2px 0 #8c1a10; }
  
 .bday-msg{
-  font-size:11px;
+  font-size:9px;
   font-weight:700;
   color:#d93020;
   min-height:14px;
@@ -496,15 +496,15 @@ body{
 .bday-avatar{ width:38px; height:38px; border-radius:50%; border:2px solid #d93020; object-fit:cover; flex-shrink:0; }
  
 .bday-info{ display:flex; flex-direction:column; flex:1; min-width:0; }
-.bday-name{ font-size:12px; font-weight:800; color:#c73520; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bday-name{ font-size:11px; font-weight:800; color:#c73520; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
  
 .bday-meta{ display:flex; align-items:center; width:100%; margin-top:3px; gap:4px; flex-wrap:wrap; }
-.bday-date{ font-size:10.5px; font-weight:700; color:#9a2010; }
-.bday-note{ font-size:10px; font-weight:600; color:#c73520; opacity:.75; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bday-date{ font-size:9.5px; font-weight:700; color:#9a2010; }
+.bday-note{ font-size:9px; font-weight:600; color:#c73520; opacity:.75; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
  
 .bday-countdown{
   margin-left:auto;
-  font-size:10.5px;
+  font-size:10px;
   font-weight:900;
   color:#d93020;
   white-space:nowrap;
@@ -522,7 +522,7 @@ body{
 .bday-empty{
   text-align:center;
   padding:16px 0;
-  font-size:11.5px;
+  font-size:11px;
   font-weight:800;
   color:#e8aa98;
 }
@@ -561,12 +561,12 @@ body{
 }
  
 .disc-wrap{
-  width:42px;height:42px;border-radius:50%;
+  width:38px;height:38px;border-radius:50%;
   background:rgba(255,255,255,0.2);
   border:2.5px solid rgba(255,255,255,0.5);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;position:relative;z-index:1;
-  font-size:20px;
+  font-size:18px;
 }
 .disc-wrap.spinning{ animation:spinDisc 3s linear infinite; }
 @keyframes spinDisc{from{transform:rotate(0)}to{transform:rotate(360deg)}}
@@ -578,7 +578,7 @@ body{
   text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;
 }
 .track-name{
-  font-size:12px;font-weight:900;color:#fff;
+  font-size:11px;font-weight:900;color:#fff;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   text-shadow:0 1px 3px rgba(0,0,0,0.3);
 }
@@ -643,15 +643,15 @@ body{
 .mcbtn:hover{ background:#fce8e0;border-color:#d93020; transform:translateY(-2px);box-shadow:0 6px 0 #c73520; }
 .mcbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #c73520;}
 .mcbtn svg{display:block;flex-shrink:0;}
-.mcbtn.sm{width:28px;height:28px;}
-.mcbtn.sm svg{width:12px;height:12px;}
+.mcbtn.sm{width:25px;height:25px;}
+.mcbtn.sm svg{width:11px;height:11px;}
 .mcbtn.play{
-  width:38px;height:38px;
+  width:32px;height:32px;
   background:linear-gradient(135deg,#d93020,#e85535);
   border:none;
   box-shadow:0 5px 0 #8c1a10;
 }
-.mcbtn.play svg{width:14px;height:14px;}
+.mcbtn.play svg{width:12px;height:12px;}
 .mcbtn.play:hover{transform:translateY(-2px);box-shadow:0 7px 0 #8c1a10;background:linear-gradient(135deg,#c02010,#d94030);}
 .mcbtn.play:active{transform:translateY(2px);box-shadow:0 2px 0 #8c1a10;}
 .mcbtn.loop-on{background:linear-gradient(135deg,#d93020,#ef6640);border:none;box-shadow:0 4px 0 #8c1a10;}
@@ -670,7 +670,7 @@ body{
 .music-vol-icon:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-1px);}
 .music-vol-icon svg{width:13px;height:13px;color:#c73520;}
 .music-vol-track{
-  width:55px;height:8px;
+  width:50px;height:8px;
   background:#fce8e0;border-radius:999px;
   border:2px solid #f5c5b8;
   cursor:pointer;position:relative;flex-shrink:0;
@@ -701,7 +701,7 @@ body{
   border:2px solid #f5c5b8;
   background:#fff8f5;
   color:#8c1a10;
-  font-size:11.5px;font-family:'Nunito',sans-serif;font-weight:700;
+  font-size:11px;font-family:'Nunito',sans-serif;font-weight:700;
   outline:none;transition:border-color .15s, box-shadow .15s;
 }
 .music-search-input::placeholder{color:#e8aa98;font-weight:600;}
@@ -728,7 +728,7 @@ body{
 .music-search-item{
   display:flex;align-items:center;gap:8px;
   padding:7px 10px;cursor:pointer;
-  font-size:11.5px;font-weight:700;color:#8c1a10;
+  font-size:11px;font-weight:700;color:#8c1a10;
   border-bottom:1.5px solid #fce8e0;
   transition:background .12s;
 }
