@@ -221,7 +221,7 @@ body{display:block;}
 .member-avatar{width:36px;height:36px;border-radius:50%;border:2px solid #d93020;object-fit:cover;flex-shrink:0;}
 .member-info{display:flex;flex-direction:column;flex:1;min-width:0;overflow:hidden;}
 .member-name{font-size:var(--fs-base);font-weight:800;color:#c73520;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.member-meta{display:flex;align-items:center;width:100%;margin-top:2px;font-size:var(--fs-xs);font-weight:700;gap:4px;}
+.member-meta{display:flex;align-items:width:100%;margin-top:2px;font-size:var(--fs-xs);font-weight:700;gap:4px;}
 .member-rating{color:#9a2010;flex-shrink:0;}
 .member-joined{margin-left:auto;color:#d93020;font-weight:800;white-space:nowrap;flex-shrink:0;}
  
@@ -347,7 +347,6 @@ body{display:block;}
   border:2.5px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;
   flex-shrink:0;position:relative;z-index:1;font-size:18px;
 }
-/* FIX: disc only spins when truly playing */
 .disc-wrap.spinning{animation:spinDisc 3.5s linear infinite;}
 @keyframes spinDisc{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .track-info{flex:1;min-width:0;position:relative;z-index:1;overflow:hidden;}
@@ -391,7 +390,11 @@ body{display:block;}
   display:flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer;
   border:2px solid #f5c5b8;background:#fff8f5;box-shadow:0 4px 0 #e8aa98;
   transition:all .15s ease;user-select:none;flex-shrink:0;
+  /* FIX 3: prevent SVG children from absorbing pointer events */
+  pointer-events:auto;
 }
+/* FIX 3: SVG children must not intercept clicks */
+.mcbtn svg, .mcbtn svg *{pointer-events:none;}
 .mcbtn:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-2px);box-shadow:0 6px 0 #c73520;}
 .mcbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #c73520;}
 .mcbtn svg{display:block;flex-shrink:0;}
@@ -413,7 +416,7 @@ body{display:block;}
   cursor:pointer;box-shadow:0 3px 0 #e8aa98;transition:all .15s;flex-shrink:0;
 }
 .music-vol-icon:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-1px);}
-.music-vol-icon svg{width:13px;height:13px;color:#c73520;}
+.music-vol-icon svg{width:13px;height:13px;color:#c73520;pointer-events:none;}
 .music-vol-track{width:46px;height:8px;background:#fce8e0;border-radius:999px;border:2px solid #f5c5b8;cursor:pointer;position:relative;flex-shrink:0;}
 .music-vol-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);border-radius:999px;width:70%;}
 .music-vol-knob{
@@ -975,7 +978,7 @@ window.addEventListener("DOMContentLoaded", loadBirthdays);
 ════════════════════════════ */
 (function(){
 
-/* ── Safe localStorage wrapper (fails gracefully in sandboxed iframes) ── */
+/* ── Safe localStorage wrapper ── */
 const LS = {
   get(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:v; }catch(e){ return def; } },
   set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
@@ -984,22 +987,20 @@ const LS = {
 };
 
 const DB = [
-  { title:"Faded – Alan Walker", src:"https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3" },
-  { title:"Despacito – Luis Fonsi", src:"https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3" },
-  { title:"Unstoppable – Sia", src:"https://raw.githubusercontent.com/taki2023/taki/main/Sia_-_Im_unstoppable_today_(mp3.pm)%20(1).mp3" },
-  { title:"Believer – Imagine Dragons", src:"https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3" },
-  { title:"Demons – Imagine Dragons", src:"https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3" },
-  { title:"Yellow – Coldplay", src:"https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3" },
-  { title:"Maniac – Zayde Wolf", src:"https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3" },
-  { title:"Mary On A Cross", src:"https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3" }
- 
+  { title:"Faded – Alan Walker",       src:"https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3" },
+  { title:"Despacito – Luis Fonsi",    src:"https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3" },
+  { title:"Unstoppable – Sia",         src:"https://raw.githubusercontent.com/taki2023/taki/main/Sia_-_Im_unstoppable_today_(mp3.pm)%20(1).mp3" },
+  { title:"Believer – Imagine Dragons",src:"https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3" },
+  { title:"Demons – Imagine Dragons",  src:"https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3" },
+  { title:"Yellow – Coldplay",         src:"https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3" },
+  { title:"Maniac – Zayde Wolf",       src:"https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3" },
+  { title:"Mary On A Cross – Ghost",   src:"https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3" }
 ];
 
-let queue     = LS.getJSON('hcc2_queue', []);
-let cur       = parseInt(LS.get('hcc2_cur', '0')) || 0;
-let savedTime = parseFloat(LS.get('hcc2_t', '0')) || 0;
+let queue        = LS.getJSON('hcc2_queue', []);
+let cur          = parseInt(LS.get('hcc2_cur', '0')) || 0;
+let savedTime    = parseFloat(LS.get('hcc2_t', '0')) || 0;
 let draggingProg = false;
-/* FIX: track whether audio is truly playing (not just loading) */
 let isActuallyPlaying = false;
 
 if (cur >= queue.length) cur = 0;
@@ -1034,23 +1035,22 @@ function save(){
   LS.set('hcc2_cur', cur);
 }
 
-/* ── FIX: UI reflects actual playing state, not loading state ── */
 function setPlayingUI(playing){
   isActuallyPlaying = playing;
   if(playing){
     iconPlay.innerHTML = '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
     iconPlay.setAttribute('fill','white');
-    disc.classList.add('spinning');           /* spin only when truly playing */
+    disc.classList.add('spinning');
     eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.remove('paused'));
     btnPlay.title = 'Pause';
   } else {
     iconPlay.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
     iconPlay.setAttribute('fill','white');
-    disc.classList.remove('spinning');        /* stop when paused/loading */
+    disc.classList.remove('spinning');
     eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.add('paused'));
     btnPlay.title = 'Play';
   }
-  renderPlaylist(); /* keep playlist icons in sync */
+  renderPlaylist();
 }
 
 function setLoopUI(on){
@@ -1082,7 +1082,6 @@ function syncProg(){
 function loadTrack(index, autoplay){
   if(!queue.length) return;
   cur = index;
-  /* FIX: reset playing state immediately when loading new track */
   setPlayingUI(false);
   audio.src = queue[cur].src;
   trackName.textContent = queue[cur].title;
@@ -1093,7 +1092,12 @@ function loadTrack(index, autoplay){
   save();
   audio.load();
   if(autoplay){
-    audio.play().catch(()=>{ setPlayingUI(false); });
+    /* FIX 2: use canplay event to reliably trigger play after load */
+    const onCanPlay = () => {
+      audio.removeEventListener('canplay', onCanPlay);
+      audio.play().catch(()=>{ setPlayingUI(false); });
+    };
+    audio.addEventListener('canplay', onCanPlay);
   } else {
     audio.onloadedmetadata = () => {
       if(savedTime>0 && savedTime<audio.duration){ audio.currentTime = savedTime; syncProg(); }
@@ -1112,7 +1116,6 @@ function renderPlaylist(){
   queue.forEach((t,i)=>{
     const div = document.createElement('div');
     div.className = 'music-playlist-item'+(i===cur?' active':'');
-    /* FIX: play icon only when actually playing, not just selected */
     const rowIcon = (i===cur && isActuallyPlaying) ? '▶' : '♪';
     div.innerHTML =
       '<span class="music-pl-num">'+String(i+1).padStart(2,'0')+'</span>'+
@@ -1157,17 +1160,30 @@ function removeTrack(i){
   renderPlaylist(); save();
 }
 
-function nextTrack(){ if(!queue.length) return; const wp=isActuallyPlaying; cur=(cur+1)%queue.length; savedTime=0; loadTrack(cur,wp); }
-function prevTrack(){ if(!queue.length) return; if(audio.currentTime>3){ audio.currentTime=0; return; } const wp=isActuallyPlaying; cur=(cur-1+queue.length)%queue.length; savedTime=0; loadTrack(cur,wp); }
+/* FIX 2: nextTrack always autoplays (song ended = was playing) */
+function nextTrack(forcePlay){
+  if(!queue.length) return;
+  const wp = (forcePlay === true) ? true : isActuallyPlaying;
+  cur=(cur+1)%queue.length;
+  savedTime=0;
+  loadTrack(cur, wp);
+}
+function prevTrack(){
+  if(!queue.length) return;
+  if(audio.currentTime>3){ audio.currentTime=0; return; }
+  const wp=isActuallyPlaying;
+  cur=(cur-1+queue.length)%queue.length;
+  savedTime=0;
+  loadTrack(cur,wp);
+}
 
-audio.onended      = () => { if(!audio.loop) nextTrack(); };
+/* FIX 2: when song ends, always force-play the next one */
+audio.onended      = () => { if(!audio.loop) nextTrack(true); };
 audio.ontimeupdate = syncProg;
 
-/* FIX: only set playing=true when audio is genuinely producing sound */
 audio.onplay  = () => { isActuallyPlaying = true;  setPlayingUI(true);  };
 audio.onpause = () => { isActuallyPlaying = false; setPlayingUI(false); };
 
-/* FIX: handle stall/waiting — stop spinning disc while buffering */
 audio.onwaiting = () => {
   disc.classList.remove('spinning');
   eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.add('paused'));
@@ -1179,9 +1195,13 @@ audio.onplaying = () => {
   }
 };
 
-audio.onerror = () => { if(queue.length) nextTrack(); };
+audio.onerror = () => { if(queue.length) nextTrack(true); };
 
-btnPlay.onclick = () => {
+/* FIX 3: play button uses button element which reliably receives clicks.
+   The CSS already sets pointer-events:none on SVG children.
+   We also attach the handler directly here so it's unambiguous. */
+btnPlay.addEventListener('click', function(e){
+  e.stopPropagation();
   if(!queue.length) return;
   if(!audio.src || audio.src===''){
     loadTrack(cur, true);
@@ -1190,16 +1210,17 @@ btnPlay.onclick = () => {
   } else {
     audio.pause();
   }
-};
+});
 
-btnNext.onclick = nextTrack;
-btnPrev.onclick = prevTrack;
+btnNext.addEventListener('click', function(e){ e.stopPropagation(); nextTrack(); });
+btnPrev.addEventListener('click', function(e){ e.stopPropagation(); prevTrack(); });
 
-btnLoop.onclick = () => {
+btnLoop.addEventListener('click', function(e){
+  e.stopPropagation();
   audio.loop = !audio.loop;
   setLoopUI(audio.loop);
   LS.set('hcc2_loop', audio.loop);
-};
+});
 
 const savedLoop = LS.get('hcc2_loop','false') === 'true';
 audio.loop = savedLoop;
@@ -1231,14 +1252,11 @@ volTrack.onmousedown = e => {
 volTrack.ontouchstart = volFromEvent;
 volTrack.ontouchmove  = volFromEvent;
 
-/* FIX: mute toggles pause/play — muting stops audio, unmuting resumes */
 btnVol.onclick = () => {
   if(!audio.muted){
-    /* Muting → pause the audio */
     audio.muted = true;
     if(!audio.paused) audio.pause();
   } else {
-    /* Unmuting → resume playback */
     audio.muted = false;
     if(queue.length && audio.src && audio.src !== '') audio.play().catch(()=>{});
   }
@@ -1280,7 +1298,6 @@ function renderDropdown(list){
         const wasEmpty = queue.length === 0;
         queue.push(song);
         save();
-        /* FIX: immediately re-render playlist & dropdown after adding */
         renderPlaylist();
         renderDropdown(DB.filter(s => s.title.toLowerCase().includes(searchInp.value.toLowerCase().trim())));
         if(wasEmpty){ savedTime=0; loadTrack(0, false); }
@@ -1303,7 +1320,9 @@ searchInp.addEventListener('input', function(){
   renderDropdown(q ? DB.filter(s => s.title.toLowerCase().includes(q)) : DB);
 });
 
-/* FIX: close dropdown on any click outside — works inside iframes too */
+/* FIX 1: close dropdown on clicks BOTH inside and outside the iframe.
+   - Inside iframe: mousedown/touchstart on document (original logic, kept).
+   - Outside iframe: the window loses focus → use window blur + visibilitychange. */
 document.addEventListener('mousedown', e => {
   if(!searchInp.contains(e.target) && !dropdown.contains(e.target)){
     closeDropdown();
@@ -1314,6 +1333,16 @@ document.addEventListener('touchstart', e => {
     closeDropdown();
   }
 }, { passive: true });
+
+/* FIX 1: when the user clicks outside the iframe the window loses focus */
+window.addEventListener('blur', () => {
+  closeDropdown();
+});
+
+/* FIX 1: also close when the tab/page becomes hidden */
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden') closeDropdown();
+});
 
 searchInp.addEventListener('keydown', e => {
   if(e.key === 'Escape'){ closeDropdown(); searchInp.blur(); }
