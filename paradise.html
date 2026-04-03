@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Paradise Chess Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;background:#0d1f1a;}
+
+:root{
+  --jungle:   #0d2b1f;
+  --deep:     #0a1e15;
+  --canopy:   #1a4332;
+  --leaf:     #2d6a4f;
+  --fern:     #40916c;
+  --ocean:    #1a6b6e;
+  --lagoon:   #2a9d8f;
+  --foam:     #52b69a;
+  --sky:      #74c2a8;
+  --sand:     #e9c46a;
+  --gold:     #f4a261;
+  --sunset:   #e76f51;
+  --cream:    #fdf6e3;
+  --parchment:#f0e6c8;
+  --bark:     #7a5c3a;
+}
+
+/* ═══════════════════════════════
+   OUTER WRAPPER
+═══════════════════════════════ */
+.sb{
+  font-family:'Josefin Sans',sans-serif;
+  width:100%;max-width:none;
+  background:var(--jungle);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Tropical texture overlay */
+.sb::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(42,157,143,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 30% at 20% 80%, rgba(26,107,110,.1) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(64,145,108,.08) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+/* ═══════════════════════════════
+   HERO HEADER
+═══════════════════════════════ */
+.hero{
+  position:relative;
+  background:linear-gradient(180deg, #061410 0%, #0d2b1f 40%, #0a1e15 100%);
+  padding:0;
+  overflow:hidden;
+}
+
+/* Animated palm silhouettes */
+.hero-palms{
+  position:absolute;bottom:0;left:0;right:0;
+  height:120px;pointer-events:none;z-index:1;
+  overflow:hidden;
+}
+.palm-svg{position:absolute;bottom:0;}
+.palm-left{left:-10px;width:110px;opacity:.7;}
+.palm-right{right:-10px;width:110px;opacity:.7;transform:scaleX(-1);}
+.palm-mid{left:50%;transform:translateX(-50%);width:80px;opacity:.4;}
+
+/* Horizon glow */
+.hero-glow{
+  position:absolute;bottom:50px;left:0;right:0;
+  height:80px;
+  background:linear-gradient(180deg, transparent 0%, rgba(42,157,143,.15) 50%, rgba(26,107,110,.25) 100%);
+  pointer-events:none;z-index:0;
+}
+
+.hero-inner{
+  position:relative;z-index:2;
+  text-align:center;
+  padding:28px 20px 30px;
+}
+
+.hero-logo-wrap{
+  width:100px;height:100px;
+  border-radius:50%;
+  border:3px solid var(--sand);
+  box-shadow:0 0 0 6px rgba(233,196,106,.15), 0 0 40px rgba(42,157,143,.3), 0 8px 32px rgba(0,0,0,.5);
+  margin:0 auto 14px;
+  overflow:hidden;
+  position:relative;
+}
+.hero-logo-wrap img{width:100%;height:100%;object-fit:cover;}
+
+.hero-tagline-top{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;
+  color:var(--sand);opacity:.8;margin-bottom:6px;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:900;
+  color:var(--cream);
+  line-height:1.1;
+  text-shadow:0 2px 20px rgba(0,0,0,.6);
+  margin-bottom:4px;
+}
+.hero-title em{
+  font-style:italic;color:var(--sand);display:block;font-size:22px;
+}
+.hero-subtitle{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:9px;font-weight:600;letter-spacing:5px;text-transform:uppercase;
+  color:var(--foam);margin-top:6px;opacity:.9;
+}
+
+/* Decorative divider */
+.hero-divider{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:12px auto 0;padding:0 30px;
+}
+.hero-divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sand),transparent);opacity:.4;}
+.hero-divider-gem{font-size:12px;color:var(--sand);opacity:.8;}
+
+/* ═══════════════════════════════
+   GIF / WELCOME BANNER
+═══════════════════════════════ */
+.gif-section{
+  position:relative;z-index:1;
+  padding:0 16px 0;margin-top:-1px;
+}
+.gif-frame{
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+  border:2px solid rgba(233,196,106,.3);
+  box-shadow:0 8px 32px rgba(0,0,0,.4), 0 0 0 1px rgba(42,157,143,.2);
+}
+.gif-frame img{width:100%;display:block;}
+.gif-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:14px 16px 12px;
+  background:linear-gradient(0deg, rgba(6,20,16,.9) 0%, rgba(6,20,16,.5) 60%, transparent 100%);
+}
+.gif-overlay-text{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:13px;color:var(--cream);
+  text-shadow:0 1px 8px rgba(0,0,0,.8);
+}
+.gif-overlay-sub{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--sand);font-weight:600;margin-top:2px;opacity:.85;
+}
+
+/* ═══════════════════════════════
+   MAIN CONTENT AREA
+═══════════════════════════════ */
+.content{
+  position:relative;z-index:1;
+  padding:0 16px;
+}
+
+/* ═══════════════════════════════
+   TROPICAL SECTION DIVIDER
+═══════════════════════════════ */
+.tropic-div{
+  display:flex;align-items:center;gap:10px;
+  margin:18px 0 14px;
+}
+.tropic-div-line{
+  flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(82,182,154,.4),transparent);
+}
+.tropic-div-icon{font-size:14px;opacity:.7;}
+
+/* ═══════════════════════════════
+   SECTION LABELS
+═══════════════════════════════ */
+.sec-head{margin-bottom:12px;}
+.sec-label-row{display:flex;align-items:center;gap:8px;margin-bottom:2px;}
+.sec-badge{
+  width:6px;height:20px;border-radius:3px;
+  background:linear-gradient(180deg,var(--sand),var(--gold));
+  flex-shrink:0;
+}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;font-style:italic;
+  color:var(--cream);letter-spacing:.3px;
+}
+.sec-sub{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--foam);font-weight:600;opacity:.7;
+  margin-left:14px;
+}
+
+/* ═══════════════════════════════
+   MEMBERS
+═══════════════════════════════ */
+.members-list{display:flex;flex-direction:column;gap:8px;}
+
+.member-card{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 13px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(26,67,50,.6),rgba(10,30,21,.8));
+  border:1px solid rgba(82,182,154,.2);
+  text-decoration:none;
+  transition:all .2s ease;
+  position:relative;overflow:hidden;
+}
+.member-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--sand),var(--lagoon));
+  border-radius:3px 0 0 3px;opacity:0;transition:opacity .2s;
+}
+.member-card:hover{
+  background:linear-gradient(135deg,rgba(42,157,143,.2),rgba(26,67,50,.8));
+  border-color:rgba(233,196,106,.35);
+  transform:translateX(4px);
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+}
+.member-card:hover::before{opacity:1;}
+
+.member-avatar{
+  width:38px;height:38px;border-radius:50%;
+  border:2px solid rgba(233,196,106,.4);
+  object-fit:cover;flex-shrink:0;
+}
+.member-name{
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;color:var(--cream);
+}
+.member-meta{
+  font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--foam);margin-top:2px;opacity:.8;
+}
+.member-joined{
+  margin-left:auto;font-size:9px;font-weight:600;
+  color:var(--sand);opacity:.8;white-space:nowrap;flex-shrink:0;
+}
+
+/* ═══════════════════════════════
+   GAME OF THE DAY
+═══════════════════════════════ */
+.gotd-box{
+  background:linear-gradient(135deg,rgba(20,50,35,.9),rgba(10,30,21,.95));
+  border:1px solid rgba(233,196,106,.3);
+  border-radius:18px;
+  padding:16px;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.3), inset 0 1px 0 rgba(233,196,106,.1);
+}
+.gotd-box::before{
+  content:'♟';
+  position:absolute;right:-10px;bottom:-15px;
+  font-size:90px;color:rgba(233,196,106,.05);
+  pointer-events:none;line-height:1;
+}
+
+.gotd-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--sand),var(--gold));
+  color:var(--jungle);padding:4px 12px;border-radius:999px;
+  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:12px;box-shadow:0 3px 12px rgba(233,196,106,.3);
+}
+
+.gotd-title{
+  font-family:'Playfair Display',serif;
+  font-size:15px;font-weight:700;font-style:italic;
+  color:var(--cream);margin-bottom:12px;
+  line-height:1.3;
+}
+
+.gotd-input-row{display:flex;gap:8px;align-items:stretch;}
+.gotd-input{
+  flex:1;padding:10px 13px;
+  border-radius:12px;border:1px solid rgba(82,182,154,.3);
+  background:rgba(10,30,21,.8);
+  color:var(--cream);
+  font-size:11px;font-family:'Josefin Sans',sans-serif;font-weight:600;
+  outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.gotd-input::placeholder{color:rgba(210,220,210,.3);font-weight:400;}
+.gotd-input:focus{border-color:var(--sand);box-shadow:0 0 0 3px rgba(233,196,106,.12);}
+
+.gotd-btn{
+  padding:10px 16px;border-radius:12px;
+  background:linear-gradient(135deg,var(--sand),var(--gold));
+  border:none;color:var(--jungle);
+  font-size:10px;font-weight:700;font-family:'Josefin Sans',sans-serif;
+  letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;transition:all .15s;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(233,196,106,.25);
+}
+.gotd-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(233,196,106,.4);}
+.gotd-btn:active{transform:translateY(1px);}
+
+.gotd-preview{
+  margin-top:12px;padding:12px;border-radius:12px;
+  background:rgba(10,30,21,.6);border:1px solid rgba(82,182,154,.15);
+  display:none;
+}
+.gotd-preview.show{display:block;}
+.gotd-preview-label{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--foam);font-weight:600;margin-bottom:6px;opacity:.7;
+}
+.gotd-link{
+  display:flex;align-items:center;gap:8px;
+  color:var(--sky);font-size:11px;font-weight:600;
+  text-decoration:none;word-break:break-all;
+}
+.gotd-link:hover{color:var(--sand);}
+.gotd-link-icon{font-size:14px;flex-shrink:0;}
+
+/* ═══════════════════════════════
+   PARTNERS
+═══════════════════════════════ */
+.partners-grid{display:flex;flex-direction:column;gap:8px;}
+
+.partner-card{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(26,107,110,.15),rgba(26,67,50,.6));
+  border:1px solid rgba(82,182,154,.2);
+  text-decoration:none;
+  transition:all .2s ease;
+  position:relative;overflow:hidden;
+}
+.partner-card::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;
+  width:40px;
+  background:linear-gradient(270deg,rgba(233,196,106,.06),transparent);
+  pointer-events:none;
+}
+.partner-card:hover{
+  background:linear-gradient(135deg,rgba(42,157,143,.2),rgba(26,107,110,.25));
+  border-color:rgba(233,196,106,.3);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+
+.partner-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(42,157,143,.3),rgba(26,107,110,.4));
+  border:1px solid rgba(82,182,154,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.partner-name{
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;color:var(--cream);
+}
+.partner-desc{
+  font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--foam);margin-top:2px;opacity:.7;
+}
+.partner-arr{
+  margin-left:auto;color:var(--sand);font-size:16px;opacity:.6;
+  transition:all .2s;flex-shrink:0;
+}
+.partner-card:hover .partner-arr{opacity:1;transform:translateX(3px);}
+
+/* ═══════════════════════════════
+   QUICK LINKS
+═══════════════════════════════ */
+.links-grid{display:flex;flex-direction:column;gap:7px;max-height:220px;overflow-y:auto;padding-right:3px;}
+
+.links-grid::-webkit-scrollbar{width:4px;}
+.links-grid::-webkit-scrollbar-track{background:rgba(10,30,21,.5);border-radius:2px;}
+.links-grid::-webkit-scrollbar-thumb{background:rgba(82,182,154,.4);border-radius:2px;}
+.links-grid{scrollbar-width:thin;scrollbar-color:rgba(82,182,154,.4) transparent;}
+
+.link-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 13px;border-radius:13px;
+  background:linear-gradient(135deg,rgba(13,43,31,.8),rgba(10,30,21,.9));
+  border:1px solid rgba(82,182,154,.18);
+  color:var(--cream);text-decoration:none;
+  font-size:11px;font-weight:600;letter-spacing:.3px;
+  transition:all .18s ease;
+  position:relative;overflow:hidden;
+}
+.link-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(42,157,143,.1),transparent);
+  opacity:0;transition:opacity .18s;
+}
+.link-btn:hover{
+  border-color:rgba(233,196,106,.35);
+  transform:translateX(5px);
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+}
+.link-btn:hover::before{opacity:1;}
+.link-icon{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(42,157,143,.25),rgba(26,107,110,.3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;flex-shrink:0;
+}
+.link-text{flex:1;}
+.link-arr{font-size:12px;color:var(--sand);opacity:.5;transition:all .18s;flex-shrink:0;}
+.link-btn:hover .link-arr{opacity:1;transform:translateX(2px);}
+
+/* ═══════════════════════════════
+   MUSIC PLAYER
+═══════════════════════════════ */
+.music-card{
+  background:linear-gradient(160deg,rgba(20,50,35,.95),rgba(10,30,21,.98));
+  border:1px solid rgba(82,182,154,.2);
+  border-radius:18px;padding:16px;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+}
+
+.now-playing{
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,rgba(42,157,143,.2),rgba(26,107,110,.25));
+  border:1px solid rgba(82,182,154,.25);
+  border-radius:14px;padding:12px 13px;margin-bottom:13px;
+  position:relative;overflow:hidden;
+}
+.now-playing::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(60deg,transparent,transparent 14px,rgba(255,255,255,.02) 14px,rgba(255,255,255,.02) 28px);
+}
+.disc{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(233,196,106,.3),rgba(244,162,97,.2));
+  border:2px solid rgba(233,196,106,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;position:relative;z-index:1;
+}
+.disc.spinning{animation:spin 3s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.now-info{flex:1;min-width:0;position:relative;z-index:1;}
+.now-label{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:3px;}
+.now-name{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;font-weight:700;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.eq{display:flex;align-items:flex-end;gap:2px;height:16px;position:relative;z-index:1;}
+.eq-b{width:3px;border-radius:2px 2px 0 0;background:var(--sand);animation:eq .7s ease-in-out infinite alternate;}
+.eq-b:nth-child(1){height:5px;animation-delay:0s;}
+.eq-b:nth-child(2){height:12px;animation-delay:.15s;}
+.eq-b:nth-child(3){height:8px;animation-delay:.3s;}
+.eq-b.paused{animation-play-state:paused;}
+@keyframes eq{to{height:16px;}}
+
+/* Progress */
+.prog-wrap{margin-bottom:11px;}
+.prog-track{
+  width:100%;height:6px;
+  background:rgba(42,157,143,.15);border-radius:999px;
+  border:1px solid rgba(82,182,154,.2);cursor:pointer;position:relative;
+}
+.prog-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--lagoon),var(--sand));
+  border-radius:999px;width:0%;position:relative;
+}
+.prog-knob{
+  position:absolute;right:-7px;top:50%;transform:translateY(-50%);
+  width:13px;height:13px;border-radius:50%;
+  background:var(--cream);border:2px solid var(--sand);
+  box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer;z-index:3;
+  transition:transform .15s;
+}
+.prog-knob:hover{transform:translateY(-50%) scale(1.2);}
+.time-row{display:flex;justify-content:space-between;font-size:9px;font-weight:600;color:var(--foam);margin-top:4px;opacity:.7;}
+
+/* Controls */
+.ctrl-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.cbtn{
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;cursor:pointer;border:1px solid rgba(82,182,154,.25);
+  background:rgba(26,67,50,.5);
+  transition:all .15s ease;user-select:none;flex-shrink:0;
+}
+.cbtn svg,.cbtn svg *{pointer-events:none;}
+.cbtn:hover{background:rgba(42,157,143,.25);border-color:rgba(82,182,154,.5);transform:translateY(-1px);}
+.cbtn:active{transform:translateY(1px);}
+.cbtn.sm{width:30px;height:30px;}
+.cbtn.sm svg{width:12px;height:12px;}
+.cbtn.play-btn{
+  width:38px;height:38px;
+  background:linear-gradient(135deg,var(--sand),var(--gold));
+  border:none;box-shadow:0 4px 16px rgba(233,196,106,.3);
+}
+.cbtn.play-btn svg{width:13px;height:13px;}
+.cbtn.play-btn:hover{box-shadow:0 6px 24px rgba(233,196,106,.5);background:linear-gradient(135deg,var(--gold),var(--sunset));}
+.cbtn.loop-on{background:linear-gradient(135deg,var(--lagoon),var(--ocean));border:none;}
+.cbtn.loop-on svg{color:#fff!important;}
+
+.vol-row{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.vol-icon{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(82,182,154,.25);background:rgba(26,67,50,.5);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all .15s;flex-shrink:0;
+}
+.vol-icon:hover{background:rgba(42,157,143,.25);}
+.vol-icon svg{width:12px;height:12px;color:var(--foam);pointer-events:none;}
+.vol-track{width:44px;height:6px;background:rgba(42,157,143,.15);border-radius:999px;border:1px solid rgba(82,182,154,.2);cursor:pointer;position:relative;flex-shrink:0;}
+.vol-fill{height:100%;background:linear-gradient(90deg,var(--lagoon),var(--foam));border-radius:999px;width:70%;}
+.vol-knob{position:absolute;top:50%;transform:translateY(-50%);left:calc(70% - 6px);width:12px;height:12px;border-radius:50%;background:var(--cream);border:2px solid var(--foam);cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.3);}
+
+/* Search */
+.music-search{margin-bottom:10px;position:relative;}
+.music-search-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.music-search-lbl::after{content:'';flex:1;height:1px;background:rgba(82,182,154,.2);}
+.music-search-inp{
+  width:100%;padding:8px 12px;border-radius:11px;
+  border:1px solid rgba(82,182,154,.25);background:rgba(10,30,21,.7);
+  color:var(--cream);font-size:11px;font-family:'Josefin Sans',sans-serif;font-weight:600;
+  outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.music-search-inp::placeholder{color:rgba(82,182,154,.3);font-weight:400;}
+.music-search-inp:focus{border-color:rgba(233,196,106,.4);box-shadow:0 0 0 3px rgba(233,196,106,.08);}
+.music-dd{
+  margin-top:4px;border-radius:11px;border:1px solid rgba(82,182,154,.25);
+  background:rgba(13,43,31,.98);backdrop-filter:blur(8px);
+  overflow-y:auto;max-height:150px;display:none;position:absolute;
+  left:0;right:0;z-index:100;box-shadow:0 12px 32px rgba(0,0,0,.5);
+}
+.music-dd.open{display:block;}
+.music-dd::-webkit-scrollbar{width:4px;}
+.music-dd::-webkit-scrollbar-thumb{background:rgba(82,182,154,.4);border-radius:2px;}
+.dd-item{
+  display:flex;align-items:center;gap:8px;padding:8px 11px;cursor:pointer;
+  font-size:11px;font-weight:600;color:var(--cream);
+  border-bottom:1px solid rgba(82,182,154,.1);transition:background .12s;
+}
+.dd-item:last-child{border-bottom:none;}
+.dd-item:hover{background:rgba(42,157,143,.15);}
+.dd-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.dd-badge{font-size:8px;font-weight:700;padding:2px 7px;border-radius:999px;flex-shrink:0;letter-spacing:.5px;}
+.dd-badge.add{background:rgba(233,196,106,.15);color:var(--sand);border:1px solid rgba(233,196,106,.3);}
+.dd-badge.done{background:rgba(82,182,154,.15);color:var(--foam);border:1px solid rgba(82,182,154,.3);}
+
+/* Playlist */
+.pl-section{margin-top:2px;}
+.pl-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.pl-lbl::after{content:'';flex:1;height:1px;background:rgba(82,182,154,.2);}
+.pl-count{font-size:8px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(42,157,143,.2);color:var(--foam);border:1px solid rgba(82,182,154,.2);}
+.pl-scroll{height:120px;overflow-y:auto;padding-right:2px;}
+.pl-scroll::-webkit-scrollbar{width:4px;}
+.pl-scroll::-webkit-scrollbar-thumb{background:rgba(82,182,154,.3);border-radius:2px;}
+.pl-item{
+  display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:10px;margin-bottom:4px;
+  cursor:pointer;background:rgba(26,67,50,.4);border:1px solid rgba(82,182,154,.12);
+  transition:all .14s;font-size:10px;font-weight:600;color:var(--cream);overflow:hidden;
+}
+.pl-item:hover{background:rgba(42,157,143,.2);border-color:rgba(82,182,154,.3);transform:translateX(3px);}
+.pl-item.active{background:rgba(233,196,106,.12);border-color:rgba(233,196,106,.3);}
+.pl-num{font-size:9px;font-weight:700;color:var(--sand);min-width:18px;flex-shrink:0;}
+.pl-ico{font-size:10px;flex-shrink:0;}
+.pl-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+.pl-rm{font-size:10px;color:rgba(82,182,154,.4);cursor:pointer;padding:0 3px;transition:color .15s;flex-shrink:0;}
+.pl-rm:hover{color:var(--sunset);}
+.pl-empty{text-align:center;padding:18px 0;font-size:11px;font-weight:600;color:rgba(82,182,154,.4);}
+.pl-empty span{display:block;font-size:22px;margin-bottom:5px;}
+
+/* ═══════════════════════════════
+   SOCIAL / INVITE
+═══════════════════════════════ */
+.invite-box{
+  background:linear-gradient(135deg,rgba(42,157,143,.15),rgba(26,107,110,.2));
+  border:1px solid rgba(82,182,154,.25);border-radius:16px;
+  padding:16px;text-align:center;position:relative;overflow:hidden;
+}
+.invite-box::before{
+  content:'🌴 ♟ 🌴';position:absolute;bottom:-5px;right:10px;
+  font-size:20px;opacity:.12;letter-spacing:4px;
+}
+.invite-title{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:15px;font-weight:700;color:var(--cream);margin-bottom:4px;
+}
+.invite-sub{font-size:10px;font-weight:600;color:var(--foam);margin-bottom:12px;opacity:.8;letter-spacing:.3px;}
+.invite-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 24px;border-radius:999px;
+  background:linear-gradient(135deg,var(--sand),var(--gold));
+  border:none;color:var(--jungle);
+  font-size:10px;font-weight:700;font-family:'Josefin Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;box-shadow:0 4px 16px rgba(233,196,106,.3);transition:all .15s;
+}
+.invite-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,196,106,.45);}
+
+.socials-row{display:flex;gap:8px;margin-top:10px;}
+.social-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:10px;border-radius:13px;
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--cream);text-decoration:none;transition:all .15s;
+  border:1px solid transparent;
+}
+.social-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3);}
+.social-wa{background:linear-gradient(135deg,#1faa4a,#25c95b);border-color:rgba(255,255,255,.1);}
+.social-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-color:rgba(255,255,255,.1);}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+.footer{
+  text-align:center;padding:18px 16px 20px;
+  position:relative;z-index:1;
+}
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:13px;color:var(--foam);opacity:.6;
+  letter-spacing:.5px;
+}
+.footer-copy{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fern);opacity:.5;margin-top:4px;}
+
+/* ═══════════════════════════════
+   SECTION WRAPPER SPACING
+═══════════════════════════════ */
+.section-block{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<div class="sb">
+
+  <!-- ─── HERO ─── -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-tagline-top">Est. 2024 · Chess Club</div>
+      <div class="hero-logo-wrap">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif" id="heroLogo" alt="Paradise Chess Club">
+      </div>
+      <div class="hero-title">The <em>Paradise</em></div>
+      <div class="hero-subtitle">Chess Club</div>
+      <div class="hero-divider">
+        <div class="hero-divider-line"></div>
+        <div class="hero-divider-gem">✦</div>
+        <div class="hero-divider-line"></div>
+      </div>
+    </div>
+
+    <!-- Palm silhouettes SVG -->
+    <div class="hero-palms">
+      <svg class="palm-svg palm-left" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 120 Q48 80 52 50 Q54 30 40 10" stroke="#0d2b1f" stroke-width="4" fill="none"/>
+        <path d="M52 50 Q30 30 10 35 Q25 50 52 55" fill="#0d2b1f"/>
+        <path d="M52 45 Q35 20 20 10 Q38 28 54 42" fill="#0a2018"/>
+        <path d="M52 52 Q70 35 85 40 Q72 54 52 57" fill="#0d2b1f"/>
+        <path d="M51 48 Q60 25 75 15 Q65 35 53 50" fill="#0a2018"/>
+      </svg>
+      <svg class="palm-svg palm-right" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 120 Q48 80 52 50 Q54 30 40 10" stroke="#0d2b1f" stroke-width="4" fill="none"/>
+        <path d="M52 50 Q30 30 10 35 Q25 50 52 55" fill="#0d2b1f"/>
+        <path d="M52 45 Q35 20 20 10 Q38 28 54 42" fill="#0a2018"/>
+        <path d="M52 52 Q70 35 85 40 Q72 54 52 57" fill="#0d2b1f"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ─── GIF SECTION ─── -->
+  <div class="gif-section" style="padding:14px 16px 0;">
+    <div class="gif-frame">
+      <img id="clubGif" src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif" alt="Club Welcome">
+      <div class="gif-overlay">
+        <div class="gif-overlay-text">Welcome to the island, friend 🌴</div>
+        <div class="gif-overlay-sub">Where every move is paradise</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MAIN CONTENT ─── -->
+  <div class="content">
+
+    <!-- MEMBERS -->
+    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🌿</div><div class="tropic-div-line"></div></div>
+    <div class="sec-head">
+      <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">New Arrivals</div></div>
+      <div class="sec-sub">Recent members</div>
+    </div>
+    <div class="members-list section-block" id="membersList">
+      <div class="member-card"><img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png"><div><div class="member-name">@loading...</div><div class="member-meta">Fetching members</div></div></div>
+    </div>
+
+    <!-- GAME OF THE DAY -->
+    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">♟</div><div class="tropic-div-line"></div></div>
+    <div class="sec-head">
+      <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Game of the Day</div></div>
+      <div class="sec-sub">Featured masterpiece</div>
+    </div>
+    <div class="gotd-box section-block">
+      <div class="gotd-badge">⭐ Daily Pick</div>
+      <div class="gotd-title">Paste the link to today's featured game below</div>
+      <div class="gotd-input-row">
+        <input class="gotd-input" type="text" id="gotdInput" placeholder="https://www.chess.com/game/live/...">
+        <button class="gotd-btn" onclick="setGameOfDay()">Set</button>
+      </div>
+      <div class="gotd-preview" id="gotdPreview">
+        <div class="gotd-preview-label">Today's Game</div>
+        <a class="gotd-link" id="gotdLink" href="#" target="_blank" rel="noopener">
+          <span class="gotd-link-icon">♟</span>
+          <span id="gotdLinkText"></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🤝</div><div class="tropic-div-line"></div></div>
+    <div class="sec-head">
+      <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Island Allies</div></div>
+      <div class="sec-sub">Our partners</div>
+    </div>
+    <div class="partners-grid section-block">
+      <a class="partner-card" href="https://www.chess.com" target="_blank" rel="noopener">
+        <div class="partner-icon">♟</div>
+        <div>
+          <div class="partner-name">Chess.com</div>
+          <div class="partner-desc">Official Platform</div>
+        </div>
+        <div class="partner-arr">›</div>
+      </a>
+      <a class="partner-card" href="https://lichess.org" target="_blank" rel="noopener">
+        <div class="partner-icon">🏰</div>
+        <div>
+          <div class="partner-name">Lichess</div>
+          <div class="partner-desc">Open Source Chess</div>
+        </div>
+        <div class="partner-arr">›</div>
+      </a>
+      <a class="partner-card" href="#" target="_blank" rel="noopener" id="partner3">
+        <div class="partner-icon">🌴</div>
+        <div>
+          <div class="partner-name">Partner 3</div>
+          <div class="partner-desc">Your partner here</div>
+        </div>
+        <div class="partner-arr">›</div>
+      </a>
+    </div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🎵</div><div class="tropic-div-line"></div></div>
+    <div class="sec-head">
+      <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Island Vibes</div></div>
+      <div class="sec-sub">Music player</div>
+    </div>
+
+    <div class="music-card section-block">
+      <div class="now-playing">
+        <div class="disc" id="disc">🎵</div>
+        <div class="now-info">
+          <div class="now-label">Now Playing</div>
+          <div class="now-name" id="trackName">Pick a song below ↓</div>
+        </div>
+        <div class="eq" id="eqBars">
+          <div class="eq-b paused"></div>
+          <div class="eq-b paused"></div>
+          <div class="eq-b paused"></div>
+        </div>
+      </div>
+
+      <div class="prog-wrap">
+        <div class="prog-track" id="progressTrack">
+          <div class="prog-fill" id="progressFill">
+            <div class="prog-knob" id="progressKnob"></div>
+          </div>
+        </div>
+        <div class="time-row">
+          <span id="timeCur">0:00</span>
+          <span id="timeDur">0:00</span>
+        </div>
+      </div>
+
+      <div class="ctrl-row">
+        <button class="cbtn sm" id="btnPrev">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--foam)">
+            <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
+          </svg>
+        </button>
+        <button class="cbtn play-btn" id="btnPlay">
+          <svg id="iconPlay" viewBox="0 0 24 24" fill="var(--jungle)" stroke="none">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </button>
+        <button class="cbtn sm" id="btnNext">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--foam)">
+            <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+          </svg>
+        </button>
+        <button class="cbtn sm" id="btnLoop">
+          <svg id="iconLoop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--foam)">
+            <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+            <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+          </svg>
+        </button>
+        <div class="vol-row">
+          <div class="vol-icon" id="btnVol">
+            <svg id="iconVol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </div>
+          <div class="vol-track" id="volTrack">
+            <div class="vol-fill" id="volFill"></div>
+            <div class="vol-knob" id="volKnob"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="music-search">
+        <div class="music-search-lbl">Search &amp; Add Songs</div>
+        <input class="music-search-inp" id="searchInput" type="text" placeholder="🔍  Type a song...">
+        <div class="music-dd" id="searchDropdown"></div>
+      </div>
+
+      <div class="pl-section">
+        <div class="pl-lbl">Queue <span class="pl-count" id="plCount">0</span></div>
+        <div class="pl-scroll" id="playlist"></div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🔗</div><div class="tropic-div-line"></div></div>
+    <div class="sec-head">
+      <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Quick Links</div></div>
+      <div class="sec-sub">Navigate the island</div>
+    </div>
+    <div class="links-grid section-block">
+      <a class="link-btn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener">
+        <div class="link-icon">🧩</div><span class="link-text">Solve a Puzzle</span><span class="link-arr">›</span>
+      </a>
+      <a class="link-btn" href="https://www.chess.com/clubs/forum/view/watch-my-game-1" target="_blank" rel="noopener">
+        <div class="link-icon">🎬</div><span class="link-text">Watch My Game</span><span class="link-arr">›</span>
+      </a>
+      <a class="link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform?usp=header" target="_blank" rel="noopener">
+        <div class="link-icon">🤔</div><span class="link-text">Guess the Elo</span><span class="link-arr">›</span>
+      </a>
+      <a class="link-btn" href="https://www.chess.com/leaderboard/live?group=856887" target="_blank" rel="noopener">
+        <div class="link-icon">🏆</div><span class="link-text">Leaderboard</span><span class="link-arr">›</span>
+      </a>
+      <a class="link-btn" href="https://chesswrap.vercel.app/" target="_blank" rel="noopener">
+        <div class="link-icon">📅</div><span class="link-text">2025 Recap</span><span class="link-arr">›</span>
+      </a>
+      <a class="link-btn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener">
+        <div class="link-icon">⭐</div><span class="link-text">Rate Our Club!</span><span class="link-arr">›</span>
+      </a>
+    </div>
+
+    <!-- INVITE + SOCIALS -->
+    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🌴</div><div class="tropic-div-line"></div></div>
+    <div class="invite-box section-block">
+      <div class="invite-title">Bring a Friend to Paradise</div>
+      <div class="invite-sub">Share the island with fellow chess lovers</div>
+      <button class="invite-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/the-paradise-chess-club/join');this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='🔗 Copy Invite Link'},1500);">
+        🔗 Copy Invite Link
+      </button>
+      <div class="socials-row">
+        <a class="social-btn social-wa" href="https://chat.whatsapp.com/J0D48mkryYa866nkmoAxa6?mode=gi_t" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a class="social-btn social-ig" href="https://www.instagram.com/hot_chilli_checkmate?igsh=bWc3NWxoNHdxOGN0" target="_blank" rel="noopener">📷 Instagram</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-logo">The Paradise Chess Club</div>
+      <div class="footer-copy">© 2026 · All moves reserved 🌴</div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /sb -->
+
+<audio id="audio"></audio>
+
+<script>
+/* ══════════════════════════
+   GAME OF THE DAY
+══════════════════════════ */
+(function(){
+  const LS_KEY = 'paradise_gotd';
+  const saved = localStorage.getItem(LS_KEY);
+  if(saved){
+    document.getElementById('gotdInput').value = saved;
+    showGotd(saved);
+  }
+  window.setGameOfDay = function(){
+    const val = document.getElementById('gotdInput').value.trim();
+    if(!val) return;
+    localStorage.setItem(LS_KEY, val);
+    showGotd(val);
+  };
+  function showGotd(url){
+    const preview = document.getElementById('gotdPreview');
+    const link = document.getElementById('gotdLink');
+    const text = document.getElementById('gotdLinkText');
+    link.href = url;
+    text.textContent = url.length > 50 ? url.slice(0,50)+'...' : url;
+    preview.classList.add('show');
+  }
+})();
+
+/* ══════════════════════════
+   MEMBERS
+══════════════════════════ */
+(function(){
+  function timeAgo(ts){
+    const d=Math.floor((Date.now()-(ts*1000))/1000);
+    if(d<60) return d+'s ago';
+    if(d<3600) return Math.floor(d/60)+'m ago';
+    if(d<86400) return Math.floor(d/3600)+'h ago';
+    if(d<604800) return Math.floor(d/86400)+'d ago';
+    return Math.floor(d/604800)+'w ago';
+  }
+  async function load(){
+    try{
+      const r=await fetch('https://api.chess.com/pub/club/the-paradise-chess-club/members').catch(()=>null);
+      // fallback to hot-chilli for demo
+      const url = r && r.ok ? 'https://api.chess.com/pub/club/the-paradise-chess-club/members' : 'https://api.chess.com/pub/club/hot-chilli-checkmate/members';
+      const res = await fetch(url);
+      const d = await res.json();
+      const members = [...(d.weekly||[]), ...(d.monthly||[])];
+      members.sort((a,b)=>b.joined-a.joined);
+      const top3 = members.slice(0,3);
+      const data = await Promise.all(top3.map(async m=>{
+        const [pj,st] = await Promise.all([
+          fetch('https://api.chess.com/pub/player/'+m.username).then(r=>r.json()),
+          fetch('https://api.chess.com/pub/player/'+m.username+'/stats').then(r=>r.json())
+        ]);
+        const ratings=[
+          {t:'Rapid',v:st.chess_rapid?.last?.rating},
+          {t:'Blitz',v:st.chess_blitz?.last?.rating},
+          {t:'Bullet',v:st.chess_bullet?.last?.rating},
+          {t:'Daily',v:st.chess_daily?.last?.rating}
+        ].filter(x=>x.v).sort((a,b)=>b.v-a.v);
+        const best = ratings[0]||{t:'—',v:'—'};
+        return {u:m.username,av:pj.avatar||'https://taki2023.github.io/taki/default-pawn.png',rt:best.t,rv:best.v,j:m.joined};
+      }));
+      document.getElementById('membersList').innerHTML = data.map(m=>`
+        <a class="member-card" href="https://www.chess.com/member/${m.u}" target="_blank">
+          <img class="member-avatar" src="${m.av}">
+          <div>
+            <div class="member-name">@${m.u}</div>
+            <div class="member-meta">${m.rt}: ${m.rv}</div>
+          </div>
+          <div class="member-joined">⏱ ${timeAgo(m.j)}</div>
+        </a>`).join('');
+    }catch(e){
+      document.getElementById('membersList').innerHTML='<div style="color:rgba(82,182,154,.5);font-size:11px;padding:10px;">Unable to load members</div>';
+    }
+  }
+  window.addEventListener('DOMContentLoaded', load);
+})();
+
+/* ══════════════════════════
+   MUSIC PLAYER
+══════════════════════════ */
+(function(){
+  const LS={
+    get:(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:v;}catch{return d;}},
+    set:(k,v)=>{try{localStorage.setItem(k,v);}catch{}},
+    gj:(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}},
+    sj:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+  };
+  const DB=[
+    {title:'Faded – Alan Walker',src:'https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3'},
+    {title:'Despacito – Luis Fonsi',src:'https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3'},
+    {title:'Unstoppable – Sia',src:'https://raw.githubusercontent.com/taki2023/taki/main/Sia_-_Im_unstoppable_today_(mp3.pm)%20(1).mp3'},
+    {title:'Believer – Imagine Dragons',src:'https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3'},
+    {title:'Demons – Imagine Dragons',src:'https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3'},
+    {title:'Yellow – Coldplay',src:'https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3'},
+    {title:'Maniac – Zayde Wolf',src:'https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3'},
+    {title:'Mary On A Cross – Ghost',src:'https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3'}
+  ];
+  let queue=LS.gj('pcc_q',[]),cur=parseInt(LS.get('pcc_cur','0'))||0,savedT=parseFloat(LS.get('pcc_t','0'))||0,dragging=false,playing=false;
+  if(cur>=queue.length)cur=0;
+  const audio=document.getElementById('audio');
+  const disc=document.getElementById('disc');
+  const trackName=document.getElementById('trackName');
+  const eqBars=document.getElementById('eqBars');
+  const pTrack=document.getElementById('progressTrack');
+  const pFill=document.getElementById('progressFill');
+  const tCur=document.getElementById('timeCur');
+  const tDur=document.getElementById('timeDur');
+  const btnPlay=document.getElementById('btnPlay');
+  const btnPrev=document.getElementById('btnPrev');
+  const btnNext=document.getElementById('btnNext');
+  const btnLoop=document.getElementById('btnLoop');
+  const btnVol=document.getElementById('btnVol');
+  const iconVol=document.getElementById('iconVol');
+  const volTrack=document.getElementById('volTrack');
+  const volFill=document.getElementById('volFill');
+  const volKnob=document.getElementById('volKnob');
+  const iconPlay=document.getElementById('iconPlay');
+  const iconLoop=document.getElementById('iconLoop');
+  const searchInp=document.getElementById('searchInput');
+  const dd=document.getElementById('searchDropdown');
+  const pl=document.getElementById('playlist');
+  const plCount=document.getElementById('plCount');
+
+  const fmt=s=>{if(!s||isNaN(s))return'0:00';const m=Math.floor(s/60),sc=Math.floor(s%60);return m+':'+(sc<10?'0':'')+sc;};
+  const save=()=>{LS.sj('pcc_q',queue);LS.set('pcc_cur',cur);};
+
+  function setPlayUI(p){
+    playing=p;
+    if(p){
+      iconPlay.innerHTML='<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
+      disc.classList.add('spinning');
+      eqBars.querySelectorAll('.eq-b').forEach(b=>b.classList.remove('paused'));
+    }else{
+      iconPlay.innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';
+      disc.classList.remove('spinning');
+      eqBars.querySelectorAll('.eq-b').forEach(b=>b.classList.add('paused'));
+    }
+    iconPlay.setAttribute('fill','var(--jungle)');
+    renderPL();
+  }
+
+  function setLoopUI(on){
+    if(on){btnLoop.classList.add('loop-on');iconLoop.style.color='#fff';}
+    else{btnLoop.classList.remove('loop-on');iconLoop.style.color='var(--foam)';}
+  }
+
+  function setVolUI(){
+    const v=audio.muted?0:audio.volume;
+    const p=(v*100)+'%';
+    volFill.style.width=p;volKnob.style.left='calc('+p+' - 6px)';
+    const m=audio.muted||v===0;
+    iconVol.innerHTML=m
+      ?'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
+      :'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  }
+
+  function syncP(){
+    if(!audio.duration||isNaN(audio.duration)||dragging)return;
+    const p=(audio.currentTime/audio.duration)*100;
+    pFill.style.width=p+'%';tCur.textContent=fmt(audio.currentTime);tDur.textContent=fmt(audio.duration);
+    LS.set('pcc_t',audio.currentTime);
+  }
+
+  function loadTrack(i,autoplay){
+    if(!queue.length)return;
+    cur=i;setPlayUI(false);
+    audio.src=queue[cur].src;trackName.textContent=queue[cur].title;
+    pFill.style.width='0%';tCur.textContent='0:00';tDur.textContent='0:00';
+    renderPL();save();audio.load();
+    if(autoplay){
+      const oc=()=>{audio.removeEventListener('canplay',oc);audio.play().catch(()=>setPlayUI(false));};
+      audio.addEventListener('canplay',oc);
+    }else{
+      audio.onloadedmetadata=()=>{if(savedT>0&&savedT<audio.duration){audio.currentTime=savedT;syncP();}savedT=0;};
+    }
+  }
+
+  function renderPL(){
+    plCount.textContent=queue.length;
+    if(!queue.length){pl.innerHTML='<div class="pl-empty"><span>🎵</span>No songs yet</div>';return;}
+    pl.innerHTML='';
+    queue.forEach((t,i)=>{
+      const d=document.createElement('div');
+      d.className='pl-item'+(i===cur?' active':'');
+      d.innerHTML='<span class="pl-num">'+String(i+1).padStart(2,'0')+'</span><span class="pl-ico">'+(i===cur&&playing?'▶':'♪')+'</span><span class="pl-name">'+t.title+'</span><span class="pl-rm" data-i="'+i+'">✕</span>';
+      d.querySelector('.pl-name').onclick=()=>{savedT=0;loadTrack(i,true);};
+      d.querySelector('.pl-rm').onclick=e=>{e.stopPropagation();removeTrack(i);};
+      pl.appendChild(d);
+    });
+  }
+
+  function removeTrack(i){
+    const wp=playing&&i===cur;
+    queue.splice(i,1);
+    if(!queue.length){audio.pause();audio.src='';cur=0;savedT=0;trackName.textContent='Pick a song below ↓';pFill.style.width='0%';tCur.textContent='0:00';tDur.textContent='0:00';setPlayUI(false);renderPL();save();return;}
+    if(i<cur)cur--;
+    if(i===cur){if(cur>=queue.length)cur=queue.length-1;loadTrack(cur,wp);}
+    renderPL();save();
+  }
+
+  function nextTrack(fp){
+    if(!queue.length)return;
+    const wp=(fp===true)?true:playing;
+    cur=(cur+1)%queue.length;savedT=0;loadTrack(cur,wp);
+  }
+  function prevTrack(){
+    if(!queue.length)return;
+    if(audio.currentTime>3){audio.currentTime=0;return;}
+    const wp=playing;cur=(cur-1+queue.length)%queue.length;savedT=0;loadTrack(cur,wp);
+  }
+
+  audio.onended=()=>{if(!audio.loop)nextTrack(true);};
+  audio.ontimeupdate=syncP;
+  audio.onplay=()=>setPlayUI(true);
+  audio.onpause=()=>setPlayUI(false);
+  audio.onerror=()=>{if(queue.length)nextTrack(true);};
+
+  btnPlay.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(!queue.length)return;
+    if(!audio.src||audio.src===''){loadTrack(cur,true);}
+    else if(audio.paused){audio.play().catch(()=>{});}
+    else{audio.pause();}
+  });
+  btnNext.addEventListener('click',e=>{e.stopPropagation();nextTrack();});
+  btnPrev.addEventListener('click',e=>{e.stopPropagation();prevTrack();});
+  btnLoop.addEventListener('click',e=>{e.stopPropagation();audio.loop=!audio.loop;setLoopUI(audio.loop);LS.set('pcc_loop',audio.loop);});
+
+  const sl=LS.get('pcc_loop','false')==='true';audio.loop=sl;setLoopUI(sl);
+  const sv=LS.get('pcc_vol',null);audio.volume=sv!==null?parseFloat(sv):0.7;
+  audio.muted=LS.get('pcc_muted','false')==='true';setVolUI();
+
+  function applyVol(v){v=Math.max(0,Math.min(1,v));audio.volume=v;audio.muted=false;LS.set('pcc_vol',v);LS.set('pcc_muted',false);setVolUI();}
+  function volEvt(e){const r=volTrack.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;applyVol(x/r.width);}
+  volTrack.onmousedown=e=>{volEvt(e);document.onmousemove=volEvt;document.onmouseup=()=>document.onmousemove=null;};
+  volTrack.ontouchstart=volEvt;volTrack.ontouchmove=volEvt;
+  btnVol.onclick=()=>{audio.muted=!audio.muted;if(!audio.muted&&queue.length&&audio.src&&audio.src!=='')audio.play().catch(()=>{});LS.set('pcc_muted',audio.muted);setVolUI();};
+
+  function seekEvt(e){if(!audio.duration||isNaN(audio.duration))return;const r=pTrack.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;const p=Math.max(0,Math.min(1,x/r.width));audio.currentTime=p*audio.duration;pFill.style.width=(p*100)+'%';}
+  pTrack.onmousedown=e=>{dragging=true;seekEvt(e);document.onmousemove=seekEvt;document.onmouseup=()=>{dragging=false;document.onmousemove=null;};};
+  pTrack.ontouchstart=e=>{dragging=true;seekEvt(e);};
+  pTrack.ontouchmove=seekEvt;
+  pTrack.ontouchend=()=>{dragging=false;};
+
+  function renderDD(list){
+    if(!list.length){dd.classList.remove('open');return;}
+    dd.innerHTML='';
+    list.forEach(s=>{
+      const ex=queue.some(q=>q.src===s.src);
+      const d=document.createElement('div');d.className='dd-item';
+      d.innerHTML='<span class="dd-title">'+s.title+'</span><span class="dd-badge '+(ex?'done':'add')+'">'+(ex?'✓ In Queue':'+ Add')+'</span>';
+      if(!ex)d.onclick=()=>{const we=queue.length===0;queue.push(s);save();renderPL();renderDD(DB.filter(x=>x.title.toLowerCase().includes(searchInp.value.toLowerCase().trim())));if(we){savedT=0;loadTrack(0,false);}};
+      dd.appendChild(d);
+    });
+    dd.classList.add('open');
+  }
+  searchInp.addEventListener('focus',()=>renderDD(DB));
+  searchInp.addEventListener('input',function(){const q=this.value.toLowerCase().trim();renderDD(q?DB.filter(s=>s.title.toLowerCase().includes(q)):DB);});
+  document.addEventListener('mousedown',e=>{if(!searchInp.contains(e.target)&&!dd.contains(e.target))dd.classList.remove('open');});
+  document.addEventListener('touchstart',e=>{if(!searchInp.contains(e.target)&&!dd.contains(e.target))dd.classList.remove('open');},{passive:true});
+  window.addEventListener('blur',()=>dd.classList.remove('open'));
+  searchInp.addEventListener('keydown',e=>{if(e.key==='Escape'){dd.classList.remove('open');searchInp.blur();}});
+
+  if(queue.length>0){audio.src=queue[cur].src;trackName.textContent=queue[cur].title;audio.onloadedmetadata=()=>{if(savedT>0&&savedT<audio.duration){audio.currentTime=savedT;syncP();}savedT=0;};}
+  renderPL();
+})();
+</script>
+</body>
+</html>
