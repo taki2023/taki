@@ -390,10 +390,8 @@ body{display:block;}
   display:flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer;
   border:2px solid #f5c5b8;background:#fff8f5;box-shadow:0 4px 0 #e8aa98;
   transition:all .15s ease;user-select:none;flex-shrink:0;
-  /* FIX 3: prevent SVG children from absorbing pointer events */
   pointer-events:auto;
 }
-/* FIX 3: SVG children must not intercept clicks */
 .mcbtn svg, .mcbtn svg *{pointer-events:none;}
 .mcbtn:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-2px);box-shadow:0 6px 0 #c73520;}
 .mcbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #c73520;}
@@ -512,6 +510,37 @@ body{display:block;}
         Play sharp. Think spicy. Win big.
       </div>
     </div>
+    <div class="div"></div>
+
+    <!-- QUICK LINKS (moved above New Members) -->
+    <div class="sec-label"><div class="dot"></div>Quick Links 🔗</div>
+    <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
+      <a class="lbtn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener noreferrer">
+        <span class="ico">🧩</span><span>Solve a Puzzle</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://www.chess.com/club/votechess/hot-chilli-checkmate" target="_blank" rel="noopener noreferrer">
+        <span class="ico">🗳️</span><span>Vote Chess</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://www.chess.com/clubs/forum/view/watch-my-game-1" target="_blank" rel="noopener noreferrer">
+        <span class="ico">🎬</span><span>Watch My Game</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+        <span class="ico">🤔</span><span>Guess the Elo</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://www.chess.com/clubs/forum/view/tricky-opening-trap-by-iamplayerofchess" target="_blank" rel="noopener noreferrer">
+        <span class="ico">♔</span><span>Opening Traps</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://www.chess.com/leaderboard/live?group=856887" target="_blank" rel="noopener noreferrer">
+        <span class="ico">🏆</span><span>Leaderboard</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://chesswrap.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <span class="ico">📅</span><span>2025 Recap</span><span class="arr">›</span>
+      </a>
+      <a class="lbtn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener noreferrer">
+        <span class="ico">⭐</span><span>Rate Our Club!</span><span class="arr">›</span>
+      </a>
+    </div>
+
     <div class="div"></div>
  
     <!-- NEWEST MEMBERS -->
@@ -656,32 +685,6 @@ body{display:block;}
     </div>
  
     <div class="div"></div>
- 
-    <!-- LINKS -->
-    <div class="sec-label"><div class="dot"></div>Quick Links 🔗</div>
-    <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
-      <a class="lbtn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener noreferrer">
-        <span class="ico">🧩</span><span>Solve a Puzzle</span><span class="arr">›</span>
-      </a>
-      <a class="lbtn" href="https://www.chess.com/clubs/forum/view/watch-my-game-1" target="_blank" rel="noopener noreferrer">
-        <span class="ico">🎬</span><span>Watch My Game</span><span class="arr">›</span>
-      </a>
-      <a class="lbtn" href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform?usp=header" target="_blank" rel="noopener noreferrer">
-        <span class="ico">🤔</span><span>Guess the Elo</span><span class="arr">›</span>
-      </a>
-      <a class="lbtn" href="https://www.chess.com/clubs/forum/view/tricky-opening-trap-by-iamplayerofchess" target="_blank" rel="noopener noreferrer">
-        <span class="ico">♔</span><span>Opening Traps</span><span class="arr">›</span>
-      </a>
-      <a class="lbtn" href="https://www.chess.com/leaderboard/live?group=856887" target="_blank" rel="noopener noreferrer">
-        <span class="ico">🏆</span><span>Leaderboard</span><span class="arr">›</span>
-      </a>
-      <a class="lbtn" href="https://chesswrap.vercel.app/" target="_blank" rel="noopener noreferrer">
-        <span class="ico">📅</span><span>2025 Recap</span><span class="arr">›</span>
-      </a>
-      <a class="lbtn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener noreferrer">
-        <span class="ico">⭐</span><span>Rate Our Club!</span><span class="arr">›</span>
-      </a>
-    </div>
  
     <div class="div"></div>
     <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
@@ -1092,7 +1095,6 @@ function loadTrack(index, autoplay){
   save();
   audio.load();
   if(autoplay){
-    /* FIX 2: use canplay event to reliably trigger play after load */
     const onCanPlay = () => {
       audio.removeEventListener('canplay', onCanPlay);
       audio.play().catch(()=>{ setPlayingUI(false); });
@@ -1160,7 +1162,6 @@ function removeTrack(i){
   renderPlaylist(); save();
 }
 
-/* FIX 2: nextTrack always autoplays (song ended = was playing) */
 function nextTrack(forcePlay){
   if(!queue.length) return;
   const wp = (forcePlay === true) ? true : isActuallyPlaying;
@@ -1177,7 +1178,6 @@ function prevTrack(){
   loadTrack(cur,wp);
 }
 
-/* FIX 2: when song ends, always force-play the next one */
 audio.onended      = () => { if(!audio.loop) nextTrack(true); };
 audio.ontimeupdate = syncProg;
 
@@ -1197,9 +1197,6 @@ audio.onplaying = () => {
 
 audio.onerror = () => { if(queue.length) nextTrack(true); };
 
-/* FIX 3: play button uses button element which reliably receives clicks.
-   The CSS already sets pointer-events:none on SVG children.
-   We also attach the handler directly here so it's unambiguous. */
 btnPlay.addEventListener('click', function(e){
   e.stopPropagation();
   if(!queue.length) return;
@@ -1320,9 +1317,6 @@ searchInp.addEventListener('input', function(){
   renderDropdown(q ? DB.filter(s => s.title.toLowerCase().includes(q)) : DB);
 });
 
-/* FIX 1: close dropdown on clicks BOTH inside and outside the iframe.
-   - Inside iframe: mousedown/touchstart on document (original logic, kept).
-   - Outside iframe: the window loses focus → use window blur + visibilitychange. */
 document.addEventListener('mousedown', e => {
   if(!searchInp.contains(e.target) && !dropdown.contains(e.target)){
     closeDropdown();
@@ -1334,12 +1328,10 @@ document.addEventListener('touchstart', e => {
   }
 }, { passive: true });
 
-/* FIX 1: when the user clicks outside the iframe the window loses focus */
 window.addEventListener('blur', () => {
   closeDropdown();
 });
 
-/* FIX 1: also close when the tab/page becomes hidden */
 document.addEventListener('visibilitychange', () => {
   if(document.visibilityState === 'hidden') closeDropdown();
 });
