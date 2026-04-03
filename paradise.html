@@ -27,9 +27,6 @@ html,body{width:100%;background:#0d1f1a;}
   --bark:     #7a5c3a;
 }
 
-/* ═══════════════════════════════
-   OUTER WRAPPER
-═══════════════════════════════ */
 .sb{
   font-family:'Josefin Sans',sans-serif;
   width:100%;max-width:none;
@@ -38,7 +35,6 @@ html,body{width:100%;background:#0d1f1a;}
   overflow:hidden;
 }
 
-/* Tropical texture overlay */
 .sb::before{
   content:'';position:absolute;inset:0;
   background:
@@ -58,7 +54,6 @@ html,body{width:100%;background:#0d1f1a;}
   overflow:hidden;
 }
 
-/* Animated palm silhouettes */
 .hero-palms{
   position:absolute;bottom:0;left:0;right:0;
   height:120px;pointer-events:none;z-index:1;
@@ -67,9 +62,7 @@ html,body{width:100%;background:#0d1f1a;}
 .palm-svg{position:absolute;bottom:0;}
 .palm-left{left:-10px;width:110px;opacity:.7;}
 .palm-right{right:-10px;width:110px;opacity:.7;transform:scaleX(-1);}
-.palm-mid{left:50%;transform:translateX(-50%);width:80px;opacity:.4;}
 
-/* Horizon glow */
 .hero-glow{
   position:absolute;bottom:50px;left:0;right:0;
   height:80px;
@@ -83,22 +76,6 @@ html,body{width:100%;background:#0d1f1a;}
   padding:28px 20px 30px;
 }
 
-.hero-logo-wrap{
-  width:100px;height:100px;
-  border-radius:50%;
-  border:3px solid var(--sand);
-  box-shadow:0 0 0 6px rgba(233,196,106,.15), 0 0 40px rgba(42,157,143,.3), 0 8px 32px rgba(0,0,0,.5);
-  margin:0 auto 14px;
-  overflow:hidden;
-  position:relative;
-}
-.hero-logo-wrap img{width:100%;height:100%;object-fit:cover;}
-
-.hero-tagline-top{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;
-  color:var(--sand);opacity:.8;margin-bottom:6px;
-}
 .hero-title{
   font-family:'Playfair Display',serif;
   font-size:28px;font-weight:900;
@@ -116,7 +93,6 @@ html,body{width:100%;background:#0d1f1a;}
   color:var(--foam);margin-top:6px;opacity:.9;
 }
 
-/* Decorative divider */
 .hero-divider{
   display:flex;align-items:center;justify-content:center;gap:10px;
   margin:12px auto 0;padding:0 30px;
@@ -243,88 +219,13 @@ html,body{width:100%;background:#0d1f1a;}
 }
 
 /* ═══════════════════════════════
-   GAME OF THE DAY
-═══════════════════════════════ */
-.gotd-box{
-  background:linear-gradient(135deg,rgba(20,50,35,.9),rgba(10,30,21,.95));
-  border:1px solid rgba(233,196,106,.3);
-  border-radius:18px;
-  padding:16px;
-  position:relative;overflow:hidden;
-  box-shadow:0 8px 32px rgba(0,0,0,.3), inset 0 1px 0 rgba(233,196,106,.1);
-}
-.gotd-box::before{
-  content:'♟';
-  position:absolute;right:-10px;bottom:-15px;
-  font-size:90px;color:rgba(233,196,106,.05);
-  pointer-events:none;line-height:1;
-}
-
-.gotd-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:linear-gradient(135deg,var(--sand),var(--gold));
-  color:var(--jungle);padding:4px 12px;border-radius:999px;
-  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  margin-bottom:12px;box-shadow:0 3px 12px rgba(233,196,106,.3);
-}
-
-.gotd-title{
-  font-family:'Playfair Display',serif;
-  font-size:15px;font-weight:700;font-style:italic;
-  color:var(--cream);margin-bottom:12px;
-  line-height:1.3;
-}
-
-.gotd-input-row{display:flex;gap:8px;align-items:stretch;}
-.gotd-input{
-  flex:1;padding:10px 13px;
-  border-radius:12px;border:1px solid rgba(82,182,154,.3);
-  background:rgba(10,30,21,.8);
-  color:var(--cream);
-  font-size:11px;font-family:'Josefin Sans',sans-serif;font-weight:600;
-  outline:none;transition:border-color .15s,box-shadow .15s;
-}
-.gotd-input::placeholder{color:rgba(210,220,210,.3);font-weight:400;}
-.gotd-input:focus{border-color:var(--sand);box-shadow:0 0 0 3px rgba(233,196,106,.12);}
-
-.gotd-btn{
-  padding:10px 16px;border-radius:12px;
-  background:linear-gradient(135deg,var(--sand),var(--gold));
-  border:none;color:var(--jungle);
-  font-size:10px;font-weight:700;font-family:'Josefin Sans',sans-serif;
-  letter-spacing:1px;text-transform:uppercase;
-  cursor:pointer;transition:all .15s;flex-shrink:0;
-  box-shadow:0 4px 12px rgba(233,196,106,.25);
-}
-.gotd-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(233,196,106,.4);}
-.gotd-btn:active{transform:translateY(1px);}
-
-.gotd-preview{
-  margin-top:12px;padding:12px;border-radius:12px;
-  background:rgba(10,30,21,.6);border:1px solid rgba(82,182,154,.15);
-  display:none;
-}
-.gotd-preview.show{display:block;}
-.gotd-preview-label{
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--foam);font-weight:600;margin-bottom:6px;opacity:.7;
-}
-.gotd-link{
-  display:flex;align-items:center;gap:8px;
-  color:var(--sky);font-size:11px;font-weight:600;
-  text-decoration:none;word-break:break-all;
-}
-.gotd-link:hover{color:var(--sand);}
-.gotd-link-icon{font-size:14px;flex-shrink:0;}
-
-/* ═══════════════════════════════
    PARTNERS
 ═══════════════════════════════ */
 .partners-grid{display:flex;flex-direction:column;gap:8px;}
 
 .partner-card{
   display:flex;align-items:center;gap:12px;
-  padding:12px 14px;border-radius:14px;
+  padding:10px 14px;border-radius:14px;
   background:linear-gradient(135deg,rgba(26,107,110,.15),rgba(26,67,50,.6));
   border:1px solid rgba(82,182,154,.2);
   text-decoration:none;
@@ -344,12 +245,11 @@ html,body{width:100%;background:#0d1f1a;}
   box-shadow:0 8px 24px rgba(0,0,0,.3);
 }
 
-.partner-icon{
+.partner-logo{
   width:40px;height:40px;border-radius:10px;
-  background:linear-gradient(135deg,rgba(42,157,143,.3),rgba(26,107,110,.4));
   border:1px solid rgba(82,182,154,.3);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
+  object-fit:cover;flex-shrink:0;
+  background:rgba(26,67,50,.5);
 }
 .partner-name{
   font-family:'Playfair Display',serif;
@@ -368,22 +268,34 @@ html,body{width:100%;background:#0d1f1a;}
 /* ═══════════════════════════════
    QUICK LINKS
 ═══════════════════════════════ */
-.links-grid{display:flex;flex-direction:column;gap:7px;max-height:220px;overflow-y:auto;padding-right:3px;}
+.links-scroll-wrap{
+  max-height:280px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:4px;
+  padding-bottom:2px;
+}
+.links-scroll-wrap::-webkit-scrollbar{width:4px;}
+.links-scroll-wrap::-webkit-scrollbar-track{background:rgba(10,30,21,.5);border-radius:2px;}
+.links-scroll-wrap::-webkit-scrollbar-thumb{background:rgba(82,182,154,.4);border-radius:2px;}
+.links-scroll-wrap{scrollbar-width:thin;scrollbar-color:rgba(82,182,154,.4) transparent;}
 
-.links-grid::-webkit-scrollbar{width:4px;}
-.links-grid::-webkit-scrollbar-track{background:rgba(10,30,21,.5);border-radius:2px;}
-.links-grid::-webkit-scrollbar-thumb{background:rgba(82,182,154,.4);border-radius:2px;}
-.links-grid{scrollbar-width:thin;scrollbar-color:rgba(82,182,154,.4) transparent;}
+.links-grid{
+  display:flex;flex-direction:column;gap:8px;
+  width:100%;
+}
 
 .link-btn{
   display:flex;align-items:center;gap:10px;
-  padding:10px 13px;border-radius:13px;
+  padding:11px 13px;border-radius:13px;
   background:linear-gradient(135deg,rgba(13,43,31,.8),rgba(10,30,21,.9));
   border:1px solid rgba(82,182,154,.18);
   color:var(--cream);text-decoration:none;
   font-size:11px;font-weight:600;letter-spacing:.3px;
-  transition:all .18s ease;
+  transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
   position:relative;overflow:hidden;
+  width:100%;
+  box-sizing:border-box;
 }
 .link-btn::before{
   content:'';position:absolute;inset:0;
@@ -392,8 +304,8 @@ html,body{width:100%;background:#0d1f1a;}
 }
 .link-btn:hover{
   border-color:rgba(233,196,106,.35);
-  transform:translateX(5px);
   box-shadow:0 4px 16px rgba(0,0,0,.25);
+  background:linear-gradient(135deg,rgba(20,55,38,.9),rgba(13,35,24,.95));
 }
 .link-btn:hover::before{opacity:1;}
 .link-icon{
@@ -403,8 +315,8 @@ html,body{width:100%;background:#0d1f1a;}
   font-size:13px;flex-shrink:0;
 }
 .link-text{flex:1;}
-.link-arr{font-size:12px;color:var(--sand);opacity:.5;transition:all .18s;flex-shrink:0;}
-.link-btn:hover .link-arr{opacity:1;transform:translateX(2px);}
+.link-arr{font-size:12px;color:var(--sand);opacity:.5;flex-shrink:0;}
+.link-btn:hover .link-arr{opacity:1;}
 
 /* ═══════════════════════════════
    MUSIC PLAYER
@@ -450,7 +362,6 @@ html,body{width:100%;background:#0d1f1a;}
 .eq-b.paused{animation-play-state:paused;}
 @keyframes eq{to{height:16px;}}
 
-/* Progress */
 .prog-wrap{margin-bottom:11px;}
 .prog-track{
   width:100%;height:6px;
@@ -472,7 +383,6 @@ html,body{width:100%;background:#0d1f1a;}
 .prog-knob:hover{transform:translateY(-50%) scale(1.2);}
 .time-row{display:flex;justify-content:space-between;font-size:9px;font-weight:600;color:var(--foam);margin-top:4px;opacity:.7;}
 
-/* Controls */
 .ctrl-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
 .cbtn{
   display:flex;align-items:center;justify-content:center;
@@ -508,7 +418,6 @@ html,body{width:100%;background:#0d1f1a;}
 .vol-fill{height:100%;background:linear-gradient(90deg,var(--lagoon),var(--foam));border-radius:999px;width:70%;}
 .vol-knob{position:absolute;top:50%;transform:translateY(-50%);left:calc(70% - 6px);width:12px;height:12px;border-radius:50%;background:var(--cream);border:2px solid var(--foam);cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.3);}
 
-/* Search */
 .music-search{margin-bottom:10px;position:relative;}
 .music-search-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
 .music-search-lbl::after{content:'';flex:1;height:1px;background:rgba(82,182,154,.2);}
@@ -541,7 +450,6 @@ html,body{width:100%;background:#0d1f1a;}
 .dd-badge.add{background:rgba(233,196,106,.15);color:var(--sand);border:1px solid rgba(233,196,106,.3);}
 .dd-badge.done{background:rgba(82,182,154,.15);color:var(--foam);border:1px solid rgba(82,182,154,.3);}
 
-/* Playlist */
 .pl-section{margin-top:2px;}
 .pl-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:7px;display:flex;align-items:center;gap:6px;}
 .pl-lbl::after{content:'';flex:1;height:1px;background:rgba(82,182,154,.2);}
@@ -565,7 +473,7 @@ html,body{width:100%;background:#0d1f1a;}
 .pl-empty span{display:block;font-size:22px;margin-bottom:5px;}
 
 /* ═══════════════════════════════
-   SOCIAL / INVITE
+   INVITE
 ═══════════════════════════════ */
 .invite-box{
   background:linear-gradient(135deg,rgba(42,157,143,.15),rgba(26,107,110,.2));
@@ -591,18 +499,6 @@ html,body{width:100%;background:#0d1f1a;}
 }
 .invite-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,196,106,.45);}
 
-.socials-row{display:flex;gap:8px;margin-top:10px;}
-.social-btn{
-  flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
-  padding:10px;border-radius:13px;
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--cream);text-decoration:none;transition:all .15s;
-  border:1px solid transparent;
-}
-.social-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3);}
-.social-wa{background:linear-gradient(135deg,#1faa4a,#25c95b);border-color:rgba(255,255,255,.1);}
-.social-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-color:rgba(255,255,255,.1);}
-
 /* ═══════════════════════════════
    FOOTER
 ═══════════════════════════════ */
@@ -617,9 +513,6 @@ html,body{width:100%;background:#0d1f1a;}
 }
 .footer-copy{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fern);opacity:.5;margin-top:4px;}
 
-/* ═══════════════════════════════
-   SECTION WRAPPER SPACING
-═══════════════════════════════ */
 .section-block{margin-bottom:4px;}
 </style>
 </head>
@@ -631,10 +524,6 @@ html,body{width:100%;background:#0d1f1a;}
   <div class="hero">
     <div class="hero-glow"></div>
     <div class="hero-inner">
-      <div class="hero-tagline-top">Est. 2024 · Chess Club</div>
-      <div class="hero-logo-wrap">
-        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif" id="heroLogo" alt="Paradise Chess Club">
-      </div>
       <div class="hero-title">The <em>Paradise</em></div>
       <div class="hero-subtitle">Chess Club</div>
       <div class="hero-divider">
@@ -644,7 +533,6 @@ html,body{width:100%;background:#0d1f1a;}
       </div>
     </div>
 
-    <!-- Palm silhouettes SVG -->
     <div class="hero-palms">
       <svg class="palm-svg palm-left" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 120 Q48 80 52 50 Q54 30 40 10" stroke="#0d2b1f" stroke-width="4" fill="none"/>
@@ -665,7 +553,7 @@ html,body{width:100%;background:#0d1f1a;}
   <!-- ─── GIF SECTION ─── -->
   <div class="gif-section" style="padding:14px 16px 0;">
     <div class="gif-frame">
-      <img id="clubGif" src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif" alt="Club Welcome">
+      <img src="https://images.chesscomfiles.com/uploads/v1/group/740787.67f84889.160x160o.2b7a593bce36.webp" alt="Club Welcome" style="width:100%;display:block;">
       <div class="gif-overlay">
         <div class="gif-overlay-text">Welcome to the island, friend 🌴</div>
         <div class="gif-overlay-sub">Where every move is paradise</div>
@@ -686,28 +574,6 @@ html,body{width:100%;background:#0d1f1a;}
       <div class="member-card"><img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png"><div><div class="member-name">@loading...</div><div class="member-meta">Fetching members</div></div></div>
     </div>
 
-    <!-- GAME OF THE DAY -->
-    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">♟</div><div class="tropic-div-line"></div></div>
-    <div class="sec-head">
-      <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Game of the Day</div></div>
-      <div class="sec-sub">Featured masterpiece</div>
-    </div>
-    <div class="gotd-box section-block">
-      <div class="gotd-badge">⭐ Daily Pick</div>
-      <div class="gotd-title">Paste the link to today's featured game below</div>
-      <div class="gotd-input-row">
-        <input class="gotd-input" type="text" id="gotdInput" placeholder="https://www.chess.com/game/live/...">
-        <button class="gotd-btn" onclick="setGameOfDay()">Set</button>
-      </div>
-      <div class="gotd-preview" id="gotdPreview">
-        <div class="gotd-preview-label">Today's Game</div>
-        <a class="gotd-link" id="gotdLink" href="#" target="_blank" rel="noopener">
-          <span class="gotd-link-icon">♟</span>
-          <span id="gotdLinkText"></span>
-        </a>
-      </div>
-    </div>
-
     <!-- PARTNERS -->
     <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🤝</div><div class="tropic-div-line"></div></div>
     <div class="sec-head">
@@ -715,27 +581,27 @@ html,body{width:100%;background:#0d1f1a;}
       <div class="sec-sub">Our partners</div>
     </div>
     <div class="partners-grid section-block">
-      <a class="partner-card" href="https://www.chess.com" target="_blank" rel="noopener">
-        <div class="partner-icon">♟</div>
+      <a class="partner-card" href="https://www.chess.com/club/the-illusion-fireballs" target="_blank" rel="noopener">
+        <img class="partner-logo" src="https://images.chesscomfiles.com/uploads/v1/group/721991.45ac00a8.160x160o.1b00bdde562e@2x.gif" alt="The Illusion Fireballs">
         <div>
-          <div class="partner-name">Chess.com</div>
-          <div class="partner-desc">Official Platform</div>
+          <div class="partner-name">The Illusion Fireballs</div>
+          <div class="partner-desc">Partner Club</div>
         </div>
         <div class="partner-arr">›</div>
       </a>
-      <a class="partner-card" href="https://lichess.org" target="_blank" rel="noopener">
-        <div class="partner-icon">🏰</div>
+      <a class="partner-card" href="https://www.chess.com/club/duolingo" target="_blank" rel="noopener">
+        <img class="partner-logo" src="https://images.chesscomfiles.com/uploads/v1/group/100424.72cf138b.160x160o.99690361a7a0@2x.png" alt="Duolingo">
         <div>
-          <div class="partner-name">Lichess</div>
-          <div class="partner-desc">Open Source Chess</div>
+          <div class="partner-name">Duolingo</div>
+          <div class="partner-desc">Partner Club</div>
         </div>
         <div class="partner-arr">›</div>
       </a>
-      <a class="partner-card" href="#" target="_blank" rel="noopener" id="partner3">
-        <div class="partner-icon">🌴</div>
+      <a class="partner-card" href="https://www.chess.com/club/hot-chilli-checkmate" target="_blank" rel="noopener">
+        <img class="partner-logo" src="https://images.chesscomfiles.com/uploads/v1/group/856887.25d9c967.160x160o.f13d925774bb@2x.png" alt="Hot Chilli CheckMate">
         <div>
-          <div class="partner-name">Partner 3</div>
-          <div class="partner-desc">Your partner here</div>
+          <div class="partner-name">Hot Chilli CheckMate</div>
+          <div class="partner-desc">Partner Club</div>
         </div>
         <div class="partner-arr">›</div>
       </a>
@@ -829,28 +695,30 @@ html,body{width:100%;background:#0d1f1a;}
       <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Quick Links</div></div>
       <div class="sec-sub">Navigate the island</div>
     </div>
-    <div class="links-grid section-block">
-      <a class="link-btn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener">
-        <div class="link-icon">🧩</div><span class="link-text">Solve a Puzzle</span><span class="link-arr">›</span>
-      </a>
-      <a class="link-btn" href="https://www.chess.com/clubs/forum/view/watch-my-game-1" target="_blank" rel="noopener">
-        <div class="link-icon">🎬</div><span class="link-text">Watch My Game</span><span class="link-arr">›</span>
-      </a>
-      <a class="link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform?usp=header" target="_blank" rel="noopener">
-        <div class="link-icon">🤔</div><span class="link-text">Guess the Elo</span><span class="link-arr">›</span>
-      </a>
-      <a class="link-btn" href="https://www.chess.com/leaderboard/live?group=856887" target="_blank" rel="noopener">
-        <div class="link-icon">🏆</div><span class="link-text">Leaderboard</span><span class="link-arr">›</span>
-      </a>
-      <a class="link-btn" href="https://chesswrap.vercel.app/" target="_blank" rel="noopener">
-        <div class="link-icon">📅</div><span class="link-text">2025 Recap</span><span class="link-arr">›</span>
-      </a>
-      <a class="link-btn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener">
-        <div class="link-icon">⭐</div><span class="link-text">Rate Our Club!</span><span class="link-arr">›</span>
-      </a>
+    <div class="links-scroll-wrap section-block">
+      <div class="links-grid">
+        <a class="link-btn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener">
+          <div class="link-icon">🧩</div><span class="link-text">Solve a Puzzle</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://www.chess.com/clubs/forum/view/watch-my-game-1" target="_blank" rel="noopener">
+          <div class="link-icon">🎬</div><span class="link-text">Watch My Game</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform?usp=header" target="_blank" rel="noopener">
+          <div class="link-icon">🤔</div><span class="link-text">Guess the Elo</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://www.chess.com/leaderboard/live?group=856887" target="_blank" rel="noopener">
+          <div class="link-icon">🏆</div><span class="link-text">Leaderboard</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://chesswrap.vercel.app/" target="_blank" rel="noopener">
+          <div class="link-icon">📅</div><span class="link-text">2025 Recap</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener">
+          <div class="link-icon">⭐</div><span class="link-text">Rate Our Club!</span><span class="link-arr">›</span>
+        </a>
+      </div>
     </div>
 
-    <!-- INVITE + SOCIALS -->
+    <!-- INVITE -->
     <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🌴</div><div class="tropic-div-line"></div></div>
     <div class="invite-box section-block">
       <div class="invite-title">Bring a Friend to Paradise</div>
@@ -858,10 +726,6 @@ html,body{width:100%;background:#0d1f1a;}
       <button class="invite-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/the-paradise-chess-club/join');this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='🔗 Copy Invite Link'},1500);">
         🔗 Copy Invite Link
       </button>
-      <div class="socials-row">
-        <a class="social-btn social-wa" href="https://chat.whatsapp.com/J0D48mkryYa866nkmoAxa6?mode=gi_t" target="_blank" rel="noopener">💬 WhatsApp</a>
-        <a class="social-btn social-ig" href="https://www.instagram.com/hot_chilli_checkmate?igsh=bWc3NWxoNHdxOGN0" target="_blank" rel="noopener">📷 Instagram</a>
-      </div>
     </div>
 
     <!-- FOOTER -->
@@ -877,33 +741,7 @@ html,body{width:100%;background:#0d1f1a;}
 
 <script>
 /* ══════════════════════════
-   GAME OF THE DAY
-══════════════════════════ */
-(function(){
-  const LS_KEY = 'paradise_gotd';
-  const saved = localStorage.getItem(LS_KEY);
-  if(saved){
-    document.getElementById('gotdInput').value = saved;
-    showGotd(saved);
-  }
-  window.setGameOfDay = function(){
-    const val = document.getElementById('gotdInput').value.trim();
-    if(!val) return;
-    localStorage.setItem(LS_KEY, val);
-    showGotd(val);
-  };
-  function showGotd(url){
-    const preview = document.getElementById('gotdPreview');
-    const link = document.getElementById('gotdLink');
-    const text = document.getElementById('gotdLinkText');
-    link.href = url;
-    text.textContent = url.length > 50 ? url.slice(0,50)+'...' : url;
-    preview.classList.add('show');
-  }
-})();
-
-/* ══════════════════════════
-   MEMBERS
+   MEMBERS — Paradise Chess Club
 ══════════════════════════ */
 (function(){
   function timeAgo(ts){
@@ -916,10 +754,7 @@ html,body{width:100%;background:#0d1f1a;}
   }
   async function load(){
     try{
-      const r=await fetch('https://api.chess.com/pub/club/the-paradise-chess-club/members').catch(()=>null);
-      // fallback to hot-chilli for demo
-      const url = r && r.ok ? 'https://api.chess.com/pub/club/the-paradise-chess-club/members' : 'https://api.chess.com/pub/club/hot-chilli-checkmate/members';
-      const res = await fetch(url);
+      const res = await fetch('https://api.chess.com/pub/club/the-paradise-chess-club/members');
       const d = await res.json();
       const members = [...(d.weekly||[]), ...(d.monthly||[])];
       members.sort((a,b)=>b.joined-a.joined);
