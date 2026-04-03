@@ -53,7 +53,6 @@ html,body{width:100%;background:#0d1f1a;}
   padding:0;
   overflow:hidden;
 }
-
 .hero-palms{
   position:absolute;bottom:0;left:0;right:0;
   height:120px;pointer-events:none;z-index:1;
@@ -62,20 +61,17 @@ html,body{width:100%;background:#0d1f1a;}
 .palm-svg{position:absolute;bottom:0;}
 .palm-left{left:-10px;width:110px;opacity:.7;}
 .palm-right{right:-10px;width:110px;opacity:.7;transform:scaleX(-1);}
-
 .hero-glow{
   position:absolute;bottom:50px;left:0;right:0;
   height:80px;
   background:linear-gradient(180deg, transparent 0%, rgba(42,157,143,.15) 50%, rgba(26,107,110,.25) 100%);
   pointer-events:none;z-index:0;
 }
-
 .hero-inner{
   position:relative;z-index:2;
   text-align:center;
   padding:28px 20px 30px;
 }
-
 .hero-title{
   font-family:'Playfair Display',serif;
   font-size:28px;font-weight:900;
@@ -84,15 +80,12 @@ html,body{width:100%;background:#0d1f1a;}
   text-shadow:0 2px 20px rgba(0,0,0,.6);
   margin-bottom:4px;
 }
-.hero-title em{
-  font-style:italic;color:var(--sand);display:inline;;font-size:28px;
-}
+.hero-title em{font-style:italic;color:var(--sand);display:inline;font-size:28px;}
 .hero-subtitle{
   font-family:'Josefin Sans',sans-serif;
   font-size:9px;font-weight:600;letter-spacing:5px;text-transform:uppercase;
   color:var(--foam);margin-top:6px;opacity:.9;
 }
-
 .hero-divider{
   display:flex;align-items:center;justify-content:center;gap:10px;
   margin:12px auto 0;padding:0 30px;
@@ -139,17 +132,43 @@ html,body{width:100%;background:#0d1f1a;}
 }
 
 /* ═══════════════════════════════
-   TROPICAL SECTION DIVIDER
+   TROPICAL SECTION DIVIDER — ENHANCED
 ═══════════════════════════════ */
 .tropic-div{
-  display:flex;align-items:center;gap:10px;
-  margin:18px 0 14px;
+  display:flex;align-items:center;gap:0;
+  margin:20px 0 16px;
+  position:relative;
 }
+
+/* The wavy vine line */
 .tropic-div-line{
-  flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(82,182,154,.4),transparent);
+  flex:1;height:18px;
+  overflow:hidden;
+  display:flex;align-items:center;
 }
-.tropic-div-icon{font-size:14px;opacity:.7;}
+
+.tropic-div-line svg{width:100%;height:18px;display:block;}
+
+.tropic-div-center{
+  display:flex;align-items:center;gap:6px;
+  padding:0 8px;
+  flex-shrink:0;
+}
+
+.tropic-div-leaf{
+  font-size:15px;   /* ← bigger */
+  opacity:.9;       /* ← more visible */
+  line-height:1;
+}
+.tropic-div-piece{
+  width:30px;height:30px;  /* ← same as music */
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(233,196,106,.5), rgba(42,157,143,.4));
+  border:2px solid rgba(233,196,106,.85);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,.35), 0 0 10px rgba(233,196,106,.2), inset 0 1px 0 rgba(255,255,255,.12);
+}
 
 /* ═══════════════════════════════
    SECTION LABELS
@@ -176,7 +195,6 @@ html,body{width:100%;background:#0d1f1a;}
    MEMBERS
 ═══════════════════════════════ */
 .members-list{display:flex;flex-direction:column;gap:8px;}
-
 .member-card{
   display:flex;align-items:center;gap:11px;
   padding:10px 13px;
@@ -199,7 +217,6 @@ html,body{width:100%;background:#0d1f1a;}
   box-shadow:0 4px 20px rgba(0,0,0,.3);
 }
 .member-card:hover::before{opacity:1;}
-
 .member-avatar{
   width:38px;height:38px;border-radius:50%;
   border:2px solid rgba(233,196,106,.4);
@@ -222,7 +239,6 @@ html,body{width:100%;background:#0d1f1a;}
    PARTNERS
 ═══════════════════════════════ */
 .partners-grid{display:flex;flex-direction:column;gap:8px;}
-
 .partner-card{
   display:flex;align-items:center;gap:12px;
   padding:10px 14px;border-radius:14px;
@@ -244,7 +260,6 @@ html,body{width:100%;background:#0d1f1a;}
   transform:translateY(-2px);
   box-shadow:0 8px 24px rgba(0,0,0,.3);
 }
-
 .partner-logo{
   width:40px;height:40px;border-radius:10px;
   border:1px solid rgba(82,182,154,.3);
@@ -266,10 +281,10 @@ html,body{width:100%;background:#0d1f1a;}
 .partner-card:hover .partner-arr{opacity:1;transform:translateX(3px);}
 
 /* ═══════════════════════════════
-   QUICK LINKS
+   QUICK LINKS — shorter scroll
 ═══════════════════════════════ */
 .links-scroll-wrap{
-  max-height:280px;
+  max-height:190px; /* ← reduced from 280px */
   overflow-y:auto;
   overflow-x:hidden;
   padding-right:4px;
@@ -281,10 +296,9 @@ html,body{width:100%;background:#0d1f1a;}
 .links-scroll-wrap{scrollbar-width:thin;scrollbar-color:rgba(82,182,154,.4) transparent;}
 
 .links-grid{
-  display:flex;flex-direction:column;gap:8px;
+  display:flex;flex-direction:column;gap:7px;
   width:100%;
 }
-
 .link-btn{
   display:flex;align-items:center;gap:10px;
   padding:11px 13px;border-radius:13px;
@@ -295,7 +309,6 @@ html,body{width:100%;background:#0d1f1a;}
   transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
   position:relative;overflow:hidden;
   width:100%;
-  box-sizing:border-box;
 }
 .link-btn::before{
   content:'';position:absolute;inset:0;
@@ -319,22 +332,27 @@ html,body{width:100%;background:#0d1f1a;}
 .link-btn:hover .link-arr{opacity:1;}
 
 /* ═══════════════════════════════
-   MUSIC PLAYER
+   MUSIC PLAYER — all bugs fixed + fixed height
 ═══════════════════════════════ */
 .music-card{
   background:linear-gradient(160deg,rgba(20,50,35,.95),rgba(10,30,21,.98));
   border:1px solid rgba(82,182,154,.2);
   border-radius:18px;padding:16px;
-  position:relative;overflow:hidden;
+  position:relative;
   box-shadow:0 8px 32px rgba(0,0,0,.3);
+  /* FIXED HEIGHT — never grows regardless of search dropdown or playlist length */
+  height:420px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
-
 .now-playing{
   display:flex;align-items:center;gap:12px;
   background:linear-gradient(135deg,rgba(42,157,143,.2),rgba(26,107,110,.25));
   border:1px solid rgba(82,182,154,.25);
   border-radius:14px;padding:12px 13px;margin-bottom:13px;
   position:relative;overflow:hidden;
+  flex-shrink:0;
 }
 .now-playing::before{
   content:'';position:absolute;inset:0;
@@ -362,7 +380,7 @@ html,body{width:100%;background:#0d1f1a;}
 .eq-b.paused{animation-play-state:paused;}
 @keyframes eq{to{height:16px;}}
 
-.prog-wrap{margin-bottom:11px;}
+.prog-wrap{margin-bottom:11px;flex-shrink:0;}
 .prog-track{
   width:100%;height:6px;
   background:rgba(42,157,143,.15);border-radius:999px;
@@ -383,7 +401,7 @@ html,body{width:100%;background:#0d1f1a;}
 .prog-knob:hover{transform:translateY(-50%) scale(1.2);}
 .time-row{display:flex;justify-content:space-between;font-size:9px;font-weight:600;color:var(--foam);margin-top:4px;opacity:.7;}
 
-.ctrl-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.ctrl-row{display:flex;align-items:center;gap:5px;margin-bottom:12px;flex-shrink:0;}
 .cbtn{
   display:flex;align-items:center;justify-content:center;
   border-radius:50%;cursor:pointer;border:1px solid rgba(82,182,154,.25);
@@ -393,32 +411,32 @@ html,body{width:100%;background:#0d1f1a;}
 .cbtn svg,.cbtn svg *{pointer-events:none;}
 .cbtn:hover{background:rgba(42,157,143,.25);border-color:rgba(82,182,154,.5);transform:translateY(-1px);}
 .cbtn:active{transform:translateY(1px);}
-.cbtn.sm{width:30px;height:30px;}
-.cbtn.sm svg{width:12px;height:12px;}
+.cbtn.sm{width:26px;height:26px;}
+.cbtn.sm svg{width:10px;height:10px;}
 .cbtn.play-btn{
-  width:38px;height:38px;
+  width:32px;height:32px;
   background:linear-gradient(135deg,var(--sand),var(--gold));
   border:none;box-shadow:0 4px 16px rgba(233,196,106,.3);
 }
-.cbtn.play-btn svg{width:13px;height:13px;}
+.cbtn.play-btn svg{width:11px;height:11px;}
 .cbtn.play-btn:hover{box-shadow:0 6px 24px rgba(233,196,106,.5);background:linear-gradient(135deg,var(--gold),var(--sunset));}
 .cbtn.loop-on{background:linear-gradient(135deg,var(--lagoon),var(--ocean));border:none;}
 .cbtn.loop-on svg{color:#fff!important;}
 
-.vol-row{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.vol-row{display:flex;align-items:center;gap:5px;margin-left:auto;}
 .vol-icon{
-  width:28px;height:28px;border-radius:50%;
+  width:24px;height:24px;border-radius:50%;
   border:1px solid rgba(82,182,154,.25);background:rgba(26,67,50,.5);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:all .15s;flex-shrink:0;
 }
 .vol-icon:hover{background:rgba(42,157,143,.25);}
-.vol-icon svg{width:12px;height:12px;color:var(--foam);pointer-events:none;}
-.vol-track{width:44px;height:6px;background:rgba(42,157,143,.15);border-radius:999px;border:1px solid rgba(82,182,154,.2);cursor:pointer;position:relative;flex-shrink:0;}
+.vol-icon svg{width:10px;height:10px;color:var(--foam);pointer-events:none;}
+.vol-track{width:38px;height:6px;background:rgba(42,157,143,.15);border-radius:999px;border:1px solid rgba(82,182,154,.2);cursor:pointer;position:relative;flex-shrink:0;}
 .vol-fill{height:100%;background:linear-gradient(90deg,var(--lagoon),var(--foam));border-radius:999px;width:70%;}
-.vol-knob{position:absolute;top:50%;transform:translateY(-50%);left:calc(70% - 6px);width:12px;height:12px;border-radius:50%;background:var(--cream);border:2px solid var(--foam);cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.3);}
+.vol-knob{position:absolute;top:50%;transform:translateY(-50%);left:calc(70% - 6px);width:11px;height:11px;border-radius:50%;background:var(--cream);border:2px solid var(--foam);cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.3);}
 
-.music-search{margin-bottom:10px;position:relative;}
+.music-search{margin-bottom:10px;position:relative;flex-shrink:0;}
 .music-search-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
 .music-search-lbl::after{content:'';flex:1;height:1px;background:rgba(82,182,154,.2);}
 .music-search-inp{
@@ -450,25 +468,58 @@ html,body{width:100%;background:#0d1f1a;}
 .dd-badge.add{background:rgba(233,196,106,.15);color:var(--sand);border:1px solid rgba(233,196,106,.3);}
 .dd-badge.done{background:rgba(82,182,154,.15);color:var(--foam);border:1px solid rgba(82,182,154,.3);}
 
-.pl-section{margin-top:2px;}
-.pl-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.pl-section{margin-top:2px;flex:1;display:flex;flex-direction:column;min-height:0;}
+.pl-lbl{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--foam);font-weight:600;opacity:.7;margin-bottom:7px;display:flex;align-items:center;gap:6px;flex-shrink:0;}
 .pl-lbl::after{content:'';flex:1;height:1px;background:rgba(82,182,154,.2);}
 .pl-count{font-size:8px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(42,157,143,.2);color:var(--foam);border:1px solid rgba(82,182,154,.2);}
-.pl-scroll{height:120px;overflow-y:auto;padding-right:2px;}
+
+/* Playlist scroll fills all remaining space in the fixed-height card */
+.pl-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:4px;
+  padding-bottom:4px;
+}
 .pl-scroll::-webkit-scrollbar{width:4px;}
 .pl-scroll::-webkit-scrollbar-thumb{background:rgba(82,182,154,.3);border-radius:2px;}
+.pl-scroll::-webkit-scrollbar-track{background:transparent;}
+
+/* FIX: playlist items — solid gap via margin-bottom, no hover flicker */
 .pl-item{
-  display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:10px;margin-bottom:4px;
-  cursor:pointer;background:rgba(26,67,50,.4);border:1px solid rgba(82,182,154,.12);
-  transition:all .14s;font-size:10px;font-weight:600;color:var(--cream);overflow:hidden;
+  display:flex;align-items:center;gap:8px;
+  padding:8px 9px;
+  border-radius:10px;
+  /* FIX: use margin-bottom for gap, NOT gap between items, so hover covers the space */
+  margin-bottom:5px;
+  cursor:pointer;
+  background:rgba(26,67,50,.4);
+  border:1px solid rgba(82,182,154,.12);
+  transition:background .14s, border-color .14s, transform .14s;
+  font-size:10px;font-weight:600;color:var(--cream);
+  overflow:hidden;
+  /* FIX: ensure no whitespace between items causes hover gap glitch */
+  flex-shrink:0;
 }
+.pl-item:last-child{margin-bottom:0;}
 .pl-item:hover{background:rgba(42,157,143,.2);border-color:rgba(82,182,154,.3);transform:translateX(3px);}
 .pl-item.active{background:rgba(233,196,106,.12);border-color:rgba(233,196,106,.3);}
 .pl-num{font-size:9px;font-weight:700;color:var(--sand);min-width:18px;flex-shrink:0;}
 .pl-ico{font-size:10px;flex-shrink:0;}
 .pl-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
-.pl-rm{font-size:10px;color:rgba(82,182,154,.4);cursor:pointer;padding:0 3px;transition:color .15s;flex-shrink:0;}
-.pl-rm:hover{color:var(--sunset);}
+.pl-rm{
+  font-size:10px;color:rgba(82,182,154,.4);
+  cursor:pointer;
+  /* FIX: give remove button generous padding so it doesn't create a hover dead zone */
+  padding:4px 6px;
+  margin:-4px -4px -4px 0;
+  border-radius:6px;
+  transition:color .15s, background .15s;
+  flex-shrink:0;
+  line-height:1;
+}
+.pl-rm:hover{color:var(--sunset);background:rgba(231,111,81,.12);}
 .pl-empty{text-align:center;padding:18px 0;font-size:11px;font-weight:600;color:rgba(82,182,154,.4);}
 .pl-empty span{display:block;font-size:22px;margin-bottom:5px;}
 
@@ -514,6 +565,15 @@ html,body{width:100%;background:#0d1f1a;}
 .footer-copy{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fern);opacity:.5;margin-top:4px;}
 
 .section-block{margin-bottom:4px;}
+
+/* Music separator — extra prominent */
+.tropic-div-piece--music{
+  width:30px;height:30px;
+  font-size:16px;
+  background:linear-gradient(135deg, rgba(233,196,106,.5), rgba(42,157,143,.4));
+  border:2px solid rgba(233,196,106,.85);
+  box-shadow:0 2px 14px rgba(0,0,0,.4), 0 0 12px rgba(233,196,106,.25), inset 0 1px 0 rgba(255,255,255,.15);
+}
 </style>
 </head>
 <body>
@@ -532,7 +592,6 @@ html,body{width:100%;background:#0d1f1a;}
         <div class="hero-divider-line"></div>
       </div>
     </div>
-
     <div class="hero-palms">
       <svg class="palm-svg palm-left" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 120 Q48 80 52 50 Q54 30 40 10" stroke="#0d2b1f" stroke-width="4" fill="none"/>
@@ -565,7 +624,26 @@ html,body{width:100%;background:#0d1f1a;}
   <div class="content">
 
     <!-- MEMBERS -->
-    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🌿</div><div class="tropic-div-line"></div></div>
+    <div class="tropic-div">
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="tropic-div-center">
+        <span class="tropic-div-leaf">🌿</span>
+        <div class="tropic-div-piece">♟</div>
+        <span class="tropic-div-leaf">🌿</span>
+      </div>
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="sec-head">
       <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">New Arrivals</div></div>
       <div class="sec-sub">Recent members</div>
@@ -575,7 +653,26 @@ html,body{width:100%;background:#0d1f1a;}
     </div>
 
     <!-- PARTNERS -->
-    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🤝</div><div class="tropic-div-line"></div></div>
+    <div class="tropic-div">
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="tropic-div-center">
+        <span class="tropic-div-leaf">🤝</span>
+        <div class="tropic-div-piece">♜</div>
+        <span class="tropic-div-leaf">🤝</span>
+      </div>
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="sec-head">
       <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Island Allies</div></div>
       <div class="sec-sub">Our partners</div>
@@ -583,32 +680,42 @@ html,body{width:100%;background:#0d1f1a;}
     <div class="partners-grid section-block">
       <a class="partner-card" href="https://www.chess.com/club/the-illusion-fireballs" target="_blank" rel="noopener">
         <img class="partner-logo" src="https://images.chesscomfiles.com/uploads/v1/group/721991.45ac00a8.160x160o.1b00bdde562e@2x.gif" alt="The Illusion Fireballs">
-        <div>
-          <div class="partner-name">The Illusion Fireballs</div>
-          <div class="partner-desc">Partner Club</div>
-        </div>
+        <div><div class="partner-name">The Illusion Fireballs</div><div class="partner-desc">Partner Club</div></div>
         <div class="partner-arr">›</div>
       </a>
       <a class="partner-card" href="https://www.chess.com/club/duolingo" target="_blank" rel="noopener">
         <img class="partner-logo" src="https://images.chesscomfiles.com/uploads/v1/group/100424.72cf138b.160x160o.99690361a7a0@2x.png" alt="Duolingo">
-        <div>
-          <div class="partner-name">Duolingo</div>
-          <div class="partner-desc">Partner Club</div>
-        </div>
+        <div><div class="partner-name">Duolingo</div><div class="partner-desc">Partner Club</div></div>
         <div class="partner-arr">›</div>
       </a>
       <a class="partner-card" href="https://www.chess.com/club/hot-chilli-checkmate" target="_blank" rel="noopener">
         <img class="partner-logo" src="https://images.chesscomfiles.com/uploads/v1/group/856887.25d9c967.160x160o.f13d925774bb@2x.png" alt="Hot Chilli CheckMate">
-        <div>
-          <div class="partner-name">Hot Chilli CheckMate</div>
-          <div class="partner-desc">Partner Club</div>
-        </div>
+        <div><div class="partner-name">Hot Chilli CheckMate</div><div class="partner-desc">Partner Club</div></div>
         <div class="partner-arr">›</div>
       </a>
     </div>
 
     <!-- MUSIC PLAYER -->
-    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🎵</div><div class="tropic-div-line"></div></div>
+    <div class="tropic-div tropic-div--music">
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="tropic-div-center tropic-div-center--music">
+        <span class="tropic-div-leaf" style="font-size:17px;opacity:1;">🎵</span>
+        <div class="tropic-div-piece tropic-div-piece--music">♩</div>
+        <span class="tropic-div-leaf" style="font-size:17px;opacity:1;">🎵</span>
+      </div>
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="sec-head">
       <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Island Vibes</div></div>
       <div class="sec-sub">Music player</div>
@@ -685,43 +792,82 @@ html,body{width:100%;background:#0d1f1a;}
 
       <div class="pl-section">
         <div class="pl-lbl">Queue <span class="pl-count" id="plCount">0</span></div>
+        <!-- FIX: removed overflow:hidden wrapper, scroll is on pl-scroll itself with proper padding -->
         <div class="pl-scroll" id="playlist"></div>
       </div>
     </div>
 
     <!-- QUICK LINKS -->
-    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🔗</div><div class="tropic-div-line"></div></div>
+    <div class="tropic-div">
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="tropic-div-center">
+        <span class="tropic-div-leaf">🔗</span>
+        <div class="tropic-div-piece">♛</div>
+        <span class="tropic-div-leaf">🔗</span>
+      </div>
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="sec-head">
       <div class="sec-label-row"><div class="sec-badge"></div><div class="sec-title">Quick Links</div></div>
       <div class="sec-sub">Navigate the island</div>
     </div>
     <div class="links-scroll-wrap section-block">
       <div class="links-grid">
-        <a class="link-btn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener">
-          <div class="link-icon">🧩</div><span class="link-text">Solve a Puzzle</span><span class="link-arr">›</span>
+        <a class="link-btn" href="https://www.chess.com/clubs/forum/view/official-rules-the-paradise-chess-club" target="_blank" rel="noopener">
+          <div class="link-icon">📜</div><span class="link-text">Official Rules</span><span class="link-arr">›</span>
         </a>
-        <a class="link-btn" href="https://www.chess.com/clubs/forum/view/watch-my-game-1" target="_blank" rel="noopener">
-          <div class="link-icon">🎬</div><span class="link-text">Watch My Game</span><span class="link-arr">›</span>
+        <a class="link-btn" href="https://www.chess.com/clubs/events/the-paradise-chess-club" target="_blank" rel="noopener">
+          <div class="link-icon">🎪</div><span class="link-text">Club Events</span><span class="link-arr">›</span>
         </a>
-        <a class="link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform?usp=header" target="_blank" rel="noopener">
-          <div class="link-icon">🤔</div><span class="link-text">Guess the Elo</span><span class="link-arr">›</span>
-        </a>
-        <a class="link-btn" href="https://www.chess.com/leaderboard/live?group=856887" target="_blank" rel="noopener">
+        <a class="link-btn" href="https://www.chess.com/leaderboard/live?group=579369" target="_blank" rel="noopener">
           <div class="link-icon">🏆</div><span class="link-text">Leaderboard</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://www.chess.com/clubs/forum/view/we-make-10000-coment" target="_blank" rel="noopener">
+          <div class="link-icon">💬</div><span class="link-text">Spam Forum</span><span class="link-arr">›</span>
+        </a>
+        <a class="link-btn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener">
+          <div class="link-icon">🧩</div><span class="link-text">Solving Puzzles</span><span class="link-arr">›</span>
         </a>
         <a class="link-btn" href="https://chesswrap.vercel.app/" target="_blank" rel="noopener">
           <div class="link-icon">📅</div><span class="link-text">2025 Recap</span><span class="link-arr">›</span>
-        </a>
-        <a class="link-btn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener">
-          <div class="link-icon">⭐</div><span class="link-text">Rate Our Club!</span><span class="link-arr">›</span>
         </a>
       </div>
     </div>
 
     <!-- INVITE -->
-    <div class="tropic-div"><div class="tropic-div-line"></div><div class="tropic-div-icon">🌴</div><div class="tropic-div-line"></div></div>
+    <div class="tropic-div">
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="tropic-div-center">
+        <span class="tropic-div-leaf">🌴</span>
+        <div class="tropic-div-piece">♚</div>
+        <span class="tropic-div-leaf">🌴</span>
+      </div>
+      <div class="tropic-div-line">
+        <svg viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(82,182,154,0.85)" stroke-width="1.5" fill="none"/>
+          <path d="M0,9 Q20,3 40,9 Q60,15 80,9 Q100,3 120,9 Q140,15 160,9 Q180,3 200,9" stroke="rgba(233,196,106,0.55)" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="invite-box section-block">
-      <div class="invite-title">Bring a Friend to Paradise</div>
+      <div class="invite-title">Bring Your Friends to the Paradise</div>
       <div class="invite-sub">Share the island with fellow chess lovers</div>
       <button class="invite-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/the-paradise-chess-club/join');this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='🔗 Copy Invite Link'},1500);">
         🔗 Copy Invite Link
@@ -741,7 +887,7 @@ html,body{width:100%;background:#0d1f1a;}
 
 <script>
 /* ══════════════════════════
-   MEMBERS — Paradise Chess Club
+   MEMBERS
 ══════════════════════════ */
 (function(){
   function timeAgo(ts){
