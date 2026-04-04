@@ -3,151 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <style>
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(180deg, rgba(50,35,90,.92), rgba(30,20,60,.95));
-  border-radius: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #f3ecff;
-  overflow: hidden;
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  width:100%;
+  background:transparent!important;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#cce0ff;
 }
 
-/* Outer container */
-#membersBox {
-  padding: 12px;
-  max-height: 245px;
-  overflow-y: auto;
-  scrollbar-width: none;
+#membersBox{
+  width:100%;
+  padding:8px 15px 10px;
+  background:linear-gradient(180deg, rgba(13,27,62,.92), rgba(10,22,48,.95));
+  border:2px solid rgba(80,140,255,.35);
+  border-radius:16px;
+  box-shadow:inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(80,140,255,.18);
 }
 
-/* Hide scrollbar (Chrome) */
-#membersBox::-webkit-scrollbar {
-  display: none;
+#membersList{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
-/* Member card */
-.memberRow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
-  border-radius: 18px;
-  background: rgba(120,90,170,.55);
-  border: 1px solid rgba(200,170,255,.25);
-  margin-bottom: 10px;
-  transition: all .25s ease;
+.member-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:12px;
+  background:rgba(20,50,110,.45);
+  border:1px solid rgba(80,140,255,.18);
+  text-decoration:none;
+  transition:.2s;
+  min-height:44px;
+  overflow:hidden;
 }
 
-/* Hover effect — purple glow */
-.memberRow:hover {
-  transform: translateY(-4px) scale(1.02);
-  background: #b58cff;
-  color: #ffffff;
-  box-shadow: 0 10px 22px rgba(0,0,0,.65);
+.member-item:hover{
+  background:rgba(30,70,160,.55);
+  border-color:rgba(100,160,255,.4);
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,.35);
 }
 
-/* Link wrapper */
-.memberLink {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  width: 100%;
-  color: inherit;
+.member-avatar{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:2px solid rgba(100,160,255,.7);
+  box-shadow:0 0 0 3px rgba(80,140,255,.2), 0 0 12px rgba(80,140,255,.25);
+  object-fit:cover;
+  flex-shrink:0;
+  transition:.25s;
 }
 
-/* Avatar */
-.memberAvatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 2px solid rgba(200,170,255,.6);
-  object-fit: cover;
-  transition: .25s;
+.member-item:hover .member-avatar{
+  transform:scale(1.06);
+  box-shadow:0 0 0 4px rgba(100,160,255,.3), 0 0 18px rgba(80,140,255,.4);
 }
 
-.memberRow:hover .memberAvatar {
-  border-color: #ffffff;
-  box-shadow: 0 0 10px rgba(255,255,255,.6);
+.member-info{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:0;
+  overflow:hidden;
 }
 
-/* Name */
-.memberName {
-  font-weight: 800;
-  font-size: 12px;
-  margin-bottom: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 140px;
+.member-name{
+  font-size:13px;
+  font-weight:800;
+  color:#7ab8ff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-/* Rating */
-.memberRating {
-  font-size: 11px;
-  opacity: .9;
-  color: #e6d6ff;
+.member-meta{
+  display:flex;
+  align-items:center;
+  width:100%;
+  margin-top:2px;
+  font-size:11px;
+  font-weight:700;
+  gap:4px;
 }
 
-.memberRow:hover .memberRating {
-  color: #ffffff;
-}
+.member-rating{ color:#b8d4f8; flex-shrink:0; }
+.member-joined{ margin-left:auto; color:#7aa8d8; font-weight:800; white-space:nowrap; flex-shrink:0; }
+.member-item:hover .member-name{ text-decoration:underline; }
 </style>
 </head>
 <body>
-<div id="membersBox"></div>
+
+<div id="membersBox">
+  <div id="membersList">
+    <div class="member-item">
+      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="member-info">
+        <div class="member-name">@loading</div>
+        <div class="member-meta"><span class="member-rating">—</span><span class="member-joined">—</span></div>
+      </div>
+    </div>
+    <div class="member-item">
+      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="member-info">
+        <div class="member-name">@loading</div>
+        <div class="member-meta"><span class="member-rating">—</span><span class="member-joined">—</span></div>
+      </div>
+    </div>
+    <div class="member-item">
+      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
+      <div class="member-info">
+        <div class="member-name">@loading</div>
+        <div class="member-meta"><span class="member-rating">—</span><span class="member-joined">—</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
+function timeAgo(timestamp) {
+  const diff = Math.floor((Date.now() - timestamp * 1000) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  const m = Math.floor(diff / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  if (d < 7) return `${d}d ago`;
+  const w = Math.floor(d / 7);
+  if (w < 4) return `${w}w ago`;
+  return `${Math.floor(d / 30)}mo ago`;
+}
+
 async function loadNewest() {
   try {
     const r = await fetch("https://api.chess.com/pub/club/anime-team-3/members");
     const d = await r.json();
+    const members = [...(d.weekly||[]), ...(d.monthly||[])];
+    members.sort((a, b) => b.joined - a.joined);
+    const top3 = members.slice(0, 3);
 
-    const members = [...d.weekly, ...d.monthly];
-    members.sort((a,b)=>b.joined-a.joined);
-    const top3 = members.slice(0,3);
-
-    const rows = await Promise.all(top3.map(async m=>{
-      const [pj,stats] = await Promise.all([
-        fetch("https://api.chess.com/pub/player/"+m.username).then(r=>r.json()),
-        fetch("https://api.chess.com/pub/player/"+m.username+"/stats").then(r=>r.json())
+    const results = await Promise.all(top3.map(async (m) => {
+      const [pj, stats] = await Promise.all([
+        fetch("https://api.chess.com/pub/player/" + m.username).then(r => r.json()),
+        fetch("https://api.chess.com/pub/player/" + m.username + "/stats").then(r => r.json())
       ]);
-
-      const ratings=[
-        {t:"Rapid",v:stats.chess_rapid?.last?.rating},
-        {t:"Blitz",v:stats.chess_blitz?.last?.rating},
-        {t:"Bullet",v:stats.chess_bullet?.last?.rating},
-        {t:"Daily",v:stats.chess_daily?.last?.rating}
-      ].filter(x=>x.v);
-
-      const best = ratings.length
-          ? ratings.sort((a,b)=>b.v-a.v)[0]
-          : {t:"—",v:"—"};
-
-      return `
-      <div class="memberRow">
-        <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
-          <img class="memberAvatar" src="${pj.avatar || 'https://taki2023.github.io/taki/default-pawn.png'}">
-          <div>
-            <div class="memberName">@${m.username}</div>
-            <div class="memberRating">${best.t}: ${best.v}</div>
-          </div>
-        </a>
-      </div>`;
+      const ratings = [
+        {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
+        {type:"Blitz",  value: stats.chess_blitz?.last?.rating},
+        {type:"Bullet", value: stats.chess_bullet?.last?.rating},
+        {type:"Daily",  value: stats.chess_daily?.last?.rating}
+      ].filter(x => x.value);
+      const best = ratings.length ? ratings.sort((a,b) => b.value - a.value)[0] : {type:"—", value:"—"};
+      return {
+        username: m.username,
+        avatar: pj.avatar || "https://taki2023.github.io/taki/default-pawn.png",
+        ratingType: best.type,
+        ratingValue: best.value,
+        joined: m.joined
+      };
     }));
 
-    document.getElementById("membersBox").innerHTML = rows.join("");
+    document.getElementById("membersList").innerHTML = results.map(m => `
+      <a class="member-item" href="https://www.chess.com/member/${m.username}" target="_blank">
+        <img class="member-avatar" src="${m.avatar}">
+        <div class="member-info">
+          <div class="member-name">@${m.username}</div>
+          <div class="member-meta">
+            <span class="member-rating">${m.ratingType}: ${m.ratingValue}</span>
+            <span class="member-joined">⏱ ${timeAgo(m.joined)}</span>
+          </div>
+        </div>
+      </a>
+    `).join("");
 
-  } catch(e){
-    document.getElementById("membersBox").innerHTML="Unable to load members";
+  } catch (err) {
+    console.error(err);
+    document.getElementById("membersList").innerHTML = "<div style='color:#7aa8d8;font-size:12px;padding:8px;'>Unable to load members.</div>";
   }
 }
 
-loadNewest();
+window.addEventListener("DOMContentLoaded", loadNewest);
 </script>
+
 </body>
 </html>
-
