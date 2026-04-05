@@ -949,14 +949,19 @@ html,body{width:100%;background:#0d1f1a;}
     sj:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
   };
   const DB=[
+    {title:'MONTAGEM RUGADA - MAFIA',src:'https://raw.githubusercontent.com/taki2023/taki/main/MONTAGEM RUGADA - MAFIA.mp3'},
+    {title:'MONTAGEM COMA',src:'https://raw.githubusercontent.com/taki2023/taki/main/Montagem-Coma.mp3'},
+    {title:'Mary On A Cross – Ghost',src:'https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3'},
     {title:'Faded – Alan Walker',src:'https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3'},
     {title:'Despacito – Luis Fonsi',src:'https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3'},
     {title:'Unstoppable – Sia',src:'https://raw.githubusercontent.com/taki2023/taki/main/Sia_-_Im_unstoppable_today_(mp3.pm)%20(1).mp3'},
     {title:'Believer – Imagine Dragons',src:'https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3'},
     {title:'Demons – Imagine Dragons',src:'https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3'},
     {title:'Yellow – Coldplay',src:'https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3'},
-    {title:'Maniac – Zayde Wolf',src:'https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3'},
-    {title:'Mary On A Cross – Ghost',src:'https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3'}
+    {title:'Maniac – Zayde Wolf',src:'https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3'}
+    
+    
+    
   ];
   let queue=LS.gj('pcc_q',[]),cur=parseInt(LS.get('pcc_cur','0'))||0,savedT=parseFloat(LS.get('pcc_t','0'))||0,dragging=false,playing=false;
   if(cur>=queue.length)cur=0;
