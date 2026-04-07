@@ -28,7 +28,7 @@ html,body{margin:0;padding:0;background:transparent;font-family:'Trebuchet MS',V
 <script>
 async function loadNewest(){
   try{
-    const r=await fetch("https://api.chess.com/pub/club/anime-chess-community/members");
+    const r=await fetch("https://api.chess.com/pub/club/anime-chess-team-1/members");
     const d=await r.json();
     const members=[...d.weekly,...d.monthly];
     members.sort((a,b)=>b.joined-a.joined);
