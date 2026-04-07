@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:transparent;font-family:'Trebuchet MS',Verdana,sans-serif;color:#5a4a66;}
+.nm-badge{display:inline-block;background:rgba(255,236,139,.6);padding:5px 16px;border-radius:999px;border:1.5px solid rgba(221,160,221,.7);font-weight:900;font-size:13px;margin-bottom:10px;}
+.nm-inner{width:92%;margin:auto;background:linear-gradient(180deg,rgba(255,240,250,.75),rgba(240,225,255,.75));border-radius:20px;padding:12px;border:2px solid rgba(221,160,221,.5);}
+.nm-row{display:flex;align-items:center;justify-content:flex-start;gap:12px;width:fit-content;margin:0 auto;}
+.nm-divider{margin-top:12px;border-top:1px solid rgba(221,160,221,.35);padding-top:12px;}
+.nm-avatar{width:65px;height:65px;border-radius:50%;border:3px solid rgba(221,160,221,.8);object-fit:cover;}
+.nm-text{text-align:left;width:150px;}
+.nm-name{font-weight:900;font-size:13px;color:#7b5fa0;}
+.nm-rating{font-size:10px;font-weight:800;color:#a06cd5;background:rgba(255,228,240,.9);padding:2px 8px;border-radius:999px;display:inline-block;margin-top:4px;}
+</style>
+</head>
+<body>
+<div style="padding:8px;" id="nm-wrap">
+  <div class="nm-badge">🌟 Newest Members</div>
+  <div class="nm-inner" id="nm-list">
+    <div class="nm-row">
+      <img class="nm-avatar" src="https://taki2023.github.io/taki/default-pawn.png"/>
+      <div class="nm-text"><div class="nm-name">@loading...</div><div class="nm-rating">— : —</div></div>
+    </div>
+  </div>
+</div>
+<script>
+async function loadNewest(){
+  try{
+    const r=await fetch("https://api.chess.com/pub/club/anime-chess-community/members");
+    const d=await r.json();
+    const members=[...d.weekly,...d.monthly];
+    members.sort((a,b)=>b.joined-a.joined);
+    const top3=members.slice(0,3);
+    const data=await Promise.all(top3.map(async m=>{
+      const[pj,stats]=await Promise.all([
+        fetch("https://api.chess.com/pub/player/"+m.username).then(r=>r.json()),
+        fetch("https://api.chess.com/pub/player/"+m.username+"/stats").then(r=>r.json())
+      ]);
+      const ratings=[
+        {type:"Rapid",value:stats.chess_rapid?.last?.rating},
+        {type:"Blitz",value:stats.chess_blitz?.last?.rating},
+        {type:"Bullet",value:stats.chess_bullet?.last?.rating},
+        {type:"Daily",value:stats.chess_daily?.last?.rating}
+      ].filter(x=>x.value);
+      const best=ratings.length?ratings.sort((a,b)=>b.value-a.value)[0]:{type:"—",value:"—"};
+      return{username:m.username,avatar:pj.avatar||"https://taki2023.github.io/taki/default-pawn.png",ratingType:best.type,ratingValue:best.value};
+    }));
+    const box=document.getElementById("nm-list");
+    box.innerHTML=data.map((m,i)=>`
+      <div${i>0?' class="nm-divider"':''}>
+        <div class="nm-row">
+          <a href="https://www.chess.com/member/${m.username}" target="_blank" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+            <img class="nm-avatar" src="${m.avatar}"/>
+            <div class="nm-text">
+              <div class="nm-name">@${m.username}</div>
+              <div class="nm-rating">${m.ratingType}: ${m.ratingValue}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    `).join("");
+  }catch(e){
+    document.getElementById("nm-list").innerHTML="<div style='text-align:center;opacity:.6;font-size:12px;padding:8px;'>Members unavailable.</div>";
+  }
+}
+loadNewest();
+</script>
+</body>
+</html>
