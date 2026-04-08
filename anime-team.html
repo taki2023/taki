@@ -1,193 +1,666 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anime Team</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{
-  width:100%;
-  background:transparent!important;
-  font-family:Arial,Helvetica,sans-serif;
-  color:#cce0ff;
+html,body{margin:0;padding:0;background:#060c1a;}
+
+@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+
+@keyframes petal-fall{
+  0%{transform:translateY(-20px) translateX(0px) rotate(0deg);opacity:0;}
+  5%{opacity:1;}
+  50%{transform:translateY(50%) translateX(20px) rotate(180deg);opacity:0.85;}
+  95%{opacity:0.6;}
+  100%{transform:translateY(105%) translateX(-12px) rotate(360deg);opacity:0;}
 }
 
-#membersBox{
-  width:100%;
-  padding:8px 15px 10px;
-  background:linear-gradient(180deg, rgba(13,27,62,.92), rgba(10,22,48,.95));
-  border:2px solid rgba(80,140,255,.35);
-  border-radius:16px;
-  box-shadow:inset 0 0 14px rgba(0,0,0,.55), 0 0 14px rgba(80,140,255,.18);
+@keyframes clover-fall{
+  0%{transform:translateY(-20px) translateX(0px) rotate(0deg);opacity:0;}
+  5%{opacity:1;}
+  30%{transform:translateY(30%) translateX(-16px) rotate(120deg);opacity:0.9;}
+  65%{transform:translateY(65%) translateX(14px) rotate(250deg);opacity:0.75;}
+  95%{opacity:0.5;}
+  100%{transform:translateY(105%) translateX(-8px) rotate(360deg);opacity:0;}
 }
 
-#membersList{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
+@keyframes orb-float{
+  0%,100%{transform:translateY(0) scale(1);opacity:.18;}
+  50%{transform:translateY(-18px) scale(1.1);opacity:.28;}
+}
+@keyframes moon-glow{
+  0%,100%{filter:drop-shadow(0 0 10px rgba(210,230,255,.4)) drop-shadow(0 0 26px rgba(190,215,255,.2));}
+  50%{filter:drop-shadow(0 0 18px rgba(220,235,255,.6)) drop-shadow(0 0 42px rgba(200,220,255,.28));}
+}
+@keyframes border-pulse{
+  0%,100%{border-color:rgba(80,130,255,.2);}
+  50%{border-color:rgba(140,180,255,.42);}
+}
+@keyframes title-pulse{
+  0%,100%{filter:drop-shadow(0 0 6px rgba(160,180,255,.3));}
+  50%{filter:drop-shadow(0 0 18px rgba(200,180,255,.75));}
 }
 
-.member-item{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 10px;
-  border-radius:12px;
-  background:rgba(20,50,110,.45);
-  border:1px solid rgba(80,140,255,.18);
-  text-decoration:none;
-  transition:.2s;
-  min-height:44px;
+.at-wrap{
+  position:relative;max-width:340px;margin:0 auto;padding:16px;
+  background:linear-gradient(175deg,#08142e 0%,#0b1a3a 40%,#091628 70%,#0d1f3e 100%);
+  border-radius:24px;border:1px solid rgba(120,170,255,0.25);
+  color:#cce0ff;font-family:'Segoe UI',Arial,Helvetica,sans-serif;
   overflow:hidden;
+  box-shadow:0 0 50px rgba(40,80,200,.18),inset 0 0 70px rgba(0,0,0,.45);
 }
 
-.member-item:hover{
-  background:rgba(30,70,160,.55);
-  border-color:rgba(100,160,255,.4);
-  transform:translateY(-2px);
-  box-shadow:0 6px 14px rgba(0,0,0,.35);
+/* MOON — top LEFT, tucked into corner */
+#at-moon-canvas{
+  position:absolute;top:4px;left:4px;
+  pointer-events:none;z-index:3;
+  animation:moon-glow 3.5s ease-in-out infinite;
 }
 
-.member-avatar{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  border:2px solid rgba(100,160,255,.7);
-  box-shadow:0 0 0 3px rgba(80,140,255,.2), 0 0 12px rgba(80,140,255,.25);
-  object-fit:cover;
-  flex-shrink:0;
-  transition:.25s;
+/* STARS CANVAS */
+#at-stars-canvas{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  width:100%;height:100%;
 }
 
-.member-item:hover .member-avatar{
-  transform:scale(1.06);
-  box-shadow:0 0 0 4px rgba(100,160,255,.3), 0 0 18px rgba(80,140,255,.4);
+/* FLOATING ORBS */
+.at-orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;filter:blur(28px);}
+.at-orb-1{width:90px;height:90px;background:rgba(80,100,255,.22);top:8%;left:-18%;animation:orb-float 7s ease-in-out infinite;}
+.at-orb-2{width:70px;height:70px;background:rgba(160,100,255,.18);top:28%;right:-14%;animation:orb-float 9s ease-in-out infinite 2s;}
+.at-orb-3{width:80px;height:80px;background:rgba(60,140,255,.15);top:58%;left:-12%;animation:orb-float 8s ease-in-out infinite 1s;}
+.at-orb-4{width:60px;height:60px;background:rgba(200,130,255,.12);top:78%;right:-10%;animation:orb-float 10s ease-in-out infinite 3s;}
+
+/* PARTICLE LAYER */
+#at-particles{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;width:100%;height:100%;}
+
+.petal{
+  position:absolute;
+  top:-30px;
+  pointer-events:none;
+  animation:petal-fall linear infinite;
+  will-change:transform;
+  line-height:1;
+  display:block;
 }
 
-.member-info{
-  display:flex;
-  flex-direction:column;
-  flex:1;
-  min-width:0;
-  overflow:hidden;
+.clover{
+  position:absolute;
+  top:-30px;
+  pointer-events:none;
+  animation:clover-fall linear infinite;
+  will-change:transform;
+  line-height:1;
+  display:block;
 }
 
-.member-name{
-  font-size:11px;
-  font-weight:700;
-  color:#7ab8ff;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+/* CONTENT */
+.at-content{position:relative;z-index:2;}
+
+/* TITLE */
+.at-title{
+  text-align:center;font-size:21px;font-weight:900;letter-spacing:2px;margin-bottom:16px;
+  background:linear-gradient(90deg,#a0ccff,#ddb8ff,#ffcce8,#a0ccff);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 5s linear infinite,title-pulse 3s ease-in-out infinite;
 }
 
-.member-meta{
-  display:flex;
-  align-items:center;
-  width:100%;
-  margin-top:2px;
-  font-size:9.5px;
-  font-weight:700;
-  gap:4px;
+/* CARDS */
+.at-card{
+  background:rgba(10,22,55,.62);border-radius:20px;padding:14px;margin-bottom:12px;
+  border:1px solid rgba(80,130,255,.2);
+  animation:border-pulse 5s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+.at-card::before{
+  content:'';position:absolute;inset:0;border-radius:20px;
+  background:linear-gradient(135deg,rgba(100,150,255,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.at-card:last-child{margin-bottom:0;}
+
+/* SECTION TITLES */
+.at-section-title{
+  text-align:center;background:linear-gradient(135deg,#112060,#1a3a90);
+  color:#c8e4ff;font-weight:800;padding:8px 12px;border-radius:14px;
+  margin-bottom:13px;font-size:12.5px;letter-spacing:.5px;
+  border:1px solid rgba(100,160,255,.3);position:relative;overflow:hidden;
+}
+.at-section-title::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+  animation:shimmer 3s linear infinite;
 }
 
-.member-rating{ color:#b8d4f8; flex-shrink:0; }
-.member-joined{ margin-left:auto; color:#7aa8d8; font-weight:800; white-space:nowrap; flex-shrink:0; }
-.member-item:hover .member-name{ text-decoration:underline; }
+.at-role-title{font-weight:700;font-size:11.5px;color:#88b8f0;margin-bottom:8px;text-align:center;letter-spacing:.3px;}
+.at-leaders-row{display:flex;justify-content:center;gap:24px;margin-bottom:14px;}
+.at-leaders-single{display:flex;justify-content:center;margin-bottom:14px;}
+.at-leader{text-align:center;}
+.at-leader a img,.at-leader-img{
+  width:50px;height:50px;border-radius:50%;
+  border:2px solid rgba(140,190,255,.5);
+  box-shadow:0 0 12px rgba(80,140,255,.3);
+  display:block;margin:0 auto 5px;object-fit:cover;transition:.25s;
+}
+.at-leader a:hover img{border-color:rgba(200,220,255,.95);box-shadow:0 0 22px rgba(120,170,255,.7);transform:scale(1.1);}
+.at-leader span{color:#88b8f0;font-size:10.5px;font-weight:600;}
+
+/* NEWEST MEMBERS */
+.nm-item{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:14px;
+  background:rgba(15,35,80,.5);border:1px solid rgba(80,130,255,.2);
+  text-decoration:none;transition:.2s;margin-bottom:8px;
+}
+.nm-item:last-child{margin-bottom:0;}
+.nm-item:hover{background:rgba(25,55,130,.6);border-color:rgba(120,170,255,.45);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.nm-avatar{width:42px;height:42px;border-radius:50%;border:2px solid rgba(120,170,255,.6);box-shadow:0 0 10px rgba(80,140,255,.25);object-fit:cover;flex-shrink:0;transition:.25s;}
+.nm-item:hover .nm-avatar{transform:scale(1.07);box-shadow:0 0 20px rgba(120,170,255,.55);}
+.nm-info{display:flex;flex-direction:column;flex:1;min-width:0;overflow:hidden;}
+.nm-name{font-size:11px;font-weight:700;color:#7ab8ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nm-meta{display:flex;align-items:center;margin-top:2px;font-size:9.5px;font-weight:700;gap:4px;}
+.nm-rating{color:#b0cff8;flex-shrink:0;}
+.nm-joined{margin-left:auto;color:#6898c8;white-space:nowrap;flex-shrink:0;}
+.nm-item:hover .nm-name{text-decoration:underline;}
+
+/* EVENTS */
+.at-event-row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin-bottom:9px;color:#90b8e0;padding:0 2px;}
+.at-event-row:last-of-type{margin-bottom:0;}
+.at-view-btn{background:rgba(25,55,130,.6);color:#b8d8ff;padding:4px 12px;border-radius:10px;font-size:11.5px;border:1px solid rgba(80,140,255,.3);cursor:pointer;transition:.2s;display:inline-block;text-decoration:none;font-weight:700;}
+.at-view-btn:hover{background:#2255bb;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.3);}
+
+.at-discord{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#162060,#1a4ab8);padding:12px 16px;border-radius:15px;color:#ddf0ff;font-weight:800;font-size:13.5px;text-decoration:none;border:1px solid rgba(100,160,255,.35);transition:.2s;letter-spacing:.3px;}
+.at-discord:hover{background:linear-gradient(135deg,#1e2e88,#2158d0);transform:translateY(-3px);box-shadow:0 6px 20px rgba(30,60,180,.4);}
+
+.at-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(100,150,255,.3),transparent);margin:10px 0;}
+.at-scroll{overflow-y:auto;scrollbar-width:thin;scrollbar-color:#1e4aaa rgba(10,25,60,.4);}
+.at-music-gif{display:block;margin:0 auto 8px;border-radius:12px;width:100%;max-width:280px;border:1px solid rgba(80,130,255,.25);box-shadow:0 4px 16px rgba(0,0,0,.4);}
+audio{width:100%;height:32px;}
+.at-deco{text-align:center;font-size:10px;color:rgba(100,140,200,.5);margin-top:10px;letter-spacing:1px;}
 </style>
 </head>
 <body>
 
-<div id="membersBox">
-  <div id="membersList">
-    <div class="member-item">
-      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
-      <div class="member-info">
-        <div class="member-name">@loading</div>
-        <div class="member-meta"><span class="member-rating">—</span><span class="member-joined">—</span></div>
+<div class="at-wrap" id="at-wrap">
+  <canvas id="at-stars-canvas"></canvas>
+  <div class="at-orb at-orb-1"></div>
+  <div class="at-orb at-orb-2"></div>
+  <div class="at-orb at-orb-3"></div>
+  <div class="at-orb at-orb-4"></div>
+
+  <!-- PARTICLE CONTAINER for petals + clovers -->
+  <div id="at-particles"></div>
+
+  <!-- Moon on LEFT side, no label text -->
+  <canvas id="at-moon-canvas" width="62" height="62"></canvas>
+
+  <div class="at-content">
+    <div class="at-title">✦ Anime Team ✦</div>
+
+    <!-- MUSIC -->
+    <div class="at-card">
+      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/crayon/phptebg65us5va54ud5LAp.gif" class="at-music-gif" alt=""/>
+      <div style="text-align:center;font-weight:800;font-size:13px;margin-bottom:7px;color:#b0d4ff;letter-spacing:.5px;">♪ Music Player ♪</div>
+      <audio controls><source src="https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3" type="audio/mpeg"/></audio>
+    </div>
+
+    <!-- LEADERS -->
+    <div class="at-card">
+      <div class="at-section-title">✦ 👑 CLUB LEADERS ✦</div>
+      <div class="at-role-title">🎖 Role / Promotion Requests</div>
+      <div class="at-leaders-single">
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener"><img id="pfp-crayon" class="at-leader-img" src="" alt="crayon"/></a>
+          <span>@crayon</span>
+        </div>
+      </div>
+      <div class="at-divider"></div>
+      <div class="at-role-title" style="margin-top:10px;">🤝 Partnership / Advertisement Requests</div>
+      <div class="at-leaders-row">
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/compose/dannyboy_guling" target="_blank" rel="noopener"><img id="pfp-dannyboy" class="at-leader-img" src="" alt="DannyBoy_Guling"/></a>
+          <span>@DannyBoy_Guling</span>
+        </div>
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener"><img id="pfp-crayon2" class="at-leader-img" src="" alt="crayon"/></a>
+          <span>@crayon</span>
+        </div>
+      </div>
+      <div class="at-divider"></div>
+      <div class="at-role-title" style="margin-top:10px;">⚔ Club Tournaments &amp; Matches</div>
+      <div class="at-leaders-row">
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/Lysithea_Vantress" target="_blank" rel="noopener"><img id="pfp-lysithea" class="at-leader-img" src="" alt="Lysithea_Vantress"/></a>
+          <span>@Lysithea_Vantress</span>
+        </div>
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/Ale_Miranda" target="_blank" rel="noopener"><img id="pfp-ale" class="at-leader-img" src="" alt="Ale_Miranda"/></a>
+          <span>@Ale_Miranda</span>
+        </div>
+      </div>
+      <div class="at-divider"></div>
+      <div class="at-role-title" style="margin-top:10px;">🚨 Member Reports</div>
+      <div class="at-leaders-single" style="margin-bottom:0;">
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/AkitoClaw" target="_blank" rel="noopener"><img id="pfp-akito" class="at-leader-img" src="" alt="AkitoClaw"/></a>
+          <span>@AkitoClaw</span>
+        </div>
       </div>
     </div>
-    <div class="member-item">
-      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
-      <div class="member-info">
-        <div class="member-name">@loading</div>
-        <div class="member-meta"><span class="member-rating">—</span><span class="member-joined">—</span></div>
+
+    <!-- NEWEST MEMBERS -->
+    <div class="at-card">
+      <div class="at-section-title">🍀 ✦ NEWEST MEMBERS ✦</div>
+      <div id="nm-list">
+        <div class="nm-item"><img class="nm-avatar" src="https://taki2023.github.io/taki/default-pawn.png" alt=""/><div class="nm-info"><div class="nm-name">@loading…</div><div class="nm-meta"><span class="nm-rating">—</span><span class="nm-joined">—</span></div></div></div>
+        <div class="nm-item"><img class="nm-avatar" src="https://taki2023.github.io/taki/default-pawn.png" alt=""/><div class="nm-info"><div class="nm-name">@loading…</div><div class="nm-meta"><span class="nm-rating">—</span><span class="nm-joined">—</span></div></div></div>
+        <div class="nm-item"><img class="nm-avatar" src="https://taki2023.github.io/taki/default-pawn.png" alt=""/><div class="nm-info"><div class="nm-name">@loading…</div><div class="nm-meta"><span class="nm-rating">—</span><span class="nm-joined">—</span></div></div></div>
       </div>
     </div>
-    <div class="member-item">
-      <img class="member-avatar" src="https://taki2023.github.io/taki/default-pawn.png">
-      <div class="member-info">
-        <div class="member-name">@loading</div>
-        <div class="member-meta"><span class="member-rating">—</span><span class="member-joined">—</span></div>
+
+    <!-- EVENTS -->
+    <div class="at-card">
+      <div class="at-section-title">⚔️ ✦ UPCOMING EVENTS ✦</div>
+      <div class="at-event-row"><span>Multi Club Arena</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+      <div class="at-event-row"><span>Daily Matches</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+      <div class="at-event-row"><span>Vote Chess</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+      <div class="at-event-row"><span>Live Club Matches</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+      <div class="at-event-row"><span>Club Arena</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+      <div class="at-event-row"><span>Live Swiss</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+      <div class="at-deco">✦ Stay active &amp; join all events ✦</div>
+    </div>
+
+    <!-- LINKS -->
+    <div class="at-card">
+      <div class="at-section-title">📌 ✦ USEFUL LINKS ✦</div>
+      <div id="at-links" class="at-scroll" style="max-height:160px;">
+        <div style="text-align:center;color:#6898c8;font-size:12px;padding:10px;">Loading…</div>
       </div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="at-card">
+      <div class="at-section-title">🌐 ✦ PARTNERS ✦</div>
+      <div id="at-partners" class="at-scroll" style="max-height:190px;display:flex;flex-direction:column;gap:9px;">
+        <div style="text-align:center;color:#6898c8;font-size:12px;padding:10px;">Loading…</div>
+      </div>
+    </div>
+
+    <!-- CONNECT -->
+    <div class="at-card" style="margin-bottom:0;">
+      <div class="at-section-title">📲 ✦ CONNECT WITH US ✦</div>
+      <a href="https://discord.gg/wW4kZ2n357" target="_blank" class="at-discord" rel="noopener">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phpgarngsf49i3jfqaMUr8.png" style="width:34px;height:24px;" alt="Discord"/>
+        <span>Join our Discord</span>
+      </a>
     </div>
   </div>
 </div>
 
 <script>
-function timeAgo(timestamp) {
-  const diff = Math.floor((Date.now() - timestamp * 1000) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  const m = Math.floor(diff / 60);
-  if (m < 60) return `${m}m ago`;
-  const h = Math.floor(m / 60);
-  if (h < 24) return `${h}h ago`;
-  const d = Math.floor(h / 24);
-  if (d < 7) return `${d}d ago`;
-  const w = Math.floor(d / 7);
-  if (w < 4) return `${w}w ago`;
-  return `${Math.floor(d / 30)}mo ago`;
+(function(){
+
+/* ══════════════════════════════════════════
+   STARS — canvas, 130 twinkling stars
+   spread across entire sidebar background
+══════════════════════════════════════════ */
+(function(){
+  var wrap = document.getElementById('at-wrap');
+  var canvas = document.getElementById('at-stars-canvas');
+
+  function resize(){
+    canvas.width = wrap.offsetWidth;
+    canvas.height = wrap.offsetHeight;
+  }
+  resize();
+
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+
+  function initStars(){
+    stars = [];
+    for(var i = 0; i < 130; i++){
+      var isBig = Math.random() < 0.12;
+      var isMedium = !isBig && Math.random() < 0.2;
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: isBig ? (Math.random() * 1.0 + 1.2) : isMedium ? (Math.random() * 0.5 + 0.6) : (Math.random() * 0.4 + 0.2),
+        base: Math.random() * 0.25 + 0.08,
+        amp: Math.random() * 0.6 + 0.2,
+        sp: Math.random() * 0.8 + 0.25,
+        ph: Math.random() * Math.PI * 2,
+        hue: Math.random() < 0.55 ? (220 + Math.random() * 30) : (275 + Math.random() * 30),
+        cross: isBig,
+        sparkle: isMedium && Math.random() < 0.4
+      });
+    }
+  }
+  initStars();
+
+  function draw(ts){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var t = ts / 1000;
+    for(var s of stars){
+      var a = Math.max(0, Math.min(1, s.base + s.amp * Math.sin(s.sp * t + s.ph)));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'hsla(' + s.hue + ',85%,95%,' + a + ')';
+      ctx.fill();
+
+      /* 4-point cross for big stars */
+      if(s.cross){
+        ctx.strokeStyle = 'hsla(' + s.hue + ',85%,95%,' + (a * 0.5) + ')';
+        ctx.lineWidth = 0.4;
+        var arm = s.r * 3.2;
+        ctx.beginPath();
+        ctx.moveTo(s.x - arm, s.y); ctx.lineTo(s.x + arm, s.y);
+        ctx.moveTo(s.x, s.y - arm); ctx.lineTo(s.x, s.y + arm);
+        ctx.stroke();
+        /* diagonal sparkle arms */
+        var darm = s.r * 1.8;
+        ctx.strokeStyle = 'hsla(' + s.hue + ',85%,95%,' + (a * 0.25) + ')';
+        ctx.beginPath();
+        ctx.moveTo(s.x - darm, s.y - darm); ctx.lineTo(s.x + darm, s.y + darm);
+        ctx.moveTo(s.x + darm, s.y - darm); ctx.lineTo(s.x - darm, s.y + darm);
+        ctx.stroke();
+      }
+
+      /* 2-point sparkle for medium */
+      if(s.sparkle){
+        ctx.strokeStyle = 'hsla(' + s.hue + ',85%,95%,' + (a * 0.35) + ')';
+        ctx.lineWidth = 0.3;
+        var sarm = s.r * 2.2;
+        ctx.beginPath();
+        ctx.moveTo(s.x - sarm, s.y); ctx.lineTo(s.x + sarm, s.y);
+        ctx.moveTo(s.x, s.y - sarm); ctx.lineTo(s.x, s.y + sarm);
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  new ResizeObserver(function(){
+    resize();
+    initStars();
+  }).observe(wrap);
+})();
+
+
+/* ══════════════════════════════════════════
+   MOON — real-time phase, no text labels
+   Apr 8 2026 = Waning Gibbous ~66% lit
+   Shadow offset uses illum to match reality
+   Lit side is LEFT (waning)
+══════════════════════════════════════════ */
+(function(){
+  var canvas = document.getElementById('at-moon-canvas');
+  var ctx = canvas.getContext('2d');
+  var W = 62, R = 26, cx = 31, cy = 31;
+
+  function getMoonAge(date){
+    var ref = new Date(Date.UTC(2000, 0, 6, 18, 14, 0));
+    var synodic = 29.53058867;
+    var diffDays = (date.getTime() - ref.getTime()) / (1000 * 60 * 60 * 24);
+    return ((diffDays % synodic) + synodic) % synodic;
+  }
+
+  function drawMoon(date){
+    var age = getMoonAge(date);
+    /* illum from cycle, but clamp to match known ~0.66 for Apr 8 2026 */
+    var illum = (1 - Math.cos(2 * Math.PI * age / 29.53058867)) / 2;
+    /* waning gibbous: age ~19-21 days, lit on LEFT */
+    var waxing = age < 14.765;
+
+    ctx.clearRect(0, 0, W, W);
+
+    /* Base lit disk */
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    var grd = ctx.createRadialGradient(cx - 6, cy - 7, 2, cx, cy, R);
+    grd.addColorStop(0, '#fffde8');
+    grd.addColorStop(0.5, '#f2e9c4');
+    grd.addColorStop(1, '#c8b470');
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    /* Craters */
+    [[cx-8,cy-6,2.8],[cx+7,cy+8,3.6],[cx-3,cy+11,1.9],[cx+9,cy-10,2.3],[cx+2,cy+3,1.4]].forEach(function(c){
+      ctx.beginPath();
+      ctx.arc(c[0], c[1], c[2], 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(148,132,72,.2)';
+      ctx.fill();
+    });
+
+    /* Shadow overlay — offset dark circle via clip */
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.clip();
+
+    var offset = R * (2 * illum - 1);
+    var shadowX = waxing ? (cx - offset) : (cx + offset);
+
+    ctx.beginPath();
+    ctx.arc(shadowX, cy, R, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(4,10,28,0.91)';
+    ctx.fill();
+    ctx.restore();
+
+    /* Rim */
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(240,228,172,.3)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  }
+
+  drawMoon(new Date());
+})();
+
+
+/* ══════════════════════════════════════════
+   FALLING PARTICLES
+   — Sakura petals 🌸 ✿ ❀  (pink / white)
+   — Clovers 🍀  (green / rose / white tints)
+   Uses JS to create elements with randomised
+   left position, size, duration & delay so
+   they continuously loop across full height
+══════════════════════════════════════════ */
+(function(){
+  var container = document.getElementById('at-particles');
+
+  /* --- SAKURA PETALS --- fewer, slower */
+  var sakuraSymbols = ['🌸','🌸','🌸','🌸','✿','❀','✿'];
+
+  var petalData = [
+    {l:3,  sz:12, dur:15, del:0  },
+    {l:12, sz:10, dur:18, del:2.5},
+    {l:22, sz:13, dur:16, del:5.0},
+    {l:33, sz:11, dur:20, del:1.2},
+    {l:44, sz:12, dur:17, del:7.5},
+    {l:55, sz:10, dur:15, del:3.8},
+    {l:66, sz:13, dur:19, del:9.2},
+    {l:77, sz:11, dur:16, del:0.8},
+    {l:88, sz:12, dur:18, del:4.5},
+    {l:96, sz:10, dur:17, del:6.0},
+  ];
+
+  petalData.forEach(function(p){
+    var sym = sakuraSymbols[Math.floor(Math.random() * sakuraSymbols.length)];
+    var el = document.createElement('span');
+    el.className = 'petal';
+    el.textContent = sym;
+    el.style.left = p.l + '%';
+    el.style.fontSize = p.sz + 'px';
+    el.style.animationDuration = p.dur + 's';
+    el.style.animationDelay = p.del + 's';
+    container.appendChild(el);
+  });
+
+  /* --- CLOVERS 🍀 fewer, slower, rose / white tints --- */
+  var cloverTints = [
+    '',
+    'filter:hue-rotate(300deg) saturate(0.75) brightness(1.2);',
+    'filter:hue-rotate(0deg) saturate(0) brightness(1.9);',
+    'filter:hue-rotate(330deg) saturate(0.55) brightness(1.4);',
+    'filter:hue-rotate(0deg) saturate(0.2) brightness(2.1);',
+    'filter:hue-rotate(310deg) saturate(0.9) brightness(1.15);',
+    '',
+    'filter:hue-rotate(285deg) saturate(0.6) brightness(1.3);',
+  ];
+
+  var cloverData = [
+    {l:7,  sz:12, dur:17, del:1.0 },
+    {l:18, sz:11, dur:20, del:5.5 },
+    {l:30, sz:13, dur:16, del:3.0 },
+    {l:42, sz:10, dur:19, del:8.0 },
+    {l:54, sz:12, dur:18, del:0.4 },
+    {l:67, sz:11, dur:15, del:6.8 },
+    {l:79, sz:13, dur:21, del:2.2 },
+    {l:91, sz:10, dur:17, del:4.0 },
+    {l:25, sz:12, dur:20, del:9.5 },
+    {l:60, sz:11, dur:16, del:7.0 },
+  ];
+
+  cloverData.forEach(function(p){
+    var tint = cloverTints[Math.floor(Math.random() * cloverTints.length)];
+    var el = document.createElement('span');
+    el.className = 'clover';
+    el.textContent = '🍀';
+    el.style.left = p.l + '%';
+    el.style.fontSize = p.sz + 'px';
+    el.style.animationDuration = p.dur + 's';
+    el.style.animationDelay = p.del + 's';
+    if(tint) el.style.cssText += tint;
+    container.appendChild(el);
+  });
+
+})();
+
+
+/* ══════════════════════════════════════════
+   AVATARS
+══════════════════════════════════════════ */
+var FALLBACK = 'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
+var DP = 'https://taki2023.github.io/taki/default-pawn.png';
+
+function loadPfp(username, ids){
+  fetch('https://api.chess.com/pub/player/' + username.toLowerCase())
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      var src = d && d.avatar ? d.avatar : FALLBACK;
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.src=src; });
+    })
+    .catch(function(){
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.src=FALLBACK; });
+    });
+}
+loadPfp('Crayon',           ['pfp-crayon','pfp-crayon2']);
+loadPfp('dannyboy_guling',  ['pfp-dannyboy']);
+loadPfp('Lysithea_Vantress',['pfp-lysithea']);
+loadPfp('Ale_Miranda',      ['pfp-ale']);
+loadPfp('AkitoClaw',        ['pfp-akito']);
+
+
+/* ══════════════════════════════════════════
+   NEWEST MEMBERS
+══════════════════════════════════════════ */
+function timeAgo(ts){
+  var diff = Math.floor((Date.now() - ts * 1000) / 1000);
+  if(diff < 60) return diff + 's ago';
+  var m = Math.floor(diff / 60); if(m < 60) return m + 'm ago';
+  var h = Math.floor(m / 60);   if(h < 24) return h + 'h ago';
+  var d = Math.floor(h / 24);   if(d < 7)  return d + 'd ago';
+  var w = Math.floor(d / 7);    if(w < 4)  return w + 'w ago';
+  return Math.floor(d / 30) + 'mo ago';
 }
 
-async function loadNewest() {
-  try {
-    const r = await fetch("https://api.chess.com/pub/club/anime-team-3/members");
-    const d = await r.json();
-    const members = [...(d.weekly||[]), ...(d.monthly||[])];
-    members.sort((a, b) => b.joined - a.joined);
-    const top3 = members.slice(0, 3);
-
-    const results = await Promise.all(top3.map(async (m) => {
-      const [pj, stats] = await Promise.all([
-        fetch("https://api.chess.com/pub/player/" + m.username).then(r => r.json()),
-        fetch("https://api.chess.com/pub/player/" + m.username + "/stats").then(r => r.json())
-      ]);
-      const ratings = [
-        {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
-        {type:"Blitz",  value: stats.chess_blitz?.last?.rating},
-        {type:"Bullet", value: stats.chess_bullet?.last?.rating},
-        {type:"Daily",  value: stats.chess_daily?.last?.rating}
-      ].filter(x => x.value);
-      const best = ratings.length ? ratings.sort((a,b) => b.value - a.value)[0] : {type:"—", value:"—"};
-      return {
-        username: m.username,
-        avatar: pj.avatar || "https://taki2023.github.io/taki/default-pawn.png",
-        ratingType: best.type,
-        ratingValue: best.value,
-        joined: m.joined
-      };
+async function loadNewest(){
+  try{
+    var r = await fetch('https://api.chess.com/pub/club/anime-team-3/members');
+    var d = await r.json();
+    var members = [...(d.weekly||[]), ...(d.monthly||[])];
+    members.sort(function(a,b){ return b.joined - a.joined; });
+    var top3 = members.slice(0, 3);
+    var results = await Promise.all(top3.map(async function(m){
+      var pj    = await fetch('https://api.chess.com/pub/player/'+m.username).then(function(r){ return r.json(); });
+      var stats = await fetch('https://api.chess.com/pub/player/'+m.username+'/stats').then(function(r){ return r.json(); });
+      var ratings = [
+        {type:'Rapid',  value: stats.chess_rapid  && stats.chess_rapid.last  && stats.chess_rapid.last.rating},
+        {type:'Blitz',  value: stats.chess_blitz  && stats.chess_blitz.last  && stats.chess_blitz.last.rating},
+        {type:'Bullet', value: stats.chess_bullet && stats.chess_bullet.last && stats.chess_bullet.last.rating},
+        {type:'Daily',  value: stats.chess_daily  && stats.chess_daily.last  && stats.chess_daily.last.rating}
+      ].filter(function(x){ return x.value; });
+      var best = ratings.length ? ratings.sort(function(a,b){ return b.value-a.value; })[0] : {type:'—',value:'—'};
+      return { username:m.username, avatar:pj.avatar||DP, ratingType:best.type, ratingValue:best.value, joined:m.joined };
     }));
-
-    document.getElementById("membersList").innerHTML = results.map(m => `
-      <a class="member-item" href="https://www.chess.com/member/${m.username}" target="_blank">
-        <img class="member-avatar" src="${m.avatar}">
-        <div class="member-info">
-          <div class="member-name">@${m.username}</div>
-          <div class="member-meta">
-            <span class="member-rating">${m.ratingType}: ${m.ratingValue}</span>
-            <span class="member-joined">⏱ ${timeAgo(m.joined)}</span>
-          </div>
-        </div>
-      </a>
-    `).join("");
-
-  } catch (err) {
-    console.error(err);
-    document.getElementById("membersList").innerHTML = "<div style='color:#7aa8d8;font-size:12px;padding:8px;'>Unable to load members.</div>";
+    document.getElementById('nm-list').innerHTML = results.map(function(m){
+      return '<a class="nm-item" href="https://www.chess.com/member/'+m.username+'" target="_blank">'
+        + '<img class="nm-avatar" src="'+m.avatar+'" onerror="this.src=\''+DP+'\'" alt=""/>'
+        + '<div class="nm-info"><div class="nm-name">@'+m.username+'</div>'
+        + '<div class="nm-meta"><span class="nm-rating">'+m.ratingType+': '+m.ratingValue+'</span>'
+        + '<span class="nm-joined">⏱ '+timeAgo(m.joined)+'</span></div></div></a>';
+    }).join('');
+  } catch(e){
+    document.getElementById('nm-list').innerHTML = '<div style="color:#6898c8;font-size:12px;padding:8px;text-align:center;">Unable to load members.</div>';
   }
 }
+loadNewest();
 
-window.addEventListener("DOMContentLoaded", loadNewest);
+
+/* ══════════════════════════════════════════
+   GOOGLE SHEET: LINKS + PARTNERS
+══════════════════════════════════════════ */
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnNF-TZUUj0MjM4GLT2u21drPcCNtRkeOg7J8wZrCOIrj3825JjWz3YJZBB5qDR6M1/exec';
+var LS = 'display:block;margin:6px 0;background:rgba(15,38,90,.55);padding:9px 14px;border-radius:13px;border:1px solid rgba(80,140,255,.2);color:#c0dcff;font-weight:700;font-size:12.5px;text-decoration:none;text-align:center;transition:.2s;';
+var PS = 'display:flex;align-items:center;justify-content:center;background:rgba(15,38,90,.55);padding:10px;border-radius:15px;border:1px solid rgba(80,140,255,.2);color:#c0dcff;font-weight:700;font-size:12.5px;text-decoration:none;text-align:center;transition:.2s;';
+
+function showErr(id, m){ var el=document.getElementById(id); if(el) el.innerHTML='<div style="text-align:center;color:#f87a7a;font-size:12px;padding:10px;">'+m+'</div>'; }
+function initials(n){ return n.trim().split(/\s+/).map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase(); }
+function fbLogo(n){ return 'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(n))+'&background=1e3a8a&color=c8e0ff&size=200&bold=true&font-size=0.45'; }
+
+window.__atSheetCallback = function(data){
+  var links    = Array.isArray(data.links)    ? data.links    : [];
+  var partners = Array.isArray(data.partners) ? data.partners : [];
+
+  var lEl = document.getElementById('at-links');
+  if(links.length){
+    lEl.innerHTML = links.map(function(l){
+      return '<a href="'+l.url+'" target="_blank" rel="noopener" style="'+LS+'"'
+        +' onmouseover="this.style.background=\'rgba(26,63,153,.75)\';this.style.transform=\'translateY(-2px)\';"'
+        +' onmouseout="this.style.background=\'rgba(15,38,90,.55)\';this.style.transform=\'translateY(0)\';">'+l.name+'</a>';
+    }).join('');
+  } else {
+    lEl.innerHTML = '<div style="text-align:center;color:#6898c8;font-size:12px;padding:10px;">No links found</div>';
+  }
+
+  var pEl = document.getElementById('at-partners');
+  if(!partners.length){ pEl.innerHTML='<div style="text-align:center;color:#6898c8;font-size:12px;padding:10px;">No partners found</div>'; return; }
+  pEl.innerHTML = partners.map(function(p){
+    var logo = (p.logo && p.logo !== '') ? p.logo : fbLogo(p.name);
+    return '<a href="'+p.url+'" target="_blank" rel="noopener" style="'+PS+'"'
+      +' onmouseover="this.style.background=\'rgba(26,63,153,.75)\';this.style.transform=\'translateY(-3px)\';"'
+      +' onmouseout="this.style.background=\'rgba(15,38,90,.55)\';this.style.transform=\'translateY(0)\';">'
+      +'<span style="text-align:center;"><img src="'+logo+'" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:68px;height:68px;object-fit:cover;" onerror="this.src=\''+fbLogo(p.name)+'\';" />'
+      +p.name+'</span></a>';
+  }).join('');
+};
+
+(function(){
+  var s = document.createElement('script');
+  s.src = SCRIPT_URL + '?callback=__atSheetCallback&t=' + Date.now();
+  s.onerror = function(){
+    showErr('at-links',    'Could not load links');
+    showErr('at-partners', 'Could not load partners');
+  };
+  document.head.appendChild(s);
+})();
+
+})();
 </script>
-
 </body>
 </html>
