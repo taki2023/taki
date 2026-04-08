@@ -188,8 +188,8 @@
        *   [ ["link name", "link url", "", "club name", "club url"], … ]
        */
 
-      if (Array.isArray(data)) {
-        data.forEach(function (row) {
+if (Array.isArray(data)) {
+  data.slice(1).forEach(function (row) {
           if (!row) return;
           if (Array.isArray(row)) {
             /* Shape 3 */
