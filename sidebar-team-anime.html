@@ -212,7 +212,7 @@ function fallbackLogo(name){
   return 'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(name))+'&background=1e3a8a&color=c8e0ff&size=200&bold=true&font-size=0.45';
 }
 
-/* ✅ SIMPLE WORKING LOGO FETCH */
+/* ✅ LOGO FETCH + SAFE HD UPGRADE */
 function fetchClubLogo(club){
   var slug = clubSlug(club.url);
   if(!slug) return Promise.resolve(fallbackLogo(club.name));
@@ -221,7 +221,13 @@ function fetchClubLogo(club){
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(d){
       if(d && d.icon){
-        return d.icon; // ✅ working logo
+        var url = d.icon;
+
+        // 🔥 SAFE QUALITY UPGRADE
+        if(url.includes('50x50'))   url = url.replace('50x50','200x200');
+        if(url.includes('100x100')) url = url.replace('100x100','200x200');
+
+        return url;
       }
       return fallbackLogo(club.name);
     })
