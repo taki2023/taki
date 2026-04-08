@@ -137,6 +137,7 @@
 
 </div>
 
+
 <script>
 (function () {
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxl2hAnTkaAxXnISVRUGSYSnWFWNI-O6Vlf47kANjHe0rDwuca0hXzgM_hfTWlafOnl/exec';
@@ -150,21 +151,35 @@
     return m ? m[1] : null;
   }
 
+  // 🔥 FINAL LOGO FETCH (SAFE + DEBUG + FALLBACK READY)
   function fetchLogo(clubUrl) {
     var s = clubSlug(clubUrl);
     if (!s) return Promise.resolve(null);
 
     return fetch('https://api.chess.com/pub/club/' + s)
-      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (r) {
+        if (!r.ok) {
+          console.log('API failed:', clubUrl);
+          return null;
+        }
+        return r.json();
+      })
       .then(function (d) {
-        if (!d || !d.icon) return null;
+        if (!d || !d.icon) {
+          console.log('No icon for:', clubUrl);
+          return null;
+        }
 
-        // safe HD upgrade
-        return d.icon
+        var upgraded = d.icon
           .replace('50x50', '200x200')
           .replace('100x100', '200x200');
+
+        return upgraded;
       })
-      .catch(function () { return null; });
+      .catch(function (e) {
+        console.log('Fetch error:', clubUrl, e);
+        return null;
+      });
   }
 
   function showError(id, msg) {
@@ -190,7 +205,7 @@
           if (!row) return;
 
           if (Array.isArray(row)) {
-            // Shape 3 (2D array)
+            // Shape 3
             var a = (row[0] || '').toString().trim();
             var b = (row[1] || '').toString().trim();
             var d = (row[3] || '').toString().trim();
@@ -200,7 +215,7 @@
             if (d && e) partners.push({ name: d, url: e });
 
           } else {
-            // Shape 1 (objects)
+            // Shape 1
             var ln = (row.link_name || row.linkName || row.name || '').toString().trim();
             var lu = (row.link_url  || row.linkUrl  || row.url  || '').toString().trim();
             var cn = (row.club_name || row.clubName || row.club || '').toString().trim();
@@ -213,7 +228,7 @@
 
       } else if (data && typeof data === 'object') {
 
-        // Shape 2 (separate arrays)
+        // Shape 2
         (data.links || []).slice(1).forEach(function (r) {
           var n = Array.isArray(r) ? r[0] : r.name;
           var u = Array.isArray(r) ? r[1] : r.url;
@@ -255,8 +270,8 @@
             var logo = logos[i];
 
             var img = logo
-              ? '<img src="' + logo + '" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;" onerror="this.style.display=\'none\'"/>'
-              : '<div style="width:70px;height:70px;border-radius:10px;background:rgba(30,60,140,.6);border:2px solid rgba(80,140,255,.3);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 5px;">🏰</div>';
+              ? '<img src="' + logo + '" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;" onerror="this.src=\'https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif\'"/>'
+              : '<img src="https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;"/>';
 
             return '<a href="' + p.url + '" target="_blank" rel="noopener" style="' + prtStyle + '"><span style="text-align:center;">' + img + p.name + '</span></a>';
           }).join('');
