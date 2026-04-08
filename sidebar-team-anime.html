@@ -157,11 +157,7 @@ var FALLBACK='https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
 
 function bestAvatar(url){
   if(!url) return FALLBACK;
-  return url
-    .replace(/50x50o?/g,'200x200')
-    .replace(/100x100o?/g,'200x200')
-    .replace(/160x160o?/g,'200x200')
-    .replace(/@2x/,'');
+  return url;
 }
 
 function loadPfp(username,ids){
@@ -212,7 +208,7 @@ function fallbackLogo(name){
   return 'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(name))+'&background=1e3a8a&color=c8e0ff&size=200&bold=true&font-size=0.45';
 }
 
-/* ✅ LOGO FETCH + SAFE HD UPGRADE */
+/* ✅ ONLY WORKING VERSION */
 function fetchClubLogo(club){
   var slug = clubSlug(club.url);
   if(!slug) return Promise.resolve(fallbackLogo(club.name));
@@ -221,13 +217,7 @@ function fetchClubLogo(club){
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(d){
       if(d && d.icon){
-        var url = d.icon;
-
-        // 🔥 SAFE QUALITY UPGRADE
-        if(url.includes('50x50'))   url = url.replace('50x50','200x200');
-        if(url.includes('100x100')) url = url.replace('100x100','200x200');
-
-        return url;
+        return d.icon; // 🔥 DO NOT TOUCH URL
       }
       return fallbackLogo(club.name);
     })
