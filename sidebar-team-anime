@@ -1,0 +1,262 @@
+<div style="position: relative; max-width: 340px; margin: auto; padding: 14px; background: linear-gradient(160deg,#0d1b3e 0%,#0a1628 60%,#0c1f3f 100%); border-radius: 22px; border: 1px solid rgba(100,150,255,0.2); color: #cce0ff; font-family: Arial,Helvetica,sans-serif; overflow: hidden;">
+
+  <!-- Stars -->
+  <div style="position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 15% 10%,rgba(180,210,255,.5) 1px,transparent 2px),radial-gradient(circle at 75% 20%,rgba(180,210,255,.4) 1px,transparent 2px),radial-gradient(circle at 45% 60%,rgba(180,210,255,.35) 1px,transparent 2px),radial-gradient(circle at 85% 75%,rgba(180,210,255,.45) 1px,transparent 2px),radial-gradient(circle at 30% 85%,rgba(180,210,255,.3) 1px,transparent 2px),radial-gradient(circle at 60% 40%,rgba(180,210,255,.35) 1px,transparent 2px),radial-gradient(circle at 10% 50%,rgba(180,210,255,.3) 1px,transparent 2px),radial-gradient(circle at 90% 45%,rgba(180,210,255,.4) 1px,transparent 2px);"></div>
+
+  <!-- TITLE -->
+  <div style="text-align: center; font-size: 20px; font-weight: 800; color: #e8f4ff; margin-bottom: 14px; letter-spacing: 1px;">Anime Team</div>
+
+  <!-- MUSIC -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
+    <div style="text-align: center;">
+      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/crayon/phptebg65us5va54ud5LAp.gif" style="display: block; margin: 0 auto 8px; border-radius: 10px; width: 100%; max-width: 280px;" />
+    </div>
+    <div style="text-align: center; font-weight: bold; font-size: 14px; margin-bottom: 6px; color: #c8e0ff;">Music Player</div>
+    <audio style="width: 100%; height: 32px;" controls>
+      <source src="https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3" type="audio/mpeg" />
+    </audio>
+  </div>
+
+  <!-- CLUB LEADERS -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
+    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">✦ 👑 CLUB LEADERS ✦</div>
+
+    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">🎖 Role / Promotion Requests</div>
+    <div style="display: flex; justify-content: center; margin-bottom: 14px;">
+      <div style="text-align: center;">
+        <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener">
+          <img src="https://i.pinimg.com/736x/90/e3/c8/90e3c8ae495b34ed5e5ad66653424f53.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+        </a>
+        <span style="color: #b8d4f8; font-size: 12px;">@crayon</span>
+      </div>
+    </div>
+
+    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">🤝 Partnership / Advertisement Requests</div>
+    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 14px;">
+      <div style="text-align: center;">
+        <a href="https://www.chess.com/messages/compose/dannyboy_guling" target="_blank" rel="noopener">
+          <img src="https://images.chesscomfiles.com/uploads/v1/user/366282397.3fc7b30d.160x160o.8d228ba1b8b0@2x.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+        </a>
+        <span style="color: #b8d4f8; font-size: 11px;">@DannyBoy_Guling</span>
+      </div>
+      <div style="text-align: center;">
+        <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener">
+          <img src="https://i.pinimg.com/736x/90/e3/c8/90e3c8ae495b34ed5e5ad66653424f53.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+        </a>
+        <span style="color: #b8d4f8; font-size: 11px;">@crayon</span>
+      </div>
+    </div>
+
+    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">⚔ Club Tournaments &amp; Matches</div>
+    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 14px;">
+      <div style="text-align: center;">
+        <a href="https://www.chess.com/messages/Lysithea_Vantress" target="_blank" rel="noopener">
+          <img src="https://images.chesscomfiles.com/uploads/user/184247267.4dd74938.webp" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+        </a>
+        <span style="color: #b8d4f8; font-size: 11px;">@Lysithea_Vantress</span>
+      </div>
+      <div style="text-align: center;">
+        <a href="https://www.chess.com/messages/Ale_Miranda" target="_blank" rel="noopener">
+          <img src="https://images.chesscomfiles.com/uploads/v1/user/288033475.54f7ab91.200x200o.8364f1b2198c.png" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+        </a>
+        <span style="color: #b8d4f8; font-size: 11px;">@Ale_Miranda</span>
+      </div>
+    </div>
+
+    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">🚨 Member Reports</div>
+    <div style="display: flex; justify-content: center;">
+      <div style="text-align: center;">
+        <a href="https://www.chess.com/messages/AkitoClaw" target="_blank" rel="noopener">
+          <img src="https://images.chesscomfiles.com/uploads/v1/user/241925781.66d2ef97.160x160o.853ee945f0b5@2x.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+        </a>
+        <span style="color: #b8d4f8; font-size: 11px;">@AkitoClaw</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWEST MEMBERS -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 12px; padding: 13px; margin-bottom: 13px;">
+    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 16px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">🍀 ✦ NEWEST MEMBERS ✦</div>
+    <iframe width="100%" height="220" style="display: block; border: none; border-radius: 16px; background: rgba(10,25,60,.6);" src="https://taki2023.github.io/taki/anime-team.html" scrolling="no"></iframe>
+  </div>
+
+  <!-- UPCOMING EVENTS -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
+    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">⚔️ ✦ UPCOMING EVENTS ✦</div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
+      <span>Multi Club Arena</span>
+      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
+      <span>Daily Matches</span>
+      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
+      <span>Vote Chess</span>
+      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
+      <span>Live Club Matches</span>
+      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
+      <span>Club Arena</span>
+      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #a8c8f0;">
+      <span>Live Swiss</span>
+      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
+    </div>
+    <div style="text-align: center; font-size: 11px; color: #7aa8d8; margin-top: 10px;">✦ Stay active &amp; join all events ✦</div>
+  </div>
+
+  <!-- USEFUL LINKS — loaded from Apps Script -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
+    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">📌 ✦ USEFUL LINKS ✦</div>
+    <div id="at-links" style="max-height: 180px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2255bb rgba(10,30,70,.4);">
+      <div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">Loading…</div>
+    </div>
+  </div>
+
+  <!-- PARTNERS — loaded from Apps Script + Chess.com API for logos -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
+    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">🌐 ✦ PARTNERS ✦</div>
+    <div id="at-partners" style="max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; scrollbar-width: thin; scrollbar-color: #2255bb rgba(10,30,70,.4);">
+      <div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">Loading…</div>
+    </div>
+  </div>
+
+  <!-- CONNECT -->
+  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; border: 1px solid rgba(80,140,255,.2);">
+    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">📲 ✦ CONNECT WITH US ✦</div>
+    <a href="https://discord.gg/wW4kZ2n357" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg,#1a3a8a,#1e55c0); padding: 12px 16px; border-radius: 14px; color: #ddeeff; font-weight: bold; text-decoration: none; border: 1px solid rgba(80,140,255,.35);">
+      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phpgarngsf49i3jfqaMUr8.png" style="width: 34px; height: 24px;" />
+      <span>Join our Discord</span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxl2hAnTkaAxXnISVRUGSYSnWFWNI-O6Vlf47kANjHe0rDwuca0hXzgM_hfTWlafOnl/exec';
+
+  var lnkStyle = 'display:block;margin:6px 0;background:rgba(20,50,110,.6);padding:9px 12px;border-radius:12px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;';
+  var prtStyle = 'display:flex;align-items:center;justify-content:center;background:rgba(20,50,110,.6);padding:10px;border-radius:14px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;';
+
+  function clubSlug(url) {
+    if (!url) return null;
+    var m = url.match(/chess\.com\/club\/([^\/\s?#]+)/);
+    return m ? m[1] : null;
+  }
+
+  function fetchLogo(clubUrl) {
+    var s = clubSlug(clubUrl);
+    if (!s) return Promise.resolve(null);
+    return fetch('https://api.chess.com/pub/club/' + s)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { return (d && d.icon) ? d.icon : null; })
+      .catch(function () { return null; });
+  }
+
+  function showError(id, msg) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = '<div style="text-align:center;color:#f87;font-size:12px;padding:10px;">' + msg + '</div>';
+  }
+
+  fetch(SCRIPT_URL)
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+
+      var links    = [];
+      var partners = [];
+
+      /*
+       * The Apps Script can return data in multiple shapes.
+       * We handle the three most common ones:
+       *
+       * Shape 1 — flat array of row objects with named keys:
+       *   [ { link_name:"...", link_url:"...", club_name:"...", club_url:"..." }, … ]
+       *
+       * Shape 2 — object with two arrays:
+       *   { links: [ [name, url], … ], partners: [ [name, url], … ] }
+       *
+       * Shape 3 — raw 2-D array (each row = all columns A-E):
+       *   [ ["link name", "link url", "", "club name", "club url"], … ]
+       */
+
+      if (Array.isArray(data)) {
+        data.forEach(function (row) {
+          if (!row) return;
+          if (Array.isArray(row)) {
+            /* Shape 3 */
+            var a = (row[0] || '').toString().trim();
+            var b = (row[1] || '').toString().trim();
+            var d = (row[3] || '').toString().trim();
+            var e = (row[4] || '').toString().trim();
+            if (a && b) links.push({ name: a, url: b });
+            if (d && e) partners.push({ name: d, url: e });
+          } else {
+            /* Shape 1 */
+            var ln = (row.link_name || row.linkName || row.name  || '').toString().trim();
+            var lu = (row.link_url  || row.linkUrl  || row.url   || '').toString().trim();
+            var cn = (row.club_name || row.clubName || row.club  || '').toString().trim();
+            var cu = (row.club_url  || row.clubUrl  || row.clubLink || '').toString().trim();
+            if (ln && lu) links.push({ name: ln, url: lu });
+            if (cn && cu) partners.push({ name: cn, url: cu });
+          }
+        });
+      } else if (data && typeof data === 'object') {
+        /* Shape 2 */
+        (data.links || []).forEach(function (r) {
+          var n = Array.isArray(r) ? r[0] : r.name;
+          var u = Array.isArray(r) ? r[1] : r.url;
+          if (n && u) links.push({ name: n, url: u });
+        });
+        (data.partners || []).forEach(function (r) {
+          var n = Array.isArray(r) ? r[0] : r.name;
+          var u = Array.isArray(r) ? r[1] : r.url;
+          if (n && u) partners.push({ name: n, url: u });
+        });
+      }
+
+      /* ── Render Useful Links ── */
+      var linksEl = document.getElementById('at-links');
+      if (!links.length) {
+        linksEl.innerHTML = '<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">No links found in sheet.</div>';
+      } else {
+        linksEl.innerHTML = links.map(function (l) {
+          return '<a href="' + l.url + '" target="_blank" rel="noopener" style="' + lnkStyle + '">' + l.name + '</a>';
+        }).join('');
+      }
+
+      /* ── Render Partners with logos ── */
+      var partnersEl = document.getElementById('at-partners');
+      if (!partners.length) {
+        partnersEl.innerHTML = '<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">No partners found in sheet.</div>';
+        return;
+      }
+
+      partnersEl.innerHTML = '<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">Fetching club logos…</div>';
+
+      Promise.all(partners.map(function (p) { return fetchLogo(p.url); }))
+        .then(function (logos) {
+          partnersEl.innerHTML = partners.map(function (p, i) {
+            var logo = logos[i];
+            var img = logo
+              ? '<img src="' + logo + '" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;" onerror="this.style.display=\'none\'"/>'
+              : '<div style="width:70px;height:70px;border-radius:10px;background:rgba(30,60,140,.6);border:2px solid rgba(80,140,255,.3);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 5px;">🏰</div>';
+            return '<a href="' + p.url + '" target="_blank" rel="noopener" style="' + prtStyle + '"><span style="text-align:center;">' + img + p.name + '</span></a>';
+          }).join('');
+        });
+    })
+    .catch(function (e) {
+      console.error('Anime Team sidebar error:', e);
+      showError('at-links',    'Could not load links. Make sure the Apps Script is deployed as "Anyone".');
+      showError('at-partners', 'Could not load partners.');
+    });
+}());
+</script>
