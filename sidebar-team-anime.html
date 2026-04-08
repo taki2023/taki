@@ -152,128 +152,155 @@ html,body{margin:0;padding:0;background:#060e1f;}
 <script>
 (function(){
 
-  /* ── Chess.com API: Club leader avatars ── */
-  var FALLBACK='https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
-  function bestAvatar(url){
-    if(!url) return FALLBACK;
-    return url
-      .replace(/50x50o?/g,'200x200')
-      .replace(/100x100o?/g,'200x200')
-      .replace(/160x160o?/g,'200x200')
-      .replace(/@2x/,'');
-  }
-  function loadPfp(username,ids){
-    fetch('https://api.chess.com/pub/player/'+username.toLowerCase())
-      .then(function(r){return r.ok?r.json():null;})
-      .then(function(d){
-        var src=d&&d.avatar?bestAvatar(d.avatar):FALLBACK;
-        ids.forEach(function(id){var el=document.getElementById(id);if(el)el.src=src;});
-      })
-      .catch(function(){
-        ids.forEach(function(id){var el=document.getElementById(id);if(el)el.src=FALLBACK;});
+/* ── Chess.com API: Club leader avatars ── */
+var FALLBACK='https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
+
+function bestAvatar(url){
+  if(!url) return FALLBACK;
+  return url
+    .replace(/50x50o?/g,'200x200')
+    .replace(/100x100o?/g,'200x200')
+    .replace(/160x160o?/g,'200x200')
+    .replace(/@2x/,'');
+}
+
+function loadPfp(username,ids){
+  fetch('https://api.chess.com/pub/player/'+username.toLowerCase())
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      var src=d&&d.avatar?bestAvatar(d.avatar):FALLBACK;
+      ids.forEach(function(id){
+        var el=document.getElementById(id);
+        if(el) el.src=src;
       });
-  }
-  loadPfp('Crayon',            ['pfp-crayon','pfp-crayon2']);
-  loadPfp('dannyboy_guling',   ['pfp-dannyboy']);
-  loadPfp('Lysithea_Vantress', ['pfp-lysithea']);
-  loadPfp('Ale_Miranda',       ['pfp-ale']);
-  loadPfp('AkitoClaw',         ['pfp-akito']);
-
-  /* ── Shared helpers ── */
-  var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxzX0mBO4umQhv1-6VnxXUiD9NWXN8ajlErjStZ60GrQCQ_qqFDhLc8S_vqvCxRz_Xp/exec';
-
-  var lnkStyle='display:block;margin:6px 0;background:rgba(20,50,110,.6);padding:9px 12px;border-radius:12px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;';
-  var prtStyle='display:flex;align-items:center;justify-content:center;background:rgba(20,50,110,.6);padding:10px;border-radius:14px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;';
-
-  function showError(id,msg){
-    var el=document.getElementById(id);
-    if(el) el.innerHTML='<div style="text-align:center;color:#f87a7a;font-size:12px;padding:10px;">'+msg+'</div>';
-  }
-  function clubSlug(url){
-    var m=url.match(/chess\.com\/clubs?\/([^\/\s?#]+)/i);
-    return m?m[1]:null;
-  }
-  function initials(name){
-    return name.trim().split(/\s+/).map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-  }
-  function fallbackLogo(name){
-    return 'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(name))+'&background=1e3a8a&color=c8e0ff&size=200&bold=true&font-size=0.45';
-  }
-  function bestLogo(url){
-    if(!url) return null;
-    return url
-      .replace(/50x50o?/g,'200x200')
-      .replace(/100x100o?/g,'200x200')
-      .replace(/160x160o?/g,'200x200')
-      .replace(/@2x/g,'');
-  }
-  function fetchClubLogo(club){
-    var slug=clubSlug(club.url);
-    if(!slug) return Promise.resolve(fallbackLogo(club.name));
-    return fetch('https://api.chess.com/pub/club/'+slug)
-      .then(function(r){return r.ok?r.json():null;})
-      .then(function(d){
-        if(d&&d.icon){var hi=bestLogo(d.icon);return hi||fallbackLogo(club.name);}
-        return fallbackLogo(club.name);
-      })
-      .catch(function(){return fallbackLogo(club.name);});
-  }
-
-  /* ── JSONP callback — called by the Apps Script response ── */
-  window.__atSheetCallback = function(data){
-    var links    = Array.isArray(data.links)    ? data.links    : [];
-    var partners = Array.isArray(data.partners) ? data.partners : [];
-
-    /* Useful Links */
-    var linksEl=document.getElementById('at-links');
-    if(links.length){
-      linksEl.innerHTML=links.map(function(l){
-        return '<a href="'+l.url+'" target="_blank" rel="noopener" style="'+lnkStyle+'"'
-          +' onmouseover="this.style.background=\'#1e4aaa\';this.style.transform=\'translateY(-2px)\';"'
-          +' onmouseout="this.style.background=\'rgba(20,50,110,.6)\';this.style.transform=\'translateY(0)\';">'
-          +l.name+'</a>';
-      }).join('');
-    } else {
-      linksEl.innerHTML='<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">No links found</div>';
-    }
-
-    /* Partners */
-    var partnersEl=document.getElementById('at-partners');
-    if(!partners.length){
-      partnersEl.innerHTML='<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">No partners found</div>';
-      return;
-    }
-    partnersEl.innerHTML='<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:6px;">Loading logos…</div>';
-
-    Promise.all(partners.map(fetchClubLogo)).then(function(logos){
-      partnersEl.innerHTML=partners.map(function(p,i){
-        return '<a href="'+p.url+'" target="_blank" rel="noopener" style="'+prtStyle+'"'
-          +' onmouseover="this.style.background=\'#1e4aaa\';this.style.transform=\'translateY(-3px)\';"'
-          +' onmouseout="this.style.background=\'rgba(20,50,110,.6)\';this.style.transform=\'translateY(0)\';">'
-          +'<span style="text-align:center;">'
-          +'<img src="'+logos[i]+'" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;"'
-          +' onerror="this.src=\''+fallbackLogo(p.name)+'\';"/>'
-          +p.name
-          +'</span>'
-          +'</a>';
-      }).join('');
+    })
+    .catch(function(){
+      ids.forEach(function(id){
+        var el=document.getElementById(id);
+        if(el) el.src=FALLBACK;
+      });
     });
-  };
+}
 
-  /* ── Inject JSONP <script> tag — bypasses CORS entirely ── */
-  function loadViaJsonp(){
-    var s=document.createElement('script');
-    s.src=SCRIPT_URL+'?callback=__atSheetCallback&t='+Date.now();
-    s.onerror=function(){
-      showError('at-links','Could not load links');
-      showError('at-partners','Could not load partners');
-    };
-    document.head.appendChild(s);
+loadPfp('Crayon',['pfp-crayon','pfp-crayon2']);
+loadPfp('dannyboy_guling',['pfp-dannyboy']);
+loadPfp('Lysithea_Vantress',['pfp-lysithea']);
+loadPfp('Ale_Miranda',['pfp-ale']);
+loadPfp('AkitoClaw',['pfp-akito']);
+
+/* ── Shared helpers ── */
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxzX0mBO4umQhv1-6VnxXUiD9NWXN8ajlErjStZ60GrQCQ_qqFDhLc8S_vqvCxRz_Xp/exec';
+
+var lnkStyle='display:block;margin:6px 0;background:rgba(20,50,110,.6);padding:9px 12px;border-radius:12px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;';
+var prtStyle='display:flex;align-items:center;justify-content:center;background:rgba(20,50,110,.6);padding:10px;border-radius:14px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;';
+
+function showError(id,msg){
+  var el=document.getElementById(id);
+  if(el) el.innerHTML='<div style="text-align:center;color:#f87a7a;font-size:12px;padding:10px;">'+msg+'</div>';
+}
+
+function clubSlug(url){
+  var m=url.match(/chess\.com\/clubs?\/([^\/\s?#]+)/i);
+  return m?m[1]:null;
+}
+
+function initials(name){
+  return name.trim().split(/\s+/).map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+}
+
+function fallbackLogo(name){
+  return 'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(name))+'&background=1e3a8a&color=c8e0ff&size=300&bold=true&font-size=0.45';
+}
+
+/* 🔥 HD LOGO FIX */
+function bestLogo(url){
+  if(!url) return null;
+  return url
+    .replace(/50x50o?/g,'300x300')
+    .replace(/100x100o?/g,'300x300')
+    .replace(/160x160o?/g,'300x300')
+    .replace(/200x200o?/g,'300x300')
+    .replace(/@2x/g,'');
+}
+
+/* 🔥 REAL LOGO FETCH (FIXED) */
+function fetchClubLogo(club){
+  var slug = clubSlug(club.url);
+  if(!slug) return Promise.resolve(fallbackLogo(club.name));
+
+  return fetch('https://api.chess.com/pub/club/' + slug)
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      var img = null;
+
+      if(d){
+        img = d.icon || d.avatar || d.image || null;
+      }
+
+      if(img){
+        return bestLogo(img);
+      }
+
+      return fallbackLogo(club.name);
+    })
+    .catch(function(){
+      return fallbackLogo(club.name);
+    });
+}
+
+/* ── JSONP callback ── */
+window.__atSheetCallback = function(data){
+
+  var links    = Array.isArray(data.links)    ? data.links    : [];
+  var partners = Array.isArray(data.partners) ? data.partners : [];
+
+  /* Links */
+  var linksEl=document.getElementById('at-links');
+  if(links.length){
+    linksEl.innerHTML=links.map(function(l){
+      return '<a href="'+l.url+'" target="_blank" rel="noopener" style="'+lnkStyle+'">'
+        +l.name+'</a>';
+    }).join('');
+  } else {
+    linksEl.innerHTML='<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">No links found</div>';
   }
-  loadViaJsonp();
+
+  /* Partners */
+  var partnersEl=document.getElementById('at-partners');
+  if(!partners.length){
+    partnersEl.innerHTML='<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">No partners found</div>';
+    return;
+  }
+
+  partnersEl.innerHTML='<div style="text-align:center;color:#7aa8d8;font-size:12px;padding:6px;">Loading logos…</div>';
+
+  Promise.all(partners.map(fetchClubLogo)).then(function(logos){
+    partnersEl.innerHTML=partners.map(function(p,i){
+      return '<a href="'+p.url+'" target="_blank" rel="noopener" style="'+prtStyle+'">'
+        +'<span>'
+        +'<img src="'+logos[i]+'" style="display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;"'
+        +' onerror="this.src=\''+fallbackLogo(p.name)+'\';"/>'
+        +p.name
+        +'</span>'
+        +'</a>';
+    }).join('');
+  });
+};
+
+/* ── Load JSONP ── */
+function loadViaJsonp(){
+  var s=document.createElement('script');
+  s.src=SCRIPT_URL+'?callback=__atSheetCallback&t='+Date.now();
+  s.onerror=function(){
+    showError('at-links','Could not load links');
+    showError('at-partners','Could not load partners');
+  };
+  document.head.appendChild(s);
+}
+
+loadViaJsonp();
 
 })();
 </script>
-
 </body>
 </html>
