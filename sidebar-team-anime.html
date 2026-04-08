@@ -155,7 +155,17 @@
     if (!s) return Promise.resolve(null);
     return fetch('https://api.chess.com/pub/club/' + s)
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) { return (d && d.icon) ? d.icon : null; })
+      .then(function (d) {
+  if (!d || !d.icon) return null;
+
+  // Try to upgrade resolution
+  var highRes = d.icon
+    .replace('50x50', '200x200')
+    .replace('100x100', '200x200')
+    .replace('200x200', '400x400');
+
+  return highRes;
+})
       .catch(function () { return null; });
   }
 
