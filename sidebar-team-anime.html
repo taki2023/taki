@@ -219,9 +219,21 @@ if (Array.isArray(data)) {
             if (cn && cu) partners.push({ name: cn, url: cu });
           }
         });
-      } else if (data && typeof data === 'object') {
-        /* Shape 2 */
-        (data.links || []).forEach(function (r) {
+     } else if (data && typeof data === 'object') {
+  /* Shape 2 */
+
+  (data.links || []).slice(1).forEach(function (r) {
+    var n = Array.isArray(r) ? r[0] : r.name;
+    var u = Array.isArray(r) ? r[1] : r.url;
+    if (n && u) links.push({ name: n, url: u });
+  });
+
+  (data.partners || []).slice(1).forEach(function (r) {
+    var n = Array.isArray(r) ? r[0] : r.name;
+    var u = Array.isArray(r) ? r[1] : r.url;
+    if (n && u) partners.push({ name: n, url: u });
+  });
+}
           var n = Array.isArray(r) ? r[0] : r.name;
           var u = Array.isArray(r) ? r[1] : r.url;
           if (n && u) links.push({ name: n, url: u });
