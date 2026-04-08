@@ -180,7 +180,7 @@ html,body{margin:0;padding:0;background:#060e1f;}
   loadPfp('AkitoClaw',         ['pfp-akito']);
 
   /* ── Shared helpers ── */
-  var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxRymArnJs_XVplNE6RdfPL8V0r26HbtGqQLJdm9R-c2HrZYVizd3bk-dzW-rnUyCTC/exec';
+  var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxzX0mBO4umQhv1-6VnxXUiD9NWXN8ajlErjStZ60GrQCQ_qqFDhLc8S_vqvCxRz_Xp/exec';
 
   var lnkStyle='display:block;margin:6px 0;background:rgba(20,50,110,.6);padding:9px 12px;border-radius:12px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;';
   var prtStyle='display:flex;align-items:center;justify-content:center;background:rgba(20,50,110,.6);padding:10px;border-radius:14px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;';
@@ -190,7 +190,7 @@ html,body{margin:0;padding:0;background:#060e1f;}
     if(el) el.innerHTML='<div style="text-align:center;color:#f87a7a;font-size:12px;padding:10px;">'+msg+'</div>';
   }
   function clubSlug(url){
-    var m=url.match(/chess\.com\/club\/([^\/\s?#]+)/i);
+    var m=url.match(/chess\.com\/clubs?\/([^\/\s?#]+)/i);
     return m?m[1]:null;
   }
   function initials(name){
