@@ -1,229 +1,203 @@
-<div style="position: relative; max-width: 340px; margin: auto; padding: 14px; background: linear-gradient(160deg,#0d1b3e 0%,#0a1628 60%,#0c1f3f 100%); border-radius: 22px; border: 1px solid rgba(100,150,255,0.2); color: #cce0ff; font-family: Arial,Helvetica,sans-serif; overflow: hidden;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anime Team Sidebar</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{margin:0;padding:0;background:#060e1f;}
+.at-wrap{position:relative;max-width:340px;margin:0 auto;padding:14px;background:linear-gradient(160deg,#0d1b3e 0%,#0a1628 60%,#0c1f3f 100%);border-radius:22px;border:1px solid rgba(100,150,255,0.2);color:#cce0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+.at-stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 15% 10%,rgba(180,210,255,.5) 1px,transparent 2px),radial-gradient(circle at 75% 20%,rgba(180,210,255,.4) 1px,transparent 2px),radial-gradient(circle at 45% 60%,rgba(180,210,255,.35) 1px,transparent 2px),radial-gradient(circle at 85% 75%,rgba(180,210,255,.45) 1px,transparent 2px),radial-gradient(circle at 30% 85%,rgba(180,210,255,.3) 1px,transparent 2px),radial-gradient(circle at 60% 40%,rgba(180,210,255,.35) 1px,transparent 2px),radial-gradient(circle at 10% 50%,rgba(180,210,255,.3) 1px,transparent 2px),radial-gradient(circle at 90% 45%,rgba(180,210,255,.4) 1px,transparent 2px);}
+.at-title{text-align:center;font-size:20px;font-weight:800;color:#e8f4ff;margin-bottom:14px;letter-spacing:1px;}
+.at-card{background:rgba(15,35,80,.55);border-radius:18px;padding:13px;margin-bottom:13px;border:1px solid rgba(80,140,255,.2);}
+.at-card-nm{background:rgba(15,35,80,.55);border-radius:12px;padding:13px;margin-bottom:13px;}
+.at-card:last-child{margin-bottom:0;}
+.at-section-title{text-align:center;background:linear-gradient(135deg,#1a3a7a,#2a5cbf);color:#ddeeff;font-weight:800;padding:7px 10px;border-radius:12px;margin-bottom:12px;font-size:13px;border:1px solid rgba(100,160,255,.3);}
+.at-section-title-lg{border-radius:16px;}
+.at-role-title{font-weight:bold;font-size:13px;color:#a8c8f0;margin-bottom:6px;text-align:center;}
+.at-leaders-row{display:flex;justify-content:center;gap:24px;margin-bottom:14px;}
+.at-leaders-single{display:flex;justify-content:center;margin-bottom:14px;}
+.at-leader{text-align:center;}
+.at-leader a img,.at-leader-img{width:52px;height:52px;border-radius:50%;border:2px solid rgba(100,160,255,.5);display:block;margin:0 auto 5px;object-fit:cover;}
+.at-leader span{color:#b8d4f8;font-size:11px;}
+.at-link-btn{display:block;margin:6px 0;background:rgba(20,50,110,.6);padding:9px 12px;border-radius:12px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;}
+.at-link-btn:hover{background:#1e4aaa;transform:translateY(-2px);}
+.at-partner-btn{display:flex;align-items:center;justify-content:center;background:rgba(20,50,110,.6);padding:10px;border-radius:14px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;transition:.2s;}
+.at-partner-btn:hover{background:#1e4aaa;transform:translateY(-3px);}
+.at-partner-btn span{text-align:center;}
+.at-partner-btn img{display:block;margin:0 auto 5px;border-radius:10px;border:2px solid rgba(80,140,255,.3);width:70px;height:70px;object-fit:cover;}
+.at-event-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:8px;color:#a8c8f0;}
+.at-view-btn{background:rgba(30,65,140,.6);color:#c8e0ff;padding:3px 11px;border-radius:10px;font-size:12px;border:1px solid rgba(80,140,255,.25);cursor:pointer;transition:.2s;display:inline-block;text-decoration:none;}
+.at-view-btn:hover{background:#2255bb;color:#fff;}
+.at-discord{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#1a3a8a,#1e55c0);padding:12px 16px;border-radius:14px;color:#ddeeff;font-weight:bold;text-decoration:none;border:1px solid rgba(80,140,255,.35);transition:.2s;}
+.at-discord:hover{background:linear-gradient(135deg,#2255bb,#2a6ae0);transform:translateY(-3px);}
+.at-scroll{overflow-y:auto;scrollbar-width:thin;scrollbar-color:#2255bb rgba(10,30,70,.4);}
+</style>
+</head>
+<body>
 
-  <!-- Stars -->
-  <div style="position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 15% 10%,rgba(180,210,255,.5) 1px,transparent 2px),radial-gradient(circle at 75% 20%,rgba(180,210,255,.4) 1px,transparent 2px),radial-gradient(circle at 45% 60%,rgba(180,210,255,.35) 1px,transparent 2px),radial-gradient(circle at 85% 75%,rgba(180,210,255,.45) 1px,transparent 2px),radial-gradient(circle at 30% 85%,rgba(180,210,255,.3) 1px,transparent 2px),radial-gradient(circle at 60% 40%,rgba(180,210,255,.35) 1px,transparent 2px),radial-gradient(circle at 10% 50%,rgba(180,210,255,.3) 1px,transparent 2px),radial-gradient(circle at 90% 45%,rgba(180,210,255,.4) 1px,transparent 2px);"></div>
-
-  <!-- TITLE -->
-  <div style="text-align: center; font-size: 20px; font-weight: 800; color: #e8f4ff; margin-bottom: 14px; letter-spacing: 1px;">Anime Team</div>
+<div class="at-wrap">
+  <div class="at-stars"></div>
+  <div class="at-title">Anime Team</div>
 
   <!-- MUSIC -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
-    <div style="text-align: center;">
-      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/crayon/phptebg65us5va54ud5LAp.gif" style="display: block; margin: 0 auto 8px; border-radius: 10px; width: 100%; max-width: 280px;" />
-    </div>
-    <div style="text-align: center; font-weight: bold; font-size: 14px; margin-bottom: 6px; color: #c8e0ff;">Music Player</div>
-    <audio style="width: 100%; height: 32px;" controls>
-      <source src="https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3" type="audio/mpeg" />
-    </audio>
+  <div class="at-card">
+    <div style="text-align:center;"><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/crayon/phptebg65us5va54ud5LAp.gif" style="display:block;margin:0 auto 8px;border-radius:10px;width:100%;max-width:280px;"/></div>
+    <div style="text-align:center;font-weight:bold;font-size:14px;margin-bottom:6px;color:#c8e0ff;">Music Player</div>
+    <audio style="width:100%;height:32px;" controls><source src="https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3" type="audio/mpeg"/></audio>
   </div>
 
   <!-- CLUB LEADERS -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
-    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">✦ 👑 CLUB LEADERS ✦</div>
+  <div class="at-card">
+    <div class="at-section-title">✦ 👑 CLUB LEADERS ✦</div>
 
-    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">🎖 Role / Promotion Requests</div>
-    <div style="display: flex; justify-content: center; margin-bottom: 14px;">
-      <div style="text-align: center;">
+    <div class="at-role-title">🎖 Role / Promotion Requests</div>
+    <div class="at-leaders-single">
+      <div class="at-leader">
         <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener">
-          <img src="https://i.pinimg.com/736x/90/e3/c8/90e3c8ae495b34ed5e5ad66653424f53.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+          <img id="pfp-crayon" class="at-leader-img" src="" alt="crayon"/>
         </a>
-        <span style="color: #b8d4f8; font-size: 12px;">@crayon</span>
+        <span>@crayon</span>
       </div>
     </div>
 
-    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">🤝 Partnership / Advertisement Requests</div>
-    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 14px;">
-      <div style="text-align: center;">
+    <div class="at-role-title">🤝 Partnership / Advertisement Requests</div>
+    <div class="at-leaders-row">
+      <div class="at-leader">
         <a href="https://www.chess.com/messages/compose/dannyboy_guling" target="_blank" rel="noopener">
-          <img src="https://images.chesscomfiles.com/uploads/v1/user/366282397.3fc7b30d.160x160o.8d228ba1b8b0@2x.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+          <img id="pfp-dannyboy" class="at-leader-img" src="" alt="DannyBoy_Guling"/>
         </a>
-        <span style="color: #b8d4f8; font-size: 11px;">@DannyBoy_Guling</span>
+        <span>@DannyBoy_Guling</span>
       </div>
-      <div style="text-align: center;">
+      <div class="at-leader">
         <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener">
-          <img src="https://i.pinimg.com/736x/90/e3/c8/90e3c8ae495b34ed5e5ad66653424f53.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+          <img id="pfp-crayon2" class="at-leader-img" src="" alt="crayon"/>
         </a>
-        <span style="color: #b8d4f8; font-size: 11px;">@crayon</span>
+        <span>@crayon</span>
       </div>
     </div>
 
-    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">⚔ Club Tournaments &amp; Matches</div>
-    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 14px;">
-      <div style="text-align: center;">
+    <div class="at-role-title">⚔ Club Tournaments &amp; Matches</div>
+    <div class="at-leaders-row">
+      <div class="at-leader">
         <a href="https://www.chess.com/messages/Lysithea_Vantress" target="_blank" rel="noopener">
-          <img src="https://images.chesscomfiles.com/uploads/user/184247267.4dd74938.webp" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+          <img id="pfp-lysithea" class="at-leader-img" src="" alt="Lysithea_Vantress"/>
         </a>
-        <span style="color: #b8d4f8; font-size: 11px;">@Lysithea_Vantress</span>
+        <span>@Lysithea_Vantress</span>
       </div>
-      <div style="text-align: center;">
+      <div class="at-leader">
         <a href="https://www.chess.com/messages/Ale_Miranda" target="_blank" rel="noopener">
-          <img src="https://images.chesscomfiles.com/uploads/v1/user/288033475.54f7ab91.200x200o.8364f1b2198c.png" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+          <img id="pfp-ale" class="at-leader-img" src="" alt="Ale_Miranda"/>
         </a>
-        <span style="color: #b8d4f8; font-size: 11px;">@Ale_Miranda</span>
+        <span>@Ale_Miranda</span>
       </div>
     </div>
 
-    <div style="font-weight: bold; font-size: 13px; color: #a8c8f0; margin-bottom: 6px; text-align: center;">🚨 Member Reports</div>
-    <div style="display: flex; justify-content: center;">
-      <div style="text-align: center;">
+    <div class="at-role-title">🚨 Member Reports</div>
+    <div class="at-leaders-single" style="margin-bottom:0;">
+      <div class="at-leader">
         <a href="https://www.chess.com/messages/AkitoClaw" target="_blank" rel="noopener">
-          <img src="https://images.chesscomfiles.com/uploads/v1/user/241925781.66d2ef97.160x160o.853ee945f0b5@2x.jpg" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100,160,255,.5); display: block; margin: 0 auto 5px;" />
+          <img id="pfp-akito" class="at-leader-img" src="" alt="AkitoClaw"/>
         </a>
-        <span style="color: #b8d4f8; font-size: 11px;">@AkitoClaw</span>
+        <span>@AkitoClaw</span>
       </div>
     </div>
   </div>
 
   <!-- NEWEST MEMBERS -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 12px; padding: 13px; margin-bottom: 13px;">
-    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 16px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">🍀 ✦ NEWEST MEMBERS ✦</div>
-    <iframe width="100%" height="220" style="display: block; border: none; border-radius: 16px; background: rgba(10,25,60,.6);" src="https://taki2023.github.io/taki/anime-team.html" scrolling="no"></iframe>
+  <div class="at-card-nm">
+    <div class="at-section-title at-section-title-lg">🍀 ✦ NEWEST MEMBERS ✦</div>
+    <iframe width="100%" height="220" style="display:block;border:none;border-radius:16px;background:rgba(10,25,60,.6);" src="https://taki2023.github.io/taki/anime-team.html" scrolling="no"></iframe>
   </div>
 
   <!-- UPCOMING EVENTS -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
-    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">⚔️ ✦ UPCOMING EVENTS ✦</div>
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
-      <span>Multi Club Arena</span>
-      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
-      <span>Daily Matches</span>
-      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
-      <span>Vote Chess</span>
-      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
-      <span>Live Club Matches</span>
-      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px; color: #a8c8f0;">
-      <span>Club Arena</span>
-      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #a8c8f0;">
-      <span>Live Swiss</span>
-      <a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" style="text-decoration: none;" rel="noopener"><span style="background: rgba(30,65,140,.6); color: #c8e0ff; padding: 3px 11px; border-radius: 10px; font-size: 12px; border: 1px solid rgba(80,140,255,.25);">View</span></a>
-    </div>
-    <div style="text-align: center; font-size: 11px; color: #7aa8d8; margin-top: 10px;">✦ Stay active &amp; join all events ✦</div>
+  <div class="at-card">
+    <div class="at-section-title">⚔️ ✦ UPCOMING EVENTS ✦</div>
+    <div class="at-event-row"><span>Multi Club Arena</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+    <div class="at-event-row"><span>Daily Matches</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+    <div class="at-event-row"><span>Vote Chess</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+    <div class="at-event-row"><span>Live Club Matches</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+    <div class="at-event-row"><span>Club Arena</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+    <div class="at-event-row"><span>Live Swiss</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
+    <div style="text-align:center;font-size:11px;color:#7aa8d8;margin-top:10px;">✦ Stay active &amp; join all events ✦</div>
   </div>
 
-  <!-- USEFUL LINKS — loaded from Apps Script -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
-    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">📌 ✦ USEFUL LINKS ✦</div>
-    <div id="at-links" style="max-height: 180px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2255bb rgba(10,30,70,.4);">
-      <div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">Loading…</div>
+  <!-- USEFUL LINKS -->
+  <div class="at-card">
+    <div class="at-section-title">📌 ✦ USEFUL LINKS ✦</div>
+    <div class="at-scroll" style="max-height:150px;">
+      <a href="https://www.chess.com/clubs/forum/view/free-anime-2" target="_blank" class="at-link-btn" rel="noopener">🍿 Free Anime &amp; Manga</a>
+      <a href="https://www.chess.com/leaderboard/live?group=4431" target="_blank" class="at-link-btn" rel="noopener">⭐ Favorite Anime</a>
+      <a href="https://www.chess.com/leaderboard/live?group=4431" target="_blank" class="at-link-btn" rel="noopener">🎭 Favorite Characters</a>
+      <a href="https://www.chess.com/leaderboard/live?group=4431" target="_blank" class="at-link-btn" rel="noopener">📊 Leaderboard</a>
+      <a href="https://chesswrap.vercel.app/" target="_blank" class="at-link-btn" rel="noopener">📅 Recap 2025</a>
+      <a href="https://www.chess.com/clubs/about/anime-team-3" target="_blank" class="at-link-btn" rel="noopener">📖 About the Club</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2Tc3ps1kO1k-PR2Gipv-7WMyJbqXmrHZCYa8130xNY_QLYw/viewform?usp=publish-editor" target="_blank" class="at-link-btn" rel="noopener">📝 Member Feedback</a>
     </div>
   </div>
 
-  <!-- PARTNERS — loaded from Apps Script + Chess.com API for logos -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; margin-bottom: 13px; border: 1px solid rgba(80,140,255,.2);">
-    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">🌐 ✦ PARTNERS ✦</div>
-    <div id="at-partners" style="max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; scrollbar-width: thin; scrollbar-color: #2255bb rgba(10,30,70,.4);">
-      <div style="text-align:center;color:#7aa8d8;font-size:12px;padding:10px;">Loading…</div>
+  <!-- PARTNERS -->
+  <div class="at-card">
+    <div class="at-section-title">🌐 ✦ PARTNERS ✦</div>
+    <div class="at-scroll" style="max-height:180px;display:flex;flex-direction:column;gap:8px;">
+      <a href="https://www.chess.com/club/anime-and-daily-chess" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/php5921gjg1s1bve9xaXiX.png"/>Anime and Daily Chess</span></a>
+      <a href="https://www.chess.com/club/koya-modulers-club" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/712671.ac9d9d5f.160x160o.b8efa65dd4c8.png"/>Koya Modulers Club</span></a>
+      <a href="https://www.chess.com/club/noobs-to-gms-club" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/874449.249ff76e.160x160o.54a16f697aba.png"/>Noobs to GMs Club</span></a>
+      <a href="https://www.chess.com/club/kasanes-karaoke" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phpdssm18vd1gqj6CV1wh7.png"/>Kasanes Karaoke</span></a>
+      <a href="https://www.chess.com/club/chess-japan" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phpghlcall810qn4IPxYBW.png"/>Chess Japan</span></a>
+      <a href="https://www.chess.com/club/mkr-community" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/806856.e2b53593.160x160o.cb3c43f61345.png"/>MKR Community</span></a>
+      <a href="https://www.chess.com/club/the-green-dragon-inn" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/468397.24976722.160x160o.1837d00d7333@2x.jpg"/>The Green Dragon Inn</span></a>
+      <a href="https://www.chess.com/club/clash-royale-team" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phprb216sgtcf1h9um7re7.jpg"/>Clash Royale Team</span></a>
+      <a href="https://www.chess.com/club/notes/demons-3" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/842691.2754d647.160x160o.c9e4e86b3683@2x.jpg"/>Demons</span></a>
+      <a href="https://www.chess.com/club/anime-chess-team-1" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/893631.b56f329a.160x160o.52f359a1a539.gif"/>Anime Chess Team</span></a>
+      <a href="https://www.chess.com/club/the-tiger-lovers" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/760042.93f0c871.160x160o.c548ead8609b@2x.jpg"/>The Tiger Lovers</span></a>
+      <a href="https://www.chess.com/club/astral-checkmates" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/905017.ba786faf.160x160o.5678d3a7a495@2x.png"/>Astral Checkmates</span></a>
+      <a href="https://www.chess.com/club/crayon-fan-club" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/900425.1f2bd9a6.160x160o.55f47c1e8302@2x.jpg"/>Crayon Fan Club</span></a>
+      <a href="https://www.chess.com/club/group-52340a9517e657f8847c842a38b7bf0f" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/876523.cff9da53.160x160o.eb977452b033@2x.png"/>Clefts Ten Commandments</span></a>
+      <a href="https://www.chess.com/club/jujutsu-high-1" target="_blank" class="at-partner-btn" rel="noopener"><span><img src="https://images.chesscomfiles.com/uploads/v1/group/905581.7308c94b.160x160o.d7c53539e8dc@2x.jpg"/>Jujutsu High Chess</span></a>
     </div>
   </div>
 
   <!-- CONNECT -->
-  <div style="background: rgba(15,35,80,.55); border-radius: 18px; padding: 13px; border: 1px solid rgba(80,140,255,.2);">
-    <div style="text-align: center; background: linear-gradient(135deg,#1a3a7a,#2a5cbf); color: #ddeeff; font-weight: 800; padding: 7px 10px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border: 1px solid rgba(100,160,255,.3);">📲 ✦ CONNECT WITH US ✦</div>
-    <a href="https://discord.gg/wW4kZ2n357" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg,#1a3a8a,#1e55c0); padding: 12px 16px; border-radius: 14px; color: #ddeeff; font-weight: bold; text-decoration: none; border: 1px solid rgba(80,140,255,.35);">
-      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phpgarngsf49i3jfqaMUr8.png" style="width: 34px; height: 24px;" />
+  <div class="at-card" style="margin-bottom:0;">
+    <div class="at-section-title">📲 ✦ CONNECT WITH US ✦</div>
+    <a href="https://discord.gg/wW4kZ2n357" target="_blank" class="at-discord" rel="noopener">
+      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/TakieddineGOUMRI/phpgarngsf49i3jfqaMUr8.png" style="width:34px;height:24px;"/>
       <span>Join our Discord</span>
     </a>
   </div>
-
 </div>
 
-
 <script>
-(function () {
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxl2hAnTkaAxXnISVRUGSYSnWFWNI-O6Vlf47kANjHe0rDwuca0hXzgM_hfTWlafOnl/exec';
-
-  var lnkStyle = 'display:block;margin:6px 0;background:rgba(20,50,110,.6);padding:9px 12px;border-radius:12px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;';
-  var prtStyle = 'display:flex;align-items:center;justify-content:center;background:rgba(20,50,110,.6);padding:10px;border-radius:14px;border:1px solid rgba(80,140,255,.2);color:#c8e0ff;font-weight:bold;font-size:13px;text-decoration:none;text-align:center;';
-
-  function clubSlug(url) {
-    var m = url.match(/chess\.com\/club\/([^\/\s?#]+)/);
-    return m ? m[1] : null;
+(function(){
+  var FALLBACK='https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
+  function bestAvatar(url){
+    if(!url) return FALLBACK;
+    return url
+      .replace(/50x50o?/g,'200x200')
+      .replace(/100x100o?/g,'200x200')
+      .replace(/160x160o?/g,'200x200')
+      .replace(/@2x/,'');
   }
-
-  function fallbackLogo(name) {
-    // generate clean logo using initials
-    var initials = name.split(' ').map(w => w[0]).join('').slice(0,3).toUpperCase();
-    return 'https://ui-avatars.com/api/?name=' + initials + '&background=1e3a8a&color=ffffff&size=128&bold=true';
-  }
-
-  function fetchLogo(club) {
-    var slug = clubSlug(club.url);
-    if (!slug) return Promise.resolve(fallbackLogo(club.name));
-
-    return fetch('https://api.chess.com/pub/club/' + slug)
-      .then(r => r.ok ? r.json() : null)
-      .then(d => {
-        if (d && d.icon) {
-          return d.icon.replace('50x50','200x200').replace('100x100','200x200');
-        }
-        return fallbackLogo(club.name); // 🔥 fallback
+  function loadPfp(username,ids){
+    fetch('https://api.chess.com/pub/player/'+username.toLowerCase())
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(d){
+        var src=d&&d.avatar?bestAvatar(d.avatar):FALLBACK;
+        ids.forEach(function(id){var el=document.getElementById(id);if(el)el.src=src;});
       })
-      .catch(() => fallbackLogo(club.name));
-  }
-
-  function showError(id, msg) {
-    var el = document.getElementById(id);
-    if (el) el.innerHTML = '<div style="text-align:center;color:#f87;font-size:12px;padding:10px;">' + msg + '</div>';
-  }
-
-  fetch(SCRIPT_URL)
-    .then(r => r.json())
-    .then(data => {
-
-      var links = [];
-      var partners = [];
-
-      if (Array.isArray(data)) {
-        data.slice(1).forEach(row => {
-          if (Array.isArray(row)) {
-            if (row[0] && row[1]) links.push({name:row[0], url:row[1]});
-            if (row[3] && row[4]) partners.push({name:row[3], url:row[4]});
-          }
-        });
-      }
-
-      // LINKS
-      var linksEl = document.getElementById('at-links');
-      linksEl.innerHTML = links.length
-        ? links.map(l => `<a href="${l.url}" target="_blank" style="${lnkStyle}">${l.name}</a>`).join('')
-        : '<div style="text-align:center;color:#7aa8d8;">No links</div>';
-
-      // PARTNERS
-      var partnersEl = document.getElementById('at-partners');
-      if (!partners.length) {
-        partnersEl.innerHTML = '<div style="text-align:center;color:#7aa8d8;">No partners</div>';
-        return;
-      }
-
-      partnersEl.innerHTML = 'Loading logos...';
-
-      Promise.all(partners.map(fetchLogo)).then(logos => {
-        partnersEl.innerHTML = partners.map((p,i) => `
-          <a href="${p.url}" target="_blank" style="${prtStyle}">
-            <span style="text-align:center;">
-              <img src="${logos[i]}" style="width:70px;height:70px;border-radius:12px;margin-bottom:6px;border:2px solid rgba(80,140,255,.3);"/>
-              <br>${p.name}
-            </span>
-          </a>
-        `).join('');
+      .catch(function(){
+        ids.forEach(function(id){var el=document.getElementById(id);if(el)el.src=FALLBACK;});
       });
-
-    })
-    .catch(err => {
-      console.error(err);
-      showError('at-links','Error loading links');
-      showError('at-partners','Error loading partners');
-    });
-
+  }
+  loadPfp('Crayon',            ['pfp-crayon','pfp-crayon2']);
+  loadPfp('dannyboy_guling',   ['pfp-dannyboy']);
+  loadPfp('Lysithea_Vantress', ['pfp-lysithea']);
+  loadPfp('Ale_Miranda',       ['pfp-ale']);
+  loadPfp('AkitoClaw',         ['pfp-akito']);
 })();
 </script>
+
+</body>
+</html>
