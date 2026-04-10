@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess.com Club Sidebar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --surface: #111a2f;
+      --surface-2: #15223f;
+      --text: #e7edf5;
+      --text-muted: #9bb0d3;
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #5fd5ff;
+      --accent-strong: #42c5ff;
+      --accent-soft: rgba(95, 213, 255, 0.16);
+      --green: #5ee6a4;
+      --orange: #ffae57;
+      --danger: #ff6f61;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      --radius: 28px;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at top left, rgba(95, 213, 255, 0.16), transparent 20%),
+        radial-gradient(circle at bottom right, rgba(255, 174, 87, 0.14), transparent 18%),
+        #07101d;
+      color: var(--text);
+    }
+
+    body {
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      gap: 18px;
+    }
+
+    .shell {
+      width: min(1180px, 100%);
+      display: grid;
+      grid-template-columns: minmax(320px, 420px) minmax(320px, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(18, 30, 53, 0.96), rgba(13, 20, 35, 0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+
+    .hero {
+      padding: 28px 28px 20px;
+    }
+
+    .hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .club-chip {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .club-chip strong {
+      font-weight: 700;
+    }
+
+    .hero-title {
+      margin: 0 0 6px;
+      font-size: clamp(2rem, 2.9vw, 3.4rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-subtitle {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      max-width: 41rem;
+    }
+
+    .hero-banner {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: linear-gradient(132deg, rgba(95, 213, 255, 0.1), rgba(255, 174, 87, 0.08));
+      border: 1px solid rgba(95, 213, 255, 0.15);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .hero-banner strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .hero-banner p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .hero-banner .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 68px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #07101d;
+      background: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card {
+      padding: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card + .card {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 14px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .section-title small {
+      color: var(--text-muted);
+      text-transform: none;
+      font-weight: 500;
+      letter-spacing: normal;
+    }
+
+    .fill-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .stat-card h3 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(95, 213, 255, 0.12);
+      color: var(--accent);
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+    }
+
+    .action-link,
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 15px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .action-link:hover,
+    .action-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(95, 213, 255, 0.22);
+    }
+
+    .member-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .member-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .member-search {
+      display: grid;
+      gap: 12px;
+    }
+
+    .input-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    input,
+    select {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: rgba(95, 213, 255, 0.3);
+      box-shadow: 0 0 0 4px rgba(95, 213, 255, 0.12);
+    }
+
+    .members-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .member-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 18px;
+      transition: transform 0.16s ease, border-color 0.16s ease;
+    }
+
+    .member-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(95, 213, 255, 0.16);
+    }
+
+    .member-avatar {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(95, 213, 255, 0.14), rgba(255, 174, 87, 0.12));
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .member-name {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .member-name strong {
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .member-name span {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .member-meta {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: right;
+      min-width: 120px;
+    }
+
+    .member-meta span {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .member-meta .when {
+      color: var(--text);
+    }
+
+    .progress-ring {
+      position: relative;
+      width: 100%;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      margin-top: 16px;
+    }
+
+    .progress-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 12;
+      stroke-linecap: round;
+    }
+
+    .progress-ring .track {
+      stroke: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress-ring .indicator {
+      stroke: var(--accent);
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+      transition: stroke-dashoffset 0.9s ease;
+    }
+
+    .progress-ring-text {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      line-height: 1.05;
+    }
+
+    .progress-ring-text strong {
+      display: block;
+      font-size: 1.5rem;
+    }
+
+    .progress-ring-text span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(16px);
+      background: rgba(13, 20, 35, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .error-panel {
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 111, 97, 0.08);
+      border: 1px solid rgba(255, 111, 97, 0.15);
+      color: #ffbfb9;
+      font-size: 0.95rem;
+    }
+
+    .attribution {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      padding: 16px 22px 22px;
+      line-height: 1.6;
+    }
+
+    .attribution a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 960px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="panel hero" aria-labelledby="club-hero-title">
+      <div class="hero-header">
+        <div>
+          <p class="club-chip">Club sidebar for Chess.com</p>
+          <h1 id="club-hero-title" class="hero-title">Live club insights for any Chess.com club</h1>
+          <p class="hero-subtitle">Enter a Chess.com club slug to fetch the club profile, members, recent joins, quick actions, and a live progress meter for your club growth.</p>
+        </div>
+        <div class="status-pill">Works with Chess.com API</div>
+      </div>
+
+      <div class="hero-banner">
+        <div>
+          <strong>Default club:</strong>
+          <p>Use a Chess.com club slug such as <code>lichess</code>, <code>chess</code>, or your own club name.</p>
+        </div>
+        <div class="badge">Ready</div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          Current club
+          <small id="club-status-text">Loading <span id="club-slug-text">lichess</span>…</small>
+        </div>
+        <div class="input-group">
+          <label for="club-slug">Club slug</label>
+          <input id="club-slug" type="text" value="lichess" placeholder="Enter Chess.com club slug" autocomplete="off" />
+        </div>
+        <div class="action-grid" style="margin-top: 14px;">
+          <button class="action-btn" id="refresh-btn" type="button">Refresh club</button>
+          <button class="action-btn" id="copy-btn" type="button">Copy club link</button>
+          <a class="action-link" id="open-club-btn" href="#" target="_blank" rel="noopener">Open club page</a>
+          <a class="action-link" id="theme-btn" href="#" type="button">Toggle theme</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Quick links</div>
+        <div class="action-grid" style="margin-top: 14px;">
+          <a class="action-link" href="https://www.chess.com/play" target="_blank" rel="noopener">▶ Play</a>
+          <a class="action-link" href="https://www.chess.com/puzzles" target="_blank" rel="noopener">🧩 Puzzles</a>
+          <a class="action-link" href="https://www.chess.com/tournaments" target="_blank" rel="noopener">🏆 Tournaments</a>
+          <a class="action-link" href="https://www.chess.com/clubs/forum/view/all-my-courses" target="_blank" rel="noopener">📚 Courses</a>
+          <a class="action-link" href="https://www.chess.com/stats" target="_blank" rel="noopener">📊 Stats</a>
+          <a class="action-link" href="https://www.chess.com/shop" target="_blank" rel="noopener">🛒 Shop</a>
+          <a class="action-link" href="https://www.chess.com/forum" target="_blank" rel="noopener">💬 Forums</a>
+          <a class="action-link" href="https://www.chess.com/settings" target="_blank" rel="noopener">⚙️ Settings</a>
+        </div>
+      </div>
+
+      <div class="card" id="club-summary-card">
+        <div class="section-title">Club snapshot</div>
+        <div class="fill-row">
+          <div class="stat-card">
+            <p>Members</p>
+            <h3 id="summary-members">—</h3>
+          </div>
+          <div class="stat-card">
+            <p>Average daily rating</p>
+            <h3 id="summary-rating">—</h3>
+          </div>
+          <div class="stat-card">
+            <p>Created</p>
+            <h3 id="summary-created">—</h3>
+          </div>
+          <div class="stat-card">
+            <p>Country</p>
+            <h3 id="summary-country">—</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="progress-card">
+        <div class="section-title">Growth meter</div>
+        <div class="progress-ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="track" cx="60" cy="60" r="48"></circle>
+            <circle class="indicator" cx="60" cy="60" r="48"></circle>
+          </svg>
+          <div class="progress-ring-text">
+            <strong id="progress-value">0%</strong>
+            <span id="progress-label">To 2,000 members</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="error-container" hidden>
+        <div class="error-panel" id="error-message">Could not load club data.</div>
+      </div>
+    </section>
+
+    <section class="panel member-panel" aria-labelledby="members-title">
+      <div class="card" style="padding-bottom: 20px;">
+        <div class="section-title">
+          Member explorer
+          <small>Search, sort, and spotlight active joins</small>
+        </div>
+        <div class="member-search">
+          <div class="input-group">
+            <label for="member-search">Search member</label>
+            <input id="member-search" type="search" placeholder="Filter by username" autocomplete="off" />
+          </div>
+          <div class="input-group">
+            <label for="active-filter">Show</label>
+            <select id="active-filter">
+              <option value="all">All members</option>
+              <option value="weekly">Joined this week</option>
+              <option value="monthly">Joined this month</option>
+              <option value="top">Top joiners</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="top-members-card">
+        <div class="section-title">Top members</div>
+        <div class="members-list" id="top-members-list"></div>
+      </div>
+
+      <div class="card" id="recent-members-card">
+        <div class="section-title">Recent joins</div>
+        <div class="members-list" id="recent-members-list"></div>
+      </div>
+
+      <div class="card attribution">
+        <p><strong>How it works:</strong> This sidebar fetches Chess.com club data with the public API, then renders club stats, a progress gauge, member search, and helpful action links.</p>
+        <p>Open this file in your browser or host it on GitHub Pages to use it as a club dashboard.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Copied club link to clipboard</div>
+
+  <script>
+    const defaultClub = 'lichess';
+    const clubSlugInput = document.getElementById('club-slug');
+    const clubStatusText = document.getElementById('club-status-text');
+    const clubSlugText = document.getElementById('club-slug-text');
+    const summaryMembers = document.getElementById('summary-members');
+    const summaryRating = document.getElementById('summary-rating');
+    const summaryCreated = document.getElementById('summary-created');
+    const summaryCountry = document.getElementById('summary-country');
+    const progressValue = document.getElementById('progress-value');
+    const progressLabel = document.getElementById('progress-label');
+    const progressIndicator = document.querySelector('.progress-ring .indicator');
+    const topMembersList = document.getElementById('top-members-list');
+    const recentMembersList = document.getElementById('recent-members-list');
+    const memberSearch = document.getElementById('member-search');
+    const activeFilter = document.getElementById('active-filter');
+    const openClubBtn = document.getElementById('open-club-btn');
+    const refreshBtn = document.getElementById('refresh-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const themeBtn = document.getElementById('theme-btn');
+    const errorContainer = document.getElementById('error-container');
+    const errorMessage = document.getElementById('error-message');
+    const toast = document.getElementById('toast');
+
+    let currentClub = defaultClub;
+    let cachedMembers = { weekly: [], monthly: [], all_time: [] };
+
+    function getClubFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('club') || localStorage.getItem('chessClubSidebarSlug') || defaultClub;
+    }
+
+    function updateClubLink(href) {
+      openClubBtn.href = href;
+      copyBtn.dataset.link = href;
+    }
+
+    function showError(message) {
+      errorContainer.hidden = false;
+      errorMessage.textContent = message;
+    }
+
+    function hideError() {
+      errorContainer.hidden = true;
+      errorMessage.textContent = '';
+    }
+
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('visible');
+      window.clearTimeout(window.toastTimeout);
+      window.toastTimeout = setTimeout(() => toast.classList.remove('visible'), 2200);
+    }
+
+    function formatDate(epoch) {
+      return new Date(epoch * 1000).toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
+
+    function formatShortDate(epoch) {
+      return new Date(epoch * 1000).toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    function createMemberItem(member) {
+      const wrapper = document.createElement('article');
+      wrapper.className = 'member-item';
+      wrapper.innerHTML = `
+        <div class="member-avatar">${member.username.slice(0, 2).toUpperCase()}</div>
+        <div class="member-name">
+          <strong>${member.username}</strong>
+          <span>${member.type || 'Member'}</span>
+        </div>
+        <div class="member-meta">
+          <span class="when">${formatShortDate(member.joined)}</span>
+          <span>Joined</span>
+        </div>
+      `;
+      return wrapper;
+    }
+
+    function updateProgressMeter(count) {
+      const goal = 2000;
+      const ratio = Math.min(1, count / goal);
+      const percent = Math.round(ratio * 100);
+      const offset = 320 - 320 * ratio;
+      progressIndicator.style.strokeDashoffset = offset;
+      progressValue.textContent = `${percent}%`;
+      progressLabel.textContent = `${count.toLocaleString()} / ${goal.toLocaleString()} members`;
+    }
+
+    function renderMemberLists() {
+      const searchTerm = memberSearch.value.trim().toLowerCase();
+      const filter = activeFilter.value;
+
+      const topList = [...cachedMembers.all_time].slice(0, 8);
+      topMembersList.innerHTML = '';
+      recentMembersList.innerHTML = '';
+
+      const filters = {
+        all: () => true,
+        weekly: member => cachedMembers.weekly.some(item => item.username === member.username),
+        monthly: member => cachedMembers.monthly.some(item => item.username === member.username),
+        top: () => true
+      };
+
+      function matches(member) {
+        return member.username.toLowerCase().includes(searchTerm) && filters[filter](member);
+      }
+
+      const recentItems = filter === 'top' ? topList : cachedMembers[filter] || cachedMembers.weekly;
+      const recentData = recentItems.slice(0, 10).filter(member => matches(member));
+
+      topList.filter(matches).forEach(member => topMembersList.appendChild(createMemberItem(member)));
+      recentData.forEach(member => recentMembersList.appendChild(createMemberItem(member)));
+
+      if (!topMembersList.children.length) {
+        topMembersList.innerHTML = `<div class="member-item" style="grid-template-columns:1fr;justify-items:center;text-align:center;height:120px;color:var(--text-muted);">No members matched your search.</div>`;
+      }
+      if (!recentMembersList.children.length) {
+        recentMembersList.innerHTML = `<div class="member-item" style="grid-template-columns:1fr;justify-items:center;text-align:center;height:120px;color:var(--text-muted);">No recent joins found.</div>`;
+      }
+    }
+
+    function setClubStatus(slug) {
+      currentClub = slug;
+      clubSlugText.textContent = slug;
+      clubStatusText.innerHTML = `Loaded <strong>${slug}</strong> • ${new Date().toLocaleTimeString()}`;
+      clubSlugInput.value = slug;
+      localStorage.setItem('chessClubSidebarSlug', slug);
+      updateClubLink(`https://www.chess.com/club/${slug}`);
+    }
+
+    async function fetchClubProfile(slug) {
+      const clubUrl = `https://api.chess.com/pub/club/${encodeURIComponent(slug)}`;
+      const membersUrl = `https://api.chess.com/pub/club/${encodeURIComponent(slug)}/members`;
+      const [clubResp, membersResp] = await Promise.all([
+        fetch(clubUrl),
+        fetch(membersUrl)
+      ]);
+
+      if (!clubResp.ok) {
+        throw new Error('Club not found or Chess.com API blocked');
+      }
+      if (!membersResp.ok) {
+        throw new Error('Could not load member data');
+      }
+
+      return Promise.all([clubResp.json(), membersResp.json()]);
+    }
+
+    async function loadClub(slug) {
+      hideError();
+      clubStatusText.textContent = 'Loading club data…';
+      clubSlugText.textContent = slug;
+      summaryMembers.textContent = '—';
+      summaryRating.textContent = '—';
+      summaryCreated.textContent = '—';
+      summaryCountry.textContent = '—';
+      progressValue.textContent = '0%';
+      progressLabel.textContent = 'Loading…';
+
+      try {
+        const [club, members] = await fetchClubProfile(slug);
+        setClubStatus(slug);
+
+        summaryMembers.textContent = club.members_count.toLocaleString();
+        summaryRating.textContent = club.average_daily_rating ? club.average_daily_rating.toLocaleString() : '—';
+        summaryCreated.textContent = formatDate(club.created);
+        summaryCountry.textContent = club.country ? club.country.replace('https://api.chess.com/pub/country/', '').toUpperCase() : 'Global';
+
+        cachedMembers = {
+          weekly: (members.weekly || []).slice(0, 15),
+          monthly: (members.monthly || []).slice(0, 18),
+          all_time: (members.all_time || []).slice(0, 40)
+        };
+
+        updateProgressMeter(club.members_count);
+        renderMemberLists();
+      } catch (error) {
+        showError(error.message);
+      }
+    }
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.style.colorScheme = 'dark';
+        document.body.style.background = 'radial-gradient(circle at top left, rgba(95, 213, 255, 0.16), transparent 20%), radial-gradient(circle at bottom right, rgba(255, 174, 87, 0.14), transparent 18%), #07101d';
+        themeBtn.textContent = 'Switch to light';
+        localStorage.setItem('chessClubSidebarTheme', 'dark');
+      } else {
+        document.documentElement.style.colorScheme = 'light';
+        document.body.style.background = 'radial-gradient(circle at top left, rgba(95, 213, 255, 0.16), transparent 20%), radial-gradient(circle at bottom right, rgba(255, 174, 87, 0.14), transparent 18%), #f7f9ff';
+        themeBtn.textContent = 'Switch to dark';
+        localStorage.setItem('chessClubSidebarTheme', 'light');
+      }
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem('chessClubSidebarTheme');
+      applyTheme(saved !== 'light');
+    }
+
+    clubSlugInput.addEventListener('keyup', event => {
+      if (event.key === 'Enter') {
+        loadClub(clubSlugInput.value.trim() || defaultClub);
+      }
+    });
+
+    refreshBtn.addEventListener('click', () => {
+      loadClub(clubSlugInput.value.trim() || defaultClub);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      const url = copyBtn.dataset.link || `https://www.chess.com/club/${clubSlugInput.value.trim() || defaultClub}`;
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast('Club link copied!');
+      } catch {
+        showToast('Copy failed — use manual link');
+      }
+    });
+
+    themeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isDark = document.documentElement.style.colorScheme !== 'dark';
+      applyTheme(isDark);
+    });
+
+    [memberSearch, activeFilter].forEach(input => {
+      input.addEventListener('input', renderMemberLists);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      const initialClub = getClubFromURL();
+      clubSlugInput.value = initialClub;
+      loadClub(initialClub);
+    });
+  </script>
+</body>
+</html>
