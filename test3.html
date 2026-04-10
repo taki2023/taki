@@ -756,7 +756,7 @@ function updateProgress() {
     return `${x},${y}`;
   });
   bgLine.setAttribute("points", points.join(" "));
-  const stopIndex = milestones.findIndex(m => m.dataset.value === "500");
+  const stopIndex = milestones.findIndex(m => m.dataset.value === "1000");
   const activePoints = points.slice(0, stopIndex + 1);
   activeLine.setAttribute("points", activePoints.join(" "));
 }
