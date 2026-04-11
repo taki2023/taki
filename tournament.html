@@ -3,133 +3,195 @@
 <head>
 <meta charset="UTF-8">
 
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
 <style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
   margin:0;
-  background:transparent;
-  font-family:'Segoe UI', sans-serif;
+  background:#1a1a1a;
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
+  font-family:'Nunito',sans-serif;
 }
 
-.container{
-  width:320px;
-  padding:18px;
-  border-radius:16px;
-  background:linear-gradient(145deg,#0d0d0d,#1a1a1a);
-  box-shadow:0 0 18px rgba(255,80,0,0.35);
+/* MAIN CARD (matched sidebar style) */
+.card{
+  width:340px;
+  background:#fff5f0;
+  border:3px solid #e8553a;
+  border-radius:28px;
+  box-shadow:0 10px 35px rgba(220,60,30,.25);
+  overflow:hidden;
+  transition:0.3s;
+}
+
+.card:hover{
+  box-shadow:0 15px 50px rgba(220,60,30,.35);
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  padding:18px 14px;
   text-align:center;
   color:white;
+  position:relative;
+}
+
+.header::after{
+  content:'';
+  position:absolute;
+  bottom:-10px;
+  left:-10%;
+  width:120%;
+  height:20px;
+  background:#fff5f0;
+  border-radius:50%;
 }
 
 .title{
-  font-size:20px;
-  font-weight:800;
-  color:#ff4d00;
-  margin-bottom:4px;
+  font-family:'Fredoka One',cursive;
+  font-size:18px;
+  text-shadow:0 2px 0 rgba(0,0,0,.15);
 }
 
 .subtitle{
   font-size:12px;
-  opacity:0.85;
-  margin-bottom:12px;
+  opacity:0.9;
+  margin-top:3px;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
+/* BODY */
+.content{
+  padding:18px;
+  text-align:center;
+}
+
+/* TIMER BOXES */
 .timer{
   display:flex;
   justify-content:space-between;
-  margin-bottom:10px;
+  margin-top:10px;
+  margin-bottom:12px;
 }
 
 .box{
-  width:65px;
+  width:75px;
   padding:10px 0;
-  border-radius:10px;
-  background:#111;
-  box-shadow:inset 0 0 10px rgba(255,80,0,0.6);
+  border-radius:14px;
+  background:#fff;
+  border:2px solid #f5c5b8;
+  box-shadow:0 4px 0 #e8aa98;
 }
 
 .num{
   font-size:20px;
-  font-weight:bold;
-  color:#ff4d00;
+  font-weight:900;
+  color:#d93020;
 }
 
 .label{
   font-size:10px;
-  opacity:0.7;
+  font-weight:800;
+  color:#9a2010;
+  margin-top:2px;
 }
 
+/* STATUS */
 .status{
-  margin-top:8px;
   font-size:13px;
-  font-weight:bold;
-  color:#ffcc00;
+  font-weight:900;
+  color:#c73520;
+  margin-top:8px;
 }
 
+/* BUTTON */
 .join-btn{
-  margin-top:12px;
+  margin-top:14px;
   display:inline-block;
-  padding:9px 16px;
-  border-radius:10px;
-  background:#ff4d00;
+  padding:10px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#d93020,#e84535);
   color:white;
   text-decoration:none;
-  font-weight:bold;
-  transition:0.2s;
+  font-weight:900;
+  box-shadow:0 5px 0 #8c1a10;
+  transition:0.15s;
 }
 
 .join-btn:hover{
-  background:#ff6a1a;
-  box-shadow:0 0 10px #ff4d00;
+  transform:translateY(-2px);
+  box-shadow:0 7px 0 #8c1a10;
 }
+
+.join-btn:active{
+  transform:translateY(2px);
+  box-shadow:0 3px 0 #8c1a10;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="title">🔥 Hot Chilli 1K Invitational</div>
-  <div class="subtitle">2h MCA • 3+0 • Unrated</div>
+<div class="card">
 
-  <div class="timer">
-    <div class="box">
-      <div id="h" class="num">00</div>
-      <div class="label">HRS</div>
-    </div>
-    <div class="box">
-      <div id="m" class="num">00</div>
-      <div class="label">MIN</div>
-    </div>
-    <div class="box">
-      <div id="s" class="num">00</div>
-      <div class="label">SEC</div>
-    </div>
+  <div class="header">
+    <div class="title">🌶 Hot Chilli Invitational</div>
+    <div class="subtitle">2h MCA • 3+0 • Unrated</div>
   </div>
 
-  <div id="status" class="status">Loading...</div>
+  <div class="content">
 
-  <a class="join-btn" href="https://www.chess.com/play/arena/31121901" target="_blank">
-    Join Tournament
-  </a>
+    <div class="timer">
+      <div class="box">
+        <div id="h" class="num">00</div>
+        <div class="label">HRS</div>
+      </div>
+
+      <div class="box">
+        <div id="m" class="num">00</div>
+        <div class="label">MIN</div>
+      </div>
+
+      <div class="box">
+        <div id="s" class="num">00</div>
+        <div class="label">SEC</div>
+      </div>
+    </div>
+
+    <div id="status" class="status">Loading...</div>
+
+    <a class="join-btn" href="https://www.chess.com/play/arena/31121901" target="_blank">
+      Join Tournament
+    </a>
+
+  </div>
 </div>
 
 <script>
 function getAlgeriaNow(){
   const now = new Date();
   const utc = now.getTime() + (now.getTimezoneOffset()*60000);
-  return new Date(utc + 3600000); // UTC+1
+  return new Date(utc + 3600000);
 }
 
 function updateTimer(){
   const now = getAlgeriaNow();
 
   let target = new Date(now);
-  target.setHours(15,0,0,0); // 3PM Algeria
+  target.setHours(15,0,0,0);
 
-  // if passed → tomorrow (prevents reset issue)
   if(now >= target){
     target.setDate(target.getDate() + 1);
   }
@@ -147,11 +209,11 @@ function updateTimer(){
   const status = document.getElementById("status");
 
   if(diff <= 3600000 && diff > 0){
-    status.innerText = "🟢 Registrations are OPEN";
+    status.innerText = "🟢 Registrations OPEN";
   } else if(diff <= 0){
     status.innerText = "🔴 Tournament Started";
   } else {
-    status.innerText = "⏳ Registrations opening soon";
+    status.innerText = "⏳ Opening soon";
   }
 }
 
