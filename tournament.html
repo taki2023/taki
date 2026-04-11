@@ -6,7 +6,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 
-<title>Tournament Countdown</title>
+<title>Hot Chilli Tournament</title>
 
 <style>
 
@@ -42,7 +42,7 @@ body{
   text-align:center;
 }
 
-/* TOURNAMENT NAME */
+/* NAME */
 .tour-name{
   font-size:13px;
   font-weight:900;
@@ -50,14 +50,21 @@ body{
   margin-bottom:10px;
 }
 
-/* COUNTDOWN BOX */
+/* STATUS */
+.status{
+  font-size:11px;
+  font-weight:900;
+  color:#d93020;
+  margin-bottom:8px;
+}
+
+/* COUNTDOWN */
 .countdown{
   display:flex;
   justify-content:center;
   gap:10px;
 }
 
-/* TIME BLOCK */
 .time-box{
   background:#fff8f5;
   border:2px solid #f5c5b8;
@@ -94,19 +101,21 @@ body{
 
 <div class="card">
 
-<div class="title">🔥 Upcoming Event</div>
+<div class="title">🔥 Swiss Tournament</div>
 
 <div class="inner">
 
 <div class="tour-name">Hot Chilli 1K Invitational 🌶️</div>
 
+<div class="status" id="status">Loading...</div>
+
 <div class="countdown">
   <div class="time-box">
-    <div class="time-value" id="hours">02</div>
+    <div class="time-value" id="hours">00</div>
     <div class="time-label">HRS</div>
   </div>
   <div class="time-box">
-    <div class="time-value" id="minutes">23</div>
+    <div class="time-value" id="minutes">00</div>
     <div class="time-label">MIN</div>
   </div>
   <div class="time-box">
@@ -115,21 +124,54 @@ body{
   </div>
 </div>
 
-<div class="footer">⏳ Get ready to cook ♟️🔥</div>
+<div class="footer">♟️ Be ready to cook 🔥</div>
 
 </div>
 </div>
 
 <script>
 
-// SET COUNTDOWN (2h 23min from now)
-let endTime = new Date().getTime() + (2*60*60*1000) + (23*60*1000);
+// 🟢 SET FIXED TIME → 3PM ALGERIA (UTC+1)
+function getAlgeriaStartTime(){
 
-function updateCountdown(){
+let now = new Date();
+
+// Create today at 15:00 Algeria time (UTC+1)
+let start = new Date(Date.UTC(
+  now.getUTCFullYear(),
+  now.getUTCMonth(),
+  now.getUTCDate(),
+  14, // 15:00 Algeria = 14:00 UTC
+  0,0
+));
+
+// If already passed → use tomorrow
+if(now.getTime() > start.getTime()){
+  start.setUTCDate(start.getUTCDate()+1);
+}
+
+return start.getTime();
+}
+
+let startTime = getAlgeriaStartTime();
+
+function update(){
 
 let now = new Date().getTime();
-let diff = endTime - now;
+let diff = startTime - now;
 
+let status = document.getElementById("status");
+
+// 🔥 REGISTRATION LOGIC
+if(diff <= 3600000 && diff > 0){
+  status.innerHTML = "🟢 Registrations are OPEN";
+}else if(diff > 3600000){
+  status.innerHTML = "🔒 Registrations open soon";
+}else{
+  status.innerHTML = "🚀 Tournament started!";
+}
+
+// ⏱️ COUNTDOWN
 if(diff <= 0){
   document.getElementById("hours").innerHTML = "00";
   document.getElementById("minutes").innerHTML = "00";
@@ -147,8 +189,8 @@ document.getElementById("seconds").innerHTML = String(s).padStart(2,'0');
 
 }
 
-setInterval(updateCountdown,1000);
-updateCountdown();
+setInterval(update,1000);
+update();
 
 </script>
 
