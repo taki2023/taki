@@ -15,26 +15,18 @@
 body{
   margin:0;
   background:#1a1a1a;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
   font-family:'Nunito',sans-serif;
 }
 
-/* MAIN CARD (matched sidebar style) */
+/* FULL WIDTH CARD */
 .card{
-  width:340px;
+  width:100%;
+  max-width:none;
   background:#fff5f0;
   border:3px solid #e8553a;
-  border-radius:28px;
+  border-radius:0;
   box-shadow:0 10px 35px rgba(220,60,30,.25);
   overflow:hidden;
-  transition:0.3s;
-}
-
-.card:hover{
-  box-shadow:0 15px 50px rgba(220,60,30,.35);
 }
 
 /* HEADER */
@@ -60,7 +52,6 @@ body{
 .title{
   font-family:'Fredoka One',cursive;
   font-size:18px;
-  text-shadow:0 2px 0 rgba(0,0,0,.15);
 }
 
 .subtitle{
@@ -77,17 +68,17 @@ body{
   text-align:center;
 }
 
-/* TIMER BOXES */
+/* TIMER */
 .timer{
   display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-  margin-bottom:12px;
+  justify-content:center;
+  gap:12px;
+  margin:10px 0 12px;
 }
 
 .box{
-  width:75px;
-  padding:10px 0;
+  width:90px;
+  padding:12px 0;
   border-radius:14px;
   background:#fff;
   border:2px solid #f5c5b8;
@@ -95,7 +86,7 @@ body{
 }
 
 .num{
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
   color:#d93020;
 }
@@ -104,15 +95,27 @@ body{
   font-size:10px;
   font-weight:800;
   color:#9a2010;
-  margin-top:2px;
 }
 
 /* STATUS */
 .status{
-  font-size:13px;
+  font-size:14px;
   font-weight:900;
   color:#c73520;
-  margin-top:8px;
+  margin-top:10px;
+}
+
+/* WINNER MESSAGE */
+.winner{
+  margin-top:10px;
+  font-size:14px;
+  font-weight:900;
+  color:#1faa4a;
+  display:none;
+  padding:10px;
+  border-radius:12px;
+  background:#eaffea;
+  border:2px solid #1faa4a;
 }
 
 /* BUTTON */
@@ -126,7 +129,6 @@ body{
   text-decoration:none;
   font-weight:900;
   box-shadow:0 5px 0 #8c1a10;
-  transition:0.15s;
 }
 
 .join-btn:hover{
@@ -154,23 +156,16 @@ body{
   <div class="content">
 
     <div class="timer">
-      <div class="box">
-        <div id="h" class="num">00</div>
-        <div class="label">HRS</div>
-      </div>
-
-      <div class="box">
-        <div id="m" class="num">00</div>
-        <div class="label">MIN</div>
-      </div>
-
-      <div class="box">
-        <div id="s" class="num">00</div>
-        <div class="label">SEC</div>
-      </div>
+      <div class="box"><div id="h" class="num">00</div><div class="label">HRS</div></div>
+      <div class="box"><div id="m" class="num">00</div><div class="label">MIN</div></div>
+      <div class="box"><div id="s" class="num">00</div><div class="label">SEC</div></div>
     </div>
 
     <div id="status" class="status">Loading...</div>
+
+    <div id="winner" class="winner">
+      🏆 Congratulations to all winners! GG WP 🔥
+    </div>
 
     <a class="join-btn" href="https://www.chess.com/play/arena/31121901" target="_blank">
       Join Tournament
@@ -184,6 +179,16 @@ function getAlgeriaNow(){
   const now = new Date();
   const utc = now.getTime() + (now.getTimezoneOffset()*60000);
   return new Date(utc + 3600000);
+}
+
+const START_HOURS = 2 * 3600000; // 2 hours
+
+// store first load time (persistent session)
+let startTime = localStorage.getItem("tour_start");
+
+if(!startTime){
+  startTime = Date.now();
+  localStorage.setItem("tour_start", startTime);
 }
 
 function updateTimer(){
@@ -207,13 +212,21 @@ function updateTimer(){
   document.getElementById("s").innerText = String(s).padStart(2,'0');
 
   const status = document.getElementById("status");
+  const winner = document.getElementById("winner");
 
-  if(diff <= 3600000 && diff > 0){
-    status.innerText = "🟢 Registrations OPEN";
-  } else if(diff <= 0){
-    status.innerText = "🔴 Tournament Started";
-  } else {
+  const elapsed = Date.now() - parseInt(startTime);
+
+  if(diff > 0){
     status.innerText = "⏳ Starting soon";
+    winner.style.display = "none";
+  }
+  else if(elapsed < START_HOURS){
+    status.innerText = "🔴 LIVE Tournament";
+    winner.style.display = "none";
+  }
+  else{
+    status.innerText = "🏁 Tournament Finished";
+    winner.style.display = "block";
   }
 }
 
