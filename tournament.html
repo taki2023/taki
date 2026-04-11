@@ -1,197 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
-
-<title>Hot Chilli Tournament</title>
+<title>Hot Chilli 1K Invitational</title>
 
 <style>
-
 body{
   margin:0;
-  font-family:'Nunito',sans-serif;
   background:transparent;
-}
-
-/* CARD */
-.card{
-  width:100%;
-  background:#fff;
-  border-radius:20px;
-  border:2px solid #f5c5b8;
-  box-shadow:0 4px 0 #e8aa98;
-  overflow:hidden;
-}
-
-/* HEADER */
-.title{
-  text-align:center;
-  font-family:'Fredoka One',cursive;
-  font-size:16px;
-  color:#fff;
-  padding:12px;
-  background:linear-gradient(135deg,#d93020,#e85535,#ef6640);
-}
-
-/* INNER */
-.inner{
-  padding:14px;
-  text-align:center;
-}
-
-/* NAME */
-.tour-name{
-  font-size:13px;
-  font-weight:900;
-  color:#c73520;
-  margin-bottom:10px;
-}
-
-/* STATUS */
-.status{
-  font-size:11px;
-  font-weight:900;
-  color:#d93020;
-  margin-bottom:8px;
-}
-
-/* COUNTDOWN */
-.countdown{
+  font-family: 'Segoe UI', sans-serif;
   display:flex;
   justify-content:center;
-  gap:10px;
+  align-items:center;
+  height:100vh;
 }
 
-.time-box{
-  background:#fff8f5;
-  border:2px solid #f5c5b8;
-  border-radius:14px;
-  padding:10px 8px;
-  min-width:60px;
-  box-shadow:0 3px 0 #e8aa98;
+.container{
+  width:320px;
+  padding:20px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#0d0d0d,#1a1a1a);
+  box-shadow:0 0 20px rgba(255,80,0,0.4);
+  text-align:center;
+  color:white;
 }
 
-.time-value{
-  font-size:18px;
-  font-weight:900;
-  color:#d93020;
+.title{
+  font-size:22px;
+  font-weight:800;
+  color:#ff4d00;
+  margin-bottom:5px;
 }
 
-.time-label{
+.subtitle{
+  font-size:13px;
+  opacity:0.8;
+  margin-bottom:15px;
+}
+
+.timer{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.box{
+  width:60px;
+  padding:10px 0;
+  border-radius:10px;
+  background:#111;
+  box-shadow:inset 0 0 8px rgba(255,80,0,0.5);
+}
+
+.num{
+  font-size:20px;
+  font-weight:bold;
+  color:#ff4d00;
+}
+
+.label{
   font-size:10px;
-  font-weight:800;
-  color:#9a2010;
+  opacity:0.7;
 }
 
-/* FOOTER */
-.footer{
-  margin-top:12px;
-  font-size:11px;
-  font-weight:800;
-  color:#e8553a;
+.status{
+  margin-top:10px;
+  font-size:14px;
+  font-weight:bold;
+  color:#ffcc00;
 }
 
+.join-btn{
+  margin-top:15px;
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:10px;
+  background:#ff4d00;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+.join-btn:hover{
+  background:#ff6a1a;
+  box-shadow:0 0 10px #ff4d00;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
+  <div class="title">🔥 Hot Chilli 1K Invitational</div>
+  <div class="subtitle">2h MCA • 3+0 • Unrated</div>
 
-<div class="title">🔥 Swiss Tournament</div>
-
-<div class="inner">
-
-<div class="tour-name">Hot Chilli 1K Invitational 🌶️</div>
-
-<div class="status" id="status">Loading...</div>
-
-<div class="countdown">
-  <div class="time-box">
-    <div class="time-value" id="hours">00</div>
-    <div class="time-label">HRS</div>
+  <div class="timer">
+    <div class="box">
+      <div id="hours" class="num">00</div>
+      <div class="label">HRS</div>
+    </div>
+    <div class="box">
+      <div id="minutes" class="num">00</div>
+      <div class="label">MIN</div>
+    </div>
+    <div class="box">
+      <div id="seconds" class="num">00</div>
+      <div class="label">SEC</div>
+    </div>
   </div>
-  <div class="time-box">
-    <div class="time-value" id="minutes">00</div>
-    <div class="time-label">MIN</div>
-  </div>
-  <div class="time-box">
-    <div class="time-value" id="seconds">00</div>
-    <div class="time-label">SEC</div>
-  </div>
-</div>
 
-<div class="footer">♟️ Be ready to cook 🔥</div>
+  <div id="status" class="status">Loading...</div>
 
-</div>
+  <a class="join-btn" href="https://www.chess.com/play/arena/31121901" target="_blank">
+    Join Tournament
+  </a>
 </div>
 
 <script>
+function updateTimer(){
+  const now = new Date();
 
-// 🟢 SET FIXED TIME → 3PM ALGERIA (UTC+1)
-function getAlgeriaStartTime(){
+  // Algeria time = UTC+1
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const algeriaNow = new Date(utc + (1 * 60 * 60 * 1000));
 
-let now = new Date();
+  // Set target to TODAY 3:00 PM Algeria time
+  let target = new Date(algeriaNow);
+  target.setHours(15,0,0,0);
 
-// Create today at 15:00 Algeria time (UTC+1)
-let start = new Date(Date.UTC(
-  now.getUTCFullYear(),
-  now.getUTCMonth(),
-  now.getUTCDate(),
-  14, // 15:00 Algeria = 14:00 UTC
-  0,0
-));
+  // If already passed, move to next day
+  if(algeriaNow > target){
+    target.setDate(target.getDate() + 1);
+  }
 
-// If already passed → use tomorrow
-if(now.getTime() > start.getTime()){
-  start.setUTCDate(start.getUTCDate()+1);
+  const diff = target - algeriaNow;
+
+  const hours = Math.floor(diff / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+  document.getElementById("hours").innerText = String(hours).padStart(2,'0');
+  document.getElementById("minutes").innerText = String(minutes).padStart(2,'0');
+  document.getElementById("seconds").innerText = String(seconds).padStart(2,'0');
+
+  // Registration logic
+  const status = document.getElementById("status");
+
+  if(diff <= 3600000 && diff > 0){
+    status.innerText = "🟢 Registrations are OPEN";
+  } else if(diff <= 0){
+    status.innerText = "🔴 Tournament Started";
+  } else {
+    status.innerText = "⏳ Registrations opening soon";
+  }
 }
 
-return start.getTime();
-}
-
-let startTime = getAlgeriaStartTime();
-
-function update(){
-
-let now = new Date().getTime();
-let diff = startTime - now;
-
-let status = document.getElementById("status");
-
-// 🔥 REGISTRATION LOGIC
-if(diff <= 3600000 && diff > 0){
-  status.innerHTML = "🟢 Registrations are OPEN";
-}else if(diff > 3600000){
-  status.innerHTML = "🔒 Registrations open soon";
-}else{
-  status.innerHTML = "🚀 Tournament started!";
-}
-
-// ⏱️ COUNTDOWN
-if(diff <= 0){
-  document.getElementById("hours").innerHTML = "00";
-  document.getElementById("minutes").innerHTML = "00";
-  document.getElementById("seconds").innerHTML = "00";
-  return;
-}
-
-let h = Math.floor(diff / (1000*60*60));
-let m = Math.floor((diff % (1000*60*60)) / (1000*60));
-let s = Math.floor((diff % (1000*60)) / 1000);
-
-document.getElementById("hours").innerHTML = String(h).padStart(2,'0');
-document.getElementById("minutes").innerHTML = String(m).padStart(2,'0');
-document.getElementById("seconds").innerHTML = String(s).padStart(2,'0');
-
-}
-
-setInterval(update,1000);
-update();
-
+setInterval(updateTimer,1000);
+updateTimer();
 </script>
 
 </body>
