@@ -59,9 +59,9 @@ html,body{width:100%;background:#0c0400;}
 .crack-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c-fire),transparent);opacity:.6;}
 .crack-diamond{width:10px;height:10px;background:linear-gradient(135deg,var(--c-flame),var(--c-spark));transform:rotate(45deg);box-shadow:0 0 10px rgba(255,180,80,.5);}
 
-/* HERO GIF SECTION */
+/* HERO GIF SECTION — 85% width */
 .hero-gif-section{position:relative;z-index:2;display:flex;justify-content:center;padding:0 14px 0;}
-.hero-gif-section img{width:100%;border-radius:6px;display:block;border:1px solid rgba(255,90,0,.25);box-shadow:0 4px 24px rgba(0,0,0,.5);}
+.hero-gif-section img{width:85%;max-width:85%;border-radius:6px;display:block;border:1px solid rgba(255,90,0,.25);box-shadow:0 4px 24px rgba(0,0,0,.5);}
 
 /* MAIN */
 .main{position:relative;z-index:2;padding:0 14px;}
@@ -181,7 +181,7 @@ html,body{width:100%;background:#0c0400;}
 .pl-n{font-size:9px;font-weight:700;color:var(--c-flame);min-width:16px;flex-shrink:0;}
 .pl-ic{font-size:9px;flex-shrink:0;}
 .pl-nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
-.pl-x{font-size:10px;color:rgba(255,80,0,.3);cursor:pointer;padding:3px 5px;border-radius:3px;transition:all .12s;flex-shrink:0;line-height:1;}
+.pl-x{font-size:10px;color:rgba(255,80,0,.3);cursor:pointer;padding:3px 5px;border-radius:3px;transition:all .12px;flex-shrink:0;line-height:1;}
 .pl-x:hover{color:var(--c-fire);background:rgba(255,80,0,.1);}
 .pl-empty{text-align:center;padding:16px 0;font-size:11px;font-weight:600;color:rgba(255,160,60,.4);font-family:'Barlow Condensed',sans-serif;}
 .pl-empty span{display:block;font-size:20px;margin-bottom:4px;}
@@ -249,11 +249,11 @@ html,body{width:100%;background:#0c0400;}
   background:rgba(255,80,0,.14);border-radius:2px;
 }
 
-/* FIXED TOOLTIP — lives on body, escapes all overflow */
-#calFixedTip{
+/* CALENDAR TOOLTIP — stays inside calendar bounds */
+.cal-tip{
   display:none;
-  position:fixed;
-  z-index:99999;
+  position:absolute;
+  z-index:9999;
   background:rgba(12,4,0,.97);
   border:1px solid var(--border-hot);
   border-radius:6px;
@@ -262,14 +262,25 @@ html,body{width:100%;background:#0c0400;}
   max-width:200px;
   box-shadow:0 8px 30px rgba(0,0,0,.8),0 0 0 1px rgba(255,120,30,.08);
   pointer-events:none;
-  transform:translate(-50%, calc(-100% - 10px));
+  white-space:normal;
 }
-#calFixedTip::after{
+.cal-tip.visible{display:block;}
+.cal-tip::after{
   content:'';
   position:absolute;
-  top:100%;left:50%;transform:translateX(-50%);
   border:6px solid transparent;
+}
+.cal-tip.arrow-down::after{
+  top:100%;left:50%;transform:translateX(-50%);
   border-top-color:var(--border-hot);
+}
+.cal-tip.arrow-up::after{
+  bottom:100%;left:50%;transform:translateX(-50%);
+  border-bottom-color:var(--border-hot);
+}
+.cal-tip.arrow-right::after{
+  top:50%;left:100%;transform:translateY(-50%);
+  border-left-color:var(--border-hot);
 }
 .cal-tip-title{
   font-family:'Barlow Condensed',sans-serif;
@@ -287,17 +298,14 @@ html,body{width:100%;background:#0c0400;}
   margin-top:3px;
 }
 .cal-tip-ev::before{content:'🔥';font-size:9px;flex-shrink:0;}
-/* remove old inline tooltip */ 
-.cal-tooltip{display:none !important;}
-.cal-grid td.has-event:hover .cal-tooltip{display:none !important;}
 
 .cal-legend{padding:12px 16px 14px;border-top:1px solid var(--border-mid);background:rgba(20,6,0,.4);display:flex;flex-direction:column;gap:6px;}
 .cal-legend-title{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--c-spark);margin-bottom:6px;}
 .legend-item{display:flex;align-items:flex-start;gap:9px;font-size:12px;font-weight:700;color:var(--text-main);font-family:'Barlow Condensed',sans-serif;line-height:1.4;}
 .legend-dot{width:7px;height:7px;border-radius:2px;background:linear-gradient(135deg,var(--c-fire),var(--c-spark));flex-shrink:0;margin-top:4px;box-shadow:0 0 6px rgba(255,100,0,.6);}
 
-/* BOOKS — preserve aspect ratio */
-.books-grid{display:flex;gap:10px;}
+/* BOOKS — 85% width, centered */
+.books-grid{display:flex;gap:10px;width:85%;margin:0 auto;}
 .book-card{flex:1;border-radius:6px;overflow:hidden;border:1px solid var(--border-dim);transition:all .18s;text-decoration:none;display:block;position:relative;}
 .book-card:hover{border-color:var(--border-hot);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
 .book-card img{width:100%;display:block;height:auto;object-fit:contain;filter:brightness(.85);}
@@ -309,7 +317,6 @@ html,body{width:100%;background:#0c0400;}
 .ms-row{position:relative;height:130px;margin:4px 0;}
 .ms-svg{width:100%;height:100%;}
 .ms-item{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:default;}
-/* Milestone badges — slightly bigger text */
 .ms-badge{padding:3px 10px;border-radius:2px;background:linear-gradient(135deg,var(--c-lava),var(--c-fire));font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:1.5px;color:#fff;box-shadow:0 0 10px rgba(255,80,0,.3);border:1px solid rgba(255,140,48,.3);}
 .ms-badge.locked{background:rgba(30,12,0,.8);color:rgba(255,160,70,.5);border-color:rgba(255,80,0,.12);box-shadow:none;}
 .ms-badge.current{background:linear-gradient(135deg,var(--c-blaze),var(--c-spark));color:#000;box-shadow:0 0 14px rgba(255,180,0,.5);}
@@ -361,7 +368,7 @@ html,body{width:100%;background:#0c0400;}
   </div>
 </div>
 
-<!-- HERO GIF (replaces welcome banner) -->
+<!-- HERO GIF (85% width, centered) -->
 <div class="hero-gif-section">
   <img src="https://images.chesscomfiles.com/uploads/v1/user/309756901.37e043e0.160x160o.9b7cddb71a19@2x.webp" alt="TIF Banner">
 </div>
@@ -399,7 +406,7 @@ html,body{width:100%;background:#0c0400;}
     <div class="sec-hd-icon">📅</div>
   </div>
 
-  <div class="cal-wrap">
+  <div class="cal-wrap" id="calWrap">
     <div class="cal-header">
       <div class="cal-month" id="calMonthLabel">APRIL 2026</div>
       <div class="cal-navs">
@@ -411,6 +418,8 @@ html,body{width:100%;background:#0c0400;}
       <thead><tr><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th><th>SUN</th></tr></thead>
       <tbody id="calBody"></tbody>
     </table>
+    <!-- Tooltip lives inside cal-wrap so it stays clipped to it -->
+    <div class="cal-tip" id="calTip"></div>
     <div class="cal-legend">
       <div class="cal-legend-title">Recurring Schedule</div>
       <div id="legendList"></div>
@@ -450,7 +459,7 @@ html,body{width:100%;background:#0c0400;}
 
   <div class="sep"><div class="sep-l"></div><div class="sep-gem"></div><div class="sep-r"></div></div>
 
-  <!-- FREE BOOKS -->
+  <!-- FREE BOOKS — 85% width centered -->
   <div class="sec-hd">
     <div class="sec-hd-bar"></div>
     <div class="sec-hd-text">
@@ -587,7 +596,6 @@ html,body{width:100%;background:#0c0400;}
 </div>
 
 <audio id="audio"></audio>
-<div id="calFixedTip"></div>
 
 <script>
 /* EMBERS */
@@ -684,23 +692,58 @@ html,body{width:100%;background:#0c0400;}
   }
   document.getElementById('calPrev').onclick=()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}renderCal();};
   document.getElementById('calNext').onclick=()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}renderCal();};
+
   window.addEventListener('DOMContentLoaded',()=>{
     renderCal();
-    const tip=document.getElementById('calFixedTip');
-    document.getElementById('calGrid').addEventListener('mouseover',e=>{
+    const tip=document.getElementById('calTip');
+    const calWrap=document.getElementById('calWrap');
+    const grid=document.getElementById('calGrid');
+
+    grid.addEventListener('mouseover',e=>{
       const td=e.target.closest('td.has-event');
-      if(!td)return;
+      if(!td){tip.classList.remove('visible');return;}
       const evs=td.dataset.evs.split('||');
       const day=td.dataset.day;
       tip.innerHTML=`<div class="cal-tip-title">${day} ${MONTHS[viewMonth].slice(0,3)}</div>${evs.map(e=>`<div class="cal-tip-ev">${e}</div>`).join('')}`;
-      tip.style.display='block';
+
+      // Position tooltip inside cal-wrap bounds
+      const wrapRect=calWrap.getBoundingClientRect();
+      const tdRect=td.getBoundingClientRect();
+      const tipW=180, tipH=90;
+
+      // Relative position of td center within calWrap
+      const tdCenterX=tdRect.left+tdRect.width/2-wrapRect.left;
+      const tdTop=tdRect.top-wrapRect.top;
+      const tdBottom=tdRect.bottom-wrapRect.top;
+
+      let left=tdCenterX-tipW/2;
+      let top=tdTop-tipH-10;
+      let arrowClass='arrow-down';
+
+      // Clamp horizontally
+      if(left<6)left=6;
+      if(left+tipW>wrapRect.width-6)left=wrapRect.width-tipW-6;
+
+      // If tooltip would go above the wrap top, flip below
+      if(top<6){
+        top=tdBottom+10;
+        arrowClass='arrow-up';
+      }
+
+      tip.style.left=left+'px';
+      tip.style.top=top+'px';
+      tip.style.width=tipW+'px';
+      tip.className='cal-tip visible '+arrowClass;
     });
-    document.getElementById('calGrid').addEventListener('mousemove',e=>{
-      tip.style.left=e.clientX+'px';
-      tip.style.top=e.clientY+'px';
+
+    grid.addEventListener('mouseout',e=>{
+      if(!e.relatedTarget||!e.relatedTarget.closest('td.has-event')){
+        tip.classList.remove('visible');
+      }
     });
-    document.getElementById('calGrid').addEventListener('mouseout',e=>{
-      if(!e.target.closest('td.has-event'))tip.style.display='none';
+
+    calWrap.addEventListener('mouseleave',()=>{
+      tip.classList.remove('visible');
     });
   });
 })();
