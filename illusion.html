@@ -27,7 +27,7 @@ html,body{width:100%;background:#0c0400;}
 /* HERO */
 .hero{position:relative;z-index:2;padding:0;overflow:hidden;background:linear-gradient(180deg,#000 0%,#0c0400 100%);}
 .hero-inner{position:relative;z-index:3;text-align:center;padding:28px 20px 24px;}
-.rune-ring{display:inline-block;width:86px;height:86px;position:relative;margin-bottom:14px;}
+.rune-ring{display:inline-block;width:70px;height:70px;position:relative;margin-bottom:14px;}
 .rune-ring svg{position:absolute;inset:0;animation:spinRing 20s linear infinite;}
 .rune-ring svg.inner{inset:12px;animation:spinRing 14s linear infinite reverse;}
 @keyframes spinRing{to{transform:rotate(360deg);}}
@@ -35,9 +35,9 @@ html,body{width:100%;background:#0c0400;}
 .hero-pulse{position:absolute;top:50%;left:50%;width:120px;height:120px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,80,0,.18) 0%,transparent 70%);animation:pulseHero 2.4s ease-in-out infinite;pointer-events:none;}
 @keyframes pulseHero{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7;}50%{transform:translate(-50%,-50%) scale(1.25);opacity:.25;}}
 .hero-tagline{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
-.hero-name{font-family:'Bebas Neue',cursive;font-size:42px;line-height:.95;color:var(--c-white);letter-spacing:2px;text-shadow:0 0 30px rgba(255,100,0,.5),0 2px 0 rgba(0,0,0,.8);}
-.hero-name span{display:block;font-size:22px;letter-spacing:6px;background:linear-gradient(90deg,var(--c-blaze),var(--c-spark),var(--c-purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-title-row{display:flex;align-items:center;justify-content:center;gap:12px;}
+.hero-name{font-family:'Bebas Neue',cursive;font-size:34px;line-height:.95;color:var(--c-white);letter-spacing:2px;text-shadow:0 0 30px rgba(255,100,0,.5),0 2px 0 rgba(0,0,0,.8);}
+.hero-name span{display:block;font-size:18px;letter-spacing:5px;background:linear-gradient(90deg,var(--c-blaze),var(--c-spark),var(--c-purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-title-row{display:flex;align-items:center;justify-content:center;gap:8px;}
 .flame-svg{flex-shrink:0;}
 .flame-svg.left{transform:scaleX(-1);}
 
@@ -46,13 +46,13 @@ html,body{width:100%;background:#0c0400;}
 @keyframes sepTravelR{0%{right:-30%;opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{right:110%;opacity:0;}}
 @keyframes sepDiamondSpin{to{transform:translate(-50%,-50%) rotate(360deg);}}
 @keyframes sepDiamondPulse{0%,100%{box-shadow:0 0 6px 1px rgba(255,100,0,.3);}50%{box-shadow:0 0 16px 4px rgba(255,140,40,.7);}}
-.sep{margin:22px 0;position:relative;height:14px;display:flex;align-items:center;}
+.sep{margin:22px 0;position:relative;height:18px;display:flex;align-items:center;}
 .sep-l{flex:1;height:1px;position:relative;overflow:hidden;background:linear-gradient(90deg,transparent 0%,rgba(40,110,255,.3) 40%,rgba(100,160,255,.65) 100%);}
 .sep-r{flex:1;height:1px;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(255,90,0,.65) 0%,rgba(255,60,0,.3) 60%,transparent 100%);}
 .sep-l::after{content:'';position:absolute;top:-2px;left:0;width:35%;height:5px;border-radius:3px;background:linear-gradient(90deg,transparent,rgba(140,200,255,.95),transparent);animation:sepTravelL 2.6s ease-in-out infinite;}
 .sep-r::before{content:'';position:absolute;top:-2px;right:0;width:35%;height:5px;border-radius:3px;background:linear-gradient(90deg,transparent,rgba(255,130,50,.95),transparent);animation:sepTravelR 2.6s ease-in-out infinite;}
-.sep-gem{width:14px;height:14px;flex-shrink:0;position:relative;}
-.sep-gem::before{content:'';position:absolute;top:50%;left:50%;width:11px;height:11px;transform:translate(-50%,-50%) rotate(0deg);background:linear-gradient(135deg,#5ab4ff,#fffaf0,#ff6010);border-radius:1px;animation:sepDiamondSpin 5s linear infinite,sepDiamondPulse 2s ease-in-out infinite;}
+.sep-gem{width:18px;height:18px;flex-shrink:0;position:relative;}
+.sep-gem::before{content:'';position:absolute;top:50%;left:50%;width:14px;height:14px;transform:translate(-50%,-50%) rotate(0deg);background:linear-gradient(135deg,#5ab4ff,#fffaf0,#ff6010);border-radius:1px;animation:sepDiamondSpin 5s linear infinite,sepDiamondPulse 2s ease-in-out infinite;}
 
 /* CRACK / HERO DIVIDER */
 .crack-div{display:flex;align-items:center;gap:8px;margin:14px 0 0;padding:0 16px;}
@@ -188,6 +188,10 @@ html,body{width:100%;background:#0c0400;}
 
 /* CALENDAR — tighter rows */
 .cal-wrap{background:var(--bg1);border:1px solid var(--border-mid);border-radius:8px;overflow:visible;position:relative;}
+/* Lock table height so switching months never resizes the calendar */
+#calGrid tbody{display:block;height:360px;overflow:hidden;}
+#calGrid thead,#calGrid tbody tr{display:table;width:100%;table-layout:fixed;}
+#calGrid tbody tr{height:60px;}
 .cal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:linear-gradient(90deg,rgba(220,60,0,.35),rgba(120,30,0,.2),rgba(30,8,0,.4));border-bottom:1px solid var(--border-mid);border-radius:8px 8px 0 0;}
 .cal-month{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:3px;color:var(--c-glow);text-shadow:0 0 16px rgba(255,150,0,.5);}
 .cal-navs{display:flex;gap:6px;}
@@ -205,7 +209,7 @@ html,body{width:100%;background:#0c0400;}
   background:rgba(30,10,0,.5);
 }
 .cal-grid td{
-  height:66px;
+  height:60px;
   padding:5px 2px 3px;
   text-align:center;
   font-size:17px;font-weight:700;
@@ -347,7 +351,7 @@ html,body{width:100%;background:#0c0400;}
     <div class="hero-tagline">Chess.com · Est. Jan 2025</div>
     <div class="hero-title-row">
       <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <div class="hero-pulse" style="width:90px;height:90px;background:radial-gradient(circle,rgba(0,100,255,.18) 0%,transparent 70%);animation:pulseHero 2.4s ease-in-out infinite;"></div>
+        <div class="hero-pulse" style="width:75px;height:75px;background:radial-gradient(circle,rgba(0,100,255,.18) 0%,transparent 70%);animation:pulseHero 2.4s ease-in-out infinite;"></div>
         <div class="rune-ring">
           <svg viewBox="0 0 86 86" fill="none"><circle cx="43" cy="43" r="40" stroke="rgba(0,120,255,.45)" stroke-width="1.5" stroke-dasharray="4 6"/><circle cx="43" cy="43" r="40" stroke="rgba(80,180,255,.2)" stroke-width="3" stroke-dasharray="1 25"/></svg>
           <svg class="inner" viewBox="0 0 62 62" fill="none"><circle cx="31" cy="31" r="28" stroke="rgba(0,140,255,.5)" stroke-width="1" stroke-dasharray="8 4"/><line x1="31" y1="3" x2="31" y2="10" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/><line x1="31" y1="52" x2="31" y2="59" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/><line x1="3" y1="31" x2="10" y2="31" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/><line x1="52" y1="31" x2="59" y2="31" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/></svg>
@@ -356,7 +360,7 @@ html,body{width:100%;background:#0c0400;}
       </div>
       <div class="hero-name">The Illusion<span>Fireballs</span></div>
       <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <div class="hero-pulse" style="width:90px;height:90px;"></div>
+        <div class="hero-pulse" style="width:75px;height:75px;"></div>
         <div class="rune-ring">
           <svg viewBox="0 0 86 86" fill="none"><circle cx="43" cy="43" r="40" stroke="rgba(255,100,0,.35)" stroke-width="1.5" stroke-dasharray="4 6"/><circle cx="43" cy="43" r="40" stroke="rgba(255,180,80,.15)" stroke-width="3" stroke-dasharray="1 25"/></svg>
           <svg class="inner" viewBox="0 0 62 62" fill="none"><circle cx="31" cy="31" r="28" stroke="rgba(255,80,0,.4)" stroke-width="1" stroke-dasharray="8 4"/><line x1="31" y1="3" x2="31" y2="10" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/><line x1="31" y1="52" x2="31" y2="59" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/><line x1="3" y1="31" x2="10" y2="31" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/><line x1="52" y1="31" x2="59" y2="31" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/></svg>
