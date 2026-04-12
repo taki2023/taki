@@ -12,10 +12,9 @@ html,body{width:100%;background:#0c0400;}
   --ember:rgba(255,120,10,.08);--c-deep:#3a0e00;--c-lava:#7c2600;--c-fire:#d44000;
   --c-blaze:#ff6010;--c-flame:#ff8c30;--c-spark:#ffb860;--c-glow:#ffd090;--c-white:#fff5e8;
   --c-purple:#9b00ff;--c-purple2:#c060ff;
-  /* ── READABILITY UPGRADES ── */
-  --text-muted:rgba(255,200,110,.75);   /* was .65 → brighter */
-  --text-dim:rgba(255,215,145,.90);     /* was .82 → brighter */
-  --text-main:rgba(255,240,200,.97);    /* was .96 → punchier */
+  --text-muted:rgba(255,200,110,.75);
+  --text-dim:rgba(255,215,145,.90);
+  --text-main:rgba(255,240,200,.97);
   --text-bright:#fff8f0;
 }
 .wrap{font-family:'Barlow Condensed',sans-serif;width:100%;background:var(--bg0);position:relative;overflow:hidden;min-height:100vh;}
@@ -60,20 +59,14 @@ html,body{width:100%;background:#0c0400;}
 .crack-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c-fire),transparent);opacity:.6;}
 .crack-diamond{width:10px;height:10px;background:linear-gradient(135deg,var(--c-flame),var(--c-spark));transform:rotate(45deg);box-shadow:0 0 10px rgba(255,180,80,.5);}
 
-/* WELCOME BANNER */
-.welcome-frame{position:relative;z-index:2;margin:14px 14px 0;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,90,0,.3),0 0 0 3px rgba(255,90,0,.08),inset 0 0 40px rgba(0,0,0,.5),0 8px 32px rgba(0,0,0,.7);}
-.welcome-frame::before,.welcome-frame::after{content:'';position:absolute;width:22px;height:22px;border:2px solid var(--c-blaze);z-index:4;pointer-events:none;}
-.welcome-frame::before{top:0;left:0;border-right:none;border-bottom:none;}
-.welcome-frame::after{bottom:0;right:0;border-left:none;border-top:none;}
-.welcome-frame img{width:100%;display:block;filter:brightness(.9);}
-.welcome-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,.92) 0%,rgba(12,4,0,.6) 55%,transparent 100%);padding:14px 14px 12px;}
-.welcome-info-row{display:flex;align-items:center;gap:10px;}
-.welcome-side-gif{width:46px;height:46px;border-radius:6px;border:1px solid rgba(255,120,20,.45);object-fit:cover;flex-shrink:0;box-shadow:0 0 12px rgba(255,80,0,.35);}
-.welcome-title{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:2px;color:var(--c-white);text-shadow:0 0 12px rgba(255,100,0,.6);}
-.welcome-sub{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--c-spark);opacity:.85;margin-top:2px;}
+/* HERO GIF SECTION */
+.hero-gif-section{position:relative;z-index:2;display:flex;justify-content:center;padding:0 14px 0;}
+.hero-gif-section img{width:100%;border-radius:6px;display:block;border:1px solid rgba(255,90,0,.25);box-shadow:0 4px 24px rgba(0,0,0,.5);}
+
+/* MAIN */
+.main{position:relative;z-index:2;padding:0 14px;}
 
 /* SECTION CHROME */
-.main{position:relative;z-index:2;padding:0 14px;}
 .sec-hd{display:flex;align-items:stretch;gap:0;margin:22px 0 12px;position:relative;}
 .sec-hd-bar{width:5px;background:linear-gradient(180deg,var(--c-spark),var(--c-fire),var(--c-purple));border-radius:2px 0 0 2px;flex-shrink:0;box-shadow:0 0 10px rgba(255,100,0,.4);}
 .sec-hd-text{background:linear-gradient(90deg,rgba(30,12,0,.9),transparent);padding:7px 14px 7px 10px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 100%,0 100%);flex-shrink:0;}
@@ -193,41 +186,35 @@ html,body{width:100%;background:#0c0400;}
 .pl-empty{text-align:center;padding:16px 0;font-size:11px;font-weight:600;color:rgba(255,160,60,.4);font-family:'Barlow Condensed',sans-serif;}
 .pl-empty span{display:block;font-size:20px;margin-bottom:4px;}
 
-/* ──────────────────────────────────────────
-   CALENDAR — fixed height, no reflow
-─────────────────────────────────────────── */
-.cal-wrap{background:var(--bg1);border:1px solid var(--border-mid);border-radius:8px;overflow:hidden;}
-.cal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:linear-gradient(90deg,rgba(220,60,0,.35),rgba(120,30,0,.2),rgba(30,8,0,.4));border-bottom:1px solid var(--border-mid);}
+/* CALENDAR — tighter rows */
+.cal-wrap{background:var(--bg1);border:1px solid var(--border-mid);border-radius:8px;overflow:visible;position:relative;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:linear-gradient(90deg,rgba(220,60,0,.35),rgba(120,30,0,.2),rgba(30,8,0,.4));border-bottom:1px solid var(--border-mid);border-radius:8px 8px 0 0;}
 .cal-month{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:3px;color:var(--c-glow);text-shadow:0 0 16px rgba(255,150,0,.5);}
 .cal-navs{display:flex;gap:6px;}
 .cal-btn{width:30px;height:30px;border-radius:5px;background:rgba(255,80,0,.15);border:1px solid var(--border-mid);color:var(--c-spark);cursor:pointer;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;transition:all .14s;font-family:'Barlow Condensed',sans-serif;}
 .cal-btn:hover{background:rgba(255,80,0,.3);border-color:var(--border-hot);color:var(--c-glow);}
 
-/* Fixed-height table: 6 rows × 68px = 408px always */
-.cal-grid{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;  /* equal columns, no flex-size surprises */
-}
+.cal-grid{width:100%;border-collapse:collapse;table-layout:fixed;overflow:visible;}
+.cal-grid tbody,.cal-grid tr{overflow:visible;}
 .cal-grid th{
   font-family:'Barlow Condensed',sans-serif;
   font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
   color:var(--c-spark);
-  padding:10px 4px 8px;text-align:center;
+  padding:8px 4px 6px;text-align:center;
   border-bottom:1px solid var(--border-mid);
   background:rgba(30,10,0,.5);
 }
 .cal-grid td{
-  height:78px;          /* taller cell for more content */
-  padding:5px 3px 4px;
+  height:66px;
+  padding:5px 2px 3px;
   text-align:center;
-  font-size:14px;font-weight:700; /* was 12px */
+  font-size:17px;font-weight:700;
   color:var(--text-dim);
   border:1px solid transparent;
   cursor:default;
   position:relative;
   vertical-align:top;
-  overflow:hidden;
+  overflow:visible;
 }
 .cal-grid td.other{color:rgba(255,160,60,.32);}
 .cal-grid td.today{
@@ -237,10 +224,9 @@ html,body{width:100%;background:#0c0400;}
   color:var(--c-spark);
   font-weight:900;
 }
-/* "TODAY" label badge */
 .today-tag{
   display:block;
-  font-size:7px;font-weight:800;letter-spacing:1.5px;
+  font-size:7px;font-weight:800;letter-spacing:1px;
   text-transform:uppercase;
   color:rgba(255,220,120,.9);
   line-height:1;
@@ -249,30 +235,72 @@ html,body{width:100%;background:#0c0400;}
 .cal-grid td.has-event{cursor:pointer;}
 .cal-grid td.has-event .day-num{
   background:linear-gradient(135deg,var(--c-lava),var(--c-fire));
-  color:#fff;border-radius:4px;padding:2px 6px;
+  color:#fff;border-radius:4px;padding:1px 5px;
   display:inline-block;font-weight:900;
   box-shadow:0 0 10px rgba(255,80,0,.45);
-  font-size:14px; /* was 12px */
+  font-size:17px;
 }
 .event-dot{
-  display:block;font-size:9px;font-weight:800; /* was 8px */
+  display:block;font-size:9px;font-weight:800;
   color:var(--c-glow);
-  line-height:1.3;padding:1px 3px;white-space:nowrap;
+  line-height:1.25;padding:1px 3px;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;
   max-width:52px;margin:2px auto 0;letter-spacing:.1px;
   background:rgba(255,80,0,.14);border-radius:2px;
 }
+
+/* FIXED TOOLTIP — lives on body, escapes all overflow */
+#calFixedTip{
+  display:none;
+  position:fixed;
+  z-index:99999;
+  background:rgba(12,4,0,.97);
+  border:1px solid var(--border-hot);
+  border-radius:6px;
+  padding:9px 13px;
+  min-width:140px;
+  max-width:200px;
+  box-shadow:0 8px 30px rgba(0,0,0,.8),0 0 0 1px rgba(255,120,30,.08);
+  pointer-events:none;
+  transform:translate(-50%, calc(-100% - 10px));
+}
+#calFixedTip::after{
+  content:'';
+  position:absolute;
+  top:100%;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--border-hot);
+}
+.cal-tip-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--c-spark);margin-bottom:5px;
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(255,90,0,.25);
+}
+.cal-tip-ev{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:700;
+  color:var(--text-main);
+  line-height:1.5;
+  display:flex;align-items:baseline;gap:5px;
+  margin-top:3px;
+}
+.cal-tip-ev::before{content:'🔥';font-size:9px;flex-shrink:0;}
+/* remove old inline tooltip */ 
+.cal-tooltip{display:none !important;}
+.cal-grid td.has-event:hover .cal-tooltip{display:none !important;}
 
 .cal-legend{padding:12px 16px 14px;border-top:1px solid var(--border-mid);background:rgba(20,6,0,.4);display:flex;flex-direction:column;gap:6px;}
 .cal-legend-title{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--c-spark);margin-bottom:6px;}
 .legend-item{display:flex;align-items:flex-start;gap:9px;font-size:12px;font-weight:700;color:var(--text-main);font-family:'Barlow Condensed',sans-serif;line-height:1.4;}
 .legend-dot{width:7px;height:7px;border-radius:2px;background:linear-gradient(135deg,var(--c-fire),var(--c-spark));flex-shrink:0;margin-top:4px;box-shadow:0 0 6px rgba(255,100,0,.6);}
 
-/* BOOKS */
+/* BOOKS — preserve aspect ratio */
 .books-grid{display:flex;gap:10px;}
 .book-card{flex:1;border-radius:6px;overflow:hidden;border:1px solid var(--border-dim);transition:all .18s;text-decoration:none;display:block;position:relative;}
 .book-card:hover{border-color:var(--border-hot);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
-.book-card img{width:100%;display:block;height:120px;object-fit:cover;filter:brightness(.8);}
+.book-card img{width:100%;display:block;height:auto;object-fit:contain;filter:brightness(.85);}
 .book-label{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-spark);}
 
 /* MILESTONES */
@@ -281,10 +309,11 @@ html,body{width:100%;background:#0c0400;}
 .ms-row{position:relative;height:130px;margin:4px 0;}
 .ms-svg{width:100%;height:100%;}
 .ms-item{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:default;}
-.ms-badge{padding:3px 8px;border-radius:2px;background:linear-gradient(135deg,var(--c-lava),var(--c-fire));font-family:'Bebas Neue',cursive;font-size:13px;letter-spacing:1px;color:#fff;box-shadow:0 0 10px rgba(255,80,0,.3);border:1px solid rgba(255,140,48,.3);}
-.ms-badge.locked{background:rgba(30,12,0,.8);color:rgba(255,160,70,.45);border-color:rgba(255,80,0,.12);box-shadow:none;}
+/* Milestone badges — slightly bigger text */
+.ms-badge{padding:3px 10px;border-radius:2px;background:linear-gradient(135deg,var(--c-lava),var(--c-fire));font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:1.5px;color:#fff;box-shadow:0 0 10px rgba(255,80,0,.3);border:1px solid rgba(255,140,48,.3);}
+.ms-badge.locked{background:rgba(30,12,0,.8);color:rgba(255,160,70,.5);border-color:rgba(255,80,0,.12);box-shadow:none;}
 .ms-badge.current{background:linear-gradient(135deg,var(--c-blaze),var(--c-spark));color:#000;box-shadow:0 0 14px rgba(255,180,0,.5);}
-.ms-date{font-size:8px;font-weight:700;color:var(--text-muted);letter-spacing:.5px;}
+.ms-date{font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.5px;}
 
 /* INVITE */
 .invite{background:var(--bg2);border:1px solid var(--border-mid);border-radius:8px;padding:18px;text-align:center;position:relative;overflow:hidden;}
@@ -296,6 +325,7 @@ html,body{width:100%;background:#0c0400;}
 .footer{text-align:center;padding:18px 14px 22px;position:relative;z-index:2;}
 .footer-name{font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:3px;color:var(--c-fire);opacity:.55;}
 .footer-copy{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,100,40,.35);margin-top:3px;}
+.footer-rights{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,100,40,.28);margin-top:2px;}
 </style>
 </head>
 <body>
@@ -327,26 +357,18 @@ html,body{width:100%;background:#0c0400;}
         </div>
       </div>
     </div>
-    <div class="crack-div">
-      <div class="crack-line"></div>
-      <div class="crack-diamond"></div>
-      <div class="crack-line"></div>
-    </div>
+    <div class="sep" style="margin:14px 0 0;padding:0 16px;"><div class="sep-l"></div><div class="sep-gem"></div><div class="sep-r"></div></div>
   </div>
 </div>
 
-<!-- WELCOME BANNER -->
-<div class="welcome-frame">
-  <img src="https://images.chesscomfiles.com/uploads/v1/group/721991.45ac00a8.160x160o.1b00bdde562e@2x.gif" alt="TIF Banner">
-  <div class="welcome-overlay">
-    <div class="welcome-info-row">
-      <img class="welcome-side-gif" src="https://images.chesscomfiles.com/uploads/v1/group/740787.67f84889.160x160o.2b7a593bce36.webp" alt="TIF Icon">
-      <div>
-        <div class="welcome-title">Think sharp. Play like fire. 🔥</div>
-        <div class="welcome-sub">The Illusion Fireballs · Chess.com</div>
-      </div>
-    </div>
-  </div>
+<!-- HERO GIF (replaces welcome banner) -->
+<div class="hero-gif-section">
+  <img src="https://images.chesscomfiles.com/uploads/v1/user/309756901.37e043e0.160x160o.9b7cddb71a19@2x.webp" alt="TIF Banner">
+</div>
+
+<!-- SEPARATOR under hero gif -->
+<div class="main" style="padding-bottom:0;">
+  <div class="sep"><div class="sep-l"></div><div class="sep-gem"></div><div class="sep-r"></div></div>
 </div>
 
 <!-- MAIN -->
@@ -356,7 +378,7 @@ html,body{width:100%;background:#0c0400;}
   <div class="sec-hd">
     <div class="sec-hd-bar"></div>
     <div class="sec-hd-text">
-      <div class="sec-hd-title">New Fireballs</div>
+      <div class="sec-hd-title">New Arrivals</div>
       <div class="sec-hd-sub">Recently joined</div>
     </div>
     <div class="sec-hd-line"></div>
@@ -557,13 +579,15 @@ html,body{width:100%;background:#0c0400;}
 
   <div class="footer">
     <div class="footer-name">The Illusion Fireballs</div>
-    <div class="footer-copy">© 2026 · All moves reserved</div>
+    <div class="footer-copy">© 2026 · The Illusion Fireballs</div>
+    <div class="footer-rights">All Rights Reserved</div>
   </div>
 
 </div>
 </div>
 
 <audio id="audio"></audio>
+<div id="calFixedTip"></div>
 
 <script>
 /* EMBERS */
@@ -630,7 +654,6 @@ html,body{width:100%;background:#0c0400;}
     const daysInPrev=new Date(viewYear,viewMonth,0).getDate();
     const events=getEvents(viewYear,viewMonth);
     let html='',day=1,nextDay=1;
-    /* always render exactly 6 rows = 42 cells */
     for(let i=0;i<42;i++){
       if(i%7===0)html+='<tr>';
       if(i<startOffset){
@@ -640,8 +663,9 @@ html,body{width:100%;background:#0c0400;}
         const evs=events[day]||[],hasEv=evs.length>0;
         let cls='';if(isToday)cls+=' today';if(hasEv)cls+=' has-event';
         const todayBadge=isToday?'<span class="today-tag">TODAY</span>':'';
-        const evHtml=evs.slice(0,3).map(e=>`<span class="event-dot">${e}</span>`).join('');
-        html+=`<td class="${cls}"><span class="day-num">${day}</span>${todayBadge}${evHtml}</td>`;
+        const evHtml=evs.slice(0,2).map(e=>`<span class="event-dot">${e}</span>`).join('');
+        const evData=hasEv?` data-evs="${evs.join('||')}" data-day="${day}"`:'';
+        html+=`<td class="${cls}"${evData}><span class="day-num">${day}</span>${todayBadge}${evHtml}</td>`;
         day++;
       } else {
         html+=`<td class="other"><span class="day-num">${nextDay}</span></td>`;nextDay++;
@@ -660,7 +684,25 @@ html,body{width:100%;background:#0c0400;}
   }
   document.getElementById('calPrev').onclick=()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}renderCal();};
   document.getElementById('calNext').onclick=()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}renderCal();};
-  window.addEventListener('DOMContentLoaded',renderCal);
+  window.addEventListener('DOMContentLoaded',()=>{
+    renderCal();
+    const tip=document.getElementById('calFixedTip');
+    document.getElementById('calGrid').addEventListener('mouseover',e=>{
+      const td=e.target.closest('td.has-event');
+      if(!td)return;
+      const evs=td.dataset.evs.split('||');
+      const day=td.dataset.day;
+      tip.innerHTML=`<div class="cal-tip-title">${day} ${MONTHS[viewMonth].slice(0,3)}</div>${evs.map(e=>`<div class="cal-tip-ev">${e}</div>`).join('')}`;
+      tip.style.display='block';
+    });
+    document.getElementById('calGrid').addEventListener('mousemove',e=>{
+      tip.style.left=e.clientX+'px';
+      tip.style.top=e.clientY+'px';
+    });
+    document.getElementById('calGrid').addEventListener('mouseout',e=>{
+      if(!e.target.closest('td.has-event'))tip.style.display='none';
+    });
+  });
 })();
 
 /* MILESTONES */
