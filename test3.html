@@ -8,7 +8,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;margin:0;padding:0;background:#1a1a1a;}
 body{display:block;}
- 
+
 /* ── Unified font-size tokens ── */
 :root{
   --fs-xs:  10px;
@@ -17,7 +17,7 @@ body{display:block;}
   --fs-md:  13px;
   --fs-lg:  15px;
 }
- 
+
 /* SIDEBAR */
 .sb{
   font-family:'Nunito',sans-serif;
@@ -27,7 +27,7 @@ body{display:block;}
   transition:box-shadow .3s ease;
 }
 .sb:hover{box-shadow:0 15px 50px rgba(220,60,30,.28);}
- 
+
 /* TOP */
 .sb-top{
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
@@ -43,9 +43,9 @@ body{display:block;}
 .chilli-deco.right{right:8px;transform:rotate(20deg);}
 .club-title{font-family:'Fredoka One',cursive;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
 .club-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:3px;}
- 
+
 .inner{width:100%;max-width:980px;margin:0 auto;padding:14px 20px 18px;}
- 
+
 /* SECTION LABEL */
 .sec-label{
   display:flex;align-items:center;gap:8px;
@@ -53,7 +53,7 @@ body{display:block;}
   margin-bottom:8px;margin-top:6px;
 }
 .sec-label .dot{width:12px;height:10px;border-radius:50%;background:#d93020;flex-shrink:0;}
- 
+
 /* SEPARATOR */
 .div{width:100%;max-width:980px;height:18px;margin:10px auto 14px;position:relative;opacity:.95;}
 .div::before,.div::after{content:"";position:absolute;left:0;width:100%;height:6px;border-radius:999px;}
@@ -71,7 +71,7 @@ body{display:block;}
     linear-gradient(90deg,transparent 0%,#ea9282 5%,#df8070 16%,#e89080 28%,#e18272 41%,#e99282 56%,#e08070 71%,#e89080 86%,#ea9282 95%,transparent 100%);
   transform:rotate(0.45deg);opacity:.82;
 }
- 
+
 /* LINKS */
 .links {
   display:flex;
@@ -81,81 +81,25 @@ body{display:block;}
   overflow-y:auto;
   padding:3.5px 3.5px;
 }
- 
-.links .lbtn:first-child {
-  margin-top:3.5px;
-}
- 
-.links .lbtn:last-child {
-  margin-bottom:4px;
-}
-/* Scrollbar styling */
-.links::-webkit-scrollbar {
-  width: 6px;
-}
-.links::-webkit-scrollbar-track {
-  background: #fce8e0;
-  border-radius: 3px;
-}
-.links::-webkit-scrollbar-thumb {
-  background: #d93020;
-  border-radius: 3px;
-}
-.links::-webkit-scrollbar-thumb:hover {
-  background: #e84535;
-}
- 
-/* Firefox scrollbar */
-.links {
-  scrollbar-width: thin;
-  scrollbar-color: #d93020 #fce8e0;
-}
- 
+.links .lbtn:first-child { margin-top:3.5px; }
+.links .lbtn:last-child  { margin-bottom:4px; }
+.links::-webkit-scrollbar{width:6px;}
+.links::-webkit-scrollbar-track{background:#fce8e0;border-radius:3px;}
+.links::-webkit-scrollbar-thumb{background:#d93020;border-radius:3px;}
+.links::-webkit-scrollbar-thumb:hover{background:#e84535;}
+.links{scrollbar-width:thin;scrollbar-color:#d93020 #fce8e0;}
+
 .lbtn{
-  display:flex;
-  align-items:center;
-  padding:10px 12px;
-  border-radius:16px;
-  background:#fff;
-  border:2px solid #f5c5b8;
-  color:#9a2010;
-  font-size:13px;
-  font-weight:800;
-  text-decoration:none;
-  box-shadow:0 3px 0 #e8aa98;
-  transition:all .15s ease;
+  display:flex;align-items:center;padding:10px 12px;border-radius:16px;
+  background:#fff;border:2px solid #f5c5b8;color:#9a2010;font-size:13px;font-weight:800;
+  text-decoration:none;box-shadow:0 3px 0 #e8aa98;transition:all .15s ease;
 }
-.lbtn:hover{
-  background:#fce8e0;
-  border-color:#d93020;
-  transform:translateY(-2px);
-  box-shadow:0 6px 0 #d93020;
-}
-.lbtn .ico{
-  font-size:16px;
-  width:auto;
-  margin-right:6px;
-  flex-shrink:0;
-}
- 
-.lbtn span{
-  text-align:left;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-}
-.lbtn .arr{
-  color:#d93020;
-  font-size:16px;
-  font-weight:900;
-  margin-left:auto;
-  transition:transform .2s ease, color .2s ease;
-}
- 
-.lbtn:hover .arr{
-  transform:translateX(4px);
-  color:#b01e10;
-}
- 
+.lbtn:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-2px);box-shadow:0 6px 0 #d93020;}
+.lbtn .ico{font-size:16px;width:auto;margin-right:6px;flex-shrink:0;}
+.lbtn span{text-align:left;white-space:nowrap;text-overflow:ellipsis;}
+.lbtn .arr{color:#d93020;font-size:16px;font-weight:900;margin-left:auto;transition:transform .2s ease,color .2s ease;}
+.lbtn:hover .arr{transform:translateX(4px);color:#b01e10;}
+
 /* INVITE */
 .invite-box{background:#fff;border-radius:16px;border:2px dashed #e8553a;padding:13px;text-align:center;}
 .invite-title{font-family:'Fredoka One',cursive;font-size:15px;color:#c73520;margin-bottom:5px;}
@@ -167,7 +111,7 @@ body{display:block;}
 }
 .copy-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #8c1a10;}
 .copy-btn:active{transform:translateY(2px);box-shadow:0 3px 0 #8c1a10;}
- 
+
 /* SOCIAL */
 .socials{display:flex;gap:9px;}
 .s-btn{
@@ -178,12 +122,36 @@ body{display:block;}
 .s-btn:hover{transform:translateY(-2px);}
 .s-btn.wa{background:linear-gradient(135deg,#25c95b,#1faa4a);}
 .s-btn.ig{background:linear-gradient(135deg,#f9a825,#e91e63,#9c27b0);}
- 
+
 /* FOOTER */
 .footer{text-align:center;margin-top:14px;font-size:var(--fs-sm);font-weight:700;color:#e8553a;}
- 
+
+/* ── LIVE MEMBERS COUNT ── */
+.live-members-bar{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:#fff;border-radius:14px;border:2px solid #f5c5b8;
+  box-shadow:0 4px 0 #e8aa98;
+  padding:10px 16px;margin-bottom:12px;
+}
+.live-dot{
+  width:8px;height:8px;border-radius:50%;background:#22c55e;
+  box-shadow:0 0 0 3px rgba(34,197,94,.25);
+  animation:livePulse 1.8s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes livePulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.25);}
+  50%{box-shadow:0 0 0 6px rgba(34,197,94,.1);}
+}
+.live-label{font-size:var(--fs-sm);font-weight:900;color:#9a2010;text-transform:uppercase;letter-spacing:.8px;}
+.live-count{
+  font-family:'Fredoka One',cursive;font-size:20px;color:#d93020;
+  text-shadow:0 1px 0 rgba(0,0,0,.08);line-height:1;
+}
+.live-sub{font-size:var(--fs-xs);font-weight:700;color:#e8aa98;}
+
 /* PROGRESS */
-.progress-wrapper{position:relative;width:100%;height:120px;margin:14px auto;}
+.progress-wrapper{position:relative;width:100%;height:130px;margin:14px auto 0;}
 .progress-svg{width:100%;height:100%;display:block;}
 .progress-bg{stroke:#f5c5b8;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .progress-active{stroke:url(#grad);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 3s forwards;}
@@ -191,23 +159,23 @@ body{display:block;}
 .milestone{
   position:absolute;transform:translate(-50%,-50%);text-align:center;
   font-size:var(--fs-sm);font-weight:900;color:#fff;
-  background:linear-gradient(135deg,#d93020,#e84535);padding:6px 8px;border-radius:999px;
+  background:linear-gradient(135deg,#d93020,#e84535);padding:5px 7px;border-radius:999px;
   z-index:2;cursor:pointer;box-shadow:0 4px 0 #8c1a10;border:none;
   transition:transform .15s ease,box-shadow .15s ease;white-space:nowrap;
+  /* Prevent overlap by ensuring consistent box-model */
+  min-width:36px;
 }
 .milestone span{display:block;font-size:9px;font-weight:800;margin-top:2px;color:rgba(255,255,255,0.85);}
 .milestone.locked{background:linear-gradient(135deg,#f0c0b0,#e8aa98);color:#8c1a10;box-shadow:0 4px 0 #c89080;}
 .milestone.locked span{color:#a84030;}
-.milestone:hover{transform:translate(-50%,-55%);box-shadow:0 6px 0 #8c1a10;}
+.milestone:hover{transform:translate(-50%,-58%);box-shadow:0 6px 0 #8c1a10;}
 .milestone.locked:hover{box-shadow:0 6px 0 #c89080;}
-@media(max-width:500px){
-  .progress-wrapper{height:160px;}
-  .milestone{font-size:10px;padding:5px 6px;}
-}
- 
-/* ── MEMBERS ── */
+
+/* ── MEMBERS — now with bottom shadow like music card ── */
 .members-box{
-  background:#fff;border-radius:18px;border:2px solid #f5c5b8;
+  background:#fff;border-radius:18px;
+  border:2px solid #f5c5b8;
+  box-shadow:0 4px 0 #e8aa98;   /* ← added, matches .music-card */
   padding:12px;margin-bottom:14px;
   min-height:168px;
 }
@@ -221,13 +189,15 @@ body{display:block;}
 .member-avatar{width:36px;height:36px;border-radius:50%;border:2px solid #d93020;object-fit:cover;flex-shrink:0;}
 .member-info{display:flex;flex-direction:column;flex:1;min-width:0;overflow:hidden;}
 .member-name{font-size:var(--fs-base);font-weight:800;color:#c73520;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.member-meta{display:flex;align-items:width:100%;margin-top:2px;font-size:var(--fs-xs);font-weight:700;gap:4px;}
+.member-meta{display:flex;align-items:center;width:100%;margin-top:2px;font-size:var(--fs-xs);font-weight:700;gap:4px;}
 .member-rating{color:#9a2010;flex-shrink:0;}
 .member-joined{margin-left:auto;color:#d93020;font-weight:800;white-space:nowrap;flex-shrink:0;}
- 
-/* ── BIRTHDAY SECTION ── */
+
+/* ── BIRTHDAY SECTION — now with bottom shadow like music card ── */
 .bday-box{
-  background:#fff;border-radius:18px;border:2px solid #f5c5b8;
+  background:#fff;border-radius:18px;
+  border:2px solid #f5c5b8;
+  box-shadow:0 4px 0 #e8aa98;   /* ← added, matches .music-card */
   padding:14px;margin-bottom:14px;
 }
 .bday-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
@@ -259,17 +229,10 @@ body{display:block;}
 .bday-save-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 #8c1a10;}
 .bday-save-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #8c1a10;}
 .bday-msg{font-size:var(--fs-xs);font-weight:700;color:#d93020;min-height:14px;}
- 
-.bday-list{
-  display:flex;flex-direction:column;gap:8px;
-  min-height:168px;
-}
- 
+.bday-list{display:flex;flex-direction:column;gap:8px;min-height:168px;}
 .bday-item{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:10px 12px;border-radius:14px;
-  background:#fff8f5;border:2px solid #f5c5b8;
-  text-decoration:none;transition:all .15s ease;
+  display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:14px;
+  background:#fff8f5;border:2px solid #f5c5b8;text-decoration:none;transition:all .15s ease;
   position:relative;overflow:hidden;
 }
 .bday-item:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-2px);box-shadow:0 5px 0 #d93020;}
@@ -282,49 +245,21 @@ body{display:block;}
   background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(217,48,32,.03) 8px,rgba(217,48,32,.03) 16px);
   pointer-events:none;
 }
-.bday-avatar{
-  width:36px;height:36px;border-radius:50%;
-  border:2px solid #d93020;object-fit:cover;
-  flex-shrink:0;margin-top:1px;
-}
+.bday-avatar{width:36px;height:36px;border-radius:50%;border:2px solid #d93020;object-fit:cover;flex-shrink:0;margin-top:1px;}
 .bday-info{display:flex;flex-direction:column;flex:1;min-width:0;}
- 
-.bday-name{
-  font-size:11px;font-weight:800;color:#c73520;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  margin-bottom:3px;
-}
- 
-.bday-date-row{
-  display:flex;align-items:center;gap:6px;
-  flex-wrap:nowrap;margin-bottom:3px;overflow:hidden;
-}
-.bday-date{
-  font-size:var(--fs-xs);font-weight:700;color:#9a2010;
-  white-space:nowrap;flex-shrink:0;
-}
-.bday-sep{
-  font-size:var(--fs-xs);color:#e8aa98;flex-shrink:0;
-}
-.bday-countdown{
-  font-size:var(--fs-xs);font-weight:900;color:#d93020;
-  white-space:nowrap;flex-shrink:0;
-}
+.bday-name{font-size:11px;font-weight:800;color:#c73520;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
+.bday-date-row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;margin-bottom:3px;overflow:hidden;}
+.bday-date{font-size:var(--fs-xs);font-weight:700;color:#9a2010;white-space:nowrap;flex-shrink:0;}
+.bday-sep{font-size:var(--fs-xs);color:#e8aa98;flex-shrink:0;}
+.bday-countdown{font-size:var(--fs-xs);font-weight:900;color:#d93020;white-space:nowrap;flex-shrink:0;}
 .bday-countdown.today-text{
-  background:linear-gradient(135deg,#d93020,#e84535);
-  color:#fff;padding:1px 7px;border-radius:999px;
-  font-size:var(--fs-xs);box-shadow:0 2px 0 #8c1a10;
+  background:linear-gradient(135deg,#d93020,#e84535);color:#fff;padding:1px 7px;
+  border-radius:999px;font-size:var(--fs-xs);box-shadow:0 2px 0 #8c1a10;
 }
- 
-.bday-note{
-  font-size:var(--fs-xs);font-weight:600;color:#c73520;opacity:.75;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  max-width:100%;display:block;
-}
- 
+.bday-note{font-size:var(--fs-xs);font-weight:600;color:#c73520;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;display:block;}
 .bday-empty{text-align:center;padding:16px 0;font-size:var(--fs-sm);font-weight:800;color:#e8aa98;}
 .bday-empty span{display:block;font-size:24px;margin-bottom:6px;}
- 
+
 /* ── MUSIC PLAYER ── */
 .music-card{
   background:#fff;border-radius:18px;border:2px solid #f5c5b8;
@@ -359,7 +294,7 @@ body{display:block;}
 .eq-bar:nth-child(3){height:9px;animation-delay:.3s;}
 .eq-bar.paused{animation-play-state:paused;}
 @keyframes eqBounce{to{height:18px;}}
- 
+
 /* Progress */
 .music-progress-section{margin-bottom:10px;}
 .music-progress-track{
@@ -383,16 +318,15 @@ body{display:block;}
 }
 .music-progress-knob:hover{transform:translateY(-50%) scale(1.2);}
 .music-time-row{display:flex;justify-content:space-between;font-size:var(--fs-xs);font-weight:900;color:#c73520;margin-top:4px;padding:0 2px;}
- 
+
 /* Controls */
 .music-controls-row{display:flex;align-items:center;gap:7px;margin-bottom:11px;flex-wrap:nowrap;}
 .mcbtn{
   display:flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer;
   border:2px solid #f5c5b8;background:#fff8f5;box-shadow:0 4px 0 #e8aa98;
-  transition:all .15s ease;user-select:none;flex-shrink:0;
-  pointer-events:auto;
+  transition:all .15s ease;user-select:none;flex-shrink:0;pointer-events:auto;
 }
-.mcbtn svg, .mcbtn svg *{pointer-events:none;}
+.mcbtn svg,.mcbtn svg *{pointer-events:none;}
 .mcbtn:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-2px);box-shadow:0 6px 0 #c73520;}
 .mcbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #c73520;}
 .mcbtn svg{display:block;flex-shrink:0;}
@@ -405,7 +339,7 @@ body{display:block;}
 .mcbtn.loop-on{background:linear-gradient(135deg,#d93020,#ef6640);border:none;box-shadow:0 4px 0 #8c1a10;}
 .mcbtn.loop-on svg{color:#fff !important;}
 .mcbtn.loop-on:hover{background:linear-gradient(135deg,#c02010,#e85535);box-shadow:0 6px 0 #8c1a10;}
- 
+
 /* Volume */
 .music-vol-row{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0;}
 .music-vol-icon{
@@ -422,7 +356,7 @@ body{display:block;}
   width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid #7c3aed;
   cursor:pointer;z-index:2;box-shadow:0 2px 0 #5b21b6;
 }
- 
+
 /* Search */
 .music-search-section{margin-bottom:10px;position:relative;}
 .music-search-label{font-size:var(--fs-xs);font-weight:900;color:#c73520;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
@@ -437,8 +371,7 @@ body{display:block;}
 .music-search-dropdown{
   margin-top:5px;border-radius:12px;border:2px solid #f5c5b8;background:#fff8f5;
   overflow-y:auto;max-height:160px;display:none;position:absolute;
-  left:0;right:0;z-index:100;
-  box-shadow:0 8px 24px rgba(217,48,32,.15);
+  left:0;right:0;z-index:100;box-shadow:0 8px 24px rgba(217,48,32,.15);
 }
 .music-search-dropdown::-webkit-scrollbar{width:5px;}
 .music-search-dropdown::-webkit-scrollbar-thumb{background:#d93020;border-radius:3px;}
@@ -456,7 +389,7 @@ body{display:block;}
 .music-search-badge{font-size:var(--fs-xs);font-weight:900;padding:2px 8px;border-radius:999px;flex-shrink:0;}
 .music-search-badge.add{background:#fce8e0;color:#c73520;border:1.5px solid #f5c5b8;}
 .music-search-badge.done{background:#dcfce7;color:#166534;border:1.5px solid #86efac;}
- 
+
 /* Playlist */
 .music-playlist-section{margin-top:4px;}
 .music-playlist-label{font-size:var(--fs-xs);font-weight:900;color:#c73520;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
@@ -480,33 +413,31 @@ body{display:block;}
 .music-pl-remove:hover{color:#d93020;}
 .music-playlist-empty{text-align:center;padding:20px 0;font-size:var(--fs-sm);font-weight:800;color:#e8aa98;}
 .music-playlist-empty span{display:block;font-size:24px;margin-bottom:6px;}
- 
+
 @media(min-width:600px){
   .music-card{max-width:420px;margin-left:auto;margin-right:auto;}
 }
 </style>
 </head>
- 
+
 <body>
 <div class="sb">
- 
+
   <div class="sb-top">
     <div class="chilli-deco left">🌶</div>
     <div class="chilli-deco right">♞</div>
     <div class="club-title">🌶 Hot Chilli CheckMate</div>
     <div class="club-sub">Your chess home ♡</div>
   </div>
- 
+
   <div class="inner">
- 
+
     <!-- WELCOME -->
-   <!-- luffy haki https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif-->
     <div style="text-align:center;margin-top:-14px;margin-bottom:10px;">
       <div style="font-family:'Fredoka One',cursive;font-size:16px;color:#c73520;margin-bottom:6px;text-shadow:0 1px 0 rgba(0,0,0,.1);">
         Welcome onboard 🌶♞
       </div>
       <img src="https://raw.githubusercontent.com/taki2023/taki/main/tumblr_ncvsorJhjY1twyezqo1_500.gif"
-    
         style="width:100%;border-radius:16px;border:2px solid #e8553a;box-shadow:0 6px 18px rgba(200,50,20,.25);">
       <div style="font-size:var(--fs-base);font-weight:800;color:#9a2010;margin-top:6px;">
         Play sharp. Think spicy. Win big.
@@ -514,7 +445,7 @@ body{display:block;}
     </div>
     <div class="div"></div>
 
-    <!-- QUICK LINKS (moved above New Members) -->
+    <!-- QUICK LINKS -->
     <div class="sec-label"><div class="dot"></div>Quick Links 🔗</div>
     <div class="links" style="max-height:210px;overflow-y:auto;padding-right:4px;">
       <a class="lbtn" href="https://www.chesscompass.com/puzzle" target="_blank" rel="noopener noreferrer">
@@ -544,7 +475,7 @@ body{display:block;}
     </div>
 
     <div class="div"></div>
- 
+
     <!-- NEWEST MEMBERS -->
     <div class="sec-label"><div class="dot"></div>New Chillies 🔥</div>
     <div class="members-box">
@@ -572,12 +503,12 @@ body{display:block;}
         </div>
       </div>
     </div>
- 
+
     <div class="div"></div>
- 
+
     <!-- BIRTHDAY SECTION -->
     <div class="sec-label"><div class="dot"></div>Birthdays 🎂</div>
- 
+
     <div class="bday-box">
       <div class="bday-form">
         <input class="bday-input" type="text" id="bdayUsername" placeholder="♟ Chess.com Username">
@@ -595,19 +526,19 @@ body{display:block;}
           <div class="bday-msg" id="bdayMsg"></div>
         </div>
       </div>
- 
+
       <div class="bday-list" id="bdayList">
         <div class="bday-empty"><span>🎂</span>Loading birthdays...</div>
       </div>
     </div>
- 
+
     <div class="div"></div>
- 
+
     <!-- MUSIC PLAYER -->
     <div class="sec-label"><div class="dot"></div>Spicy Tunes 🎵</div>
- 
+
     <div class="music-card" id="musicCard">
- 
+
       <div class="now-playing-banner">
         <div class="disc-wrap" id="disc">🎵</div>
         <div class="track-info">
@@ -620,7 +551,7 @@ body{display:block;}
           <div class="eq-bar paused"></div>
         </div>
       </div>
- 
+
       <div class="music-progress-section">
         <div class="music-progress-track" id="progressTrack">
           <div class="music-progress-fill" id="progressFill">
@@ -632,7 +563,7 @@ body{display:block;}
           <span id="timeDur">0:00</span>
         </div>
       </div>
- 
+
       <div class="music-controls-row">
         <button class="mcbtn sm" id="btnPrev" title="Previous">
           <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -669,13 +600,13 @@ body{display:block;}
           </div>
         </div>
       </div>
- 
+
       <div class="music-search-section">
         <div class="music-search-label">Search &amp; Add Songs</div>
         <input class="music-search-input" id="searchInput" type="text" placeholder="🔍  Type a song name...">
         <div class="music-search-dropdown" id="searchDropdown"></div>
       </div>
- 
+
       <div class="music-playlist-section">
         <div class="music-playlist-label">
           Queue
@@ -683,12 +614,20 @@ body{display:block;}
         </div>
         <div class="music-playlist-scroll" id="playlist"></div>
       </div>
- 
+
     </div>
- 
+
     <div class="div"></div>
     <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
- 
+
+    <!-- LIVE MEMBERS COUNT — above the milestones -->
+    <div class="live-members-bar">
+      <div class="live-dot"></div>
+      <span class="live-label">Members</span>
+      <span class="live-count" id="liveCount">—</span>
+      <span class="live-sub">and growing 🌶</span>
+    </div>
+
     <div class="progress-wrapper">
       <svg class="progress-svg" preserveAspectRatio="none">
         <polyline class="progress-bg" fill="none"/>
@@ -700,76 +639,128 @@ body{display:block;}
           </linearGradient>
         </defs>
       </svg>
-      <div class="milestone" data-value="10" data-date="Nov 21">10<br><span>Nov 21</span></div>
-      <div class="milestone" data-value="100" data-date="Nov 27">100<br><span>Nov 27</span></div>
-      <div class="milestone" data-value="200" data-date="Dec 12">200<br><span>Dec 12</span></div>
-      <div class="milestone" data-value="300" data-date="Jan 11">300<br><span>Jan 11</span></div>
-      <div class="milestone" data-value="500" data-date="Feb 06">500<br><span>Feb 06</span></div>
+      <div class="milestone" data-value="10"   data-date="Nov 21">10<br><span>Nov 21</span></div>
+      <div class="milestone" data-value="100"  data-date="Nov 27">100<br><span>Nov 27</span></div>
+      <div class="milestone" data-value="200"  data-date="Dec 12">200<br><span>Dec 12</span></div>
+      <div class="milestone" data-value="300"  data-date="Jan 11">300<br><span>Jan 11</span></div>
+      <div class="milestone" data-value="500"  data-date="Feb 06">500<br><span>Feb 06</span></div>
       <div class="milestone" data-value="1000" data-date="Apr 09">1000<br><span>Apr 09</span></div>
       <div class="milestone locked" data-value="2000+" data-date="—">?<br><span>2000+</span></div>
     </div>
- 
+
     <div class="div"></div>
- 
+
     <!-- INVITE -->
     <div class="sec-label"><div class="dot"></div>Invite Friends 🙌</div>
     <div class="invite-box">
       <div class="invite-title">Spread the spice! 🌶</div>
       <div class="invite-sub">Invite your friends and grow the Chillies army !</div>
-      <button class="copy-btn" onclick="navigator.clipboard.writeText('https://www.chess.com/club/hot-chilli-checkmate/join');this.innerHTML='✓ Copied!';setTimeout(()=>{this.innerHTML='🔗 Copy Invite Link'},1500);">
-        🔗 Copy Invite Link
-      </button>
+      <button class="copy-btn" id="copyInviteBtn">🔗 Copy Invite Link</button>
     </div>
- 
+
     <div class="div"></div>
- 
+
     <!-- SOCIAL -->
     <div class="sec-label"><div class="dot"></div>Find Us Online</div>
     <div class="socials">
       <a class="s-btn wa" href="https://chat.whatsapp.com/J0D48mkryYa866nkmoAxa6?mode=gi_t" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
       <a class="s-btn ig" href="https://www.instagram.com/hot_chilli_checkmate?igsh=bWc3NWxoNHdxOGN0" target="_blank" rel="noopener noreferrer">📷 Instagram</a>
     </div>
- 
+
     <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
- 
+
   </div>
 </div>
- 
+
 <audio id="audio"></audio>
- 
+
 <script>
 /* ════════════════════════════
-   CLUB PROGRESS
+   COPY INVITE LINK — fixed
+════════════════════════════ */
+document.getElementById('copyInviteBtn').addEventListener('click', function() {
+  const link = 'https://www.chess.com/club/hot-chilli-checkmate';
+  const btn = this;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(link).then(() => {
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { btn.innerHTML = '🔗 Copy Invite Link'; }, 1500);
+    }).catch(() => {
+      /* fallback */
+      const ta = document.createElement('textarea');
+      ta.value = link; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { btn.innerHTML = '🔗 Copy Invite Link'; }, 1500);
+    });
+  }
+});
+
+/* ════════════════════════════
+   CLUB PROGRESS — milestone overlap fix
 ════════════════════════════ */
 function updateProgress() {
-  const wrapper = document.querySelector(".progress-wrapper");
+  const wrapper   = document.querySelector(".progress-wrapper");
   const milestones = Array.from(wrapper.querySelectorAll(".milestone"));
-  const svg = wrapper.querySelector(".progress-svg");
-  const bgLine = svg.querySelector(".progress-bg");
+  const svg       = wrapper.querySelector(".progress-svg");
+  const bgLine    = svg.querySelector(".progress-bg");
   const activeLine = svg.querySelector(".progress-active");
-  const wrapperWidth = wrapper.clientWidth;
+
+  const wrapperWidth  = wrapper.clientWidth;
   const wrapperHeight = wrapper.clientHeight;
-  const paddingX = 30;
+
+  /* Ensure wrapper has dimensions before placing milestones */
+  if (!wrapperWidth || !wrapperHeight) return;
+
+  const paddingX = 36;   /* slightly bigger padding so edge labels don't clip */
+
+  /* Two Y rows — far enough apart to never overlap vertically */
+  const rowTop    = wrapperHeight * 0.22;  /* odd indices (high row) */
+  const rowBottom = wrapperHeight * 0.78;  /* even indices (low row) */
+
   const points = milestones.map((m, i) => {
     const x = paddingX + (i / (milestones.length - 1)) * (wrapperWidth - 2 * paddingX);
-    const y = i % 2 === 0 ? wrapperHeight * 0.7 : wrapperHeight * 0.3;
-    m.style.left = `${x}px`;
-    m.style.top = `${y}px`;
-    return `${x},${y}`;
+    const y = i % 2 === 0 ? rowBottom : rowTop;
+    m.style.left = x + 'px';
+    m.style.top  = y + 'px';
+    return x + ',' + y;
   });
+
   bgLine.setAttribute("points", points.join(" "));
-  const stopIndex = milestones.findIndex(m => m.dataset.value === "1000");
+
+  const stopIndex  = milestones.findIndex(m => m.dataset.value === "1000");
   const activePoints = points.slice(0, stopIndex + 1);
   activeLine.setAttribute("points", activePoints.join(" "));
 }
-updateProgress();
+
+/* Run after layout is painted, then on every resize */
+requestAnimationFrame(() => { updateProgress(); });
 window.addEventListener("resize", updateProgress);
- 
+
+/* ════════════════════════════
+   LIVE MEMBER COUNT
+════════════════════════════ */
+async function loadMemberCount() {
+  try {
+    const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate");
+    const d = await r.json();
+    const count = d.members_count;
+    if (count !== undefined) {
+      document.getElementById('liveCount').textContent = count.toLocaleString();
+    }
+  } catch(e) {
+    document.getElementById('liveCount').textContent = '—';
+    console.error('Member count fetch failed:', e);
+  }
+}
+
 /* ════════════════════════════
    NEWEST MEMBERS
 ════════════════════════════ */
 let newestCache = [];
- 
+
 function timeAgo(timestamp) {
   const now = Date.now();
   const diffSeconds = Math.floor((now - (timestamp * 1000)) / 1000);
@@ -785,7 +776,7 @@ function timeAgo(timestamp) {
   const months = Math.floor(days / 30);
   return `${months}mo ago`;
 }
- 
+
 async function loadNewest() {
   try {
     const r = await fetch("https://api.chess.com/pub/club/hot-chilli-checkmate/members");
@@ -799,12 +790,12 @@ async function loadNewest() {
         fetch("https://api.chess.com/pub/player/" + m.username + "/stats").then(res => res.json())
       ]);
       const ratings = [
-        {type:"Rapid", value: stats.chess_rapid?.last?.rating},
-        {type:"Blitz", value: stats.chess_blitz?.last?.rating},
+        {type:"Rapid",  value: stats.chess_rapid?.last?.rating},
+        {type:"Blitz",  value: stats.chess_blitz?.last?.rating},
         {type:"Bullet", value: stats.chess_bullet?.last?.rating},
-        {type:"Daily", value: stats.chess_daily?.last?.rating}
+        {type:"Daily",  value: stats.chess_daily?.last?.rating}
       ].filter(x => x.value);
-      const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—", value:"—"};
+      const best = ratings.length ? ratings.sort((a,b) => b.value - a.value)[0] : {type:"—", value:"—"};
       const avatar = pj.avatar || "https://taki2023.github.io/taki/default-pawn.png";
       return { username: m.username, avatar, ratingType: best.type, ratingValue: best.value, joined: m.joined };
     });
@@ -815,7 +806,7 @@ async function loadNewest() {
     document.getElementById("membersList").innerHTML = "Unable to load members.";
   }
 }
- 
+
 function renderMembers() {
   const box = document.getElementById("membersList");
   box.innerHTML = newestCache.map(m => `
@@ -831,127 +822,105 @@ function renderMembers() {
     </a>
   `).join("");
 }
- 
+
 window.addEventListener("DOMContentLoaded", () => {
   loadNewest();
+  loadMemberCount();
   setInterval(renderMembers, 60000);
+  setInterval(loadMemberCount, 300000); /* refresh count every 5 min */
 });
- 
+
 /* ════════════════════════════
    BIRTHDAY SECTION
 ════════════════════════════ */
 const BDAY_API = "https://script.google.com/macros/s/AKfycbwlfeoWrelPvqRd34KHdMLjkXEjHfTRHImqCfNhY4RBjADYQOw-SHPzGJkURi3xn9kq/exec";
- 
-const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+const MONTH_NAMES  = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DAYS_IN_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
- 
+
 const monthSel = document.getElementById("bdayMonth");
 MONTH_NAMES.forEach((name, i) => {
   const opt = document.createElement("option");
-  opt.value = i + 1;
-  opt.textContent = name;
+  opt.value = i + 1; opt.textContent = name;
   monthSel.appendChild(opt);
 });
- 
+
 function updateDays() {
-  const month = parseInt(document.getElementById("bdayMonth").value);
+  const month  = parseInt(document.getElementById("bdayMonth").value);
   const daySel = document.getElementById("bdayDay");
-  const prev = parseInt(daySel.value);
+  const prev   = parseInt(daySel.value);
   daySel.innerHTML = '<option value="">Day</option>';
   const maxDay = month ? DAYS_IN_MONTH[month - 1] : 31;
   for (let i = 1; i <= maxDay; i++) {
     const opt = document.createElement("option");
-    opt.value = i;
-    opt.textContent = i;
+    opt.value = i; opt.textContent = i;
     daySel.appendChild(opt);
   }
   if (prev && prev <= maxDay) daySel.value = prev;
 }
 updateDays();
- 
+
 async function saveBirthday() {
-  const user = document.getElementById("bdayUsername").value.trim();
+  const user  = document.getElementById("bdayUsername").value.trim();
   const month = parseInt(document.getElementById("bdayMonth").value);
-  const day = parseInt(document.getElementById("bdayDay").value);
-  const noteRaw = document.getElementById("bdayNote").value.trim();
-  const note = noteRaw.slice(0, 60);
-  const msg = document.getElementById("bdayMsg");
- 
-  if (!user || !month || !day) {
-    msg.textContent = "⚠ Fill username, month and day!";
-    return;
-  }
+  const day   = parseInt(document.getElementById("bdayDay").value);
+  const note  = document.getElementById("bdayNote").value.trim().slice(0, 60);
+  const msg   = document.getElementById("bdayMsg");
+  if (!user || !month || !day) { msg.textContent = "⚠ Fill username, month and day!"; return; }
   msg.textContent = "Saving...";
   try {
-    const formData = new FormData();
-    formData.append("Username", user);
-    formData.append("Month", month);
-    formData.append("Day", day);
-    formData.append("Note", note);
-    const res = await fetch(BDAY_API, { method: 'POST', body: formData });
+    const fd = new FormData();
+    fd.append("Username", user); fd.append("Month", month);
+    fd.append("Day", day);       fd.append("Note", note);
+    const res    = await fetch(BDAY_API, { method: 'POST', body: fd });
     const result = await res.json();
     if (result.success) {
       msg.textContent = "🎉 Saved!";
       document.getElementById("bdayUsername").value = "";
-      document.getElementById("bdayMonth").value = "";
-      document.getElementById("bdayDay").value = "";
-      document.getElementById("bdayNote").value = "";
-      updateDays();
-      loadBirthdays();
-    } else {
-      msg.textContent = "❌ Error saving";
-    }
-  } catch(e) {
-    msg.textContent = "❌ Error saving";
-    console.error(e);
-  }
+      document.getElementById("bdayMonth").value    = "";
+      document.getElementById("bdayDay").value      = "";
+      document.getElementById("bdayNote").value     = "";
+      updateDays(); loadBirthdays();
+    } else { msg.textContent = "❌ Error saving"; }
+  } catch(e) { msg.textContent = "❌ Error saving"; console.error(e); }
 }
- 
+
 function getNextDate(month, day) {
   const today = new Date(); today.setHours(0,0,0,0);
   const b = new Date(today.getFullYear(), month - 1, day);
   if (b < today) b.setFullYear(today.getFullYear() + 1);
   return b;
 }
- 
 function getDateSuffix(day) {
   if (day >= 11 && day <= 13) return "th";
   switch (day % 10) { case 1: return "st"; case 2: return "nd"; case 3: return "rd"; default: return "th"; }
 }
- 
+
 async function loadBirthdays() {
   const list = document.getElementById("bdayList");
   list.innerHTML = '<div class="bday-empty"><span>⏳</span>Loading...</div>';
   try {
-    const res = await fetch(BDAY_API);
+    const res  = await fetch(BDAY_API);
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error("Invalid");
     const upcoming = data.map(b => ({
-      username: b.Username,
-      month: parseInt(b.Month),
-      day: parseInt(b.Day),
-      note: b.Note ? String(b.Note).slice(0, 60) : ""
+      username: b.Username, month: parseInt(b.Month), day: parseInt(b.Day),
+      note: b.Note ? String(b.Note).slice(0,60) : ""
     })).sort((a, b) => getNextDate(a.month, a.day) - getNextDate(b.month, b.day)).slice(0, 3);
- 
+
     if (!upcoming.length) {
-      list.innerHTML = '<div class="bday-empty"><span>🎂</span>No birthdays yet!<br>Add yours above</div>';
-      return;
+      list.innerHTML = '<div class="bday-empty"><span>🎂</span>No birthdays yet!<br>Add yours above</div>'; return;
     }
- 
     const members = await Promise.all(upcoming.map(async b => {
       let avatar = "https://taki2023.github.io/taki/default-pawn.png";
-      try {
-        const pj = await fetch("https://api.chess.com/pub/player/" + b.username).then(r => r.json());
-        if (pj.avatar) avatar = pj.avatar;
-      } catch(e) {}
-      const nextDate = getNextDate(b.month, b.day);
-      const today = new Date(); today.setHours(0,0,0,0);
-      const diffDays = Math.round((nextDate - today) / (1000*60*60*24));
-      const suffix = getDateSuffix(b.day);
+      try { const pj = await fetch("https://api.chess.com/pub/player/" + b.username).then(r => r.json()); if (pj.avatar) avatar = pj.avatar; } catch(e) {}
+      const nextDate    = getNextDate(b.month, b.day);
+      const today       = new Date(); today.setHours(0,0,0,0);
+      const diffDays    = Math.round((nextDate - today) / (1000*60*60*24));
+      const suffix      = getDateSuffix(b.day);
       const countdownText = diffDays === 0 ? "TODAY 🎉" : `in ${diffDays}d`;
       return { username: b.username, avatar, note: b.note, dateStr: `🎂 ${b.day}${suffix} ${MONTH_NAMES[b.month-1]}`, countdown: countdownText, isToday: diffDays === 0 };
     }));
- 
     list.innerHTML = members.map(m => `
       <a class="bday-item ${m.isToday ? 'today-bday' : ''}" href="https://www.chess.com/member/${m.username}" target="_blank">
         <img class="bday-avatar" src="${m.avatar}">
@@ -967,39 +936,37 @@ async function loadBirthdays() {
       </a>
     `).join("");
   } catch(e) {
-    list.innerHTML = '<div class="bday-empty"><span>⚠️</span>Failed to load</div>';
-    console.error(e);
+    list.innerHTML = '<div class="bday-empty"><span>⚠️</span>Failed to load</div>'; console.error(e);
   }
 }
- 
+
 window.saveBirthday = saveBirthday;
-window.updateDays = updateDays;
+window.updateDays   = updateDays;
 window.addEventListener("DOMContentLoaded", loadBirthdays);
- 
+
 /* ════════════════════════════
    MUSIC PLAYER
 ════════════════════════════ */
 (function(){
 
-/* ── Safe localStorage wrapper ── */
 const LS = {
-  get(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:v; }catch(e){ return def; } },
+  get(k,def){ try{ const v=localStorage.getItem(k); return v===null?def:v; }catch(e){ return def; } },
   set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
-  getJSON(k, def){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):def; }catch(e){ return def; } },
+  getJSON(k,def){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):def; }catch(e){ return def; } },
   setJSON(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 };
 
 const DB = [
   {title:'MONTAGEM RUGADA',src:'https://raw.githubusercontent.com/taki2023/taki/main/MONTAGEM RUGADA - MAFIA.mp3'},
   {title:'MONTAGEM COMA',src:'https://raw.githubusercontent.com/taki2023/taki/main/Montagem-Coma.mp3'},
-  { title:"Faded – Alan Walker",       src:"https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3" },
-  { title:"Despacito – Luis Fonsi",    src:"https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3" },
-  { title:"Unstoppable – Sia",         src:"https://raw.githubusercontent.com/taki2023/taki/main/Sia_-_Im_unstoppable_today_(mp3.pm)%20(1).mp3" },
-  { title:"Believer – Imagine Dragons",src:"https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3" },
-  { title:"Demons – Imagine Dragons",  src:"https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3" },
-  { title:"Yellow – Coldplay",         src:"https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3" },
-  { title:"Maniac – Zayde Wolf",       src:"https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3" },
-  { title:"Mary On A Cross – Ghost",   src:"https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3" }
+  {title:"Faded – Alan Walker",        src:"https://raw.githubusercontent.com/taki2023/taki/main/8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm)%20(1).mp3"},
+  {title:"Despacito – Luis Fonsi",     src:"https://raw.githubusercontent.com/taki2023/taki/main/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm)%20(1).mp3"},
+  {title:"Unstoppable – Sia",          src:"https://raw.githubusercontent.com/taki2023/taki/main/Sia_-_Im_unstoppable_today_(mp3.pm)%20(1).mp3"},
+  {title:"Believer – Imagine Dragons", src:"https://raw.githubusercontent.com/taki2023/taki/main/Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm)%20(1).mp3"},
+  {title:"Demons – Imagine Dragons",   src:"https://raw.githubusercontent.com/taki2023/taki/main/I_magine_Dragons_-_Demons_(mp3.pm).mp3"},
+  {title:"Yellow – Coldplay",          src:"https://raw.githubusercontent.com/taki2023/taki/main/Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3"},
+  {title:"Maniac – Zayde Wolf",        src:"https://raw.githubusercontent.com/taki2023/taki/main/ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm)%20(1).mp3"},
+  {title:"Mary On A Cross – Ghost",    src:"https://raw.githubusercontent.com/taki2023/taki/main/Ghost-Mary-On-A-Cross-(AmkLoaded).mp3"}
 ];
 
 let queue        = LS.getJSON('hcc2_queue', []);
@@ -1007,7 +974,6 @@ let cur          = parseInt(LS.get('hcc2_cur', '0')) || 0;
 let savedTime    = parseFloat(LS.get('hcc2_t', '0')) || 0;
 let draggingProg = false;
 let isActuallyPlaying = false;
-
 if (cur >= queue.length) cur = 0;
 
 const audio     = document.getElementById('audio');
@@ -1034,327 +1000,182 @@ const dropdown  = document.getElementById('searchDropdown');
 const playlist  = document.getElementById('playlist');
 const plCount   = document.getElementById('plCount');
 
-function fmt(s){ if(!s||isNaN(s)) return '0:00'; const m=Math.floor(s/60), sc=Math.floor(s%60); return m+':'+(sc<10?'0':'')+sc; }
-function save(){
-  LS.setJSON('hcc2_queue', queue);
-  LS.set('hcc2_cur', cur);
-}
+function fmt(s){ if(!s||isNaN(s)) return '0:00'; const m=Math.floor(s/60),sc=Math.floor(s%60); return m+':'+(sc<10?'0':'')+sc; }
+function save(){ LS.setJSON('hcc2_queue',queue); LS.set('hcc2_cur',cur); }
 
 function setPlayingUI(playing){
   isActuallyPlaying = playing;
   if(playing){
-    iconPlay.innerHTML = '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
+    iconPlay.innerHTML='<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
     iconPlay.setAttribute('fill','white');
     disc.classList.add('spinning');
     eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.remove('paused'));
-    btnPlay.title = 'Pause';
+    btnPlay.title='Pause';
   } else {
-    iconPlay.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+    iconPlay.innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';
     iconPlay.setAttribute('fill','white');
     disc.classList.remove('spinning');
     eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.add('paused'));
-    btnPlay.title = 'Play';
+    btnPlay.title='Play';
   }
   renderPlaylist();
 }
-
 function setLoopUI(on){
   if(on){ btnLoop.classList.add('loop-on'); iconLoop.setAttribute('stroke','#fff'); btnLoop.title='Loop ON'; }
   else  { btnLoop.classList.remove('loop-on'); iconLoop.setAttribute('stroke','#c73520'); btnLoop.title='Loop OFF'; }
 }
-
 function setVolUI(){
-  const v = audio.muted ? 0 : audio.volume;
-  const pct = (v*100)+'%';
-  volFill.style.width = pct;
-  volKnob.style.left  = 'calc('+pct+' - 6px)';
-  const muted = audio.muted || v===0;
-  iconVol.innerHTML = muted
-    ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
-    : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
-  btnVol.title = muted ? 'Unmute' : 'Mute';
+  const v=audio.muted?0:audio.volume, pct=(v*100)+'%';
+  volFill.style.width=pct; volKnob.style.left='calc('+pct+' - 6px)';
+  const muted=audio.muted||v===0;
+  iconVol.innerHTML=muted
+    ?'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
+    :'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  btnVol.title=muted?'Unmute':'Mute';
 }
-
 function syncProg(){
   if(!audio.duration||isNaN(audio.duration)||draggingProg) return;
-  const p = (audio.currentTime/audio.duration)*100;
-  progFill.style.width = p+'%';
-  timeCur.textContent  = fmt(audio.currentTime);
-  timeDur.textContent  = fmt(audio.duration);
-  LS.set('hcc2_t', audio.currentTime);
+  const p=(audio.currentTime/audio.duration)*100;
+  progFill.style.width=p+'%'; timeCur.textContent=fmt(audio.currentTime);
+  timeDur.textContent=fmt(audio.duration); LS.set('hcc2_t',audio.currentTime);
 }
-
-function loadTrack(index, autoplay){
+function loadTrack(index,autoplay){
   if(!queue.length) return;
-  cur = index;
-  setPlayingUI(false);
-  audio.src = queue[cur].src;
-  trackName.textContent = queue[cur].title;
-  progFill.style.width = '0%';
-  timeCur.textContent = '0:00';
-  timeDur.textContent = '0:00';
-  renderPlaylist();
-  save();
-  audio.load();
+  cur=index; setPlayingUI(false);
+  audio.src=queue[cur].src; trackName.textContent=queue[cur].title;
+  progFill.style.width='0%'; timeCur.textContent='0:00'; timeDur.textContent='0:00';
+  renderPlaylist(); save(); audio.load();
   if(autoplay){
-    const onCanPlay = () => {
-      audio.removeEventListener('canplay', onCanPlay);
-      audio.play().catch(()=>{ setPlayingUI(false); });
-    };
-    audio.addEventListener('canplay', onCanPlay);
+    const onCP=()=>{ audio.removeEventListener('canplay',onCP); audio.play().catch(()=>{ setPlayingUI(false); }); };
+    audio.addEventListener('canplay',onCP);
   } else {
-    audio.onloadedmetadata = () => {
-      if(savedTime>0 && savedTime<audio.duration){ audio.currentTime = savedTime; syncProg(); }
-      savedTime = 0;
-    };
+    audio.onloadedmetadata=()=>{ if(savedTime>0&&savedTime<audio.duration){ audio.currentTime=savedTime; syncProg(); } savedTime=0; };
   }
 }
-
 function renderPlaylist(){
-  plCount.textContent = queue.length;
-  if(!queue.length){
-    playlist.innerHTML = '<div class="music-playlist-empty"><span>🎵</span>No songs yet!<br>Search above to add some</div>';
-    return;
-  }
-  playlist.innerHTML = '';
+  plCount.textContent=queue.length;
+  if(!queue.length){ playlist.innerHTML='<div class="music-playlist-empty"><span>🎵</span>No songs yet!<br>Search above to add some</div>'; return; }
+  playlist.innerHTML='';
   queue.forEach((t,i)=>{
-    const div = document.createElement('div');
-    div.className = 'music-playlist-item'+(i===cur?' active':'');
-    const rowIcon = (i===cur && isActuallyPlaying) ? '▶' : '♪';
-    div.innerHTML =
-      '<span class="music-pl-num">'+String(i+1).padStart(2,'0')+'</span>'+
-      '<span class="music-pl-icon">'+rowIcon+'</span>'+
-      '<span class="music-pl-name">'+t.title+'</span>'+
-      '<span class="music-pl-remove" data-i="'+i+'">✕</span>';
-    div.querySelector('.music-pl-name').onclick = () => { savedTime=0; loadTrack(i, true); };
-    div.querySelector('.music-pl-remove').onclick = (e) => { e.stopPropagation(); removeTrack(i); };
-    div.draggable = true;
-    div.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', i); });
-    div.addEventListener('dragover', e => e.preventDefault());
-    div.addEventListener('drop', e => {
+    const div=document.createElement('div');
+    div.className='music-playlist-item'+(i===cur?' active':'');
+    const rowIcon=(i===cur&&isActuallyPlaying)?'▶':'♪';
+    div.innerHTML='<span class="music-pl-num">'+String(i+1).padStart(2,'0')+'</span><span class="music-pl-icon">'+rowIcon+'</span><span class="music-pl-name">'+t.title+'</span><span class="music-pl-remove" data-i="'+i+'">✕</span>';
+    div.querySelector('.music-pl-name').onclick=()=>{ savedTime=0; loadTrack(i,true); };
+    div.querySelector('.music-pl-remove').onclick=(e)=>{ e.stopPropagation(); removeTrack(i); };
+    div.draggable=true;
+    div.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',i); });
+    div.addEventListener('dragover',e=>e.preventDefault());
+    div.addEventListener('drop',e=>{
       e.preventDefault();
-      const from = parseInt(e.dataTransfer.getData('text/plain'));
-      const to = Array.from(playlist.children).indexOf(div);
+      const from=parseInt(e.dataTransfer.getData('text/plain'));
+      const to=Array.from(playlist.children).indexOf(div);
       if(from===to) return;
-      const item = queue.splice(from,1)[0];
-      queue.splice(to,0,item);
-      if(cur===from) cur=to;
-      else if(from<cur&&to>=cur) cur--;
-      else if(from>cur&&to<=cur) cur++;
+      const item=queue.splice(from,1)[0]; queue.splice(to,0,item);
+      if(cur===from) cur=to; else if(from<cur&&to>=cur) cur--; else if(from>cur&&to<=cur) cur++;
       renderPlaylist(); save();
     });
     playlist.appendChild(div);
   });
 }
-
 function removeTrack(i){
-  const wasPlaying = isActuallyPlaying && i===cur;
+  const wasPlaying=isActuallyPlaying&&i===cur;
   queue.splice(i,1);
   if(!queue.length){
-    audio.pause(); audio.src='';
-    cur=0; savedTime=0;
-    trackName.textContent='Pick a song below ↓';
-    progFill.style.width='0%';
+    audio.pause(); audio.src=''; cur=0; savedTime=0;
+    trackName.textContent='Pick a song below ↓'; progFill.style.width='0%';
     timeCur.textContent='0:00'; timeDur.textContent='0:00';
-    setPlayingUI(false);
-    renderPlaylist(); save(); return;
+    setPlayingUI(false); renderPlaylist(); save(); return;
   }
   if(i<cur) cur--;
-  if(i===cur){ if(cur>=queue.length) cur=queue.length-1; loadTrack(cur, wasPlaying); }
+  if(i===cur){ if(cur>=queue.length) cur=queue.length-1; loadTrack(cur,wasPlaying); }
   renderPlaylist(); save();
 }
-
 function nextTrack(forcePlay){
   if(!queue.length) return;
-  const wp = (forcePlay === true) ? true : isActuallyPlaying;
-  cur=(cur+1)%queue.length;
-  savedTime=0;
-  loadTrack(cur, wp);
+  const wp=(forcePlay===true)?true:isActuallyPlaying;
+  cur=(cur+1)%queue.length; savedTime=0; loadTrack(cur,wp);
 }
 function prevTrack(){
   if(!queue.length) return;
   if(audio.currentTime>3){ audio.currentTime=0; return; }
   const wp=isActuallyPlaying;
-  cur=(cur-1+queue.length)%queue.length;
-  savedTime=0;
-  loadTrack(cur,wp);
+  cur=(cur-1+queue.length)%queue.length; savedTime=0; loadTrack(cur,wp);
 }
+audio.onended=()=>{ if(!audio.loop) nextTrack(true); };
+audio.ontimeupdate=syncProg;
+audio.onplay=()=>{ isActuallyPlaying=true; setPlayingUI(true); };
+audio.onpause=()=>{ isActuallyPlaying=false; setPlayingUI(false); };
+audio.onwaiting=()=>{ disc.classList.remove('spinning'); eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.add('paused')); };
+audio.onplaying=()=>{ if(isActuallyPlaying){ disc.classList.add('spinning'); eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.remove('paused')); } };
+audio.onerror=()=>{ if(queue.length) nextTrack(true); };
 
-audio.onended      = () => { if(!audio.loop) nextTrack(true); };
-audio.ontimeupdate = syncProg;
-
-audio.onplay  = () => { isActuallyPlaying = true;  setPlayingUI(true);  };
-audio.onpause = () => { isActuallyPlaying = false; setPlayingUI(false); };
-
-audio.onwaiting = () => {
-  disc.classList.remove('spinning');
-  eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.add('paused'));
-};
-audio.onplaying = () => {
-  if(isActuallyPlaying){
-    disc.classList.add('spinning');
-    eqBars.querySelectorAll('.eq-bar').forEach(b=>b.classList.remove('paused'));
-  }
-};
-
-audio.onerror = () => { if(queue.length) nextTrack(true); };
-
-btnPlay.addEventListener('click', function(e){
+btnPlay.addEventListener('click',function(e){
   e.stopPropagation();
   if(!queue.length) return;
-  if(!audio.src || audio.src===''){
-    loadTrack(cur, true);
-  } else if(audio.paused){
-    audio.play().catch(()=>{});
-  } else {
-    audio.pause();
-  }
+  if(!audio.src||audio.src===''){ loadTrack(cur,true); }
+  else if(audio.paused){ audio.play().catch(()=>{}); }
+  else { audio.pause(); }
+});
+btnNext.addEventListener('click',function(e){ e.stopPropagation(); nextTrack(); });
+btnPrev.addEventListener('click',function(e){ e.stopPropagation(); prevTrack(); });
+btnLoop.addEventListener('click',function(e){
+  e.stopPropagation(); audio.loop=!audio.loop; setLoopUI(audio.loop); LS.set('hcc2_loop',audio.loop);
 });
 
-btnNext.addEventListener('click', function(e){ e.stopPropagation(); nextTrack(); });
-btnPrev.addEventListener('click', function(e){ e.stopPropagation(); prevTrack(); });
+const savedLoop=LS.get('hcc2_loop','false')==='true'; audio.loop=savedLoop; setLoopUI(savedLoop);
+const savedVol=LS.get('hcc2_vol',null);
+audio.volume=savedVol!==null?parseFloat(savedVol):0.7;
+audio.muted=LS.get('hcc2_muted','false')==='true'; setVolUI();
 
-btnLoop.addEventListener('click', function(e){
-  e.stopPropagation();
-  audio.loop = !audio.loop;
-  setLoopUI(audio.loop);
-  LS.set('hcc2_loop', audio.loop);
-});
-
-const savedLoop = LS.get('hcc2_loop','false') === 'true';
-audio.loop = savedLoop;
-setLoopUI(savedLoop);
-
-const savedVol = LS.get('hcc2_vol', null);
-audio.volume = savedVol !== null ? parseFloat(savedVol) : 0.7;
-audio.muted  = LS.get('hcc2_muted','false') === 'true';
-setVolUI();
-
-function applyVol(v){
-  v = Math.max(0, Math.min(1, v));
-  audio.volume = v;
-  audio.muted = false;
-  LS.set('hcc2_vol', v);
-  LS.set('hcc2_muted', false);
-  setVolUI();
-}
-function volFromEvent(e){
-  const r = volTrack.getBoundingClientRect();
-  const x = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
-  applyVol(x / r.width);
-}
-volTrack.onmousedown = e => {
-  volFromEvent(e);
-  document.onmousemove = volFromEvent;
-  document.onmouseup = () => document.onmousemove = null;
+function applyVol(v){ v=Math.max(0,Math.min(1,v)); audio.volume=v; audio.muted=false; LS.set('hcc2_vol',v); LS.set('hcc2_muted',false); setVolUI(); }
+function volFromEvent(e){ const r=volTrack.getBoundingClientRect(),x=(e.touches?e.touches[0].clientX:e.clientX)-r.left; applyVol(x/r.width); }
+volTrack.onmousedown=e=>{ volFromEvent(e); document.onmousemove=volFromEvent; document.onmouseup=()=>document.onmousemove=null; };
+volTrack.ontouchstart=volFromEvent; volTrack.ontouchmove=volFromEvent;
+btnVol.onclick=()=>{
+  if(!audio.muted){ audio.muted=true; if(!audio.paused) audio.pause(); }
+  else { audio.muted=false; if(queue.length&&audio.src&&audio.src!=='') audio.play().catch(()=>{}); }
+  LS.set('hcc2_muted',audio.muted); setVolUI();
 };
-volTrack.ontouchstart = volFromEvent;
-volTrack.ontouchmove  = volFromEvent;
-
-btnVol.onclick = () => {
-  if(!audio.muted){
-    audio.muted = true;
-    if(!audio.paused) audio.pause();
-  } else {
-    audio.muted = false;
-    if(queue.length && audio.src && audio.src !== '') audio.play().catch(()=>{});
-  }
-  LS.set('hcc2_muted', audio.muted);
-  setVolUI();
-};
-
 function seekFrom(e){
   if(!audio.duration||isNaN(audio.duration)) return;
-  const r = progTrack.getBoundingClientRect();
-  const x = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
-  const p = Math.max(0, Math.min(1, x/r.width));
-  audio.currentTime = p*audio.duration;
-  progFill.style.width = (p*100)+'%';
+  const r=progTrack.getBoundingClientRect(),x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  const p=Math.max(0,Math.min(1,x/r.width));
+  audio.currentTime=p*audio.duration; progFill.style.width=(p*100)+'%';
 }
-progTrack.onmousedown = e => {
-  draggingProg = true;
-  seekFrom(e);
-  document.onmousemove = seekFrom;
-  document.onmouseup = () => { draggingProg=false; document.onmousemove=null; };
-};
-progTrack.ontouchstart = e => { draggingProg=true; seekFrom(e); };
-progTrack.ontouchmove  = seekFrom;
-progTrack.ontouchend   = () => { draggingProg=false; };
+progTrack.onmousedown=e=>{ draggingProg=true; seekFrom(e); document.onmousemove=seekFrom; document.onmouseup=()=>{ draggingProg=false; document.onmousemove=null; }; };
+progTrack.ontouchstart=e=>{ draggingProg=true; seekFrom(e); };
+progTrack.ontouchmove=seekFrom; progTrack.ontouchend=()=>{ draggingProg=false; };
 
-/* ── Search dropdown ── */
 function renderDropdown(list){
   if(!list.length){ dropdown.classList.remove('open'); return; }
-  dropdown.innerHTML = '';
-  list.forEach(song => {
-    const exists = queue.some(q => q.src === song.src);
-    const div = document.createElement('div');
-    div.className = 'music-search-item';
-    div.innerHTML =
-      '<span class="music-search-item-title">'+song.title+'</span>'+
-      '<span class="music-search-badge '+(exists?'done':'add')+'">'+(exists?'✓ In Queue':'+ Add')+'</span>';
-    if(!exists){
-      div.onclick = () => {
-        const wasEmpty = queue.length === 0;
-        queue.push(song);
-        save();
-        renderPlaylist();
-        renderDropdown(DB.filter(s => s.title.toLowerCase().includes(searchInp.value.toLowerCase().trim())));
-        if(wasEmpty){ savedTime=0; loadTrack(0, false); }
-      };
-    }
+  dropdown.innerHTML='';
+  list.forEach(song=>{
+    const exists=queue.some(q=>q.src===song.src);
+    const div=document.createElement('div');
+    div.className='music-search-item';
+    div.innerHTML='<span class="music-search-item-title">'+song.title+'</span><span class="music-search-badge '+(exists?'done':'add')+'">'+(exists?'✓ In Queue':'+ Add')+'</span>';
+    if(!exists){ div.onclick=()=>{ const wasEmpty=queue.length===0; queue.push(song); save(); renderPlaylist(); renderDropdown(DB.filter(s=>s.title.toLowerCase().includes(searchInp.value.toLowerCase().trim()))); if(wasEmpty){ savedTime=0; loadTrack(0,false); } }; }
     dropdown.appendChild(div);
   });
   dropdown.classList.add('open');
 }
+function closeDropdown(){ dropdown.classList.remove('open'); }
+searchInp.addEventListener('focus',()=>{ renderDropdown(DB); });
+searchInp.addEventListener('input',function(){ const q=this.value.toLowerCase().trim(); renderDropdown(q?DB.filter(s=>s.title.toLowerCase().includes(q)):DB); });
+document.addEventListener('mousedown',e=>{ if(!searchInp.contains(e.target)&&!dropdown.contains(e.target)) closeDropdown(); });
+document.addEventListener('touchstart',e=>{ if(!searchInp.contains(e.target)&&!dropdown.contains(e.target)) closeDropdown(); },{passive:true});
+window.addEventListener('blur',()=>{ closeDropdown(); });
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') closeDropdown(); });
+searchInp.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDropdown(); searchInp.blur(); } });
 
-function closeDropdown(){
-  dropdown.classList.remove('open');
-}
-
-searchInp.addEventListener('focus', () => {
-  renderDropdown(DB);
-});
-searchInp.addEventListener('input', function(){
-  const q = this.value.toLowerCase().trim();
-  renderDropdown(q ? DB.filter(s => s.title.toLowerCase().includes(q)) : DB);
-});
-
-document.addEventListener('mousedown', e => {
-  if(!searchInp.contains(e.target) && !dropdown.contains(e.target)){
-    closeDropdown();
-  }
-});
-document.addEventListener('touchstart', e => {
-  if(!searchInp.contains(e.target) && !dropdown.contains(e.target)){
-    closeDropdown();
-  }
-}, { passive: true });
-
-window.addEventListener('blur', () => {
-  closeDropdown();
-});
-
-document.addEventListener('visibilitychange', () => {
-  if(document.visibilityState === 'hidden') closeDropdown();
-});
-
-searchInp.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){ closeDropdown(); searchInp.blur(); }
-});
-
-/* Restore state on load */
-if(queue.length > 0){
-  audio.src = queue[cur].src;
-  trackName.textContent = queue[cur].title;
-  audio.onloadedmetadata = () => {
-    if(savedTime > 0 && savedTime < audio.duration){ audio.currentTime = savedTime; syncProg(); }
-    savedTime = 0;
-  };
+if(queue.length>0){
+  audio.src=queue[cur].src; trackName.textContent=queue[cur].title;
+  audio.onloadedmetadata=()=>{ if(savedTime>0&&savedTime<audio.duration){ audio.currentTime=savedTime; syncProg(); } savedTime=0; };
 }
 renderPlaylist();
-
 })();
 </script>
- 
+
 </body>
 </html>
