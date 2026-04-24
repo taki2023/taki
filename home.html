@@ -75,6 +75,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   height:clamp(40px,8.5vw,56px);
 }
 .cal-cell.empty{background:transparent;border-color:transparent;}
+.cal-cell.overflow{opacity:.3;pointer-events:none;}
 .cal-cell.today{background:linear-gradient(135deg,rgba(217,48,32,.09),rgba(239,102,64,.05));border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);}
 .day-num{font-family:'Fredoka One',cursive;font-size:clamp(8px,2vw,12px);color:var(--text-dark);line-height:1;padding-left:2px;flex-shrink:0;}
 .cal-cell.today .day-num{
@@ -95,7 +96,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;transition:transform .15s;z-index:1;
 }
 .evt:hover{transform:scale(1.3);z-index:999;}
-.legend{display:flex;flex-wrap:wrap;gap:4px 9px;margin-top:10px;justify-content:center;}
+.legend{display:flex;flex-wrap:wrap;gap:4px 9px;margin-top:6px;justify-content:center;}
 .leg-item{display:flex;align-items:center;gap:3px;font-size:clamp(7px,1.8vw,10px);font-weight:800;color:var(--text-mid);}
 .leg-dot{font-size:clamp(10px,2.2vw,13px);}
 
@@ -120,7 +121,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .evt-tip-detail{font-size:var(--fs-xs);font-weight:700;color:var(--text-mid);line-height:1.55;}
 .evt-tip-link{display:inline-block;margin-top:5px;font-size:var(--fs-xs);font-weight:900;color:#fff;background:linear-gradient(135deg,#d93020,#e85535);padding:3px 10px;border-radius:999px;text-decoration:none;box-shadow:0 2px 0 #8c1a10;pointer-events:auto;}
 
-.footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);margin-top:auto;padding-top:10px;}
+.footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);margin-top:auto;padding-top:4px;}
 </style>
 </head>
 <body>
@@ -238,49 +239,63 @@ function buildCalendar(){
   const first=dowMon(viewYear,viewMonth,1);
   const last=lastDay(viewYear,viewMonth);
   const TOTAL=42;
-  let cellsAdded=0;
 
+  // ── prev-month overflow days ──
+  const prevM = viewMonth===0?11:viewMonth-1;
+  const prevY = viewMonth===0?viewYear-1:viewYear;
+  const prevLast = lastDay(prevY,prevM);
   for(let i=0;i<first;i++){
-    const c=document.createElement('div');
-    c.className='cal-cell empty'; calBody.appendChild(c); cellsAdded++;
+    const d = prevLast - first + 1 + i;
+    const cell = makeCell(prevY, prevM, d, true);
+    calBody.appendChild(cell);
   }
 
+  // ── current month days ──
   for(let d=1;d<=last;d++){
-    const isToday=(d===today.getDate()&&viewMonth===today.getMonth()&&viewYear===today.getFullYear());
-    const cell=document.createElement('div');
-    cell.className='cal-cell'+(isToday?' today':'');
+    const cell = makeCell(viewYear, viewMonth, d, false);
+    calBody.appendChild(cell);
+  }
 
-    const num=document.createElement('div');
-    num.className='day-num'; num.textContent=d; cell.appendChild(num);
+  // ── next-month overflow days ──
+  const nextM = viewMonth===11?0:viewMonth+1;
+  const nextY = viewMonth===11?viewYear+1:viewYear;
+  const filled = first + last;
+  for(let d=1; filled+d-1 < TOTAL; d++){
+    const cell = makeCell(nextY, nextM, d, true);
+    calBody.appendChild(cell);
+  }
+}
 
-    const types=evtTypesForDay(viewYear,viewMonth,d);
-    if(types.length){
-      const wrap=document.createElement('div');
-      wrap.className='evt-icons';
-      types.forEach(type=>{
-        const ev=resolveEvent(type,viewYear,viewMonth,d);
-        const ico=document.createElement('div');
-        ico.className='evt';
-        ico.textContent=ev.icon;
-        ico.style.background=ev.color;
-        ico.style.border='1.5px solid '+ev.border;
-        // pass full date label into the tooltip
-        const dateLabel=formatDate(viewYear,viewMonth,d);
+function makeCell(y, m, d, overflow){
+  const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
+  const cell=document.createElement('div');
+  cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
+
+  const num=document.createElement('div');
+  num.className='day-num'; num.textContent=d; cell.appendChild(num);
+
+  const types=evtTypesForDay(y,m,d);
+  if(types.length){
+    const wrap=document.createElement('div');
+    wrap.className='evt-icons';
+    types.forEach(type=>{
+      const ev=resolveEvent(type,y,m,d);
+      const ico=document.createElement('div');
+      ico.className='evt';
+      ico.textContent=ev.icon;
+      ico.style.background=ev.color;
+      ico.style.border='1.5px solid '+ev.border;
+      const dateLabel=formatDate(y,m,d);
+      if(!overflow){
         ico.addEventListener('mouseenter',e=>showTip(e,ev,dateLabel));
         ico.addEventListener('mouseleave',hideTip);
         ico.addEventListener('mousemove',moveTip);
-        wrap.appendChild(ico);
-      });
-      cell.appendChild(wrap);
-    }
-    calBody.appendChild(cell);
-    cellsAdded++;
+      }
+      wrap.appendChild(ico);
+    });
+    cell.appendChild(wrap);
   }
-
-  while(cellsAdded<TOTAL){
-    const c=document.createElement('div');
-    c.className='cal-cell empty'; calBody.appendChild(c); cellsAdded++;
-  }
+  return cell;
 }
 
 let activeTip=false;
