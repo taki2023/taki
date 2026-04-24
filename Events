@@ -169,7 +169,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 // Make sure your sheet is published:
 //   File → Share → Publish to web → select your sheet → CSV
 // ─────────────────────────────────────────────────────────────
-const SHEET_CSV_URL = 'YOUR_GOOGLE_SHEET_CSV_URL_HERE';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQORKPI2d-n-66kVN25-C0EerERBF34hIwLrz5EFoWpQfA08qqKMQn0JiA5D3WvfXOc3spp8MHO1_Dl/pubhtml';
 // Example:
 // const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/SHEET_ID/export?format=csv&gid=0';
 
