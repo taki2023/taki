@@ -164,17 +164,10 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 </div>
 
 <script>
-// ─────────────────────────────────────────────────────────────
-// ★ CONFIGURATION — paste your Google Sheet CSV export URL here
-// Make sure your sheet is published:
-//   File → Share → Publish to web → select your sheet → CSV
-// ─────────────────────────────────────────────────────────────
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQORKPI2d-n-66kVN25-C0EerERBF34hIwLrz5EFoWpQfA08qqKMQn0JiA5D3WvfXOc3spp8MHO1_Dl/pubhtml';
-// Example:
-// const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/SHEET_ID/export?format=csv&gid=0';
 
-// Column indices (0-based) — adjust if your sheet order differs
-// Expected columns: date | time (UTC) | title | details | button before | button after | logo | link before | link after
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxouJIRbVJLLMIWZ7-vVAbdoFDjLefr5u47I1pIy0L14GJF9XIRP09TK_tllwXsev2D8w/exec';
+
+// columns: date | time (UTC) | title | details | button before | button after | logo | link before | link after
 const COL = {
   date:          0,
   time:          1,
@@ -200,25 +193,6 @@ let viewMonth  = today.getMonth();
 let eventMap = {};
 let sheetLoaded = false;
 
-// ─── CSV parser (handles quoted commas) ───────────────────────
-function parseCSV(text) {
-  const rows = [];
-  const lines = text.split(/\r?\n/);
-  for (const line of lines) {
-    if (!line.trim()) continue;
-    const cols = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') { inQ = !inQ; }
-      else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-      else cur += ch;
-    }
-    cols.push(cur.trim());
-    rows.push(cols);
-  }
-  return rows;
-}
 
 // ─── Parse date string (flexible: YYYY-MM-DD, MM/DD/YYYY, DD/MM/YYYY, etc.) ──
 function parseDate(str) {
@@ -274,40 +248,40 @@ function formatDate(y, m, d) { return `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`; }
 
 // ─── Load sheet ───────────────────────────────────────────────
 async function loadSheet() {
-  if (SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
-    console.warn('⚠️ Set SHEET_CSV_URL to your published Google Sheet CSV URL.');
-    return;
-  }
   try {
-    // Use a CORS proxy if needed — Google Sheets published CSV supports direct fetch in most cases
-    const res = await fetch(SHEET_CSV_URL);
+    const res = await fetch(SHEET_API_URL);
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
-    const rows = parseCSV(text);
-    // skip header row (row 0)
+
+    const data = await res.json(); // ← already JSON
     eventMap = {};
-    for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      if (!row[COL.date] || !row[COL.title]) continue;
-      const dateObj = parseDate(row[COL.date]);
-      if (!dateObj) continue;
+
+    data.forEach(ev => {
+      if (!ev.date || !ev.title) return;
+
+      const dateObj = parseDate(ev.date);
+      if (!dateObj) return;
+
       const key = dateKey(dateObj.y, dateObj.m, dateObj.d);
+
       if (!eventMap[key]) eventMap[key] = [];
+
       eventMap[key].push({
         dateObj,
-        timeRaw:      (row[COL.time] || '').trim(),
-        timeObj:      parseTime(row[COL.time]),
-        title:        (row[COL.title] || '').trim(),
-        details:      (row[COL.details] || '').trim(),
-        buttonBefore: (row[COL.buttonBefore] || '').trim(),
-        buttonAfter:  (row[COL.buttonAfter] || '').trim(),
-        logo:         (row[COL.logo] || '').trim(),
-        linkBefore:   (row[COL.linkBefore] || '').trim(),
-        linkAfter:    (row[COL.linkAfter] || '').trim(),
+        timeRaw: ev.time,
+        timeObj: parseTime(ev.time),
+        title: ev.title,
+        details: ev.details,
+        buttonBefore: ev.buttonBefore,
+        buttonAfter: ev.buttonAfter,
+        logo: ev.logo,
+        linkBefore: ev.linkBefore,
+        linkAfter: ev.linkAfter,
       });
-    }
+    });
+
     sheetLoaded = true;
     buildCalendar();
+
   } catch (e) {
     console.error('Failed to load sheet:', e);
   }
