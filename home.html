@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot Chilli CheckMate – Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
+
+:root{
+  --red-dark:#d93020;
+  --red-mid:#e85535;
+  --red-light:#ef6640;
+  --red-border:#e8553a;
+  --bg:#fff5f0;
+  --card:#fff;
+  --border:#f5c5b8;
+  --shadow:#e8aa98;
+  --text-dark:#c73520;
+  --text-mid:#9a2010;
+  --text-muted:#e8aa98;
+  --fs-xs:10px;
+  --fs-sm:11px;
+  --fs-base:12px;
+  --fs-md:13px;
+}
+
+/* ══════════════════════════════════
+   OUTER SHELL
+══════════════════════════════════ */
+.page-sb{
+  width:100%;
+  background:var(--bg);
+  border-radius:28px;
+  border:3px solid var(--red-border);
+  position:relative;
+  overflow:visible;
+}
+
+/* ══════════════════════════════════
+   TOP HEADER
+══════════════════════════════════ */
+.page-top{
+  background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  border-radius:24px 24px 0 0;
+  padding:18px 16px 12px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.page-top::before{
+  content:'';position:absolute;bottom:-10px;left:-10%;
+  width:120%;height:20px;background:var(--bg);border-radius:50%;
+}
+.page-top::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-55deg,transparent,transparent 14px,rgba(255,255,255,.04) 14px,rgba(255,255,255,.04) 28px);
+  pointer-events:none;
+}
+.chilli-l{position:absolute;font-size:28px;opacity:.45;top:8px;left:10px;transform:rotate(-20deg);z-index:1;}
+.chilli-r{position:absolute;font-size:28px;opacity:.45;top:8px;right:10px;transform:rotate(20deg);z-index:1;}
+.page-title{font-family:'Fredoka One',cursive;font-size:20px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18);position:relative;z-index:1;}
+.page-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:3px;position:relative;z-index:1;}
+
+/* ══════════════════════════════════
+   INNER CONTENT
+══════════════════════════════════ */
+.inner{padding:18px 14px 20px;}
+
+/* ══════════════════════════════════
+   SECTION LABELS
+══════════════════════════════════ */
+.sec-label{
+  display:flex;align-items:center;gap:8px;
+  font-family:'Fredoka One',cursive;font-size:14px;color:var(--red-dark);
+  margin-bottom:10px;margin-top:4px;
+}
+.sec-label .dot{width:12px;height:10px;border-radius:50%;background:var(--red-dark);flex-shrink:0;}
+
+/* ══════════════════════════════════
+   SEPARATOR
+══════════════════════════════════ */
+.div{width:100%;height:18px;margin:14px 0;position:relative;opacity:.9;}
+.div::before,.div::after{content:"";position:absolute;left:0;width:100%;height:6px;border-radius:999px;}
+.div::before{
+  top:4px;
+  background:radial-gradient(circle at 2% 50%,#e89080 0 6px,transparent 7px),
+    radial-gradient(circle at 98% 50%,#e89080 0 6px,transparent 7px),
+    linear-gradient(90deg,transparent 0%,#e89080 4%,#e08070 12%,#e99082 24%,#e18070 37%,#e89080 50%,#e28272 63%,#e99282 77%,#e08070 90%,#e89080 96%,transparent 100%);
+  transform:rotate(-0.35deg);filter:blur(.15px);
+}
+.div::after{
+  top:8px;left:4px;width:calc(100% - 8px);
+  background:radial-gradient(circle at 2% 50%,#e89080 0 5px,transparent 6px),
+    radial-gradient(circle at 98% 50%,#e89080 0 5px,transparent 6px),
+    linear-gradient(90deg,transparent 0%,#ea9282 5%,#df8070 16%,#e89080 28%,#e18272 41%,#e99282 56%,#e08070 71%,#e89080 86%,#ea9282 95%,transparent 100%);
+  transform:rotate(0.45deg);opacity:.82;
+}
+
+/* ══════════════════════════════════
+   WELCOME SECTION
+══════════════════════════════════ */
+.welcome-box{
+  background:var(--card);
+  border-radius:18px;
+  border:2px solid var(--border);
+  box-shadow:0 4px 0 var(--shadow);
+  padding:16px;
+  text-align:center;
+  margin-bottom:4px;
+}
+.welcome-title{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(14px,3.5vw,18px);
+  color:var(--red-dark);
+  margin-bottom:6px;
+}
+.welcome-sub{
+  font-size:clamp(10px,2.5vw,13px);
+  font-weight:600;
+  color:var(--text-mid);
+  font-style:italic;
+  margin-bottom:12px;
+}
+.welcome-tagline{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(12px,3vw,15px);
+  color:var(--red-mid);
+  margin-top:4px;
+}
+
+/* ══════════════════════════════════
+   CALENDAR
+══════════════════════════════════ */
+.cal-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;gap:8px;
+}
+.cal-month-label{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(13px,3.5vw,18px);
+  color:var(--red-dark);
+  text-align:center;flex:1;
+  white-space:nowrap;
+}
+.nav-btn{
+  width:32px;height:32px;min-width:32px;
+  border-radius:50%;border:2px solid var(--border);
+  background:var(--card);box-shadow:0 4px 0 var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:15px;color:var(--red-dark);
+  font-weight:900;transition:all .15s;user-select:none;flex-shrink:0;
+  line-height:1;
+}
+.nav-btn:hover{background:#fce8e0;border-color:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 0 var(--red-dark);}
+.nav-btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--red-dark);}
+
+/* GRID */
+.cal-grid{width:100%;}
+.cal-head{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:2px;margin-bottom:3px;
+}
+.cal-head-cell{
+  text-align:center;
+  font-size:clamp(8px,1.8vw,11px);
+  font-weight:900;
+  color:var(--text-mid);
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  padding:3px 0;
+}
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+
+.cal-cell{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:8px;
+  padding:3px 2px 3px;
+  position:relative;
+  display:flex;flex-direction:column;
+  align-items:flex-start;
+  gap:1px;
+  transition:border-color .15s;
+  overflow:visible;
+  min-height:clamp(46px,10vw,70px);
+}
+.cal-cell.empty{background:transparent;border-color:transparent;box-shadow:none;}
+.cal-cell.today{
+  background:linear-gradient(135deg,rgba(217,48,32,.09),rgba(239,102,64,.05));
+  border-color:var(--red-dark);
+  box-shadow:0 0 0 2px rgba(217,48,32,.2);
+}
+/* day number — top-left corner */
+.day-num{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(9px,2.2vw,13px);
+  color:var(--text-dark);
+  line-height:1;
+  width:100%;
+  text-align:left;
+  padding-left:3px;
+  flex-shrink:0;
+}
+/* today: red circle badge stays top-left, same flow as other dates */
+.cal-cell.today .day-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#d93020,#e85535);
+  color:#fff;border-radius:50%;
+  width:clamp(16px,3.5vw,22px);height:clamp(16px,3.5vw,22px);
+  padding:0;
+  margin-left:2px;
+  box-shadow:0 2px 0 #8c1a10;
+  /* keep it left — do NOT use width:100% */
+  text-align:center;
+  flex-shrink:0;
+  /* override full-width so the circle doesn't stretch */
+}
+
+/* EVENT ICONS */
+.evt-icons{
+  display:flex;flex-direction:column;align-items:center;
+  gap:1px;width:100%;flex:1;
+  /* re-center icons even though parent is align-items:flex-start */
+  align-self:stretch;
+}
+.evt{
+  position:relative;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  width:clamp(18px,4.5vw,28px);
+  height:clamp(18px,4.5vw,28px);
+  border-radius:6px;
+  font-size:clamp(10px,2.8vw,16px);
+  flex-shrink:0;
+  transition:transform .15s;
+  z-index:1;
+}
+.evt:hover{transform:scale(1.2);z-index:999;}
+
+/* ══════════════════════════════════
+   LEGEND
+══════════════════════════════════ */
+.legend{
+  display:flex;flex-wrap:wrap;gap:5px 10px;
+  margin-top:12px;justify-content:center;
+}
+.leg-item{
+  display:flex;align-items:center;gap:4px;
+  font-size:clamp(8px,2vw,11px);font-weight:800;color:var(--text-mid);
+}
+.leg-dot{font-size:clamp(11px,2.5vw,14px);}
+
+/* ══════════════════════════════════
+   EASY ACCESS GRID
+══════════════════════════════════ */
+.easy-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  padding:6px;
+}
+.easy-btn{
+  display:block;
+  border-radius:0;
+  overflow:visible;
+  border:none;
+  box-shadow:none;
+  background:none;
+  transition:transform .18s ease, filter .18s ease;
+  position:relative;
+  text-decoration:none;
+}
+.easy-btn:hover{
+  transform:translateY(-2px) scale(1.02);
+  filter:drop-shadow(0 5px 8px rgba(217,48,32,.28));
+}
+.easy-btn:active{transform:translateY(1px) scale(1);}
+.easy-btn img{
+  width:100%;height:auto;
+  display:block;
+  border-radius:0;
+}
+
+/* Last row — full width (opening courses) */
+.easy-btn.full{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;
+}
+.easy-btn.full img{
+  width:auto;
+  max-width:75%;
+  height:auto;
+}
+
+/* ══════════════════════════════════
+   TOOLTIP (fixed, never clipped)
+══════════════════════════════════ */
+.evt-tip{
+  position:fixed;
+  background:var(--card);
+  border:2px solid var(--red-dark);
+  border-radius:12px;padding:8px 11px;
+  box-shadow:0 8px 24px rgba(217,48,32,.22);
+  pointer-events:none;opacity:0;
+  transition:opacity .18s;
+  z-index:99999;
+  min-width:130px;max-width:185px;
+  white-space:normal;
+  font-family:'Nunito',sans-serif;
+}
+.evt-tip.show{opacity:1;}
+.evt-tip-name{font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);margin-bottom:3px;}
+.evt-tip-detail{font-size:var(--fs-xs);font-weight:700;color:var(--text-mid);line-height:1.55;}
+.evt-tip-icon{font-size:18px;display:block;margin-bottom:3px;}
+.evt-tip-link{
+  display:inline-block;margin-top:5px;font-size:var(--fs-xs);font-weight:900;
+  color:#fff;background:linear-gradient(135deg,#d93020,#e85535);
+  padding:3px 10px;border-radius:999px;text-decoration:none;
+  box-shadow:0 2px 0 #8c1a10;
+  pointer-events:auto;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.footer{
+  text-align:center;
+  font-size:var(--fs-sm);font-weight:700;
+  color:var(--red-border);
+  margin-top:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-sb">
+
+  <!-- ── TOP HEADER ── -->
+  <div class="page-top">
+    <div class="chilli-l">🌶</div>
+    <div class="chilli-r">♟</div>
+    <div class="page-title">🏠 Hot Chilli CheckMate</div>
+    <div class="page-sub">Your Chess Home ♞</div>
+  </div>
+
+  <div class="inner">
+
+    <!-- ── WELCOME ── -->
+    <div class="sec-label"><div class="dot"></div>Welcome 🌶️♟️</div>
+    <div class="welcome-box">
+      <div class="welcome-title">Welcome to Hot Chilli CheckMate Chess Club! 🌶️♟️</div>
+      <div class="welcome-sub">An active chess club where passion meets respect.</div>
+      <div class="welcome-tagline">Let's heat up the board together! 🔥🌶️♟️</div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ── EVENTS CALENDAR ── -->
+    <div class="sec-label"><div class="dot"></div>Events Calendar 📅</div>
+
+    <div class="cal-nav">
+      <button class="nav-btn" id="prevBtn">‹</button>
+      <div class="cal-month-label" id="monthLabel"></div>
+      <button class="nav-btn" id="nextBtn">›</button>
+    </div>
+
+    <div class="cal-grid">
+      <div class="cal-head" id="calHead"></div>
+      <div class="cal-body" id="calBody"></div>
+    </div>
+
+    <div class="legend">
+      <div class="leg-item"><span class="leg-dot">🎯</span> Guess the Elo</div>
+      <div class="leg-item"><span class="leg-dot">⚡</span> Blitz Battle</div>
+      <div class="leg-item"><span class="leg-dot">🏟️</span> Multiclub Arena</div>
+      <div class="leg-item"><span class="leg-dot">📊</span> Monthly Recap</div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ── EASY ACCESS ── -->
+    <div class="sec-label"><div class="dot"></div>Easy Access 🔗</div>
+
+    <div class="easy-grid">
+      <a class="easy-btn" href="https://www.chess.com/clubs/forum/view/club-rules-507" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phphec60gtsd9pm5OvPIcR.png" alt="Club Rules" loading="lazy">
+      </a>
+      <a class="easy-btn" href="https://www.chess.com/club/notes/hot-chilli-checkmate" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phplpsfep15a3cn7DaWUrA.png" alt="Club Notes" loading="lazy">
+      </a>
+      <a class="easy-btn" href="https://www.chess.com/club/votechess/hot-chilli-checkmate" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpd71mc8pva33c7vqVIWR.png" alt="Vote Chess" loading="lazy">
+      </a>
+      <a class="easy-btn" href="https://www.chess.com/clubs/upcomingevents/hot-chilli-checkmate?type=daily" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/php6n6dvh69dagn5yiYlQP.png" alt="Upcoming Events" loading="lazy">
+      </a>
+      <a class="easy-btn" href="https://www.chess.com/club/hot-chilli-giveaway-club" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpjviodnmpsetleQMe5OM.png" alt="Giveaway Club" loading="lazy">
+      </a>
+      <a class="easy-btn" href="https://www.chess.com/announcements/view/hot-chilli-partners" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpbbcuj6qkegfb0cRzzsR.png" alt="Partners" loading="lazy">
+      </a>
+      <!-- Full-width last row -->
+      <a class="easy-btn full" href="https://www.chess.com/announcements/view/hot-chilli-opening-courses" target="_blank" rel="noopener noreferrer">
+        <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpo1a83gbbt58ieoO3Xw1.png" alt="Opening Courses" loading="lazy">
+      </a>
+    </div>
+
+    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
+
+  </div>
+</div>
+
+<!-- ── GLOBAL TOOLTIP (fixed, never clipped) ── -->
+<div class="evt-tip" id="globalTip">
+  <span class="evt-tip-icon" id="tipIcon"></span>
+  <div class="evt-tip-name" id="tipName"></div>
+  <div class="evt-tip-detail" id="tipDetail"></div>
+  <div id="tipLinkWrap"></div>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   CALENDAR CONFIG
+════════════════════════════════════════ */
+const EVENTS = {
+  friday: {
+    icon:'🎯', name:'Guess the Elo',
+    detail:'Click & submit your game!',
+    link:'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform',
+    linkText:'Submit Game →', color:'#fff3e0', border:'#ef6640'
+  },
+  saturday: {
+    icon:'⚡', name:'Blitz Battle',
+    detail:'3+0 · 3 PM UTC',
+    link:'https://www.chess.com/club/hot-chilli-checkmate',
+    linkText:'Join Battle →', color:'#fff8e1', border:'#f9a825'
+  },
+  sunday: {
+    icon:'🏟️', name:'Multiclub Arena (MCA)',
+    detail:'3+0 · 3 PM UTC · 2h long',
+    link:'https://www.chess.com/club/hot-chilli-checkmate',
+    linkText:'Join Arena →', color:'#e8f5e9', border:'#43a047'
+  },
+  recap: {
+    icon:'📊', name:'Monthly Recap',
+    detail:'End-of-month stats & highlights!',
+    link:'https://chesswrap.vercel.app/',
+    linkText:'View Recap →', color:'#fce4ec', border:'#e91e63'
+  }
+};
+
+const today = new Date();
+let viewYear  = today.getFullYear();
+let viewMonth = today.getMonth();
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAY_NAMES   = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
+const monthLabel  = document.getElementById('monthLabel');
+const calHead     = document.getElementById('calHead');
+const calBody     = document.getElementById('calBody');
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const tip         = document.getElementById('globalTip');
+const tipIcon     = document.getElementById('tipIcon');
+const tipName     = document.getElementById('tipName');
+const tipDetail   = document.getElementById('tipDetail');
+const tipLinkWrap = document.getElementById('tipLinkWrap');
+
+/* ── helpers ── */
+function lastDay(y,m){ return new Date(y,m+1,0).getDate(); }
+function dowMon(y,m,d){ return (new Date(y,m,d).getDay()+6)%7; } // 0=Mon
+
+function eventsForDay(y,m,d){
+  const dow = new Date(y,m,d).getDay();
+  const last = lastDay(y,m);
+  const ev = [];
+  if(dow===5) ev.push('friday');
+  if(dow===6) ev.push('saturday');
+  if(dow===0) ev.push('sunday');
+  if(d===last) ev.push('recap');
+  return ev;
+}
+
+/* ── build ── */
+function buildHeader(){
+  calHead.innerHTML='';
+  DAY_NAMES.forEach(d=>{
+    const c=document.createElement('div');
+    c.className='cal-head-cell';
+    c.textContent=d;
+    calHead.appendChild(c);
+  });
+}
+
+function buildCalendar(){
+  monthLabel.textContent = MONTH_NAMES[viewMonth]+' '+viewYear;
+  calBody.innerHTML='';
+  buildHeader();
+
+  const firstDow = dowMon(viewYear,viewMonth,1);
+  const last     = lastDay(viewYear,viewMonth);
+
+  for(let i=0;i<firstDow;i++){
+    const c=document.createElement('div');
+    c.className='cal-cell empty';
+    calBody.appendChild(c);
+  }
+
+  for(let d=1;d<=last;d++){
+    const isToday=(d===today.getDate()&&viewMonth===today.getMonth()&&viewYear===today.getFullYear());
+    const cell=document.createElement('div');
+    cell.className='cal-cell'+(isToday?' today':'');
+
+    const num=document.createElement('div');
+    num.className='day-num';
+    num.textContent=d;
+    cell.appendChild(num);
+
+    const evts=eventsForDay(viewYear,viewMonth,d);
+    if(evts.length){
+      const wrap=document.createElement('div');
+      wrap.className='evt-icons';
+      evts.forEach(key=>{
+        const ev=EVENTS[key];
+        const ico=document.createElement('div');
+        ico.className='evt';
+        ico.textContent=ev.icon;
+        ico.style.background=ev.color;
+        ico.style.border='1.5px solid '+ev.border;
+        ico.addEventListener('mouseenter',e=>showTip(e,key));
+        ico.addEventListener('mouseleave',hideTip);
+        ico.addEventListener('mousemove', moveTip);
+        wrap.appendChild(ico);
+      });
+      cell.appendChild(wrap);
+    }
+    calBody.appendChild(cell);
+  }
+}
+
+/* ── tooltip ── */
+let activeTip=false;
+
+function showTip(e,key){
+  const ev=EVENTS[key];
+  tipIcon.textContent=ev.icon;
+  tipName.textContent=ev.name;
+  tipDetail.textContent=ev.detail;
+  tipLinkWrap.innerHTML=ev.link
+    ?`<a class="evt-tip-link" href="${ev.link}" target="_blank" rel="noopener">${ev.linkText}</a>`
+    :'';
+  activeTip=true;
+  tip.classList.add('show');
+  posTip(e);
+}
+function hideTip(){ activeTip=false; tip.classList.remove('show'); }
+function moveTip(e){ if(activeTip) posTip(e); }
+function posTip(e){
+  const TW=195,TH=110;
+  const vw=window.innerWidth,vh=window.innerHeight;
+  let x=e.clientX+14, y=e.clientY+14;
+  if(x+TW>vw-8) x=e.clientX-TW-14;
+  if(y+TH>vh-8) y=e.clientY-TH-14;
+  x=Math.max(6,x); y=Math.max(6,y);
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+
+/* ── nav ── */
+prevBtn.addEventListener('click',()=>{ viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} buildCalendar(); });
+nextBtn.addEventListener('click',()=>{ viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} buildCalendar(); });
+
+buildCalendar();
+</script>
+</body>
+</html>
