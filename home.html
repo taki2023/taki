@@ -43,7 +43,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   background:var(--card);border:1.5px solid var(--border);border-radius:8px;
   padding:3px 2px 3px;display:flex;flex-direction:column;
   align-items:flex-start;gap:1px;overflow:visible;
-  min-height:clamp(46px,10vw,70px);
+  height:clamp(52px,11vw,74px);
 }
 .cal-cell.empty{background:transparent;border-color:transparent;}
 .cal-cell.today{background:linear-gradient(135deg,rgba(217,48,32,.09),rgba(239,102,64,.05));border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);}
@@ -54,14 +54,23 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   width:clamp(16px,3.5vw,22px);height:clamp(16px,3.5vw,22px);
   padding:0;margin-left:2px;box-shadow:0 2px 0 #8c1a10;text-align:center;flex-shrink:0;
 }
-.evt-icons{display:flex;flex-direction:column;align-items:center;gap:1px;width:100%;flex:1;align-self:stretch;}
+.evt-icons{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  width:100%;
+  flex:1;
+}
 .evt{
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  width:clamp(18px,4.5vw,28px);height:clamp(18px,4.5vw,28px);
-  border-radius:6px;font-size:clamp(10px,2.8vw,16px);
+  width:clamp(14px,3.8vw,22px);height:clamp(14px,3.8vw,22px);
+  border-radius:5px;font-size:clamp(8px,2.4vw,13px);
   flex-shrink:0;transition:transform .15s;z-index:1;
 }
-.evt:hover{transform:scale(1.2);z-index:999;}
+.evt:hover{transform:scale(1.25);z-index:999;}
 .legend{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:12px;justify-content:center;}
 .leg-item{display:flex;align-items:center;gap:4px;font-size:clamp(8px,2vw,11px);font-weight:800;color:var(--text-mid);}
 .leg-dot{font-size:clamp(11px,2.5vw,14px);}
@@ -112,84 +121,119 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 </div>
 
 <script>
-const EVENTS={
-  friday:{icon:'🎯',name:'Guess the Elo',detail:'Click & submit your game!',link:'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform',linkText:'Submit Game →',color:'#fff3e0',border:'#ef6640'},
-  saturday:{icon:'⚡',name:'Blitz Battle',detail:'3+0 · 3 PM UTC',link:'https://www.chess.com/club/hot-chilli-checkmate',linkText:'Join Battle →',color:'#fff8e1',border:'#f9a825'},
-  sunday:{icon:'🏟️',name:'Multiclub Arena (MCA)',detail:'3+0 · 3 PM UTC · 2h long',link:'https://www.chess.com/club/hot-chilli-checkmate',linkText:'Join Arena →',color:'#e8f5e9',border:'#43a047'},
-  recap:{icon:'📊',name:'Monthly Recap',detail:'End-of-month stats & highlights!',link:'https://chesswrap.vercel.app/',linkText:'View Recap →',color:'#fce4ec',border:'#e91e63'}
+const EVENTS = {
+  friday:   { icon:'🎯', name:'Guess the Elo',        detail:'Click & submit your game!',          link:'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform', linkText:'Submit Game →', color:'#fff3e0', border:'#ef6640' },
+  saturday: { icon:'⚡', name:'Blitz Battle',          detail:'3+0 · 3 PM UTC',                     link:'', linkText:'Join Battle →', color:'#fff8e1', border:'#f9a825' },
+  sunday:   { icon:'🏟️', name:'Multiclub Arena (MCA)', detail:'3+0 · 3 PM UTC · 2h long',           link:'', linkText:'Join Arena →',  color:'#e8f5e9', border:'#43a047' },
+  recap:    { icon:'📊', name:'Monthly Recap',         detail:'End-of-month stats & highlights!',   link:'', linkText:'View Recap →',  color:'#fce4ec', border:'#e91e63' }
 };
-const today=new Date();
-let viewYear=today.getFullYear(),viewMonth=today.getMonth();
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS=['MON','TUE','WED','THU','FRI','SAT','SUN'];
-const monthLabel=document.getElementById('monthLabel');
-const calHead=document.getElementById('calHead');
-const calBody=document.getElementById('calBody');
-const tip=document.getElementById('globalTip');
-const tipIcon=document.getElementById('tipIcon');
-const tipName=document.getElementById('tipName');
-const tipDetail=document.getElementById('tipDetail');
-const tipLinkWrap=document.getElementById('tipLinkWrap');
-function lastDay(y,m){return new Date(y,m+1,0).getDate();}
-function dowMon(y,m,d){return(new Date(y,m,d).getDay()+6)%7;}
+
+const today = new Date();
+let viewYear = today.getFullYear(), viewMonth = today.getMonth();
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS   = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
+const monthLabel  = document.getElementById('monthLabel');
+const calHead     = document.getElementById('calHead');
+const calBody     = document.getElementById('calBody');
+const tip         = document.getElementById('globalTip');
+const tipIcon     = document.getElementById('tipIcon');
+const tipName     = document.getElementById('tipName');
+const tipDetail   = document.getElementById('tipDetail');
+const tipLinkWrap = document.getElementById('tipLinkWrap');
+
+function lastDay(y,m){ return new Date(y,m+1,0).getDate(); }
+function dowMon(y,m,d){ return (new Date(y,m,d).getDay()+6)%7; }
+
 function evtsForDay(y,m,d){
-  const dow=new Date(y,m,d).getDay(),last=lastDay(y,m),ev=[];
-  if(dow===5)ev.push('friday');
-  if(dow===6)ev.push('saturday');
-  if(dow===0)ev.push('sunday');
-  if(d===last)ev.push('recap');
+  const dow = new Date(y,m,d).getDay(), last = lastDay(y,m), ev = [];
+  if(dow===5) ev.push('friday');
+  if(dow===6) ev.push('saturday');
+  if(dow===0) ev.push('sunday');
+  if(d===last) ev.push('recap');
   return ev;
 }
+
 function buildCalendar(){
-  monthLabel.textContent=MONTHS[viewMonth]+' '+viewYear;
-  calHead.innerHTML='';
-  DAYS.forEach(d=>{const c=document.createElement('div');c.className='cal-head-cell';c.textContent=d;calHead.appendChild(c);});
-  calBody.innerHTML='';
-  const first=dowMon(viewYear,viewMonth,1),last=lastDay(viewYear,viewMonth);
-  for(let i=0;i<first;i++){const c=document.createElement('div');c.className='cal-cell empty';calBody.appendChild(c);}
+  monthLabel.textContent = MONTHS[viewMonth]+' '+viewYear;
+
+  calHead.innerHTML = '';
+  DAYS.forEach(d=>{
+    const c = document.createElement('div');
+    c.className = 'cal-head-cell'; c.textContent = d; calHead.appendChild(c);
+  });
+
+  calBody.innerHTML = '';
+  const first = dowMon(viewYear,viewMonth,1);
+  const last  = lastDay(viewYear,viewMonth);
+  const TOTAL = 42; // always 6 rows → stable height every month
+  let cellsAdded = 0;
+
+  for(let i=0;i<first;i++){
+    const c = document.createElement('div');
+    c.className = 'cal-cell empty'; calBody.appendChild(c); cellsAdded++;
+  }
+
   for(let d=1;d<=last;d++){
-    const isToday=(d===today.getDate()&&viewMonth===today.getMonth()&&viewYear===today.getFullYear());
-    const cell=document.createElement('div');
-    cell.className='cal-cell'+(isToday?' today':'');
-    const num=document.createElement('div');
-    num.className='day-num';num.textContent=d;cell.appendChild(num);
-    const evts=evtsForDay(viewYear,viewMonth,d);
+    const isToday = (d===today.getDate() && viewMonth===today.getMonth() && viewYear===today.getFullYear());
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell'+(isToday?' today':'');
+
+    const num = document.createElement('div');
+    num.className = 'day-num'; num.textContent = d; cell.appendChild(num);
+
+    const evts = evtsForDay(viewYear,viewMonth,d);
     if(evts.length){
-      const wrap=document.createElement('div');wrap.className='evt-icons';
+      const wrap = document.createElement('div');
+      wrap.className = 'evt-icons';
       evts.forEach(key=>{
-        const ev=EVENTS[key];
-        const ico=document.createElement('div');
-        ico.className='evt';ico.textContent=ev.icon;
-        ico.style.background=ev.color;ico.style.border='1.5px solid '+ev.border;
-        ico.addEventListener('mouseenter',e=>showTip(e,key));
-        ico.addEventListener('mouseleave',hideTip);
-        ico.addEventListener('mousemove',moveTip);
+        const ev  = EVENTS[key];
+        const ico = document.createElement('div');
+        ico.className   = 'evt';
+        ico.textContent = ev.icon;
+        ico.style.background = ev.color;
+        ico.style.border     = '1.5px solid '+ev.border;
+        ico.addEventListener('mouseenter', e=>showTip(e,key));
+        ico.addEventListener('mouseleave', hideTip);
+        ico.addEventListener('mousemove',  moveTip);
         wrap.appendChild(ico);
       });
       cell.appendChild(wrap);
     }
     calBody.appendChild(cell);
+    cellsAdded++;
+  }
+
+  while(cellsAdded<TOTAL){
+    const c = document.createElement('div');
+    c.className = 'cal-cell empty'; calBody.appendChild(c); cellsAdded++;
   }
 }
-let activeTip=false;
+
+let activeTip = false;
 function showTip(e,key){
-  const ev=EVENTS[key];
-  tipIcon.textContent=ev.icon;tipName.textContent=ev.name;tipDetail.textContent=ev.detail;
-  tipLinkWrap.innerHTML=ev.link?`<a class="evt-tip-link" href="${ev.link}" target="_blank" rel="noopener">${ev.linkText}</a>`:'';
-  activeTip=true;tip.classList.add('show');posTip(e);
+  const ev = EVENTS[key];
+  tipIcon.textContent   = ev.icon;
+  tipName.textContent   = ev.name;
+  tipDetail.textContent = ev.detail;
+  tipLinkWrap.innerHTML = ev.link
+    ? `<a class="evt-tip-link" href="${ev.link}" target="_blank" rel="noopener">${ev.linkText}</a>`
+    : '';
+  activeTip = true; tip.classList.add('show'); posTip(e);
 }
-function hideTip(){activeTip=false;tip.classList.remove('show');}
-function moveTip(e){if(activeTip)posTip(e);}
+function hideTip(){ activeTip = false; tip.classList.remove('show'); }
+function moveTip(e){ if(activeTip) posTip(e); }
 function posTip(e){
-  const TW=195,TH=110,vw=window.innerWidth,vh=window.innerHeight;
-  let x=e.clientX+14,y=e.clientY+14;
-  if(x+TW>vw-8)x=e.clientX-TW-14;
-  if(y+TH>vh-8)y=e.clientY-TH-14;
-  x=Math.max(6,x);y=Math.max(6,y);
-  tip.style.left=x+'px';tip.style.top=y+'px';
+  const TW=195, TH=110, vw=window.innerWidth, vh=window.innerHeight;
+  let x=e.clientX+14, y=e.clientY+14;
+  if(x+TW>vw-8) x=e.clientX-TW-14;
+  if(y+TH>vh-8) y=e.clientY-TH-14;
+  x=Math.max(6,x); y=Math.max(6,y);
+  tip.style.left = x+'px'; tip.style.top = y+'px';
 }
-document.getElementById('prevBtn').addEventListener('click',()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
-document.getElementById('nextBtn').addEventListener('click',()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
+
+document.getElementById('prevBtn').addEventListener('click',()=>{ viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} buildCalendar(); });
+document.getElementById('nextBtn').addEventListener('click',()=>{ viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} buildCalendar(); });
 buildCalendar();
 </script>
 </body>
