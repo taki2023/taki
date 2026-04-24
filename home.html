@@ -6,25 +6,54 @@
 <title>Hot Chilli CheckMate – Home</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
+/* ═══════════════════════════════════════════════════════════════
+   SIDEBAR FIXED HEIGHT
+   Change --sidebar-height to resize the entire widget.
+   Current value fits 6 calendar rows comfortably.
+   ═══════════════════════════════════════════════════════════════ */
 :root{
+  --sidebar-height: 560px;   /* ← FIXED SIDEBAR HEIGHT — adjust here */
+
   --red-dark:#d93020;--red-mid:#e85535;--red-border:#e8553a;
   --bg:#fff5f0;--card:#fff;--border:#f5c5b8;--shadow:#e8aa98;
   --text-dark:#c73520;--text-mid:#9a2010;
   --fs-xs:10px;--fs-sm:11px;
 }
-.page-sb{width:100%;background:var(--bg);border-radius:28px;border:3px solid var(--red-border);overflow:visible;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
+
+.page-sb{
+  width:100%;
+  height:var(--sidebar-height);          /* fixed height applied here */
+  background:var(--bg);
+  border-radius:28px;
+  border:3px solid var(--red-border);
+  overflow:hidden;                        /* clip to fixed height */
+  display:flex;
+  flex-direction:column;
+}
 .page-top{
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
-  border-radius:24px 24px 0 0;padding:14px 16px 10px;
-  text-align:center;position:relative;overflow:hidden;
+  border-radius:24px 24px 0 0;
+  padding:14px 16px 10px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
 }
 .page-top::before{content:'';position:absolute;bottom:-10px;left:-10%;width:120%;height:20px;background:var(--bg);border-radius:50%;}
 .page-top::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 14px,rgba(255,255,255,.04) 14px,rgba(255,255,255,.04) 28px);pointer-events:none;}
 .page-title{font-family:'Fredoka One',cursive;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18);position:relative;z-index:1;}
 .page-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
-.inner{padding:10px 10px 14px;}
+
+/* .inner grows to fill remaining height and scrolls if needed */
+.inner{
+  padding:10px 10px 14px;
+  flex:1;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
 .cal-month-label{font-family:'Fredoka One',cursive;font-size:clamp(13px,3.5vw,17px);color:var(--red-dark);text-align:center;flex:1;white-space:nowrap;}
 .nav-btn{
@@ -69,18 +98,29 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .legend{display:flex;flex-wrap:wrap;gap:4px 9px;margin-top:10px;justify-content:center;}
 .leg-item{display:flex;align-items:center;gap:3px;font-size:clamp(7px,1.8vw,10px);font-weight:800;color:var(--text-mid);}
 .leg-dot{font-size:clamp(10px,2.2vw,13px);}
+
+/* ── Tooltip ── */
 .evt-tip{
   position:fixed;background:var(--card);border:2px solid var(--red-dark);
   border-radius:12px;padding:8px 11px;box-shadow:0 8px 24px rgba(217,48,32,.22);
   pointer-events:none;opacity:0;transition:opacity .18s;z-index:99999;
-  min-width:130px;max-width:190px;white-space:normal;font-family:'Nunito',sans-serif;
+  min-width:130px;max-width:200px;white-space:normal;font-family:'Nunito',sans-serif;
 }
 .evt-tip.show{opacity:1;}
+.evt-tip-header{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px;}
+.evt-tip-icon{font-size:18px;line-height:1;}
+/* Date badge shown next to the icon */
+.evt-tip-date{
+  font-family:'Fredoka One',cursive;font-size:11px;
+  background:linear-gradient(135deg,#d93020,#e85535);
+  color:#fff;padding:2px 7px;border-radius:999px;
+  box-shadow:0 2px 0 #8c1a10;white-space:nowrap;
+}
 .evt-tip-name{font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);margin-bottom:3px;}
 .evt-tip-detail{font-size:var(--fs-xs);font-weight:700;color:var(--text-mid);line-height:1.55;}
-.evt-tip-icon{font-size:18px;display:block;margin-bottom:3px;}
 .evt-tip-link{display:inline-block;margin-top:5px;font-size:var(--fs-xs);font-weight:900;color:#fff;background:linear-gradient(135deg,#d93020,#e85535);padding:3px 10px;border-radius:999px;text-decoration:none;box-shadow:0 2px 0 #8c1a10;pointer-events:auto;}
-.footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);margin-top:12px;}
+
+.footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);margin-top:auto;padding-top:10px;}
 </style>
 </head>
 <body>
@@ -109,7 +149,10 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 </div>
 
 <div class="evt-tip" id="globalTip">
-  <span class="evt-tip-icon" id="tipIcon"></span>
+  <div class="evt-tip-header">
+    <span class="evt-tip-icon" id="tipIcon"></span>
+    <span class="evt-tip-date" id="tipDate"></span>
+  </div>
   <div class="evt-tip-name" id="tipName"></div>
   <div class="evt-tip-detail" id="tipDetail"></div>
   <div id="tipLinkWrap"></div>
@@ -118,8 +161,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 <script>
 // ─────────────────────────────────────────────────────────────────
 // DEFAULT EVENT TEMPLATES
-// These are the fallback for every Friday / Saturday / Sunday / last-day
-// unless a specific date override is set below.
 // ─────────────────────────────────────────────────────────────────
 const DEFAULTS = {
   friday:   { icon:'🎯', name:'Guess the Elo',        detail:'Click & submit your game!',        link:'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform', linkText:'Submit Game →', color:'#fff3e0', border:'#ef6640' },
@@ -129,42 +170,27 @@ const DEFAULTS = {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// PER-DAY OVERRIDES  ← THIS IS WHERE YOU ADD WEEKLY LINKS
-//
+// PER-DAY OVERRIDES
 // Format:  "YYYY-MM-DD": { eventType: { fields to override } }
-//
-// You only need to write the fields that differ from the default.
-// Everything else falls back to DEFAULTS automatically.
-//
-// Example:
-//   "2026-05-02": {
-//     saturday: { detail:'Blitz Week 1 · 3+0', link:'https://chess.com/t/blitz-w1', linkText:'Join →' }
-//   },
-//   "2026-05-09": {
-//     saturday: { detail:'Blitz Week 2 · 3+0', link:'https://chess.com/t/blitz-w2', linkText:'Join →' }
-//   },
-//   "2026-05-04": {
-//     sunday: { detail:'MCA vs Club X · 3 PM', link:'https://chess.com/t/mca-may1', linkText:'Join Arena →' }
-//   },
-//   "2026-05-31": {
-//     recap: { detail:'May wrap-up is live!', link:'https://chesswrap.vercel.app/may', linkText:'View May →' }
-//   }
 // ─────────────────────────────────────────────────────────────────
 const DAY_OVERRIDES = {
   // Add your per-day, per-event overrides here
 };
 
 // ─────────────────────────────────────────────────────────────────
+const MONTHS      = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS        = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
 const today = new Date();
 let viewYear = today.getFullYear(), viewMonth = today.getMonth();
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS   = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
 const monthLabel  = document.getElementById('monthLabel');
 const calHead     = document.getElementById('calHead');
 const calBody     = document.getElementById('calBody');
 const tip         = document.getElementById('globalTip');
 const tipIcon     = document.getElementById('tipIcon');
+const tipDate     = document.getElementById('tipDate');
 const tipName     = document.getElementById('tipName');
 const tipDetail   = document.getElementById('tipDetail');
 const tipLinkWrap = document.getElementById('tipLinkWrap');
@@ -174,8 +200,7 @@ function dateKey(y,m,d){ return `${y}-${pad(m+1)}-${pad(d)}`; }
 function lastDay(y,m){ return new Date(y,m+1,0).getDate(); }
 function dowMon(y,m,d){ return (new Date(y,m,d).getDay()+6)%7; }
 
-// Merge default with any per-day override (override wins field-by-field)
-function resolveEvent(type, y, m, d){
+function resolveEvent(type,y,m,d){
   const base = { ...DEFAULTS[type] };
   const over = DAY_OVERRIDES[dateKey(y,m,d)]?.[type];
   return over ? { ...base, ...over } : base;
@@ -190,20 +215,30 @@ function evtTypesForDay(y,m,d){
   return ev;
 }
 
+// Ordinal suffix: 1→"1st", 2→"2nd", etc.
+function ordinal(d){
+  const s=['th','st','nd','rd'], v=d%100;
+  return d+(s[(v-20)%10]||s[v]||s[0]);
+}
+
+function formatDate(y,m,d){
+  return `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
+}
+
 function buildCalendar(){
   monthLabel.textContent = MONTHS[viewMonth]+' '+viewYear;
 
-  calHead.innerHTML = '';
+  calHead.innerHTML='';
   DAYS.forEach(d=>{
-    const c = document.createElement('div');
+    const c=document.createElement('div');
     c.className='cal-head-cell'; c.textContent=d; calHead.appendChild(c);
   });
 
-  calBody.innerHTML = '';
-  const first = dowMon(viewYear,viewMonth,1);
-  const last  = lastDay(viewYear,viewMonth);
-  const TOTAL = 42; // always 6 rows → stable height every month
-  let cellsAdded = 0;
+  calBody.innerHTML='';
+  const first=dowMon(viewYear,viewMonth,1);
+  const last=lastDay(viewYear,viewMonth);
+  const TOTAL=42;
+  let cellsAdded=0;
 
   for(let i=0;i<first;i++){
     const c=document.createElement('div');
@@ -229,7 +264,9 @@ function buildCalendar(){
         ico.textContent=ev.icon;
         ico.style.background=ev.color;
         ico.style.border='1.5px solid '+ev.border;
-        ico.addEventListener('mouseenter',e=>showTip(e,ev));
+        // pass full date label into the tooltip
+        const dateLabel=formatDate(viewYear,viewMonth,d);
+        ico.addEventListener('mouseenter',e=>showTip(e,ev,dateLabel));
         ico.addEventListener('mouseleave',hideTip);
         ico.addEventListener('mousemove',moveTip);
         wrap.appendChild(ico);
@@ -247,8 +284,9 @@ function buildCalendar(){
 }
 
 let activeTip=false;
-function showTip(e,ev){
+function showTip(e,ev,dateLabel){
   tipIcon.textContent=ev.icon;
+  tipDate.textContent=dateLabel;
   tipName.textContent=ev.name;
   tipDetail.textContent=ev.detail;
   tipLinkWrap.innerHTML=ev.link
@@ -259,7 +297,7 @@ function showTip(e,ev){
 function hideTip(){ activeTip=false; tip.classList.remove('show'); }
 function moveTip(e){ if(activeTip) posTip(e); }
 function posTip(e){
-  const TW=195,TH=115,vw=window.innerWidth,vh=window.innerHeight;
+  const TW=205,TH=120,vw=window.innerWidth,vh=window.innerHeight;
   let x=e.clientX+14,y=e.clientY+14;
   if(x+TW>vw-8) x=e.clientX-TW-14;
   if(y+TH>vh-8) y=e.clientY-TH-14;
