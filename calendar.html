@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot Chilli – Events Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;background:transparent;}
+
+:root{
+  --red-dark:#d93020;
+  --red-mid:#e85535;
+  --red-light:#ef6640;
+  --red-border:#e8553a;
+  --bg:#fff5f0;
+  --card:#fff;
+  --border:#f5c5b8;
+  --shadow:#e8aa98;
+  --text-dark:#c73520;
+  --text-mid:#9a2010;
+  --text-muted:#e8aa98;
+  --fs-xs:10px;
+  --fs-sm:11px;
+  --fs-base:12px;
+  --fs-md:13px;
+}
+
+.cal-sb{
+  font-family:'Nunito',sans-serif;
+  width:100%;background:var(--bg);
+  border-radius:28px;border:3px solid var(--red-border);
+  position:relative;overflow:visible;
+}
+
+/* TOP */
+.cal-top{
+  background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  border-radius:24px 24px 0 0;padding:16px 16px 10px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cal-top::before{
+  content:'';position:absolute;bottom:-10px;left:-10%;
+  width:120%;height:20px;background:var(--bg);border-radius:50%;
+}
+.chilli-l{position:absolute;font-size:26px;opacity:.5;top:8px;left:10px;transform:rotate(-20deg);}
+.chilli-r{position:absolute;font-size:18px;opacity:.5;top:8px;right:10px;transform:rotate(20deg);}
+.cal-title{font-family:'Fredoka One',cursive;font-size:18px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
+.cal-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
+
+.inner{padding:16px 14px 18px;}
+
+/* NAV */
+.cal-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;
+}
+.cal-month-label{
+  font-family:'Fredoka One',cursive;
+  font-size:17px;color:var(--red-dark);
+  text-align:center;flex:1;
+}
+.nav-btn{
+  width:34px;height:34px;border-radius:50%;border:2px solid var(--border);
+  background:var(--card);box-shadow:0 4px 0 var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--red-dark);
+  font-weight:900;transition:all .15s;user-select:none;flex-shrink:0;
+}
+.nav-btn:hover{background:#fce8e0;border-color:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 0 var(--red-dark);}
+.nav-btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--red-dark);}
+
+/* WEEKDAY HEADERS */
+.cal-grid{width:100%;}
+.cal-head{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:3px;margin-bottom:4px;
+}
+.cal-head-cell{
+  text-align:center;font-size:var(--fs-xs);font-weight:900;
+  color:var(--text-mid);text-transform:uppercase;letter-spacing:.6px;
+  padding:4px 0;
+}
+
+/* DAYS GRID */
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+
+.cal-cell{
+  background:var(--card);border:2px solid var(--border);
+  border-radius:10px;min-height:60px;padding:4px 3px 3px;
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;gap:2px;
+  transition:border-color .15s;
+  overflow:visible;
+}
+.cal-cell.empty{background:transparent;border-color:transparent;box-shadow:none;}
+.cal-cell.today{
+  background:linear-gradient(135deg,rgba(217,48,32,.1),rgba(239,102,64,.06));
+  border-color:var(--red-dark);
+  box-shadow:0 0 0 2px rgba(217,48,32,.25);
+}
+.cal-cell.today .day-num{
+  background:linear-gradient(135deg,#d93020,#e85535);
+  color:#fff;border-radius:50%;
+  width:20px;height:20px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 0 #8c1a10;
+}
+
+.day-num{
+  font-family:'Fredoka One',cursive;
+  font-size:12px;color:var(--text-dark);
+  line-height:1;margin-bottom:2px;
+  min-width:20px;text-align:center;
+  flex-shrink:0;
+}
+
+/* EVENT ICONS */
+.evt-icons{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  width:100%;flex:1;
+}
+.evt{
+  position:relative;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:8px;
+  font-size:16px;flex-shrink:0;
+  transition:transform .15s;
+  z-index:1;
+}
+.evt:hover{transform:scale(1.15);z-index:999;}
+
+/* TOOLTIPS — smart positioning */
+.evt-tip{
+  position:fixed;
+  background:#fff;border:2px solid var(--red-dark);
+  border-radius:12px;padding:8px 10px;
+  box-shadow:0 8px 24px rgba(217,48,32,.22);
+  pointer-events:none;opacity:0;transition:opacity .18s;
+  z-index:9999;
+  min-width:130px;max-width:180px;
+  white-space:normal;
+  font-family:'Nunito',sans-serif;
+}
+.evt-tip.show{opacity:1;}
+.evt-tip-name{font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);margin-bottom:3px;}
+.evt-tip-detail{font-size:var(--fs-xs);font-weight:700;color:var(--text-mid);line-height:1.5;}
+.evt-tip-icon{font-size:18px;display:block;margin-bottom:3px;}
+.evt-tip-link{
+  display:inline-block;margin-top:5px;font-size:var(--fs-xs);font-weight:900;
+  color:#fff;background:linear-gradient(135deg,#d93020,#e85535);
+  padding:3px 9px;border-radius:999px;text-decoration:none;
+  box-shadow:0 2px 0 #8c1a10;
+}
+
+/* LEGEND */
+.legend{
+  display:flex;flex-wrap:wrap;gap:6px;
+  margin-top:14px;justify-content:center;
+}
+.leg-item{
+  display:flex;align-items:center;gap:5px;
+  font-size:var(--fs-xs);font-weight:800;color:var(--text-mid);
+}
+.leg-dot{font-size:14px;}
+
+/* SEPARATOR */
+.div{width:100%;height:18px;margin:12px 0;position:relative;opacity:.9;}
+.div::before,.div::after{content:"";position:absolute;left:0;width:100%;height:6px;border-radius:999px;}
+.div::before{top:4px;background:linear-gradient(90deg,transparent,#e89080 4%,#e08070 50%,#e89080 96%,transparent);transform:rotate(-0.35deg);}
+.div::after{top:8px;left:4px;width:calc(100% - 8px);background:linear-gradient(90deg,transparent,#ea9282 5%,#e08070 50%,#ea9282 95%,transparent);transform:rotate(0.45deg);opacity:.82;}
+
+.footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);margin-top:10px;}
+
+/* Pulsing dot for today */
+@keyframes livePulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(217,48,32,.25);}
+  50%{box-shadow:0 0 0 6px rgba(217,48,32,.1);}
+}
+</style>
+</head>
+<body>
+
+<div class="cal-sb">
+  <div class="cal-top">
+    <div class="chilli-l">🌶</div>
+    <div class="chilli-r">♟</div>
+    <div class="cal-title">📅 Events Calendar</div>
+    <div class="cal-sub">Hot Chilli CheckMate ♞</div>
+  </div>
+
+  <div class="inner">
+    <div class="cal-nav">
+      <button class="nav-btn" id="prevBtn">‹</button>
+      <div class="cal-month-label" id="monthLabel"></div>
+      <button class="nav-btn" id="nextBtn">›</button>
+    </div>
+
+    <div class="cal-grid">
+      <div class="cal-head" id="calHead"></div>
+      <div class="cal-body" id="calBody"></div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="legend">
+      <div class="leg-item"><span class="leg-dot">🎯</span> Guess the Elo</div>
+      <div class="leg-item"><span class="leg-dot">⚡</span> Blitz Battle</div>
+      <div class="leg-item"><span class="leg-dot">🏟️</span> Multiclub Arena</div>
+      <div class="leg-item"><span class="leg-dot">📊</span> Monthly Recap</div>
+    </div>
+
+    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
+  </div>
+</div>
+
+<!-- Global tooltip (fixed positioning) -->
+<div class="evt-tip" id="globalTip">
+  <span class="evt-tip-icon" id="tipIcon"></span>
+  <div class="evt-tip-name" id="tipName"></div>
+  <div class="evt-tip-detail" id="tipDetail"></div>
+  <div id="tipLinkWrap"></div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────
+const EVENTS = {
+  friday: {
+    icon: '🎯',
+    name: 'Guess the Elo',
+    detail: 'Click & submit your game!',
+    link: 'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform',
+    linkText: 'Submit Game →',
+    color: '#fff3e0',
+    border: '#ef6640'
+  },
+  saturday: {
+    icon: '⚡',
+    name: 'Blitz Battle',
+    detail: '3+0 · 3 PM UTC',
+    link: 'https://www.chess.com/club/hot-chilli-checkmate',
+    linkText: 'Join Battle →',
+    color: '#fff8e1',
+    border: '#f9a825'
+  },
+  sunday: {
+    icon: '🏟️',
+    name: 'Multiclub Arena',
+    detail: '3+0 · 3 PM UTC · 2h long',
+    link: 'https://www.chess.com/club/hot-chilli-checkmate',
+    linkText: 'Join Arena →',
+    color: '#e8f5e9',
+    border: '#43a047'
+  },
+  recap: {
+    icon: '📊',
+    name: 'Monthly Recap',
+    detail: 'End-of-month stats & highlights!',
+    link: 'https://chesswrap.vercel.app/',
+    linkText: 'View Recap →',
+    color: '#fce4ec',
+    border: '#e91e63'
+  }
+};
+
+// ── STATE ────────────────────────────────────────────────────
+const today = new Date();
+let viewYear = today.getFullYear();
+let viewMonth = today.getMonth(); // 0-indexed
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAY_NAMES = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
+// ── DOM ──────────────────────────────────────────────────────
+const monthLabel = document.getElementById('monthLabel');
+const calHead    = document.getElementById('calHead');
+const calBody    = document.getElementById('calBody');
+const prevBtn    = document.getElementById('prevBtn');
+const nextBtn    = document.getElementById('nextBtn');
+const tip        = document.getElementById('globalTip');
+const tipIcon    = document.getElementById('tipIcon');
+const tipName    = document.getElementById('tipName');
+const tipDetail  = document.getElementById('tipDetail');
+const tipLinkWrap= document.getElementById('tipLinkWrap');
+
+// ── BUILD CALENDAR ───────────────────────────────────────────
+function buildHeader() {
+  calHead.innerHTML = '';
+  DAY_NAMES.forEach(d => {
+    const cell = document.createElement('div');
+    cell.className = 'cal-head-cell';
+    cell.textContent = d;
+    calHead.appendChild(cell);
+  });
+}
+
+function getLastDayOfMonth(y, m) {
+  return new Date(y, m + 1, 0).getDate();
+}
+
+function getDayOfWeekMon(y, m, d) {
+  // 0=Mon..6=Sun
+  let dow = new Date(y, m, d).getDay();
+  return (dow + 6) % 7;
+}
+
+function getEventsForDay(year, month, day) {
+  const date = new Date(year, month, day);
+  const dow = date.getDay(); // 0=Sun,5=Fri,6=Sat
+  const lastDay = getLastDayOfMonth(year, month);
+  const evts = [];
+
+  if (dow === 5) evts.push('friday');   // Friday
+  if (dow === 6) evts.push('saturday'); // Saturday
+  if (dow === 0) evts.push('sunday');   // Sunday
+
+  // Monthly recap = last day of month (or last weekday? we use last day)
+  if (day === lastDay) evts.push('recap');
+
+  return evts;
+}
+
+function buildCalendar() {
+  monthLabel.textContent = MONTH_NAMES[viewMonth] + ' ' + viewYear;
+  calBody.innerHTML = '';
+  buildHeader();
+
+  const firstDow = getDayOfWeekMon(viewYear, viewMonth, 1); // 0=Mon
+  const lastDay  = getLastDayOfMonth(viewYear, viewMonth);
+
+  // Empty leading cells
+  for (let i = 0; i < firstDow; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell empty';
+    calBody.appendChild(cell);
+  }
+
+  // Day cells
+  for (let d = 1; d <= lastDay; d++) {
+    const cell = document.createElement('div');
+    const isToday = (d === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear());
+    cell.className = 'cal-cell' + (isToday ? ' today' : '');
+
+    const num = document.createElement('div');
+    num.className = 'day-num';
+    num.textContent = d;
+    cell.appendChild(num);
+
+    const evts = getEventsForDay(viewYear, viewMonth, d);
+    if (evts.length) {
+      const evtWrap = document.createElement('div');
+      evtWrap.className = 'evt-icons';
+      evts.forEach(evtKey => {
+        const ev = EVENTS[evtKey];
+        const icon = document.createElement('div');
+        icon.className = 'evt';
+        icon.textContent = ev.icon;
+        icon.style.background = ev.color;
+        icon.style.border = '1.5px solid ' + ev.border;
+
+        // Tooltip
+        icon.addEventListener('mouseenter', (e) => showTip(e, evtKey));
+        icon.addEventListener('mouseleave', hideTip);
+        icon.addEventListener('mousemove', moveTip);
+
+        evtWrap.appendChild(icon);
+      });
+      cell.appendChild(evtWrap);
+    }
+
+    calBody.appendChild(cell);
+  }
+}
+
+// ── TOOLTIP ──────────────────────────────────────────────────
+let activeTip = false;
+
+function showTip(e, evtKey) {
+  const ev = EVENTS[evtKey];
+  tipIcon.textContent = ev.icon;
+  tipName.textContent = ev.name;
+  tipDetail.textContent = ev.detail;
+  if (ev.link) {
+    tipLinkWrap.innerHTML = `<a class="evt-tip-link" href="${ev.link}" target="_blank" rel="noopener">${ev.linkText}</a>`;
+  } else {
+    tipLinkWrap.innerHTML = '';
+  }
+  activeTip = true;
+  tip.classList.add('show');
+  positionTip(e);
+}
+
+function hideTip() {
+  activeTip = false;
+  tip.classList.remove('show');
+}
+
+function moveTip(e) {
+  if (activeTip) positionTip(e);
+}
+
+function positionTip(e) {
+  const TW = 190, TH = 100;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  let x = e.clientX + 12;
+  let y = e.clientY + 12;
+
+  // Flip left if overflows right
+  if (x + TW > vw - 8) x = e.clientX - TW - 12;
+  // Flip up if overflows bottom
+  if (y + TH > vh - 8) y = e.clientY - TH - 12;
+  // Clamp
+  x = Math.max(6, x);
+  y = Math.max(6, y);
+
+  tip.style.left = x + 'px';
+  tip.style.top  = y + 'px';
+}
+
+// ── NAVIGATION ───────────────────────────────────────────────
+prevBtn.addEventListener('click', () => {
+  viewMonth--;
+  if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+  buildCalendar();
+});
+
+nextBtn.addEventListener('click', () => {
+  viewMonth++;
+  if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+  buildCalendar();
+});
+
+// ── INIT ─────────────────────────────────────────────────────
+buildCalendar();
+</script>
+</body>
+</html>
