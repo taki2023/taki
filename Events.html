@@ -43,6 +43,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .nav-btn:hover{background:#fce8e0;border-color:var(--red-dark);transform:translateY(-2px);box-shadow:0 5px 0 var(--red-dark);}
 .nav-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--red-dark);}
+
 .cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px;}
 .cal-head-cell{text-align:center;font-size:clamp(7px,1.6vw,10px);font-weight:900;color:var(--text-mid);text-transform:uppercase;letter-spacing:.4px;padding:2px 0;}
 .cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
@@ -77,10 +78,9 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   overflow:hidden;line-height:1;
 }
 .evt:hover{transform:scale(1.3);z-index:999;}
-/* ── FIX: img fills the box properly ── */
 .evt img{width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;}
 
-/* ── Status badge colors ── */
+/* ── Status badges ── */
 .status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
 .status-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:pulse-badge 1.4s ease-in-out infinite;}
 .status-ended{color:#555;background:#f5f5f5;border-color:#ccc;}
@@ -89,9 +89,10 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 /* ── Tooltip ── */
 .evt-tip{
   position:fixed;background:var(--card);border:2px solid var(--red-dark);
-  border-radius:14px;padding:10px 13px;box-shadow:0 8px 28px rgba(217,48,32,.25);
+  border-radius:14px;padding:10px 13px 8px;box-shadow:0 8px 28px rgba(217,48,32,.25);
   pointer-events:none;opacity:0;transition:opacity .12s;z-index:99999;
-  min-width:190px;max-width:250px;white-space:normal;font-family:'Nunito',sans-serif;
+  min-width:195px;max-width:255px;white-space:normal;font-family:'Nunito',sans-serif;
+  display:flex;flex-direction:column;
 }
 .evt-tip.show{opacity:1;pointer-events:auto;}
 
@@ -115,12 +116,28 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-countdown .cd-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0;}
 
 .tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:7px;}
+
+/* Bottom row: button left, organizer right */
+.tip-bottom-row{
+  display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;
+}
 .tip-btn{
   display:inline-block;font-size:10px;font-weight:900;color:#fff;
   background:linear-gradient(135deg,#d93020,#e85535);
   padding:4px 12px;border-radius:999px;text-decoration:none;
-  box-shadow:0 2px 0 #8c1a10;pointer-events:auto;
+  box-shadow:0 2px 0 #8c1a10;pointer-events:auto;white-space:nowrap;flex-shrink:0;
 }
+.tip-organizer{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:9.5px;font-weight:900;color:var(--text-mid);
+  background:#fff0eb;border:1.5px solid var(--border);
+  border-radius:999px;padding:3px 8px 3px 6px;
+  text-decoration:none;white-space:nowrap;
+  transition:background .15s,border-color .15s;pointer-events:auto;
+  margin-left:auto;
+}
+.tip-organizer:hover{background:#fce0d5;border-color:var(--red-mid);color:var(--red-dark);}
+.tip-organizer-icon{font-size:11px;line-height:1;}
 
 .footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);padding-top:4px;margin-top:auto;}
 </style>
@@ -144,22 +161,21 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   </div>
 </div>
 
-<!-- Tooltip -->
 <div class="evt-tip" id="globalTip">
   <div class="tip-row1">
-    <div class="tip-logo" id="tipLogo"></div>
+    <div class="tip-logo"      id="tipLogo"></div>
     <div class="tip-date-wrap">
-      <div class="tip-title" id="tipTitle"></div>
+      <div class="tip-title"      id="tipTitle"></div>
       <div class="tip-date-badge" id="tipDateBadge"></div>
     </div>
   </div>
-  <div class="tip-countdown" id="tipCountdown" style="display:none"></div>
-  <div class="tip-detail" id="tipDetail"></div>
-  <div id="tipBtnWrap"></div>
+  <div class="tip-countdown"  id="tipCountdown" style="display:none"></div>
+  <div class="tip-detail"     id="tipDetail"></div>
+  <div class="tip-bottom-row" id="tipBottomRow"></div>
 </div>
 
 <script>
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzskPj9PjtOWmaw15NnYUwZXhXIoI__8LxO3VTQd3rYsMVqs4FEM5VlzsPkjw3FQW6JNw/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbw6VyQPeJWGdTc4f-BbUJ7XTxs7-3BfAqo4zEF-4ZL7cC2RBgM-PUjij2suHviy9lo13A/exec';
 
 const MONTHS      = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -170,214 +186,157 @@ let viewYear  = today.getFullYear();
 let viewMonth = today.getMonth();
 let eventMap  = {};
 
-// ─── Helpers ──────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────
 function pad(n){ return String(n).padStart(2,'0'); }
 function dateKey(y,m,d){ return `${y}-${pad(m+1)}-${pad(d)}`; }
 function lastDay(y,m){ return new Date(y,m+1,0).getDate(); }
 function dowMon(y,m,d){ return (new Date(y,m,d).getDay()+6)%7; }
 function ordinal(d){ const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)%10]||s[v]||s[0]); }
 function formatDate(y,m,d){ return `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`; }
+function isURL(s){ return s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.')); }
 
-// ─── Parse date: YYYY-MM-DD / MM/DD/YYYY / DD-MM-YYYY ─────────
+// ── Parse date ────────────────────────────────────────────────
 function parseDate(str){
   if(!str) return null;
-  str = str.trim();
-  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){
-    const [y,m,d]=str.split('-').map(Number);
-    return {y, m:m-1, d};
-  }
-  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){
-    const [m,d,y]=str.split('/').map(Number);
-    return {y, m:m-1, d};
-  }
-  if(/^\d{1,2}-\d{1,2}-\d{4}$/.test(str)){
-    const [d,m,y]=str.split('-').map(Number);
-    return {y, m:m-1, d};
-  }
-  const dt=new Date(str);
-  if(!isNaN(dt)) return {y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
+  str=str.trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){ const [y,m,d]=str.split('-').map(Number); return {y,m:m-1,d}; }
+  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){ const [m,d,y]=str.split('/').map(Number); return {y,m:m-1,d}; }
+  if(/^\d{1,2}-\d{1,2}-\d{4}$/.test(str)){ const [d,m,y]=str.split('-').map(Number); return {y,m:m-1,d}; }
+  const dt=new Date(str); if(!isNaN(dt)) return {y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
   return null;
 }
 
-// ─── Parse time: "HH:MM" / "HH:MM:SS" / "5" / am/pm ──────────
+// ── Parse time ────────────────────────────────────────────────
 function parseTime(str){
   if(!str||!str.trim()) return null;
   const match=str.trim().match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);
   if(!match) return null;
   let h=parseInt(match[1]),min=parseInt(match[2]);
-  if(match[3]){
-    if(match[3].toLowerCase()==='pm'&&h<12) h+=12;
-    if(match[3].toLowerCase()==='am'&&h===12) h=0;
-  }
+  if(match[3]){ if(match[3].toLowerCase()==='pm'&&h<12) h+=12; if(match[3].toLowerCase()==='am'&&h===12) h=0; }
   return {h,min};
 }
 
-// ─── Build UTC Date from date+time ────────────────────────────
+// ── Build UTC Date from full date + time ──────────────────────
 function buildUTC(dateObj,timeObj){
   if(!dateObj||!timeObj) return null;
-  // Use the full date (year, month, day) + time — fixes countdown ignoring date
   return new Date(Date.UTC(dateObj.y, dateObj.m, dateObj.d, timeObj.h, timeObj.min, 0));
 }
 
-// ─── Detect if logo value is a URL or emoji/text ───────────────
-function isURL(str){
-  if(!str) return false;
-  return /^https?:\/\//i.test(str) || /^\/\//.test(str) || str.includes('.');
-}
-
-// ─── Status calculation using date+time+duration ──────────────
-// Returns { status: 'upcoming'|'live'|'ended', text, cssClass }
+// ── Compute event phase ───────────────────────────────────────
+// Returns: { status, text, cssClass, isAfter }
+// isAfter = true  →  show "after" content (details/button/link)
+// isAfter = false →  show "before" content
+//
+// Switch from BEFORE → AFTER happens at endUTC (startUTC + duration).
+// If no duration is set (0), the switch happens at startUTC itself.
 function getStatus(ev){
   if(!ev.timeObj) return null;
 
-  const startUTC = buildUTC(ev.dateObj, ev.timeObj);
+  const startUTC   = buildUTC(ev.dateObj, ev.timeObj);
   if(!startUTC) return null;
 
-  // duration in hours → end time
-  const durationMs = (ev.duration || 0) * 3600000;
+  const durationMs = (ev.duration||0) * 3600000;
+  // endUTC: when the event finishes. If duration=0, end = start (instant switch).
   const endUTC     = new Date(startUTC.getTime() + durationMs);
   const now        = Date.now();
-  const diffStart  = startUTC - now; // ms until start (negative = already started)
+  const diffStart  = startUTC - now;   // positive → hasn't started yet
 
   if(diffStart > 0){
-    // ── UPCOMING ──
-    const totalSec = Math.floor(diffStart/1000);
-    const d = Math.floor(totalSec/86400);
-    const h = Math.floor((totalSec%86400)/3600);
-    const m = Math.floor((totalSec%3600)/60);
-    let text = 'Starting in ';
-    if(d>0)      text += `${d}d ${h}h ${m}m`;
-    else if(h>0) text += `${h}h ${m}m`;
-    else         text += `${m}m`;
-    return { status:'upcoming', text, cssClass:'status-upcoming' };
+    // ── UPCOMING — show BEFORE content ──
+    const totalSec=Math.floor(diffStart/1000);
+    const d=Math.floor(totalSec/86400);
+    const h=Math.floor((totalSec%86400)/3600);
+    const m=Math.floor((totalSec%3600)/60);
+    let text='Starting in ';
+    if(d>0)      text+=`${d}d ${h}h ${m}m`;
+    else if(h>0) text+=`${h}h ${m}m`;
+    else         text+=`${m}m`;
+    return {status:'upcoming', text, cssClass:'status-upcoming', isAfter:false};
 
   } else if(now < endUTC.getTime()){
-    // ── LIVE: started but not yet past end time ──
-    const agoMin = Math.abs(Math.floor(diffStart/60000));
-    const leftMs = endUTC - now;
-    const leftMin = Math.ceil(leftMs/60000);
-    let text = `🔴 Live`;
-    if(agoMin > 0) text += ` · started ${agoMin}m ago`;
-    if(leftMin > 0 && ev.duration > 0) text += ` · ~${leftMin}m left`;
-    return { status:'live', text, cssClass:'status-live' };
+    // ── LIVE (started, not yet ended) — show BEFORE content ──
+    return {status:'live', text:'🔴 Live', cssClass:'status-live', isAfter:false};
 
   } else {
-    // ── ENDED ──
-    return { status:'ended', text:'✅ Ended', cssClass:'status-ended' };
+    // ── ENDED (past endUTC) — show AFTER content ──
+    return {status:'ended', text:'✅ Ended', cssClass:'status-ended', isAfter:true};
   }
 }
 
-// ─── Load sheet (fast: no-cache, immediate calendar) ──────────
+// ── Load sheet ────────────────────────────────────────────────
 async function loadSheet(){
   try{
-    const res = await fetch(SHEET_API_URL, {
-      cache: 'no-store',                        // skip browser cache → faster fresh data
-      headers: { 'Accept': 'application/json' }
-    });
+    const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
     if(!res.ok) throw new Error('HTTP '+res.status);
-    const data = await res.json();
-
-    eventMap = {};
-    data.forEach(ev => {
+    const data=await res.json();
+    eventMap={};
+    data.forEach(ev=>{
       if(!ev.date||!ev.title) return;
-      const dateObj = parseDate(ev.date);
+      const dateObj=parseDate(ev.date);
       if(!dateObj) return;
-      const key = dateKey(dateObj.y, dateObj.m, dateObj.d);
+      const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
       if(!eventMap[key]) eventMap[key]=[];
-
-      // ── FIX: logo stored exactly as sheet returns it ──
-      const logoRaw = (ev.logo||'').trim();
-
       eventMap[key].push({
         dateObj,
-        timeRaw:      ev.time,
-        timeObj:      parseTime(ev.time),
-        title:        ev.title,
-        details:      ev.details,
-        buttonBefore: ev.buttonBefore,
-        buttonAfter:  ev.buttonAfter,
-        logo:         logoRaw,          // URL or emoji text
-        linkBefore:   ev.linkBefore,
-        linkAfter:    ev.linkAfter,
-        duration:     parseFloat(ev.duration)||0,  // ← NEW: hours
+        timeObj:       parseTime(ev.time),
+        duration:      parseFloat(ev.duration)||0,
+        title:         ev.title,
+        detailsBefore: ev.detailsBefore||'',
+        detailsAfter:  ev.detailsAfter ||'',
+        buttonBefore:  ev.buttonBefore ||'',
+        buttonAfter:   ev.buttonAfter  ||'',
+        logo:          (ev.logo||'').trim(),
+        linkBefore:    ev.linkBefore   ||'',
+        linkAfter:     ev.linkAfter    ||'',
+        organizer:     (ev.organizer||'').trim(),
       });
     });
-
-    buildCalendar();  // re-render with events populated
-  } catch(e){
-    console.error('Sheet load failed:', e);
-  }
+    buildCalendar();
+  }catch(e){ console.error('Sheet load failed:',e); }
 }
 
-// ─── Calendar render ──────────────────────────────────────────
-const monthLabel = document.getElementById('monthLabel');
-const calHead    = document.getElementById('calHead');
-const calBody    = document.getElementById('calBody');
+// ── Calendar ──────────────────────────────────────────────────
+const monthLabel=document.getElementById('monthLabel');
+const calHead   =document.getElementById('calHead');
+const calBody   =document.getElementById('calBody');
 
 function buildCalendar(){
-  monthLabel.textContent = MONTHS[viewMonth]+' '+viewYear;
-
+  monthLabel.textContent=MONTHS[viewMonth]+' '+viewYear;
   calHead.innerHTML='';
-  DAYS.forEach(d=>{
-    const c=document.createElement('div');
-    c.className='cal-head-cell'; c.textContent=d; calHead.appendChild(c);
-  });
-
+  DAYS.forEach(d=>{ const c=document.createElement('div'); c.className='cal-head-cell'; c.textContent=d; calHead.appendChild(c); });
   calBody.innerHTML='';
-  const first    = dowMon(viewYear,viewMonth,1);
-  const last     = lastDay(viewYear,viewMonth);
-  const prevM    = viewMonth===0?11:viewMonth-1;
-  const prevY    = viewMonth===0?viewYear-1:viewYear;
-  const prevLast = lastDay(prevY,prevM);
-  const nextM    = viewMonth===11?0:viewMonth+1;
-  const nextY    = viewMonth===11?viewYear+1:viewYear;
-
-  for(let i=0;i<first;i++)
-    calBody.appendChild(makeCell(prevY,prevM,prevLast-first+1+i,true));
-  for(let d=1;d<=last;d++)
-    calBody.appendChild(makeCell(viewYear,viewMonth,d,false));
+  const first=dowMon(viewYear,viewMonth,1);
+  const last=lastDay(viewYear,viewMonth);
+  const prevM=viewMonth===0?11:viewMonth-1, prevY=viewMonth===0?viewYear-1:viewYear;
+  const prevLast=lastDay(prevY,prevM);
+  const nextM=viewMonth===11?0:viewMonth+1, nextY=viewMonth===11?viewYear+1:viewYear;
+  for(let i=0;i<first;i++) calBody.appendChild(makeCell(prevY,prevM,prevLast-first+1+i,true));
+  for(let d=1;d<=last;d++) calBody.appendChild(makeCell(viewYear,viewMonth,d,false));
   const filled=first+last;
-  for(let d=1;filled+d-1<42;d++)
-    calBody.appendChild(makeCell(nextY,nextM,d,true));
+  for(let d=1;filled+d-1<42;d++) calBody.appendChild(makeCell(nextY,nextM,d,true));
 }
 
-// ─── Make a cell ──────────────────────────────────────────────
 function makeCell(y,m,d,overflow){
   const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
   const cell=document.createElement('div');
   cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
-
-  const num=document.createElement('div');
-  num.className='day-num'; num.textContent=d; cell.appendChild(num);
-
-  const key    = dateKey(y,m,d);
-  const events = eventMap[key]||[];
-
+  const num=document.createElement('div'); num.className='day-num'; num.textContent=d; cell.appendChild(num);
+  const key=dateKey(y,m,d);
+  const events=eventMap[key]||[];
   if(events.length){
-    const wrap=document.createElement('div');
-    wrap.className='evt-icons';
+    const wrap=document.createElement('div'); wrap.className='evt-icons';
     events.forEach(ev=>{
-      const ico=document.createElement('div');
-      ico.className='evt';
-
-      // ── FIX: render logo as <img> if URL, otherwise render as emoji/text ──
-      if(ev.logo && isURL(ev.logo)){
-        const img=document.createElement('img');
-        img.src=ev.logo;
-        img.alt=ev.title;
-        img.loading='lazy';                  // don't block calendar render
-        ico.appendChild(img);
-      } else if(ev.logo){
-        ico.textContent=ev.logo;             // emoji or short text
+      const ico=document.createElement('div'); ico.className='evt';
+      if(ev.logo&&isURL(ev.logo)){
+        const img=document.createElement('img'); img.src=ev.logo; img.alt=ev.title; img.loading='lazy'; ico.appendChild(img);
       } else {
-        ico.textContent='📅';
+        ico.textContent=ev.logo||'📅';
       }
-
       if(!overflow){
-        ico.addEventListener('mouseenter', e=>{ showTip(e,ev,y,m,d,false); });
-        ico.addEventListener('mouseleave', maybHideTip);
-        ico.addEventListener('mousemove',  moveTip);
-        ico.addEventListener('click', e=>{ e.stopPropagation(); pinTip(e,ev,y,m,d); });
+        ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d,false));
+        ico.addEventListener('mouseleave',maybHideTip);
+        ico.addEventListener('mousemove', moveTip);
+        ico.addEventListener('click',e=>{ e.stopPropagation(); pinTip(e,ev,y,m,d); });
       }
       wrap.appendChild(ico);
     });
@@ -386,44 +345,39 @@ function makeCell(y,m,d,overflow){
   return cell;
 }
 
-// ─── Tooltip ──────────────────────────────────────────────────
-const tip          = document.getElementById('globalTip');
-const tipLogo      = document.getElementById('tipLogo');
-const tipTitle     = document.getElementById('tipTitle');
-const tipDateBadge = document.getElementById('tipDateBadge');
-const tipCountdown = document.getElementById('tipCountdown');
-const tipDetail    = document.getElementById('tipDetail');
-const tipBtnWrap   = document.getElementById('tipBtnWrap');
+// ── Tooltip ───────────────────────────────────────────────────
+const tip          =document.getElementById('globalTip');
+const tipLogo      =document.getElementById('tipLogo');
+const tipTitle     =document.getElementById('tipTitle');
+const tipDateBadge =document.getElementById('tipDateBadge');
+const tipCountdown =document.getElementById('tipCountdown');
+const tipDetail    =document.getElementById('tipDetail');
+const tipBottomRow =document.getElementById('tipBottomRow');
 
-let tipPinned       = false;
-let countdownTimer  = null;
+let tipPinned=false, countdownTimer=null;
 
 function renderTip(ev,y,m,d){
-  // Logo
+  // ── Logo ──
   tipLogo.innerHTML='';
-  if(ev.logo && isURL(ev.logo)){
-    const img=document.createElement('img');
-    img.src=ev.logo; img.alt=ev.title;
-    tipLogo.appendChild(img);
+  if(ev.logo&&isURL(ev.logo)){
+    const img=document.createElement('img'); img.src=ev.logo; img.alt=ev.title; tipLogo.appendChild(img);
   } else {
-    tipLogo.textContent = ev.logo || '📅';
+    tipLogo.textContent=ev.logo||'📅';
   }
 
-  // Title + date
-  tipTitle.textContent = ev.title;
-  const dateLine = formatDate(y,m,d);
-  tipDateBadge.textContent = ev.timeObj
-    ? `${dateLine} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
-    : dateLine;
+  // ── Title + date ──
+  tipTitle.textContent=ev.title;
+  tipDateBadge.textContent=ev.timeObj
+    ? `${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
+    : formatDate(y,m,d);
 
-  // Status / countdown — now uses full date+time+duration
+  // ── Status badge (live-updating) ──
   clearInterval(countdownTimer);
-  const st = getStatus(ev);
+  const st=getStatus(ev);
   if(st){
     tipCountdown.style.display='flex';
     const update=()=>{
-      const s=getStatus(ev);
-      if(!s) return;
+      const s=getStatus(ev); if(!s) return;
       tipCountdown.className='tip-countdown '+s.cssClass;
       tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;
     };
@@ -433,75 +387,62 @@ function renderTip(ev,y,m,d){
     tipCountdown.style.display='none';
   }
 
-  // Details
-  tipDetail.textContent = ev.details||'';
-  tipDetail.style.display = ev.details?'block':'none';
+  // ── Determine phase ──
+  // isAfter=true once the event has fully ended (past startUTC + duration).
+  // During "live" (started but not ended): still show BEFORE content.
+  // No timeObj → fall back to showing before content.
+  const isAfter = st ? st.isAfter : false;
 
-  // Button — switch before/after based on status
-  tipBtnWrap.innerHTML='';
-  if(ev.timeObj){
-    const status   = st ? st.status : 'ended';
-    const isAfter  = (status==='ended'||status==='live');
-    const btnText  = isAfter ? ev.buttonAfter  : ev.buttonBefore;
-    const btnLink  = isAfter ? ev.linkAfter    : ev.linkBefore;
-    if(btnText&&btnLink){
-      const a=document.createElement('a');
-      a.className='tip-btn';
-      a.href=btnLink; a.target='_blank'; a.rel='noopener';
-      a.textContent=btnText;
-      tipBtnWrap.appendChild(a);
-    }
-  } else {
-    if(ev.buttonBefore&&ev.linkBefore){
-      const a=document.createElement('a');
-      a.className='tip-btn';
-      a.href=ev.linkBefore; a.target='_blank'; a.rel='noopener';
-      a.textContent=ev.buttonBefore;
-      tipBtnWrap.appendChild(a);
-    }
+  // ── Details ──
+  const detailsText = isAfter
+    ? (ev.detailsAfter  || ev.detailsBefore || '')   // after: prefer detailsAfter, fall back to before
+    : (ev.detailsBefore || '');                       // before / live: always detailsBefore
+  tipDetail.textContent=detailsText;
+  tipDetail.style.display=detailsText?'block':'none';
+
+  // ── Bottom row: button + organizer ──
+  tipBottomRow.innerHTML='';
+
+  const btnText = isAfter ? ev.buttonAfter  : ev.buttonBefore;
+  const btnLink = isAfter ? ev.linkAfter    : ev.linkBefore;
+
+  if(btnText&&btnLink){
+    const a=document.createElement('a');
+    a.className='tip-btn'; a.href=btnLink; a.target='_blank'; a.rel='noopener';
+    a.textContent=btnText;
+    tipBottomRow.appendChild(a);
+  }
+
+  if(ev.organizer){
+    const a=document.createElement('a');
+    a.className='tip-organizer';
+    a.href=`https://www.chess.com/member/${ev.organizer}`;
+    a.target='_blank'; a.rel='noopener';
+    a.innerHTML=`<span class="tip-organizer-icon">♟</span>@${ev.organizer}`;
+    tipBottomRow.appendChild(a);
   }
 }
 
-function showTip(e,ev,y,m,d,pin){
-  if(tipPinned&&!pin) return;
-  renderTip(ev,y,m,d);
-  tip.classList.add('show');
-  posTip(e);
-}
-function pinTip(e,ev,y,m,d){
-  tipPinned=true;
-  renderTip(ev,y,m,d);
-  tip.classList.add('show');
-  posTip(e);
-}
+function showTip(e,ev,y,m,d){ if(tipPinned) return; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
+function pinTip(e,ev,y,m,d){ tipPinned=true; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
 function maybHideTip(){ if(!tipPinned) hideTip(); }
-function hideTip(){
-  tipPinned=false;
-  tip.classList.remove('show');
-  clearInterval(countdownTimer);
-}
+function hideTip(){ tipPinned=false; tip.classList.remove('show'); clearInterval(countdownTimer); }
 function moveTip(e){ if(!tipPinned) posTip(e); }
 function posTip(e){
-  const TW=260,TH=170,vw=window.innerWidth,vh=window.innerHeight;
-  let x=e.clientX+14, y=e.clientY+14;
+  const TW=265,TH=185,vw=window.innerWidth,vh=window.innerHeight;
+  let x=e.clientX+14,y=e.clientY+14;
   if(x+TW>vw-8) x=e.clientX-TW-14;
   if(y+TH>vh-8) y=e.clientY-TH-14;
   x=Math.max(6,x); y=Math.max(6,y);
   tip.style.left=x+'px'; tip.style.top=y+'px';
 }
 
-document.addEventListener('click', e=>{ if(!tip.contains(e.target)) hideTip(); });
+document.addEventListener('click',e=>{ if(!tip.contains(e.target)) hideTip(); });
+document.getElementById('prevBtn').addEventListener('click',()=>{ viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} buildCalendar(); });
+document.getElementById('nextBtn').addEventListener('click',()=>{ viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} buildCalendar(); });
 
-document.getElementById('prevBtn').addEventListener('click',()=>{
-  viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} buildCalendar();
-});
-document.getElementById('nextBtn').addEventListener('click',()=>{
-  viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} buildCalendar();
-});
-
-// ─── Init: draw calendar immediately, load data in parallel ───
-buildCalendar();   // instant skeleton
-loadSheet();       // async — updates calendar when ready
+buildCalendar();
+loadSheet();
 </script>
 </body>
 </html>
