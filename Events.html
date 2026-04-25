@@ -131,7 +131,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   background:rgba(255,243,224,.7);
   overflow:hidden;line-height:1;
   position:relative;
-  /* size is always reserved even while skeleton shows */
 }
 .evt:hover{transform:scale(1.35);z-index:999;}
 .evt img{
@@ -180,6 +179,41 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .status-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:pulse-badge 1.4s ease-in-out infinite;}
 .status-ended{color:#555;background:#f5f5f5;border-color:#ccc;}
 @keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+/* ── Legend ── */
+.legend{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:5px 14px;
+  padding:7px 4px 2px;margin-top:6px;flex-shrink:0;
+}
+.legend-item{
+  display:flex;align-items:center;gap:5px;
+  font-size:9.5px;font-weight:800;color:var(--text-mid);
+  white-space:nowrap;
+}
+.legend-dot{
+  width:9px;height:9px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;
+}
+.legend-dot.dot-before{
+  background:radial-gradient(circle at 35% 35%, #64b5f6, #1e88e5);
+  box-shadow:0 0 0 2.5px rgba(30,136,229,.25), 0 1px 4px rgba(30,136,229,.4);
+  animation:dot-glow-blue 2.5s ease-in-out infinite;
+}
+.legend-dot.dot-soon{
+  background:radial-gradient(circle at 35% 35%, #81c784, #43a047);
+  box-shadow:0 0 0 2.5px rgba(67,160,71,.25), 0 1px 4px rgba(67,160,71,.4);
+  animation:dot-glow-green 1.8s ease-in-out infinite;
+}
+.legend-dot.dot-live{
+  background:radial-gradient(circle at 35% 35%, #ff6b6b, #e53935);
+  box-shadow:0 0 0 2.5px rgba(229,57,53,.35), 0 1px 4px rgba(229,57,53,.5);
+  animation:dot-pulse 1s ease-in-out infinite;
+}
+.legend-dot.dot-ended{
+  background:radial-gradient(circle at 35% 35%, #757575, #212121);
+  box-shadow:0 1px 3px rgba(0,0,0,.35);
+}
 
 /* ── Tooltip ── */
 .evt-tip{
@@ -253,6 +287,15 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     </div>
     <div class="cal-head" id="calHead"></div>
     <div class="cal-body" id="calBody"></div>
+
+    <!-- ── Legend ── -->
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot dot-before"></span>Upcoming</div>
+      <div class="legend-item"><span class="legend-dot dot-soon"></span>Starting soon</div>
+      <div class="legend-item"><span class="legend-dot dot-live"></span>Live now</div>
+      <div class="legend-item"><span class="legend-dot dot-ended"></span>Ended</div>
+    </div>
+
     <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
   </div>
 </div>
@@ -283,10 +326,8 @@ let viewMonth = today.getMonth();
 let eventMap  = {};
 
 // ── Persistent image cache (memory + localStorage) ────────────
-// localStorage key: imgcache:<url> → 'ok' | 'err'
-// In-memory: imgMem map for instant same-session access
-const imgMem = new Map();   // url → 'loading' | 'ok' | 'err'
-const imgCbs = new Map();   // url → [callback fns]
+const imgMem = new Map();
+const imgCbs = new Map();
 
 function lsKey(url){ return 'imgcache:'+url; }
 function lsGet(url){ try{ return localStorage.getItem(lsKey(url)); }catch(e){ return null; } }
@@ -294,9 +335,7 @@ function lsSet(url, val){ try{ localStorage.setItem(lsKey(url), val); }catch(e){
 
 function preloadImg(url){
   if(!url) return;
-  // Already in memory?
   if(imgMem.has(url)) return;
-  // Already cached in localStorage from a previous session?
   const cached = lsGet(url);
   if(cached === 'ok' || cached === 'err'){
     imgMem.set(url, cached);
@@ -318,10 +357,8 @@ function notifyImgCbs(url, state){
 function onImgReady(url, cb){
   const state = imgMem.get(url);
   if(state==='ok'||state==='err'){ cb(state); return; }
-  // Also check localStorage in case preload hasn't run yet
   const cached = lsGet(url);
   if(cached==='ok'||cached==='err'){ imgMem.set(url,cached); cb(cached); return; }
-  // Queue callback and ensure preload is running
   if(!imgCbs.has(url)) imgCbs.set(url,[]);
   imgCbs.get(url).push(cb);
   if(!imgMem.has(url)) preloadImg(url);
@@ -383,10 +420,9 @@ function getPhase(ev){
   }
 }
 
-// ── Dot class for a cell (worst-case priority across all events) ──
-// Priority: live > soon(≤1h) > before > ended
+// ── Dot class for a cell ──────────────────────────────────────
 function cellDotClass(events){
-  let best = null; // null < ended < before < soon < live
+  let best = null;
   const rank = { ended:1, before:2, soon:3, live:4 };
   for(const ev of events){
     if(!ev.timeObj) continue;
@@ -451,7 +487,6 @@ async function loadSheet(){
         logo,
         organizer:     (ev.organizer||'').trim(),
       });
-      // Pre-warm image cache immediately after sheet load
       if(logo && isURL(logo)) preloadImg(logo);
     });
     buildCalendar();
@@ -486,7 +521,6 @@ function makeCell(y,m,d,overflow){
 
   const events=eventMap[dateKey(y,m,d)]||[];
 
-  // ── Status dot ──
   if(!overflow && events.length){
     const dotCls = cellDotClass(events);
     if(dotCls){
@@ -502,7 +536,6 @@ function makeCell(y,m,d,overflow){
       const ico=document.createElement('div'); ico.className='evt';
 
       if(ev.logo && isURL(ev.logo)){
-        // Always show skeleton first — size is reserved by .evt dimensions
         const skel=document.createElement('div'); skel.className='evt-skeleton';
         ico.appendChild(skel);
         const img=document.createElement('img'); img.alt=ev.title;
@@ -514,10 +547,8 @@ function makeCell(y,m,d,overflow){
             img.src = ev.logo;
             const finish = ()=>{ img.classList.add('loaded'); skel.style.opacity='0'; setTimeout(()=>skel.remove(),250); };
             img.onload = finish;
-            // If browser already has it decoded (same-session cache), onload won't fire
             if(img.complete && img.naturalWidth > 0) finish();
           } else {
-            // Error — swap skeleton for emoji
             skel.remove();
             const em=document.createElement('span'); em.className='evt-emoji'; em.textContent='📅'; ico.appendChild(em);
           }
@@ -525,7 +556,6 @@ function makeCell(y,m,d,overflow){
         onImgReady(ev.logo, reveal);
 
       } else {
-        // Plain emoji — no skeleton needed, render immediately
         const em=document.createElement('span'); em.className='evt-emoji'; em.textContent=ev.logo||'📅'; ico.appendChild(em);
       }
 
@@ -554,7 +584,6 @@ const tipBottomRow =document.getElementById('tipBottomRow');
 let tipPinned=false, countdownTimer=null;
 
 function renderTip(ev,y,m,d){
-  // Logo with skeleton
   tipLogo.innerHTML='';
   if(ev.logo && isURL(ev.logo)){
     const skel=document.createElement('div'); skel.className='tip-logo-skeleton'; tipLogo.appendChild(skel);
@@ -642,5 +671,4 @@ buildCalendar();
 loadSheet();
 </script>
 </body>
-</html>
 </html>
