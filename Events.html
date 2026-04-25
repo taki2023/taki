@@ -28,7 +28,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .page-top::before{content:'';position:absolute;bottom:-10px;left:-10%;width:120%;height:20px;background:var(--bg);border-radius:50%;}
 .page-top::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 14px,rgba(255,255,255,.04) 14px,rgba(255,255,255,.04) 28px);pointer-events:none;}
-.page-title{font-family:'Fredoka One',cursive;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18);position:relative;z-index:1;}
+.page-title{font-family:'Fredoka One',cursive;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.22), 0 4px 10px rgba(0,0,0,.15);position:relative;z-index:1;}
 .page-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
 
 .inner{padding:10px 10px 14px;flex:1;overflow-y:auto;display:flex;flex-direction:column;}
@@ -52,6 +52,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   padding:2px;display:flex;flex-direction:column;
   align-items:flex-start;gap:1px;overflow:visible;
   height:clamp(40px,8.5vw,56px);
+  position:relative;
 }
 .cal-cell.empty{background:transparent;border-color:transparent;}
 .cal-cell.overflow{opacity:.3;pointer-events:none;}
@@ -68,6 +69,48 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   align-items:center;justify-content:center;
   gap:2px;width:100%;flex:1;
 }
+
+/* ── Status dot in top-right of cell ── */
+.status-dot{
+  position:absolute;top:4px;right:4px;
+  width:9px;height:9px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.9);
+  flex-shrink:0;pointer-events:none;z-index:5;
+  transition:transform .2s;
+}
+.status-dot.dot-live{
+  background:radial-gradient(circle at 35% 35%, #ff6b6b, #e53935);
+  box-shadow:0 0 0 2.5px rgba(229,57,53,.35), 0 1px 4px rgba(229,57,53,.5);
+  animation:dot-pulse 1s ease-in-out infinite;
+}
+.status-dot.dot-before{
+  background:radial-gradient(circle at 35% 35%, #64b5f6, #1e88e5);
+  box-shadow:0 0 0 2.5px rgba(30,136,229,.25), 0 1px 4px rgba(30,136,229,.4);
+  animation:dot-glow-blue 2.5s ease-in-out infinite;
+}
+.status-dot.dot-soon{
+  background:radial-gradient(circle at 35% 35%, #81c784, #43a047);
+  box-shadow:0 0 0 2.5px rgba(67,160,71,.25), 0 1px 4px rgba(67,160,71,.4);
+  animation:dot-glow-green 1.8s ease-in-out infinite;
+}
+.status-dot.dot-ended{
+  background:radial-gradient(circle at 35% 35%, #757575, #212121);
+  box-shadow:0 1px 3px rgba(0,0,0,.35);
+}
+@keyframes dot-pulse{
+  0%,100%{box-shadow:0 0 0 2.5px rgba(229,57,53,.35),0 1px 4px rgba(229,57,53,.5);transform:scale(1);}
+  50%{box-shadow:0 0 0 5px rgba(229,57,53,.1),0 1px 6px rgba(229,57,53,.6);transform:scale(1.15);}
+}
+@keyframes dot-glow-blue{
+  0%,100%{box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);}
+  50%{box-shadow:0 0 0 4px rgba(30,136,229,.12),0 1px 7px rgba(30,136,229,.5);}
+}
+@keyframes dot-glow-green{
+  0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25),0 1px 4px rgba(67,160,71,.4);}
+  50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12),0 1px 7px rgba(67,160,71,.55);}
+}
+
+/* ── Event icon ── */
 .evt{
   cursor:pointer;display:flex;align-items:center;justify-content:center;
   width:clamp(13px,3.4vw,20px);height:clamp(13px,3.4vw,20px);
@@ -75,10 +118,20 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;transition:transform .15s;z-index:1;
   border:1.5px solid rgba(217,48,32,.25);
   background:rgba(255,243,224,.7);
-  overflow:hidden;line-height:1;
+  overflow:hidden;line-height:1;position:relative;
 }
 .evt:hover{transform:scale(1.3);z-index:999;}
-.evt img{width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;}
+.evt img{width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .2s;}
+.evt img.loaded{opacity:1;}
+
+/* ── Skeleton shimmer ── */
+.evt-skeleton{
+  position:absolute;inset:0;border-radius:3px;
+  background:linear-gradient(90deg,#f5ddd6 25%,#fceae4 50%,#f5ddd6 75%);
+  background-size:200% 100%;
+  animation:shimmer .9s infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 
 /* ── Status badges ── */
 .status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
@@ -100,9 +153,12 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-logo{
   width:34px;height:34px;border-radius:7px;border:1.5px solid var(--border);
   flex-shrink:0;font-size:22px;display:flex;align-items:center;justify-content:center;
-  overflow:hidden;background:#fff8f5;
+  overflow:hidden;background:#fff8f5;position:relative;
 }
-.tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;}
+.tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;opacity:0;transition:opacity .2s;}
+.tip-logo img.loaded{opacity:1;}
+.tip-logo-skeleton{position:absolute;inset:0;border-radius:6px;background:linear-gradient(90deg,#f5ddd6 25%,#fceae4 50%,#f5ddd6 75%);background-size:200% 100%;animation:shimmer .9s infinite;}
+
 .tip-date-wrap{display:flex;flex-direction:column;gap:2px;min-width:0;}
 .tip-title{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;word-break:break-word;}
 .tip-date-badge{font-size:10px;font-weight:800;color:var(--text-mid);opacity:.8;}
@@ -185,6 +241,35 @@ let viewYear  = today.getFullYear();
 let viewMonth = today.getMonth();
 let eventMap  = {};
 
+// ── Image cache (in-memory + browser cache via fetch) ─────────
+const imgCache = new Map(); // url → 'loading' | 'ok' | 'err' | objectURL
+const imgWaiters = new Map(); // url → [callbacks]
+
+function preloadImg(url){
+  if(!url||imgCache.get(url)==='ok'||imgCache.get(url)==='err') return;
+  if(imgCache.has(url)) return; // already loading
+  imgCache.set(url,'loading');
+  const img = new Image();
+  img.onload  = ()=>{ imgCache.set(url,'ok');  notifyWaiters(url,'ok');  };
+  img.onerror = ()=>{ imgCache.set(url,'err'); notifyWaiters(url,'err'); };
+  // Add crossOrigin + fetch hint for caching
+  img.crossOrigin = 'anonymous';
+  img.decoding   = 'async';
+  img.src = url;
+}
+function notifyWaiters(url, state){
+  const cbs = imgWaiters.get(url)||[];
+  imgWaiters.delete(url);
+  cbs.forEach(cb=>cb(state));
+}
+function onImgReady(url, cb){
+  const state = imgCache.get(url);
+  if(state==='ok'||state==='err'){ cb(state); return; }
+  if(!imgWaiters.has(url)) imgWaiters.set(url,[]);
+  imgWaiters.get(url).push(cb);
+  if(!state) preloadImg(url);
+}
+
 // ── Helpers ───────────────────────────────────────────────────
 function pad(n){ return String(n).padStart(2,'0'); }
 function dateKey(y,m,d){ return `${y}-${pad(m+1)}-${pad(d)}`; }
@@ -194,7 +279,7 @@ function ordinal(d){ const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)%1
 function formatDate(y,m,d){ return `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`; }
 function isURL(s){ return s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.')); }
 
-// ── Parse date ────────────────────────────────────────────────
+// ── Parse date / time ─────────────────────────────────────────
 function parseDate(str){
   if(!str) return null;
   str=str.trim();
@@ -204,8 +289,6 @@ function parseDate(str){
   const dt=new Date(str); if(!isNaN(dt)) return {y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
   return null;
 }
-
-// ── Parse time ────────────────────────────────────────────────
 function parseTime(str){
   if(!str||!str.trim()) return null;
   const m=str.trim().match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);
@@ -214,23 +297,12 @@ function parseTime(str){
   if(m[3]){ if(m[3].toLowerCase()==='pm'&&h<12) h+=12; if(m[3].toLowerCase()==='am'&&h===12) h=0; }
   return {h,min};
 }
-
-// ── Build UTC timestamp ───────────────────────────────────────
 function buildUTC(dateObj,timeObj){
   if(!dateObj||!timeObj) return null;
   return new Date(Date.UTC(dateObj.y, dateObj.m, dateObj.d, timeObj.h, timeObj.min, 0));
 }
 
 // ── Get event phase ───────────────────────────────────────────
-// Returns { status: 'upcoming'|'live'|'ended', text, cssClass, phase: 'before'|'live'|'after' }
-//
-// Phase map:
-//   now < startUTC            → 'before'   (upcoming)
-//   startUTC ≤ now < endUTC   → 'live'
-//   now ≥ endUTC              → 'after'    (ended)
-//
-// If duration = 0 → endUTC = startUTC, so the event switches to 'after'
-// the moment it starts (no live window).
 function getPhase(ev){
   if(!ev.timeObj) return null;
   const startUTC  = buildUTC(ev.dateObj, ev.timeObj);
@@ -240,7 +312,6 @@ function getPhase(ev){
   const now        = Date.now();
 
   if(now < startUTC.getTime()){
-    // ── UPCOMING ──
     const sec=Math.floor((startUTC-now)/1000);
     const d=Math.floor(sec/86400), h=Math.floor((sec%86400)/3600), m=Math.floor((sec%3600)/60);
     let text='Starting in ';
@@ -248,27 +319,42 @@ function getPhase(ev){
     else if(h>0) text+=`${h}h ${m}m`;
     else text+=`${m}m`;
     return {status:'upcoming', text, cssClass:'status-upcoming', phase:'before'};
-
   } else if(now < endUTC.getTime()){
-    // ── LIVE ──
     return {status:'live', text:'🔴 Live', cssClass:'status-live', phase:'live'};
-
   } else {
-    // ── ENDED ──
     return {status:'ended', text:'✅ Ended', cssClass:'status-ended', phase:'after'};
   }
 }
 
-// ── Pick phase-appropriate field with fallback chain ──────────
-// For each field, if the phase-specific value is empty, falls back gracefully.
+// ── Dot class for a cell (worst-case priority across all events) ──
+// Priority: live > soon(≤1h) > before > ended
+function cellDotClass(events){
+  let best = null; // null < ended < before < soon < live
+  const rank = { ended:1, before:2, soon:3, live:4 };
+  for(const ev of events){
+    if(!ev.timeObj) continue;
+    const startUTC  = buildUTC(ev.dateObj, ev.timeObj);
+    if(!startUTC) continue;
+    const durationMs = (ev.duration||0)*3600000;
+    const endUTC     = new Date(startUTC.getTime()+durationMs);
+    const now        = Date.now();
+    let cls;
+    if(now >= endUTC.getTime())             cls='ended';
+    else if(now >= startUTC.getTime())      cls='live';
+    else if(startUTC-now <= 3600000)        cls='soon';
+    else                                    cls='before';
+    if(!best || rank[cls]>rank[best]) best=cls;
+  }
+  return best ? 'dot-'+best : null;
+}
+
+// ── Pick phase-appropriate field ──────────────────────────────
 function pick(ev, phase, field){
-  // field = 'details' | 'button' | 'link'
   const key = {
     before: { details:'detailsBefore', button:'buttonBefore', link:'linkBefore' },
     live:   { details:'detailsLive',   button:'buttonLive',   link:'linkLive'   },
     after:  { details:'detailsAfter',  button:'buttonAfter',  link:'linkAfter'  },
   };
-  // Try exact phase first, then fall back so tooltip is never empty
   const fallback = { before:['before'], live:['live','before'], after:['after','live','before'] };
   for(const p of fallback[phase]){
     const val = ev[key[p][field]];
@@ -290,27 +376,26 @@ async function loadSheet(){
       if(!dateObj) return;
       const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
       if(!eventMap[key]) eventMap[key]=[];
+      const logo=(ev.logo||'').trim();
       eventMap[key].push({
         dateObj,
         timeObj:       parseTime(ev.time),
         duration:      parseFloat(ev.duration)||0,
         title:         ev.title,
-        // before
         detailsBefore: ev.detailsBefore||'',
         buttonBefore:  ev.buttonBefore ||'',
         linkBefore:    ev.linkBefore   ||'',
-        // live
         detailsLive:   ev.detailsLive  ||'',
         buttonLive:    ev.buttonLive   ||'',
         linkLive:      ev.linkLive     ||'',
-        // after
         detailsAfter:  ev.detailsAfter ||'',
         buttonAfter:   ev.buttonAfter  ||'',
         linkAfter:     ev.linkAfter    ||'',
-        // shared
-        logo:          (ev.logo||'').trim(),
+        logo,
         organizer:     (ev.organizer||'').trim(),
       });
+      // Pre-warm image cache immediately after sheet load
+      if(logo && isURL(logo)) preloadImg(logo);
     });
     buildCalendar();
   }catch(e){ console.error('Sheet load failed:',e); }
@@ -339,17 +424,45 @@ function makeCell(y,m,d,overflow){
   const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
   const cell=document.createElement('div');
   cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
+
   const num=document.createElement('div'); num.className='day-num'; num.textContent=d; cell.appendChild(num);
+
   const events=eventMap[dateKey(y,m,d)]||[];
+
+  // ── Status dot ──
+  if(!overflow && events.length){
+    const dotCls = cellDotClass(events);
+    if(dotCls){
+      const dot = document.createElement('div');
+      dot.className = 'status-dot '+dotCls;
+      cell.appendChild(dot);
+    }
+  }
+
   if(events.length){
     const wrap=document.createElement('div'); wrap.className='evt-icons';
     events.forEach(ev=>{
       const ico=document.createElement('div'); ico.className='evt';
-      if(ev.logo&&isURL(ev.logo)){
-        const img=document.createElement('img'); img.src=ev.logo; img.alt=ev.title; img.loading='lazy'; ico.appendChild(img);
+
+      if(ev.logo && isURL(ev.logo)){
+        // Skeleton shown until image resolves
+        const skel=document.createElement('div'); skel.className='evt-skeleton'; ico.appendChild(skel);
+        const img=document.createElement('img'); img.alt=ev.title; img.loading='eager'; img.decoding='async';
+        ico.appendChild(img);
+        onImgReady(ev.logo, state=>{
+          if(state==='ok'){
+            img.src = ev.logo;
+            img.onload = ()=>{ img.classList.add('loaded'); skel.remove(); };
+            // If already decoded (cached by browser), onload may not fire
+            if(img.complete && img.naturalWidth){ img.classList.add('loaded'); skel.remove(); }
+          } else {
+            skel.remove(); ico.textContent='📅';
+          }
+        });
       } else {
         ico.textContent=ev.logo||'📅';
       }
+
       if(!overflow){
         ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d));
         ico.addEventListener('mouseleave',maybHideTip);
@@ -375,21 +488,30 @@ const tipBottomRow =document.getElementById('tipBottomRow');
 let tipPinned=false, countdownTimer=null;
 
 function renderTip(ev,y,m,d){
-  // Logo
+  // Logo with skeleton
   tipLogo.innerHTML='';
-  if(ev.logo&&isURL(ev.logo)){
-    const img=document.createElement('img'); img.src=ev.logo; img.alt=ev.title; tipLogo.appendChild(img);
+  if(ev.logo && isURL(ev.logo)){
+    const skel=document.createElement('div'); skel.className='tip-logo-skeleton'; tipLogo.appendChild(skel);
+    const img=document.createElement('img'); img.alt=ev.title; img.decoding='async';
+    tipLogo.appendChild(img);
+    onImgReady(ev.logo, state=>{
+      if(state==='ok'){
+        img.src=ev.logo;
+        img.onload=()=>{ img.classList.add('loaded'); skel.remove(); };
+        if(img.complete && img.naturalWidth){ img.classList.add('loaded'); skel.remove(); }
+      } else {
+        skel.remove(); tipLogo.textContent='📅';
+      }
+    });
   } else {
     tipLogo.textContent=ev.logo||'📅';
   }
 
-  // Title + date
   tipTitle.textContent=ev.title;
   tipDateBadge.textContent=ev.timeObj
     ? `${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
     : formatDate(y,m,d);
 
-  // Status badge — updates every 30s
   clearInterval(countdownTimer);
   const st=getPhase(ev);
   if(st){
@@ -405,17 +527,14 @@ function renderTip(ev,y,m,d){
     tipCountdown.style.display='none';
   }
 
-  // Phase-matched content
-  const phase = st ? st.phase : 'before';   // no timeObj → treat as before
+  const phase = st ? st.phase : 'before';
   const details = pick(ev, phase, 'details');
   const btnText = pick(ev, phase, 'button');
   const btnLink = pick(ev, phase, 'link');
 
-  // Details
   tipDetail.textContent=details;
   tipDetail.style.display=details?'block':'none';
 
-  // Bottom row: button + organizer
   tipBottomRow.innerHTML='';
   if(btnText&&btnLink){
     const a=document.createElement('a');
