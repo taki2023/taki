@@ -44,8 +44,17 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .nav-btn:hover{background:#fce8e0;border-color:var(--red-dark);transform:translateY(-2px);box-shadow:0 5px 0 var(--red-dark);}
 .nav-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--red-dark);}
 
-.cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px;}
-.cal-head-cell{text-align:center;font-size:clamp(7px,1.6vw,10px);font-weight:900;color:var(--text-mid);text-transform:uppercase;letter-spacing:.4px;padding:2px 0;}
+.cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px;}
+.cal-head-cell{
+  text-align:center;
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(9px,2vw,12px);
+  font-weight:400;
+  color:var(--text-mid);
+  letter-spacing:.6px;
+  padding:3px 0 2px;
+  opacity:.85;
+}
 .cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .cal-cell{
   background:var(--card);border:1.5px solid var(--border);border-radius:7px;
@@ -112,26 +121,59 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 
 /* ── Event icon ── */
 .evt{
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  width:clamp(13px,3.4vw,20px);height:clamp(13px,3.4vw,20px);
-  border-radius:4px;font-size:clamp(9px,2.2vw,14px);
-  flex-shrink:0;transition:transform .15s;z-index:1;
-  border:1.5px solid rgba(217,48,32,.25);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  width:clamp(15px,3.8vw,22px);height:clamp(15px,3.8vw,22px);
+  min-width:15px;min-height:15px;
+  border-radius:5px;font-size:clamp(10px,2.4vw,15px);
+  flex-shrink:0;transition:transform .18s;z-index:1;
+  border:1.5px solid rgba(217,48,32,.22);
   background:rgba(255,243,224,.7);
-  overflow:hidden;line-height:1;position:relative;
+  overflow:hidden;line-height:1;
+  position:relative;
+  /* size is always reserved even while skeleton shows */
 }
-.evt:hover{transform:scale(1.3);z-index:999;}
-.evt img{width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .2s;}
+.evt:hover{transform:scale(1.35);z-index:999;}
+.evt img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;border-radius:3px;display:block;
+  opacity:0;transition:opacity .25s;
+}
 .evt img.loaded{opacity:1;}
+.evt-emoji{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:inherit;line-height:1;
+}
 
 /* ── Skeleton shimmer ── */
 .evt-skeleton{
   position:absolute;inset:0;border-radius:3px;
-  background:linear-gradient(90deg,#f5ddd6 25%,#fceae4 50%,#f5ddd6 75%);
-  background-size:200% 100%;
-  animation:shimmer .9s infinite;
+  background:linear-gradient(90deg,
+    #f0cfc4 0%,
+    #fce5de 40%,
+    #f9d6cd 60%,
+    #f0cfc4 100%
+  );
+  background-size:300% 100%;
+  animation:shimmer .85s ease-in-out infinite;
+  z-index:2;
 }
-@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.tip-logo-skeleton{
+  position:absolute;inset:0;border-radius:6px;
+  background:linear-gradient(90deg,
+    #f0cfc4 0%,
+    #fce5de 40%,
+    #f9d6cd 60%,
+    #f0cfc4 100%
+  );
+  background-size:300% 100%;
+  animation:shimmer .85s ease-in-out infinite;
+  z-index:2;
+}
+@keyframes shimmer{
+  0%  {background-position:200% 0;}
+  100%{background-position:-100% 0;}
+}
 
 /* ── Status badges ── */
 .status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
@@ -155,9 +197,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;font-size:22px;display:flex;align-items:center;justify-content:center;
   overflow:hidden;background:#fff8f5;position:relative;
 }
-.tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;opacity:0;transition:opacity .2s;}
+.tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;opacity:0;transition:opacity .25s;}
 .tip-logo img.loaded{opacity:1;}
-.tip-logo-skeleton{position:absolute;inset:0;border-radius:6px;background:linear-gradient(90deg,#f5ddd6 25%,#fceae4 50%,#f5ddd6 75%);background-size:200% 100%;animation:shimmer .9s infinite;}
 
 .tip-date-wrap{display:flex;flex-direction:column;gap:2px;min-width:0;}
 .tip-title{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;word-break:break-word;}
@@ -241,33 +282,49 @@ let viewYear  = today.getFullYear();
 let viewMonth = today.getMonth();
 let eventMap  = {};
 
-// ── Image cache (in-memory + browser cache via fetch) ─────────
-const imgCache = new Map(); // url → 'loading' | 'ok' | 'err' | objectURL
-const imgWaiters = new Map(); // url → [callbacks]
+// ── Persistent image cache (memory + localStorage) ────────────
+// localStorage key: imgcache:<url> → 'ok' | 'err'
+// In-memory: imgMem map for instant same-session access
+const imgMem = new Map();   // url → 'loading' | 'ok' | 'err'
+const imgCbs = new Map();   // url → [callback fns]
+
+function lsKey(url){ return 'imgcache:'+url; }
+function lsGet(url){ try{ return localStorage.getItem(lsKey(url)); }catch(e){ return null; } }
+function lsSet(url, val){ try{ localStorage.setItem(lsKey(url), val); }catch(e){} }
 
 function preloadImg(url){
-  if(!url||imgCache.get(url)==='ok'||imgCache.get(url)==='err') return;
-  if(imgCache.has(url)) return; // already loading
-  imgCache.set(url,'loading');
+  if(!url) return;
+  // Already in memory?
+  if(imgMem.has(url)) return;
+  // Already cached in localStorage from a previous session?
+  const cached = lsGet(url);
+  if(cached === 'ok' || cached === 'err'){
+    imgMem.set(url, cached);
+    return;
+  }
+  imgMem.set(url, 'loading');
   const img = new Image();
-  img.onload  = ()=>{ imgCache.set(url,'ok');  notifyWaiters(url,'ok');  };
-  img.onerror = ()=>{ imgCache.set(url,'err'); notifyWaiters(url,'err'); };
-  // Add crossOrigin + fetch hint for caching
   img.crossOrigin = 'anonymous';
-  img.decoding   = 'async';
+  img.decoding    = 'async';
+  img.onload  = ()=>{ imgMem.set(url,'ok');  lsSet(url,'ok');  notifyImgCbs(url,'ok');  };
+  img.onerror = ()=>{ imgMem.set(url,'err'); lsSet(url,'err'); notifyImgCbs(url,'err'); };
   img.src = url;
 }
-function notifyWaiters(url, state){
-  const cbs = imgWaiters.get(url)||[];
-  imgWaiters.delete(url);
+function notifyImgCbs(url, state){
+  const cbs = imgCbs.get(url)||[];
+  imgCbs.delete(url);
   cbs.forEach(cb=>cb(state));
 }
 function onImgReady(url, cb){
-  const state = imgCache.get(url);
+  const state = imgMem.get(url);
   if(state==='ok'||state==='err'){ cb(state); return; }
-  if(!imgWaiters.has(url)) imgWaiters.set(url,[]);
-  imgWaiters.get(url).push(cb);
-  if(!state) preloadImg(url);
+  // Also check localStorage in case preload hasn't run yet
+  const cached = lsGet(url);
+  if(cached==='ok'||cached==='err'){ imgMem.set(url,cached); cb(cached); return; }
+  // Queue callback and ensure preload is running
+  if(!imgCbs.has(url)) imgCbs.set(url,[]);
+  imgCbs.get(url).push(cb);
+  if(!imgMem.has(url)) preloadImg(url);
 }
 
 // ── Helpers ───────────────────────────────────────────────────
@@ -445,22 +502,31 @@ function makeCell(y,m,d,overflow){
       const ico=document.createElement('div'); ico.className='evt';
 
       if(ev.logo && isURL(ev.logo)){
-        // Skeleton shown until image resolves
-        const skel=document.createElement('div'); skel.className='evt-skeleton'; ico.appendChild(skel);
-        const img=document.createElement('img'); img.alt=ev.title; img.loading='eager'; img.decoding='async';
+        // Always show skeleton first — size is reserved by .evt dimensions
+        const skel=document.createElement('div'); skel.className='evt-skeleton';
+        ico.appendChild(skel);
+        const img=document.createElement('img'); img.alt=ev.title;
+        img.loading='eager'; img.decoding='async';
         ico.appendChild(img);
-        onImgReady(ev.logo, state=>{
+
+        const reveal = state => {
           if(state==='ok'){
             img.src = ev.logo;
-            img.onload = ()=>{ img.classList.add('loaded'); skel.remove(); };
-            // If already decoded (cached by browser), onload may not fire
-            if(img.complete && img.naturalWidth){ img.classList.add('loaded'); skel.remove(); }
+            const finish = ()=>{ img.classList.add('loaded'); skel.style.opacity='0'; setTimeout(()=>skel.remove(),250); };
+            img.onload = finish;
+            // If browser already has it decoded (same-session cache), onload won't fire
+            if(img.complete && img.naturalWidth > 0) finish();
           } else {
-            skel.remove(); ico.textContent='📅';
+            // Error — swap skeleton for emoji
+            skel.remove();
+            const em=document.createElement('span'); em.className='evt-emoji'; em.textContent='📅'; ico.appendChild(em);
           }
-        });
+        };
+        onImgReady(ev.logo, reveal);
+
       } else {
-        ico.textContent=ev.logo||'📅';
+        // Plain emoji — no skeleton needed, render immediately
+        const em=document.createElement('span'); em.className='evt-emoji'; em.textContent=ev.logo||'📅'; ico.appendChild(em);
       }
 
       if(!overflow){
@@ -494,15 +560,17 @@ function renderTip(ev,y,m,d){
     const skel=document.createElement('div'); skel.className='tip-logo-skeleton'; tipLogo.appendChild(skel);
     const img=document.createElement('img'); img.alt=ev.title; img.decoding='async';
     tipLogo.appendChild(img);
-    onImgReady(ev.logo, state=>{
+    const reveal = state=>{
       if(state==='ok'){
         img.src=ev.logo;
-        img.onload=()=>{ img.classList.add('loaded'); skel.remove(); };
-        if(img.complete && img.naturalWidth){ img.classList.add('loaded'); skel.remove(); }
+        const finish=()=>{ img.classList.add('loaded'); skel.style.opacity='0'; setTimeout(()=>skel.remove(),250); };
+        img.onload=finish;
+        if(img.complete && img.naturalWidth>0) finish();
       } else {
         skel.remove(); tipLogo.textContent='📅';
       }
-    });
+    };
+    onImgReady(ev.logo, reveal);
   } else {
     tipLogo.textContent=ev.logo||'📅';
   }
@@ -574,4 +642,5 @@ buildCalendar();
 loadSheet();
 </script>
 </body>
+</html>
 </html>
