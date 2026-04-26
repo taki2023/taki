@@ -62,16 +62,12 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   font-size:clamp(9.5px,2.2vw,13px);
   letter-spacing:.7px;
   padding:3px 1px;
-  /* solid gradient text — no opacity dimming */
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
-  /* subtle pill tray behind each label */
   background-color:#ffe8e0;
   border-radius:6px;
-  /* border to frame each pill */
   border:1px solid rgba(232,85,53,.25);
-  /* hard shadow so text pops */
   filter:drop-shadow(0 1px 0 rgba(180,30,10,.22));
 }
 
@@ -81,7 +77,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   background:var(--card);border:1.5px solid var(--border);border-radius:7px;
   padding:2px;display:flex;flex-direction:column;
   align-items:flex-start;gap:0;overflow:visible;
-  /* Fixed height so all rows are uniform */
   height:clamp(42px,9vw,58px);
   position:relative;
 }
@@ -92,9 +87,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);
 }
 
-/* ── Day number wrapper — fixed height on ALL cells ── */
+/* ── Day number wrapper ── */
 .day-num-wrap{
-  /* same fixed height whether today or not — icons always start here */
   height:18px;
   width:100%;
   display:flex;align-items:center;
@@ -107,7 +101,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   line-height:1;
   display:flex;align-items:center;
 }
-/* today: swap number for a red circle — still inside same 18px wrapper */
 .cal-cell.today .day-num{
   display:inline-flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#d93020,#e85535);color:#fff;border-radius:50%;
@@ -116,12 +109,11 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   font-size:clamp(8px,1.9vw,11px);
 }
 
-/* ── Event icon row — always fills remaining space ── */
+/* ── Event icon row ── */
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:wrap;
   align-items:center;justify-content:center;
   gap:2px;width:100%;
-  /* flex:1 pushes it to fill the cell height after the day num */
   flex:1;
   min-height:0;
 }
@@ -141,6 +133,12 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 @keyframes dot-glow-blue{0%,100%{box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);}50%{box-shadow:0 0 0 4px rgba(30,136,229,.12),0 1px 7px rgba(30,136,229,.5);}}
 @keyframes dot-glow-green{0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25),0 1px 4px rgba(67,160,71,.4);}50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12),0 1px 7px rgba(67,160,71,.55);}}
 
+/* ── Status badge colours ── */
+.status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
+.status-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:pulse-badge 1.4s ease-in-out infinite;}
+.status-ended{color:#555;background:#f5f5f5;border-color:#ccc;}
+@keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
+
 /* ── Event icon ── */
 .evt{
   cursor:pointer;
@@ -152,8 +150,11 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   border:1.5px solid rgba(217,48,32,.22);
   background:rgba(255,243,224,.7);
   overflow:hidden;line-height:1;position:relative;
+  /* prevent tap highlight on mobile */
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
-.evt:hover{transform:scale(1.35);z-index:999;}
+.evt:hover{transform:scale(1.35);z-index:10;}
 .evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;}
 .evt img.loaded{opacity:1;}
 .evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;}
@@ -166,12 +167,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .tip-logo-skeleton{border-radius:6px;}
 @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
-
-/* ── Status badge colours ── */
-.status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
-.status-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:pulse-badge 1.4s ease-in-out infinite;}
-.status-ended{color:#555;background:#f5f5f5;border-color:#ccc;}
-@keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
 
 /* ── Legend ── */
 .legend{
@@ -186,7 +181,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   letter-spacing:.4px;
   white-space:nowrap;
 }
-/* each legend label gets its own gradient colour */
 .legend-item:nth-child(1) .legend-label{color:#1565c0;}
 .legend-item:nth-child(2) .legend-label{color:#2e7d32;}
 .legend-item:nth-child(3) .legend-label{color:#b71c1c;}
@@ -201,11 +195,14 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .evt-tip{
   position:fixed;background:var(--card);border:2px solid var(--red-dark);
   border-radius:14px;padding:10px 13px 9px;box-shadow:0 8px 28px rgba(217,48,32,.25);
-  pointer-events:none;opacity:0;transition:opacity .12s;z-index:99999;
+  /* pointer-events always auto so mouse can enter without it hiding */
+  pointer-events:auto;
+  opacity:0;transition:opacity .12s;
+  z-index:99999;
   min-width:200px;max-width:260px;white-space:normal;font-family:'Nunito',sans-serif;
-  display:flex;flex-direction:column;gap:0;
+  display:none;flex-direction:column;gap:0;
 }
-.evt-tip.show{opacity:1;pointer-events:auto;}
+.evt-tip.show{opacity:1;display:flex;}
 
 .tip-row1{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
 .tip-logo{
@@ -238,7 +235,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   background:linear-gradient(135deg,#fff8f5,#fff0eb);
   border-left:3px solid var(--red-mid);
   border-radius:0 8px 8px 0;
-  display:none; /* shown by JS when quote exists */
+  display:none;
 }
 .tip-quote-text{
   font-family:'Playfair Display',Georgia,serif;
@@ -256,6 +253,21 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   color:var(--text-mid);
   margin-top:3px;
   letter-spacing:.3px;
+}
+
+/* Close button (mobile) */
+.tip-close{
+  position:absolute;top:7px;right:9px;
+  font-size:16px;font-weight:900;color:var(--red-dark);
+  cursor:pointer;line-height:1;display:none;
+  width:20px;height:20px;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(217,48,32,.08);
+  z-index:10;
+}
+@media (pointer:coarse){
+  .tip-close{display:flex;}
+  /* give title some right padding so it doesn't overlap close button */
+  .tip-title{padding-right:18px;}
 }
 
 .tip-bottom-row{
@@ -284,7 +296,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   font-family:'Fredoka One',cursive;
   font-size:11px;
   letter-spacing:.4px;
-  /* exact same gradient as .cal-month-label */
   background:linear-gradient(135deg,#d93020,#ef6640);
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -322,6 +333,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 
 <!-- Tooltip -->
 <div class="evt-tip" id="globalTip">
+  <div class="tip-close" id="tipClose">✕</div>
   <div class="tip-row1">
     <div class="tip-logo"      id="tipLogo"></div>
     <div class="tip-date-wrap">
@@ -329,9 +341,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
       <div class="tip-date-badge" id="tipDateBadge"></div>
     </div>
   </div>
-  <div class="tip-countdown"  id="tipCountdown" style="display:none"></div>
+  <div class="tip-countdown"  id="tipCountdown"></div>
   <div class="tip-detail"     id="tipDetail"></div>
-  <!-- Quote block -->
   <div class="tip-quote" id="tipQuote">
     <span class="tip-quote-text"  id="tipQuoteText"></span>
     <span class="tip-quote-author" id="tipQuoteAuthor"></span>
@@ -351,7 +362,10 @@ let viewYear  = today.getFullYear();
 let viewMonth = today.getMonth();
 let eventMap  = {};
 
-// ── Image cache ───────────────────────────────────────────────
+// Detect touch/mobile
+const isTouchDevice = () => window.matchMedia('(pointer:coarse)').matches;
+
+// ── Image cache ─────────────────────────────────────────────
 const imgMem = new Map(), imgCbs = new Map();
 function lsKey(u){ return 'imgcache:'+u; }
 function lsGet(u){ try{ return localStorage.getItem(lsKey(u)); }catch(e){ return null; } }
@@ -377,7 +391,7 @@ function onImgReady(url,cb){
   if(!imgMem.has(url)) preloadImg(url);
 }
 
-// ── Helpers ───────────────────────────────────────────────────
+// ── Helpers ──────────────────────────────────────────────────
 const pad = n => String(n).padStart(2,'0');
 const dateKey = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
 const lastDay = (y,m) => new Date(y,m+1,0).getDate();
@@ -386,7 +400,7 @@ const ordinal = d => { const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)
 const formatDate = (y,m,d) => `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
 const isURL = s => s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.'));
 
-// ── Parse ─────────────────────────────────────────────────────
+// ── Parse ────────────────────────────────────────────────────
 function parseDate(str){
   if(!str) return null; str=str.trim();
   if(/^\d{4}-\d{2}-\d{2}$/.test(str)){ const[y,m,d]=str.split('-').map(Number); return{y,m:m-1,d}; }
@@ -407,7 +421,7 @@ function buildUTC(dateObj,timeObj){
   return new Date(Date.UTC(dateObj.y,dateObj.m,dateObj.d,timeObj.h,timeObj.min,0));
 }
 
-// ── Phase ─────────────────────────────────────────────────────
+// ── Phase ────────────────────────────────────────────────────
 function getPhase(ev){
   if(!ev.timeObj) return null;
   const startUTC=buildUTC(ev.dateObj,ev.timeObj); if(!startUTC) return null;
@@ -454,7 +468,7 @@ function pick(ev,phase,field){
   return '';
 }
 
-// ── Load sheet ────────────────────────────────────────────────
+// ── Load sheet ───────────────────────────────────────────────
 async function loadSheet(){
   try{
     const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
@@ -462,6 +476,7 @@ async function loadSheet(){
     const data=await res.json();
     eventMap={};
     data.forEach(ev=>{
+      // Only require title + date — all other fields optional
       if(!ev.date||!ev.title) return;
       const dateObj=parseDate(ev.date); if(!dateObj) return;
       const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
@@ -471,19 +486,18 @@ async function loadSheet(){
         dateObj,
         timeObj:       parseTime(ev.time),
         duration:      parseFloat(ev.duration)||0,
-        title:         ev.title,
-        detailsBefore: ev.detailsBefore||'',
-        buttonBefore:  ev.buttonBefore||'',
-        linkBefore:    ev.linkBefore||'',
-        detailsLive:   ev.detailsLive||'',
-        buttonLive:    ev.buttonLive||'',
-        linkLive:      ev.linkLive||'',
-        detailsAfter:  ev.detailsAfter||'',
-        buttonAfter:   ev.buttonAfter||'',
-        linkAfter:     ev.linkAfter||'',
+        title:         (ev.title||'').trim(),
+        detailsBefore: (ev.detailsBefore||'').trim(),
+        buttonBefore:  (ev.buttonBefore||'').trim(),
+        linkBefore:    (ev.linkBefore||'').trim(),
+        detailsLive:   (ev.detailsLive||'').trim(),
+        buttonLive:    (ev.buttonLive||'').trim(),
+        linkLive:      (ev.linkLive||'').trim(),
+        detailsAfter:  (ev.detailsAfter||'').trim(),
+        buttonAfter:   (ev.buttonAfter||'').trim(),
+        linkAfter:     (ev.linkAfter||'').trim(),
         logo,
         organizer:     (ev.organizer||'').trim(),
-        // ── new quote fields ──
         quoteBefore:   (ev.quoteBefore||'').trim(),
         quoteAfter:    (ev.quoteAfter||'').trim(),
       });
@@ -493,7 +507,7 @@ async function loadSheet(){
   }catch(e){ console.error('Sheet load failed:',e); }
 }
 
-// ── Calendar ──────────────────────────────────────────────────
+// ── Calendar ─────────────────────────────────────────────────
 const monthLabel=document.getElementById('monthLabel');
 const calHead=document.getElementById('calHead');
 const calBody=document.getElementById('calBody');
@@ -542,12 +556,16 @@ function makeCell(y,m,d,overflow){
           } else { skel.remove(); const em=document.createElement('span'); em.className='evt-emoji'; em.textContent='📅'; ico.appendChild(em); }
         });
       } else {
-        const em=document.createElement('span'); em.className='evt-emoji'; em.textContent=ev.logo||'📅'; ico.appendChild(em);
+        const em=document.createElement('span'); em.className='evt-emoji';
+        em.textContent=(ev.logo&&ev.logo.trim())?ev.logo:'📅';
+        ico.appendChild(em);
       }
+
       if(!overflow){
-        ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d,ico));
+        ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d));
         ico.addEventListener('mouseleave',maybHideTip);
-        ico.addEventListener('click',e=>{ e.stopPropagation(); pinTip(e,ev,y,m,d,ico); });
+        ico.addEventListener('mousemove', moveTip);
+        ico.addEventListener('click',e=>{ e.stopPropagation(); pinTip(e,ev,y,m,d); });
       }
       wrap.appendChild(ico);
     });
@@ -556,19 +574,26 @@ function makeCell(y,m,d,overflow){
   return cell;
 }
 
-// ── Tooltip ───────────────────────────────────────────────────
-const tip          =document.getElementById('globalTip');
-const tipLogo      =document.getElementById('tipLogo');
-const tipTitle     =document.getElementById('tipTitle');
-const tipDateBadge =document.getElementById('tipDateBadge');
-const tipCountdown =document.getElementById('tipCountdown');
-const tipDetail    =document.getElementById('tipDetail');
-const tipQuote     =document.getElementById('tipQuote');
-const tipQuoteText =document.getElementById('tipQuoteText');
-const tipQuoteAuthor=document.getElementById('tipQuoteAuthor');
-const tipBottomRow =document.getElementById('tipBottomRow');
+// ── Tooltip logic ─────────────────────────────────────────────
+const tip           = document.getElementById('globalTip');
+const tipLogo       = document.getElementById('tipLogo');
+const tipTitle      = document.getElementById('tipTitle');
+const tipDateBadge  = document.getElementById('tipDateBadge');
+const tipCountdown  = document.getElementById('tipCountdown');
+const tipDetail     = document.getElementById('tipDetail');
+const tipQuote      = document.getElementById('tipQuote');
+const tipQuoteText  = document.getElementById('tipQuoteText');
+const tipQuoteAuthor= document.getElementById('tipQuoteAuthor');
+const tipBottomRow  = document.getElementById('tipBottomRow');
+const tipClose      = document.getElementById('tipClose');
 
 let tipPinned=false, countdownTimer=null;
+
+function hideTip(){ tipPinned=false; tip.classList.remove('show'); clearInterval(countdownTimer); }
+function showTip(e,ev,y,m,d){ if(tipPinned) return; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
+function pinTip(e,ev,y,m,d){ tipPinned=true; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
+function maybHideTip(){ if(!tipPinned) hideTip(); }
+function moveTip(e){ if(!tipPinned) posTip(e); }
 
 function renderTip(ev,y,m,d){
   // Logo
@@ -584,16 +609,18 @@ function renderTip(ev,y,m,d){
         if(img.complete&&img.naturalWidth>0) finish();
       } else { skel.remove(); tipLogo.textContent='📅'; }
     });
-  } else { tipLogo.textContent=ev.logo||'📅'; }
+  } else {
+    tipLogo.textContent=(ev.logo&&ev.logo.trim())?ev.logo:'📅';
+  }
 
-  tipTitle.textContent=ev.title;
-  tipDateBadge.textContent=ev.timeObj
+  tipTitle.textContent = ev.title;
+  tipDateBadge.textContent = ev.timeObj
     ? `${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
     : formatDate(y,m,d);
 
   // Countdown badge
-  clearInterval(countdownTimer);
-  const st=getPhase(ev);
+  clearInterval(countdownTimer); countdownTimer=null;
+  const st = getPhase(ev);
   if(st){
     tipCountdown.style.display='flex';
     const updateBadge=()=>{
@@ -603,77 +630,65 @@ function renderTip(ev,y,m,d){
     };
     updateBadge();
     countdownTimer=setInterval(updateBadge,30000);
-  } else { tipCountdown.style.display='none'; }
+  } else {
+    tipCountdown.style.display='none';
+  }
 
-  const phase=st?st.phase:'before';
-  const details=pick(ev,phase,'details');
-  const btnText=pick(ev,phase,'button');
-  const btnLink=pick(ev,phase,'link');
+  // Details — use phase if time available, else fall back to 'before'
+  const phase = st ? st.phase : 'before';
+  const details = pick(ev,phase,'details');
+  const btnText = pick(ev,phase,'button');
+  const btnLink  = pick(ev,phase,'link');
 
-  tipDetail.textContent=details;
-  tipDetail.style.display=details?'block':'none';
+  tipDetail.textContent = details;
+  tipDetail.style.display = details ? 'block' : 'none';
 
-  // ── Quote: show quoteBefore before end, quoteAfter after end ──
+  // Quote
   const quote = (phase==='after') ? ev.quoteAfter : ev.quoteBefore;
   if(quote){
-    tipQuoteText.textContent=quote;
-    tipQuoteAuthor.textContent=ev.organizer ? `— @${ev.organizer}` : '';
-    tipQuote.style.display='block';
+    tipQuoteText.textContent = quote;
+    tipQuoteAuthor.textContent = ev.organizer ? `— @${ev.organizer}` : '';
+    tipQuote.style.display = 'block';
   } else {
-    tipQuote.style.display='none';
+    tipQuote.style.display = 'none';
   }
 
   // Bottom row
-  tipBottomRow.innerHTML='';
-  if(btnText&&btnLink){
+  tipBottomRow.innerHTML = '';
+  if(btnText && btnLink){
     const a=document.createElement('a');
-    a.className='tip-btn'; a.href=btnLink; a.target='_blank'; a.rel='noopener';
+    a.className='tip-btn'; a.href=btnLink; a.target='_blank'; a.rel='noopener noreferrer';
     a.textContent=btnText; tipBottomRow.appendChild(a);
   }
   if(ev.organizer){
     const a=document.createElement('a');
     a.className='tip-organizer';
     a.href=`https://www.chess.com/member/${ev.organizer}`;
-    a.target='_blank'; a.rel='noopener';
+    a.target='_blank'; a.rel='noopener noreferrer';
     a.innerHTML=`<span class="tip-organizer-icon">♟</span>@${ev.organizer}`;
     tipBottomRow.appendChild(a);
   }
 }
 
-function showTip(e,ev,y,m,d,ico){ if(tipPinned) return; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(ico); }
-function pinTip(e,ev,y,m,d,ico){ tipPinned=true; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(ico); }
-function maybHideTip(){ if(!tipPinned) hideTip(); }
-function hideTip(){ tipPinned=false; tip.classList.remove('show'); clearInterval(countdownTimer); }
-function moveTip(e){ /* no-op: position is icon-anchored */ }
-function posTip(ico){
-  /* Measure the tooltip AFTER it's visible so dimensions are real */
-  tip.style.visibility='hidden'; tip.style.display='flex';
-  const TW=tip.offsetWidth||270, TH=tip.offsetHeight||220;
-  tip.style.visibility=''; tip.style.display='';
-
-  const r=ico.getBoundingClientRect();
-  const GAP=6;
-  const vw=window.innerWidth, vh=window.innerHeight;
-
-  /* Prefer: right of icon, vertically centred on it */
-  let x=r.right+GAP, y=r.top+(r.height/2)-(TH/2);
-
-  /* If it bleeds off right edge → put it to the left */
-  if(x+TW>vw-4) x=r.left-TW-GAP;
-
-  /* Clamp vertically */
-  if(y+TH>vh-4) y=vh-TH-4;
-  if(y<4) y=4;
-
-  /* Clamp horizontally */
-  if(x<4) x=4;
-
+function posTip(e){
+  const TW=265,TH=185,vw=window.innerWidth,vh=window.innerHeight;
+  let x=e.clientX+14,y=e.clientY+14;
+  if(x+TW>vw-8) x=e.clientX-TW-14;
+  if(y+TH>vh-8) y=e.clientY-TH-14;
+  x=Math.max(6,x); y=Math.max(6,y);
   tip.style.left=x+'px'; tip.style.top=y+'px';
 }
 
 document.addEventListener('click',e=>{ if(!tip.contains(e.target)) hideTip(); });
-document.getElementById('prevBtn').addEventListener('click',()=>{ viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} buildCalendar(); });
-document.getElementById('nextBtn').addEventListener('click',()=>{ viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} buildCalendar(); });
+
+document.getElementById('prevBtn').addEventListener('click',()=>{
+  hideTip();
+  viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} buildCalendar();
+});
+document.getElementById('nextBtn').addEventListener('click',()=>{
+  hideTip();
+  viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} buildCalendar();
+});
 
 buildCalendar();
 loadSheet();
