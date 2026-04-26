@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hot Chilli CheckMate – Home</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sidebar-height:464px;
+  --sidebar-height:480px;
   --red-dark:#d93020;--red-mid:#e85535;--red-border:#e8553a;
   --bg:#fff5f0;--card:#fff;--border:#f5c5b8;--shadow:#e8aa98;
   --text-dark:#c73520;--text-mid:#9a2010;
@@ -31,9 +31,19 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .page-title{font-family:'Fredoka One',cursive;font-size:18.5px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.22), 0 4px 10px rgba(0,0,0,.15);position:relative;z-index:1;}
 .page-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
 
-.inner{padding:10px 10px 14px;flex:1;overflow-y:auto;display:flex;flex-direction:column;}
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
-.cal-month-label{font-family:'Fredoka One',cursive;font-size:clamp(13px,3.5vw,17px);color:var(--red-dark);text-align:center;flex:1;white-space:nowrap;}
+.inner{padding:10px 10px 12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+
+/* ── Calendar nav ── */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px;}
+.cal-month-label{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(14px,3.8vw,19px);
+  background:linear-gradient(135deg,#d93020,#ef6640);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;flex:1;white-space:nowrap;
+  filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));
+  letter-spacing:.5px;
+}
 .nav-btn{
   width:28px;height:28px;min-width:28px;border-radius:50%;border:2px solid var(--border);
   background:var(--card);box-shadow:0 3px 0 var(--shadow);
@@ -44,80 +54,92 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .nav-btn:hover{background:#fce8e0;border-color:var(--red-dark);transform:translateY(-2px);box-shadow:0 5px 0 var(--red-dark);}
 .nav-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--red-dark);}
 
-.cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px;}
+/* ── Day-of-week headers ── */
+.cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:5px;}
 .cal-head-cell{
   text-align:center;
   font-family:'Fredoka One',cursive;
-  font-size:clamp(9px,2vw,12px);
-  font-weight:400;
-  color:var(--text-mid);
-  letter-spacing:.6px;
-  padding:3px 0 2px;
-  opacity:.85;
+  font-size:clamp(9.5px,2.2vw,13px);
+  letter-spacing:.7px;
+  padding:3px 1px;
+  /* solid gradient text — no opacity dimming */
+  background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  /* subtle pill tray behind each label */
+  background-color:#ffe8e0;
+  border-radius:6px;
+  /* border to frame each pill */
+  border:1px solid rgba(232,85,53,.25);
+  /* hard shadow so text pops */
+  filter:drop-shadow(0 1px 0 rgba(180,30,10,.22));
 }
+
+/* ── Calendar grid ── */
 .cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .cal-cell{
   background:var(--card);border:1.5px solid var(--border);border-radius:7px;
   padding:2px;display:flex;flex-direction:column;
-  align-items:flex-start;gap:1px;overflow:visible;
-  height:clamp(40px,8.5vw,56px);
+  align-items:flex-start;gap:0;overflow:visible;
+  /* Fixed height so all rows are uniform */
+  height:clamp(42px,9vw,58px);
   position:relative;
 }
 .cal-cell.empty{background:transparent;border-color:transparent;}
 .cal-cell.overflow{opacity:.3;pointer-events:none;}
-.cal-cell.today{background:linear-gradient(135deg,rgba(217,48,32,.09),rgba(239,102,64,.05));border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);}
-.day-num{font-family:'Fredoka One',cursive;font-size:clamp(8px,2vw,12px);color:var(--text-dark);line-height:1;padding-left:2px;flex-shrink:0;}
+.cal-cell.today{
+  background:linear-gradient(135deg,rgba(217,48,32,.09),rgba(239,102,64,.05));
+  border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);
+}
+
+/* ── Day number wrapper — fixed height on ALL cells ── */
+.day-num-wrap{
+  /* same fixed height whether today or not — icons always start here */
+  height:18px;
+  width:100%;
+  display:flex;align-items:center;
+  flex-shrink:0;padding-left:2px;
+}
+.day-num{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(8px,2vw,11px);
+  color:var(--text-dark);
+  line-height:1;
+  display:flex;align-items:center;
+}
+/* today: swap number for a red circle — still inside same 18px wrapper */
 .cal-cell.today .day-num{
   display:inline-flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#d93020,#e85535);color:#fff;border-radius:50%;
-  width:clamp(14px,3.2vw,20px);height:clamp(14px,3.2vw,20px);
-  padding:0;margin-left:2px;box-shadow:0 2px 0 #8c1a10;text-align:center;flex-shrink:0;
+  width:17px;height:17px;
+  padding:0;box-shadow:0 2px 0 #8c1a10;
+  font-size:clamp(8px,1.9vw,11px);
 }
+
+/* ── Event icon row — always fills remaining space ── */
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:wrap;
   align-items:center;justify-content:center;
-  gap:2px;width:100%;flex:1;
+  gap:2px;width:100%;
+  /* flex:1 pushes it to fill the cell height after the day num */
+  flex:1;
+  min-height:0;
 }
 
-/* ── Status dot in top-right of cell ── */
+/* ── Status dot ── */
 .status-dot{
   position:absolute;top:4px;right:4px;
   width:7px;height:7px;border-radius:50%;
   border:1.5px solid rgba(255,255,255,.9);
   flex-shrink:0;pointer-events:none;z-index:5;
-  transition:transform .2s;
 }
-.status-dot.dot-live{
-  background:radial-gradient(circle at 35% 35%, #ff6b6b, #e53935);
-  box-shadow:0 0 0 2.5px rgba(229,57,53,.35), 0 1px 4px rgba(229,57,53,.5);
-  animation:dot-pulse 1s ease-in-out infinite;
-}
-.status-dot.dot-before{
-  background:radial-gradient(circle at 35% 35%, #64b5f6, #1e88e5);
-  box-shadow:0 0 0 2.5px rgba(30,136,229,.25), 0 1px 4px rgba(30,136,229,.4);
-  animation:dot-glow-blue 2.5s ease-in-out infinite;
-}
-.status-dot.dot-soon{
-  background:radial-gradient(circle at 35% 35%, #81c784, #43a047);
-  box-shadow:0 0 0 2.5px rgba(67,160,71,.25), 0 1px 4px rgba(67,160,71,.4);
-  animation:dot-glow-green 1.8s ease-in-out infinite;
-}
-.status-dot.dot-ended{
-  background:radial-gradient(circle at 35% 35%, #757575, #212121);
-  box-shadow:0 1px 3px rgba(0,0,0,.35);
-}
-@keyframes dot-pulse{
-  0%,100%{box-shadow:0 0 0 2.5px rgba(229,57,53,.35),0 1px 4px rgba(229,57,53,.5);transform:scale(1);}
-  50%{box-shadow:0 0 0 5px rgba(229,57,53,.1),0 1px 6px rgba(229,57,53,.6);transform:scale(1.15);}
-}
-@keyframes dot-glow-blue{
-  0%,100%{box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);}
-  50%{box-shadow:0 0 0 4px rgba(30,136,229,.12),0 1px 7px rgba(30,136,229,.5);}
-}
-@keyframes dot-glow-green{
-  0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25),0 1px 4px rgba(67,160,71,.4);}
-  50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12),0 1px 7px rgba(67,160,71,.55);}
-}
+.status-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff6b6b,#e53935);box-shadow:0 0 0 2.5px rgba(229,57,53,.35),0 1px 4px rgba(229,57,53,.5);animation:dot-pulse 1s ease-in-out infinite;}
+.status-dot.dot-before{background:radial-gradient(circle at 35% 35%,#64b5f6,#1e88e5);box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);animation:dot-glow-blue 2.5s ease-in-out infinite;}
+.status-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#81c784,#43a047);box-shadow:0 0 0 2.5px rgba(67,160,71,.25),0 1px 4px rgba(67,160,71,.4);animation:dot-glow-green 1.8s ease-in-out infinite;}
+.status-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#757575,#212121);box-shadow:0 1px 3px rgba(0,0,0,.35);}
+@keyframes dot-pulse{0%,100%{box-shadow:0 0 0 2.5px rgba(229,57,53,.35),0 1px 4px rgba(229,57,53,.5);transform:scale(1);}50%{box-shadow:0 0 0 5px rgba(229,57,53,.1),0 1px 6px rgba(229,57,53,.6);transform:scale(1.15);}}
+@keyframes dot-glow-blue{0%,100%{box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);}50%{box-shadow:0 0 0 4px rgba(30,136,229,.12),0 1px 7px rgba(30,136,229,.5);}}
+@keyframes dot-glow-green{0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25),0 1px 4px rgba(67,160,71,.4);}50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12),0 1px 7px rgba(67,160,71,.55);}}
 
 /* ── Event icon ── */
 .evt{
@@ -129,52 +151,23 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;transition:transform .18s;z-index:1;
   border:1.5px solid rgba(217,48,32,.22);
   background:rgba(255,243,224,.7);
-  overflow:hidden;line-height:1;
-  position:relative;
+  overflow:hidden;line-height:1;position:relative;
 }
 .evt:hover{transform:scale(1.35);z-index:999;}
-.evt img{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:contain;border-radius:3px;display:block;
-  opacity:0;transition:opacity .25s;
-}
+.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;}
 .evt img.loaded{opacity:1;}
-.evt-emoji{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:inherit;line-height:1;
-}
+.evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;}
 
 /* ── Skeleton shimmer ── */
-.evt-skeleton{
+.evt-skeleton,.tip-logo-skeleton{
   position:absolute;inset:0;border-radius:3px;
-  background:linear-gradient(90deg,
-    #f0cfc4 0%,
-    #fce5de 40%,
-    #f9d6cd 60%,
-    #f0cfc4 100%
-  );
-  background-size:300% 100%;
-  animation:shimmer .85s ease-in-out infinite;
-  z-index:2;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;z-index:2;
 }
-.tip-logo-skeleton{
-  position:absolute;inset:0;border-radius:6px;
-  background:linear-gradient(90deg,
-    #f0cfc4 0%,
-    #fce5de 40%,
-    #f9d6cd 60%,
-    #f0cfc4 100%
-  );
-  background-size:300% 100%;
-  animation:shimmer .85s ease-in-out infinite;
-  z-index:2;
-}
-@keyframes shimmer{
-  0%  {background-position:200% 0;}
-  100%{background-position:-100% 0;}
-}
+.tip-logo-skeleton{border-radius:6px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
 
-/* ── Status badges ── */
+/* ── Status badge colours ── */
 .status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
 .status-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:pulse-badge 1.4s ease-in-out infinite;}
 .status-ended{color:#555;background:#f5f5f5;border-color:#ccc;}
@@ -183,45 +176,34 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 /* ── Legend ── */
 .legend{
   display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:5px 14px;
-  padding:7px 4px 2px;margin-top:6px;flex-shrink:0;
+  flex-wrap:wrap;gap:4px 12px;
+  padding:6px 4px 2px;margin-top:5px;flex-shrink:0;
 }
 .legend-item{
   display:flex;align-items:center;gap:5px;
-  font-size:9.5px;font-weight:800;color:var(--text-mid);
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(9px,2vw,11px);
+  letter-spacing:.4px;
   white-space:nowrap;
 }
-.legend-dot{
-  width:9px;height:9px;border-radius:50%;
-  border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;
-}
-.legend-dot.dot-before{
-  background:radial-gradient(circle at 35% 35%, #64b5f6, #1e88e5);
-  box-shadow:0 0 0 2.5px rgba(30,136,229,.25), 0 1px 4px rgba(30,136,229,.4);
-  animation:dot-glow-blue 2.5s ease-in-out infinite;
-}
-.legend-dot.dot-soon{
-  background:radial-gradient(circle at 35% 35%, #81c784, #43a047);
-  box-shadow:0 0 0 2.5px rgba(67,160,71,.25), 0 1px 4px rgba(67,160,71,.4);
-  animation:dot-glow-green 1.8s ease-in-out infinite;
-}
-.legend-dot.dot-live{
-  background:radial-gradient(circle at 35% 35%, #ff6b6b, #e53935);
-  box-shadow:0 0 0 2.5px rgba(229,57,53,.35), 0 1px 4px rgba(229,57,53,.5);
-  animation:dot-pulse 1s ease-in-out infinite;
-}
-.legend-dot.dot-ended{
-  background:radial-gradient(circle at 35% 35%, #757575, #212121);
-  box-shadow:0 1px 3px rgba(0,0,0,.35);
-}
+/* each legend label gets its own gradient colour */
+.legend-item:nth-child(1) .legend-label{color:#1565c0;}
+.legend-item:nth-child(2) .legend-label{color:#2e7d32;}
+.legend-item:nth-child(3) .legend-label{color:#b71c1c;}
+.legend-item:nth-child(4) .legend-label{color:#424242;}
+.legend-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;}
+.legend-dot.dot-before{background:radial-gradient(circle at 35% 35%,#64b5f6,#1e88e5);box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);animation:dot-glow-blue 2.5s ease-in-out infinite;}
+.legend-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#81c784,#43a047);box-shadow:0 0 0 2.5px rgba(67,160,71,.25),0 1px 4px rgba(67,160,71,.4);animation:dot-glow-green 1.8s ease-in-out infinite;}
+.legend-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff6b6b,#e53935);box-shadow:0 0 0 2.5px rgba(229,57,53,.35),0 1px 4px rgba(229,57,53,.5);animation:dot-pulse 1s ease-in-out infinite;}
+.legend-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#757575,#212121);box-shadow:0 1px 3px rgba(0,0,0,.35);}
 
 /* ── Tooltip ── */
 .evt-tip{
   position:fixed;background:var(--card);border:2px solid var(--red-dark);
-  border-radius:14px;padding:10px 13px 8px;box-shadow:0 8px 28px rgba(217,48,32,.25);
+  border-radius:14px;padding:10px 13px 9px;box-shadow:0 8px 28px rgba(217,48,32,.25);
   pointer-events:none;opacity:0;transition:opacity .12s;z-index:99999;
-  min-width:195px;max-width:255px;white-space:normal;font-family:'Nunito',sans-serif;
-  display:flex;flex-direction:column;
+  min-width:200px;max-width:260px;white-space:normal;font-family:'Nunito',sans-serif;
+  display:flex;flex-direction:column;gap:0;
 }
 .evt-tip.show{opacity:1;pointer-events:auto;}
 
@@ -246,7 +228,35 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .tip-countdown .cd-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0;}
 
-.tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:7px;}
+.tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:6px;}
+
+/* ── Organizer quote block ── */
+.tip-quote{
+  position:relative;
+  margin:0 0 7px 0;
+  padding:6px 10px 6px 13px;
+  background:linear-gradient(135deg,#fff8f5,#fff0eb);
+  border-left:3px solid var(--red-mid);
+  border-radius:0 8px 8px 0;
+  display:none; /* shown by JS when quote exists */
+}
+.tip-quote-text{
+  font-family:'Playfair Display',Georgia,serif;
+  font-style:italic;
+  font-size:10px;
+  color:#7a2010;
+  line-height:1.6;
+  display:block;
+}
+.tip-quote-text::before{content:'\201C';font-size:14px;line-height:0;vertical-align:-3px;margin-right:1px;color:var(--red-mid);font-family:'Playfair Display',serif;}
+.tip-quote-text::after {content:'\201D';font-size:14px;line-height:0;vertical-align:-3px;margin-left:1px; color:var(--red-mid);font-family:'Playfair Display',serif;}
+.tip-quote-author{
+  display:block;
+  font-size:9px;font-weight:900;
+  color:var(--text-mid);
+  margin-top:3px;
+  letter-spacing:.3px;
+}
 
 .tip-bottom-row{
   display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;
@@ -269,7 +279,18 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-organizer:hover{background:#fce0d5;border-color:var(--red-mid);color:var(--red-dark);}
 .tip-organizer-icon{font-size:11px;line-height:1;}
 
-.footer{text-align:center;font-size:var(--fs-sm);font-weight:700;color:var(--red-border);padding-top:4px;margin-top:auto;}
+.footer{
+  text-align:center;
+  font-family:'Fredoka One',cursive;
+  font-size:11px;
+  letter-spacing:.4px;
+  /* exact same gradient as .cal-month-label */
+  background:linear-gradient(135deg,#d93020,#ef6640);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));
+  padding-top:4px;margin-top:auto;
+}
 </style>
 </head>
 <body>
@@ -288,29 +309,34 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     <div class="cal-head" id="calHead"></div>
     <div class="cal-body" id="calBody"></div>
 
-    <!-- ── Legend ── -->
     <div class="legend">
-      <div class="legend-item"><span class="legend-dot dot-before"></span>Upcoming</div>
-      <div class="legend-item"><span class="legend-dot dot-soon"></span>Starting soon</div>
-      <div class="legend-item"><span class="legend-dot dot-live"></span>Live now</div>
-      <div class="legend-item"><span class="legend-dot dot-ended"></span>Ended</div>
+      <div class="legend-item"><span class="legend-dot dot-before"></span><span class="legend-label">Upcoming</span></div>
+      <div class="legend-item"><span class="legend-dot dot-soon"></span><span class="legend-label">Starting soon</span></div>
+      <div class="legend-item"><span class="legend-dot dot-live"></span><span class="legend-label">Live now</span></div>
+      <div class="legend-item"><span class="legend-dot dot-ended"></span><span class="legend-label">Ended</span></div>
     </div>
 
     <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
   </div>
 </div>
 
+<!-- Tooltip -->
 <div class="evt-tip" id="globalTip">
   <div class="tip-row1">
-    <div class="tip-logo"       id="tipLogo"></div>
+    <div class="tip-logo"      id="tipLogo"></div>
     <div class="tip-date-wrap">
-      <div class="tip-title"       id="tipTitle"></div>
-      <div class="tip-date-badge"  id="tipDateBadge"></div>
+      <div class="tip-title"      id="tipTitle"></div>
+      <div class="tip-date-badge" id="tipDateBadge"></div>
     </div>
   </div>
-  <div class="tip-countdown"   id="tipCountdown" style="display:none"></div>
-  <div class="tip-detail"      id="tipDetail"></div>
-  <div class="tip-bottom-row"  id="tipBottomRow"></div>
+  <div class="tip-countdown"  id="tipCountdown" style="display:none"></div>
+  <div class="tip-detail"     id="tipDetail"></div>
+  <!-- Quote block -->
+  <div class="tip-quote" id="tipQuote">
+    <span class="tip-quote-text"  id="tipQuoteText"></span>
+    <span class="tip-quote-author" id="tipQuoteAuthor"></span>
+  </div>
+  <div class="tip-bottom-row" id="tipBottomRow"></div>
 </div>
 
 <script>
@@ -325,39 +351,26 @@ let viewYear  = today.getFullYear();
 let viewMonth = today.getMonth();
 let eventMap  = {};
 
-// ── Persistent image cache (memory + localStorage) ────────────
-const imgMem = new Map();
-const imgCbs = new Map();
-
-function lsKey(url){ return 'imgcache:'+url; }
-function lsGet(url){ try{ return localStorage.getItem(lsKey(url)); }catch(e){ return null; } }
-function lsSet(url, val){ try{ localStorage.setItem(lsKey(url), val); }catch(e){} }
-
+// ── Image cache ───────────────────────────────────────────────
+const imgMem = new Map(), imgCbs = new Map();
+function lsKey(u){ return 'imgcache:'+u; }
+function lsGet(u){ try{ return localStorage.getItem(lsKey(u)); }catch(e){ return null; } }
+function lsSet(u,v){ try{ localStorage.setItem(lsKey(u),v); }catch(e){} }
 function preloadImg(url){
-  if(!url) return;
-  if(imgMem.has(url)) return;
-  const cached = lsGet(url);
-  if(cached === 'ok' || cached === 'err'){
-    imgMem.set(url, cached);
-    return;
-  }
-  imgMem.set(url, 'loading');
-  const img = new Image();
-  img.crossOrigin = 'anonymous';
-  img.decoding    = 'async';
-  img.onload  = ()=>{ imgMem.set(url,'ok');  lsSet(url,'ok');  notifyImgCbs(url,'ok');  };
-  img.onerror = ()=>{ imgMem.set(url,'err'); lsSet(url,'err'); notifyImgCbs(url,'err'); };
-  img.src = url;
+  if(!url||imgMem.has(url)) return;
+  const cached=lsGet(url);
+  if(cached==='ok'||cached==='err'){ imgMem.set(url,cached); return; }
+  imgMem.set(url,'loading');
+  const img=new Image(); img.crossOrigin='anonymous'; img.decoding='async';
+  img.onload =()=>{ imgMem.set(url,'ok');  lsSet(url,'ok');  notifyImgCbs(url,'ok');  };
+  img.onerror=()=>{ imgMem.set(url,'err'); lsSet(url,'err'); notifyImgCbs(url,'err'); };
+  img.src=url;
 }
-function notifyImgCbs(url, state){
-  const cbs = imgCbs.get(url)||[];
-  imgCbs.delete(url);
-  cbs.forEach(cb=>cb(state));
-}
-function onImgReady(url, cb){
-  const state = imgMem.get(url);
+function notifyImgCbs(url,state){ const cbs=imgCbs.get(url)||[]; imgCbs.delete(url); cbs.forEach(cb=>cb(state)); }
+function onImgReady(url,cb){
+  const state=imgMem.get(url);
   if(state==='ok'||state==='err'){ cb(state); return; }
-  const cached = lsGet(url);
+  const cached=lsGet(url);
   if(cached==='ok'||cached==='err'){ imgMem.set(url,cached); cb(cached); return; }
   if(!imgCbs.has(url)) imgCbs.set(url,[]);
   imgCbs.get(url).push(cb);
@@ -365,94 +378,79 @@ function onImgReady(url, cb){
 }
 
 // ── Helpers ───────────────────────────────────────────────────
-function pad(n){ return String(n).padStart(2,'0'); }
-function dateKey(y,m,d){ return `${y}-${pad(m+1)}-${pad(d)}`; }
-function lastDay(y,m){ return new Date(y,m+1,0).getDate(); }
-function dowMon(y,m,d){ return (new Date(y,m,d).getDay()+6)%7; }
-function ordinal(d){ const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)%10]||s[v]||s[0]); }
-function formatDate(y,m,d){ return `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`; }
-function isURL(s){ return s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.')); }
+const pad = n => String(n).padStart(2,'0');
+const dateKey = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
+const lastDay = (y,m) => new Date(y,m+1,0).getDate();
+const dowMon  = (y,m,d) => (new Date(y,m,d).getDay()+6)%7;
+const ordinal = d => { const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)%10]||s[v]||s[0]); };
+const formatDate = (y,m,d) => `${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
+const isURL = s => s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.'));
 
-// ── Parse date / time ─────────────────────────────────────────
+// ── Parse ─────────────────────────────────────────────────────
 function parseDate(str){
-  if(!str) return null;
-  str=str.trim();
-  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){ const [y,m,d]=str.split('-').map(Number); return {y,m:m-1,d}; }
-  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){ const [m,d,y]=str.split('/').map(Number); return {y,m:m-1,d}; }
-  if(/^\d{1,2}-\d{1,2}-\d{4}$/.test(str)){ const [d,m,y]=str.split('-').map(Number); return {y,m:m-1,d}; }
-  const dt=new Date(str); if(!isNaN(dt)) return {y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
+  if(!str) return null; str=str.trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){ const[y,m,d]=str.split('-').map(Number); return{y,m:m-1,d}; }
+  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){ const[m,d,y]=str.split('/').map(Number); return{y,m:m-1,d}; }
+  if(/^\d{1,2}-\d{1,2}-\d{4}$/.test(str)){ const[d,m,y]=str.split('-').map(Number); return{y,m:m-1,d}; }
+  const dt=new Date(str); if(!isNaN(dt)) return{y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
   return null;
 }
 function parseTime(str){
   if(!str||!str.trim()) return null;
-  const m=str.trim().match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);
-  if(!m) return null;
+  const m=str.trim().match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i); if(!m) return null;
   let h=parseInt(m[1]),min=parseInt(m[2]);
   if(m[3]){ if(m[3].toLowerCase()==='pm'&&h<12) h+=12; if(m[3].toLowerCase()==='am'&&h===12) h=0; }
-  return {h,min};
+  return{h,min};
 }
 function buildUTC(dateObj,timeObj){
   if(!dateObj||!timeObj) return null;
-  return new Date(Date.UTC(dateObj.y, dateObj.m, dateObj.d, timeObj.h, timeObj.min, 0));
+  return new Date(Date.UTC(dateObj.y,dateObj.m,dateObj.d,timeObj.h,timeObj.min,0));
 }
 
-// ── Get event phase ───────────────────────────────────────────
+// ── Phase ─────────────────────────────────────────────────────
 function getPhase(ev){
   if(!ev.timeObj) return null;
-  const startUTC  = buildUTC(ev.dateObj, ev.timeObj);
-  if(!startUTC) return null;
-  const durationMs = (ev.duration||0) * 3600000;
-  const endUTC     = new Date(startUTC.getTime() + durationMs);
-  const now        = Date.now();
-
-  if(now < startUTC.getTime()){
+  const startUTC=buildUTC(ev.dateObj,ev.timeObj); if(!startUTC) return null;
+  const endUTC=new Date(startUTC.getTime()+(ev.duration||0)*3600000);
+  const now=Date.now();
+  if(now<startUTC.getTime()){
     const sec=Math.floor((startUTC-now)/1000);
-    const d=Math.floor(sec/86400), h=Math.floor((sec%86400)/3600), m=Math.floor((sec%3600)/60);
+    const d=Math.floor(sec/86400),h=Math.floor((sec%86400)/3600),m=Math.floor((sec%3600)/60);
     let text='Starting in ';
-    if(d>0) text+=`${d}d ${h}h ${m}m`;
-    else if(h>0) text+=`${h}h ${m}m`;
-    else text+=`${m}m`;
-    return {status:'upcoming', text, cssClass:'status-upcoming', phase:'before'};
-  } else if(now < endUTC.getTime()){
-    return {status:'live', text:'🔴 Live', cssClass:'status-live', phase:'live'};
+    if(d>0) text+=`${d}d ${h}h ${m}m`; else if(h>0) text+=`${h}h ${m}m`; else text+=`${m}m`;
+    return{status:'upcoming',text,cssClass:'status-upcoming',phase:'before'};
+  } else if(now<endUTC.getTime()){
+    return{status:'live',text:'🔴 Live',cssClass:'status-live',phase:'live'};
   } else {
-    return {status:'ended', text:'✅ Ended', cssClass:'status-ended', phase:'after'};
+    return{status:'ended',text:'✅ Ended',cssClass:'status-ended',phase:'after'};
   }
 }
 
-// ── Dot class for a cell ──────────────────────────────────────
 function cellDotClass(events){
-  let best = null;
-  const rank = { ended:1, before:2, soon:3, live:4 };
+  let best=null; const rank={ended:1,before:2,soon:3,live:4};
   for(const ev of events){
     if(!ev.timeObj) continue;
-    const startUTC  = buildUTC(ev.dateObj, ev.timeObj);
-    if(!startUTC) continue;
-    const durationMs = (ev.duration||0)*3600000;
-    const endUTC     = new Date(startUTC.getTime()+durationMs);
-    const now        = Date.now();
+    const s=buildUTC(ev.dateObj,ev.timeObj); if(!s) continue;
+    const e=new Date(s.getTime()+(ev.duration||0)*3600000);
+    const now=Date.now();
     let cls;
-    if(now >= endUTC.getTime())             cls='ended';
-    else if(now >= startUTC.getTime())      cls='live';
-    else if(startUTC-now <= 3600000)        cls='soon';
-    else                                    cls='before';
-    if(!best || rank[cls]>rank[best]) best=cls;
+    if(now>=e.getTime()) cls='ended';
+    else if(now>=s.getTime()) cls='live';
+    else if(s-now<=3600000) cls='soon';
+    else cls='before';
+    if(!best||rank[cls]>rank[best]) best=cls;
   }
-  return best ? 'dot-'+best : null;
+  return best?'dot-'+best:null;
 }
 
-// ── Pick phase-appropriate field ──────────────────────────────
-function pick(ev, phase, field){
-  const key = {
-    before: { details:'detailsBefore', button:'buttonBefore', link:'linkBefore' },
-    live:   { details:'detailsLive',   button:'buttonLive',   link:'linkLive'   },
-    after:  { details:'detailsAfter',  button:'buttonAfter',  link:'linkAfter'  },
+function pick(ev,phase,field){
+  const key={
+    before:{details:'detailsBefore',button:'buttonBefore',link:'linkBefore'},
+    live:  {details:'detailsLive',  button:'buttonLive',  link:'linkLive'  },
+    after: {details:'detailsAfter', button:'buttonAfter', link:'linkAfter' },
   };
-  const fallback = { before:['before'], live:['live','before'], after:['after','live','before'] };
-  for(const p of fallback[phase]){
-    const val = ev[key[p][field]];
-    if(val && val.trim()) return val.trim();
-  }
+  const fallback={before:['before'],live:['live','before'],after:['after','live','before']};
+  for(const p of fallback[phase]){ const val=ev[key[p][field]]; if(val&&val.trim()) return val.trim(); }
   return '';
 }
 
@@ -465,8 +463,7 @@ async function loadSheet(){
     eventMap={};
     data.forEach(ev=>{
       if(!ev.date||!ev.title) return;
-      const dateObj=parseDate(ev.date);
-      if(!dateObj) return;
+      const dateObj=parseDate(ev.date); if(!dateObj) return;
       const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
       if(!eventMap[key]) eventMap[key]=[];
       const logo=(ev.logo||'').trim();
@@ -476,18 +473,21 @@ async function loadSheet(){
         duration:      parseFloat(ev.duration)||0,
         title:         ev.title,
         detailsBefore: ev.detailsBefore||'',
-        buttonBefore:  ev.buttonBefore ||'',
-        linkBefore:    ev.linkBefore   ||'',
-        detailsLive:   ev.detailsLive  ||'',
-        buttonLive:    ev.buttonLive   ||'',
-        linkLive:      ev.linkLive     ||'',
-        detailsAfter:  ev.detailsAfter ||'',
-        buttonAfter:   ev.buttonAfter  ||'',
-        linkAfter:     ev.linkAfter    ||'',
+        buttonBefore:  ev.buttonBefore||'',
+        linkBefore:    ev.linkBefore||'',
+        detailsLive:   ev.detailsLive||'',
+        buttonLive:    ev.buttonLive||'',
+        linkLive:      ev.linkLive||'',
+        detailsAfter:  ev.detailsAfter||'',
+        buttonAfter:   ev.buttonAfter||'',
+        linkAfter:     ev.linkAfter||'',
         logo,
         organizer:     (ev.organizer||'').trim(),
+        // ── new quote fields ──
+        quoteBefore:   (ev.quoteBefore||'').trim(),
+        quoteAfter:    (ev.quoteAfter||'').trim(),
       });
-      if(logo && isURL(logo)) preloadImg(logo);
+      if(logo&&isURL(logo)) preloadImg(logo);
     });
     buildCalendar();
   }catch(e){ console.error('Sheet load failed:',e); }
@@ -495,8 +495,8 @@ async function loadSheet(){
 
 // ── Calendar ──────────────────────────────────────────────────
 const monthLabel=document.getElementById('monthLabel');
-const calHead   =document.getElementById('calHead');
-const calBody   =document.getElementById('calBody');
+const calHead=document.getElementById('calHead');
+const calBody=document.getElementById('calBody');
 
 function buildCalendar(){
   monthLabel.textContent=MONTHS[viewMonth]+' '+viewYear;
@@ -517,53 +517,37 @@ function makeCell(y,m,d,overflow){
   const cell=document.createElement('div');
   cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
 
-  const num=document.createElement('div'); num.className='day-num'; num.textContent=d; cell.appendChild(num);
+  const wrap0=document.createElement('div'); wrap0.className='day-num-wrap';
+  const num=document.createElement('div'); num.className='day-num'; num.textContent=d;
+  wrap0.appendChild(num); cell.appendChild(wrap0);
 
   const events=eventMap[dateKey(y,m,d)]||[];
-
-  if(!overflow && events.length){
-    const dotCls = cellDotClass(events);
-    if(dotCls){
-      const dot = document.createElement('div');
-      dot.className = 'status-dot '+dotCls;
-      cell.appendChild(dot);
-    }
+  if(!overflow&&events.length){
+    const dotCls=cellDotClass(events);
+    if(dotCls){ const dot=document.createElement('div'); dot.className='status-dot '+dotCls; cell.appendChild(dot); }
   }
-
   if(events.length){
     const wrap=document.createElement('div'); wrap.className='evt-icons';
     events.forEach(ev=>{
       const ico=document.createElement('div'); ico.className='evt';
-
-      if(ev.logo && isURL(ev.logo)){
-        const skel=document.createElement('div'); skel.className='evt-skeleton';
-        ico.appendChild(skel);
-        const img=document.createElement('img'); img.alt=ev.title;
-        img.loading='eager'; img.decoding='async';
-        ico.appendChild(img);
-
-        const reveal = state => {
+      if(ev.logo&&isURL(ev.logo)){
+        const skel=document.createElement('div'); skel.className='evt-skeleton'; ico.appendChild(skel);
+        const img=document.createElement('img'); img.alt=ev.title; img.loading='eager'; img.decoding='async'; ico.appendChild(img);
+        onImgReady(ev.logo,state=>{
           if(state==='ok'){
-            img.src = ev.logo;
-            const finish = ()=>{ img.classList.add('loaded'); skel.style.opacity='0'; setTimeout(()=>skel.remove(),250); };
-            img.onload = finish;
-            if(img.complete && img.naturalWidth > 0) finish();
-          } else {
-            skel.remove();
-            const em=document.createElement('span'); em.className='evt-emoji'; em.textContent='📅'; ico.appendChild(em);
-          }
-        };
-        onImgReady(ev.logo, reveal);
-
+            img.src=ev.logo;
+            const finish=()=>{ img.classList.add('loaded'); skel.style.opacity='0'; setTimeout(()=>skel.remove(),250); };
+            img.onload=finish;
+            if(img.complete&&img.naturalWidth>0) finish();
+          } else { skel.remove(); const em=document.createElement('span'); em.className='evt-emoji'; em.textContent='📅'; ico.appendChild(em); }
+        });
       } else {
         const em=document.createElement('span'); em.className='evt-emoji'; em.textContent=ev.logo||'📅'; ico.appendChild(em);
       }
-
       if(!overflow){
-        ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d));
+        ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d,ico));
         ico.addEventListener('mouseleave',maybHideTip);
-        ico.addEventListener('mousemove', moveTip);
-        ico.addEventListener('click',e=>{ e.stopPropagation(); pinTip(e,ev,y,m,d); });
+        ico.addEventListener('click',e=>{ e.stopPropagation(); pinTip(e,ev,y,m,d,ico); });
       }
       wrap.appendChild(ico);
     });
@@ -579,36 +563,35 @@ const tipTitle     =document.getElementById('tipTitle');
 const tipDateBadge =document.getElementById('tipDateBadge');
 const tipCountdown =document.getElementById('tipCountdown');
 const tipDetail    =document.getElementById('tipDetail');
+const tipQuote     =document.getElementById('tipQuote');
+const tipQuoteText =document.getElementById('tipQuoteText');
+const tipQuoteAuthor=document.getElementById('tipQuoteAuthor');
 const tipBottomRow =document.getElementById('tipBottomRow');
 
 let tipPinned=false, countdownTimer=null;
 
 function renderTip(ev,y,m,d){
+  // Logo
   tipLogo.innerHTML='';
-  if(ev.logo && isURL(ev.logo)){
+  if(ev.logo&&isURL(ev.logo)){
     const skel=document.createElement('div'); skel.className='tip-logo-skeleton'; tipLogo.appendChild(skel);
-    const img=document.createElement('img'); img.alt=ev.title; img.decoding='async';
-    tipLogo.appendChild(img);
-    const reveal = state=>{
+    const img=document.createElement('img'); img.alt=ev.title; img.decoding='async'; tipLogo.appendChild(img);
+    onImgReady(ev.logo,state=>{
       if(state==='ok'){
         img.src=ev.logo;
         const finish=()=>{ img.classList.add('loaded'); skel.style.opacity='0'; setTimeout(()=>skel.remove(),250); };
         img.onload=finish;
-        if(img.complete && img.naturalWidth>0) finish();
-      } else {
-        skel.remove(); tipLogo.textContent='📅';
-      }
-    };
-    onImgReady(ev.logo, reveal);
-  } else {
-    tipLogo.textContent=ev.logo||'📅';
-  }
+        if(img.complete&&img.naturalWidth>0) finish();
+      } else { skel.remove(); tipLogo.textContent='📅'; }
+    });
+  } else { tipLogo.textContent=ev.logo||'📅'; }
 
   tipTitle.textContent=ev.title;
   tipDateBadge.textContent=ev.timeObj
     ? `${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
     : formatDate(y,m,d);
 
+  // Countdown badge
   clearInterval(countdownTimer);
   const st=getPhase(ev);
   if(st){
@@ -620,24 +603,32 @@ function renderTip(ev,y,m,d){
     };
     updateBadge();
     countdownTimer=setInterval(updateBadge,30000);
-  } else {
-    tipCountdown.style.display='none';
-  }
+  } else { tipCountdown.style.display='none'; }
 
-  const phase = st ? st.phase : 'before';
-  const details = pick(ev, phase, 'details');
-  const btnText = pick(ev, phase, 'button');
-  const btnLink = pick(ev, phase, 'link');
+  const phase=st?st.phase:'before';
+  const details=pick(ev,phase,'details');
+  const btnText=pick(ev,phase,'button');
+  const btnLink=pick(ev,phase,'link');
 
   tipDetail.textContent=details;
   tipDetail.style.display=details?'block':'none';
 
+  // ── Quote: show quoteBefore before end, quoteAfter after end ──
+  const quote = (phase==='after') ? ev.quoteAfter : ev.quoteBefore;
+  if(quote){
+    tipQuoteText.textContent=quote;
+    tipQuoteAuthor.textContent=ev.organizer ? `— @${ev.organizer}` : '';
+    tipQuote.style.display='block';
+  } else {
+    tipQuote.style.display='none';
+  }
+
+  // Bottom row
   tipBottomRow.innerHTML='';
   if(btnText&&btnLink){
     const a=document.createElement('a');
     a.className='tip-btn'; a.href=btnLink; a.target='_blank'; a.rel='noopener';
-    a.textContent=btnText;
-    tipBottomRow.appendChild(a);
+    a.textContent=btnText; tipBottomRow.appendChild(a);
   }
   if(ev.organizer){
     const a=document.createElement('a');
@@ -649,17 +640,34 @@ function renderTip(ev,y,m,d){
   }
 }
 
-function showTip(e,ev,y,m,d){ if(tipPinned) return; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
-function pinTip(e,ev,y,m,d){ tipPinned=true; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
+function showTip(e,ev,y,m,d,ico){ if(tipPinned) return; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(ico); }
+function pinTip(e,ev,y,m,d,ico){ tipPinned=true; renderTip(ev,y,m,d); tip.classList.add('show'); posTip(ico); }
 function maybHideTip(){ if(!tipPinned) hideTip(); }
 function hideTip(){ tipPinned=false; tip.classList.remove('show'); clearInterval(countdownTimer); }
-function moveTip(e){ if(!tipPinned) posTip(e); }
-function posTip(e){
-  const TW=265,TH=185,vw=window.innerWidth,vh=window.innerHeight;
-  let x=e.clientX+14,y=e.clientY+14;
-  if(x+TW>vw-8) x=e.clientX-TW-14;
-  if(y+TH>vh-8) y=e.clientY-TH-14;
-  x=Math.max(6,x); y=Math.max(6,y);
+function moveTip(e){ /* no-op: position is icon-anchored */ }
+function posTip(ico){
+  /* Measure the tooltip AFTER it's visible so dimensions are real */
+  tip.style.visibility='hidden'; tip.style.display='flex';
+  const TW=tip.offsetWidth||270, TH=tip.offsetHeight||220;
+  tip.style.visibility=''; tip.style.display='';
+
+  const r=ico.getBoundingClientRect();
+  const GAP=6;
+  const vw=window.innerWidth, vh=window.innerHeight;
+
+  /* Prefer: right of icon, vertically centred on it */
+  let x=r.right+GAP, y=r.top+(r.height/2)-(TH/2);
+
+  /* If it bleeds off right edge → put it to the left */
+  if(x+TW>vw-4) x=r.left-TW-GAP;
+
+  /* Clamp vertically */
+  if(y+TH>vh-4) y=vh-TH-4;
+  if(y<4) y=4;
+
+  /* Clamp horizontally */
+  if(x<4) x=4;
+
   tip.style.left=x+'px'; tip.style.top=y+'px';
 }
 
