@@ -23,7 +23,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   box-shadow:0 8px 32px rgba(217,48,32,.12);
 }
 
-/* ── BANNER: tighter padding ── */
+/* ── BANNER ── */
 .page-top{
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
   border-radius:24px 24px 0 0;padding:8px 16px 8px;
@@ -36,6 +36,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 
 .inner{padding:10px 10px 12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;}
 
+/* ── NAV — redesigned buttons ── */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px;}
 .cal-month-label{
   font-family:'Fredoka One',cursive;font-size:clamp(14px,3.8vw,19px);
@@ -45,14 +46,23 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));letter-spacing:.5px;
 }
 .nav-btn{
-  width:28px;height:28px;min-width:28px;border-radius:50%;border:2px solid var(--border);
-  background:var(--card);box-shadow:0 3px 0 var(--shadow);
+  width:32px;height:32px;min-width:32px;border-radius:10px;
+  border:none;outline:none;
+  background:linear-gradient(145deg,#d93020,#e85535);
+  box-shadow:0 3px 0 #8c1a10, 0 4px 12px rgba(217,48,32,.3);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:14px;color:var(--red-dark);font-weight:900;
+  cursor:pointer;color:#fff;font-weight:900;
   transition:all .15s;user-select:none;flex-shrink:0;line-height:1;
+  position:relative;overflow:hidden;
 }
-.nav-btn:hover{background:#fce8e0;border-color:var(--red-dark);transform:translateY(-2px);box-shadow:0 5px 0 var(--red-dark);}
-.nav-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--red-dark);}
+.nav-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 60%);
+  border-radius:inherit;pointer-events:none;
+}
+.nav-btn svg{width:14px;height:14px;stroke:#fff;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.nav-btn:hover{background:linear-gradient(145deg,#c42818,#d94528);transform:translateY(-2px);box-shadow:0 5px 0 #8c1a10,0 6px 16px rgba(217,48,32,.4);}
+.nav-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #8c1a10,0 2px 6px rgba(217,48,32,.2);}
 
 /* ── DAY HEADERS ── */
 .cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:5px;}
@@ -82,7 +92,12 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);
 }
 
-.day-num-wrap{height:18px;width:100%;display:flex;align-items:center;flex-shrink:0;padding-left:2px;}
+/* ── TOP ROW: day number + status dot on same line ── */
+.day-num-wrap{
+  height:18px;width:100%;display:flex;align-items:center;
+  flex-shrink:0;padding-left:2px;padding-right:3px;
+  justify-content:space-between;
+}
 .day-num{font-family:'Fredoka One',cursive;font-size:clamp(8px,2vw,11px);color:var(--text-dark);line-height:1;display:flex;align-items:center;}
 .cal-cell.today .day-num{
   display:inline-flex;align-items:center;justify-content:center;
@@ -90,11 +105,10 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   width:17px;height:17px;padding:0;box-shadow:0 2px 0 #8c1a10;font-size:clamp(8px,1.9vw,11px);
 }
 
-.evt-icons{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px;width:100%;flex:1;min-height:0;}
-
+/* status dot — now inline in the day-num-wrap row */
 .status-dot{
-  position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;
-  border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;pointer-events:none;z-index:5;
+  width:7px;height:7px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;pointer-events:none;
 }
 .status-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff6b6b,#e53935);box-shadow:0 0 0 2.5px rgba(229,57,53,.35),0 1px 4px rgba(229,57,53,.5);animation:dot-pulse 1s ease-in-out infinite;}
 .status-dot.dot-before{background:radial-gradient(circle at 35% 35%,#64b5f6,#1e88e5);box-shadow:0 0 0 2.5px rgba(30,136,229,.25),0 1px 4px rgba(30,136,229,.4);animation:dot-glow-blue 2.5s ease-in-out infinite;}
@@ -110,6 +124,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .status-ended{color:#555;background:#f5f5f5;border-color:#ccc;}
 @keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
 @keyframes pulse-badge-green{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(67,160,71,.3);}50%{opacity:.85;box-shadow:0 0 0 4px rgba(67,160,71,.08);}}
+
+.evt-icons{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px;width:100%;flex:1;min-height:0;}
 
 .evt{
   cursor:pointer;display:flex;align-items:center;justify-content:center;
@@ -171,7 +187,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;opacity:0;transition:opacity .25s;}
 .tip-logo img.loaded{opacity:1;}
 .tip-date-wrap{display:flex;flex-direction:column;gap:2px;min-width:0;}
-.tip-title{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;word-break:break-word;}
+.tip-title{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;word-break:break-word;padding-right:22px;}
 .tip-date-badge{font-size:10px;font-weight:800;color:var(--text-mid);opacity:.8;}
 
 /* countdown badge */
@@ -186,43 +202,24 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 /* details */
 .tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:6px;}
 
-/* ── ORGANIZER QUOTE BLOCK — email notification style ── */
+/* ── ORGANIZER QUOTE BLOCK ── */
 .tip-quote-block{
-  background:#fff;
-  border:1.5px solid #eee;
-  border-radius:9px;
-  padding:0;
-  margin-bottom:7px;
-  overflow:hidden;
-  box-shadow:0 2px 6px rgba(0,0,0,.06);
+  background:#fff;border:1.5px solid #eee;border-radius:9px;
+  padding:0;margin-bottom:7px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);
 }
-.tip-quote-block-bar{
-  height:3px;
-  background:linear-gradient(90deg,#d93020,#ef6640);
-  width:100%;
-}
-.tip-quote-inner{
-  padding:6px 9px 7px;
-}
+.tip-quote-block-bar{height:3px;background:linear-gradient(90deg,#d93020,#ef6640);width:100%;}
+.tip-quote-inner{padding:6px 9px 7px;}
 .tip-quote-label{
-  display:flex;align-items:center;gap:4px;
-  font-family:'Nunito',sans-serif;
-  font-size:8.5px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;
-  color:#aaa;
-  margin-bottom:4px;
+  display:flex;align-items:center;gap:5px;
+  font-family:'Nunito',sans-serif;font-size:8.5px;font-weight:900;
+  letter-spacing:.7px;text-transform:uppercase;color:#aaa;margin-bottom:4px;
 }
-.tip-quote-label-icon{font-size:9px;}
-.tip-quote-text{
-  font-family:'Nunito',sans-serif;
-  font-size:10.5px;font-weight:700;
-  color:#3a3a3a;
-  line-height:1.55;
-}
+/* Gmail SVG icon */
+.tip-quote-label-icon{display:flex;align-items:center;flex-shrink:0;}
+.tip-quote-text{font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:#3a3a3a;line-height:1.55;}
 
-/* bottom row: organizer pill (left) + button (right) */
-.tip-bottom-row{
-  display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;
-}
+/* bottom row */
+.tip-bottom-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;}
 .tip-btn{
   display:inline-block;font-size:10px;font-weight:900;color:#fff;
   background:linear-gradient(135deg,#d93020,#e85535);
@@ -240,13 +237,18 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-organizer:hover{background:#fce0d5;border-color:var(--red-mid);color:var(--red-dark);}
 .tip-organizer-icon{font-size:11px;line-height:1;}
 
-/* close (touch only) */
+/* ── CLOSE BUTTON — always visible on all devices ── */
 .tip-close{
-  position:absolute;top:7px;right:9px;font-size:16px;font-weight:900;color:var(--red-dark);
-  cursor:pointer;line-height:1;display:none;width:20px;height:20px;
-  align-items:center;justify-content:center;border-radius:50%;background:rgba(217,48,32,.08);z-index:10;
+  position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;color:var(--red-dark);
+  cursor:pointer;line-height:1;
+  width:20px;height:20px;display:flex;
+  align-items:center;justify-content:center;border-radius:50%;
+  background:rgba(217,48,32,.1);z-index:10;
+  border:1.5px solid rgba(217,48,32,.2);
+  transition:background .15s,transform .15s;
+  user-select:none;
 }
-@media (pointer:coarse){.tip-close{display:flex;}.tip-title{padding-right:18px;}}
+.tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
 
 .footer{
   text-align:center;font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.4px;
@@ -265,9 +267,14 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   </div>
   <div class="inner">
     <div class="cal-nav">
-      <button class="nav-btn" id="prevBtn">‹</button>
+      <!-- Redesigned nav buttons with SVG arrows -->
+      <button class="nav-btn" id="prevBtn" aria-label="Previous month">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
       <div class="cal-month-label" id="monthLabel"></div>
-      <button class="nav-btn" id="nextBtn">›</button>
+      <button class="nav-btn" id="nextBtn" aria-label="Next month">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
     <div class="cal-head" id="calHead"></div>
     <div class="cal-body" id="calBody"></div>
@@ -287,34 +294,42 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 <div class="evt-tip" id="globalTip">
   <div class="tip-close" id="tipClose">✕</div>
 
-  <!-- 1. Header: logo + title + date -->
   <div class="tip-row1">
-    <div class="tip-logo"      id="tipLogo"></div>
+    <div class="tip-logo" id="tipLogo"></div>
     <div class="tip-date-wrap">
-      <div class="tip-title"      id="tipTitle"></div>
+      <div class="tip-title" id="tipTitle"></div>
       <div class="tip-date-badge" id="tipDateBadge"></div>
     </div>
   </div>
 
-  <!-- 2. Countdown badge -->
   <div class="tip-countdown" id="tipCountdown"></div>
-
-  <!-- 3. Details text -->
   <div class="tip-detail" id="tipDetail"></div>
 
-  <!-- 4. Organizer quote block -->
   <div class="tip-quote-block" id="tipQuoteBlock" style="display:none;">
     <div class="tip-quote-block-bar"></div>
     <div class="tip-quote-inner">
       <div class="tip-quote-label">
-        <span class="tip-quote-label-icon">✉️</span>
+        <!-- Gmail SVG logo -->
+        <span class="tip-quote-label-icon">
+          <svg width="13" height="10" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 2.4C0 1.08 1.08 0 2.4 0h19.2C22.92 0 24 1.08 24 2.4v13.2C24 16.92 22.92 18 21.6 18H2.4C1.08 18 0 16.92 0 15.6V2.4z" fill="#f2f2f2"/>
+            <path d="M0 2.4L12 11 24 2.4" stroke="none" fill="none"/>
+            <path d="M2.4 0L12 7.8 21.6 0" fill="none"/>
+            <!-- Gmail M shape -->
+            <path d="M0 3.6V15.6a2.4 2.4 0 002.4 2.4h1.2V6L12 12.6 20.4 6v12h1.2a2.4 2.4 0 002.4-2.4V3.6L12 10.8 0 3.6z" fill="#c5221f"/>
+            <path d="M0 3.6L12 10.8 24 3.6 21.6 0 12 7.2 2.4 0 0 3.6z" fill="#ea4335"/>
+            <path d="M0 3.6V15.6a2.4 2.4 0 002.4 2.4h1.2V6L0 3.6z" fill="#4285f4"/>
+            <path d="M24 3.6V15.6a2.4 2.4 0 01-2.4 2.4h-1.2V6L24 3.6z" fill="#34a853"/>
+            <path d="M3.6 18V6L0 3.6v12a2.4 2.4 0 002.4 2.4H3.6z" fill="#4285f4"/>
+            <path d="M20.4 18V6L24 3.6v12a2.4 2.4 0 01-2.4 2.4h-1.2z" fill="#34a853"/>
+          </svg>
+        </span>
         <span id="tipQuoteLabelText">Message from organizer</span>
       </div>
       <div class="tip-quote-text" id="tipMsg"></div>
     </div>
   </div>
 
-  <!-- 5. Bottom row: organizer pill (left) + CTA button (right) -->
   <div class="tip-bottom-row" id="tipBottomRow"></div>
 </div>
 
@@ -324,7 +339,6 @@ const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby5dh1JPiyGp0JmMG
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-/* Fun day labels: [emoji, short label] */
 const DAYS_FUN=[
   ['🌙','MON'],['🔥','TUE'],['⚡','WED'],['♟','THU'],['🎯','FRI'],['🌶','SAT'],['☀️','SUN']
 ];
@@ -332,7 +346,7 @@ const DAYS_FUN=[
 const today=new Date();
 let viewYear=today.getFullYear(), viewMonth=today.getMonth(), eventMap={};
 
-/* ── image cache ─────────────────────────────── */
+/* ── image cache ── */
 const imgMem=new Map(),imgCbs=new Map();
 const lsKey=u=>'imgcache:'+u;
 const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
@@ -355,7 +369,7 @@ function onImgReady(url,cb){
   if(!imgMem.has(url))preloadImg(url);
 }
 
-/* ── helpers ──────────────────────────────────── */
+/* ── helpers ── */
 const pad=n=>String(n).padStart(2,'0');
 const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
@@ -364,7 +378,7 @@ const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||
 const formatDate=(y,m,d)=>`${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
 const isURL=s=>s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.'));
 
-/* ── parsers ─────────────────────────────────── */
+/* ── parsers ── */
 function parseDate(str){
   if(!str)return null;str=str.trim();
   if(/^\d{4}-\d{2}-\d{2}$/.test(str)){const[y,m,d]=str.split('-').map(Number);return{y,m:m-1,d};}
@@ -385,7 +399,7 @@ function buildUTC(dateObj,timeObj){
   return new Date(Date.UTC(dateObj.y,dateObj.m,dateObj.d,timeObj.h,timeObj.min,0));
 }
 
-/* ── phase ───────────────────────────────────── */
+/* ── phase ── */
 function getPhase(ev){
   if(!ev.timeObj)return null;
   const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)return null;
@@ -433,7 +447,7 @@ function pick(ev,phase,field){
   return '';
 }
 
-/* ── load sheet ─────────────────────────────── */
+/* ── load sheet ── */
 async function loadSheet(){
   try{
     const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
@@ -446,13 +460,15 @@ async function loadSheet(){
       const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
       if(!eventMap[key])eventMap[key]=[];
       const logo=(ev.logo||'').trim();
+      // Store organizer exactly as-is from the sheet (no casing changes)
       eventMap[key].push({
         dateObj,timeObj:parseTime(ev.time),duration:parseFloat(ev.duration)||0,
         title:(ev.title||'').trim(),
         detailsBefore:(ev.detailsBefore||'').trim(),buttonBefore:(ev.buttonBefore||'').trim(),linkBefore:(ev.linkBefore||'').trim(),
         detailsLive:(ev.detailsLive||'').trim(),buttonLive:(ev.buttonLive||'').trim(),linkLive:(ev.linkLive||'').trim(),
         detailsAfter:(ev.detailsAfter||'').trim(),buttonAfter:(ev.buttonAfter||'').trim(),linkAfter:(ev.linkAfter||'').trim(),
-        logo,organizer:(ev.organizer||'').trim(),
+        logo,
+        organizer:(ev.organizer||'').trim(), // ← kept exactly as typed in sheet
         quoteBefore:(ev.quoteBefore||'').trim(),quoteAfter:(ev.quoteAfter||'').trim(),
       });
       if(logo&&isURL(logo))preloadImg(logo);
@@ -461,7 +477,7 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
-/* ── calendar ───────────────────────────────── */
+/* ── calendar ── */
 const monthLabel=document.getElementById('monthLabel');
 const calHead=document.getElementById('calHead');
 const calBody=document.getElementById('calBody');
@@ -471,8 +487,7 @@ function buildCalendar(){
   calHead.innerHTML='';
   DAYS_FUN.forEach(([,label])=>{
     const c=document.createElement('div');c.className='cal-head-cell';
-    c.textContent=label;
-    calHead.appendChild(c);
+    c.textContent=label;calHead.appendChild(c);
   });
   calBody.innerHTML='';
   const first=dowMon(viewYear,viewMonth,1),last=lastDay(viewYear,viewMonth);
@@ -488,14 +503,23 @@ function makeCell(y,m,d,overflow){
   const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
   const cell=document.createElement('div');
   cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
+
+  // ── Top row: day number + status dot side by side ──
   const wrap0=document.createElement('div');wrap0.className='day-num-wrap';
   const num=document.createElement('div');num.className='day-num';num.textContent=d;
-  wrap0.appendChild(num);cell.appendChild(wrap0);
+  wrap0.appendChild(num);
+
   const events=eventMap[dateKey(y,m,d)]||[];
   if(!overflow&&events.length){
     const dotCls=cellDotClass(events);
-    if(dotCls){const dot=document.createElement('div');dot.className='status-dot '+dotCls;cell.appendChild(dot);}
+    if(dotCls){
+      const dot=document.createElement('div');
+      dot.className='status-dot '+dotCls;
+      wrap0.appendChild(dot); // dot is now inside the same row as the number
+    }
   }
+  cell.appendChild(wrap0);
+
   if(events.length){
     const wrap=document.createElement('div');wrap.className='evt-icons';
     events.forEach(ev=>{
@@ -527,18 +551,18 @@ function makeCell(y,m,d,overflow){
   return cell;
 }
 
-/* ── tooltip ─────────────────────────────────── */
-const tip         =document.getElementById('globalTip');
-const tipLogo     =document.getElementById('tipLogo');
-const tipTitle    =document.getElementById('tipTitle');
-const tipDateBadge=document.getElementById('tipDateBadge');
-const tipCountdown=document.getElementById('tipCountdown');
-const tipDetail   =document.getElementById('tipDetail');
-const tipMsg      =document.getElementById('tipMsg');
+/* ── tooltip ── */
+const tip          =document.getElementById('globalTip');
+const tipLogo      =document.getElementById('tipLogo');
+const tipTitle     =document.getElementById('tipTitle');
+const tipDateBadge =document.getElementById('tipDateBadge');
+const tipCountdown =document.getElementById('tipCountdown');
+const tipDetail    =document.getElementById('tipDetail');
+const tipMsg       =document.getElementById('tipMsg');
 const tipQuoteBlock=document.getElementById('tipQuoteBlock');
 const tipQuoteLabelText=document.getElementById('tipQuoteLabelText');
-const tipBottomRow=document.getElementById('tipBottomRow');
-const tipClose    =document.getElementById('tipClose');
+const tipBottomRow =document.getElementById('tipBottomRow');
+const tipClose     =document.getElementById('tipClose');
 
 let tipPinned=false,countdownTimer=null;
 
@@ -592,7 +616,7 @@ function renderTip(ev,y,m,d){
   const quote=(phase==='after')?ev.quoteAfter:ev.quoteBefore;
   if(quote){
     tipMsg.textContent=quote;
-    /* update label with organizer name if available */
+    // Organizer name exactly as stored (no casing transformation)
     tipQuoteLabelText.textContent=ev.organizer?`From @${ev.organizer}`:'From the organizer';
     tipQuoteBlock.style.display='block';
   }else{
@@ -606,6 +630,7 @@ function renderTip(ev,y,m,d){
     a.className='tip-organizer';
     a.href=`https://www.chess.com/member/${ev.organizer}`;
     a.target='_blank';a.rel='noopener noreferrer';
+    // Organizer name exactly as-is (no .toUpperCase() or .toLowerCase())
     a.innerHTML=`<span class="tip-organizer-icon">♟</span>@${ev.organizer}`;
     tipBottomRow.appendChild(a);
   }
