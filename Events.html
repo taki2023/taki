@@ -36,7 +36,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 
 .inner{padding:10px 10px 12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;}
 
-/* ── NAV — redesigned buttons ── */
+/* ── NAV ── */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px;}
 .cal-month-label{
   font-family:'Fredoka One',cursive;font-size:clamp(14px,3.8vw,19px);
@@ -92,7 +92,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   border-color:var(--red-dark);box-shadow:0 0 0 2px rgba(217,48,32,.2);
 }
 
-/* ── TOP ROW: day number + status dot on same line ── */
+/* ── TOP ROW: day number + status dot ── */
 .day-num-wrap{
   height:18px;width:100%;display:flex;align-items:center;
   flex-shrink:0;padding-left:2px;padding-right:3px;
@@ -105,7 +105,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   width:17px;height:17px;padding:0;box-shadow:0 2px 0 #8c1a10;font-size:clamp(8px,1.9vw,11px);
 }
 
-/* status dot — now inline in the day-num-wrap row */
 .status-dot{
   width:7px;height:7px;border-radius:50%;
   border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;pointer-events:none;
@@ -202,21 +201,34 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 /* details */
 .tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:6px;}
 
-/* ── ORGANIZER QUOTE BLOCK ── */
+/* ── QUOTE / MESSAGE BLOCK (shared style for organizer + admin) ── */
 .tip-quote-block{
   background:#fff;border:1.5px solid #eee;border-radius:9px;
   padding:0;margin-bottom:7px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);
 }
-.tip-quote-block-bar{height:3px;background:linear-gradient(90deg,#d93020,#ef6640);width:100%;}
+.tip-quote-block-bar{height:3px;width:100%;}
+.tip-quote-block-bar.bar-organizer{background:linear-gradient(90deg,#d93020,#ef6640);}
+.tip-quote-block-bar.bar-admin{background:linear-gradient(90deg,#6a0dad,#b042f5);}
 .tip-quote-inner{padding:6px 9px 7px;}
 .tip-quote-label{
   display:flex;align-items:center;gap:5px;
   font-family:'Nunito',sans-serif;font-size:8.5px;font-weight:900;
   letter-spacing:.7px;text-transform:uppercase;color:#aaa;margin-bottom:4px;
 }
-/* Gmail SVG icon */
 .tip-quote-label-icon{display:flex;align-items:center;flex-shrink:0;}
+
+/* Admin shield icon */
+.admin-icon{font-size:11px;line-height:1;}
+
 .tip-quote-text{font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:#3a3a3a;line-height:1.55;}
+
+/* ── @mention links in quotes ── */
+.mention-link{
+  color:#d93020;font-weight:900;text-decoration:none;
+  border-bottom:1px dotted rgba(217,48,32,.4);
+  transition:color .15s,border-color .15s;
+}
+.mention-link:hover{color:#a01808;border-bottom-color:rgba(160,24,8,.7);}
 
 /* bottom row */
 .tip-bottom-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;}
@@ -237,7 +249,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-organizer:hover{background:#fce0d5;border-color:var(--red-mid);color:var(--red-dark);}
 .tip-organizer-icon{font-size:11px;line-height:1;}
 
-/* ── CLOSE BUTTON — always visible on all devices ── */
+/* ── CLOSE BUTTON ── */
 .tip-close{
   position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;color:var(--red-dark);
   cursor:pointer;line-height:1;
@@ -249,6 +261,19 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   user-select:none;
 }
 .tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
+
+/* ── Mobile full-screen tooltip overlay ── */
+@media (hover:none) and (pointer:coarse){
+  .evt-tip{
+    position:fixed!important;
+    left:50%!important;top:50%!important;
+    transform:translate(-50%,-50%);
+    width:min(88vw,300px);max-width:min(88vw,300px);
+    max-height:80vh;overflow-y:auto;
+    box-shadow:0 16px 48px rgba(217,48,32,.35),0 0 0 9999px rgba(0,0,0,.45);
+  }
+  .evt-tip.show{display:flex;}
+}
 
 .footer{
   text-align:center;font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.4px;
@@ -267,7 +292,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   </div>
   <div class="inner">
     <div class="cal-nav">
-      <!-- Redesigned nav buttons with SVG arrows -->
       <button class="nav-btn" id="prevBtn" aria-label="Previous month">
         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
@@ -305,23 +329,20 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   <div class="tip-countdown" id="tipCountdown"></div>
   <div class="tip-detail" id="tipDetail"></div>
 
+  <!-- Organizer message block -->
   <div class="tip-quote-block" id="tipQuoteBlock" style="display:none;">
-    <div class="tip-quote-block-bar"></div>
+    <div class="tip-quote-block-bar bar-organizer"></div>
     <div class="tip-quote-inner">
       <div class="tip-quote-label">
-        <!-- Gmail SVG logo -->
         <span class="tip-quote-label-icon">
+          <!-- Gmail SVG logo -->
           <svg width="13" height="10" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 2.4C0 1.08 1.08 0 2.4 0h19.2C22.92 0 24 1.08 24 2.4v13.2C24 16.92 22.92 18 21.6 18H2.4C1.08 18 0 16.92 0 15.6V2.4z" fill="#f2f2f2"/>
-            <path d="M0 2.4L12 11 24 2.4" stroke="none" fill="none"/>
             <path d="M2.4 0L12 7.8 21.6 0" fill="none"/>
-            <!-- Gmail M shape -->
             <path d="M0 3.6V15.6a2.4 2.4 0 002.4 2.4h1.2V6L12 12.6 20.4 6v12h1.2a2.4 2.4 0 002.4-2.4V3.6L12 10.8 0 3.6z" fill="#c5221f"/>
             <path d="M0 3.6L12 10.8 24 3.6 21.6 0 12 7.2 2.4 0 0 3.6z" fill="#ea4335"/>
             <path d="M0 3.6V15.6a2.4 2.4 0 002.4 2.4h1.2V6L0 3.6z" fill="#4285f4"/>
             <path d="M24 3.6V15.6a2.4 2.4 0 01-2.4 2.4h-1.2V6L24 3.6z" fill="#34a853"/>
-            <path d="M3.6 18V6L0 3.6v12a2.4 2.4 0 002.4 2.4H3.6z" fill="#4285f4"/>
-            <path d="M20.4 18V6L24 3.6v12a2.4 2.4 0 01-2.4 2.4h-1.2z" fill="#34a853"/>
           </svg>
         </span>
         <span id="tipQuoteLabelText">Message from organizer</span>
@@ -330,11 +351,23 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     </div>
   </div>
 
+  <!-- Admin message block -->
+  <div class="tip-quote-block" id="tipAdminBlock" style="display:none;">
+    <div class="tip-quote-block-bar bar-admin"></div>
+    <div class="tip-quote-inner">
+      <div class="tip-quote-label">
+        <span class="tip-quote-label-icon admin-icon">🛡️</span>
+        <span id="tipAdminLabelText">Admin message</span>
+      </div>
+      <div class="tip-quote-text" id="tipAdminMsg"></div>
+    </div>
+  </div>
+
   <div class="tip-bottom-row" id="tipBottomRow"></div>
 </div>
 
 <script>
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby5dh1JPiyGp0JmMGrX1MdCzEmlucVo-uJNfZ8XSy86V1Qmp9uqkQlM7aLGR3DwVTuh9w/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwLWbOvhgA9aiwEpatPngrRZCsUaGbBNNYDQR3KK5sm-p8lQjx1eili_e4IGUWM9cCL9w/exec';
 
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -346,11 +379,52 @@ const DAYS_FUN=[
 const today=new Date();
 let viewYear=today.getFullYear(), viewMonth=today.getMonth(), eventMap={};
 
+/* ══════════════════════════════════════════════
+   IMAGE PROXY
+   Converts Google Drive / Sheets "brut" links to
+   a publicly accessible URL via wsrv.nl CDN proxy.
+══════════════════════════════════════════════ */
+function proxyImageURL(raw){
+  if(!raw)return null;
+  raw=raw.trim();
+
+  // Already a proxied wsrv URL — don't double-proxy
+  if(raw.startsWith('https://wsrv.nl'))return raw;
+
+  // Google Drive share link  →  direct download link via wsrv proxy
+  // Pattern: https://drive.google.com/file/d/FILE_ID/view...
+  const driveMatch=raw.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
+  if(driveMatch){
+    const fileId=driveMatch[1];
+    const direct=`https://drive.google.com/uc?export=download&id=${fileId}`;
+    return `https://wsrv.nl/?url=${encodeURIComponent(direct)}&w=64&h=64&fit=contain&output=webp`;
+  }
+
+  // Google Docs / Sheets exported images
+  // Pattern: https://docs.google.com/...
+  if(raw.includes('docs.google.com')){
+    return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
+  }
+
+  // Blogger / Googleusercontent
+  if(raw.includes('googleusercontent.com')||raw.includes('blogger.com')){
+    return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
+  }
+
+  // Generic http/https image — still proxy to avoid CORS issues
+  if(/^https?:\/\//i.test(raw)){
+    return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
+  }
+
+  return null; // emoji or non-URL
+}
+
 /* ── image cache ── */
 const imgMem=new Map(),imgCbs=new Map();
-const lsKey=u=>'imgcache:'+u;
+const lsKey=u=>'imgcache2:'+u; // v2 key to bust old cache
 const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
 const lsSet=(u,v)=>{try{localStorage.setItem(lsKey(u),v);}catch(e){}};
+
 function preloadImg(url){
   if(!url||imgMem.has(url))return;
   const c=lsGet(url);if(c==='ok'||c==='err'){imgMem.set(url,c);return;}
@@ -377,6 +451,31 @@ const dowMon=(y,m,d)=>(new Date(y,m,d).getDay()+6)%7;
 const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||s[v]||s[0]);};
 const formatDate=(y,m,d)=>`${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
 const isURL=s=>s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.'));
+
+/* ── @mention linkifier ── */
+function linkifyMentions(text){
+  // Split on @username patterns, make each a clickable chess.com link
+  const parts=text.split(/(@[\w-]+)/g);
+  return parts.map(part=>{
+    if(/^@[\w-]+$/.test(part)){
+      const username=part.slice(1);
+      const a=document.createElement('a');
+      a.className='mention-link';
+      a.href=`https://www.chess.com/member/${username}`;
+      a.target='_blank';
+      a.rel='noopener noreferrer';
+      a.textContent=part;
+      return a;
+    }else{
+      return document.createTextNode(part);
+    }
+  });
+}
+
+function setTextWithMentions(el,text){
+  el.innerHTML='';
+  linkifyMentions(text).forEach(node=>el.appendChild(node));
+}
 
 /* ── parsers ── */
 function parseDate(str){
@@ -459,19 +558,27 @@ async function loadSheet(){
       const dateObj=parseDate(ev.date);if(!dateObj)return;
       const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
       if(!eventMap[key])eventMap[key]=[];
-      const logo=(ev.logo||'').trim();
-      // Store organizer exactly as-is from the sheet (no casing changes)
+      const rawLogo=(ev.logo||'').trim();
+      const proxiedLogo=isURL(rawLogo)?proxyImageURL(rawLogo):null;
+      const logoDisplay=proxiedLogo||rawLogo; // fallback to emoji if not URL
+
       eventMap[key].push({
         dateObj,timeObj:parseTime(ev.time),duration:parseFloat(ev.duration)||0,
         title:(ev.title||'').trim(),
         detailsBefore:(ev.detailsBefore||'').trim(),buttonBefore:(ev.buttonBefore||'').trim(),linkBefore:(ev.linkBefore||'').trim(),
         detailsLive:(ev.detailsLive||'').trim(),buttonLive:(ev.buttonLive||'').trim(),linkLive:(ev.linkLive||'').trim(),
         detailsAfter:(ev.detailsAfter||'').trim(),buttonAfter:(ev.buttonAfter||'').trim(),linkAfter:(ev.linkAfter||'').trim(),
-        logo,
-        organizer:(ev.organizer||'').trim(), // ← kept exactly as typed in sheet
-        quoteBefore:(ev.quoteBefore||'').trim(),quoteAfter:(ev.quoteAfter||'').trim(),
+        rawLogo,
+        logo:logoDisplay,
+        isProxied:!!proxiedLogo,
+        organizer:(ev.organizer||'').trim(),
+        quoteBefore:(ev.quoteBefore||'').trim(),
+        quoteAfter:(ev.quoteAfter||'').trim(),
+        // ── NEW: admin columns ──
+        admin:(ev.admin||'').trim().replace(/^@/,''),
+        adminMessage:(ev.adminMessage||'').trim(),
       });
-      if(logo&&isURL(logo))preloadImg(logo);
+      if(proxiedLogo)preloadImg(proxiedLogo);
     });
     buildCalendar();
   }catch(e){console.error('Sheet load failed:',e);}
@@ -504,7 +611,6 @@ function makeCell(y,m,d,overflow){
   const cell=document.createElement('div');
   cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
 
-  // ── Top row: day number + status dot side by side ──
   const wrap0=document.createElement('div');wrap0.className='day-num-wrap';
   const num=document.createElement('div');num.className='day-num';num.textContent=d;
   wrap0.appendChild(num);
@@ -515,7 +621,7 @@ function makeCell(y,m,d,overflow){
     if(dotCls){
       const dot=document.createElement('div');
       dot.className='status-dot '+dotCls;
-      wrap0.appendChild(dot); // dot is now inside the same row as the number
+      wrap0.appendChild(dot);
     }
   }
   cell.appendChild(wrap0);
@@ -524,7 +630,9 @@ function makeCell(y,m,d,overflow){
     const wrap=document.createElement('div');wrap.className='evt-icons';
     events.forEach(ev=>{
       const ico=document.createElement('div');ico.className='evt';
-      if(ev.logo&&isURL(ev.logo)){
+
+      if(ev.isProxied){
+        // Proxied image (Google Drive / generic URL)
         const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
         const img=document.createElement('img');img.alt=ev.title;img.loading='eager';img.decoding='async';ico.appendChild(img);
         onImgReady(ev.logo,state=>{
@@ -532,17 +640,31 @@ function makeCell(y,m,d,overflow){
             img.src=ev.logo;
             const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};
             img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();
-          }else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);}
+          }else{
+            // Proxy failed → fall back to emoji
+            skel.remove();
+            const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);
+          }
         });
       }else{
+        // Emoji or empty
         const em=document.createElement('span');em.className='evt-emoji';
-        em.textContent=(ev.logo&&ev.logo.trim())?ev.logo:'📅';ico.appendChild(em);
+        em.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'📅';ico.appendChild(em);
       }
+
       if(!overflow){
+        // Desktop hover
         ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d));
         ico.addEventListener('mouseleave',maybHideTip);
         ico.addEventListener('mousemove',moveTip);
+        // Desktop + mobile click/tap
         ico.addEventListener('click',e=>{e.stopPropagation();pinTip(e,ev,y,m,d);});
+        // ── Mobile touch: touchend fires a pinTip ──
+        ico.addEventListener('touchend',e=>{
+          e.preventDefault();e.stopPropagation();
+          const touch=e.changedTouches[0];
+          pinTip(touch,ev,y,m,d);
+        },{passive:false});
       }
       wrap.appendChild(ico);
     });
@@ -552,17 +674,20 @@ function makeCell(y,m,d,overflow){
 }
 
 /* ── tooltip ── */
-const tip          =document.getElementById('globalTip');
-const tipLogo      =document.getElementById('tipLogo');
-const tipTitle     =document.getElementById('tipTitle');
-const tipDateBadge =document.getElementById('tipDateBadge');
-const tipCountdown =document.getElementById('tipCountdown');
-const tipDetail    =document.getElementById('tipDetail');
-const tipMsg       =document.getElementById('tipMsg');
-const tipQuoteBlock=document.getElementById('tipQuoteBlock');
+const tip            =document.getElementById('globalTip');
+const tipLogo        =document.getElementById('tipLogo');
+const tipTitle       =document.getElementById('tipTitle');
+const tipDateBadge   =document.getElementById('tipDateBadge');
+const tipCountdown   =document.getElementById('tipCountdown');
+const tipDetail      =document.getElementById('tipDetail');
+const tipMsg         =document.getElementById('tipMsg');
+const tipQuoteBlock  =document.getElementById('tipQuoteBlock');
 const tipQuoteLabelText=document.getElementById('tipQuoteLabelText');
-const tipBottomRow =document.getElementById('tipBottomRow');
-const tipClose     =document.getElementById('tipClose');
+const tipAdminBlock  =document.getElementById('tipAdminBlock');
+const tipAdminLabelText=document.getElementById('tipAdminLabelText');
+const tipAdminMsg    =document.getElementById('tipAdminMsg');
+const tipBottomRow   =document.getElementById('tipBottomRow');
+const tipClose       =document.getElementById('tipClose');
 
 let tipPinned=false,countdownTimer=null;
 
@@ -573,12 +698,13 @@ const maybHideTip=()=>{if(!tipPinned)hideTip();};
 const moveTip=(e)=>{if(!tipPinned)posTip(e);};
 
 tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
+tipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideTip();},{passive:false});
 tip.addEventListener('mouseleave',()=>{if(!tipPinned)hideTip();});
 
 function renderTip(ev,y,m,d){
   /* logo */
   tipLogo.innerHTML='';
-  if(ev.logo&&isURL(ev.logo)){
+  if(ev.isProxied){
     const skel=document.createElement('div');skel.className='tip-logo-skeleton';tipLogo.appendChild(skel);
     const img=document.createElement('img');img.alt=ev.title;img.decoding='async';tipLogo.appendChild(img);
     onImgReady(ev.logo,state=>{
@@ -588,7 +714,7 @@ function renderTip(ev,y,m,d){
         img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();
       }else{skel.remove();tipLogo.textContent='📅';}
     });
-  }else{tipLogo.textContent=(ev.logo&&ev.logo.trim())?ev.logo:'📅';}
+  }else{tipLogo.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'📅';}
 
   tipTitle.textContent=ev.title;
   tipDateBadge.textContent=ev.timeObj
@@ -615,22 +741,29 @@ function renderTip(ev,y,m,d){
   /* organizer quote block */
   const quote=(phase==='after')?ev.quoteAfter:ev.quoteBefore;
   if(quote){
-    tipMsg.textContent=quote;
-    // Organizer name exactly as stored (no casing transformation)
+    setTextWithMentions(tipMsg,quote);
     tipQuoteLabelText.textContent=ev.organizer?`From @${ev.organizer}`:'From the organizer';
     tipQuoteBlock.style.display='block';
   }else{
     tipQuoteBlock.style.display='none';
   }
 
-  /* bottom row: organizer pill + button */
+  /* ── admin message block ── */
+  if(ev.adminMessage){
+    setTextWithMentions(tipAdminMsg,ev.adminMessage);
+    tipAdminLabelText.textContent=ev.admin?`From @${ev.admin}`:'Admin message';
+    tipAdminBlock.style.display='block';
+  }else{
+    tipAdminBlock.style.display='none';
+  }
+
+  /* bottom row: organizer pill + action button */
   tipBottomRow.innerHTML='';
   if(ev.organizer){
     const a=document.createElement('a');
     a.className='tip-organizer';
     a.href=`https://www.chess.com/member/${ev.organizer}`;
     a.target='_blank';a.rel='noopener noreferrer';
-    // Organizer name exactly as-is (no .toUpperCase() or .toLowerCase())
     a.innerHTML=`<span class="tip-organizer-icon">♟</span>@${ev.organizer}`;
     tipBottomRow.appendChild(a);
   }
@@ -642,7 +775,13 @@ function renderTip(ev,y,m,d){
 }
 
 function posTip(e){
-  const TW=265,TH=185,vw=window.innerWidth,vh=window.innerHeight;
+  const TW=265,TH=200,vw=window.innerWidth,vh=window.innerHeight;
+  // On touch devices, center in viewport (CSS handles this via media query)
+  const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+  if(isTouchDevice){
+    tip.style.left='';tip.style.top='';
+    return;
+  }
   let x=e.clientX+14,y=e.clientY+14;
   if(x+TW>vw-8)x=e.clientX-TW-14;
   if(y+TH>vh-8)y=e.clientY-TH-14;
@@ -651,6 +790,8 @@ function posTip(e){
 }
 
 document.addEventListener('click',e=>{if(!tip.contains(e.target))hideTip();});
+document.addEventListener('touchstart',e=>{if(!tip.contains(e.target)&&tipPinned)hideTip();},{passive:true});
+
 document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
 document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
 
