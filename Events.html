@@ -170,6 +170,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   position:fixed;background:var(--card);border:2px solid var(--red-dark);
   border-radius:14px;padding:10px 13px 9px;
   box-shadow:0 8px 28px rgba(217,48,32,.25);
+  /* pointer-events:auto is intentional — tooltip is hoverable */
   pointer-events:auto;opacity:0;transition:opacity .12s;
   z-index:99999;min-width:200px;max-width:300px;white-space:normal;
   font-family:'Nunito',sans-serif;display:none;flex-direction:column;gap:0;
@@ -201,7 +202,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 /* details */
 .tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:6px;}
 
-/* ── QUOTE / MESSAGE BLOCK (shared style for organizer + admin) ── */
+/* ── QUOTE / MESSAGE BLOCK ── */
 .tip-quote-block{
   background:#fff;border:1.5px solid #eee;border-radius:9px;
   padding:0;margin-bottom:7px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);
@@ -216,13 +217,10 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   letter-spacing:.7px;text-transform:uppercase;color:#aaa;margin-bottom:4px;
 }
 .tip-quote-label-icon{display:flex;align-items:center;flex-shrink:0;}
-
-/* Admin shield icon */
 .admin-icon{font-size:11px;line-height:1;}
-
 .tip-quote-text{font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:#3a3a3a;line-height:1.55;}
 
-/* ── @mention links in quotes ── */
+/* ── @mention links ── */
 .mention-link{
   color:#d93020;font-weight:900;text-decoration:none;
   border-bottom:1px dotted rgba(217,48,32,.4);
@@ -335,7 +333,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     <div class="tip-quote-inner">
       <div class="tip-quote-label">
         <span class="tip-quote-label-icon">
-          <!-- Gmail SVG logo -->
           <svg width="13" height="10" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 2.4C0 1.08 1.08 0 2.4 0h19.2C22.92 0 24 1.08 24 2.4v13.2C24 16.92 22.92 18 21.6 18H2.4C1.08 18 0 16.92 0 15.6V2.4z" fill="#f2f2f2"/>
             <path d="M2.4 0L12 7.8 21.6 0" fill="none"/>
@@ -381,47 +378,29 @@ let viewYear=today.getFullYear(), viewMonth=today.getMonth(), eventMap={};
 
 /* ══════════════════════════════════════════════
    IMAGE PROXY
-   Converts Google Drive / Sheets "brut" links to
-   a publicly accessible URL via wsrv.nl CDN proxy.
 ══════════════════════════════════════════════ */
 function proxyImageURL(raw){
   if(!raw)return null;
   raw=raw.trim();
-
-  // Already a proxied wsrv URL — don't double-proxy
   if(raw.startsWith('https://wsrv.nl'))return raw;
-
-  // Google Drive share link  →  direct download link via wsrv proxy
-  // Pattern: https://drive.google.com/file/d/FILE_ID/view...
   const driveMatch=raw.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
   if(driveMatch){
     const fileId=driveMatch[1];
     const direct=`https://drive.google.com/uc?export=download&id=${fileId}`;
     return `https://wsrv.nl/?url=${encodeURIComponent(direct)}&w=64&h=64&fit=contain&output=webp`;
   }
-
-  // Google Docs / Sheets exported images
-  // Pattern: https://docs.google.com/...
-  if(raw.includes('docs.google.com')){
+  if(raw.includes('docs.google.com'))
     return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
-  }
-
-  // Blogger / Googleusercontent
-  if(raw.includes('googleusercontent.com')||raw.includes('blogger.com')){
+  if(raw.includes('googleusercontent.com')||raw.includes('blogger.com'))
     return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
-  }
-
-  // Generic http/https image — still proxy to avoid CORS issues
-  if(/^https?:\/\//i.test(raw)){
+  if(/^https?:\/\//i.test(raw))
     return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
-  }
-
-  return null; // emoji or non-URL
+  return null;
 }
 
 /* ── image cache ── */
 const imgMem=new Map(),imgCbs=new Map();
-const lsKey=u=>'imgcache2:'+u; // v2 key to bust old cache
+const lsKey=u=>'imgcache2:'+u;
 const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
 const lsSet=(u,v)=>{try{localStorage.setItem(lsKey(u),v);}catch(e){}};
 
@@ -454,7 +433,6 @@ const isURL=s=>s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.'));
 
 /* ── @mention linkifier ── */
 function linkifyMentions(text){
-  // Split on @username patterns, make each a clickable chess.com link
   const parts=text.split(/(@[\w-]+)/g);
   return parts.map(part=>{
     if(/^@[\w-]+$/.test(part)){
@@ -462,8 +440,7 @@ function linkifyMentions(text){
       const a=document.createElement('a');
       a.className='mention-link';
       a.href=`https://www.chess.com/member/${username}`;
-      a.target='_blank';
-      a.rel='noopener noreferrer';
+      a.target='_blank';a.rel='noopener noreferrer';
       a.textContent=part;
       return a;
     }else{
@@ -471,7 +448,6 @@ function linkifyMentions(text){
     }
   });
 }
-
 function setTextWithMentions(el,text){
   el.innerHTML='';
   linkifyMentions(text).forEach(node=>el.appendChild(node));
@@ -500,33 +476,57 @@ function buildUTC(dateObj,timeObj){
 
 /* ── phase ── */
 function getPhase(ev){
+  // No time → no status at all
   if(!ev.timeObj)return null;
   const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)return null;
-  const e=new Date(s.getTime()+(ev.duration||0)*3600000);
+  const hasDuration=ev.duration>0;
+  const e=hasDuration?new Date(s.getTime()+ev.duration*3600000):null;
   const now=Date.now();
+
   if(now<s.getTime()){
+    // Upcoming / soon
     const ms=s-now,sec=Math.floor(ms/1000);
     const d=Math.floor(sec/86400),h=Math.floor((sec%86400)/3600),m=Math.floor((sec%3600)/60);
     let text='Starting in ';
-    if(d>0)text+=`${d}d ${h}h ${m}m`;else if(h>0)text+=`${h}h ${m}m`;else text+=`${m}m`;
+    if(d>0)text+=`${d}d ${h}h ${m}m`;
+    else if(h>0)text+=`${h}h ${m}m`;
+    else text+=`${m}m`;
     const isSoon=ms<=3600000;
     return{status:isSoon?'soon':'upcoming',text,cssClass:isSoon?'status-soon':'status-upcoming',phase:'before'};
-  }else if(now<e.getTime()){
+
+  }else if(e && now<e.getTime()){
+    // Live — calculate time remaining
+    const msLeft=e.getTime()-now;
+    const secLeft=Math.floor(msLeft/1000);
+    const hLeft=Math.floor(secLeft/3600);
+    const mLeft=Math.floor((secLeft%3600)/60);
+    let endsText='';
+    if(hLeft>0)endsText=` · ends in ${hLeft}h ${mLeft}m`;
+    else if(mLeft>0)endsText=` · ends in ${mLeft}m`;
+    else endsText=' · ending soon';
+    return{status:'live',text:'🔴 Live'+endsText,cssClass:'status-live',phase:'live'};
+
+  }else if(!e && now>=s.getTime()){
+    // Started but no duration — just show Live without "ends in"
     return{status:'live',text:'🔴 Live',cssClass:'status-live',phase:'live'};
+
   }else{
+    // Ended (only reachable when duration is set and we're past end)
     return{status:'ended',text:'✅ Ended',cssClass:'status-ended',phase:'after'};
   }
 }
 
 function cellDotClass(events){
+  // Only show dot if event has a time
   let best=null;const rank={ended:1,before:2,soon:3,live:4};
   for(const ev of events){
-    if(!ev.timeObj)continue;
+    if(!ev.timeObj)continue; // skip events with no time
     const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)continue;
-    const e=new Date(s.getTime()+(ev.duration||0)*3600000);
+    const hasDuration=ev.duration>0;
+    const e=hasDuration?new Date(s.getTime()+ev.duration*3600000):null;
     const now=Date.now();
     let cls;
-    if(now>=e.getTime())cls='ended';
+    if(e && now>=e.getTime())cls='ended';
     else if(now>=s.getTime())cls='live';
     else if(s-now<=3600000)cls='soon';
     else cls='before';
@@ -560,21 +560,16 @@ async function loadSheet(){
       if(!eventMap[key])eventMap[key]=[];
       const rawLogo=(ev.logo||'').trim();
       const proxiedLogo=isURL(rawLogo)?proxyImageURL(rawLogo):null;
-      const logoDisplay=proxiedLogo||rawLogo; // fallback to emoji if not URL
-
+      const logoDisplay=proxiedLogo||rawLogo;
       eventMap[key].push({
         dateObj,timeObj:parseTime(ev.time),duration:parseFloat(ev.duration)||0,
         title:(ev.title||'').trim(),
         detailsBefore:(ev.detailsBefore||'').trim(),buttonBefore:(ev.buttonBefore||'').trim(),linkBefore:(ev.linkBefore||'').trim(),
         detailsLive:(ev.detailsLive||'').trim(),buttonLive:(ev.buttonLive||'').trim(),linkLive:(ev.linkLive||'').trim(),
         detailsAfter:(ev.detailsAfter||'').trim(),buttonAfter:(ev.buttonAfter||'').trim(),linkAfter:(ev.linkAfter||'').trim(),
-        rawLogo,
-        logo:logoDisplay,
-        isProxied:!!proxiedLogo,
+        rawLogo,logo:logoDisplay,isProxied:!!proxiedLogo,
         organizer:(ev.organizer||'').trim(),
-        quoteBefore:(ev.quoteBefore||'').trim(),
-        quoteAfter:(ev.quoteAfter||'').trim(),
-        // ── NEW: admin columns ──
+        quoteBefore:(ev.quoteBefore||'').trim(),quoteAfter:(ev.quoteAfter||'').trim(),
         admin:(ev.admin||'').trim().replace(/^@/,''),
         adminMessage:(ev.adminMessage||'').trim(),
       });
@@ -632,7 +627,6 @@ function makeCell(y,m,d,overflow){
       const ico=document.createElement('div');ico.className='evt';
 
       if(ev.isProxied){
-        // Proxied image (Google Drive / generic URL)
         const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
         const img=document.createElement('img');img.alt=ev.title;img.loading='eager';img.decoding='async';ico.appendChild(img);
         onImgReady(ev.logo,state=>{
@@ -641,30 +635,40 @@ function makeCell(y,m,d,overflow){
             const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};
             img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();
           }else{
-            // Proxy failed → fall back to emoji
             skel.remove();
             const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);
           }
         });
       }else{
-        // Emoji or empty
         const em=document.createElement('span');em.className='evt-emoji';
         em.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'📅';ico.appendChild(em);
       }
 
       if(!overflow){
-        // Desktop hover
-        ico.addEventListener('mouseenter',e=>showTip(e,ev,y,m,d));
-        ico.addEventListener('mouseleave',maybHideTip);
-        ico.addEventListener('mousemove',moveTip);
-        // Desktop + mobile click/tap
-        ico.addEventListener('click',e=>{e.stopPropagation();pinTip(e,ev,y,m,d);});
-        // ── Mobile touch: touchend fires a pinTip ──
-        ico.addEventListener('touchend',e=>{
-          e.preventDefault();e.stopPropagation();
-          const touch=e.changedTouches[0];
-          pinTip(touch,ev,y,m,d);
-        },{passive:false});
+        /*
+         * ── FIX: Tooltip flicker ──────────────────────────────────────────
+         * Root cause: mouseleave fires on the .evt icon the moment the cursor
+         * moves a pixel toward the tooltip, triggering hideTip → the tooltip
+         * disappears → cursor is now "outside" tooltip → next frame the cursor
+         * is back over the icon → mouseenter fires again → infinite loop.
+         *
+         * Solution: Use a small delay on hide. If the cursor enters the tooltip
+         * (or the same icon again) before the delay fires, we cancel the hide.
+         * We track this with a single shared `leaveTimer` variable.
+         */
+        ico.addEventListener('mouseenter', e => {
+          cancelLeave();
+          if(!tipPinned){ renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
+        });
+        ico.addEventListener('mouseleave', () => { if(!tipPinned) scheduleLeave(); });
+        ico.addEventListener('mousemove',  e => { if(!tipPinned) posTip(e); });
+
+        // Click/tap to pin
+        ico.addEventListener('click', e => { e.stopPropagation(); pinTip(e,ev,y,m,d); });
+        ico.addEventListener('touchend', e => {
+          e.preventDefault(); e.stopPropagation();
+          pinTip(e.changedTouches[0], ev, y, m, d);
+        }, {passive:false});
       }
       wrap.appendChild(ico);
     });
@@ -673,35 +677,67 @@ function makeCell(y,m,d,overflow){
   return cell;
 }
 
-/* ── tooltip ── */
-const tip            =document.getElementById('globalTip');
-const tipLogo        =document.getElementById('tipLogo');
-const tipTitle       =document.getElementById('tipTitle');
-const tipDateBadge   =document.getElementById('tipDateBadge');
-const tipCountdown   =document.getElementById('tipCountdown');
-const tipDetail      =document.getElementById('tipDetail');
-const tipMsg         =document.getElementById('tipMsg');
-const tipQuoteBlock  =document.getElementById('tipQuoteBlock');
-const tipQuoteLabelText=document.getElementById('tipQuoteLabelText');
-const tipAdminBlock  =document.getElementById('tipAdminBlock');
-const tipAdminLabelText=document.getElementById('tipAdminLabelText');
-const tipAdminMsg    =document.getElementById('tipAdminMsg');
-const tipBottomRow   =document.getElementById('tipBottomRow');
-const tipClose       =document.getElementById('tipClose');
+/* ══════════════════════════════════════════
+   TOOLTIP — flicker-free hover logic
+   ─────────────────────────────────────────
+   We keep a short leave-delay (120 ms).
+   Any mouseenter on the icon OR on the
+   tooltip itself cancels the pending hide.
+══════════════════════════════════════════ */
+const tip             = document.getElementById('globalTip');
+const tipLogo         = document.getElementById('tipLogo');
+const tipTitle        = document.getElementById('tipTitle');
+const tipDateBadge    = document.getElementById('tipDateBadge');
+const tipCountdown    = document.getElementById('tipCountdown');
+const tipDetail       = document.getElementById('tipDetail');
+const tipMsg          = document.getElementById('tipMsg');
+const tipQuoteBlock   = document.getElementById('tipQuoteBlock');
+const tipQuoteLabelText = document.getElementById('tipQuoteLabelText');
+const tipAdminBlock   = document.getElementById('tipAdminBlock');
+const tipAdminLabelText = document.getElementById('tipAdminLabelText');
+const tipAdminMsg     = document.getElementById('tipAdminMsg');
+const tipBottomRow    = document.getElementById('tipBottomRow');
+const tipClose        = document.getElementById('tipClose');
 
-let tipPinned=false,countdownTimer=null;
+let tipPinned = false;
+let countdownTimer = null;
+let leaveTimer = null;   // ← the key to fixing the flicker
 
-const hideTip=()=>{tipPinned=false;tip.classList.remove('show');clearInterval(countdownTimer);};
-const showTip=(e,ev,y,m,d)=>{if(tipPinned)return;renderTip(ev,y,m,d);tip.classList.add('show');posTip(e);};
-const pinTip =(e,ev,y,m,d)=>{tipPinned=true;renderTip(ev,y,m,d);tip.classList.add('show');posTip(e);};
-const maybHideTip=()=>{if(!tipPinned)hideTip();};
-const moveTip=(e)=>{if(!tipPinned)posTip(e);};
+const LEAVE_DELAY = 120; // ms — long enough to cross the gap, short enough to feel instant
 
-tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
-tipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideTip();},{passive:false});
-tip.addEventListener('mouseleave',()=>{if(!tipPinned)hideTip();});
+function scheduleLeave(){
+  leaveTimer = setTimeout(() => {
+    leaveTimer = null;
+    hideTip();
+  }, LEAVE_DELAY);
+}
+function cancelLeave(){
+  if(leaveTimer){ clearTimeout(leaveTimer); leaveTimer = null; }
+}
 
-function renderTip(ev,y,m,d){
+const hideTip = () => {
+  tipPinned = false;
+  tip.classList.remove('show');
+  clearInterval(countdownTimer);
+  countdownTimer = null;
+};
+
+const pinTip = (e, ev, y, m, d) => {
+  cancelLeave();
+  tipPinned = true;
+  renderTip(ev, y, m, d);
+  tip.classList.add('show');
+  posTip(e);
+};
+
+// Tooltip itself keeps hover alive
+tip.addEventListener('mouseenter', cancelLeave);
+tip.addEventListener('mouseleave', () => { if(!tipPinned) scheduleLeave(); });
+
+tipClose.addEventListener('click',    e => { e.stopPropagation(); hideTip(); });
+tipClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); hideTip(); }, {passive:false});
+
+function renderTip(ev, y, m, d){
   /* logo */
   tipLogo.innerHTML='';
   if(ev.isProxied){
@@ -721,14 +757,23 @@ function renderTip(ev,y,m,d){
     ?`${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
     :formatDate(y,m,d);
 
-  /* countdown */
+  /* countdown — only when time is set */
   clearInterval(countdownTimer);countdownTimer=null;
   const st=getPhase(ev);
   if(st){
     tipCountdown.style.display='flex';
-    const update=()=>{const s=getPhase(ev);if(!s)return;tipCountdown.className='tip-countdown '+s.cssClass;tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;};
-    update();countdownTimer=setInterval(update,30000);
-  }else{tipCountdown.style.display='none';}
+    const update=()=>{
+      const s=getPhase(ev);
+      if(!s)return;
+      tipCountdown.className='tip-countdown '+s.cssClass;
+      tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;
+    };
+    update();
+    // Refresh every 30s for upcoming/soon, every minute for live
+    countdownTimer=setInterval(update, st.status==='live'?60000:30000);
+  }else{
+    tipCountdown.style.display='none';
+  }
 
   /* details */
   const phase=st?st.phase:'before';
@@ -748,7 +793,7 @@ function renderTip(ev,y,m,d){
     tipQuoteBlock.style.display='none';
   }
 
-  /* ── admin message block ── */
+  /* admin message block */
   if(ev.adminMessage){
     setTextWithMentions(tipAdminMsg,ev.adminMessage);
     tipAdminLabelText.textContent=ev.admin?`From @${ev.admin}`:'Admin message';
@@ -757,7 +802,7 @@ function renderTip(ev,y,m,d){
     tipAdminBlock.style.display='none';
   }
 
-  /* bottom row: organizer pill + action button */
+  /* bottom row */
   tipBottomRow.innerHTML='';
   if(ev.organizer){
     const a=document.createElement('a');
@@ -776,12 +821,8 @@ function renderTip(ev,y,m,d){
 
 function posTip(e){
   const TW=265,TH=200,vw=window.innerWidth,vh=window.innerHeight;
-  // On touch devices, center in viewport (CSS handles this via media query)
   const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-  if(isTouchDevice){
-    tip.style.left='';tip.style.top='';
-    return;
-  }
+  if(isTouchDevice){tip.style.left='';tip.style.top='';return;}
   let x=e.clientX+14,y=e.clientY+14;
   if(x+TW>vw-8)x=e.clientX-TW-14;
   if(y+TH>vh-8)y=e.clientY-TH-14;
@@ -789,8 +830,8 @@ function posTip(e){
   tip.style.left=x+'px';tip.style.top=y+'px';
 }
 
-document.addEventListener('click',e=>{if(!tip.contains(e.target))hideTip();});
-document.addEventListener('touchstart',e=>{if(!tip.contains(e.target)&&tipPinned)hideTip();},{passive:true});
+document.addEventListener('click',      e => { if(!tip.contains(e.target)) hideTip(); });
+document.addEventListener('touchstart', e => { if(!tip.contains(e.target)&&tipPinned) hideTip(); }, {passive:true});
 
 document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
 document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
