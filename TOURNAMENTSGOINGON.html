@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Event Calendar</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
- 
+
 /* ── CRITICAL: explicit dark bg — never white ── */
 html,body{
   width:100%;
@@ -19,9 +17,9 @@ html,body{
 body{
   background:linear-gradient(160deg,#0a1628 0%,#071020 55%,#0c1a10 100%);
 }
- 
+
 .cal-wrap{padding:12px 10px 10px;}
- 
+
 /* NAV */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:10px;}
 .cal-month-label{
@@ -44,7 +42,7 @@ body{
   box-shadow:0 0 10px rgba(255,185,0,.28);
 }
 .nav-btn:active{transform:scale(.9);}
- 
+
 /* DAY HEADERS */
 .cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:5px;}
 .cal-head-cell{
@@ -53,7 +51,7 @@ body{
   color:rgba(255,185,0,.5);padding:4px 0;
   border-bottom:1px solid rgba(255,185,0,.1);
 }
- 
+
 /* GRID */
 .cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .cal-cell{
@@ -75,7 +73,7 @@ body{
   background:rgba(255,185,0,.09);border-color:rgba(255,185,0,.5);
   box-shadow:0 0 0 1.5px rgba(255,185,0,.2);
 }
- 
+
 .day-num{
   font-size:9.5px;font-weight:700;
   color:rgba(255,210,100,.4);line-height:1;
@@ -87,7 +85,7 @@ body{
   display:flex;align-items:center;justify-content:center;
 }
 .cal-cell.has-events .day-num{color:rgba(255,210,100,.65);}
- 
+
 /* event icons in cell */
 .evt-dots{display:flex;flex-wrap:wrap;gap:2px;width:100%;}
 .evt-dot{
@@ -107,7 +105,7 @@ body{
   background:rgba(255,185,0,.08);border:1px solid rgba(255,185,0,.14);
   border-radius:4px;padding:1px 3px;line-height:1.4;align-self:flex-end;margin-top:auto;
 }
- 
+
 /* PANEL OVERLAY */
 .panel-overlay{
   display:none;position:fixed;inset:0;z-index:9999;
@@ -140,7 +138,7 @@ body{
   display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;
 }
 .panel-close:hover{background:rgba(255,185,0,.18);color:#ffd54f;transform:scale(1.1);}
- 
+
 /* EVENT CARD */
 .evt-card{
   background:rgba(255,185,0,.05);border:1px solid rgba(255,185,0,.13);
@@ -196,38 +194,38 @@ body{
 </style>
 </head>
 <body>
- 
+
 <div class="cal-wrap">
   <div class="cal-nav">
-    <button class="nav-btn" id="prevBtn">&#8249;</button>
-    <div class="cal-month-label" id="monthLabel"></div>
-    <button class="nav-btn" id="nextBtn">&#8250;</button>
+    <button class="nav-btn" id="prevBtn">‹</button>
+    <div class="cal-month-label" id="monthLabel">APRIL 2026</div>
+    <button class="nav-btn" id="nextBtn">›</button>
   </div>
-  <div class="cal-head" id="calHead"></div>
-  <div class="cal-body" id="calBody"></div>
+  <div class="cal-head" id="calHead"><div class="cal-head-cell">MON</div><div class="cal-head-cell">TUE</div><div class="cal-head-cell">WED</div><div class="cal-head-cell">THU</div><div class="cal-head-cell">FRI</div><div class="cal-head-cell">SAT</div><div class="cal-head-cell">SUN</div></div>
+  <div class="cal-body" id="calBody"><div class="cal-cell overflow"><div class="day-num">30</div></div><div class="cal-cell overflow"><div class="day-num">31</div></div><div class="cal-cell"><div class="day-num">1</div></div><div class="cal-cell"><div class="day-num">2</div></div><div class="cal-cell"><div class="day-num">3</div></div><div class="cal-cell"><div class="day-num">4</div></div><div class="cal-cell"><div class="day-num">5</div></div><div class="cal-cell"><div class="day-num">6</div></div><div class="cal-cell"><div class="day-num">7</div></div><div class="cal-cell"><div class="day-num">8</div></div><div class="cal-cell"><div class="day-num">9</div></div><div class="cal-cell"><div class="day-num">10</div></div><div class="cal-cell"><div class="day-num">11</div></div><div class="cal-cell"><div class="day-num">12</div></div><div class="cal-cell"><div class="day-num">13</div></div><div class="cal-cell"><div class="day-num">14</div></div><div class="cal-cell"><div class="day-num">15</div></div><div class="cal-cell"><div class="day-num">16</div></div><div class="cal-cell"><div class="day-num">17</div></div><div class="cal-cell"><div class="day-num">18</div></div><div class="cal-cell"><div class="day-num">19</div></div><div class="cal-cell"><div class="day-num">20</div></div><div class="cal-cell"><div class="day-num">21</div></div><div class="cal-cell"><div class="day-num">22</div></div><div class="cal-cell"><div class="day-num">23</div></div><div class="cal-cell"><div class="day-num">24</div></div><div class="cal-cell"><div class="day-num">25</div></div><div class="cal-cell"><div class="day-num">26</div></div><div class="cal-cell"><div class="day-num">27</div></div><div class="cal-cell"><div class="day-num">28</div></div><div class="cal-cell"><div class="day-num">29</div></div><div class="cal-cell today"><div class="day-num">30</div></div><div class="cal-cell overflow"><div class="day-num">1</div></div><div class="cal-cell overflow"><div class="day-num">2</div></div><div class="cal-cell overflow"><div class="day-num">3</div></div><div class="cal-cell overflow"><div class="day-num">4</div></div><div class="cal-cell overflow"><div class="day-num">5</div></div><div class="cal-cell overflow"><div class="day-num">6</div></div><div class="cal-cell overflow"><div class="day-num">7</div></div><div class="cal-cell overflow"><div class="day-num">8</div></div><div class="cal-cell overflow"><div class="day-num">9</div></div><div class="cal-cell overflow"><div class="day-num">10</div></div></div>
 </div>
- 
+
 <div class="panel-overlay" id="panelOverlay">
   <div class="panel">
     <div class="panel-header">
       <div class="panel-header-bar"></div>
       <div class="panel-date-hdr" id="panelDateHdr"></div>
     </div>
-    <div class="panel-close" id="panelClose">&#10005;</div>
+    <div class="panel-close" id="panelClose">✕</div>
     <div id="panelCards"></div>
   </div>
 </div>
- 
+
 <script>
 const SHEET_URL='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
- 
+
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAYS=['MON','TUE','WED','THU','FRI','SAT','SUN'];
- 
+
 const today=new Date();
 let viewYear=today.getFullYear(),viewMonth=today.getMonth(),eventMap={};
- 
+
 function proxyURL(raw){
   if(!raw)return null;raw=raw.trim();
   if(raw.startsWith('https://wsrv.nl'))return raw;
@@ -238,13 +236,13 @@ function proxyURL(raw){
   return null;
 }
 function isURL(s){return!!(s&&(/^https?:\/\//i.test(s)||s.includes('.')));}
- 
+
 const pad=n=>String(n).padStart(2,'0');
 const dateKey=(y,m,d)=>y+'-'+pad(m+1)+'-'+pad(d);
 const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
 const dowMon=(y,m,d)=>(new Date(y,m,d).getDay()+6)%7;
 const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||s[v]||s[0]);};
- 
+
 function parseDate(str){
   if(!str)return null;str=str.trim();
   if(/^\d{4}-\d{2}-\d{2}$/.test(str)){const[y,m,d]=str.split('-').map(Number);return{y,m:m-1,d};}
@@ -252,7 +250,7 @@ function parseDate(str){
   const dt=new Date(str);if(!isNaN(dt))return{y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
   return null;
 }
- 
+
 function linkifyMentions(text){
   return text.split(/(@[\w-]+)/g).map(p=>{
     if(/^@[\w-]+$/.test(p)){const a=document.createElement('a');a.className='mention-link';a.href='https://www.chess.com/member/'+p.slice(1);a.target='_blank';a.rel='noopener noreferrer';a.textContent=p;return a;}
@@ -260,7 +258,7 @@ function linkifyMentions(text){
   });
 }
 function setMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
- 
+
 const imgMem=new Map(),imgCbs=new Map();
 function onImgReady(url,cb){
   const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}
@@ -271,7 +269,7 @@ function onImgReady(url,cb){
   const done=st=>{imgMem.set(url,st);(imgCbs.get(url)||[]).forEach(f=>f(st));imgCbs.delete(url);};
   img.onload=()=>done('ok');img.onerror=()=>done('err');img.src=url;
 }
- 
+
 async function loadSheet(){
   try{
     const res=await fetch(SHEET_URL,{cache:'no-store'});
@@ -298,11 +296,11 @@ async function loadSheet(){
     buildCalendar();
   }catch(e){console.error('Sheet error:',e);}
 }
- 
+
 const monthLabel=document.getElementById('monthLabel');
 const calHead=document.getElementById('calHead');
 const calBody=document.getElementById('calBody');
- 
+
 function buildCalendar(){
   monthLabel.textContent=MONTHS[viewMonth].toUpperCase()+' '+viewYear;
   calHead.innerHTML='';
@@ -315,7 +313,7 @@ function buildCalendar(){
   for(let d=1;d<=last;d++)calBody.appendChild(makeCell(viewYear,viewMonth,d,false));
   const filled=first+last;for(let d=1;filled+d-1<42;d++)calBody.appendChild(makeCell(nextY,nextM,d,true));
 }
- 
+
 function makeCell(y,m,d,overflow){
   const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
   const events=(!overflow&&eventMap[dateKey(y,m,d)])||[];
@@ -346,13 +344,13 @@ function makeCell(y,m,d,overflow){
   }
   return cell;
 }
- 
+
 const overlay=document.getElementById('panelOverlay');
 const panelDateHdr=document.getElementById('panelDateHdr');
 const panelCards=document.getElementById('panelCards');
 document.getElementById('panelClose').addEventListener('click',()=>overlay.classList.remove('show'));
 overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('show');});
- 
+
 function openPanel(y,m,d,events){
   panelDateHdr.textContent=MONTHS[m]+' '+ordinal(d)+', '+y;
   panelCards.innerHTML='';
@@ -390,12 +388,13 @@ function openPanel(y,m,d,events){
   });
   overlay.classList.add('show');
 }
- 
+
 document.getElementById('prevBtn').addEventListener('click',()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
 document.getElementById('nextBtn').addEventListener('click',()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
- 
+
 buildCalendar();
 loadSheet();
 </script>
-</body>
-</html>
+
+
+</body></html>
