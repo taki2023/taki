@@ -1,205 +1,401 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Calendar</title>
 <style>
-*{box-sizing:border-box;}
+*{box-sizing:border-box;margin:0;padding:0;}
+ 
+/* ── CRITICAL: explicit dark bg — never white ── */
 html,body{
-  margin:0;
-  padding:0;
-  background:transparent!important;
-  font-family:Inter,Segoe UI,system-ui,sans-serif;
-  color:#f1e7df;
-}
-
-/* MAIN BOX */
-#membersBox{
   width:100%;
-  padding:14px;
-  background:linear-gradient(180deg, rgba(15,15,35,.85), rgba(8,8,20,.9));
-  border:2px solid rgba(255,176,120,.45);
-  border-radius:16px;
-  box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 0 12px rgba(255,176,120,.2);
-  display:flex;
-  flex-direction:column;
+  min-height:100vh;
+  background:#071020;
+  font-family:'Segoe UI',Tahoma,Geneva,sans-serif;
+  color:#eee;
+  overflow-x:hidden;
 }
-
-/* HEADER */
-.membersHeader{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 10px;
-  border-radius:12px;
-  background:rgba(255,176,120,.08);
-  border:1px solid rgba(255,176,120,.35);
+body{
+  background:linear-gradient(160deg,#0a1628 0%,#071020 55%,#0c1a10 100%);
 }
-
-.membersIcon{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  background:linear-gradient(145deg,#ffb347,#ff8a00);
+ 
+.cal-wrap{padding:12px 10px 10px;}
+ 
+/* NAV */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:10px;}
+.cal-month-label{
+  flex:1;text-align:center;
+  font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;
+  color:#ffd54f;text-shadow:0 0 14px rgba(255,185,0,.5);
 }
-
-
-
-.membersWelcome{
-  font-size:12px;
-  margin:8px 4px 12px;
-  color:#ddd;
+.nav-btn{
+  width:28px;height:28px;min-width:28px;border-radius:8px;
+  border:1px solid rgba(255,185,0,.35);outline:none;cursor:pointer;
+  background:linear-gradient(145deg,#1a3a52,#0d2235);
+  color:#ffd54f;font-size:16px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;user-select:none;line-height:1;
+  box-shadow:0 2px 8px rgba(0,0,0,.5);
 }
-
-/* LIST */
-#membersList{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+.nav-btn:hover{
+  background:linear-gradient(145deg,#243f5c,#122840);
+  border-color:rgba(255,185,0,.65);
+  box-shadow:0 0 10px rgba(255,185,0,.28);
 }
-
-/* ROW */
-.memberRow{
-  display:flex;
-  align-items:center;
-  padding:8px;
-  border-radius:10px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,176,120,.15);
-  transition:.2s;
+.nav-btn:active{transform:scale(.9);}
+ 
+/* DAY HEADERS */
+.cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:5px;}
+.cal-head-cell{
+  text-align:center;font-size:8.5px;font-weight:900;
+  letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,185,0,.5);padding:4px 0;
+  border-bottom:1px solid rgba(255,185,0,.1);
 }
-
-.memberRow:hover{
-  transform:translateY(-2px);
-  background:rgba(255,176,120,0.15);
-  box-shadow:0 4px 12px rgba(0,0,0,.4);
+ 
+/* GRID */
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-cell{
+  background:rgba(255,185,0,.03);
+  border:1px solid rgba(255,185,0,.07);
+  border-radius:7px;padding:4px 3px;min-height:44px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+  cursor:default;transition:border-color .15s,background .15s;
 }
-
-/* LINK */
-.memberLink{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  width:100%;
+.cal-cell.overflow{background:transparent;border-color:transparent;opacity:.18;pointer-events:none;}
+.cal-cell.has-events{
+  background:rgba(255,185,0,.07);border-color:rgba(255,185,0,.22);cursor:pointer;
 }
-
-/* AVATAR */
-.memberAvatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  border:2px solid rgba(255,176,120,.8);
-  box-shadow:0 0 10px rgba(255,176,120,.3);
-  object-fit:cover;
+.cal-cell.has-events:hover{
+  background:rgba(255,185,0,.13);border-color:rgba(255,185,0,.5);
+  box-shadow:0 0 10px rgba(255,185,0,.14);
 }
-
-/* TEXT */
-.memberName{
-  font-size:13px;
-  font-weight:700;
-  color:#ffb347;
+.cal-cell.today{
+  background:rgba(255,185,0,.09);border-color:rgba(255,185,0,.5);
+  box-shadow:0 0 0 1.5px rgba(255,185,0,.2);
 }
-
-.memberRating{
-  font-size:11px;
-  color:#ddd;
+ 
+.day-num{
+  font-size:9.5px;font-weight:700;
+  color:rgba(255,210,100,.4);line-height:1;
 }
-
-/* FOOTER */
-.membersFooter{
-  margin-top:10px;
-  padding-top:8px;
-  border-top:1px solid rgba(255,176,120,.2);
-  text-align:center;
-  font-size:12px;
-  color:#bbb;
+.cal-cell.today .day-num{
+  color:#ffd54f;font-size:9px;font-weight:900;
+  background:rgba(255,185,0,.28);border-radius:50%;
+  width:16px;height:16px;
+  display:flex;align-items:center;justify-content:center;
 }
+.cal-cell.has-events .day-num{color:rgba(255,210,100,.65);}
+ 
+/* event icons in cell */
+.evt-dots{display:flex;flex-wrap:wrap;gap:2px;width:100%;}
+.evt-dot{
+  width:18px;height:18px;border-radius:5px;
+  background:rgba(255,185,0,.1);border:1px solid rgba(255,185,0,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;line-height:1;overflow:hidden;position:relative;flex-shrink:0;
+}
+.evt-dot img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;border-radius:4px;opacity:0;transition:opacity .2s;
+}
+.evt-dot img.loaded{opacity:1;}
+.evt-dot .dot-emoji{font-size:11px;line-height:1;position:relative;z-index:1;}
+.more-badge{
+  font-size:7.5px;font-weight:900;color:rgba(255,185,0,.55);
+  background:rgba(255,185,0,.08);border:1px solid rgba(255,185,0,.14);
+  border-radius:4px;padding:1px 3px;line-height:1.4;align-self:flex-end;margin-top:auto;
+}
+ 
+/* PANEL OVERLAY */
+.panel-overlay{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.65);
+  align-items:flex-start;justify-content:center;
+  padding:14px;overflow-y:auto;
+}
+.panel-overlay.show{display:flex;}
+.panel{
+  background:linear-gradient(160deg,#0d1e35 0%,#071020 60%,#0c1a12 100%);
+  border:1.5px solid rgba(255,185,0,.45);border-radius:16px;
+  width:100%;max-width:320px;margin:auto;
+  box-shadow:0 16px 48px rgba(0,0,0,.75),0 0 0 1px rgba(255,185,0,.1);
+  padding:14px;position:relative;
+}
+.panel-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-right:26px;}
+.panel-header-bar{
+  width:3px;height:18px;border-radius:2px;flex-shrink:0;
+  background:linear-gradient(180deg,#ffd54f,#f57c00);
+  box-shadow:0 0 8px rgba(255,185,0,.5);
+}
+.panel-date-hdr{
+  font-size:10px;font-weight:900;letter-spacing:2.5px;
+  text-transform:uppercase;color:#ffd54f;
+}
+.panel-close{
+  position:absolute;top:10px;right:11px;font-size:12px;font-weight:900;
+  color:rgba(255,185,0,.55);cursor:pointer;width:22px;height:22px;
+  border-radius:50%;background:rgba(255,185,0,.07);border:1px solid rgba(255,185,0,.18);
+  display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;
+}
+.panel-close:hover{background:rgba(255,185,0,.18);color:#ffd54f;transform:scale(1.1);}
+ 
+/* EVENT CARD */
+.evt-card{
+  background:rgba(255,185,0,.05);border:1px solid rgba(255,185,0,.13);
+  border-radius:12px;padding:11px 12px;margin-bottom:8px;
+}
+.evt-card:last-child{margin-bottom:0;}
+.evt-card-top{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.evt-card-logo{
+  width:34px;height:34px;border-radius:9px;
+  background:rgba(255,185,0,.07);border:1px solid rgba(255,185,0,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;overflow:hidden;position:relative;
+}
+.evt-card-logo img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;border-radius:8px;opacity:0;transition:opacity .2s;
+}
+.evt-card-logo img.loaded{opacity:1;}
+.evt-card-info{flex:1;min-width:0;}
+.evt-card-title{
+  font-size:12px;font-weight:800;color:#ffd54f;
+  line-height:1.25;margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.evt-card-date{font-size:9px;font-weight:700;color:rgba(255,210,100,.42);letter-spacing:.3px;}
+.evt-card-details{
+  font-size:10.5px;font-weight:600;
+  color:rgba(230,210,160,.72);line-height:1.55;margin-bottom:8px;
+}
+.evt-quote{
+  background:rgba(0,0,0,.2);border-left:3px solid rgba(255,185,0,.38);
+  border-radius:0 8px 8px 0;padding:6px 10px;margin-bottom:8px;
+}
+.evt-quote-label{
+  font-size:8px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;
+  color:rgba(255,185,0,.38);margin-bottom:3px;display:flex;align-items:center;gap:4px;
+}
+.evt-quote-text{font-size:10px;font-weight:600;color:rgba(255,220,150,.7);line-height:1.55;}
+.mention-link{
+  color:#ffd54f;font-weight:900;text-decoration:none;
+  border-bottom:1px dotted rgba(255,185,0,.38);transition:color .12s;
+}
+.mention-link:hover{color:#ffe082;}
+.evt-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:900;letter-spacing:.4px;color:#0a1628;
+  background:linear-gradient(135deg,#ffd54f,#f5a500);
+  padding:5px 14px;border-radius:999px;text-decoration:none;
+  box-shadow:0 2px 0 rgba(150,80,0,.45),0 3px 10px rgba(255,185,0,.22);
+  transition:opacity .15s,transform .15s;
+}
+.evt-btn:hover{opacity:.88;transform:translateY(-1px);}
 </style>
 </head>
-
 <body>
-
-<div id="membersBox">
-
-
-  <div class="membersWelcome">
-    Welcome to the club 👑
+ 
+<div class="cal-wrap">
+  <div class="cal-nav">
+    <button class="nav-btn" id="prevBtn">&#8249;</button>
+    <div class="cal-month-label" id="monthLabel"></div>
+    <button class="nav-btn" id="nextBtn">&#8250;</button>
   </div>
-
-  <div id="membersList">
-    loading...
-  </div>
-
-  <div class="membersFooter" id="membersCount">
-    Members: ...
-  </div>
-
+  <div class="cal-head" id="calHead"></div>
+  <div class="cal-body" id="calBody"></div>
 </div>
-
+ 
+<div class="panel-overlay" id="panelOverlay">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-bar"></div>
+      <div class="panel-date-hdr" id="panelDateHdr"></div>
+    </div>
+    <div class="panel-close" id="panelClose">&#10005;</div>
+    <div id="panelCards"></div>
+  </div>
+</div>
+ 
 <script>
-async function loadNewest(){
-  try{
-    const r = await fetch("https://api.chess.com/pub/club/tournamentsgoingon/members");
-    const d = await r.json();
-
-    const allMembers = [...d.weekly, ...d.monthly];
-    allMembers.sort((a,b)=>b.joined-a.joined);
-
-    const top3 = allMembers.slice(0,3);
-
-    const promises = top3.map(async (m)=>{
-      const [pj, stats] = await Promise.all([
-        fetch("https://api.chess.com/pub/player/"+m.username).then(r=>r.json()),
-        fetch("https://api.chess.com/pub/player/"+m.username+"/stats").then(r=>r.json())
-      ]);
-
-      const ratings=[
-        {type:"Rapid",value:stats.chess_rapid?.last?.rating},
-        {type:"Blitz",value:stats.chess_blitz?.last?.rating},
-        {type:"Bullet",value:stats.chess_bullet?.last?.rating}
-      ].filter(x=>x.value);
-
-      const best = ratings.length ? ratings.sort((a,b)=>b.value-a.value)[0] : {type:"—",value:"—"};
-
-      return {
-        username:m.username,
-        avatar: pj.avatar || "https://taki2023.github.io/taki/default-pawn.png",
-        ratingType:best.type,
-        ratingValue:best.value
-      };
-    });
-
-    const membersData = await Promise.all(promises);
-
-    document.getElementById("membersList").innerHTML =
-      membersData.map(m=>`
-        <div class="memberRow">
-          <a class="memberLink" href="https://www.chess.com/member/${m.username}" target="_blank">
-            <img class="memberAvatar" src="${m.avatar}">
-            <div>
-              <div class="memberName">@${m.username}</div>
-              <div class="memberRating">${m.ratingType}: ${m.ratingValue}</div>
-            </div>
-          </a>
-        </div>
-      `).join("");
-
-    // TOTAL COUNT
-    document.getElementById("membersCount").innerHTML =
-      "👥 Members: <b>" + allMembers.length + "</b>";
-
-  }catch(err){
-    console.error(err);
-    document.getElementById("membersList").innerHTML="Failed to load";
-  }
+const SHEET_URL='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+ 
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS=['MON','TUE','WED','THU','FRI','SAT','SUN'];
+ 
+const today=new Date();
+let viewYear=today.getFullYear(),viewMonth=today.getMonth(),eventMap={};
+ 
+function proxyURL(raw){
+  if(!raw)return null;raw=raw.trim();
+  if(raw.startsWith('https://wsrv.nl'))return raw;
+  const dm=raw.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
+  if(dm){const direct='https://drive.google.com/uc?export=download&id='+dm[1];return'https://wsrv.nl/?url='+encodeURIComponent(direct)+'&w=64&h=64&fit=contain&output=webp';}
+  if(raw.includes('docs.google.com')||raw.includes('googleusercontent.com')||raw.includes('blogger.com'))return'https://wsrv.nl/?url='+encodeURIComponent(raw)+'&w=64&h=64&fit=contain&output=webp';
+  if(/^https?:\/\//i.test(raw))return'https://wsrv.nl/?url='+encodeURIComponent(raw)+'&w=64&h=64&fit=contain&output=webp';
+  return null;
 }
-
-loadNewest();
+function isURL(s){return!!(s&&(/^https?:\/\//i.test(s)||s.includes('.')));}
+ 
+const pad=n=>String(n).padStart(2,'0');
+const dateKey=(y,m,d)=>y+'-'+pad(m+1)+'-'+pad(d);
+const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
+const dowMon=(y,m,d)=>(new Date(y,m,d).getDay()+6)%7;
+const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||s[v]||s[0]);};
+ 
+function parseDate(str){
+  if(!str)return null;str=str.trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){const[y,m,d]=str.split('-').map(Number);return{y,m:m-1,d};}
+  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){const[m,d,y]=str.split('/').map(Number);return{y,m:m-1,d};}
+  const dt=new Date(str);if(!isNaN(dt))return{y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
+  return null;
+}
+ 
+function linkifyMentions(text){
+  return text.split(/(@[\w-]+)/g).map(p=>{
+    if(/^@[\w-]+$/.test(p)){const a=document.createElement('a');a.className='mention-link';a.href='https://www.chess.com/member/'+p.slice(1);a.target='_blank';a.rel='noopener noreferrer';a.textContent=p;return a;}
+    return document.createTextNode(p);
+  });
+}
+function setMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
+ 
+const imgMem=new Map(),imgCbs=new Map();
+function onImgReady(url,cb){
+  const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}
+  if(!imgCbs.has(url))imgCbs.set(url,[]);imgCbs.get(url).push(cb);
+  if(s==='loading')return;
+  imgMem.set(url,'loading');
+  const img=new Image();img.crossOrigin='anonymous';
+  const done=st=>{imgMem.set(url,st);(imgCbs.get(url)||[]).forEach(f=>f(st));imgCbs.delete(url);};
+  img.onload=()=>done('ok');img.onerror=()=>done('err');img.src=url;
+}
+ 
+async function loadSheet(){
+  try{
+    const res=await fetch(SHEET_URL,{cache:'no-store'});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    eventMap={};
+    data.forEach(ev=>{
+      if(!ev.date||!ev.title)return;
+      const dateObj=parseDate(ev.date);if(!dateObj)return;
+      const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
+      if(!eventMap[key])eventMap[key]=[];
+      const rawLogo=(ev.logo||'').trim();
+      const proxiedLogo=isURL(rawLogo)?proxyURL(rawLogo):null;
+      eventMap[key].push({
+        dateObj,title:(ev.title||'').trim(),
+        details:(ev.detailsBefore||'').trim(),
+        button:(ev.buttonBefore||'').trim(),
+        link:(ev.linkBefore||'').trim(),
+        rawLogo,logo:proxiedLogo||rawLogo,isProxied:!!proxiedLogo,
+        organizer:(ev.organizer||'').trim().replace(/^@/,''),
+        quote:(ev.quoteBefore||'').trim(),
+      });
+    });
+    buildCalendar();
+  }catch(e){console.error('Sheet error:',e);}
+}
+ 
+const monthLabel=document.getElementById('monthLabel');
+const calHead=document.getElementById('calHead');
+const calBody=document.getElementById('calBody');
+ 
+function buildCalendar(){
+  monthLabel.textContent=MONTHS[viewMonth].toUpperCase()+' '+viewYear;
+  calHead.innerHTML='';
+  DAYS.forEach(d=>{const c=document.createElement('div');c.className='cal-head-cell';c.textContent=d;calHead.appendChild(c);});
+  calBody.innerHTML='';
+  const first=dowMon(viewYear,viewMonth,1),last=lastDay(viewYear,viewMonth);
+  const prevM=viewMonth===0?11:viewMonth-1,prevY=viewMonth===0?viewYear-1:viewYear;
+  const nextM=viewMonth===11?0:viewMonth+1,nextY=viewMonth===11?viewYear+1:viewYear;
+  for(let i=0;i<first;i++)calBody.appendChild(makeCell(prevY,prevM,lastDay(prevY,prevM)-first+1+i,true));
+  for(let d=1;d<=last;d++)calBody.appendChild(makeCell(viewYear,viewMonth,d,false));
+  const filled=first+last;for(let d=1;filled+d-1<42;d++)calBody.appendChild(makeCell(nextY,nextM,d,true));
+}
+ 
+function makeCell(y,m,d,overflow){
+  const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
+  const events=(!overflow&&eventMap[dateKey(y,m,d)])||[];
+  const cell=document.createElement('div');
+  cell.className='cal-cell'+(overflow?' overflow':'')+(isToday?' today':'')+(events.length?' has-events':'');
+  const num=document.createElement('div');num.className='day-num';num.textContent=d;cell.appendChild(num);
+  if(events.length){
+    const dots=document.createElement('div');dots.className='evt-dots';
+    events.slice(0,3).forEach(ev=>{
+      const dot=document.createElement('div');dot.className='evt-dot';
+      const em=document.createElement('span');em.className='dot-emoji';
+      em.textContent=(ev.rawLogo&&ev.rawLogo.trim()&&!ev.isProxied)?ev.rawLogo:'📅';
+      dot.appendChild(em);
+      if(ev.isProxied){
+        onImgReady(ev.logo,state=>{
+          if(state==='ok'){
+            const img=document.createElement('img');img.alt=ev.title;img.src=ev.logo;dot.appendChild(img);
+            const f=()=>{img.classList.add('loaded');em.style.opacity='0';};
+            img.onload=f;if(img.complete&&img.naturalWidth>0)f();
+          }
+        });
+      }
+      dots.appendChild(dot);
+    });
+    if(events.length>3){const mb=document.createElement('div');mb.className='more-badge';mb.textContent='+'+( events.length-3);dots.appendChild(mb);}
+    cell.appendChild(dots);
+    cell.addEventListener('click',()=>openPanel(y,m,d,events));
+  }
+  return cell;
+}
+ 
+const overlay=document.getElementById('panelOverlay');
+const panelDateHdr=document.getElementById('panelDateHdr');
+const panelCards=document.getElementById('panelCards');
+document.getElementById('panelClose').addEventListener('click',()=>overlay.classList.remove('show'));
+overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('show');});
+ 
+function openPanel(y,m,d,events){
+  panelDateHdr.textContent=MONTHS[m]+' '+ordinal(d)+', '+y;
+  panelCards.innerHTML='';
+  events.forEach(ev=>{
+    const card=document.createElement('div');card.className='evt-card';
+    // logo + title row
+    const top=document.createElement('div');top.className='evt-card-top';
+    const logo=document.createElement('div');logo.className='evt-card-logo';
+    const logoEm=document.createElement('span');
+    logoEm.textContent=(ev.rawLogo&&ev.rawLogo.trim()&&!ev.isProxied)?ev.rawLogo:'📅';
+    logo.appendChild(logoEm);
+    if(ev.isProxied){onImgReady(ev.logo,state=>{if(state==='ok'){const img=document.createElement('img');img.alt=ev.title;img.src=ev.logo;logo.appendChild(img);const f=()=>{img.classList.add('loaded');logoEm.style.opacity='0';};img.onload=f;if(img.complete&&img.naturalWidth>0)f();}});}
+    top.appendChild(logo);
+    const info=document.createElement('div');info.className='evt-card-info';
+    const titleEl=document.createElement('div');titleEl.className='evt-card-title';titleEl.textContent=ev.title;
+    const dateEl=document.createElement('div');dateEl.className='evt-card-date';dateEl.textContent=MONTHS[m]+' '+ordinal(d)+', '+y;
+    info.appendChild(titleEl);info.appendChild(dateEl);top.appendChild(info);card.appendChild(top);
+    // details
+    if(ev.details){const det=document.createElement('div');det.className='evt-card-details';det.textContent=ev.details;card.appendChild(det);}
+    // quote
+    if(ev.quote){
+      const qb=document.createElement('div');qb.className='evt-quote';
+      const ql=document.createElement('div');ql.className='evt-quote-label';
+      ql.textContent='♟ '+(ev.organizer?'From @'+ev.organizer:'From the organizer');
+      const qt=document.createElement('div');qt.className='evt-quote-text';
+      setMentions(qt,ev.quote);qb.appendChild(ql);qb.appendChild(qt);card.appendChild(qb);
+    }
+    // button
+    if(ev.button&&ev.link){
+      const btn=document.createElement('a');btn.className='evt-btn';
+      btn.href=ev.link;btn.target='_blank';btn.rel='noopener noreferrer';
+      btn.textContent=ev.button;card.appendChild(btn);
+    }
+    panelCards.appendChild(card);
+  });
+  overlay.classList.add('show');
+}
+ 
+document.getElementById('prevBtn').addEventListener('click',()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
+document.getElementById('nextBtn').addEventListener('click',()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
+ 
+buildCalendar();
+loadSheet();
 </script>
-
 </body>
 </html>
