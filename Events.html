@@ -124,18 +124,28 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 @keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
 @keyframes pulse-badge-green{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(67,160,71,.3);}50%{opacity:.85;box-shadow:0 0 0 4px rgba(67,160,71,.08);}}
 
-.evt-icons{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px;width:100%;flex:1;min-height:0;}
+/* ── EVENT ICONS — first icon far left, last icon far right, never touching ── */
+.evt-icons{
+  display:flex;flex-direction:row;flex-wrap:nowrap;
+  align-items:center;justify-content:space-between;
+  width:100%;flex:1;min-height:0;overflow:visible;
+  padding:0 2px;
+}
+/* single event stays centered */
+.evt-icons .evt:only-child{margin:0 auto;}
 
 .evt{
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  width:clamp(15px,3.8vw,22px);height:clamp(15px,3.8vw,22px);min-width:15px;min-height:15px;
-  border-radius:5px;font-size:clamp(10px,2.4vw,15px);
-  flex-shrink:0;transition:transform .18s;z-index:1;
+  width:clamp(14px,3.5vw,22px);height:clamp(14px,3.5vw,22px);
+  min-width:0;min-height:14px;flex-shrink:0;
+  border-radius:5px;font-size:clamp(9px,2.2vw,14px);
+  transition:transform .18s;z-index:1;
   border:1.5px solid rgba(217,48,32,.22);background:rgba(255,243,224,.7);
   overflow:hidden;line-height:1;position:relative;
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
 .evt:hover{transform:scale(1.35);z-index:10;}
+
 .evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;}
 .evt img.loaded{opacity:1;}
 .evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;}
@@ -170,14 +180,12 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   position:fixed;background:var(--card);border:2px solid var(--red-dark);
   border-radius:14px;padding:10px 13px 9px;
   box-shadow:0 8px 28px rgba(217,48,32,.25);
-  /* pointer-events:auto is intentional — tooltip is hoverable */
   pointer-events:auto;opacity:0;transition:opacity .12s;
   z-index:99999;min-width:200px;max-width:300px;white-space:normal;
   font-family:'Nunito',sans-serif;display:none;flex-direction:column;gap:0;
 }
 .evt-tip.show{opacity:1;display:flex;}
 
-/* header: logo + title/date */
 .tip-row1{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
 .tip-logo{
   width:34px;height:34px;border-radius:7px;border:1.5px solid var(--border);
@@ -190,7 +198,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-title{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;word-break:break-word;padding-right:22px;}
 .tip-date-badge{font-size:10px;font-weight:800;color:var(--text-mid);opacity:.8;}
 
-/* countdown badge */
 .tip-countdown{
   display:flex;align-items:center;gap:5px;
   font-size:10px;font-weight:900;
@@ -199,10 +206,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .tip-countdown .cd-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0;}
 
-/* details */
 .tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;margin-bottom:6px;}
 
-/* ── QUOTE / MESSAGE BLOCK ── */
 .tip-quote-block{
   background:#fff;border:1.5px solid #eee;border-radius:9px;
   padding:0;margin-bottom:7px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);
@@ -220,7 +225,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .admin-icon{font-size:11px;line-height:1;}
 .tip-quote-text{font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:#3a3a3a;line-height:1.55;}
 
-/* ── @mention links ── */
 .mention-link{
   color:#d93020;font-weight:900;text-decoration:none;
   border-bottom:1px dotted rgba(217,48,32,.4);
@@ -228,7 +232,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .mention-link:hover{color:#a01808;border-bottom-color:rgba(160,24,8,.7);}
 
-/* bottom row */
 .tip-bottom-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;}
 .tip-btn{
   display:inline-block;font-size:10px;font-weight:900;color:#fff;
@@ -247,7 +250,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-organizer:hover{background:#fce0d5;border-color:var(--red-mid);color:var(--red-dark);}
 .tip-organizer-icon{font-size:11px;line-height:1;}
 
-/* ── CLOSE BUTTON ── */
 .tip-close{
   position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;color:var(--red-dark);
   cursor:pointer;line-height:1;
@@ -260,7 +262,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
 
-/* ── Mobile full-screen tooltip overlay ── */
 @media (hover:none) and (pointer:coarse){
   .evt-tip{
     position:fixed!important;
@@ -327,7 +328,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   <div class="tip-countdown" id="tipCountdown"></div>
   <div class="tip-detail" id="tipDetail"></div>
 
-  <!-- Organizer message block -->
   <div class="tip-quote-block" id="tipQuoteBlock" style="display:none;">
     <div class="tip-quote-block-bar bar-organizer"></div>
     <div class="tip-quote-inner">
@@ -348,7 +348,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     </div>
   </div>
 
-  <!-- Admin message block -->
   <div class="tip-quote-block" id="tipAdminBlock" style="display:none;">
     <div class="tip-quote-block-bar bar-admin"></div>
     <div class="tip-quote-inner">
@@ -376,9 +375,6 @@ const DAYS_FUN=[
 const today=new Date();
 let viewYear=today.getFullYear(), viewMonth=today.getMonth(), eventMap={};
 
-/* ══════════════════════════════════════════════
-   IMAGE PROXY
-══════════════════════════════════════════════ */
 function proxyImageURL(raw){
   if(!raw)return null;
   raw=raw.trim();
@@ -398,7 +394,6 @@ function proxyImageURL(raw){
   return null;
 }
 
-/* ── image cache ── */
 const imgMem=new Map(),imgCbs=new Map();
 const lsKey=u=>'imgcache2:'+u;
 const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
@@ -422,7 +417,6 @@ function onImgReady(url,cb){
   if(!imgMem.has(url))preloadImg(url);
 }
 
-/* ── helpers ── */
 const pad=n=>String(n).padStart(2,'0');
 const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
@@ -431,7 +425,6 @@ const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||
 const formatDate=(y,m,d)=>`${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
 const isURL=s=>s&&(/^https?:\/\//i.test(s)||/^\/\//.test(s)||s.includes('.'));
 
-/* ── @mention linkifier ── */
 function linkifyMentions(text){
   const parts=text.split(/(@[\w-]+)/g);
   return parts.map(part=>{
@@ -453,7 +446,6 @@ function setTextWithMentions(el,text){
   linkifyMentions(text).forEach(node=>el.appendChild(node));
 }
 
-/* ── parsers ── */
 function parseDate(str){
   if(!str)return null;str=str.trim();
   if(/^\d{4}-\d{2}-\d{2}$/.test(str)){const[y,m,d]=str.split('-').map(Number);return{y,m:m-1,d};}
@@ -474,9 +466,7 @@ function buildUTC(dateObj,timeObj){
   return new Date(Date.UTC(dateObj.y,dateObj.m,dateObj.d,timeObj.h,timeObj.min,0));
 }
 
-/* ── phase ── */
 function getPhase(ev){
-  // No time → no status at all
   if(!ev.timeObj)return null;
   const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)return null;
   const hasDuration=ev.duration>0;
@@ -484,7 +474,6 @@ function getPhase(ev){
   const now=Date.now();
 
   if(now<s.getTime()){
-    // Upcoming / soon
     const ms=s-now,sec=Math.floor(ms/1000);
     const d=Math.floor(sec/86400),h=Math.floor((sec%86400)/3600),m=Math.floor((sec%3600)/60);
     let text='Starting in ';
@@ -493,9 +482,7 @@ function getPhase(ev){
     else text+=`${m}m`;
     const isSoon=ms<=3600000;
     return{status:isSoon?'soon':'upcoming',text,cssClass:isSoon?'status-soon':'status-upcoming',phase:'before'};
-
   }else if(e && now<e.getTime()){
-    // Live — calculate time remaining
     const msLeft=e.getTime()-now;
     const secLeft=Math.floor(msLeft/1000);
     const hLeft=Math.floor(secLeft/3600);
@@ -505,22 +492,17 @@ function getPhase(ev){
     else if(mLeft>0)endsText=` · ends in ${mLeft}m`;
     else endsText=' · ending soon';
     return{status:'live',text:'🔴 Live'+endsText,cssClass:'status-live',phase:'live'};
-
   }else if(!e && now>=s.getTime()){
-    // Started but no duration — just show Live without "ends in"
     return{status:'live',text:'🔴 Live',cssClass:'status-live',phase:'live'};
-
   }else{
-    // Ended (only reachable when duration is set and we're past end)
     return{status:'ended',text:'✅ Ended',cssClass:'status-ended',phase:'after'};
   }
 }
 
 function cellDotClass(events){
-  // Only show dot if event has a time
   let best=null;const rank={ended:1,before:2,soon:3,live:4};
   for(const ev of events){
-    if(!ev.timeObj)continue; // skip events with no time
+    if(!ev.timeObj)continue;
     const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)continue;
     const hasDuration=ev.duration>0;
     const e=hasDuration?new Date(s.getTime()+ev.duration*3600000):null;
@@ -546,7 +528,6 @@ function pick(ev,phase,field){
   return '';
 }
 
-/* ── load sheet ── */
 async function loadSheet(){
   try{
     const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
@@ -579,7 +560,6 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
-/* ── calendar ── */
 const monthLabel=document.getElementById('monthLabel');
 const calHead=document.getElementById('calHead');
 const calBody=document.getElementById('calBody');
@@ -645,25 +625,12 @@ function makeCell(y,m,d,overflow){
       }
 
       if(!overflow){
-        /*
-         * ── FIX: Tooltip flicker ──────────────────────────────────────────
-         * Root cause: mouseleave fires on the .evt icon the moment the cursor
-         * moves a pixel toward the tooltip, triggering hideTip → the tooltip
-         * disappears → cursor is now "outside" tooltip → next frame the cursor
-         * is back over the icon → mouseenter fires again → infinite loop.
-         *
-         * Solution: Use a small delay on hide. If the cursor enters the tooltip
-         * (or the same icon again) before the delay fires, we cancel the hide.
-         * We track this with a single shared `leaveTimer` variable.
-         */
         ico.addEventListener('mouseenter', e => {
           cancelLeave();
           if(!tipPinned){ renderTip(ev,y,m,d); tip.classList.add('show'); posTip(e); }
         });
         ico.addEventListener('mouseleave', () => { if(!tipPinned) scheduleLeave(); });
         ico.addEventListener('mousemove',  e => { if(!tipPinned) posTip(e); });
-
-        // Click/tap to pin
         ico.addEventListener('click', e => { e.stopPropagation(); pinTip(e,ev,y,m,d); });
         ico.addEventListener('touchend', e => {
           e.preventDefault(); e.stopPropagation();
@@ -677,13 +644,6 @@ function makeCell(y,m,d,overflow){
   return cell;
 }
 
-/* ══════════════════════════════════════════
-   TOOLTIP — flicker-free hover logic
-   ─────────────────────────────────────────
-   We keep a short leave-delay (120 ms).
-   Any mouseenter on the icon OR on the
-   tooltip itself cancels the pending hide.
-══════════════════════════════════════════ */
 const tip             = document.getElementById('globalTip');
 const tipLogo         = document.getElementById('tipLogo');
 const tipTitle        = document.getElementById('tipTitle');
@@ -701,15 +661,12 @@ const tipClose        = document.getElementById('tipClose');
 
 let tipPinned = false;
 let countdownTimer = null;
-let leaveTimer = null;   // ← the key to fixing the flicker
+let leaveTimer = null;
 
-const LEAVE_DELAY = 120; // ms — long enough to cross the gap, short enough to feel instant
+const LEAVE_DELAY = 120;
 
 function scheduleLeave(){
-  leaveTimer = setTimeout(() => {
-    leaveTimer = null;
-    hideTip();
-  }, LEAVE_DELAY);
+  leaveTimer = setTimeout(() => { leaveTimer = null; hideTip(); }, LEAVE_DELAY);
 }
 function cancelLeave(){
   if(leaveTimer){ clearTimeout(leaveTimer); leaveTimer = null; }
@@ -730,7 +687,6 @@ const pinTip = (e, ev, y, m, d) => {
   posTip(e);
 };
 
-// Tooltip itself keeps hover alive
 tip.addEventListener('mouseenter', cancelLeave);
 tip.addEventListener('mouseleave', () => { if(!tipPinned) scheduleLeave(); });
 
@@ -738,7 +694,6 @@ tipClose.addEventListener('click',    e => { e.stopPropagation(); hideTip(); });
 tipClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); hideTip(); }, {passive:false});
 
 function renderTip(ev, y, m, d){
-  /* logo */
   tipLogo.innerHTML='';
   if(ev.isProxied){
     const skel=document.createElement('div');skel.className='tip-logo-skeleton';tipLogo.appendChild(skel);
@@ -757,7 +712,6 @@ function renderTip(ev, y, m, d){
     ?`${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`
     :formatDate(y,m,d);
 
-  /* countdown — only when time is set */
   clearInterval(countdownTimer);countdownTimer=null;
   const st=getPhase(ev);
   if(st){
@@ -769,21 +723,18 @@ function renderTip(ev, y, m, d){
       tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;
     };
     update();
-    // Refresh every 30s for upcoming/soon, every minute for live
     countdownTimer=setInterval(update, st.status==='live'?60000:30000);
   }else{
     tipCountdown.style.display='none';
   }
 
-  /* details */
   const phase=st?st.phase:'before';
   const details=pick(ev,phase,'details');
   const btnText=pick(ev,phase,'button');
-  const btnLink =pick(ev,phase,'link');
+  const btnLink=pick(ev,phase,'link');
   tipDetail.textContent=details;
   tipDetail.style.display=details?'block':'none';
 
-  /* organizer quote block */
   const quote=(phase==='after')?ev.quoteAfter:ev.quoteBefore;
   if(quote){
     setTextWithMentions(tipMsg,quote);
@@ -793,7 +744,6 @@ function renderTip(ev, y, m, d){
     tipQuoteBlock.style.display='none';
   }
 
-  /* admin message block */
   if(ev.adminMessage){
     setTextWithMentions(tipAdminMsg,ev.adminMessage);
     tipAdminLabelText.textContent=ev.admin?`From @${ev.admin}`:'Admin message';
@@ -802,7 +752,6 @@ function renderTip(ev, y, m, d){
     tipAdminBlock.style.display='none';
   }
 
-  /* bottom row */
   tipBottomRow.innerHTML='';
   if(ev.organizer){
     const a=document.createElement('a');
