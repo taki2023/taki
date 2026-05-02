@@ -42,7 +42,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
   50%{filter:drop-shadow(0 0 20px rgba(255,190,60,.75));}
 }
  
-/* ── WRAPPER ── */
 .at-wrap{
   position:relative;width:100%;max-width:100%;margin:0;padding:16px;
   background:linear-gradient(175deg,#110900 0%,#1c0f02 35%,#130a00 65%,#1e1100 100%);
@@ -54,28 +53,23 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
   box-shadow:0 0 60px rgba(150,80,5,.22),inset 0 0 80px rgba(0,0,0,.55);
 }
  
-/* ── STARS CANVAS ── */
 #at-stars-canvas{
   position:absolute;inset:0;pointer-events:none;z-index:0;
   width:100%;height:100%;
 }
  
-
 .at-orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;filter:blur(30px);}
 .at-orb-1{width:90px;height:90px;background:rgba(200,100,10,.20);top:8%;left:-18%;animation:orb-float 7s ease-in-out infinite;}
 .at-orb-2{width:70px;height:70px;background:rgba(180,80,5,.16);top:28%;right:-14%;animation:orb-float 9s ease-in-out infinite 2s;}
 .at-orb-3{width:80px;height:80px;background:rgba(220,120,15,.14);top:58%;left:-12%;animation:orb-float 8s ease-in-out infinite 1s;}
 .at-orb-4{width:60px;height:60px;background:rgba(160,70,5,.12);top:78%;right:-10%;animation:orb-float 10s ease-in-out infinite 3s;}
  
-/* ── PARTICLES ── */
 #at-particles{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;width:100%;height:100%;}
 .ember{position:absolute;top:-20px;pointer-events:none;animation:ember-fall linear infinite;will-change:transform;border-radius:50%;display:block;}
 .spark{position:absolute;top:-20px;pointer-events:none;animation:spark-fall linear infinite;will-change:transform;display:block;line-height:1;}
  
-/* ── CONTENT ── */
 .at-content{position:relative;z-index:2;}
  
-/* ── TITLE ── */
 .at-title{
   text-align:center;font-size:21px;font-weight:900;letter-spacing:2px;margin-bottom:16px;
   background:linear-gradient(90deg,#f5d878,#ffb830,#f5e890,#e8a020,#f5d878);
@@ -84,7 +78,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
   animation:shimmer 5s linear infinite,title-pulse 3s ease-in-out infinite;
 }
  
-/* ── CARDS ── */
 .at-card{
   background:rgba(20,10,2,.68);border-radius:20px;padding:14px;margin-bottom:12px;
   border:1px solid rgba(180,110,20,.22);
@@ -98,7 +91,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
 }
 .at-card:last-child{margin-bottom:0;}
  
-/* ── SECTION TITLES ── */
 .at-section-title{
   text-align:center;background:linear-gradient(135deg,#3a1e04,#5a3008);
   color:#f5d878;font-weight:800;padding:8px 12px;border-radius:14px;
@@ -115,6 +107,7 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
 .at-leaders-row{display:flex;justify-content:center;gap:24px;margin-bottom:14px;}
 .at-leaders-single{display:flex;justify-content:center;margin-bottom:14px;}
 .at-leader{text-align:center;}
+.at-leader span{font-size:10px;color:#f0d8a8;display:block;margin-top:2px;}
 .at-leader a img,.at-leader-img{
   width:50px;height:50px;border-radius:50%;
   border:2px solid rgba(210,150,50,.55);
@@ -128,7 +121,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
   transform:scale(1.1);
 }
  
-/* ── NEWEST MEMBERS ── */
 .nm-item{
   display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:14px;
   background:rgba(30,14,2,.55);border:1px solid rgba(170,100,15,.22);
@@ -155,7 +147,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
 .nm-joined{margin-left:auto;color:#9a6e28;white-space:nowrap;flex-shrink:0;}
 .nm-item:hover .nm-name{text-decoration:underline;}
  
-/* ── EVENTS ── */
 .at-event-row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin-bottom:9px;color:#c8a060;padding:0 2px;}
 .at-event-row:last-of-type{margin-bottom:0;}
 .at-view-btn{
@@ -171,7 +162,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
   box-shadow:0 3px 10px rgba(0,0,0,.35),0 0 14px rgba(230,210,205,.28);
   border-color:rgba(220,210,205,.65);
 }
- 
 
 .at-discord{
   display:flex;align-items:center;justify-content:center;gap:10px;
@@ -192,7 +182,6 @@ html,body{margin:0;padding:0;background:#0e0800;width:100%;overflow-x:hidden;}
 .at-music-gif{display:block;margin:0 auto 8px;border-radius:12px;width:100%;max-width:280px;border:1px solid rgba(180,120,30,.28);box-shadow:0 4px 16px rgba(0,0,0,.45);}
 audio{width:100%;height:32px;}
 .at-deco{text-align:center;font-size:10px;color:rgba(160,110,30,.55);margin-top:10px;letter-spacing:1px;}
- 
 
 .at-link-item:hover{
   background:rgba(70,62,62,.75) !important;
@@ -200,7 +189,6 @@ audio{width:100%;height:32px;}
   transform:translateY(-2px) !important;
   box-shadow:0 4px 14px rgba(220,210,205,.25);
 }
- 
 
 .at-partner-item:hover{
   background:rgba(70,62,62,.75) !important;
@@ -220,19 +208,15 @@ audio{width:100%;height:32px;}
   <div class="at-orb at-orb-4"></div>
   <div id="at-particles"></div>
  
-
- 
   <div class="at-content">
     <div class="at-title">✦ Anime Team ✦</div>
  
-    <!-- MUSIC -->
     <div class="at-card">
       <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/crayon/phptebg65us5va54ud5LAp.gif" class="at-music-gif" alt="" loading="lazy">
       <div style="text-align:center;font-weight:800;font-size:13px;margin-bottom:7px;color:#f0c860;letter-spacing:.5px;">♪ Music Player ♪</div>
       <audio controls><source src="https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3" type="audio/mpeg"></audio>
     </div>
  
-    <!-- LEADERS -->
     <div class="at-card">
       <div class="at-section-title">✦ 👑 CLUB LEADERS ✦</div>
       <div class="at-role-title">🎖 Role / Promotion Requests</div>
@@ -276,7 +260,6 @@ audio{width:100%;height:32px;}
       </div>
     </div>
  
-    <!-- NEWEST MEMBERS -->
     <div class="at-card">
       <div class="at-section-title">🍀 ✦ NEWEST MEMBERS ✦</div>
       <div id="nm-list">
@@ -284,7 +267,6 @@ audio{width:100%;height:32px;}
       </div>
     </div>
  
-    <!-- EVENTS -->
     <div class="at-card">
       <div class="at-section-title">⚔️ ✦ UPCOMING EVENTS ✦</div>
       <div class="at-event-row"><span>Multi Club Arena</span><a href="https://www.chess.com/clubs/upcomingevents/anime-team-3" target="_blank" rel="noopener" class="at-view-btn">View</a></div>
@@ -296,19 +278,16 @@ audio{width:100%;height:32px;}
       <div class="at-deco">✦ Stay active &amp; join all events ✦</div>
     </div>
  
-    <!-- LINKS -->
     <div class="at-card">
       <div class="at-section-title">📌 ✦ USEFUL LINKS ✦</div>
       <div id="at-links" class="at-scroll" style="max-height:160px;"></div>
     </div>
  
-    <!-- PARTNERS -->
     <div class="at-card">
       <div class="at-section-title">🌐 ✦ PARTNERS ✦</div>
       <div id="at-partners" class="at-scroll" style="max-height:190px;display:flex;flex-direction:column;gap:9px;"></div>
     </div>
  
-    <!-- CONNECT -->
     <div class="at-card" style="margin-bottom:0;">
       <div class="at-section-title">📲 ✦ CONNECT WITH US ✦</div>
       <a href="https://discord.gg/wW4kZ2n357" target="_blank" class="at-discord" rel="noopener">
@@ -321,127 +300,118 @@ audio{width:100%;height:32px;}
  
 <script>
 (function(){
- 
-/* ══ TWINKLING STARS ══ */
-(function(){
-  var wrap   = document.getElementById('at-wrap');
-  var canvas = document.getElementById('at-stars-canvas');
-  function resize(){ canvas.width = wrap.offsetWidth; canvas.height = wrap.offsetHeight; }
-  resize();
-  var ctx = canvas.getContext('2d');
-  var stars = [];
-  function initStars(){
-    stars = [];
-    for(var i = 0; i < 70; i++){
-      var isBig    = Math.random() < 0.12;
-      var isMedium = !isBig && Math.random() < 0.2;
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: isBig ? (Math.random()*1.0+1.2) : isMedium ? (Math.random()*0.5+0.6) : (Math.random()*0.4+0.2),
-        base: Math.random()*0.20+0.06,
-        amp:  Math.random()*0.55+0.18,
-        sp:   Math.random()*0.8+0.25,
-        ph:   Math.random()*Math.PI*2,
-        hue:  28 + Math.random()*27,
-        cross:   isBig,
-        sparkle: isMedium && Math.random()<0.4
-      });
-    }
+
+var wrap   = document.getElementById('at-wrap');
+var canvas = document.getElementById('at-stars-canvas');
+function resizeCanvas(){ canvas.width = wrap.offsetWidth; canvas.height = wrap.offsetHeight; }
+resizeCanvas();
+var ctx = canvas.getContext('2d');
+var stars = [];
+function initStars(){
+  stars = [];
+  for(var i = 0; i < 70; i++){
+    var isBig    = Math.random() < 0.12;
+    var isMedium = !isBig && Math.random() < 0.2;
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: isBig ? (Math.random()*1.0+1.2) : isMedium ? (Math.random()*0.5+0.6) : (Math.random()*0.4+0.2),
+      base: Math.random()*0.20+0.06,
+      amp:  Math.random()*0.55+0.18,
+      sp:   Math.random()*0.8+0.25,
+      ph:   Math.random()*Math.PI*2,
+      hue:  28 + Math.random()*27,
+      cross:   isBig,
+      sparkle: isMedium && Math.random()<0.4
+    });
   }
-  initStars();
-  function draw(ts){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    var t = ts/1000;
-    for(var s of stars){
-      var a = Math.max(0,Math.min(1, s.base + s.amp*Math.sin(s.sp*t+s.ph)));
+}
+initStars();
+function drawStars(ts){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  var t = ts/1000;
+  for(var s of stars){
+    var a = Math.max(0,Math.min(1, s.base + s.amp*Math.sin(s.sp*t+s.ph)));
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = 'hsla('+s.hue+',90%,85%,'+a+')';
+    ctx.fill();
+    if(s.cross){
+      ctx.strokeStyle='hsla('+s.hue+',90%,85%,'+(a*0.5)+')';
+      ctx.lineWidth=0.4;
+      var arm=s.r*3.2;
       ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle = 'hsla('+s.hue+',90%,85%,'+a+')';
-      ctx.fill();
-      if(s.cross){
-        ctx.strokeStyle='hsla('+s.hue+',90%,85%,'+(a*0.5)+')';
-        ctx.lineWidth=0.4;
-        var arm=s.r*3.2;
-        ctx.beginPath();
-        ctx.moveTo(s.x-arm,s.y);ctx.lineTo(s.x+arm,s.y);
-        ctx.moveTo(s.x,s.y-arm);ctx.lineTo(s.x,s.y+arm);
-        ctx.stroke();
-        var darm=s.r*1.8;
-        ctx.strokeStyle='hsla('+s.hue+',90%,85%,'+(a*0.25)+')';
-        ctx.beginPath();
-        ctx.moveTo(s.x-darm,s.y-darm);ctx.lineTo(s.x+darm,s.y+darm);
-        ctx.moveTo(s.x+darm,s.y-darm);ctx.lineTo(s.x-darm,s.y+darm);
-        ctx.stroke();
-      }
-      if(s.sparkle){
-        ctx.strokeStyle='hsla('+s.hue+',90%,85%,'+(a*0.35)+')';
-        ctx.lineWidth=0.3;
-        var sarm=s.r*2.2;
-        ctx.beginPath();
-        ctx.moveTo(s.x-sarm,s.y);ctx.lineTo(s.x+sarm,s.y);
-        ctx.moveTo(s.x,s.y-sarm);ctx.lineTo(s.x,s.y+sarm);
-        ctx.stroke();
-      }
+      ctx.moveTo(s.x-arm,s.y);ctx.lineTo(s.x+arm,s.y);
+      ctx.moveTo(s.x,s.y-arm);ctx.lineTo(s.x,s.y+arm);
+      ctx.stroke();
+      var darm=s.r*1.8;
+      ctx.strokeStyle='hsla('+s.hue+',90%,85%,'+(a*0.25)+')';
+      ctx.beginPath();
+      ctx.moveTo(s.x-darm,s.y-darm);ctx.lineTo(s.x+darm,s.y+darm);
+      ctx.moveTo(s.x+darm,s.y-darm);ctx.lineTo(s.x-darm,s.y+darm);
+      ctx.stroke();
     }
-    requestAnimationFrame(draw);
+    if(s.sparkle){
+      ctx.strokeStyle='hsla('+s.hue+',90%,85%,'+(a*0.35)+')';
+      ctx.lineWidth=0.3;
+      var sarm=s.r*2.2;
+      ctx.beginPath();
+      ctx.moveTo(s.x-sarm,s.y);ctx.lineTo(s.x+sarm,s.y);
+      ctx.moveTo(s.x,s.y-sarm);ctx.lineTo(s.x,s.y+sarm);
+      ctx.stroke();
+    }
   }
-  requestAnimationFrame(draw);
-  new ResizeObserver(function(){ resize(); initStars(); }).observe(wrap);
-})();
- 
- 
-/* ══ FALLING PARTICLES ══ */
-(function(){
-  var container = document.getElementById('at-particles');
-  var emberColors = [
-    {bg:'rgba(255,160,40,.90)',sh:'0 0 5px rgba(255,120,0,.9)'},
-    {bg:'rgba(255,210,60,.80)',sh:'0 0 5px rgba(255,190,0,.8)'},
-    {bg:'rgba(255,100,20,.75)',sh:'0 0 4px rgba(200,60,0,.7)'},
-    {bg:'rgba(255,180,30,.70)',sh:'0 0 4px rgba(200,110,0,.6)'},
-  ];
-  var emberData = [
-    {l:4,w:3,h:3,dur:14,del:0},{l:13,w:2,h:2,dur:17,del:2.2},
-    {l:23,w:4,h:4,dur:13,del:4.8},{l:34,w:2,h:3,dur:19,del:1.1},
-    {l:45,w:3,h:3,dur:12,del:6.8},{l:56,w:2,h:2,dur:18,del:3.4},
-    {l:67,w:4,h:4,dur:15,del:8.2},{l:77,w:2,h:3,dur:11,del:0.9},
-    {l:87,w:3,h:2,dur:16,del:5.6},{l:95,w:2,h:2,dur:13,del:2.9},
-    {l:20,w:3,h:3,dur:20,del:9.1},{l:62,w:2,h:2,dur:10,del:7.4},
-  ];
-  emberData.forEach(function(p){
-    var c = emberColors[Math.floor(Math.random()*emberColors.length)];
-    var el = document.createElement('span');
-    el.className='ember';
-    el.style.cssText='left:'+p.l+'%;width:'+p.w+'px;height:'+p.h+'px;'
-      +'background:'+c.bg+';box-shadow:'+c.sh+';'
-      +'animation-duration:'+p.dur+'s;animation-delay:'+p.del+'s;';
-    container.appendChild(el);
-  });
- 
-  var sparkSymbols=['✦','·','⋅','✧'];
-  var sparkData=[
-    {l:8,sz:8,dur:16,del:1.3},{l:19,sz:7,dur:20,del:5.8},
-    {l:31,sz:9,dur:15,del:3.2},{l:43,sz:7,dur:18,del:8.4},
-    {l:52,sz:8,dur:17,del:0.6},{l:64,sz:9,dur:14,del:6.9},
-    {l:75,sz:7,dur:21,del:2.5},{l:84,sz:8,dur:16,del:4.1},
-    {l:92,sz:9,dur:13,del:7.8},
-  ];
-  sparkData.forEach(function(p){
-    var sym=sparkSymbols[Math.floor(Math.random()*sparkSymbols.length)];
-    var el=document.createElement('span');
-    el.className='spark';
-    el.textContent=sym;
-    el.style.left=p.l+'%';
-    el.style.fontSize=p.sz+'px';
-    el.style.color='rgba(255,'+(170+Math.floor(Math.random()*60))+',40,'+(0.5+Math.random()*0.4)+')';
-    el.style.animationDuration=p.dur+'s';
-    el.style.animationDelay=p.del+'s';
-    container.appendChild(el);
-  });
-})();
- 
- 
-/* ══ AVATARS ══ */
+  requestAnimationFrame(drawStars);
+}
+requestAnimationFrame(drawStars);
+new ResizeObserver(function(){ resizeCanvas(); initStars(); }).observe(wrap);
+
+var container = document.getElementById('at-particles');
+var emberColors = [
+  {bg:'rgba(255,160,40,.90)',sh:'0 0 5px rgba(255,120,0,.9)'},
+  {bg:'rgba(255,210,60,.80)',sh:'0 0 5px rgba(255,190,0,.8)'},
+  {bg:'rgba(255,100,20,.75)',sh:'0 0 4px rgba(200,60,0,.7)'},
+  {bg:'rgba(255,180,30,.70)',sh:'0 0 4px rgba(200,110,0,.6)'},
+];
+var emberData = [
+  {l:4,w:3,h:3,dur:14,del:0},{l:13,w:2,h:2,dur:17,del:2.2},
+  {l:23,w:4,h:4,dur:13,del:4.8},{l:34,w:2,h:3,dur:19,del:1.1},
+  {l:45,w:3,h:3,dur:12,del:6.8},{l:56,w:2,h:2,dur:18,del:3.4},
+  {l:67,w:4,h:4,dur:15,del:8.2},{l:77,w:2,h:3,dur:11,del:0.9},
+  {l:87,w:3,h:2,dur:16,del:5.6},{l:95,w:2,h:2,dur:13,del:2.9},
+  {l:20,w:3,h:3,dur:20,del:9.1},{l:62,w:2,h:2,dur:10,del:7.4},
+];
+emberData.forEach(function(p){
+  var c = emberColors[Math.floor(Math.random()*emberColors.length)];
+  var el = document.createElement('span');
+  el.className='ember';
+  el.style.cssText='left:'+p.l+'%;width:'+p.w+'px;height:'+p.h+'px;'
+    +'background:'+c.bg+';box-shadow:'+c.sh+';'
+    +'animation-duration:'+p.dur+'s;animation-delay:'+p.del+'s;';
+  container.appendChild(el);
+});
+
+var sparkSymbols=['✦','·','⋅','✧'];
+var sparkData=[
+  {l:8,sz:8,dur:16,del:1.3},{l:19,sz:7,dur:20,del:5.8},
+  {l:31,sz:9,dur:15,del:3.2},{l:43,sz:7,dur:18,del:8.4},
+  {l:52,sz:8,dur:17,del:0.6},{l:64,sz:9,dur:14,del:6.9},
+  {l:75,sz:7,dur:21,del:2.5},{l:84,sz:8,dur:16,del:4.1},
+  {l:92,sz:9,dur:13,del:7.8},
+];
+sparkData.forEach(function(p){
+  var sym=sparkSymbols[Math.floor(Math.random()*sparkSymbols.length)];
+  var el=document.createElement('span');
+  el.className='spark';
+  el.textContent=sym;
+  el.style.left=p.l+'%';
+  el.style.fontSize=p.sz+'px';
+  el.style.color='rgba(255,'+(170+Math.floor(Math.random()*60))+',40,'+(0.5+Math.random()*0.4)+')';
+  el.style.animationDuration=p.dur+'s';
+  el.style.animationDelay=p.del+'s';
+  container.appendChild(el);
+});
+
 var FALLBACK='https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
 var DP='https://taki2023.github.io/taki/default-pawn.png';
 function loadPfp(username,ids){
@@ -460,12 +430,9 @@ loadPfp('dannyboy_guling',  ['pfp-dannyboy']);
 loadPfp('Lysithea_Vantress',['pfp-lysithea']);
 loadPfp('Ale_Miranda',      ['pfp-ale']);
 loadPfp('AkitoClaw',        ['pfp-akito']);
- 
- 
-/* ══ NEWEST MEMBERS — fixed timeAgo ══ */
+
 function timeAgo(ts){
   var diff = Math.floor((Date.now() - ts * 1000) / 1000);
-  /* Guard: negative or near-zero means just joined / clock skew */
   if(diff < 30) return 'Just now';
   var m = Math.floor(diff / 60);   if(m < 60)  return m + 'm ago';
   var h = Math.floor(m / 60);      if(h < 24)  return h + 'h ago';
@@ -516,18 +483,16 @@ async function loadNewest(){
   }
 }
 loadNewest();
- 
- 
-/* ══ GOOGLE SHEET: LINKS + PARTNERS ══ */
+
 var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxnNF-TZUUj0MjM4GLT2u21drPcCNtRkeOg7J8wZrCOIrj3825JjWz3YJZBB5qDR6M1/exec';
- 
+
 var BASE_LS='display:block;margin:6px 0;background:rgba(40,18,2,.65);padding:9px 14px;border-radius:13px;border:1px solid rgba(180,120,20,.25);color:#f0c860;font-weight:700;font-size:12.5px;text-decoration:none;text-align:center;transition:.2s;';
 var BASE_PS='display:flex;align-items:center;justify-content:center;background:rgba(40,18,2,.65);padding:10px;border-radius:15px;border:1px solid rgba(180,120,20,.25);color:#f0c860;font-weight:700;font-size:12.5px;text-decoration:none;text-align:center;transition:.2s;';
- 
+
 function showErr(id,m){var el=document.getElementById(id);if(el)el.innerHTML='<div style="text-align:center;color:#c06030;font-size:12px;padding:10px;">'+m+'</div>';}
 function initials(n){return n.trim().split(/\s+/).map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();}
 function fbLogo(n){return 'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(n))+'&background=3a1e04&color=f0c860&size=200&bold=true&font-size=0.45';}
- 
+
 window.__atSheetCallback=function(data){
   var links   =Array.isArray(data.links)   ?data.links   :[];
   var partners=Array.isArray(data.partners)?data.partners:[];
@@ -559,7 +524,7 @@ window.__atSheetCallback=function(data){
   s.onerror=function(){showErr('at-links','Could not load links');showErr('at-partners','Could not load partners');};
   document.head.appendChild(s);
 })();
- 
+
 })();
 </script>
 </body></html>
