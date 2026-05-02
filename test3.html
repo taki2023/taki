@@ -825,6 +825,7 @@ let newestCache = [];
 function timeAgo(timestamp) {
   const now = Date.now();
   const diffSeconds = Math.floor((now - (timestamp * 1000)) / 1000);
+  if(diffSeconds < 30) return 'Just now';
   if (diffSeconds < 60) return `${diffSeconds}s ago`;
   const minutes = Math.floor(diffSeconds / 60);
   if (minutes < 60) return `${minutes}m ago`;
