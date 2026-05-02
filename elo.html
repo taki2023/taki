@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Guess The Elo - All Time Leaderboard</title>
+<title>Guess The Elo - Leaderboard</title>
 
 <style>
 body {
@@ -11,6 +11,7 @@ body {
     color: white;
 }
 
+/* CONTAINER */
 .container {
     width: 600px;
     margin: 30px auto;
@@ -19,17 +20,57 @@ body {
     overflow: hidden;
 }
 
-/* TITLE */
+/* TITLE WITH PODIUM */
 .title {
-    height: 70px; /* fixed height */
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    font-weight: bold;
+    gap: 15px;
     background: #2a160f;
-    border: 2px solid #d4a017; /* outline */
+    border: 2px solid #d4a017;
     border-radius: 10px 10px 0 0;
+}
+
+/* PODIUM ICON */
+.podium {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.podium span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    font-weight: bold;
+    border-radius: 3px;
+    color: white;
+    font-size: 12px;
+}
+
+/* Podium heights */
+.gold {
+    background: #f1c40f;
+    height: 30px;
+}
+
+.silver {
+    background: #bdc3c7;
+    height: 22px;
+}
+
+.bronze {
+    background: #cd7f32;
+    height: 18px;
+}
+
+/* Title text */
+.title-text {
+    font-size: 28px;
+    font-weight: 800;
+    color: #d6d6d6;
 }
 
 /* HEADER */
@@ -41,6 +82,7 @@ body {
     background: #2a160f;
 }
 
+/* ROWS */
 .row {
     display: flex;
     justify-content: space-between;
@@ -64,9 +106,9 @@ body {
     font-weight: bold;
 }
 
-.gold { background: gold; color: black; }
-.silver { background: silver; color: black; }
-.bronze { background: #cd7f32; }
+.rank.gold { background: gold; color: black; }
+.rank.silver { background: silver; color: black; }
+.rank.bronze { background: #cd7f32; }
 
 .points {
     font-weight: bold;
@@ -82,12 +124,23 @@ body {
 
 <div class="container">
 
-    <div class="title">🏆 All-Time Leaderboard (Guess the Elo)</div>
+    <!-- TITLE -->
+    <div class="title">
+        <div class="podium">
+            <span class="silver">2</span>
+            <span class="gold">1</span>
+            <span class="bronze">3</span>
+        </div>
+        <span class="title-text">Leaderboard</span>
+    </div>
 
+    <!-- HEADER -->
     <div class="header">
         <div>Player</div>
         <div>Points</div>
     </div>
+
+    <!-- LEADERBOARD -->
 
     <div class="row">
         <div class="left">
@@ -185,8 +238,10 @@ body {
         <div class="points">1</div>
     </div>
 
-
 </div>
+
+</body>
+</html>
 
 </body>
 </html>
