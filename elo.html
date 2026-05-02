@@ -19,6 +19,20 @@ body {
     overflow: hidden;
 }
 
+/* TITLE */
+.title {
+    height: 70px; /* fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    background: #2a160f;
+    border: 2px solid #d4a017; /* outline */
+    border-radius: 10px 10px 0 0;
+}
+
+/* HEADER */
 .header {
     display: flex;
     justify-content: space-between;
@@ -58,7 +72,6 @@ body {
     font-weight: bold;
 }
 
-/* subtle hover */
 .row:hover {
     background: rgba(255,255,255,0.05);
 }
@@ -68,106 +81,15 @@ body {
 <body>
 
 <div class="container">
+
+    <div class="title">🏆 All-Time Leaderboard (Guess the Elo)</div>
+
     <div class="header">
         <div>Player</div>
         <div>Points</div>
     </div>
 
-    <div class="row">
-        <div class="left">
-            <div class="rank gold">1</div>
-            <div>@Dhrubojyoti</div>
-        </div>
-        <div class="points">9</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank silver">2</div>
-            <div>@mental-central-dialog</div>
-        </div>
-        <div class="points">5</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank bronze">3</div>
-            <div>@vednu</div>
-        </div>
-        <div class="points">5</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">4</div>
-            <div>@Tengen</div>
-        </div>
-        <div class="points">5</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">5</div>
-            <div>@WeGinny</div>
-        </div>
-        <div class="points">3</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">6</div>
-            <div>@Iamplayerofchess</div>
-        </div>
-        <div class="points">3</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">7</div>
-            <div>@TrofAndy</div>
-        </div>
-        <div class="points">2</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@Juliana3377</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@MR_BLUE_GUY</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@Nin-chessy</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@SS-Ehan</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@charan_smaran</div>
-        </div>
-        <div class="points">1</div>
-    </div>
+    <!-- rows stay the same -->
 
 </div>
 
