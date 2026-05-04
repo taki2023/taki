@@ -5,6 +5,16 @@
 <title>Hot Chilli Sidebar</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
+/*
+  ╔══════════════════════════════════════════════╗
+  ║         HOT CHILLI CHECKMATE SIDEBAR         ║
+  ║  Sidebar height: AUTO — grows with content.  ║
+  ║  No fixed height clipping anywhere.          ║
+  ║  Members list: no scroll, shows all 3.       ║
+  ║  Birthday list: no scroll, shows up to 3.    ║
+  ╚══════════════════════════════════════════════╝
+*/
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;margin:0;padding:0;background:#1a1a1a;}
 body{display:block;}
@@ -22,6 +32,8 @@ body{display:block;}
   width:100%;max-width:none;margin:0;
   background:#fff5f0;border-radius:28px;
   border:3px solid #e8553a;position:relative;
+  /* height is AUTO — sidebar grows to fit all content */
+  height:auto;
   transition:box-shadow .3s ease;
 }
 .sb:hover{box-shadow:0 15px 50px rgba(220,60,30,.28);}
@@ -163,23 +175,20 @@ body{display:block;}
 .milestone:hover{transform:translate(-50%,-58%);box-shadow:0 6px 0 #8c1a10;}
 .milestone.locked:hover{box-shadow:0 6px 0 #c89080;}
 
-/* ── MEMBERS BOX — fixed height, scrollable ── */
+/* ── MEMBERS BOX — NO scroll, auto height, shows all 3 ── */
 .members-box{
   background:#fff;border-radius:18px;
   border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;
   padding:12px;margin-bottom:14px;
-  height:168px;           /* ← FIXED height, no min-height */
-  overflow:hidden;        /* clip, list scrolls inside */
+  height:auto;        /* grows to fit content — no scroll */
+  overflow:visible;
 }
 .members-list{
   display:flex;flex-direction:column;gap:8px;
-  height:100%;overflow-y:auto;
+  height:auto;        /* no fixed height — no scrollbar */
+  overflow:visible;
 }
-.members-list::-webkit-scrollbar{width:5px;}
-.members-list::-webkit-scrollbar-track{background:#fce8e0;border-radius:3px;}
-.members-list::-webkit-scrollbar-thumb{background:#d93020;border-radius:3px;}
-.members-list{scrollbar-width:thin;scrollbar-color:#d93020 #fce8e0;}
 
 .member-item{
   display:flex;align-items:center;gap:10px;padding:8px 10px;
@@ -195,13 +204,13 @@ body{display:block;}
 .member-rating{color:#9a2010;flex-shrink:0;}
 .member-joined{margin-left:auto;color:#d93020;font-weight:800;white-space:nowrap;flex-shrink:0;}
 
-/* ── BIRTHDAY BOX — fixed height, scrollable list ── */
+/* ── BIRTHDAY BOX — NO scroll on list, shows up to 3 ── */
 .bday-box{
   background:#fff;border-radius:18px;
   border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;
   padding:14px;margin-bottom:14px;
-  /* No fixed height on the whole box — form part is static, list part is fixed */
+  height:auto;        /* grows with content — no clip */
 }
 .bday-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .bday-input-row{display:flex;gap:7px;}
@@ -233,17 +242,12 @@ body{display:block;}
 .bday-save-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #8c1a10;}
 .bday-msg{font-size:var(--fs-xs);font-weight:700;color:#d93020;min-height:14px;}
 
-/* ← FIXED height scrollable birthday list — never grows */
+/* ── Birthday list — NO fixed height, NO scroll, max 3 items ── */
 .bday-list{
   display:flex;flex-direction:column;gap:8px;
-  height:168px;           /* fixed, matches members-box */
-  overflow-y:auto;
-  padding-right:2px;
+  height:auto;        /* no fixed height — no scrollbar */
+  overflow:visible;
 }
-.bday-list::-webkit-scrollbar{width:5px;}
-.bday-list::-webkit-scrollbar-track{background:#fce8e0;border-radius:3px;}
-.bday-list::-webkit-scrollbar-thumb{background:#d93020;border-radius:3px;}
-.bday-list{scrollbar-width:thin;scrollbar-color:#d93020 #fce8e0;}
 
 .bday-item{
   display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:14px;
@@ -863,7 +867,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 /* ══════════════════════════════════════
    BIRTHDAY SECTION
-
 ══════════════════════════════════════ */
 const BDAY_API = "https://script.google.com/macros/s/AKfycbzIzMsTTSsPkfevXn2BM-By6wIptXxld-OvD_LkvU6inCXbUfAzQrKJxjUsfLFE2bDJ/exec";
 
@@ -907,10 +910,6 @@ async function saveBirthday() {
   msg.textContent = "Saving...";
 
   try {
-    /* ── KEY FIX: use URL-encoded body instead of FormData ──
-       GAS doPost receives URL-encoded params reliably even
-       after the 302 redirect that fetch follows automatically.
-       FormData multipart is NOT parsed by e.parameter in GAS. */
     const body = new URLSearchParams({
       Username: user,
       Month: month,
@@ -959,12 +958,10 @@ async function loadBirthdays() {
   const list = document.getElementById("bdayList");
   list.innerHTML = '<div class="bday-empty"><span>⏳</span>Loading...</div>';
   try {
-    const res  = await fetch(BDAY_API + "?v=" + Date.now()); /* bust cache */
+    const res  = await fetch(BDAY_API + "?v=" + Date.now());
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error("Invalid response");
 
-    /* Sort by next upcoming date on the JS side too (GAS sorts the sheet,
-       but we re-sort here to guarantee correct order regardless) */
     const upcoming = data
       .map(b => ({
         username: String(b.Username || "").trim(),
@@ -974,7 +971,7 @@ async function loadBirthdays() {
       }))
       .filter(b => b.username && b.month && b.day)
       .sort((a, b) => getNextDate(a.month, a.day) - getNextDate(b.month, b.day))
-      .slice(0, 5); /* show up to 5, list scrolls */
+      .slice(0, 3); /* ← show max 3 birthdays, no scroll needed */
 
     if (!upcoming.length) {
       list.innerHTML = '<div class="bday-empty"><span>🎂</span>No birthdays yet!<br>Add yours above</div>';
