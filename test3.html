@@ -5,6 +5,17 @@
 <title>Hot Chilli Sidebar</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
+/*
+  ╔════════════════════════════════════════════════════╗
+  ║           HOT CHILLI CHECKMATE SIDEBAR             ║
+  ║  Sidebar height: AUTO — grows with all content.    ║
+  ║  Members box: min-height pre-reserved for 3 cards  ║
+  ║    → no layout jump on load, no scrollbar.         ║
+  ║  Birthday list: min-height pre-reserved for 3 rows ║
+  ║    → no layout jump on load, no scrollbar.         ║
+  ║  No overflow:auto anywhere in this file.           ║
+  ╚════════════════════════════════════════════════════╝
+*/
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;margin:0;padding:0;background:#1a1a1a;}
@@ -166,19 +177,20 @@ body{display:block;}
 .milestone:hover{transform:translate(-50%,-58%);box-shadow:0 6px 0 #8c1a10;}
 .milestone.locked:hover{box-shadow:0 6px 0 #c89080;}
 
-/* ── MEMBERS BOX — NO scroll, auto height, shows all 3 ── */
+/* ── MEMBERS BOX — space pre-reserved for 3 cards, no scroll, no layout jump ── */
+/* 3 cards × 60px + 2 gaps × 8px = 196px list; + 24px box padding = 220px box */
 .members-box{
   background:#fff;border-radius:18px;
   border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;
   padding:12px;margin-bottom:14px;
-  height:auto;        /* grows to fit content — no scroll */
-  overflow:visible;
+  min-height:220px;   /* reserved for 3 items — no jump on load */
+  overflow:hidden;    /* no scrollbar ever */
 }
 .members-list{
   display:flex;flex-direction:column;gap:8px;
-  height:auto;        /* no fixed height — no scrollbar */
-  overflow:visible;
+  min-height:196px;   /* reserved: 3×60px + 2×8px gap */
+  overflow:hidden;    /* no scrollbar */
 }
 
 .member-item{
@@ -195,13 +207,14 @@ body{display:block;}
 .member-rating{color:#9a2010;flex-shrink:0;}
 .member-joined{margin-left:auto;color:#d93020;font-weight:800;white-space:nowrap;flex-shrink:0;}
 
-/* ── BIRTHDAY BOX — NO scroll on list, shows up to 3 ── */
+/* ── BIRTHDAY BOX — space pre-reserved for form + 3 cards, no scroll, no layout jump ── */
+/* form area ~196px + list: 3×64px + 2×8px = 208px; total box ~424px */
 .bday-box{
   background:#fff;border-radius:18px;
   border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;
   padding:14px;margin-bottom:14px;
-  height:auto;        /* grows with content — no clip */
+  overflow:hidden;    /* no scrollbar ever */
 }
 .bday-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .bday-input-row{display:flex;gap:7px;}
@@ -233,11 +246,12 @@ body{display:block;}
 .bday-save-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #8c1a10;}
 .bday-msg{font-size:var(--fs-xs);font-weight:700;color:#d93020;min-height:14px;}
 
-/* ── Birthday list — NO fixed height, NO scroll, max 3 items ── */
+/* ── Birthday list — space pre-reserved for 3 items, NO scroll ── */
+/* 3 items × 64px + 2 gaps × 8px = 208px */
 .bday-list{
   display:flex;flex-direction:column;gap:8px;
-  height:auto;        /* no fixed height — no scrollbar */
-  overflow:visible;
+  min-height:208px;   /* reserved: 3×64px + 2×8px — no jump on load */
+  overflow:hidden;    /* no scrollbar */
 }
 
 .bday-item{
