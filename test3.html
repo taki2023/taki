@@ -24,9 +24,12 @@ body{display:block;}
   width:100%;max-width:none;margin:0;
   background:#fff5f0;border-radius:28px;
   border:3px solid #e8553a;position:relative;
-  /* height is AUTO — sidebar grows to fit all content */
   height:auto;
   transition:box-shadow .3s ease;
+  /* FIX: overflow:clip keeps border-radius clipping for backgrounds
+     but does NOT trap transformed children, so hover lifts on first/last
+     member and birthday items are never cropped */
+  overflow:clip;
 }
 .sb:hover{box-shadow:0 15px 50px rgba(220,60,30,.28);}
 
@@ -167,20 +170,24 @@ body{display:block;}
 .milestone:hover{transform:translate(-50%,-58%);box-shadow:0 6px 0 #8c1a10;}
 .milestone.locked:hover{box-shadow:0 6px 0 #c89080;}
 
-/* ── MEMBERS BOX — space pre-reserved for 3 cards, no scroll, no layout jump ── */
-/* 3 cards × 60px + 2 gaps × 8px = 196px list; + 24px box padding = 220px box */
+/* ── MEMBERS BOX ── */
 .members-box{
   background:#fff;border-radius:18px;
   border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;
   padding:12px;margin-bottom:14px;
-  min-height:220px;   /* reserved for 3 items — no jump on load */
-  overflow:hidden;    /* no scrollbar ever */
+  min-height:220px;
+  /* FIX: overflow:clip instead of overflow:hidden — border-radius still clips
+     the box background but transformed children (hover) can escape the edge */
+  overflow:clip;
 }
 .members-list{
   display:flex;flex-direction:column;gap:8px;
-  min-height:196px;   /* reserved: 3×60px + 2×8px gap */
-  overflow:hidden;    /* no scrollbar */
+  min-height:196px;
+  /* FIX: padding gives the first/last item room so translateY(-2px) hover
+     lift isn't cut off at the top and bottom of the container */
+  padding:3px 2px 4px;
+  overflow:visible;
 }
 
 .member-item{
@@ -197,14 +204,14 @@ body{display:block;}
 .member-rating{color:#9a2010;flex-shrink:0;}
 .member-joined{margin-left:auto;color:#d93020;font-weight:800;white-space:nowrap;flex-shrink:0;}
 
-/* ── BIRTHDAY BOX — space pre-reserved for form + 3 cards, no scroll, no layout jump ── */
-/* form area ~196px + list: 3×64px + 2×8px = 208px; total box ~424px */
+/* ── BIRTHDAY BOX ── */
 .bday-box{
   background:#fff;border-radius:18px;
   border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;
   padding:14px;margin-bottom:14px;
-  overflow:hidden;    /* no scrollbar ever */
+  /* FIX: overflow:clip — same reason as .members-box */
+  overflow:clip;
 }
 .bday-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .bday-input-row{display:flex;gap:7px;}
@@ -236,12 +243,13 @@ body{display:block;}
 .bday-save-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #8c1a10;}
 .bday-msg{font-size:var(--fs-xs);font-weight:700;color:#d93020;min-height:14px;}
 
-/* ── Birthday list — space pre-reserved for 3 items, NO scroll ── */
-/* 3 items × 64px + 2 gaps × 8px = 208px */
+/* ── Birthday list ── */
 .bday-list{
   display:flex;flex-direction:column;gap:8px;
-  min-height:208px;   /* reserved: 3×64px + 2×8px — no jump on load */
-  overflow:hidden;    /* no scrollbar */
+  min-height:208px;
+  /* FIX: padding so first/last birthday item hover isn't clipped */
+  padding:3px 2px 4px;
+  overflow:visible;
 }
 
 .bday-item{
@@ -966,7 +974,7 @@ async function loadBirthdays() {
       }))
       .filter(b => b.username && b.month && b.day)
       .sort((a, b) => getNextDate(a.month, a.day) - getNextDate(b.month, b.day))
-      .slice(0, 3); /* ← show max 3 birthdays, no scroll needed */
+      .slice(0, 3);
 
     if (!upcoming.length) {
       list.innerHTML = '<div class="bday-empty"><span>🎂</span>No birthdays yet!<br>Add yours above</div>';
