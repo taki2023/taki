@@ -6,6 +6,7 @@
 <title>Hot Chilli – Opening Courses</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;justify-content:center;}
 
@@ -15,6 +16,10 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
   --fs-base:12px;
   --fs-md:  13px;
   --fs-lg:  15px;
+
+  --sidebar-height: 520px;
+  --header-height:  90px;
+  --scroller-height:280px;
 }
 
 /* ── COURSES CARD ── */
@@ -27,6 +32,8 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
 
 /* TOP HEADER */
 .courses-top{
+  height:var(--header-height);
+  flex-shrink:0;
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
   border-radius:24px 24px 0 0;padding:18px 16px 10px;
   text-align:center;position:relative;overflow:hidden;
@@ -41,18 +48,38 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
 .section-title{font-family:'Fredoka One',cursive;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
 .section-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:3px;position:relative;z-index:1;}
 
-.inner{width:100%;padding:14px 20px 20px;}
+/* INNER */
+.inner{
+  width:100%;padding:14px 20px 20px;
+}
 
 /* SECTION LABEL */
 .sec-label{
   display:flex;align-items:center;gap:8px;
   font-family:'Fredoka One',cursive;font-size:14px;color:#c73520;
   margin-bottom:10px;margin-top:4px;
+  flex-shrink:0;
 }
 .sec-label .dot{width:12px;height:10px;border-radius:50%;background:#d93020;flex-shrink:0;}
 
+/* ── SCROLLER WRAPPER ── */
+.scroller-wrap{
+  height:var(--scroller-height);
+  overflow-y:auto;
+  flex-shrink:0;
+  border-radius:16px;
+  padding-right:4px;
+  /* fade top & bottom to hint at scrollability */
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 92%,transparent 100%);
+}
+.scroller-wrap::-webkit-scrollbar{width:4px;}
+.scroller-wrap::-webkit-scrollbar-track{background:transparent;}
+.scroller-wrap::-webkit-scrollbar-thumb{background:#e8aa98;border-radius:999px;}
+.scroller-wrap{scrollbar-width:thin;scrollbar-color:#e8aa98 transparent;}
+
 /* SEPARATOR */
-.div{width:100%;height:18px;margin:10px auto 14px;position:relative;opacity:.95;}
+.div{width:100%;height:18px;margin:10px auto 14px;position:relative;opacity:.95;flex-shrink:0;}
 .div::before,.div::after{content:"";position:absolute;left:0;width:100%;height:6px;border-radius:999px;}
 .div::before{
   top:4px;
@@ -72,6 +99,7 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
 /* ── COURSE CARDS ── */
 .courses-list{
   display:flex;flex-direction:column;gap:10px;
+  padding:6px 2px;
 }
 
 .course-card{
@@ -82,6 +110,7 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
   text-decoration:none;
   transition:all .18s ease;
   position:relative;overflow:hidden;
+  flex-shrink:0;
 }
 .course-card::before{
   content:'';position:absolute;inset:0;
@@ -143,7 +172,7 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
   background:#fff;border-radius:16px;
   border:2px dashed #e8553a;
   padding:13px 15px;text-align:center;
-  margin-top:4px;
+  margin-top:4px;flex-shrink:0;
 }
 .credit-title{font-family:'Fredoka One',cursive;font-size:15px;color:#c73520;margin-bottom:6px;}
 .credit-body{font-size:var(--fs-sm);font-weight:700;color:#9a2010;line-height:1.65;}
@@ -155,7 +184,7 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
 .crown{font-size:20px;display:block;margin-bottom:4px;}
 
 /* FOOTER */
-.footer{text-align:center;margin-top:14px;font-size:var(--fs-sm);font-weight:700;color:#e8553a;}
+.footer{text-align:center;margin-top:14px;font-size:var(--fs-sm);font-weight:700;color:#e8553a;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -175,123 +204,126 @@ html,body{width:100%;margin:0;padding:0;background:transparent;display:flex;just
     <!-- SECTION LABEL -->
     <div class="sec-label"><div class="dot"></div>Learn & Dominate ♟</div>
 
-    <!-- COURSE CARDS -->
-    <div class="courses-list">
+    <!-- SCROLLABLE COURSE CARDS -->
+    <div class="scroller-wrap">
+      <div class="courses-list">
 
-    <a class="course-card" href="https://www.chess.com/clubs/forum/view/how-to-crack-the-london" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">🔓</div>
-        <div class="course-info">
-          <div class="course-name">How To Crack The London</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
-      
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/the-english-and-how-to-avoid-the-slav" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">⚔️</div>
-        <div class="course-info">
-          <div class="course-name">The English Opening (White)</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/how-to-crack-the-london" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">🔓</div>
+          <div class="course-info">
+            <div class="course-name">How To Crack The London</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/how-to-play-the-ponziani" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">⚔️</div>
-        <div class="course-info">
-          <div class="course-name">How To Play The Ponziani</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/the-english-and-how-to-avoid-the-slav" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">⚔️</div>
+          <div class="course-info">
+            <div class="course-name">The English Opening (White)</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/playing-the-kid" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">👑</div>
-        <div class="course-info">
-          <div class="course-name">Playing The King's Indian Def </div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/how-to-play-the-ponziani" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">⚔️</div>
+          <div class="course-info">
+            <div class="course-name">How To Play The Ponziani</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/breaking-the-sicilian-smith-morra" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">🌶</div>
-        <div class="course-info">
-          <div class="course-name">Breaking The Smith-Morra</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/playing-the-kid" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">👑</div>
+          <div class="course-info">
+            <div class="course-name">Playing The King's Indian Def</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/how-to-analyze-your-games-1" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">🔍</div>
-        <div class="course-info">
-          <div class="course-name">How To Analyze Your Games</div>
-          <div class="course-badge"><span class="badge-dot"></span>Strategy Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/breaking-the-sicilian-smith-morra" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">🌶</div>
+          <div class="course-info">
+            <div class="course-name">Breaking The Smith-Morra</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/defending-with-the-caro" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">🛡️</div>
-        <div class="course-info">
-          <div class="course-name">Defending With The Caro</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/how-to-analyze-your-games-1" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">🔍</div>
+          <div class="course-info">
+            <div class="course-name">How To Analyze Your Games</div>
+            <div class="course-badge"><span class="badge-dot"></span>Strategy Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/beating-with-b4" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">💥</div>
-        <div class="course-info">
-          <div class="course-name">Beating With b4</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/defending-with-the-caro" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">🛡️</div>
+          <div class="course-info">
+            <div class="course-name">Defending With The Caro</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/fortifying-against-1-e4-the-french" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">🏰</div>
-        <div class="course-info">
-          <div class="course-name">Fortifying Against The French</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/beating-with-b4" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">💥</div>
+          <div class="course-info">
+            <div class="course-name">Beating With b4</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/1-d4-systems-the-colle" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">♟</div>
-        <div class="course-info">
-          <div class="course-name">1.d4 Systems – The Colle</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/fortifying-against-1-e4-the-french" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">🏰</div>
+          <div class="course-info">
+            <div class="course-name">Fortifying Against The French</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/breaking-through-b6-defenses" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">⚡</div>
-        <div class="course-info">
-          <div class="course-name">Breaking Through b6 Defenses</div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/1-d4-systems-the-colle" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">♟</div>
+          <div class="course-info">
+            <div class="course-name">1.d4 Systems – The Colle</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
-      <a class="course-card" href="https://www.chess.com/clubs/forum/view/strangling-with-the-scotch-learn-how-to-play-with-1-e4" target="_blank" rel="noopener noreferrer">
-        <div class="course-icon-wrap">🔥</div>
-        <div class="course-info">
-          <div class="course-name">Strangling With The Scotch </div>
-          <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
-        </div>
-        <span class="course-arr">›</span>
-      </a>
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/breaking-through-b6-defenses" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">⚡</div>
+          <div class="course-info">
+            <div class="course-name">Breaking Through b6 Defenses</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
 
+        <a class="course-card" href="https://www.chess.com/clubs/forum/view/strangling-with-the-scotch-learn-how-to-play-with-1-e4" target="_blank" rel="noopener noreferrer">
+          <div class="course-icon-wrap">🔥</div>
+          <div class="course-info">
+            <div class="course-name">Strangling With The Scotch</div>
+            <div class="course-badge"><span class="badge-dot"></span>Opening Course</div>
+          </div>
+          <span class="course-arr">›</span>
+        </a>
+
+      </div>
     </div>
+    <!-- END SCROLLER -->
 
     <div class="div"></div>
 
     <!-- CREDIT BOX -->
-<div class="credit-box">
+    <div class="credit-box">
       <span class="crown">🎖️</span>
       <div class="credit-title">Written by <a class="credit-link" href="https://www.chess.com/member/biitzel" target="_blank" rel="noopener noreferrer">@BIitzel</a> 🌶</div>
       <div class="credit-body">
