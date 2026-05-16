@@ -2,246 +2,478 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Guess The Elo - Leaderboard</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guess The Elo – Leaderboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-body {
-    background: #2b1a12;
-    font-family: Arial, sans-serif;
-    color: white;
-}
+  :root {
+    --red:    #d93020;
+    --red2:   #e85535;
+    --red3:   #ef6640;
+    --dark:   #8c1a10;
+    --light:  #fff5f0;
+    --card:   #fff;
+    --border: #f5c5b8;
+    --shadow: #e8aa98;
+    --text:   #9a2010;
+    --muted:  #e8aa98;
+    --gold:   #f5c518;
+    --silver: #bdc3c7;
+    --bronze: #cd7f32;
+  }
 
-/* CONTAINER */
-.container {
-    width: 600px;
-    margin: 30px auto;
-    background: #3a2418;
-    border-radius: 10px;
-    overflow: hidden;
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* TITLE WITH PODIUM */
-.title {
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    background: #2a160f;
-    border: 2px solid #d4a017;
-    border-radius: 10px 10px 0 0;
-}
+  html, body {
+    width: 100%; margin: 0; padding: 0;
+    background: #1a1a1a;
+  }
 
-/* PODIUM ICON */
-.podium {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-}
+  body {
+    font-family: 'Nunito', sans-serif;
+    display: block;
+  }
 
-.podium span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    font-weight: bold;
-    border-radius: 3px;
-    color: white;
-    font-size: 12px;
-}
+  .sb {
+    width: 100%;
+    max-width: none;
+    background: var(--light);
+    border-radius: 0;
+    border: none;
+    overflow: clip;
+  }
 
-/* Podium heights */
-.gold {
-    background: #f1c40f;
-    height: 30px;
-}
-
-.silver {
-    background: #bdc3c7;
-    height: 22px;
-}
-
-.bronze {
-    background: #cd7f32;
-    height: 18px;
-}
-
-/* Title text */
-.title-text {
-    font-size: 28px;
-    font-weight: 800;
-    color: #d6d6d6;
-}
-
-/* HEADER */
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
-    font-weight: bold;
-    background: #2a160f;
-}
-
-/* ROWS */
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.rank {
-    width: 30px;
-    height: 30px;
+  /* ── HEADER ── */
+  .sb-top {
+    background: linear-gradient(135deg, #d93020 0%, #e85535 60%, #ef6640 100%);
+    padding: 20px 20px 22px;
     text-align: center;
-    line-height: 30px;
-    border-radius: 6px;
-    font-weight: bold;
-}
+    position: relative;
+    overflow: hidden;
+  }
+  .sb-top::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; left: -10%;
+    width: 120%; height: 22px;
+    background: var(--light);
+    border-radius: 50%;
+  }
+  .chilli-deco { position: absolute; font-size: 26px; opacity: .55; top: 10px; }
+  .chilli-deco.left  { left: 12px;  transform: rotate(-20deg); }
+  .chilli-deco.right { right: 12px; transform: rotate(20deg); }
 
-.rank.gold { background: gold; color: black; }
-.rank.silver { background: silver; color: black; }
-.rank.bronze { background: #cd7f32; }
+  .club-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px; color: #fff;
+    text-shadow: 0 2px 0 rgba(0,0,0,.15);
+    position: relative; z-index: 1;
+  }
+  .club-sub {
+    font-size: 11px; font-weight: 700;
+    color: rgba(255,255,255,.85);
+    letter-spacing: .8px; text-transform: uppercase;
+    margin-top: 4px; position: relative; z-index: 1;
+  }
+  .ep-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.18);
+    border: 1.5px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 11px; font-weight: 900;
+    color: #fff; letter-spacing: .5px;
+    margin-top: 10px;
+    position: relative; z-index: 1;
+  }
+  .ep-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255,255,255,.25);
+    animation: livePulse 1.8s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes livePulse {
+    0%,100% { box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
+    50%      { box-shadow: 0 0 0 6px rgba(255,255,255,.1); }
+  }
 
-.points {
-    font-weight: bold;
-}
+  /* ── DIVIDER ── */
+  .div {
+    width: calc(100% - 40px); height: 18px;
+    margin: 8px auto 12px; position: relative; opacity: .95;
+  }
+  .div::before, .div::after {
+    content: ""; position: absolute;
+    left: 0; width: 100%; height: 6px; border-radius: 999px;
+  }
+  .div::before {
+    top: 4px;
+    background: radial-gradient(circle at 2% 50%,#e89080 0 6px,transparent 7px),
+      radial-gradient(circle at 98% 50%,#e89080 0 6px,transparent 7px),
+      linear-gradient(90deg,transparent 0%,#e89080 4%,#e08070 12%,#e99082 24%,#e18070 37%,#e89080 50%,#e28272 63%,#e99282 77%,#e08070 90%,#e89080 96%,transparent 100%);
+    transform: rotate(-0.35deg); filter: blur(.15px);
+  }
+  .div::after {
+    top: 8px; left: 4px; width: calc(100% - 8px);
+    background: radial-gradient(circle at 2% 50%,#e89080 0 5px,transparent 6px),
+      radial-gradient(circle at 98% 50%,#e89080 0 5px,transparent 6px),
+      linear-gradient(90deg,transparent 0%,#ea9282 5%,#df8070 16%,#e89080 28%,#e18272 41%,#e99282 56%,#e08070 71%,#e89080 86%,#ea9282 95%,transparent 100%);
+    transform: rotate(0.45deg); opacity: .82;
+  }
 
-.row:hover {
-    background: rgba(255,255,255,0.05);
-}
+  /* ── INNER ── */
+  .inner { padding: 10px 20px 22px; }
+
+  /* ── SECTION LABEL ── */
+  .sec-label {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 14px; color: var(--red);
+    margin-bottom: 8px; margin-top: 4px;
+  }
+  .sec-label .dot {
+    width: 12px; height: 10px; border-radius: 50%;
+    background: var(--red); flex-shrink: 0;
+  }
+
+  /* ── SCORING LEGEND ── */
+  .legend-bar {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 3px 0 var(--shadow);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    display: flex; flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 11px; font-weight: 800; color: var(--text);
+    align-items: center;
+  }
+  .legend-bar .sep {
+    color: var(--muted); font-size: 13px;
+  }
+
+  /* ── PAGINATION ── */
+  .pag-bar {
+    background: #fce8e0;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 3px 0 var(--shadow);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 8px;
+    user-select: none;
+  }
+  .pag-bar.bottom { margin-top: 8px; margin-bottom: 0; }
+
+  .pag-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px; color: var(--text);
+    white-space: nowrap; letter-spacing: .3px;
+  }
+
+  .pag-group { display: flex; align-items: center; gap: 4px; }
+
+  .pag-btn {
+    height: 30px; min-width: 30px; padding: 0 8px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px; font-weight: 900;
+    cursor: pointer;
+    transition: all .15s ease;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 0 var(--shadow);
+  }
+  .pag-btn:hover:not(:disabled) {
+    background: #fce8e0; border-color: var(--red);
+    transform: translateY(-2px); box-shadow: 0 5px 0 var(--dark);
+  }
+  .pag-btn.active {
+    background: linear-gradient(135deg, var(--red), var(--red2));
+    color: #fff; border-color: var(--red);
+    box-shadow: 0 3px 0 var(--dark);
+  }
+  .pag-btn:disabled { opacity: .3; cursor: default; box-shadow: none; }
+
+  .pag-dots { color: var(--muted); font-size: 13px; font-weight: 900; padding: 0 2px; }
+
+  .pag-nav {
+    height: 30px; padding: 0 12px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px; font-weight: 900;
+    cursor: pointer;
+    transition: all .15s ease;
+    display: flex; align-items: center; gap: 4px;
+    box-shadow: 0 3px 0 var(--shadow);
+  }
+  .pag-nav:hover:not(:disabled) {
+    background: #fce8e0; border-color: var(--red);
+    transform: translateY(-2px); box-shadow: 0 5px 0 var(--dark);
+  }
+  .pag-nav:disabled { opacity: .3; cursor: default; box-shadow: none; }
+
+  /* ── BOARD ── */
+  .board { display: flex; flex-direction: column; gap: 8px; }
+
+  .col-header {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 0 10px;
+    padding: 0 12px 4px;
+    font-size: 10px; font-weight: 900;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── ROW ── */
+  .row {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 0 10px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 3px 0 var(--shadow);
+    position: relative; overflow: visible;
+    transition: all .15s ease;
+    cursor: default;
+    animation: fadeUp .3s ease both;
+  }
+  .row:hover {
+    background: #fce8e0; border-color: var(--red);
+    transform: translateY(-2px); box-shadow: 0 6px 0 var(--dark);
+    z-index: 1;
+  }
+
+  .row::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+  .row.rank-1::before { background: var(--gold); }
+  .row.rank-2::before { background: var(--silver); }
+  .row.rank-3::before { background: var(--bronze); }
+
+  .row.rank-1 {
+    background: linear-gradient(90deg, #fffae8, var(--card));
+    border-color: #e8d080;
+    box-shadow: 0 3px 0 #c8a830;
+  }
+  .row.rank-1:hover { box-shadow: 0 6px 0 #a08020; }
+
+  /* ── RANK BADGE ── */
+  .rank-badge {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 13px;
+    background: #fce8e0;
+    border: 2px solid var(--border);
+    color: var(--muted);
+    box-shadow: 0 3px 0 var(--shadow);
+    flex-shrink: 0;
+  }
+  .rank-badge.gold   { background: linear-gradient(135deg,#f5c518,#e8b010); color: #7a5500; border-color: #d4a010; font-size: 18px; box-shadow: 0 3px 0 #a07010; }
+  .rank-badge.silver { background: linear-gradient(135deg,#d0d8e8,#bdc3c7); color: #444; border-color: #a0a8b0; font-size: 18px; box-shadow: 0 3px 0 #909898; }
+  .rank-badge.bronze { background: linear-gradient(135deg,#e8a060,#cd7f32); color: #fff; border-color: #a06020; font-size: 18px; box-shadow: 0 3px 0 #805010; }
+
+  /* ── PLAYER NAME ── */
+  .player-name {
+    font-size: 13px; font-weight: 800;
+    color: #c73520;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ── POINTS ── */
+  .pts-total {
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px; line-height: 1;
+    text-align: right; min-width: 36px;
+    color: var(--text);
+  }
+  .pts-total.gold-pts   { color: #b08010; }
+  .pts-total.silver-pts { color: #7a8898; }
+  .pts-total.bronze-pts { color: #a06020; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .row:nth-child(1)  { animation-delay: .03s } .row:nth-child(2)  { animation-delay: .06s }
+  .row:nth-child(3)  { animation-delay: .09s } .row:nth-child(4)  { animation-delay: .12s }
+  .row:nth-child(5)  { animation-delay: .15s } .row:nth-child(6)  { animation-delay: .18s }
+  .row:nth-child(7)  { animation-delay: .21s } .row:nth-child(8)  { animation-delay: .24s }
+  .row:nth-child(9)  { animation-delay: .27s } .row:nth-child(10) { animation-delay: .30s }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; margin-top: 14px;
+    font-size: 11px; font-weight: 700; color: var(--red2);
+  }
 </style>
 </head>
-
 <body>
+<div class="sb">
 
-<div class="container">
+  <!-- HEADER -->
+  <div class="sb-top">
+    <div class="chilli-deco left">🌶</div>
+    <div class="chilli-deco right">♞</div>
+    <div class="club-title">Guess The Elo 🏆</div>
+    <div class="club-sub">Hot Chilli CheckMate · Season 1</div>
+    <div><div class="ep-pill"><div class="ep-dot"></div>After 3 Episodes</div></div>
+  </div>
 
-    <!-- TITLE -->
-    <div class="title">
-        <div class="podium">
-            <span class="silver">2</span>
-            <span class="gold">1</span>
-            <span class="bronze">3</span>
-        </div>
-        <span class="title-text">Guess The Elo - Leaderboard</span>
+  <div class="inner">
+
+    <!-- SCORING -->
+    <div class="sec-label"><div class="dot"></div>Scoring System 🌶</div>
+    <div class="legend-bar">
+      <span>🥇 1st — 5 pts</span>
+      <span class="sep">·</span>
+      <span>🥈 2nd — 4 pts</span>
+      <span class="sep">·</span>
+      <span>🥉 3rd — 3 pts</span>
+      <span class="sep">·</span>
+      <span>Participation — 1 pt</span>
+      <span class="sep">·</span>
+      <span style="color:#22c55e">📩 Game Submission — +3 pts</span>
     </div>
 
-    <!-- HEADER -->
-    <div class="header">
+    <div class="div"></div>
+
+    <div class="sec-label"><div class="dot"></div>Rankings ♟</div>
+
+    <!-- TOP PAGINATION -->
+    <div class="pag-bar" id="pag-top"></div>
+
+    <!-- BOARD -->
+    <div class="board">
+      <div class="col-header">
+        <div></div>
         <div>Player</div>
-        <div>Points</div>
+        <div style="text-align:right">Pts</div>
+      </div>
+      <div id="rows-container"></div>
     </div>
 
-    <!-- LEADERBOARD -->
+    <!-- BOTTOM PAGINATION -->
+    <div class="pag-bar bottom" id="pag-bot"></div>
 
-    <div class="row">
-        <div class="left">
-            <div class="rank gold">1</div>
-            <div>@Dhrubojyoti</div>
-        </div>
-        <div class="points">9</div>
-    </div>
+    <div class="div"></div>
+    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 
-    <div class="row">
-        <div class="left">
-            <div class="rank silver">2</div>
-            <div>@mental-central-dialog</div>
-        </div>
-        <div class="points">5</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank bronze">3</div>
-            <div>@vednu</div>
-        </div>
-        <div class="points">5</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">4</div>
-            <div>@Tengen</div>
-        </div>
-        <div class="points">5</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">5</div>
-            <div>@WeGinny</div>
-        </div>
-        <div class="points">3</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">6</div>
-            <div>@Iamplayerofchess</div>
-        </div>
-        <div class="points">3</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">7</div>
-            <div>@TrofAndy</div>
-        </div>
-        <div class="points">2</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@Juliana3377</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@MR_BLUE_GUY</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@Nin-chessy</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@SS-Ehan</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
-    <div class="row">
-        <div class="left">
-            <div class="rank">8</div>
-            <div>@charan_smaran</div>
-        </div>
-        <div class="points">1</div>
-    </div>
-
+  </div>
 </div>
 
-</body>
-</html>
+<script>
+  const players = [
+    { rank: 1,  medal: 'gold',   name: '@mental-central-dialog', pts: 10 },
+    { rank: 2,  medal: 'silver', name: '@Dhrubojyoti',           pts: 9  },
+    { rank: 3,  medal: 'bronze', name: '@Tengen',                pts: 7  },
+    { rank: 4,  medal: '',       name: '@vednu',                 pts: 6  },
+    { rank: 4,  medal: '',       name: '@WeGinny',               pts: 6  },
+    { rank: 6,  medal: '',       name: '@Ms_Anonymous79',        pts: 4  },
+    { rank: 6,  medal: '',       name: '@the-player-cat',        pts: 4  },
+    { rank: 8,  medal: '',       name: '@Iamplayerofchess',      pts: 3  },
+    { rank: 8,  medal: '',       name: '@Daniel2040',            pts: 3  },
+    { rank: 8,  medal: '',       name: '@AryanAkbar',            pts: 3  },
+    { rank: 8,  medal: '',       name: '@Giraffe1100',           pts: 3  },
+    { rank: 8,  medal: '',       name: '@BrilliantPaanda2',      pts: 3  },
+    { rank: 8,  medal: '',       name: '@Jaden_Cavaluzzo',       pts: 3  },
+    { rank: 15, medal: '',       name: '@TrofAndy',              pts: 3  },
+    { rank: 16, medal: '',       name: '@Alberteinstein6902',    pts: 1  },
+    { rank: 16, medal: '',       name: '@Juliana3377',           pts: 1  },
+    { rank: 16, medal: '',       name: '@MR_BLUE_GUY',           pts: 1  },
+    { rank: 16, medal: '',       name: '@Nin-chessy',            pts: 1  },
+    { rank: 16, medal: '',       name: '@SS-Ehan',               pts: 1  },
+    { rank: 16, medal: '',       name: '@charan_smaran',         pts: 1  },
+    { rank: 16, medal: '',       name: '@PoppyOost',             pts: 1  },
+    { rank: 16, medal: '',       name: '@ZamadaGM',              pts: 1  },
+  ];
 
+  const PER_PAGE = 10;
+  const totalPages = Math.ceil(players.length / PER_PAGE);
+  let currentPage = 1;
+
+  function ptsClass(medal) {
+    if (medal === 'gold')   return 'pts-total gold-pts';
+    if (medal === 'silver') return 'pts-total silver-pts';
+    if (medal === 'bronze') return 'pts-total bronze-pts';
+    return 'pts-total';
+  }
+
+  function rankClass(p) {
+    if (p.rank === 1) return 'row rank-1';
+    if (p.rank === 2) return 'row rank-2';
+    if (p.rank === 3) return 'row rank-3';
+    return 'row';
+  }
+
+  function badgeHtml(p) {
+    if (p.medal === 'gold')   return '<div class="rank-badge gold">🥇</div>';
+    if (p.medal === 'silver') return '<div class="rank-badge silver">🥈</div>';
+    if (p.medal === 'bronze') return '<div class="rank-badge bronze">🥉</div>';
+    return `<div class="rank-badge">${p.rank}</div>`;
+  }
+
+  function renderPage(page) {
+    currentPage = page;
+    const slice = players.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+    document.getElementById('rows-container').innerHTML = slice.map(p => `
+      <div class="${rankClass(p)}">
+        ${badgeHtml(p)}
+        <div class="player-name">${p.name}</div>
+        <div class="${ptsClass(p.medal)}">${p.pts}</div>
+      </div>
+    `).join('');
+    renderPagination();
+  }
+
+  function buildPageRange(cur, total) {
+    if (total <= 5) return Array.from({length: total}, (_, i) => i + 1);
+    if (cur <= 3) return [1, 2, 3, 4, '...', total];
+    if (cur >= total - 2) return [1, '...', total-3, total-2, total-1, total];
+    return [1, '...', cur-1, cur, cur+1, '...', total];
+  }
+
+  function pagHTML() {
+    let html = `<span class="pag-label">Pages</span><div class="pag-group">`;
+    html += `<button class="pag-nav" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>&#8249;</button>`;
+    for (const p of buildPageRange(currentPage, totalPages)) {
+      if (p === '...') html += `<span class="pag-dots">…</span>`;
+      else html += `<button class="pag-btn ${p===currentPage?'active':''}" onclick="changePage(${p})">${p}</button>`;
+    }
+    html += `<button class="pag-nav" onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>&#8250;</button>`;
+    html += `<button class="pag-nav" onclick="changePage(${totalPages})" ${currentPage===totalPages?'disabled':''} style="margin-left:2px;font-size:10px;">Last</button>`;
+    html += `</div>`;
+    return html;
+  }
+
+  function renderPagination() {
+    document.getElementById('pag-top').innerHTML = pagHTML();
+    document.getElementById('pag-bot').innerHTML = pagHTML();
+  }
+
+  function changePage(p) {
+    if (p < 1 || p > totalPages) return;
+    renderPage(p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  renderPage(1);
+</script>
 </body>
 </html>
