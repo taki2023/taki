@@ -224,7 +224,7 @@
   .pag-nav:disabled { opacity: .3; cursor: default; box-shadow: none; }
 
   /* ── BOARD ── */
-  .board { display: flex; flex-direction: column; gap: 8px; }
+  .board { display: flex; flex-direction: column; gap: 0; }
 
   .col-header {
     display: grid;
@@ -234,6 +234,11 @@
     font-size: 10px; font-weight: 900;
     letter-spacing: 1.5px; text-transform: uppercase;
     color: var(--muted);
+  }
+
+  /* ── ROW WRAPPER (gives spacing + contains hover overflow) ── */
+  .row-wrap {
+    padding: 4px 0;
   }
 
   /* ── ROW ── */
@@ -252,12 +257,17 @@
     cursor: default;
     animation: fadeUp .3s ease both;
   }
+
+  /* Default hover */
   .row:hover {
-    background: #fce8e0; border-color: var(--red);
-    transform: translateY(-2px); box-shadow: 0 6px 0 var(--dark);
+    background: #fce8e0;
+    border-color: var(--red);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--dark);
     z-index: 1;
   }
 
+  /* Left accent bar */
   .row::before {
     content: ''; position: absolute;
     left: 0; top: 0; bottom: 0; width: 4px;
@@ -267,12 +277,54 @@
   .row.rank-2::before { background: var(--silver); }
   .row.rank-3::before { background: var(--bronze); }
 
+  /* ── RANK-THEMED BASE STYLES ── */
   .row.rank-1 {
     background: linear-gradient(90deg, #fffae8, var(--card));
     border-color: #e8d080;
     box-shadow: 0 3px 0 #c8a830;
   }
-  .row.rank-1:hover { box-shadow: 0 6px 0 #a08020; }
+  .row.rank-2 {
+    background: linear-gradient(90deg, #f2f4f7, var(--card));
+    border-color: #cdd4db;
+    box-shadow: 0 3px 0 #aab0b8;
+  }
+  .row.rank-3 {
+    background: linear-gradient(90deg, #fff0e4, var(--card));
+    border-color: #d4a878;
+    box-shadow: 0 3px 0 #a07048;
+  }
+
+  /* ── RANK-THEMED HOVER ── */
+  .row.rank-1:hover {
+    background: linear-gradient(90deg, #fff5c0, #fffae8);
+    border-color: #d4a010;
+    box-shadow: 0 6px 0 #a07010;
+  }
+  .row.rank-2:hover {
+    background: linear-gradient(90deg, #e4e8ef, #f2f4f7);
+    border-color: #9098a8;
+    box-shadow: 0 6px 0 #606878;
+  }
+  .row.rank-3:hover {
+    background: linear-gradient(90deg, #ffe4c8, #fff0e4);
+    border-color: #a06020;
+    box-shadow: 0 6px 0 #704010;
+  }
+
+  /* ── GHOST ROW (placeholder to maintain height) ── */
+  .row-ghost {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 0 10px;
+    align-items: center;
+    padding: 12px 14px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    /* no box-shadow, no animation */
+    pointer-events: none;
+    visibility: hidden;
+  }
 
   /* ── RANK BADGE ── */
   .rank-badge {
@@ -379,30 +431,46 @@
 </div>
 
 <script>
-  const players = [
-    { rank: 1,  medal: 'gold',   name: '@mental-central-dialog', pts: 10 },
-    { rank: 2,  medal: 'silver', name: '@Dhrubojyoti',           pts: 9  },
-    { rank: 3,  medal: 'bronze', name: '@Tengen',                pts: 7  },
-    { rank: 4,  medal: '',       name: '@vednu',                 pts: 6  },
-    { rank: 4,  medal: '',       name: '@WeGinny',               pts: 6  },
-    { rank: 6,  medal: '',       name: '@Ms_Anonymous79',        pts: 4  },
-    { rank: 6,  medal: '',       name: '@the-player-cat',        pts: 4  },
-    { rank: 8,  medal: '',       name: '@Iamplayerofchess',      pts: 3  },
-    { rank: 8,  medal: '',       name: '@Daniel2040',            pts: 3  },
-    { rank: 8,  medal: '',       name: '@AryanAkbar',            pts: 3  },
-    { rank: 8,  medal: '',       name: '@Giraffe1100',           pts: 3  },
-    { rank: 8,  medal: '',       name: '@BrilliantPaanda2',      pts: 3  },
-    { rank: 8,  medal: '',       name: '@Jaden_Cavaluzzo',       pts: 3  },
-    { rank: 15, medal: '',       name: '@TrofAndy',              pts: 3  },
-    { rank: 16, medal: '',       name: '@Alberteinstein6902',    pts: 1  },
-    { rank: 16, medal: '',       name: '@Juliana3377',           pts: 1  },
-    { rank: 16, medal: '',       name: '@MR_BLUE_GUY',           pts: 1  },
-    { rank: 16, medal: '',       name: '@Nin-chessy',            pts: 1  },
-    { rank: 16, medal: '',       name: '@SS-Ehan',               pts: 1  },
-    { rank: 16, medal: '',       name: '@charan_smaran',         pts: 1  },
-    { rank: 16, medal: '',       name: '@PoppyOost',             pts: 1  },
-    { rank: 16, medal: '',       name: '@ZamadaGM',              pts: 1  },
+  // ── RAW DATA (unsorted, ranks will be computed) ──
+  const rawPlayers = [
+    { name: '@mental-central-dialog', pts: 10 },
+    { name: '@Dhrubojyoti',           pts: 9  },
+    { name: '@Tengen',                pts: 7  },
+    { name: '@vednu',                 pts: 6  },
+    { name: '@WeGinny',               pts: 6  },
+    { name: '@Ms_Anonymous79',        pts: 4  },
+    { name: '@the-player-cat',        pts: 4  },
+    { name: '@Iamplayerofchess',      pts: 3  },
+    { name: '@Daniel2040',            pts: 3  },
+    { name: '@AryanAkbar',            pts: 3  },
+    { name: '@Giraffe1100',           pts: 3  },
+    { name: '@BrilliantPaanda2',      pts: 3  },
+    { name: '@Jaden_Cavaluzzo',       pts: 3  },
+    { name: '@TrofAndy',              pts: 3  },
+    { name: '@Alberteinstein6902',    pts: 1  },
+    { name: '@Juliana3377',           pts: 1  },
+    { name: '@MR_BLUE_GUY',           pts: 1  },
+    { name: '@Nin-chessy',            pts: 1  },
+    { name: '@SS-Ehan',               pts: 1  },
+    { name: '@charan_smaran',         pts: 1  },
+    { name: '@PoppyOost',             pts: 1  },
+    { name: '@ZamadaGM',              pts: 1  },
   ];
+
+  // ── COMPUTE DENSE COMPETITION RANKING ──
+  // Sort descending by pts, then assign ranks:
+  // same pts → same rank; next distinct pts → rank = position after all tied players
+  const sorted = [...rawPlayers].sort((a, b) => b.pts - a.pts);
+  const players = sorted.map((p, i, arr) => {
+    // find the index of the first player with the same pts
+    const firstIdx = arr.findIndex(x => x.pts === p.pts);
+    const rank = firstIdx + 1; // 1-based
+    let medal = '';
+    if (rank === 1) medal = 'gold';
+    else if (rank === 2) medal = 'silver';
+    else if (rank === 3) medal = 'bronze';
+    return { ...p, rank, medal };
+  });
 
   const PER_PAGE = 10;
   const totalPages = Math.ceil(players.length / PER_PAGE);
@@ -415,7 +483,7 @@
     return 'pts-total';
   }
 
-  function rankClass(p) {
+  function rowClass(p) {
     if (p.rank === 1) return 'row rank-1';
     if (p.rank === 2) return 'row rank-2';
     if (p.rank === 3) return 'row rank-3';
@@ -432,13 +500,34 @@
   function renderPage(page) {
     currentPage = page;
     const slice = players.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-    document.getElementById('rows-container').innerHTML = slice.map(p => `
-      <div class="${rankClass(p)}">
-        ${badgeHtml(p)}
-        <div class="player-name">${p.name}</div>
-        <div class="${ptsClass(p.medal)}">${p.pts}</div>
+    const realCount = slice.length;
+    const ghostCount = PER_PAGE - realCount;
+
+    // Real rows wrapped for spacing + shadow clearance
+    let html = slice.map(p => `
+      <div class="row-wrap">
+        <div class="${rowClass(p)}">
+          ${badgeHtml(p)}
+          <div class="player-name">${p.name}</div>
+          <div class="${ptsClass(p.medal)}">${p.pts}</div>
+        </div>
       </div>
     `).join('');
+
+    // Ghost rows to maintain fixed height on last page
+    for (let i = 0; i < ghostCount; i++) {
+      html += `
+        <div class="row-wrap">
+          <div class="row-ghost">
+            <div class="rank-badge"></div>
+            <div class="player-name">&nbsp;</div>
+            <div class="pts-total">&nbsp;</div>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('rows-container').innerHTML = html;
     renderPagination();
   }
 
