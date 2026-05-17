@@ -219,13 +219,20 @@ audio{width:100%;height:32px;}
  
     <div class="at-card">
       <div class="at-section-title">✦ 👑 CLUB LEADERS ✦</div>
+
+      <!-- CHANGE 1: Role / Promotion Requests now has both DannyBoy_Guling AND Crayon -->
       <div class="at-role-title">🎖 Role / Promotion Requests</div>
-      <div class="at-leaders-single">
+      <div class="at-leaders-row">
+        <div class="at-leader">
+          <a href="https://www.chess.com/messages/compose/dannyboy_guling" target="_blank" rel="noopener"><img id="pfp-dannyboy2" class="at-leader-img" src="https://images.chesscomfiles.com/uploads/v1/user/366282397.3fc7b30d.200x200o.4f4c22d68905.jpg" alt="DannyBoy_Guling" loading="lazy"></a>
+          <span>@DannyBoy_Guling</span>
+        </div>
         <div class="at-leader">
           <a href="https://www.chess.com/messages/compose/Crayon" target="_blank" rel="noopener"><img id="pfp-crayon" class="at-leader-img" src="https://images.chesscomfiles.com/uploads/v1/user/240765061.ad56bc4a.200x200o.b1748b2c2589.jpg" alt="crayon" loading="lazy"></a>
           <span>@crayon</span>
         </div>
       </div>
+
       <div class="at-divider"></div>
       <div class="at-role-title" style="margin-top:10px;">🤝 Partnership / Advertisement Requests</div>
       <div class="at-leaders-row">
@@ -238,24 +245,24 @@ audio{width:100%;height:32px;}
           <span>@crayon</span>
         </div>
       </div>
+
       <div class="at-divider"></div>
+      <!-- CHANGE 2: Ale_Miranda removed — Lysithea_Vantress is now the sole leader here -->
       <div class="at-role-title" style="margin-top:10px;">⚔ Club Tournaments &amp; Matches</div>
-      <div class="at-leaders-row">
+      <div class="at-leaders-single">
         <div class="at-leader">
           <a href="https://www.chess.com/messages/Lysithea_Vantress" target="_blank" rel="noopener"><img id="pfp-lysithea" class="at-leader-img" src="https://images.chesscomfiles.com/uploads/v1/user/184247267.4dd74938.200x200o.931fc2614c2f.webp" alt="Lysithea_Vantress" loading="lazy"></a>
           <span>@Lysithea_Vantress</span>
         </div>
-        <div class="at-leader">
-          <a href="https://www.chess.com/messages/Ale_Miranda" target="_blank" rel="noopener"><img id="pfp-ale" class="at-leader-img" src="https://images.chesscomfiles.com/uploads/v1/user/288033475.6e901be4.200x200o.2bf8f1ec9992.jpg" alt="Ale_Miranda" loading="lazy"></a>
-          <span>@Ale_Miranda</span>
-        </div>
       </div>
+
       <div class="at-divider"></div>
+      <!-- CHANGE 3: AkitoClaw → LuciusClaw -->
       <div class="at-role-title" style="margin-top:10px;">🚨 Member Reports</div>
       <div class="at-leaders-single" style="margin-bottom:0;">
         <div class="at-leader">
-          <a href="https://www.chess.com/messages/AkitoClaw" target="_blank" rel="noopener"><img id="pfp-akito" class="at-leader-img" src="https://images.chesscomfiles.com/uploads/v1/user/241925781.8af60c84.200x200o.0c9d9a64ae1a.png" alt="AkitoClaw" loading="lazy"></a>
-          <span>@AkitoClaw</span>
+          <a href="https://www.chess.com/messages/LuciusClaw" target="_blank" rel="noopener"><img id="pfp-lucius" class="at-leader-img" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" alt="LuciusClaw" loading="lazy"></a>
+          <span>@LuciusClaw</span>
         </div>
       </div>
     </div>
@@ -426,10 +433,9 @@ function loadPfp(username,ids){
     });
 }
 loadPfp('Crayon',           ['pfp-crayon','pfp-crayon2']);
-loadPfp('dannyboy_guling',  ['pfp-dannyboy']);
+loadPfp('dannyboy_guling',  ['pfp-dannyboy','pfp-dannyboy2']);
 loadPfp('Lysithea_Vantress',['pfp-lysithea']);
-loadPfp('Ale_Miranda',      ['pfp-ale']);
-loadPfp('AkitoClaw',        ['pfp-akito']);
+loadPfp('LuciusClaw',       ['pfp-lucius']);
 
 function timeAgo(ts){
   var diff = Math.floor((Date.now() - ts * 1000) / 1000);
