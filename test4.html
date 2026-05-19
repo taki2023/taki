@@ -6,7 +6,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 
-
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;margin:0;padding:0;background:#1a1a1a;}
 body{display:block;}
@@ -346,10 +345,32 @@ body{display:block;}
 .music-playlist-empty{text-align:center;padding:20px 0;font-size:var(--fs-sm);font-weight:800;color:#e8aa98;}
 .music-playlist-empty span{display:block;font-size:24px;margin-bottom:6px;}
 
-/* ── FLOATING BUTTONS ── */
+/* ══════════════════════════════════════
+   FLOATING BUTTONS — sticky inside iframe
+   Uses position:sticky so they stick to
+   the bottom of the visible iframe area
+   as the user scrolls, floating over the
+   right side of the content.
+══════════════════════════════════════ */
+.float-wrap{
+  position:sticky;
+  bottom:20px;
+  /* pull the whole strip to the right edge */
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
+  padding-right:14px;
+  /* negative margin pulls the strip up so it
+     overlaps the content above and doesn't add
+     extra whitespace at the bottom */
+  margin-top:-185px;
+  pointer-events:none; /* let clicks pass through the gap */
+  z-index:9999;
+  /* needed so float-wrap itself doesn't shrink */
+  width:100%;
+}
 .float-btn{
-  position:fixed;
-  right:30px;
   width:55px;height:55px;
   background:rgb(255,252,245);
   border:4px solid rgb(249,216,209);
@@ -361,8 +382,9 @@ body{display:block;}
   user-select:none;
   box-shadow:rgb(249,216,209) 0px 6px 0px;
   transition:0.15s cubic-bezier(0.175,0.885,0.32,1.275);
-  transform:translateY(0px);
   text-decoration:none;
+  /* re-enable pointer events for the buttons themselves */
+  pointer-events:auto;
 }
 .float-btn:hover{
   border-color:#e64a19;
@@ -373,9 +395,6 @@ body{display:block;}
   transform:translateY(4px);
   box-shadow:0 2px 0 #9c3314;
 }
-.float-btn.courses{bottom:170px;}
-.float-btn.vote   {bottom:100px;}
-.float-btn.partners{bottom:30px;}
 
 @media(min-width:600px){
   .music-card{max-width:420px;margin-left:auto;margin-right:auto;}
@@ -610,13 +629,22 @@ body{display:block;}
 
     <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 
-  </div>
-</div>
+  </div><!-- /inner -->
 
-<!-- FLOATING BUTTONS -->
-<a class="float-btn courses" href="https://www.chess.com/announcements/view/hot-chilli-opening-courses" target="_blank" rel="noopener noreferrer" title="Courses">📚</a>
-<a class="float-btn vote"    href="https://www.chess.com/club/votechess/hot-chilli-checkmate"           target="_blank" rel="noopener noreferrer" title="Vote Chess">♟️</a>
-<a class="float-btn partners" href="https://www.chess.com/announcements/view/hot-chilli-partners"      target="_blank" rel="noopener noreferrer" title="Partners">🤝</a>
+  <!-- ══ FLOATING BUTTONS (sticky, right edge, bottom of viewport) ══
+       Placed OUTSIDE .inner but INSIDE .sb so overflow:clip doesn't cut them.
+       position:sticky makes them stick to the bottom of the visible iframe
+       as the user scrolls — same visual effect as fixed, but iframe-scoped.
+       pointer-events:none on the wrapper lets clicks pass through empty space;
+       pointer-events:auto on each button re-enables interaction.
+  -->
+  <div class="float-wrap">
+    <a class="float-btn" href="https://www.chess.com/announcements/view/hot-chilli-opening-courses" target="_blank" rel="noopener noreferrer" title="Courses">📚</a>
+    <a class="float-btn" href="https://www.chess.com/club/votechess/hot-chilli-checkmate"           target="_blank" rel="noopener noreferrer" title="Vote Chess">♟️</a>
+    <a class="float-btn" href="https://www.chess.com/announcements/view/hot-chilli-partners"        target="_blank" rel="noopener noreferrer" title="Partners">🤝</a>
+  </div>
+
+</div><!-- /sb -->
 
 <audio id="audio"></audio>
 
