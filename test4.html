@@ -801,7 +801,6 @@ async function saveBirthday() {
       body:    body.toString()
     });
     const result = await res.json();
-    // success is always false now — server never writes, just validates
     msg.textContent = result.error || "❌ Error";
   } catch(e) {
     msg.textContent = "❌ Network error";
@@ -828,7 +827,7 @@ async function loadBirthdays() {
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error("Invalid response");
 
-    // Server already returns top 3 sorted — just render them
+    // ── FIX: trust the server sort, hard-cap at 3 on the client too ──
     const upcoming = data
       .map(b => ({
         username: String(b.Username || "").trim(),
@@ -836,7 +835,8 @@ async function loadBirthdays() {
         day:   parseInt(b.Day),
         note:  b.Note ? String(b.Note).slice(0, 60) : ""
       }))
-      .filter(b => b.username && b.month && b.day);
+      .filter(b => b.username && b.month && b.day)
+      .slice(0, 3); // ← never render more than 3
 
     if (!upcoming.length) {
       list.innerHTML = '<div class="bday-empty"><span>🎂</span>No birthdays yet!<br>Add yours above</div>';
