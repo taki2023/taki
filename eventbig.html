@@ -161,36 +161,62 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   --cell-w: 40px; /* fallback, overwritten by ResizeObserver */
 }
 
-/* ── EVT ICONS WRAPPER ──
-   No gap/padding here — JS sets margin on each .evt directly
-   so spacing is always perfectly equal (space1 = space2 = space3 ...) */
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:nowrap;
   align-items:center;justify-content:center;
-  gap:0;
+  gap:3px;
   width:100%;
   flex:1;min-height:0;min-width:0;
   overflow:visible;
-  padding:0 0 3px;
+  padding:0 3px 3px;
   box-sizing:border-box;
 }
 
-/* ── EVT ICON ──
-   Size set by JS via --ico on each icon individually.
-   1 icon  → ico = cellW * 0.50
-   2 icons → ico = cellW * 0.43  (so 2*ico = 86% of cellW)
-   3 icons → ico = cellW * 0.28  (so 3*ico = 84% of cellW)
-   Remaining space is divided into N+1 equal margins by JS.
+/* 2-event: space-around distributes edge margins automatically,
+   gap controls the space between the two icons (min 3px, scales with cell) */
+.evt-icons.two-events{
+  justify-content:space-around;
+  gap:0;
+  padding:0;
+}
+/* inner gap between the 2 icons via negative margin trick won't work;
+   instead we rely on space-around giving each icon half-a-unit on each side,
+   making total between-gap = 1 unit = same as side margins → naturally balanced.
+   For extra between-gap we add a transparent pseudo-spacer in JS — but CSS-only:
+   use column-gap on the icons themselves via margin */
+.evt-icons.two-events .evt{
+  margin:0 max(1.5px, calc(var(--cell-w) * 0.025));
+}
+
+/*
+  Icon size — all driven by --cell-w stamped by ResizeObserver:
+  1 icon : 52% of cell width
+  2 icons: (cellW - 3px gap) / 2  ≈  cellW * 0.42  — both fit perfectly centered
+  3+icons: cellW * 0.27
 */
+.evt-icons[data-count="1"] .evt{
+  --ico: min(max(13px, calc(var(--cell-w) * 0.52)), 26px);
+}
+.evt-icons[data-count="2"] .evt{
+  --ico: min(max(11px, calc(var(--cell-w) * 0.42)), 22px);
+}
+.evt-icons[data-count="3"] .evt,
+.evt-icons[data-count="4"] .evt,
+.evt-icons[data-count="5"] .evt{
+  --ico: min(max(9px, calc(var(--cell-w) * 0.27)), 18px);
+}
+
 .evt{
-  --ico: 20px; /* overwritten by JS */
+  --ico: min(max(13px, calc(var(--cell-w) * 0.52)), 26px); /* fallback */
   cursor:pointer;display:flex;align-items:center;justify-content:center;
+  /* perfect square */
   width:  var(--ico);
   height: var(--ico);
   min-width:  var(--ico);
   min-height: var(--ico);
   flex-shrink:0;
   border-radius:4px;
+  /* emoji fills ~90% of the box */
   font-size: calc(var(--ico) * 0.76);
   transform-origin:center center;
   transition:transform .18s cubic-bezier(.34,1.56,.64,1);
@@ -620,43 +646,13 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
-// ── Responsive cell + icon sizing ──
-// Measures real cell width, computes exact equal spacing, stamps onto every icon.
+// ── Responsive cell sizing: measures real cell width → --cell-w on each cell ──
 function applyCellWidth(){
   const cells = calBody.querySelectorAll('.cal-cell');
   if(!cells.length) return;
   const w = cells[0].getBoundingClientRect().width;
   if(w < 1) return;
-
-  cells.forEach(cell => {
-    cell.style.setProperty('--cell-w', w + 'px');
-
-    const wrappers = cell.querySelectorAll('.evt-icons');
-    wrappers.forEach(wrap => {
-      const n = parseInt(wrap.dataset.count) || 1;
-      const icons = wrap.querySelectorAll('.evt');
-
-      // Icon size: 50% for 1, 43% for 2, 28% for 3+
-      let ratio;
-      if(n === 1)      ratio = 0.50;
-      else if(n === 2) ratio = 0.43;
-      else             ratio = 0.28;
-
-      const ico = w * ratio;           // icon size in px
-      const totalIco = ico * n;        // total icon width
-      const remaining = w - totalIco;  // leftover space
-      const space = remaining / (n + 1); // equal gap: N icons → N+1 spaces
-
-      icons.forEach((ico_el, i) => {
-        const icoStr = ico.toFixed(2) + 'px';
-        ico_el.style.setProperty('--ico', icoStr);
-        // margin-left: space for first icon, space between for rest
-        // margin-right: space only for last icon (to close the row)
-        ico_el.style.marginLeft  = space.toFixed(2) + 'px';
-        ico_el.style.marginRight = (i === n - 1 ? space : 0).toFixed(2) + 'px';
-      });
-    });
-  });
+  cells.forEach(c => c.style.setProperty('--cell-w', w + 'px'));
 }
 
 const monthLabel=document.getElementById('monthLabel');
