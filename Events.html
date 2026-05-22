@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sidebar-height:570px;
+  --sidebar-height:auto;
   --red-dark:#d93020;--red-mid:#e85535;--red-border:#e8553a;
   --bg:#fff5f0;--card:#fff;--border:#f5c5b8;--shadow:#e8aa98;
   --text-dark:#c73520;--text-mid:#9a2010;
@@ -34,7 +34,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .page-title{font-family:'Fredoka One',cursive;font-size:18.5px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.22), 0 4px 10px rgba(0,0,0,.15);position:relative;z-index:1;}
 .page-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:1px;position:relative;z-index:1;}
 
-.inner{padding:10px 10px 12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+.inner{padding:10px 10px 12px;display:flex;flex-direction:column;gap:0;}
 
 /* ── NAV ── */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px;}
@@ -196,7 +196,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 
 .legend{
   display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:4px 12px;padding:6px 4px 2px;margin-top:5px;flex-shrink:0;
+  flex-wrap:wrap;gap:4px 12px;padding:6px 4px 2px;margin-top:5px;
 }
 .legend-item{display:flex;align-items:center;gap:5px;font-family:'Fredoka One',cursive;font-size:clamp(9px,2vw,11px);letter-spacing:.4px;white-space:nowrap;}
 .legend-item:nth-child(1) .legend-label{color:#1565c0;}
@@ -314,7 +314,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   text-align:center;font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.4px;
   background:linear-gradient(135deg,#d93020,#ef6640);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));padding-top:4px;margin-top:auto;
+  filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));padding-top:4px;
 }
 </style>
 </head>
@@ -596,25 +596,10 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
-// ── Responsive icon sizing ──
-//
-//  If cellWidth < cellHeight (narrow/portrait cell — e.g. when calendar is squeezed):
-//    1 event  → 70% of cell WIDTH
-//    2 events → 43% of cell WIDTH
-//    3+ events→ 28% of cell WIDTH
-//
-//  Otherwise (normal/landscape cell):
-//    1 event  → 50% of cell HEIGHT
-//    2 events → 43% of cell HEIGHT
-//    3+ events→ 28% of cell HEIGHT
-//
-//  Horizontal placement: equal margins distribute icons evenly across cell width.
-//
 function applyCellWidth(){
   const cells = calBody.querySelectorAll('.cal-cell');
   if(!cells.length) return;
 
-  // Use the first non-empty cell for measurements
   const sampleCell = cells[0];
   const cellRect = sampleCell.getBoundingClientRect();
   const cellW = cellRect.width;
@@ -627,31 +612,26 @@ function applyCellWidth(){
       const n = parseInt(wrap.dataset.count) || 1;
       const icons = wrap.querySelectorAll('.evt');
 
-      // If cell is narrower than it is tall → base icon size on cell WIDTH instead
-      // (70% / 43% / 28% of width), otherwise use cell HEIGHT (50% / 43% / 28%)
       let ratio;
       if(cellW < cellH) {
-        // narrow / portrait cell: scale off WIDTH
         if(n === 1)      ratio = 0.70;
         else if(n === 2) ratio = 0.43;
         else             ratio = 0.28;
       } else {
-        // normal / landscape cell: scale off HEIGHT
         if(n === 1)      ratio = 0.50;
         else if(n === 2) ratio = 0.43;
         else             ratio = 0.28;
       }
 
       const base = cellW < cellH ? cellW : cellH;
-      const ico = base * ratio;   // icon size in px (square)
-      const totalIco = ico * n;        // total icon width consumed
-      const remaining = cellW - totalIco; // leftover horizontal space
-      const space = remaining / (n + 1);  // equal gap: N icons → N+1 gaps
+      const ico = base * ratio;
+      const totalIco = ico * n;
+      const remaining = cellW - totalIco;
+      const space = remaining / (n + 1);
 
       icons.forEach((icoEl, i) => {
         const icoStr = ico.toFixed(2) + 'px';
         icoEl.style.setProperty('--ico', icoStr);
-        // First icon gets left-margin = space; every icon gets right-margin = space if last, else 0
         icoEl.style.marginLeft  = space.toFixed(2) + 'px';
         icoEl.style.marginRight = (i === n - 1 ? space : 0).toFixed(2) + 'px';
       });
@@ -900,3 +880,4 @@ loadSheet();
 </script>
 </body>
 </html>
+
