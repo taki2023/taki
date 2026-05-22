@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --sidebar-height:492;
+  --sidebar-height:auto;
   --red-dark:#d93020;--red-mid:#e85535;--red-border:#e8553a;
   --bg:#fff5f0;--card:#fff;--border:#f5c5b8;--shadow:#e8aa98;
   --text-dark:#c73520;--text-mid:#9a2010;
@@ -17,11 +17,87 @@
 html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 
 .page-sb{
-  width:100%;height:var(--sidebar-height);background:var(--bg);
+  width:100%;background:var(--bg);
   border-radius:28px;border:3px solid var(--red-border);
   overflow:hidden;display:flex;flex-direction:column;
   box-shadow:0 8px 32px rgba(217,48,32,.12);
+  /* Fixed height until loaded so the skeleton matches the real calendar */
+  height:492px;
+  transition:height .3s ease;
 }
+.page-sb.loaded{
+  height:auto;
+}
+
+/* ── SKELETON OVERLAY ── */
+.cal-skeleton{
+  display:flex;flex-direction:column;gap:8px;
+  padding:10px 10px 12px;
+  flex:1;
+}
+.skel-nav{
+  display:flex;align-items:center;gap:8px;height:34px;margin-bottom:0;
+}
+.skel-circle{
+  width:34px;height:34px;min-width:34px;border-radius:50%;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+  flex-shrink:0;
+}
+.skel-label{
+  flex:1;height:20px;border-radius:8px;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+}
+.skel-head{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;margin-bottom:0;
+}
+.skel-head-cell{
+  height:24px;border-radius:6px;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+}
+.skel-head-cell:nth-child(odd){animation-delay:.1s;}
+.skel-grid{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;
+  flex:1;
+}
+.skel-cell{
+  border-radius:9px;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+  min-height:46px;
+}
+.skel-cell:nth-child(3n){animation-delay:.12s;}
+.skel-cell:nth-child(5n){animation-delay:.22s;}
+.skel-cell:nth-child(7n){animation-delay:.07s;}
+.skel-cell.empty{background:#fff5f0;animation:none;border:1.5px dashed #f5c5b8;}
+.skel-legend{
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;padding:6px 4px 2px;margin-top:auto;
+}
+.skel-legend-item{
+  height:12px;width:60px;border-radius:6px;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+}
+.skel-legend-item:nth-child(2){animation-delay:.1s;}
+.skel-legend-item:nth-child(3){animation-delay:.2s;}
+.skel-legend-item:nth-child(4){animation-delay:.3s;}
+.skel-footer{
+  height:14px;width:60%;border-radius:6px;
+  margin:4px auto 0;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+}
+
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
+
+/* hide skeleton once loaded */
+.page-sb.loaded .cal-skeleton{ display:none; }
+/* hide real content until loaded */
+.cal-real{ display:none; }
+.page-sb.loaded .cal-real{ display:flex; flex-direction:column; }
 
 /* ── BANNER ── */
 .page-top{
@@ -192,7 +268,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;z-index:2;
 }
 .tip-logo-skeleton{border-radius:6px;}
-@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
 
 .legend{
   display:flex;align-items:center;justify-content:center;
@@ -320,12 +395,45 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 </head>
 <body>
 
-<div class="page-sb">
+<div class="page-sb" id="pageSb">
   <div class="page-top">
     <div class="page-title">🏠 Hot Chilli CheckMate #</div>
     <div class="page-sub">Your Chess Home ♡</div>
   </div>
-  <div class="inner">
+
+  <!-- ══ SKELETON shown while loading ══ -->
+  <div class="cal-skeleton" id="calSkeleton">
+    <!-- Nav row -->
+    <div class="skel-nav">
+      <div class="skel-circle"></div>
+      <div class="skel-label"></div>
+      <div class="skel-circle"></div>
+    </div>
+    <!-- Day headers -->
+    <div class="skel-head">
+      <div class="skel-head-cell"></div>
+      <div class="skel-head-cell"></div>
+      <div class="skel-head-cell"></div>
+      <div class="skel-head-cell"></div>
+      <div class="skel-head-cell"></div>
+      <div class="skel-head-cell"></div>
+      <div class="skel-head-cell"></div>
+    </div>
+    <!-- Grid cells — 6 rows × 7 cols = 42, first few empty to mirror real calendar -->
+    <div class="skel-grid" id="skelGrid"></div>
+    <!-- Legend -->
+    <div class="skel-legend">
+      <div class="skel-legend-item"></div>
+      <div class="skel-legend-item"></div>
+      <div class="skel-legend-item"></div>
+      <div class="skel-legend-item"></div>
+    </div>
+    <!-- Footer -->
+    <div class="skel-footer"></div>
+  </div>
+
+  <!-- ══ REAL CONTENT hidden until loaded ══ -->
+  <div class="cal-real inner" id="calReal">
     <div class="cal-nav">
       <button class="nav-btn" id="prevBtn" aria-label="Previous month">
         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
@@ -410,6 +518,26 @@ const DAYS_FUN=[
 
 const today=new Date();
 let viewYear=today.getFullYear(), viewMonth=today.getMonth(), eventMap={};
+
+/* ── Build skeleton grid cells matching real calendar layout ── */
+(function buildSkelGrid(){
+  const grid = document.getElementById('skelGrid');
+  if(!grid) return;
+  const y = today.getFullYear(), m = today.getMonth();
+  const first = (new Date(y, m, 1).getDay() + 6) % 7; // Mon-based offset
+  const last  = new Date(y, m+1, 0).getDate();
+  const total = 42; // always 6 rows
+  for(let i = 0; i < total; i++){
+    const cell = document.createElement('div');
+    const dayIdx = i - first + 1;
+    if(i < first || dayIdx > last){
+      cell.className = 'skel-cell empty';
+    } else {
+      cell.className = 'skel-cell';
+    }
+    grid.appendChild(cell);
+  }
+})();
 
 function proxyImageURL(raw){
   if(!raw)return null;
@@ -593,7 +721,14 @@ async function loadSheet(){
       if(proxiedLogo)preloadImg(proxiedLogo);
     });
     buildCalendar();
-  }catch(e){console.error('Sheet load failed:',e);}
+    /* ── Reveal real content, hide skeleton, let height go auto ── */
+    document.getElementById('pageSb').classList.add('loaded');
+  }catch(e){
+    console.error('Sheet load failed:',e);
+    /* Still reveal calendar (will be empty) so user isn't stuck */
+    buildCalendar();
+    document.getElementById('pageSb').classList.add('loaded');
+  }
 }
 
 function applyCellWidth(){
@@ -614,7 +749,7 @@ function applyCellWidth(){
 
       let ratio;
       if(cellW < cellH) {
-        if(n === 1)      ratio = 0.60;
+        if(n === 1)      ratio = 0.70;
         else if(n === 2) ratio = 0.43;
         else             ratio = 0.28;
       } else {
@@ -874,10 +1009,9 @@ new ResizeObserver(() => {
   requestAnimationFrame(applyCellWidth);
 }).observe(calBody);
 
-buildCalendar();
-requestAnimationFrame(applyCellWidth);
 loadSheet();
 </script>
 </body>
 </html>
+
 
