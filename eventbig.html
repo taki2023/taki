@@ -164,54 +164,51 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:nowrap;
   align-items:center;justify-content:center;
-  /* gap & padding = 2px fixed so we can predict space precisely */
-  gap:2px;
+  gap:3px;
   width:100%;
   flex:1;min-height:0;min-width:0;
   overflow:visible;
-  padding:0 2px;
+  padding:0 3px;
   box-sizing:border-box;
 }
 
+/* 2-event: perfectly centered with a 3px gap between them */
 .evt-icons.two-events{
-  /* for 2 icons: distribute evenly, still 2px gap */
-  justify-content:space-evenly;
-  gap:0;
-  padding:0 1px;
+  justify-content:center;
+  gap:3px;
+  padding:0;
 }
 
 /*
-  Icon size strategy:
-  - 1 icon:  use up to 55% of cell width, max 26px, min 14px  → square
-  - 2 icons: JS sets --cell-evts:2 on the wrapper; icon = (cellW - 2px gap - 2px padding*2) / 2
-             which ≈ cellW*0.44, max 22px, min 12px
-  - 3+ icons: cellW*0.28, max 18px, min 10px
-  We drive this with data-count attribute set by JS on .evt-icons
+  Icon size — all driven by --cell-w stamped by ResizeObserver:
+  1 icon : 52% of cell width
+  2 icons: (cellW - 3px gap) / 2  ≈  cellW * 0.42  — both fit perfectly centered
+  3+icons: cellW * 0.27
 */
 .evt-icons[data-count="1"] .evt{
-  --ico: min(max(14px, calc(var(--cell-w) * 0.55)), 26px);
+  --ico: min(max(13px, calc(var(--cell-w) * 0.52)), 26px);
 }
 .evt-icons[data-count="2"] .evt{
-  /* (cellW - 2px gap - 2px*2 padding) / 2  ≈  cellW * 0.43 */
-  --ico: min(max(12px, calc(var(--cell-w) * 0.43)), 22px);
+  --ico: min(max(11px, calc(var(--cell-w) * 0.42)), 22px);
 }
 .evt-icons[data-count="3"] .evt,
 .evt-icons[data-count="4"] .evt,
 .evt-icons[data-count="5"] .evt{
-  --ico: min(max(10px, calc(var(--cell-w) * 0.28)), 18px);
+  --ico: min(max(9px, calc(var(--cell-w) * 0.27)), 18px);
 }
 
 .evt{
-  --ico: min(max(14px, calc(var(--cell-w) * 0.55)), 26px); /* fallback */
+  --ico: min(max(13px, calc(var(--cell-w) * 0.52)), 26px); /* fallback */
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  /* SQUARE: same value for width and height */
+  /* perfect square */
   width:  var(--ico);
   height: var(--ico);
   min-width:  var(--ico);
   min-height: var(--ico);
   flex-shrink:0;
   border-radius:4px;
-  font-size: calc(var(--ico) * 0.62);
+  /* emoji fills ~90% of the box */
+  font-size: calc(var(--ico) * 0.88);
   transform-origin:center center;
   transition:transform .18s cubic-bezier(.34,1.56,.64,1);
   z-index:1;
@@ -226,9 +223,9 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   box-shadow:0 3px 10px rgba(217,48,32,.2);
 }
 
-.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;opacity:0;transition:opacity .25s;}
+.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;padding:1px;}
 .evt img.loaded{opacity:1;}
-.evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;}
+.evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;user-select:none;}
 
 .evt-skeleton,.tip-logo-skeleton{
   position:absolute;inset:0;border-radius:4px;
