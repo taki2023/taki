@@ -98,9 +98,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   background:var(--card);border:1.5px solid var(--border);border-radius:9px;
   padding:2px;display:flex;flex-direction:column;
   align-items:flex-start;gap:0;
-  /* FIX: removed overflow:hidden so hover scale is never clipped */
   overflow:visible;
-  height:52px;position:relative;
+  height:46px;position:relative;
   min-width:0;width:100%;
   transition:border-color .15s, box-shadow .15s;
 }
@@ -150,43 +149,52 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 @keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
 @keyframes pulse-badge-green{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(67,160,71,.3);}50%{opacity:.85;box-shadow:0 0 0 4px rgba(67,160,71,.08);}}
 
-/* ── EVENT ICONS ── */
-/* FIX: use a wrapper that is overflow:visible so scale doesn't clip,
-   but the icon row itself stays contained within the cell width */
+/* ── EVENT ICONS: fully dynamic via --cell-w set by ResizeObserver ── */
+/*
+  Icon size   = clamp(14px, cellW*0.52, 28px)   — scales with cell
+  Cell height = clamp(44px, cellW*0.88, 68px)   — taller on wider screens
+  Gap         = clamp(1px,  cellW*0.04,  4px)
+  Font-size   = icon*0.60
+  All set via inline CSS vars on each .cal-cell via JS
+*/
+.cal-cell{
+  --cell-w: 40px; /* fallback, overwritten by ResizeObserver */
+}
+
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:nowrap;
   align-items:center;justify-content:center;
-  gap:3px;
+  gap:max(1px, calc(var(--cell-w) * 0.04));
   width:100%;
   flex:1;min-height:0;min-width:0;
-  /* FIX: overflow visible so scaled icon isn't clipped */
   overflow:visible;
-  padding:0 2px;
+  padding:0 max(1px, calc(var(--cell-w) * 0.04));
 }
 
-/* FIX: two-event layout — use simple flex with space-around, no spacers */
 .evt-icons.two-events{
-  justify-content:space-around;
-  padding:0 4px;
+  justify-content:space-evenly;
   gap:0;
+  padding:0;
 }
 
 .evt{
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  width:22px;height:22px;
-  min-width:22px;min-height:22px;flex-shrink:0;
-  border-radius:6px;font-size:14px;
-  /* FIX: use transform-origin center so scale grows in-place */
+  /* width scales with cell, height is slightly shorter for rectangular look */
+  width:  max(14px, min(calc(var(--cell-w) * 0.52), 28px));
+  height: max(11px, min(calc(var(--cell-w) * 0.40), 22px));
+  min-width:  max(14px, min(calc(var(--cell-w) * 0.52), 28px));
+  min-height: max(11px, min(calc(var(--cell-w) * 0.40), 22px));
+  flex-shrink:0;
+  border-radius:4px;
+  font-size: max(9px, min(calc(var(--cell-w) * 0.31), 17px));
   transform-origin:center center;
   transition:transform .18s cubic-bezier(.34,1.56,.64,1);
-  /* FIX: high z-index on hover handled via :hover rule */
   z-index:1;
   border:1.5px solid rgba(217,48,32,.22);background:rgba(255,243,224,.7);
   overflow:hidden;line-height:1;position:relative;
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
   box-shadow:0 1px 3px rgba(217,48,32,.08);
 }
-/* FIX: hover raises z-index so icon appears above sibling cells */
 .evt:hover{
   transform:scale(1.38);
   z-index:100;
@@ -607,6 +615,15 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
+// ── Responsive cell sizing: measures real cell width → --cell-w on each cell ──
+function applyCellWidth(){
+  const cells = calBody.querySelectorAll('.cal-cell');
+  if(!cells.length) return;
+  const w = cells[0].getBoundingClientRect().width;
+  if(w < 1) return;
+  cells.forEach(c => c.style.setProperty('--cell-w', w + 'px'));
+}
+
 const monthLabel=document.getElementById('monthLabel');
 const calHead=document.getElementById('calHead');
 const calBody=document.getElementById('calBody');
@@ -626,6 +643,7 @@ function buildCalendar(){
   for(let d=1;d<=last;d++)calBody.appendChild(makeCell(viewYear,viewMonth,d,false));
   const filled=first+last;
   for(let d=1;filled+d-1<42;d++)calBody.appendChild(makeCell(nextY,nextM,d,true));
+  requestAnimationFrame(applyCellWidth);
 }
 
 function makeCell(y,m,d,overflow){
@@ -837,7 +855,12 @@ document.addEventListener('touchstart', e => { if(!tip.contains(e.target)&&tipPi
 document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
 document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
 
+new ResizeObserver(() => {
+  requestAnimationFrame(applyCellWidth);
+}).observe(calBody);
+
 buildCalendar();
+requestAnimationFrame(applyCellWidth);
 loadSheet();
 </script>
 </body>
