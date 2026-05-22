@@ -87,10 +87,9 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   font-family:'Nunito',sans-serif;font-weight:900;text-transform:uppercase;
 }
 
-/* ── CALENDAR GRID: overflow visible so hover scale isn't clipped ── */
+/* ── CALENDAR GRID ── */
 .cal-body{
   display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;
-  /* FIX: allow child cells to overflow so scaled icons show above neighbours */
   overflow:visible;
 }
 
@@ -109,7 +108,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .cal-cell.today{
   background:linear-gradient(135deg,rgba(217,48,32,.08),rgba(239,102,64,.04));
   border-color:var(--red-dark);
-  /* FIX: removed the outer glow/ring shadow that was bleeding outside */
   box-shadow:0 2px 8px rgba(217,48,32,.1);
 }
 
@@ -123,10 +121,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .cal-cell.today .day-num{
   display:inline-flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#d93020,#e85535);color:#fff;border-radius:50%;
-  /* FIX: exact size with no overflow, no extra shadow */
   width:17px;height:17px;min-width:17px;padding:0;
   font-size:11px;
-  /* FIX: removed box-shadow that was leaking outside the clipped wrap */
   box-shadow:none;
 }
 
@@ -149,74 +145,28 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 @keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
 @keyframes pulse-badge-green{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(67,160,71,.3);}50%{opacity:.85;box-shadow:0 0 0 4px rgba(67,160,71,.08);}}
 
-/* ── EVENT ICONS: fully dynamic via --cell-w set by ResizeObserver ── */
-/*
-  Icon size   = clamp(14px, cellW*0.52, 28px)   — scales with cell
-  Cell height = clamp(44px, cellW*0.88, 68px)   — taller on wider screens
-  Gap         = clamp(1px,  cellW*0.04,  4px)
-  Font-size   = icon*0.60
-  All set via inline CSS vars on each .cal-cell via JS
-*/
-.cal-cell{
-  --cell-w: 40px; /* fallback, overwritten by ResizeObserver */
-}
-
+/* ── EVT ICONS WRAPPER ── */
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:nowrap;
   align-items:center;justify-content:center;
-  gap:3px;
+  gap:0;
   width:100%;
   flex:1;min-height:0;min-width:0;
   overflow:visible;
-  padding:0 3px 3px;
+  padding:0 0 3px;
   box-sizing:border-box;
 }
 
-/* 2-event: space-around distributes edge margins automatically,
-   gap controls the space between the two icons (min 3px, scales with cell) */
-.evt-icons.two-events{
-  justify-content:space-around;
-  gap:0;
-  padding:0;
-}
-/* inner gap between the 2 icons via negative margin trick won't work;
-   instead we rely on space-around giving each icon half-a-unit on each side,
-   making total between-gap = 1 unit = same as side margins → naturally balanced.
-   For extra between-gap we add a transparent pseudo-spacer in JS — but CSS-only:
-   use column-gap on the icons themselves via margin */
-.evt-icons.two-events .evt{
-  margin:0 max(1.5px, calc(var(--cell-w) * 0.025));
-}
-
-/*
-  Icon size — all driven by --cell-w stamped by ResizeObserver:
-  1 icon : 52% of cell width
-  2 icons: (cellW - 3px gap) / 2  ≈  cellW * 0.42  — both fit perfectly centered
-  3+icons: cellW * 0.27
-*/
-.evt-icons[data-count="1"] .evt{
-  --ico: min(max(13px, calc(var(--cell-w) * 0.52)), 26px);
-}
-.evt-icons[data-count="2"] .evt{
-  --ico: min(max(11px, calc(var(--cell-w) * 0.42)), 22px);
-}
-.evt-icons[data-count="3"] .evt,
-.evt-icons[data-count="4"] .evt,
-.evt-icons[data-count="5"] .evt{
-  --ico: min(max(9px, calc(var(--cell-w) * 0.27)), 18px);
-}
-
+/* ── EVT ICON ── size driven by cell HEIGHT via JS ── */
 .evt{
-  --ico: min(max(13px, calc(var(--cell-w) * 0.52)), 26px); /* fallback */
+  --ico: 20px; /* overwritten by JS */
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  /* perfect square */
   width:  var(--ico);
   height: var(--ico);
   min-width:  var(--ico);
   min-height: var(--ico);
   flex-shrink:0;
   border-radius:4px;
-  /* emoji fills ~90% of the box */
   font-size: calc(var(--ico) * 0.76);
   transform-origin:center center;
   transition:transform .18s cubic-bezier(.34,1.56,.64,1);
@@ -646,13 +596,52 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
-// ── Responsive cell sizing: measures real cell width → --cell-w on each cell ──
+// ── Responsive icon sizing based on TOTAL cell HEIGHT ──
+//
+//  Icon size ratios (of the full cell height):
+//    1 event  → 50%
+//    2 events → 43%
+//    3+ events→ 28%
+//
+//  Horizontal placement: equal margins distribute icons evenly across cell width.
+//
 function applyCellWidth(){
   const cells = calBody.querySelectorAll('.cal-cell');
   if(!cells.length) return;
-  const w = cells[0].getBoundingClientRect().width;
-  if(w < 1) return;
-  cells.forEach(c => c.style.setProperty('--cell-w', w + 'px'));
+
+  // Use the first non-empty cell for measurements
+  const sampleCell = cells[0];
+  const cellRect = sampleCell.getBoundingClientRect();
+  const cellW = cellRect.width;
+  const cellH = cellRect.height;
+  if(cellW < 1 || cellH < 1) return;
+
+  cells.forEach(cell => {
+    const wrappers = cell.querySelectorAll('.evt-icons');
+    wrappers.forEach(wrap => {
+      const n = parseInt(wrap.dataset.count) || 1;
+      const icons = wrap.querySelectorAll('.evt');
+
+      // Icon size as a fraction of the TOTAL cell HEIGHT
+      let ratio;
+      if(n === 1)      ratio = 0.50;
+      else if(n === 2) ratio = 0.43;
+      else             ratio = 0.28;
+
+      const ico = cellH * ratio;   // icon size in px (square)
+      const totalIco = ico * n;        // total icon width consumed
+      const remaining = cellW - totalIco; // leftover horizontal space
+      const space = remaining / (n + 1);  // equal gap: N icons → N+1 gaps
+
+      icons.forEach((icoEl, i) => {
+        const icoStr = ico.toFixed(2) + 'px';
+        icoEl.style.setProperty('--ico', icoStr);
+        // First icon gets left-margin = space; every icon gets right-margin = space if last, else 0
+        icoEl.style.marginLeft  = space.toFixed(2) + 'px';
+        icoEl.style.marginRight = (i === n - 1 ? space : 0).toFixed(2) + 'px';
+      });
+    });
+  });
 }
 
 const monthLabel=document.getElementById('monthLabel');
