@@ -172,10 +172,11 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   box-sizing:border-box;
 }
 
-/* 2-event: perfectly centered with a 3px gap between them */
+/* 2-event: centered with dynamic gap — grows with cell, min 3px */
 .evt-icons.two-events{
   justify-content:center;
-  gap:3px;
+  /* gap = 14% of cell width, but never less than 3px */
+  gap:max(3px, calc(var(--cell-w) * 0.14));
   padding:0;
 }
 
@@ -208,7 +209,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;
   border-radius:4px;
   /* emoji fills ~90% of the box */
-  font-size: calc(var(--ico) * 0.88);
+  font-size: calc(var(--ico) * 0.82);
   transform-origin:center center;
   transition:transform .18s cubic-bezier(.34,1.56,.64,1);
   z-index:1;
