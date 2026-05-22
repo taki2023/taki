@@ -168,16 +168,24 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   width:100%;
   flex:1;min-height:0;min-width:0;
   overflow:visible;
-  padding:0 3px;
+  padding:0 3px 3px;
   box-sizing:border-box;
 }
 
-/* 2-event: centered with dynamic gap — grows with cell, min 3px */
+/* 2-event: space-around distributes edge margins automatically,
+   gap controls the space between the two icons (min 3px, scales with cell) */
 .evt-icons.two-events{
-  justify-content:center;
-  /* gap = 14% of cell width, but never less than 3px */
-  gap:max(3px, calc(var(--cell-w) * 0.14));
+  justify-content:space-around;
+  gap:0;
   padding:0;
+}
+/* inner gap between the 2 icons via negative margin trick won't work;
+   instead we rely on space-around giving each icon half-a-unit on each side,
+   making total between-gap = 1 unit = same as side margins → naturally balanced.
+   For extra between-gap we add a transparent pseudo-spacer in JS — but CSS-only:
+   use column-gap on the icons themselves via margin */
+.evt-icons.two-events .evt{
+  margin:0 max(1.5px, calc(var(--cell-w) * 0.05));
 }
 
 /*
@@ -209,7 +217,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;
   border-radius:4px;
   /* emoji fills ~90% of the box */
-  font-size: calc(var(--ico) * 0.82);
+  font-size: calc(var(--ico) * 0.78);
   transform-origin:center center;
   transition:transform .18s cubic-bezier(.34,1.56,.64,1);
   z-index:1;
