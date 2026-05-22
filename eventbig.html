@@ -46,7 +46,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));letter-spacing:.5px;
 }
 
-/* ── NEW NAV BUTTONS: soft circular ghost style ── */
 .nav-btn{
   width:34px;height:34px;min-width:34px;border-radius:50%;
   border:2px solid rgba(217,48,32,.3);outline:none;
@@ -88,11 +87,19 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   font-family:'Nunito',sans-serif;font-weight:900;text-transform:uppercase;
 }
 
-.cal-body{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;}
+/* ── CALENDAR GRID: overflow visible so hover scale isn't clipped ── */
+.cal-body{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;
+  /* FIX: allow child cells to overflow so scaled icons show above neighbours */
+  overflow:visible;
+}
+
 .cal-cell{
   background:var(--card);border:1.5px solid var(--border);border-radius:9px;
   padding:2px;display:flex;flex-direction:column;
-  align-items:flex-start;gap:0;overflow:hidden;
+  align-items:flex-start;gap:0;
+  /* FIX: removed overflow:hidden so hover scale is never clipped */
+  overflow:visible;
   height:52px;position:relative;
   min-width:0;width:100%;
   transition:border-color .15s, box-shadow .15s;
@@ -103,7 +110,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .cal-cell.today{
   background:linear-gradient(135deg,rgba(217,48,32,.08),rgba(239,102,64,.04));
   border-color:var(--red-dark);
-  box-shadow:0 0 0 2.5px rgba(217,48,32,.18), 0 3px 12px rgba(217,48,32,.12);
+  /* FIX: removed the outer glow/ring shadow that was bleeding outside */
+  box-shadow:0 2px 8px rgba(217,48,32,.1);
 }
 
 /* ── TOP ROW: day number + status dot ── */
@@ -116,9 +124,11 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .cal-cell.today .day-num{
   display:inline-flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#d93020,#e85535);color:#fff;border-radius:50%;
-  width:17px;height:17px;padding:0;
-  box-shadow:0 2px 0 #8c1a10, 0 0 8px rgba(217,48,32,.4);
+  /* FIX: exact size with no overflow, no extra shadow */
+  width:17px;height:17px;min-width:17px;padding:0;
   font-size:11px;
+  /* FIX: removed box-shadow that was leaking outside the clipped wrap */
+  box-shadow:none;
 }
 
 .status-dot{
@@ -140,38 +150,48 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 @keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:.6;}}
 @keyframes pulse-badge-green{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(67,160,71,.3);}50%{opacity:.85;box-shadow:0 0 0 4px rgba(67,160,71,.08);}}
 
-/* ── EVENT ICONS ──
-   1 event: centered
-   2 events: 15% gap left, icon, 70% middle gap, icon, 15% gap right
-   3+ events: evenly spaced
-*/
+/* ── EVENT ICONS ── */
+/* FIX: use a wrapper that is overflow:visible so scale doesn't clip,
+   but the icon row itself stays contained within the cell width */
 .evt-icons{
   display:flex;flex-direction:row;flex-wrap:nowrap;
   align-items:center;justify-content:center;
   gap:3px;
-  width:100%;max-width:100%;flex:1;min-height:0;min-width:0;overflow:hidden;
-  padding:0 3px;
+  width:100%;
+  flex:1;min-height:0;min-width:0;
+  /* FIX: overflow visible so scaled icon isn't clipped */
+  overflow:visible;
+  padding:0 2px;
 }
+
+/* FIX: two-event layout — use simple flex with space-around, no spacers */
 .evt-icons.two-events{
-  justify-content:space-between;
-  padding:0;
+  justify-content:space-around;
+  padding:0 4px;
+  gap:0;
 }
-/* invisible flex spacers force icons to 15%/85% positions */
-.evt-spacer{flex:1;min-width:0;pointer-events:none;}
 
 .evt{
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  /* BIGGER: was clamp(14px,3.5vw,22px), now clamp(17px,4vw,26px) */
   width:22px;height:22px;
-  min-width:0;min-height:22px;flex-shrink:0;
+  min-width:22px;min-height:22px;flex-shrink:0;
   border-radius:6px;font-size:14px;
-  transition:transform .18s cubic-bezier(.34,1.56,.64,1);z-index:1;
+  /* FIX: use transform-origin center so scale grows in-place */
+  transform-origin:center center;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1);
+  /* FIX: high z-index on hover handled via :hover rule */
+  z-index:1;
   border:1.5px solid rgba(217,48,32,.22);background:rgba(255,243,224,.7);
   overflow:hidden;line-height:1;position:relative;
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
   box-shadow:0 1px 3px rgba(217,48,32,.08);
 }
-.evt:hover{transform:scale(1.38);z-index:10;box-shadow:0 3px 10px rgba(217,48,32,.2);}
+/* FIX: hover raises z-index so icon appears above sibling cells */
+.evt:hover{
+  transform:scale(1.38);
+  z-index:100;
+  box-shadow:0 3px 10px rgba(217,48,32,.2);
+}
 
 .evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;opacity:0;transition:opacity .25s;}
 .evt img.loaded{opacity:1;}
@@ -630,7 +650,9 @@ function makeCell(y,m,d,overflow){
 
   if(events.length){
     const isTwoEvt=events.length===2;
-    const wrap=document.createElement('div');wrap.className='evt-icons'+(isTwoEvt?' two-events':'');
+    const wrap=document.createElement('div');
+    wrap.className='evt-icons'+(isTwoEvt?' two-events':'');
+
     events.forEach(ev=>{
       const ico=document.createElement('div');ico.className='evt';
 
@@ -667,22 +689,8 @@ function makeCell(y,m,d,overflow){
       }
       wrap.appendChild(ico);
     });
-    // for 2 events: wrap each icon with a spacer on each side
-    // structure: [spacer][icon][spacer][spacer][icon][spacer]
-    // using flex:1 spacers gives 15%·icon·70%·icon·15% naturally
-    if(isTwoEvt){
-      const icons=[...wrap.children];
-      wrap.innerHTML='';
-      // ratio: side spacer = 1.5 flex, middle spacer = 7 flex
-      // so: 1.5 + icon + 7 + icon + 1.5 → sides ~15%, middle ~70%
-      const mkSp=(flex)=>{const s=document.createElement('div');s.className='evt-spacer';s.style.flex=flex;return s;};
-      wrap.appendChild(mkSp('2'));
-      wrap.appendChild(icons[0]);
-      wrap.appendChild(mkSp('3'));
-      wrap.appendChild(mkSp('3'));
-      wrap.appendChild(icons[1]);
-      wrap.appendChild(mkSp('2'));
-    }
+
+    // FIX: removed the flex spacer approach for two-events — space-around in CSS handles it cleanly
     cell.appendChild(wrap);
   }
   return cell;
