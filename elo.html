@@ -20,24 +20,24 @@
     --gold:   #f5c518;
     --silver: #bdc3c7;
     --bronze: #cd7f32;
-
+ 
     /* Fixed sidebar height — same on every device, no black flash */
     --sb-min-height: 920px;
   }
-
+ 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   html, body {
     width: 100%; margin: 0; padding: 0;
     background: #1a1a1a;
     min-height: 100vh;
   }
-
+ 
   body {
     font-family: 'Nunito', sans-serif;
     display: block;
   }
-
+ 
   /* Sidebar locked to min-height from frame 0 — prevents black window */
   .sb {
     width: 100%;
@@ -49,7 +49,7 @@
     overflow: clip;
     position: relative;
   }
-
+ 
   /* ══════════════════════════════════════════
      SKELETON LAYER — visible before JS/fonts
   ══════════════════════════════════════════ */
@@ -65,7 +65,7 @@
     pointer-events: none;
   }
   .skeleton-layer.hide { opacity: 0; }
-
+ 
   .sk-header {
     height: 130px;
     background: linear-gradient(135deg, #d93020 0%, #e85535 60%, #ef6640 100%);
@@ -94,7 +94,7 @@
   @keyframes skPulse {
     0%,100% { opacity: .55; } 50% { opacity: 1; }
   }
-
+ 
   .sk-body { padding: 28px 20px 0; }
   .sk-lbl {
     height: 12px; border-radius: 999px;
@@ -156,7 +156,7 @@
     0%   { background-position: 200% 0; }
     100% { background-position: -200% 0; }
   }
-
+ 
   /* ══════════════════════════════════════════
      REAL CONTENT — fades in once ready
   ══════════════════════════════════════════ */
@@ -165,7 +165,7 @@
     transition: opacity .4s ease .05s;
   }
   .real-content.visible { opacity: 1; }
-
+ 
   /* ── HEADER ── */
   .sb-top {
     background: linear-gradient(135deg, #d93020 0%, #e85535 60%, #ef6640 100%);
@@ -182,10 +182,10 @@
     background: var(--light);
     border-radius: 50%;
   }
-  .chilli-deco { position: absolute; font-size: 26px; opacity: .55; top: 10px; }
+  .chilli-deco { position: absolute; font-size: 44px; opacity: .65; top: 8px; }
   .chilli-deco.left  { left: 12px;  transform: rotate(-20deg); }
   .chilli-deco.right { right: 12px; transform: rotate(20deg); }
-
+ 
   .club-title {
     font-family: 'Fredoka One', cursive;
     font-size: 22px; color: #fff;
@@ -220,7 +220,7 @@
     0%,100% { box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
     50%      { box-shadow: 0 0 0 6px rgba(255,255,255,.1); }
   }
-
+ 
   /* ── DIVIDER ── */
   .div {
     width: calc(100% - 40px); height: 18px;
@@ -244,10 +244,10 @@
       linear-gradient(90deg,transparent 0%,#ea9282 5%,#df8070 16%,#e89080 28%,#e18272 41%,#e99282 56%,#e08070 71%,#e89080 86%,#ea9282 95%,transparent 100%);
     transform: rotate(0.45deg); opacity: .82;
   }
-
+ 
   /* ── INNER ── */
   .inner { padding: 10px 20px 22px; }
-
+ 
   /* ── SECTION LABEL ── */
   .sec-label {
     display: flex; align-items: center; gap: 8px;
@@ -259,7 +259,7 @@
     width: 12px; height: 10px; border-radius: 50%;
     background: var(--red); flex-shrink: 0;
   }
-
+ 
   /* ── SCORING LEGEND ── */
   .legend-bar {
     background: var(--card);
@@ -274,7 +274,7 @@
     align-items: center;
   }
   .legend-bar .sep { color: var(--muted); font-size: 13px; }
-
+ 
   /* ── PAGINATION ── */
   .pag-bar {
     background: #fce8e0;
@@ -329,7 +329,7 @@
     transform: translateY(-2px); box-shadow: 0 5px 0 var(--dark);
   }
   .pag-nav:disabled { opacity: .3; cursor: default; box-shadow: none; }
-
+ 
   /* ── BOARD ── */
   .board { display: flex; flex-direction: column; gap: 0; }
   .col-header {
@@ -339,10 +339,10 @@
     letter-spacing: 1.5px; text-transform: uppercase;
     color: var(--muted);
   }
-
+ 
   /* ── ROW WRAPPER ── */
   .row-wrap { padding: 4px 0; }
-
+ 
   /* ── ROW (now an <a> tag for links) ── */
   .row {
     display: grid;
@@ -367,7 +367,7 @@
     box-shadow: 0 6px 0 var(--dark);
     z-index: 1;
   }
-
+ 
   /* ── LEFT ACCENT BAR (improved) ── */
   .row::before {
     content: ''; position: absolute;
@@ -387,17 +387,17 @@
     background: linear-gradient(180deg, #f0b060 0%, #cd7f32 50%, #a06020 100%);
     box-shadow: 0 0 7px rgba(205,127,50,.45);
   }
-
+ 
   /* ── RANK-THEMED BASE STYLES ── */
   .row.rank-1 { background: linear-gradient(90deg, #fffae8, var(--card)); border-color: #e8d080; box-shadow: 0 3px 0 #c8a830; }
   .row.rank-2 { background: linear-gradient(90deg, #f2f4f7, var(--card)); border-color: #cdd4db; box-shadow: 0 3px 0 #aab0b8; }
   .row.rank-3 { background: linear-gradient(90deg, #fff0e4, var(--card)); border-color: #d4a878; box-shadow: 0 3px 0 #a07048; }
-
+ 
   /* ── RANK-THEMED HOVER ── */
   .row.rank-1:hover { background: linear-gradient(90deg, #fff5c0, #fffae8); border-color: #d4a010; box-shadow: 0 6px 0 #a07010; }
   .row.rank-2:hover { background: linear-gradient(90deg, #e4e8ef, #f2f4f7); border-color: #9098a8; box-shadow: 0 6px 0 #606878; }
   .row.rank-3:hover { background: linear-gradient(90deg, #ffe4c8, #fff0e4); border-color: #a06020; box-shadow: 0 6px 0 #704010; }
-
+ 
   /* ── GHOST ROW ── */
   .row-ghost {
     display: grid; grid-template-columns: 44px 1fr auto;
@@ -406,7 +406,7 @@
     border: 2px solid transparent; border-radius: 16px;
     pointer-events: none; visibility: hidden;
   }
-
+ 
   /* ── RANK BADGE ── */
   .rank-badge {
     width: 34px; height: 34px; border-radius: 10px;
@@ -419,14 +419,14 @@
   .rank-badge.gold   { background: linear-gradient(135deg,#f5c518,#e8b010); color: #7a5500; border-color: #d4a010; font-size: 18px; box-shadow: 0 3px 0 #a07010; }
   .rank-badge.silver { background: linear-gradient(135deg,#d0d8e8,#bdc3c7); color: #444;    border-color: #a0a8b0; font-size: 18px; box-shadow: 0 3px 0 #909898; }
   .rank-badge.bronze { background: linear-gradient(135deg,#e8a060,#cd7f32); color: #fff;    border-color: #a06020; font-size: 18px; box-shadow: 0 3px 0 #805010; }
-
+ 
   /* ── PLAYER NAME — exactly original ── */
   .player-name {
     font-size: 13px; font-weight: 800;
     color: #c73520;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-
+ 
   /* ── POINTS ── */
   .pts-total {
     font-family: 'Fredoka One', cursive;
@@ -437,7 +437,7 @@
   .pts-total.gold-pts   { color: #b08010; }
   .pts-total.silver-pts { color: #7a8898; }
   .pts-total.bronze-pts { color: #a06020; }
-
+ 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -447,7 +447,7 @@
   .row:nth-child(5)  { animation-delay: .15s } .row:nth-child(6)  { animation-delay: .18s }
   .row:nth-child(7)  { animation-delay: .21s } .row:nth-child(8)  { animation-delay: .24s }
   .row:nth-child(9)  { animation-delay: .27s } .row:nth-child(10) { animation-delay: .30s }
-
+ 
   /* ── FOOTER ── */
   .footer {
     text-align: center; margin-top: 14px;
@@ -457,7 +457,7 @@
 </head>
 <body>
 <div class="sb">
-
+ 
   <!-- ══ SKELETON LAYER — visible from frame 0, no black flash ══ -->
   <div class="skeleton-layer" id="skeleton">
     <div class="sk-header">
@@ -482,10 +482,10 @@
       <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
     </div>
   </div>
-
+ 
   <!-- ══ REAL CONTENT — fades in smoothly ══ -->
   <div class="real-content" id="realContent">
-
+ 
     <!-- HEADER -->
     <div class="sb-top">
       <div class="chilli-deco left">🌶</div>
@@ -494,9 +494,9 @@
       <div class="club-sub">Hot Chilli CheckMate · Season 1</div>
       <div><div class="ep-pill"><div class="ep-dot"></div>After 4 Episodes</div></div>
     </div>
-
+ 
     <div class="inner">
-
+ 
       <!-- SCORING -->
       <div class="sec-label"><div class="dot"></div>Scoring System 🌶</div>
       <div class="legend-bar">
@@ -510,14 +510,14 @@
         <span class="sep">·</span>
         <span style="color:#22c55e">📩 Game Submission — +3 pts</span>
       </div>
-
+ 
       <div class="div"></div>
-
+ 
       <div class="sec-label"><div class="dot"></div>Rankings ♟</div>
-
+ 
       <!-- TOP PAGINATION -->
       <div class="pag-bar" id="pag-top"></div>
-
+ 
       <!-- BOARD -->
       <div class="board">
         <div class="col-header">
@@ -527,17 +527,17 @@
         </div>
         <div id="rows-container"></div>
       </div>
-
+ 
       <!-- BOTTOM PAGINATION -->
       <div class="pag-bar bottom" id="pag-bot"></div>
-
+ 
       <div class="div"></div>
       <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
-
+ 
     </div>
   </div><!-- /real-content -->
 </div><!-- /sb -->
-
+ 
 <script>
   const rawPlayers = [
     { name: '@mental-central-dialog', pts: 14 },
@@ -569,7 +569,7 @@
     { name: '@Aminson_Antony',        pts: 1  },
     { name: '@Freddy1201',            pts: 3  },
   ];
-
+ 
   const sorted = [...rawPlayers].sort((a, b) => b.pts - a.pts);
   const players = sorted.map((p, i, arr) => {
     const firstIdx = arr.findIndex(x => x.pts === p.pts);
@@ -582,11 +582,11 @@
     const profileUrl = 'https://www.chess.com/member/' + handle;
     return { ...p, rank, medal, profileUrl };
   });
-
+ 
   const PER_PAGE = 10;
   const totalPages = Math.ceil(players.length / PER_PAGE);
   let currentPage = 1;
-
+ 
   function ptsClass(medal) {
     if (medal === 'gold')   return 'pts-total gold-pts';
     if (medal === 'silver') return 'pts-total silver-pts';
@@ -605,12 +605,12 @@
     if (p.medal === 'bronze') return '<div class="rank-badge bronze">🥉</div>';
     return '<div class="rank-badge">' + p.rank + '</div>';
   }
-
+ 
   function renderPage(page) {
     currentPage = page;
     const slice = players.slice((page - 1) * PER_PAGE, page * PER_PAGE);
     const ghostCount = PER_PAGE - slice.length;
-
+ 
     let html = slice.map(p =>
       '<div class="row-wrap">' +
         '<a class="' + rowClass(p) + '" href="' + p.profileUrl + '" target="_blank" rel="noopener noreferrer">' +
@@ -620,22 +620,22 @@
         '</a>' +
       '</div>'
     ).join('');
-
+ 
     for (let i = 0; i < ghostCount; i++) {
       html += '<div class="row-wrap"><div class="row-ghost"><div class="rank-badge"></div><div class="player-name">&nbsp;</div><div class="pts-total">&nbsp;</div></div></div>';
     }
-
+ 
     document.getElementById('rows-container').innerHTML = html;
     renderPagination();
   }
-
+ 
   function buildPageRange(cur, total) {
     if (total <= 5) return Array.from({length: total}, (_, i) => i + 1);
     if (cur <= 3) return [1, 2, 3, 4, '...', total];
     if (cur >= total - 2) return [1, '...', total-3, total-2, total-1, total];
     return [1, '...', cur-1, cur, cur+1, '...', total];
   }
-
+ 
   function pagHTML() {
     let html = '<span class="pag-label">Pages</span><div class="pag-group">';
     html += '<button class="pag-nav" onclick="changePage(' + (currentPage-1) + ')" ' + (currentPage===1?'disabled':'') + '>&#8249;</button>';
@@ -648,18 +648,18 @@
     html += '</div>';
     return html;
   }
-
+ 
   function renderPagination() {
     document.getElementById('pag-top').innerHTML = pagHTML();
     document.getElementById('pag-bot').innerHTML = pagHTML();
   }
-
+ 
   function changePage(p) {
     if (p < 1 || p > totalPages) return;
     renderPage(p);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
+ 
   function reveal() {
     renderPage(1);
     requestAnimationFrame(() => {
@@ -673,7 +673,7 @@
       });
     });
   }
-
+ 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(reveal);
   } else {
