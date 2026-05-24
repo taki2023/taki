@@ -20,6 +20,9 @@
     --gold:   #f5c518;
     --silver: #bdc3c7;
     --bronze: #cd7f32;
+
+    /* Fixed sidebar height — same on every device, no black flash */
+    --sb-min-height: 920px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,6 +30,7 @@
   html, body {
     width: 100%; margin: 0; padding: 0;
     background: #1a1a1a;
+    min-height: 100vh;
   }
 
   body {
@@ -34,14 +38,133 @@
     display: block;
   }
 
+  /* Sidebar locked to min-height from frame 0 — prevents black window */
   .sb {
     width: 100%;
     max-width: none;
     background: var(--light);
+    min-height: var(--sb-min-height);
     border-radius: 0;
     border: none;
     overflow: clip;
+    position: relative;
   }
+
+  /* ══════════════════════════════════════════
+     SKELETON LAYER — visible before JS/fonts
+  ══════════════════════════════════════════ */
+  .skeleton-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: var(--light);
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity .4s ease .05s;
+    pointer-events: none;
+  }
+  .skeleton-layer.hide { opacity: 0; }
+
+  .sk-header {
+    height: 130px;
+    background: linear-gradient(135deg, #d93020 0%, #e85535 60%, #ef6640 100%);
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+    padding: 20px;
+  }
+  .sk-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; left: -10%;
+    width: 120%; height: 22px;
+    background: var(--light);
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .sk-bar {
+    border-radius: 999px;
+    background: rgba(255,255,255,.28);
+    animation: skPulse 1.6s ease-in-out infinite;
+  }
+  .sk-bar.title { width: 180px; height: 20px; }
+  .sk-bar.sub   { width: 130px; height: 11px; margin-top: 4px; }
+  .sk-bar.pill  { width: 110px; height: 24px; margin-top: 8px; }
+  @keyframes skPulse {
+    0%,100% { opacity: .55; } 50% { opacity: 1; }
+  }
+
+  .sk-body { padding: 28px 20px 0; }
+  .sk-lbl {
+    height: 12px; border-radius: 999px;
+    background: var(--border);
+    animation: skPulse 1.6s ease-in-out infinite;
+    margin-bottom: 10px;
+  }
+  .sk-legend {
+    height: 46px; border-radius: 14px; margin-bottom: 14px;
+    background: linear-gradient(90deg, var(--border) 25%, #f9ddd6 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: skSlide 1.6s ease-in-out infinite;
+  }
+  .sk-div {
+    height: 18px; margin: 0 0 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    animation: skPulse 1.6s ease-in-out infinite;
+  }
+  .sk-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 3px 0 var(--shadow);
+    margin-bottom: 8px;
+  }
+  .sk-avatar {
+    width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(90deg, var(--border) 25%, #f9ddd6 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: skSlide 1.6s ease-in-out infinite;
+  }
+  .sk-name {
+    flex: 1; height: 13px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--border) 25%, #f9ddd6 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: skSlide 1.6s ease-in-out infinite;
+  }
+  .sk-pts {
+    width: 28px; height: 22px; border-radius: 6px;
+    background: linear-gradient(90deg, var(--border) 25%, #f9ddd6 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: skSlide 1.6s ease-in-out infinite;
+  }
+  /* vary name widths for realism */
+  .sk-row:nth-child(1) .sk-name { max-width:155px }
+  .sk-row:nth-child(2) .sk-name { max-width:120px }
+  .sk-row:nth-child(3) .sk-name { max-width:140px }
+  .sk-row:nth-child(4) .sk-name { max-width:100px }
+  .sk-row:nth-child(5) .sk-name { max-width:170px }
+  .sk-row:nth-child(6) .sk-name { max-width:115px }
+  .sk-row:nth-child(7) .sk-name { max-width:145px }
+  .sk-row:nth-child(8) .sk-name { max-width:130px }
+  .sk-row:nth-child(9) .sk-name { max-width:160px }
+  .sk-row:nth-child(10) .sk-name { max-width:125px }
+  @keyframes skSlide {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ══════════════════════════════════════════
+     REAL CONTENT — fades in once ready
+  ══════════════════════════════════════════ */
+  .real-content {
+    opacity: 0;
+    transition: opacity .4s ease .05s;
+  }
+  .real-content.visible { opacity: 1; }
 
   /* ── HEADER ── */
   .sb-top {
@@ -150,9 +273,7 @@
     font-size: 11px; font-weight: 800; color: var(--text);
     align-items: center;
   }
-  .legend-bar .sep {
-    color: var(--muted); font-size: 13px;
-  }
+  .legend-bar .sep { color: var(--muted); font-size: 13px; }
 
   /* ── PAGINATION ── */
   .pag-bar {
@@ -161,33 +282,25 @@
     border-radius: 14px;
     box-shadow: 0 3px 0 var(--shadow);
     padding: 8px 12px;
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     justify-content: space-between;
-    gap: 6px;
-    margin-bottom: 8px;
+    gap: 6px; margin-bottom: 8px;
     user-select: none;
   }
   .pag-bar.bottom { margin-top: 8px; margin-bottom: 0; }
-
   .pag-label {
     font-family: 'Fredoka One', cursive;
     font-size: 13px; color: var(--text);
     white-space: nowrap; letter-spacing: .3px;
   }
-
   .pag-group { display: flex; align-items: center; gap: 4px; }
-
   .pag-btn {
     height: 30px; min-width: 30px; padding: 0 8px;
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    background: var(--card);
-    color: var(--text);
+    border-radius: 10px; border: 2px solid var(--border);
+    background: var(--card); color: var(--text);
     font-family: 'Nunito', sans-serif;
     font-size: 12px; font-weight: 900;
-    cursor: pointer;
-    transition: all .15s ease;
+    cursor: pointer; transition: all .15s ease;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 3px 0 var(--shadow);
   }
@@ -201,18 +314,12 @@
     box-shadow: 0 3px 0 var(--dark);
   }
   .pag-btn:disabled { opacity: .3; cursor: default; box-shadow: none; }
-
   .pag-dots { color: var(--muted); font-size: 13px; font-weight: 900; padding: 0 2px; }
-
   .pag-nav {
-    height: 30px; padding: 0 12px;
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    background: var(--card);
-    color: var(--text);
-    font-family: 'Nunito', sans-serif;
-    font-size: 12px; font-weight: 900;
-    cursor: pointer;
+    height: 30px; padding: 0 12px; border-radius: 10px;
+    border: 2px solid var(--border); background: var(--card);
+    color: var(--text); font-family: 'Nunito', sans-serif;
+    font-size: 12px; font-weight: 900; cursor: pointer;
     transition: all .15s ease;
     display: flex; align-items: center; gap: 4px;
     box-shadow: 0 3px 0 var(--shadow);
@@ -225,23 +332,18 @@
 
   /* ── BOARD ── */
   .board { display: flex; flex-direction: column; gap: 0; }
-
   .col-header {
-    display: grid;
-    grid-template-columns: 44px 1fr auto;
-    gap: 0 10px;
-    padding: 0 12px 4px;
+    display: grid; grid-template-columns: 44px 1fr auto;
+    gap: 0 10px; padding: 0 12px 4px;
     font-size: 10px; font-weight: 900;
     letter-spacing: 1.5px; text-transform: uppercase;
     color: var(--muted);
   }
 
-  /* ── ROW WRAPPER (gives spacing + contains hover overflow) ── */
-  .row-wrap {
-    padding: 4px 0;
-  }
+  /* ── ROW WRAPPER ── */
+  .row-wrap { padding: 4px 0; }
 
-  /* ── ROW ── */
+  /* ── ROW (now an <a> tag for links) ── */
   .row {
     display: grid;
     grid-template-columns: 44px 1fr auto;
@@ -254,11 +356,10 @@
     box-shadow: 0 3px 0 var(--shadow);
     position: relative; overflow: visible;
     transition: all .15s ease;
-    cursor: default;
+    cursor: pointer;
+    text-decoration: none; /* remove link underline */
     animation: fadeUp .3s ease both;
   }
-
-  /* Default hover */
   .row:hover {
     background: #fce8e0;
     border-color: var(--red);
@@ -267,63 +368,43 @@
     z-index: 1;
   }
 
-  /* Left accent bar */
+  /* ── LEFT ACCENT BAR (improved) ── */
   .row::before {
     content: ''; position: absolute;
-    left: 0; top: 0; bottom: 0; width: 4px;
-    border-radius: 4px 0 0 4px;
+    left: 0; top: 4px; bottom: 4px; width: 5px;
+    border-radius: 3px;
+    background: transparent;
   }
-  .row.rank-1::before { background: var(--gold); }
-  .row.rank-2::before { background: var(--silver); }
-  .row.rank-3::before { background: var(--bronze); }
+  .row.rank-1::before {
+    background: linear-gradient(180deg, #ffe866 0%, #f5c518 50%, #d4a010 100%);
+    box-shadow: 0 0 8px rgba(245,197,24,.55);
+  }
+  .row.rank-2::before {
+    background: linear-gradient(180deg, #e0e6f0 0%, #bdc3c7 50%, #9aa0a8 100%);
+    box-shadow: 0 0 6px rgba(189,195,199,.45);
+  }
+  .row.rank-3::before {
+    background: linear-gradient(180deg, #f0b060 0%, #cd7f32 50%, #a06020 100%);
+    box-shadow: 0 0 7px rgba(205,127,50,.45);
+  }
 
   /* ── RANK-THEMED BASE STYLES ── */
-  .row.rank-1 {
-    background: linear-gradient(90deg, #fffae8, var(--card));
-    border-color: #e8d080;
-    box-shadow: 0 3px 0 #c8a830;
-  }
-  .row.rank-2 {
-    background: linear-gradient(90deg, #f2f4f7, var(--card));
-    border-color: #cdd4db;
-    box-shadow: 0 3px 0 #aab0b8;
-  }
-  .row.rank-3 {
-    background: linear-gradient(90deg, #fff0e4, var(--card));
-    border-color: #d4a878;
-    box-shadow: 0 3px 0 #a07048;
-  }
+  .row.rank-1 { background: linear-gradient(90deg, #fffae8, var(--card)); border-color: #e8d080; box-shadow: 0 3px 0 #c8a830; }
+  .row.rank-2 { background: linear-gradient(90deg, #f2f4f7, var(--card)); border-color: #cdd4db; box-shadow: 0 3px 0 #aab0b8; }
+  .row.rank-3 { background: linear-gradient(90deg, #fff0e4, var(--card)); border-color: #d4a878; box-shadow: 0 3px 0 #a07048; }
 
   /* ── RANK-THEMED HOVER ── */
-  .row.rank-1:hover {
-    background: linear-gradient(90deg, #fff5c0, #fffae8);
-    border-color: #d4a010;
-    box-shadow: 0 6px 0 #a07010;
-  }
-  .row.rank-2:hover {
-    background: linear-gradient(90deg, #e4e8ef, #f2f4f7);
-    border-color: #9098a8;
-    box-shadow: 0 6px 0 #606878;
-  }
-  .row.rank-3:hover {
-    background: linear-gradient(90deg, #ffe4c8, #fff0e4);
-    border-color: #a06020;
-    box-shadow: 0 6px 0 #704010;
-  }
+  .row.rank-1:hover { background: linear-gradient(90deg, #fff5c0, #fffae8); border-color: #d4a010; box-shadow: 0 6px 0 #a07010; }
+  .row.rank-2:hover { background: linear-gradient(90deg, #e4e8ef, #f2f4f7); border-color: #9098a8; box-shadow: 0 6px 0 #606878; }
+  .row.rank-3:hover { background: linear-gradient(90deg, #ffe4c8, #fff0e4); border-color: #a06020; box-shadow: 0 6px 0 #704010; }
 
-  /* ── GHOST ROW (placeholder to maintain height) ── */
+  /* ── GHOST ROW ── */
   .row-ghost {
-    display: grid;
-    grid-template-columns: 44px 1fr auto;
-    gap: 0 10px;
-    align-items: center;
-    padding: 12px 14px;
-    background: transparent;
-    border: 2px solid transparent;
-    border-radius: 16px;
-    /* no box-shadow, no animation */
-    pointer-events: none;
-    visibility: hidden;
+    display: grid; grid-template-columns: 44px 1fr auto;
+    gap: 0 10px; align-items: center;
+    padding: 12px 14px; background: transparent;
+    border: 2px solid transparent; border-radius: 16px;
+    pointer-events: none; visibility: hidden;
   }
 
   /* ── RANK BADGE ── */
@@ -331,17 +412,15 @@
     width: 34px; height: 34px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     font-weight: 900; font-size: 13px;
-    background: #fce8e0;
-    border: 2px solid var(--border);
-    color: var(--muted);
-    box-shadow: 0 3px 0 var(--shadow);
+    background: #fce8e0; border: 2px solid var(--border);
+    color: var(--muted); box-shadow: 0 3px 0 var(--shadow);
     flex-shrink: 0;
   }
   .rank-badge.gold   { background: linear-gradient(135deg,#f5c518,#e8b010); color: #7a5500; border-color: #d4a010; font-size: 18px; box-shadow: 0 3px 0 #a07010; }
-  .rank-badge.silver { background: linear-gradient(135deg,#d0d8e8,#bdc3c7); color: #444; border-color: #a0a8b0; font-size: 18px; box-shadow: 0 3px 0 #909898; }
-  .rank-badge.bronze { background: linear-gradient(135deg,#e8a060,#cd7f32); color: #fff; border-color: #a06020; font-size: 18px; box-shadow: 0 3px 0 #805010; }
+  .rank-badge.silver { background: linear-gradient(135deg,#d0d8e8,#bdc3c7); color: #444;    border-color: #a0a8b0; font-size: 18px; box-shadow: 0 3px 0 #909898; }
+  .rank-badge.bronze { background: linear-gradient(135deg,#e8a060,#cd7f32); color: #fff;    border-color: #a06020; font-size: 18px; box-shadow: 0 3px 0 #805010; }
 
-  /* ── PLAYER NAME ── */
+  /* ── PLAYER NAME — exactly original ── */
   .player-name {
     font-size: 13px; font-weight: 800;
     color: #c73520;
@@ -379,59 +458,87 @@
 <body>
 <div class="sb">
 
-  <!-- HEADER -->
-  <div class="sb-top">
-    <div class="chilli-deco left">🌶</div>
-    <div class="chilli-deco right">♞</div>
-    <div class="club-title">Guess The Elo 🏆</div>
-    <div class="club-sub">Hot Chilli CheckMate · Season 1</div>
-    <div><div class="ep-pill"><div class="ep-dot"></div>After 4 Episodes</div></div>
+  <!-- ══ SKELETON LAYER — visible from frame 0, no black flash ══ -->
+  <div class="skeleton-layer" id="skeleton">
+    <div class="sk-header">
+      <div class="sk-bar title"></div>
+      <div class="sk-bar sub"></div>
+      <div class="sk-bar pill"></div>
+    </div>
+    <div class="sk-body">
+      <div class="sk-lbl" style="width:140px;margin-bottom:10px;"></div>
+      <div class="sk-legend"></div>
+      <div class="sk-div"></div>
+      <div class="sk-lbl" style="width:100px;margin-bottom:8px;"></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+      <div class="sk-row"><div class="sk-avatar"></div><div class="sk-name"></div><div class="sk-pts"></div></div>
+    </div>
   </div>
 
-  <div class="inner">
+  <!-- ══ REAL CONTENT — fades in smoothly ══ -->
+  <div class="real-content" id="realContent">
 
-    <!-- SCORING -->
-    <div class="sec-label"><div class="dot"></div>Scoring System 🌶</div>
-    <div class="legend-bar">
-      <span>🥇 1st — 5 pts</span>
-      <span class="sep">·</span>
-      <span>🥈 2nd — 4 pts</span>
-      <span class="sep">·</span>
-      <span>🥉 3rd — 3 pts</span>
-      <span class="sep">·</span>
-      <span>Participation — 1 pt</span>
-      <span class="sep">·</span>
-      <span style="color:#22c55e">📩 Game Submission — +3 pts</span>
+    <!-- HEADER -->
+    <div class="sb-top">
+      <div class="chilli-deco left">🌶</div>
+      <div class="chilli-deco right">♞</div>
+      <div class="club-title">Guess The Elo 🏆</div>
+      <div class="club-sub">Hot Chilli CheckMate · Season 1</div>
+      <div><div class="ep-pill"><div class="ep-dot"></div>After 4 Episodes</div></div>
     </div>
 
-    <div class="div"></div>
+    <div class="inner">
 
-    <div class="sec-label"><div class="dot"></div>Rankings ♟</div>
-
-    <!-- TOP PAGINATION -->
-    <div class="pag-bar" id="pag-top"></div>
-
-    <!-- BOARD -->
-    <div class="board">
-      <div class="col-header">
-        <div></div>
-        <div>Player</div>
-        <div style="text-align:right">Pts</div>
+      <!-- SCORING -->
+      <div class="sec-label"><div class="dot"></div>Scoring System 🌶</div>
+      <div class="legend-bar">
+        <span>🥇 1st — 5 pts</span>
+        <span class="sep">·</span>
+        <span>🥈 2nd — 4 pts</span>
+        <span class="sep">·</span>
+        <span>🥉 3rd — 3 pts</span>
+        <span class="sep">·</span>
+        <span>Participation — 1 pt</span>
+        <span class="sep">·</span>
+        <span style="color:#22c55e">📩 Game Submission — +3 pts</span>
       </div>
-      <div id="rows-container"></div>
+
+      <div class="div"></div>
+
+      <div class="sec-label"><div class="dot"></div>Rankings ♟</div>
+
+      <!-- TOP PAGINATION -->
+      <div class="pag-bar" id="pag-top"></div>
+
+      <!-- BOARD -->
+      <div class="board">
+        <div class="col-header">
+          <div></div>
+          <div>Player</div>
+          <div style="text-align:right">Pts</div>
+        </div>
+        <div id="rows-container"></div>
+      </div>
+
+      <!-- BOTTOM PAGINATION -->
+      <div class="pag-bar bottom" id="pag-bot"></div>
+
+      <div class="div"></div>
+      <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
+
     </div>
-
-    <!-- BOTTOM PAGINATION -->
-    <div class="pag-bar bottom" id="pag-bot"></div>
-
-    <div class="div"></div>
-    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
-
-  </div>
-</div>
+  </div><!-- /real-content -->
+</div><!-- /sb -->
 
 <script>
-  // ── RAW DATA (unsorted, ranks will be computed) ──
   const rawPlayers = [
     { name: '@mental-central-dialog', pts: 14 },
     { name: '@Dhrubojyoti',           pts: 9  },
@@ -463,19 +570,17 @@
     { name: '@Freddy1201',            pts: 3  },
   ];
 
-  // ── COMPUTE DENSE COMPETITION RANKING ──
-  // Sort descending by pts, then assign ranks:
-  // same pts → same rank; next distinct pts → rank = position after all tied players
   const sorted = [...rawPlayers].sort((a, b) => b.pts - a.pts);
   const players = sorted.map((p, i, arr) => {
-    // find the index of the first player with the same pts
     const firstIdx = arr.findIndex(x => x.pts === p.pts);
-    const rank = firstIdx + 1; // 1-based
+    const rank = firstIdx + 1;
     let medal = '';
     if (rank === 1) medal = 'gold';
     else if (rank === 2) medal = 'silver';
     else if (rank === 3) medal = 'bronze';
-    return { ...p, rank, medal };
+    const handle = p.name.replace(/^@/, '');
+    const profileUrl = 'https://www.chess.com/member/' + handle;
+    return { ...p, rank, medal, profileUrl };
   });
 
   const PER_PAGE = 10;
@@ -488,49 +593,36 @@
     if (medal === 'bronze') return 'pts-total bronze-pts';
     return 'pts-total';
   }
-
   function rowClass(p) {
     if (p.rank === 1) return 'row rank-1';
     if (p.rank === 2) return 'row rank-2';
     if (p.rank === 3) return 'row rank-3';
     return 'row';
   }
-
   function badgeHtml(p) {
     if (p.medal === 'gold')   return '<div class="rank-badge gold">🥇</div>';
     if (p.medal === 'silver') return '<div class="rank-badge silver">🥈</div>';
     if (p.medal === 'bronze') return '<div class="rank-badge bronze">🥉</div>';
-    return `<div class="rank-badge">${p.rank}</div>`;
+    return '<div class="rank-badge">' + p.rank + '</div>';
   }
 
   function renderPage(page) {
     currentPage = page;
     const slice = players.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-    const realCount = slice.length;
-    const ghostCount = PER_PAGE - realCount;
+    const ghostCount = PER_PAGE - slice.length;
 
-    // Real rows wrapped for spacing + shadow clearance
-    let html = slice.map(p => `
-      <div class="row-wrap">
-        <div class="${rowClass(p)}">
-          ${badgeHtml(p)}
-          <div class="player-name">${p.name}</div>
-          <div class="${ptsClass(p.medal)}">${p.pts}</div>
-        </div>
-      </div>
-    `).join('');
+    let html = slice.map(p =>
+      '<div class="row-wrap">' +
+        '<a class="' + rowClass(p) + '" href="' + p.profileUrl + '" target="_blank" rel="noopener noreferrer">' +
+          badgeHtml(p) +
+          '<div class="player-name">' + p.name + '</div>' +
+          '<div class="' + ptsClass(p.medal) + '">' + p.pts + '</div>' +
+        '</a>' +
+      '</div>'
+    ).join('');
 
-    // Ghost rows to maintain fixed height on last page
     for (let i = 0; i < ghostCount; i++) {
-      html += `
-        <div class="row-wrap">
-          <div class="row-ghost">
-            <div class="rank-badge"></div>
-            <div class="player-name">&nbsp;</div>
-            <div class="pts-total">&nbsp;</div>
-          </div>
-        </div>
-      `;
+      html += '<div class="row-wrap"><div class="row-ghost"><div class="rank-badge"></div><div class="player-name">&nbsp;</div><div class="pts-total">&nbsp;</div></div></div>';
     }
 
     document.getElementById('rows-container').innerHTML = html;
@@ -545,15 +637,15 @@
   }
 
   function pagHTML() {
-    let html = `<span class="pag-label">Pages</span><div class="pag-group">`;
-    html += `<button class="pag-nav" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>&#8249;</button>`;
+    let html = '<span class="pag-label">Pages</span><div class="pag-group">';
+    html += '<button class="pag-nav" onclick="changePage(' + (currentPage-1) + ')" ' + (currentPage===1?'disabled':'') + '>&#8249;</button>';
     for (const p of buildPageRange(currentPage, totalPages)) {
-      if (p === '...') html += `<span class="pag-dots">…</span>`;
-      else html += `<button class="pag-btn ${p===currentPage?'active':''}" onclick="changePage(${p})">${p}</button>`;
+      if (p === '...') html += '<span class="pag-dots">…</span>';
+      else html += '<button class="pag-btn ' + (p===currentPage?'active':'') + '" onclick="changePage(' + p + ')">' + p + '</button>';
     }
-    html += `<button class="pag-nav" onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>&#8250;</button>`;
-    html += `<button class="pag-nav" onclick="changePage(${totalPages})" ${currentPage===totalPages?'disabled':''} style="margin-left:2px;font-size:10px;">Last</button>`;
-    html += `</div>`;
+    html += '<button class="pag-nav" onclick="changePage(' + (currentPage+1) + ')" ' + (currentPage===totalPages?'disabled':'') + '>&#8250;</button>';
+    html += '<button class="pag-nav" onclick="changePage(' + totalPages + ')" ' + (currentPage===totalPages?'disabled':'') + ' style="margin-left:2px;font-size:10px;">Last</button>';
+    html += '</div>';
     return html;
   }
 
@@ -568,7 +660,26 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  renderPage(1);
+  function reveal() {
+    renderPage(1);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.getElementById('realContent').classList.add('visible');
+        setTimeout(() => {
+          const sk = document.getElementById('skeleton');
+          sk.classList.add('hide');
+          setTimeout(() => { sk.style.display = 'none'; }, 450);
+        }, 60);
+      });
+    });
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(reveal);
+  } else {
+    window.addEventListener('load', reveal);
+  }
+  setTimeout(reveal, 700); // safety fallback
 </script>
 </body>
 </html>
