@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIF Event Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Fire palette */
+  --c-deep:#3a0e00;--c-lava:#7c2600;--c-fire:#d44000;
+  --c-blaze:#ff6010;--c-flame:#ff8c30;--c-spark:#ffb860;--c-glow:#ffd090;
+  /* Blue palette (from TIF sidebar rune rings) */
+  --c-blue-deep:#001a3a;--c-blue:#0070ff;--c-blue-mid:#40a0ff;--c-blue-glow:#80c8ff;
+  /* Purple accent */
+  --c-purple:#9b00ff;--c-purple2:#c060ff;
+  /* Backgrounds */
+  --bg0:#080300;--bg1:#0e0500;--bg2:#130700;--bg3:#1a0900;
+  /* Borders */
+  --border-fire:rgba(255,90,0,.4);
+  --border-fire-hot:rgba(255,150,20,.7);
+  --border-blue:rgba(0,120,255,.35);
+  --border-blue-hot:rgba(80,180,255,.6);
+  /* Text */
+  --text-muted:rgba(255,200,110,.7);
+  --text-dim:rgba(255,218,155,.88);
+  --text-main:rgba(255,238,200,.96);
+  --text-bright:#fff8f0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-serif;}
+
+/* ═══════════════════════════════════════
+   WRAPPER
+═══════════════════════════════════════ */
+.tif-cal-wrap{
+  width:100%;
+  background:var(--bg0);
+  border-radius:10px;
+  /* Dual-tone border: fire left/bottom, blue right/top */
+  border:2px solid transparent;
+  background-clip:padding-box;
+  position:relative;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  min-height:440px;
+}
+/* Dual-tone outer glow border via pseudo */
+.tif-cal-wrap::before{
+  content:'';position:absolute;inset:-2px;border-radius:12px;z-index:0;
+  background:linear-gradient(135deg,
+    var(--c-blue-mid) 0%, var(--c-blue) 20%,
+    rgba(40,0,80,.6) 45%,
+    var(--c-fire) 70%, var(--c-spark) 100%
+  );
+}
+.tif-cal-wrap>*{position:relative;z-index:1;}
+/* inner bg to cover the pseudo */
+.tif-cal-wrap>.cal-banner,
+.tif-cal-wrap>.cal-skeleton,
+.tif-cal-wrap>.cal-real{
+  background:var(--bg0);
+}
+.tif-cal-wrap>.cal-banner{background:transparent;}
+
+/* ═══════════════════════════════════════
+   SKELETON
+═══════════════════════════════════════ */
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
+.skel-base{
+  background:linear-gradient(90deg,
+    rgba(60,20,0,.7) 0%,rgba(0,40,80,.5) 30%,
+    rgba(100,35,0,.6) 55%,rgba(0,30,60,.5) 80%,
+    rgba(60,20,0,.7) 100%);
+  background-size:300% 100%;animation:shimmer .95s ease-in-out infinite;border-radius:4px;
+}
+.cal-skeleton{display:flex;flex-direction:column;gap:9px;padding:14px;flex:1;background:var(--bg0);}
+.skel-nav{display:flex;align-items:center;gap:8px;height:36px;}
+.skel-circle{width:36px;height:36px;min-width:36px;border-radius:50%;}
+.skel-label{flex:1;height:22px;border-radius:6px;}
+.skel-head{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;}
+.skel-head-cell{height:26px;border-radius:4px;}
+.skel-head-cell:nth-child(odd){animation-delay:.12s;}
+.skel-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;flex:1;}
+.skel-cell{border-radius:6px;min-height:54px;}
+.skel-cell:nth-child(3n){animation-delay:.15s;}
+.skel-cell:nth-child(5n){animation-delay:.25s;}
+.skel-cell:nth-child(7n){animation-delay:.08s;}
+.skel-cell.empty{background:rgba(255,80,0,.025)!important;animation:none;border:1px dashed rgba(255,80,0,.08);}
+.skel-legend{display:flex;align-items:center;justify-content:center;gap:14px;padding:6px 0 2px;}
+.skel-legend-item{height:12px;width:62px;border-radius:6px;}
+.skel-legend-item:nth-child(2){animation-delay:.1s;}
+.skel-legend-item:nth-child(3){animation-delay:.2s;}
+.skel-legend-item:nth-child(4){animation-delay:.3s;}
+
+/* ═══════════════════════════════════════
+   LOADED STATE TOGGLE
+═══════════════════════════════════════ */
+.tif-cal-wrap.loaded .cal-skeleton{display:none;}
+.cal-real{display:none;background:var(--bg0);}
+.tif-cal-wrap.loaded .cal-real{display:flex;flex-direction:column;}
+
+/* ═══════════════════════════════════════
+   BANNER
+═══════════════════════════════════════ */
+.cal-banner{
+  padding:14px 18px 16px;text-align:center;position:relative;overflow:hidden;flex-shrink:0;
+  /* Dual-tone gradient background */
+  background:linear-gradient(135deg,
+    #020d1a 0%, #061830 25%,
+    #0e0500 50%,
+    #200800 75%, #2a0c00 100%
+  ) !important;
+  border-bottom:2px solid transparent;
+  border-image:linear-gradient(90deg, var(--c-blue-mid), var(--c-purple2), var(--c-fire)) 1;
+}
+.cal-banner::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 80% at 15% 50%, rgba(0,80,200,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 50%, rgba(220,60,0,.14) 0%, transparent 60%);
+}
+.cal-banner-inner{position:relative;z-index:1;}
+.cal-banner-emoji{font-size:28px;line-height:1;display:block;margin-bottom:4px;filter:drop-shadow(0 0 10px rgba(255,100,0,.7));}
+.cal-banner-title{
+  font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:4px;line-height:1;
+  background:linear-gradient(90deg, var(--c-blue-glow), var(--c-purple2) 40%, var(--c-spark) 70%, var(--c-flame));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(255,120,0,.3));
+}
+.cal-banner-sub{
+  font-size:9px;font-weight:800;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,200,110,.55);margin-top:4px;
+}
+/* Separator under banner title */
+.cal-banner-sep{
+  display:flex;align-items:center;gap:6px;margin:8px auto 0;width:80%;
+}
+.cal-banner-sep-l{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c-blue-mid));}
+.cal-banner-sep-r{flex:1;height:1px;background:linear-gradient(90deg,var(--c-fire),transparent);}
+.cal-banner-sep-gem{
+  width:8px;height:8px;border-radius:1px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--c-blue-mid),var(--c-purple2),var(--c-spark));
+  transform:rotate(45deg);
+  box-shadow:0 0 6px rgba(100,160,255,.6),0 0 10px rgba(255,120,0,.4);
+}
+
+/* ═══════════════════════════════════════
+   INNER CONTENT AREA
+═══════════════════════════════════════ */
+.cal-inner{padding:12px 10px 14px;display:flex;flex-direction:column;gap:0;}
+
+/* ═══════════════════════════════════════
+   NAV ROW
+═══════════════════════════════════════ */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;}
+.cal-month-lbl{
+  font-family:'Bebas Neue',cursive;font-size:clamp(16px,4.5vw,24px);
+  letter-spacing:3px;text-align:center;flex:1;white-space:nowrap;
+  background:linear-gradient(90deg,var(--c-blue-glow) 0%,var(--c-spark) 55%,var(--c-flame) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 8px rgba(255,150,40,.35));
+}
+.nav-btn{
+  width:32px;height:32px;min-width:32px;border-radius:6px;
+  border:1px solid var(--border-fire);outline:none;
+  background:linear-gradient(135deg,rgba(0,50,120,.25),rgba(40,10,0,.4));
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);
+  user-select:none;flex-shrink:0;
+  box-shadow:inset 0 1px 0 rgba(100,180,255,.1);
+}
+.nav-btn svg{width:13px;height:13px;stroke:var(--c-blue-mid);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none;transition:all .18s;}
+.nav-btn:hover{
+  background:linear-gradient(135deg,rgba(0,80,200,.35),rgba(80,20,0,.4));
+  border-color:var(--border-blue-hot);transform:scale(1.12);
+  box-shadow:0 0 12px rgba(0,120,255,.25);
+}
+.nav-btn:hover svg{stroke:var(--c-blue-glow);}
+.nav-btn:active{transform:scale(.92);}
+
+/* ═══════════════════════════════════════
+   DAY HEADERS  ← big improvement here
+═══════════════════════════════════════ */
+.cal-head{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:4px;}
+.cal-head-cell{
+  text-align:center;font-size:10px;letter-spacing:1.8px;padding:6px 2px 5px;
+  font-weight:900;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;
+  border-radius:5px;border:1px solid;
+}
+/* Alternate fire / blue columns for the dual-tone effect */
+.cal-head-cell:nth-child(1),
+.cal-head-cell:nth-child(3),
+.cal-head-cell:nth-child(5),
+.cal-head-cell:nth-child(7){
+  color:var(--c-spark);
+  background:linear-gradient(180deg,rgba(255,80,0,.2) 0%,rgba(200,50,0,.12) 100%);
+  border-color:rgba(255,90,0,.45);
+  text-shadow:0 0 8px rgba(255,130,0,.6);
+}
+.cal-head-cell:nth-child(2),
+.cal-head-cell:nth-child(4),
+.cal-head-cell:nth-child(6){
+  color:var(--c-blue-glow);
+  background:linear-gradient(180deg,rgba(0,80,200,.2) 0%,rgba(0,50,150,.12) 100%);
+  border-color:rgba(0,100,255,.45);
+  text-shadow:0 0 8px rgba(60,160,255,.6);
+}
+
+/* ═══════════════════════════════════════
+   CALENDAR GRID  ← bold visible lines
+═══════════════════════════════════════ */
+.cal-body{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  /* Visible grid via gap + body background showing through */
+  gap:0;overflow:visible;
+  /* Outer grid border */
+  border:1.5px solid rgba(255,90,0,.35);
+  border-radius:6px;overflow:hidden;
+}
+/* Each cell has its own border so grid lines are clearly visible */
+.cal-cell{
+  background:var(--bg2);
+  border-right:1px solid rgba(255,80,0,.22);
+  border-bottom:1px solid rgba(255,80,0,.22);
+  padding:3px 3px 2px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:0;
+  overflow:visible;height:58px;position:relative;min-width:0;width:100%;
+  transition:background .14s, border-color .14s;
+}
+/* Remove right border from last column, bottom from last row */
+.cal-cell:nth-child(7n){border-right:none;}
+/* We'll handle last row via JS class */
+.cal-cell.last-row{border-bottom:none;}
+
+.cal-cell:not(.empty):not(.overflow):hover{
+  background:rgba(255,80,0,.07);
+}
+.cal-cell.empty{
+  background:rgba(10,4,0,.6);
+  border-color:rgba(255,80,0,.1);
+}
+.cal-cell.overflow{opacity:.22;pointer-events:none;}
+
+/* TODAY — fire highlight */
+.cal-cell.today{
+  background:linear-gradient(135deg,rgba(255,90,0,.15),rgba(200,50,0,.08));
+  border-color:rgba(255,120,0,.6) !important;
+  box-shadow:inset 0 0 12px rgba(255,80,0,.12);
+}
+
+/* ═══════════════════════════════════════
+   DAY NUMBER ROW
+═══════════════════════════════════════ */
+.day-num-wrap{
+  height:20px;width:100%;display:flex;align-items:center;
+  flex-shrink:0;padding:0 3px;justify-content:space-between;min-width:0;
+}
+.day-num{
+  font-family:'Bebas Neue',cursive;font-size:14px;
+  color:rgba(255,215,140,.75);line-height:1;
+}
+.cal-cell.today .day-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--c-fire),var(--c-blaze));
+  color:#fff;border-radius:4px;
+  width:19px;height:19px;min-width:19px;padding:0;font-size:12px;
+  box-shadow:0 0 10px rgba(255,90,0,.6);
+}
+.cal-cell.empty .day-num,.cal-cell.overflow .day-num{color:rgba(255,150,60,.22);}
+
+/* ═══════════════════════════════════════
+   STATUS DOTS
+═══════════════════════════════════════ */
+.status-dot{width:7px;height:7px;border-radius:50%;border:1.5px solid rgba(0,0,0,.4);flex-shrink:0;pointer-events:none;}
+.status-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff7070,#e53935);box-shadow:0 0 0 2px rgba(229,57,53,.3);animation:dotPulse 1s ease-in-out infinite;}
+.status-dot.dot-before{background:radial-gradient(circle at 35% 35%,#60c0ff,#0080ff);box-shadow:0 0 0 2px rgba(0,120,255,.3);animation:dotGlowBlue 2.5s ease-in-out infinite;}
+.status-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#ffd080,#ff8800);box-shadow:0 0 0 2px rgba(255,140,0,.3);animation:dotGlowFire 1.8s ease-in-out infinite;}
+.status-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#444,#1a1a1a);box-shadow:0 1px 3px rgba(0,0,0,.5);}
+@keyframes dotPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 2px rgba(229,57,53,.3);}50%{transform:scale(1.2);box-shadow:0 0 0 4px rgba(229,57,53,.1);}}
+@keyframes dotGlowBlue{0%,100%{box-shadow:0 0 0 2px rgba(0,120,255,.3);}50%{box-shadow:0 0 0 4px rgba(0,120,255,.1);}}
+@keyframes dotGlowFire{0%,100%{box-shadow:0 0 0 2px rgba(255,140,0,.3);}50%{box-shadow:0 0 0 4px rgba(255,140,0,.1);}}
+
+/* ═══════════════════════════════════════
+   EVENT ICONS
+═══════════════════════════════════════ */
+.evt-icons{
+  display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;
+  gap:0;width:100%;flex:1;min-height:0;min-width:0;overflow:visible;
+  padding:0 0 3px;
+}
+.evt{
+  --ico:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  width:var(--ico);height:var(--ico);min-width:var(--ico);min-height:var(--ico);
+  flex-shrink:0;border-radius:4px;
+  font-size:calc(var(--ico)*.74);
+  transform-origin:center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);
+  z-index:1;overflow:hidden;line-height:1;position:relative;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  /* dual-tone icon border */
+  border:1px solid rgba(80,160,255,.35);
+  background:linear-gradient(135deg,rgba(0,30,60,.7),rgba(20,8,0,.7));
+  box-shadow:0 1px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(100,180,255,.08);
+}
+.evt:hover{transform:scale(1.4);z-index:100;box-shadow:0 4px 14px rgba(0,100,255,.3),0 4px 14px rgba(255,80,0,.2);}
+.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;padding:1px;}
+.evt img.loaded{opacity:1;}
+.evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;user-select:none;}
+.evt-skeleton{position:absolute;inset:0;border-radius:3px;
+  background:linear-gradient(90deg,rgba(0,30,60,.8) 0%,rgba(60,20,0,.6) 40%,rgba(0,30,60,.7) 100%);
+  background-size:300% 100%;animation:shimmer .9s ease-in-out infinite;z-index:2;}
+.tip-logo-skeleton{border-radius:6px;position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,30,60,.8) 0%,rgba(60,20,0,.6) 40%,rgba(0,30,60,.7) 100%);
+  background-size:300% 100%;animation:shimmer .9s ease-in-out infinite;z-index:2;}
+
+/* ═══════════════════════════════════════
+   LEGEND
+═══════════════════════════════════════ */
+.cal-legend{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:5px 14px;padding:10px 4px 3px;
+  border-top:1px solid rgba(255,80,0,.15);
+  margin-top:8px;
+}
+.legend-item{
+  display:flex;align-items:center;gap:5px;
+  font-family:'Barlow Condensed',sans-serif;font-size:clamp(9px,2.2vw,11px);
+  font-weight:700;letter-spacing:.5px;white-space:nowrap;color:var(--text-muted);
+}
+.legend-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(0,0,0,.4);flex-shrink:0;}
+.legend-dot.dot-before{background:radial-gradient(circle at 35% 35%,#60c0ff,#0080ff);animation:dotGlowBlue 2.5s ease-in-out infinite;}
+.legend-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#ffd080,#ff8800);animation:dotGlowFire 1.8s ease-in-out infinite;}
+.legend-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff7070,#e53935);animation:dotPulse 1s ease-in-out infinite;}
+.legend-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#444,#1a1a1a);}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.cal-footer{
+  text-align:center;font-family:'Bebas Neue',cursive;font-size:11px;letter-spacing:2.5px;
+  color:rgba(255,120,40,.3);padding-top:4px;padding-bottom:2px;
+}
+
+/* ═══════════════════════════════════════
+   TOOLTIP
+═══════════════════════════════════════ */
+.evt-tip{
+  position:fixed;
+  background:linear-gradient(160deg,#050d18 0%,#0a0400 60%,#0e0500 100%);
+  border:1.5px solid;
+  border-image:linear-gradient(135deg,var(--c-blue-mid),var(--c-purple2),var(--c-fire)) 1;
+  border-radius:10px;padding:11px 13px 10px;
+  box-shadow:0 12px 50px rgba(0,0,0,.9), 0 0 20px rgba(0,80,200,.1), 0 0 20px rgba(255,80,0,.08);
+  pointer-events:auto;opacity:0;transition:opacity .12s;
+  z-index:99999;min-width:215px;max-width:300px;white-space:normal;
+  font-family:'Barlow Condensed',sans-serif;display:none;flex-direction:column;gap:0;
+}
+.evt-tip.show{opacity:1;display:flex;}
+.tip-close{
+  position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;color:var(--c-blue-mid);
+  cursor:pointer;width:20px;height:20px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(0,80,200,.12);z-index:10;
+  border:1px solid rgba(0,100,255,.3);transition:background .15s,transform .15s;user-select:none;
+}
+.tip-close:hover{background:rgba(0,100,255,.25);transform:scale(1.15);}
+
+.tip-row1{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.tip-logo{
+  width:36px;height:36px;border-radius:7px;
+  border:1px solid rgba(80,160,255,.3);
+  flex-shrink:0;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(135deg,rgba(0,30,70,.7),rgba(20,8,0,.7));
+  position:relative;
+}
+.tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;opacity:0;transition:opacity .25s;}
+.tip-logo img.loaded{opacity:1;}
+.tip-date-wrap{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.tip-title{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--c-glow);line-height:1.15;word-break:break-word;padding-right:24px;letter-spacing:1.5px;text-shadow:0 0 10px rgba(255,150,0,.4);}
+.tip-date-badge{font-size:10px;font-weight:700;color:var(--c-blue-mid);letter-spacing:.4px;opacity:.9;}
+
+.tip-countdown{
+  display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800;
+  padding:4px 10px;border-radius:999px;border:1px solid;
+  margin-bottom:7px;width:fit-content;letter-spacing:.3px;
+}
+.tip-countdown .cd-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.countdown-upcoming{color:var(--c-blue-glow);background:rgba(0,100,255,.12);border-color:rgba(0,120,255,.4);}
+.countdown-soon{color:var(--c-spark);background:rgba(255,140,0,.1);border-color:rgba(255,140,0,.35);}
+.countdown-live{color:#ff7070;background:rgba(220,50,50,.1);border-color:rgba(220,50,50,.35);}
+.countdown-ended{color:rgba(160,160,160,.7);background:rgba(80,80,80,.08);border-color:rgba(80,80,80,.2);}
+
+.tip-repeat-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;
+  background:rgba(155,0,255,.1);color:var(--c-purple2);border:1px solid rgba(155,0,255,.3);
+  margin-bottom:7px;
+}
+.tip-detail{font-size:11px;font-weight:600;color:var(--text-dim);line-height:1.55;margin-bottom:7px;}
+.tip-quote-block{
+  background:rgba(0,20,50,.35);
+  border:1px solid rgba(80,160,255,.2);
+  border-radius:7px;padding:0;margin-bottom:8px;overflow:hidden;
+}
+.tip-quote-bar{height:2px;width:100%;background:linear-gradient(90deg,var(--c-blue-mid),var(--c-purple2),var(--c-spark));}
+.tip-quote-inner{padding:7px 10px 8px;}
+.tip-quote-label{
+  font-size:8px;font-weight:900;letter-spacing:2px;text-transform:uppercase;
+  color:var(--c-blue-mid);opacity:.7;margin-bottom:4px;display:flex;align-items:center;gap:5px;
+}
+.tip-quote-text{font-size:11px;font-weight:700;color:var(--text-main);line-height:1.55;}
+.mention-link{color:var(--c-spark);font-weight:900;text-decoration:none;border-bottom:1px dotted rgba(255,180,60,.4);transition:color .15s;}
+.mention-link:hover{color:var(--c-glow);}
+.tip-bottom-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:3px;}
+.tip-btn{
+  display:inline-block;font-family:'Bebas Neue',cursive;font-size:13px;letter-spacing:1.5px;
+  color:#000;background:linear-gradient(135deg,var(--c-fire),var(--c-blaze));
+  padding:5px 14px;border-radius:3px;text-decoration:none;
+  box-shadow:0 2px 0 rgba(60,15,0,.7),0 0 10px rgba(255,80,0,.2);
+  pointer-events:auto;white-space:nowrap;flex-shrink:0;transition:all .15s;
+}
+.tip-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,80,0,.5);}
+.tip-organizer{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10px;font-weight:800;color:var(--c-blue-mid);
+  background:rgba(0,80,200,.1);border:1px solid rgba(0,100,255,.25);
+  border-radius:999px;padding:3px 9px 3px 7px;text-decoration:none;white-space:nowrap;
+  transition:all .15s;pointer-events:auto;
+}
+.tip-organizer:hover{background:rgba(0,100,255,.2);border-color:rgba(80,160,255,.5);color:var(--c-blue-glow);}
+
+@media (hover:none) and (pointer:coarse){
+  .evt-tip{
+    position:fixed!important;left:50%!important;top:50%!important;
+    transform:translate(-50%,-50%);
+    width:min(88vw,300px);max-width:min(88vw,300px);
+    max-height:80vh;overflow-y:auto;
+    box-shadow:0 20px 60px rgba(0,0,0,.95),0 0 0 9999px rgba(0,0,0,.55);
+  }
+  .evt-tip.show{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<div class="tif-cal-wrap" id="tifCalWrap">
+
+  <!-- BANNER -->
+  <div class="cal-banner">
+    <div class="cal-banner-inner">
+      <span class="cal-banner-emoji">🔥</span>
+      <div class="cal-banner-title">Event Calendar</div>
+      <div class="cal-banner-sep">
+        <div class="cal-banner-sep-l"></div>
+        <div class="cal-banner-sep-gem"></div>
+        <div class="cal-banner-sep-r"></div>
+      </div>
+      <div class="cal-banner-sub">The Illusion Fireballs · Auto-Updated</div>
+    </div>
+  </div>
+
+  <!-- SKELETON -->
+  <div class="cal-skeleton" id="calSkeleton">
+    <div class="skel-nav">
+      <div class="skel-circle skel-base"></div>
+      <div class="skel-label skel-base"></div>
+      <div class="skel-circle skel-base"></div>
+    </div>
+    <div class="skel-head">
+      <div class="skel-head-cell skel-base"></div><div class="skel-head-cell skel-base"></div>
+      <div class="skel-head-cell skel-base"></div><div class="skel-head-cell skel-base"></div>
+      <div class="skel-head-cell skel-base"></div><div class="skel-head-cell skel-base"></div>
+      <div class="skel-head-cell skel-base"></div>
+    </div>
+    <div class="skel-grid" id="skelGrid"></div>
+    <div class="skel-legend">
+      <div class="skel-legend-item skel-base"></div><div class="skel-legend-item skel-base"></div>
+      <div class="skel-legend-item skel-base"></div><div class="skel-legend-item skel-base"></div>
+    </div>
+  </div>
+
+  <!-- REAL CONTENT -->
+  <div class="cal-real cal-inner" id="calReal">
+    <div class="cal-nav">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous month">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="cal-month-lbl" id="monthLabel"></div>
+      <button class="nav-btn" id="nextBtn" aria-label="Next month">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="cal-head" id="calHead"></div>
+    <div class="cal-body" id="calBody"></div>
+    <div class="cal-legend">
+      <div class="legend-item"><span class="legend-dot dot-before"></span>Upcoming</div>
+      <div class="legend-item"><span class="legend-dot dot-soon"></span>Soon</div>
+      <div class="legend-item"><span class="legend-dot dot-live"></span>Live</div>
+      <div class="legend-item"><span class="legend-dot dot-ended"></span>Ended</div>
+    </div>
+    <div class="cal-footer">© 2026 · The Illusion Fireballs</div>
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div class="evt-tip" id="globalTip">
+  <div class="tip-close" id="tipClose">✕</div>
+  <div class="tip-row1">
+    <div class="tip-logo" id="tipLogo"></div>
+    <div class="tip-date-wrap">
+      <div class="tip-title" id="tipTitle"></div>
+      <div class="tip-date-badge" id="tipDateBadge"></div>
+    </div>
+  </div>
+  <div class="tip-countdown" id="tipCountdown"></div>
+  <div class="tip-repeat-badge" id="tipRepeatBadge" style="display:none;"></div>
+  <div class="tip-detail" id="tipDetail"></div>
+  <div class="tip-quote-block" id="tipQuoteBlock" style="display:none;">
+    <div class="tip-quote-bar"></div>
+    <div class="tip-quote-inner">
+      <div class="tip-quote-label">🔥 <span id="tipQuoteLbl">Message from organizer</span></div>
+      <div class="tip-quote-text" id="tipMsg"></div>
+    </div>
+  </div>
+  <div class="tip-bottom-row" id="tipBottomRow"></div>
+</div>
+
+<script>
+const SHEET_API_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAY_LABELS = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
+const today = new Date();
+let viewYear = today.getFullYear(), viewMonth = today.getMonth();
+let eventMap = {};
+
+/* ── SKELETON GRID ─────────────────────────────────────────────────── */
+(function buildSkelGrid(){
+  const grid = document.getElementById('skelGrid'); if(!grid) return;
+  const y = today.getFullYear(), m = today.getMonth();
+  const first = (new Date(y,m,1).getDay()+6)%7, last = new Date(y,m+1,0).getDate();
+  for(let i=0;i<42;i++){
+    const cell=document.createElement('div');
+    const dayIdx=i-first+1;
+    cell.className=(i<first||dayIdx>last)?'skel-cell empty':'skel-cell skel-base';
+    grid.appendChild(cell);
+  }
+})();
+
+/* ── IMAGE HELPERS ──────────────────────────────────────────────────── */
+function proxyImageURL(raw){
+  if(!raw) return null; raw=raw.trim();
+  if(raw.startsWith('https://wsrv.nl')) return raw;
+  const dm=raw.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
+  if(dm){ const d=`https://drive.google.com/uc?export=download&id=${dm[1]}`; return `https://wsrv.nl/?url=${encodeURIComponent(d)}&w=64&h=64&fit=contain&output=webp`; }
+  if(/^https?:\/\//i.test(raw)) return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
+  return null;
+}
+const imgMem=new Map(),imgCbs=new Map();
+const lsKey=u=>'tifimg:'+u;
+const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
+const lsSet=(u,v)=>{try{localStorage.setItem(lsKey(u),v);}catch(e){}};
+function preloadImg(url){
+  if(!url||imgMem.has(url))return;
+  const c=lsGet(url);if(c==='ok'||c==='err'){imgMem.set(url,c);return;}
+  imgMem.set(url,'loading');
+  const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
+  img.onload=()=>{imgMem.set(url,'ok');lsSet(url,'ok');notify(url,'ok');};
+  img.onerror=()=>{imgMem.set(url,'err');lsSet(url,'err');notify(url,'err');};
+  img.src=url;
+}
+function notify(url,state){const cbs=imgCbs.get(url)||[];imgCbs.delete(url);cbs.forEach(cb=>cb(state));}
+function onImgReady(url,cb){
+  const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}
+  const c=lsGet(url);if(c==='ok'||c==='err'){imgMem.set(url,c);cb(c);return;}
+  if(!imgCbs.has(url))imgCbs.set(url,[]);
+  imgCbs.get(url).push(cb);
+  if(!imgMem.has(url))preloadImg(url);
+}
+
+/* ── PARSERS ────────────────────────────────────────────────────────── */
+const pad=n=>String(n).padStart(2,'0');
+const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
+const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
+const dowMon=(y,m,d)=>(new Date(y,m,d).getDay()+6)%7;
+const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||s[v]||s[0]);};
+const formatDate=(y,m,d)=>`${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
+const isURL=s=>s&&/^https?:\/\//i.test(s);
+
+function parseDate(str){
+  if(!str)return null;str=str.trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){const[y,m,d]=str.split('-').map(Number);return{y,m:m-1,d};}
+  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){const[m,d,y]=str.split('/').map(Number);return{y,m:m-1,d};}
+  if(/^\d{1,2}-\d{1,2}-\d{4}$/.test(str)){const[d,m,y]=str.split('-').map(Number);return{y,m:m-1,d};}
+  const dt=new Date(str);if(!isNaN(dt))return{y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
+  return null;
+}
+function parseTime(str){
+  if(!str||!str.trim())return null;
+  const m=str.trim().match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);if(!m)return null;
+  let h=parseInt(m[1]),min=parseInt(m[2]);
+  if(m[3]){if(m[3].toLowerCase()==='pm'&&h<12)h+=12;if(m[3].toLowerCase()==='am'&&h===12)h=0;}
+  return{h,min};
+}
+
+/* ── REPEAT PARSER ──────────────────────────────────────────────────── */
+function parseRepeat(str){
+  if(!str||!str.trim())return{type:'none'};
+  str=str.trim().toLowerCase();
+  if(str==='weekly')return{type:'weekly'};
+  const m=str.match(/^weekly\(([^,]+),([^)]+)\)$/);
+  if(m){const from=parseDate(m[1].trim()),to=parseDate(m[2].trim());if(from&&to)return{type:'weekly-range',from,to};}
+  return{type:'none'};
+}
+
+function expandEvent(ev){
+  const rep=ev.repeat,base=ev.dateObj;
+  if(!base)return[];
+  if(rep.type==='none')return[{...ev,dateObjActual:base}];
+  if(rep.type==='weekly'){
+    const dow=new Date(base.y,base.m,base.d).getDay(),daysInView=lastDay(viewYear,viewMonth),baseDt=new Date(base.y,base.m,base.d);
+    const res=[];
+    for(let d=1;d<=daysInView;d++){const dt=new Date(viewYear,viewMonth,d);if(dt.getDay()===dow&&dt>=baseDt)res.push({...ev,dateObjActual:{y:viewYear,m:viewMonth,d}});}
+    return res;
+  }
+  if(rep.type==='weekly-range'){
+    const dow=new Date(base.y,base.m,base.d).getDay();
+    const fromDt=new Date(rep.from.y,rep.from.m,rep.from.d),toDt=new Date(rep.to.y,rep.to.m,rep.to.d);
+    const daysInView=lastDay(viewYear,viewMonth),res=[];
+    for(let d=1;d<=daysInView;d++){const dt=new Date(viewYear,viewMonth,d);if(dt.getDay()===dow&&dt>=fromDt&&dt<=toDt)res.push({...ev,dateObjActual:{y:viewYear,m:viewMonth,d}});}
+    return res;
+  }
+  return[];
+}
+
+/* ── PHASE / COUNTDOWN ──────────────────────────────────────────────── */
+function buildUTC(dObj,tObj){if(!dObj||!tObj)return null;return new Date(Date.UTC(dObj.y,dObj.m,dObj.d,tObj.h,tObj.min,0));}
+
+function getPhase(ev,dObjOv){
+  const dObj=dObjOv||ev.dateObjActual||ev.dateObj;
+  if(!ev.timeObj)return null;
+  const s=buildUTC(dObj,ev.timeObj);if(!s)return null;
+  const e=ev.duration>0?new Date(s.getTime()+ev.duration*3600000):null,now=Date.now();
+  if(now<s.getTime()){
+    const ms=s-now,sec=Math.floor(ms/1000),dd=Math.floor(sec/86400),hh=Math.floor((sec%86400)/3600),mm=Math.floor((sec%3600)/60);
+    let text='Starting in ';if(dd>0)text+=`${dd}d ${hh}h ${mm}m`;else if(hh>0)text+=`${hh}h ${mm}m`;else text+=`${mm}m`;
+    return{status:ms<=3600000?'soon':'upcoming',text,cssClass:ms<=3600000?'countdown-soon':'countdown-upcoming',phase:'before'};
+  }else if(e&&now<e.getTime()){
+    const msLeft=e-now,hLeft=Math.floor(msLeft/3600000),mLeft=Math.floor((msLeft%3600000)/60000);
+    const endsText=hLeft>0?` · ends in ${hLeft}h ${mLeft}m`:mLeft>0?` · ends in ${mLeft}m`:' · ending soon';
+    return{status:'live',text:'🔴 Live'+endsText,cssClass:'countdown-live',phase:'live'};
+  }else if(!e&&now>=s.getTime()){
+    return{status:'live',text:'🔴 Live',cssClass:'countdown-live',phase:'live'};
+  }else{
+    return{status:'ended',text:'✅ Ended',cssClass:'countdown-ended',phase:'after'};
+  }
+}
+
+function cellDotClass(events){
+  let best=null;const rank={ended:1,before:2,soon:3,live:4};
+  for(const ev of events){
+    if(!ev.timeObj)continue;
+    const s=buildUTC(ev.dateObjActual||ev.dateObj,ev.timeObj);if(!s)continue;
+    const e=ev.duration>0?new Date(s.getTime()+ev.duration*3600000):null,now=Date.now();
+    let cls;
+    if(e&&now>=e.getTime())cls='ended';
+    else if(now>=s.getTime())cls='live';
+    else if(s-now<=3600000)cls='soon';
+    else cls='before';
+    if(!best||rank[cls]>rank[best])best=cls;
+  }
+  return best?'dot-'+best:null;
+}
+
+/* ── MENTION LINKIFY ────────────────────────────────────────────────── */
+function linkifyMentions(text){
+  return text.split(/(@[\w-]+)/g).map(part=>{
+    if(/^@[\w-]+$/.test(part)){
+      const a=document.createElement('a');a.className='mention-link';
+      a.href=`https://www.chess.com/member/${part.slice(1)}`;a.target='_blank';a.rel='noopener noreferrer';a.textContent=part;return a;
+    }return document.createTextNode(part);
+  });
+}
+function setTextWithMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
+
+function repeatLabel(rep){
+  if(!rep||rep.type==='none')return'';
+  if(rep.type==='weekly')return'🔄 WEEKLY';
+  if(rep.type==='weekly-range'){const f=rep.from,t=rep.to;return`🔄 WEEKLY · ${MONTH_SHORT[f.m]} ${f.d} → ${MONTH_SHORT[t.m]} ${t.d}`;}
+  return'';
+}
+
+/* ── LOAD SHEET ─────────────────────────────────────────────────────── */
+async function loadSheet(){
+  try{
+    const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{Accept:'application/json'}});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    const rawEvents=[];
+    data.forEach(ev=>{
+      if(!ev.date||!ev.title)return;
+      const dateObj=parseDate(ev.date);if(!dateObj)return;
+      const rawLogo=(ev.logo||'').trim();
+      const proxied=isURL(rawLogo)?proxyImageURL(rawLogo):null;
+      const logoDisplay=proxied||rawLogo;
+      const rep=parseRepeat(ev.repeat||'');
+      rawEvents.push({dateObj,timeObj:parseTime(ev.time),duration:parseFloat(ev.duration)||0,
+        title:(ev.title||'').trim(),details:(ev.details||'').trim(),link:(ev.link||'').trim(),
+        rawLogo,logo:logoDisplay,isProxied:!!proxied,
+        organizer:(ev.organizer||'').trim().replace(/^@/,''),message:(ev.message||'').trim(),
+        repeat:rep,rawRepeat:(ev.repeat||'').trim(),
+      });
+      if(proxied)preloadImg(proxied);
+    });
+    buildEventMap(rawEvents);
+    buildCalendar();
+    document.getElementById('tifCalWrap').classList.add('loaded');
+    window._tifRawEvents=rawEvents;
+  }catch(e){
+    console.error('Sheet load failed:',e);
+    buildCalendar();
+    document.getElementById('tifCalWrap').classList.add('loaded');
+  }
+}
+
+function buildEventMap(rawEvents){
+  eventMap={};if(!rawEvents)return;
+  rawEvents.forEach(ev=>{
+    expandEvent(ev).forEach(inst=>{
+      const d=inst.dateObjActual,k=dateKey(d.y,d.m,d.d);
+      if(!eventMap[k])eventMap[k]=[];eventMap[k].push(inst);
+    });
+  });
+}
+
+/* ── CALENDAR RENDER ────────────────────────────────────────────────── */
+const monthLabel=document.getElementById('monthLabel');
+const calHead=document.getElementById('calHead');
+const calBody=document.getElementById('calBody');
+
+function buildCalendar(){
+  if(window._tifRawEvents)buildEventMap(window._tifRawEvents);
+  monthLabel.textContent=MONTHS[viewMonth]+' '+viewYear;
+  calHead.innerHTML='';
+  DAY_LABELS.forEach(label=>{
+    const c=document.createElement('div');c.className='cal-head-cell';c.textContent=label;calHead.appendChild(c);
+  });
+  calBody.innerHTML='';
+  const first=dowMon(viewYear,viewMonth,1),last=lastDay(viewYear,viewMonth);
+  const prevM=viewMonth===0?11:viewMonth-1,prevY=viewMonth===0?viewYear-1:viewYear;
+  const nextM=viewMonth===11?0:viewMonth+1,nextY=viewMonth===11?viewYear+1:viewYear;
+  const totalCells=42;
+  for(let i=0;i<first;i++) calBody.appendChild(makeCell(prevY,prevM,lastDay(prevY,prevM)-first+1+i,true,i,totalCells,first,last));
+  for(let d=1;d<=last;d++) calBody.appendChild(makeCell(viewYear,viewMonth,d,false,first+d-1,totalCells,first,last));
+  const filled=first+last;
+  for(let d=1;filled+d-1<totalCells;d++) calBody.appendChild(makeCell(nextY,nextM,d,true,filled+d-1,totalCells,first,last));
+  requestAnimationFrame(applyCellWidth);
+}
+
+function applyCellWidth(){
+  const cells=calBody.querySelectorAll('.cal-cell');if(!cells.length)return;
+  const r=cells[0].getBoundingClientRect();const cW=r.width,cH=r.height;if(cW<1||cH<1)return;
+  cells.forEach(cell=>{
+    cell.querySelectorAll('.evt-icons').forEach(wrap=>{
+      const n=parseInt(wrap.dataset.count)||1,icons=wrap.querySelectorAll('.evt');
+      const base=Math.min(cW,cH),ratio=n===1?.55:n===2?.42:.27,ico=base*ratio;
+      const space=(cW-ico*n)/(n+1);
+      icons.forEach((icoEl,i)=>{
+        icoEl.style.setProperty('--ico',ico.toFixed(2)+'px');
+        icoEl.style.marginLeft=space.toFixed(2)+'px';
+        icoEl.style.marginRight=(i===n-1?space:0).toFixed(2)+'px';
+      });
+    });
+  });
+}
+
+function makeCell(y,m,d,overflow,cellIdx,totalCells,first,last){
+  const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
+  // Determine if this is in the last row (cells 35-41)
+  const isLastRow=cellIdx>=35;
+  const cell=document.createElement('div');
+  let cls='cal-cell';
+  if(isToday)cls+=' today';
+  if(overflow)cls+=' overflow';
+  if(isLastRow)cls+=' last-row';
+  cell.className=cls;
+
+  const wrap0=document.createElement('div');wrap0.className='day-num-wrap';
+  const num=document.createElement('div');num.className='day-num';num.textContent=d;
+  wrap0.appendChild(num);
+
+  const events=eventMap[dateKey(y,m,d)]||[];
+  if(!overflow&&events.length){
+    const dotCls=cellDotClass(events);
+    if(dotCls){const dot=document.createElement('div');dot.className='status-dot '+dotCls;wrap0.appendChild(dot);}
+  }
+  cell.appendChild(wrap0);
+
+  if(events.length){
+    const wrap=document.createElement('div');wrap.className='evt-icons';wrap.dataset.count=String(events.length);
+    events.forEach(ev=>{
+      const ico=document.createElement('div');ico.className='evt';
+      if(ev.isProxied){
+        const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
+        const img=document.createElement('img');img.alt=ev.title;img.loading='eager';img.decoding='async';ico.appendChild(img);
+        onImgReady(ev.logo,state=>{
+          if(state==='ok'){img.src=ev.logo;const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();}
+          else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='🔥';ico.appendChild(em);}
+        });
+      }else{
+        const em=document.createElement('span');em.className='evt-emoji';
+        em.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'🔥';ico.appendChild(em);
+      }
+      if(!overflow){
+        ico.addEventListener('mouseenter',e=>{cancelLeave();if(!tipPinned){renderTip(ev,y,m,d);tip.classList.add('show');posTip(e);}});
+        ico.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
+        ico.addEventListener('mousemove',e=>{if(!tipPinned)posTip(e);});
+        ico.addEventListener('click',e=>{e.stopPropagation();pinTip(e,ev,y,m,d);});
+        ico.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();pinTip(e.changedTouches[0],ev,y,m,d);},{passive:false});
+      }
+      wrap.appendChild(ico);
+    });
+    cell.appendChild(wrap);
+  }
+  return cell;
+}
+
+/* ── TOOLTIP ────────────────────────────────────────────────────────── */
+const tip=document.getElementById('globalTip');
+const tipLogo=document.getElementById('tipLogo');
+const tipTitle=document.getElementById('tipTitle');
+const tipDateBadge=document.getElementById('tipDateBadge');
+const tipCountdown=document.getElementById('tipCountdown');
+const tipRepBadge=document.getElementById('tipRepeatBadge');
+const tipDetail=document.getElementById('tipDetail');
+const tipMsg=document.getElementById('tipMsg');
+const tipQuoteBlock=document.getElementById('tipQuoteBlock');
+const tipQuoteLbl=document.getElementById('tipQuoteLbl');
+const tipBottomRow=document.getElementById('tipBottomRow');
+const tipClose=document.getElementById('tipClose');
+
+let tipPinned=false,countdownTimer=null,leaveTimer=null;
+const LEAVE_DELAY=120;
+const scheduleLeave=()=>{leaveTimer=setTimeout(()=>{leaveTimer=null;hideTip();},LEAVE_DELAY);};
+const cancelLeave=()=>{if(leaveTimer){clearTimeout(leaveTimer);leaveTimer=null;}};
+const hideTip=()=>{tipPinned=false;tip.classList.remove('show');clearInterval(countdownTimer);countdownTimer=null;};
+const pinTip=(e,ev,y,m,d)=>{cancelLeave();tipPinned=true;renderTip(ev,y,m,d);tip.classList.add('show');posTip(e);};
+
+tip.addEventListener('mouseenter',cancelLeave);
+tip.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
+tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
+tipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideTip();},{passive:false});
+
+function renderTip(ev,y,m,d){
+  tipLogo.innerHTML='';
+  if(ev.isProxied){
+    const skel=document.createElement('div');skel.className='tip-logo-skeleton';tipLogo.appendChild(skel);
+    const img=document.createElement('img');img.alt=ev.title;img.decoding='async';tipLogo.appendChild(img);
+    onImgReady(ev.logo,state=>{
+      if(state==='ok'){img.src=ev.logo;const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();}
+      else{skel.remove();tipLogo.textContent='🔥';}
+    });
+  }else{tipLogo.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'🔥';}
+  tipTitle.textContent=ev.title;
+  tipDateBadge.textContent=ev.timeObj?`${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`:formatDate(y,m,d);
+  clearInterval(countdownTimer);countdownTimer=null;
+  const dObj={y,m,d},st=getPhase(ev,dObj);
+  if(st){
+    tipCountdown.style.display='flex';
+    const update=()=>{const s=getPhase(ev,dObj);if(!s)return;tipCountdown.className='tip-countdown '+s.cssClass;tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;};
+    update();countdownTimer=setInterval(update,st.status==='live'?60000:30000);
+  }else tipCountdown.style.display='none';
+  const repLbl=repeatLabel(ev.repeat);
+  if(repLbl){tipRepBadge.textContent=repLbl;tipRepBadge.style.display='inline-flex';}else tipRepBadge.style.display='none';
+  tipDetail.textContent=ev.details;tipDetail.style.display=ev.details?'block':'none';
+  if(ev.message){setTextWithMentions(tipMsg,ev.message);tipQuoteLbl.textContent=ev.organizer?`Message from @${ev.organizer}`:'Message from organizer';tipQuoteBlock.style.display='block';}
+  else tipQuoteBlock.style.display='none';
+  tipBottomRow.innerHTML='';
+  if(ev.organizer){const a=document.createElement('a');a.className='tip-organizer';a.href=`https://www.chess.com/member/${ev.organizer}`;a.target='_blank';a.rel='noopener noreferrer';a.innerHTML=`♟ @${ev.organizer}`;tipBottomRow.appendChild(a);}
+  if(ev.link){const a=document.createElement('a');a.className='tip-btn';a.href=ev.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='JOIN 🔥';tipBottomRow.appendChild(a);}
+}
+
+function posTip(e){
+  const TW=265,TH=230,vw=window.innerWidth,vh=window.innerHeight;
+  const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+  if(isTouchDevice){tip.style.left='';tip.style.top='';return;}
+  let x=e.clientX+14,y=e.clientY+14;
+  if(x+TW>vw-8)x=e.clientX-TW-14;if(y+TH>vh-8)y=e.clientY-TH-14;
+  x=Math.max(6,x);y=Math.max(6,y);
+  tip.style.left=x+'px';tip.style.top=y+'px';
+}
+
+document.addEventListener('click',e=>{if(!tip.contains(e.target))hideTip();});
+document.addEventListener('touchstart',e=>{if(!tip.contains(e.target)&&tipPinned)hideTip();},{passive:true});
+document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
+document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
+new ResizeObserver(()=>{requestAnimationFrame(applyCellWidth);}).observe(calBody);
+
+loadSheet();
+</script>
+</body>
+</html>
