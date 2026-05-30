@@ -271,7 +271,7 @@ function update(){
   // EARLY
   const e = countdown(EARLY);
   if(!e){
-    const ended = now > EARLY.getTime() + 2.5*3600000;
+    const ended = now > EARLY.getTime() + 1*3600000;
     setBadge('badge1', ended ? 'ended' : 'live');
     document.getElementById('cdwrap1').innerHTML = `<div class="cd-msg">${ended ? '✅ Ended' : '🔴 Live!'}</div>`;
   } else {
@@ -284,7 +284,7 @@ function update(){
   // LATE
   const l = countdown(LATE);
   if(!l){
-    const ended = now > LATE.getTime() + 2.5*3600000;
+    const ended = now > LATE.getTime() + 1*3600000;
     setBadge('badge2', ended ? 'ended' : 'live');
     document.getElementById('cdwrap2').innerHTML = `<div class="cd-msg">${ended ? '✅ Ended' : '🔴 Live!'}</div>`;
   } else {
