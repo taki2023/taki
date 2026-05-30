@@ -41,15 +41,16 @@ html,body{background:transparent;font-family:'Nunito',sans-serif;width:100%;}
   padding:10px 10px 11px;display:flex;flex-direction:column;gap:8px;
   box-shadow:0 2px 10px rgba(217,48,32,.07);min-width:0;
 }
-.t-header{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;}
+.t-header{display:flex;flex-direction:row;align-items:center;gap:8px;text-align:left;}
 .t-logo{
-  width:38px;height:38px;border-radius:9px;border:2px solid var(--border);
+  width:36px;height:36px;border-radius:9px;border:2px solid var(--border);
   background:#fff8f5;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;
 }
-.t-logo img{width:28px;height:28px;object-fit:contain;}
-.t-label{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.1;}
-.t-meta{font-size:9px;font-weight:800;color:var(--text-mid);opacity:.8;}
-.badge-wrap{display:flex;justify-content:center;}
+.t-logo img{width:26px;height:26px;object-fit:contain;}
+.t-text{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0;}
+.t-label{font-family:'Fredoka One',cursive;font-size:12.5px;color:var(--red-dark);line-height:1.1;}
+.t-meta{font-size:8.5px;font-weight:800;color:var(--text-mid);opacity:.8;}
+.badge-wrap{display:flex;justify-content:flex-start;}
 
 /* Badges */
 .live-badge,.soon-badge,.upcoming-badge,.ended-badge{
@@ -109,7 +110,7 @@ html,body{background:transparent;font-family:'Nunito',sans-serif;width:100%;}
 .diamond-meta{font-size:10px;font-weight:800;color:#7b1fa2;opacity:.8;margin-top:2px;}
 
 .wheel-section{display:flex;align-items:center;justify-content:center;gap:14px;}
-.wheel-svg{animation:spin 5s linear infinite;}
+.wheel-img{width:80px;height:80px;object-fit:contain;animation:spin 5s linear infinite;flex-shrink:0;}
 @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 
 .wheel-cd-col{display:flex;flex-direction:column;gap:3px;align-items:center;}
@@ -164,9 +165,11 @@ html,body{background:transparent;font-family:'Nunito',sans-serif;width:100%;}
           <div class="t-logo">
             <img src="https://www.chess.com/bundles/web/images/color-icons/tournaments.svg" alt="Tournament" onerror="this.parentElement.textContent='♟️'">
           </div>
-          <div class="t-label">Early Swiss 🌅</div>
-          <div class="t-meta">12:00 UTC · 11 rounds</div>
-          <div class="badge-wrap" id="badge1"></div>
+          <div class="t-text">
+            <div class="t-label">Early Swiss 🌅</div>
+            <div class="t-meta">12:00 UTC · 11 rounds</div>
+            <div class="badge-wrap" id="badge1"></div>
+          </div>
         </div>
         <div class="cd-row" id="cdwrap1">
           <div class="cd-seg"><div class="cd-num" id="e-h">--</div><div class="cd-unit">HRS</div></div>
@@ -184,9 +187,11 @@ html,body{background:transparent;font-family:'Nunito',sans-serif;width:100%;}
           <div class="t-logo">
             <img src="https://www.chess.com/bundles/web/images/color-icons/tournaments.svg" alt="Tournament" onerror="this.parentElement.textContent='♟️'">
           </div>
-          <div class="t-label">Late Swiss 🌙</div>
-          <div class="t-meta">18:00 UTC · 11 rounds</div>
-          <div class="badge-wrap" id="badge2"></div>
+          <div class="t-text">
+            <div class="t-label">Late Swiss 🌙</div>
+            <div class="t-meta">18:00 UTC · 11 rounds</div>
+            <div class="badge-wrap" id="badge2"></div>
+          </div>
         </div>
         <div class="cd-row" id="cdwrap2">
           <div class="cd-seg"><div class="cd-num" id="l-h">--</div><div class="cd-unit">HRS</div></div>
@@ -217,20 +222,10 @@ html,body{background:transparent;font-family:'Nunito',sans-serif;width:100%;}
       </div>
 
       <div class="wheel-section">
-        <svg class="wheel-svg" width="72" height="72" viewBox="0 0 72 72">
-          <circle cx="36" cy="36" r="33" fill="none" stroke="rgba(106,13,173,.12)" stroke-width="5"/>
-          <path d="M36 3 A33 33 0 0 1 69 36" fill="none" stroke="#9c27b0" stroke-width="5" stroke-linecap="round"/>
-          <path d="M69 36 A33 33 0 0 1 36 69" fill="none" stroke="#e040fb" stroke-width="5" stroke-linecap="round"/>
-          <path d="M36 69 A33 33 0 0 1 3 36" fill="none" stroke="#ce93d8" stroke-width="5" stroke-linecap="round"/>
-          <path d="M3 36 A33 33 0 0 1 36 3" fill="none" stroke="#6a0dad" stroke-width="5" stroke-linecap="round"/>
-          <line x1="36" y1="3" x2="36" y2="69" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
-          <line x1="3" y1="36" x2="69" y2="36" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
-          <line x1="12.6" y1="12.6" x2="59.4" y2="59.4" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
-          <line x1="59.4" y1="12.6" x2="12.6" y2="59.4" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
-          <circle cx="36" cy="36" r="8" fill="#6a0dad"/>
-          <circle cx="36" cy="36" r="4" fill="#e040fb"/>
-          <polygon points="36,1 39.5,12 32.5,12" fill="#d93020"/>
-        </svg>
+        <img class="wheel-img"
+          src="https://raw.githubusercontent.com/taki2023/taki/main/wheel.png"
+          alt="Spinning wheel"
+          onerror="this.style.display='none'">
         <div class="wheel-cd-col">
           <div class="wheel-cd-label">STARTS IN</div>
           <div class="wheel-cd-row">
