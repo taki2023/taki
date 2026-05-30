@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCC Anniversary Event</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red-dark:#d93020;--red-mid:#e85535;--red-border:#e8553a;
+  --bg:#fff5f0;--card:#fff;--border:#f5c5b8;
+  --text-dark:#c73520;--text-mid:#9a2010;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:transparent;font-family:'Nunito',sans-serif;width:100%;}
+
+.widget{
+  background:var(--bg);
+  border-radius:28px;border:3px solid var(--red-border);
+  overflow:hidden;box-shadow:0 8px 32px rgba(217,48,32,.12);
+  width:100%;
+}
+
+/* Banner */
+.banner{
+  background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  padding:12px 16px 20px;text-align:center;position:relative;overflow:hidden;
+}
+.banner::before{content:'';position:absolute;bottom:-10px;left:-10%;width:120%;height:22px;background:var(--bg);border-radius:50%;}
+.banner::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 14px,rgba(255,255,255,.04) 14px,rgba(255,255,255,.04) 28px);}
+.banner-title{font-family:'Fredoka One',cursive;font-size:20px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.22);position:relative;z-index:1;}
+.banner-sub{font-size:11px;font-weight:800;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
+
+.body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px;}
+
+/* Two-column row for both swiss */
+.swiss-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+.t-card{
+  background:var(--card);border:2px solid var(--border);border-radius:16px;
+  padding:10px 10px 11px;display:flex;flex-direction:column;gap:8px;
+  box-shadow:0 2px 10px rgba(217,48,32,.07);min-width:0;
+}
+.t-header{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;}
+.t-logo{
+  width:38px;height:38px;border-radius:9px;border:2px solid var(--border);
+  background:#fff8f5;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;
+}
+.t-logo img{width:28px;height:28px;object-fit:contain;}
+.t-label{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.1;}
+.t-meta{font-size:9px;font-weight:800;color:var(--text-mid);opacity:.8;}
+.badge-wrap{display:flex;justify-content:center;}
+
+/* Badges */
+.live-badge,.soon-badge,.upcoming-badge,.ended-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:9px;font-weight:900;border-radius:999px;padding:2px 7px;white-space:nowrap;border:1.5px solid;
+}
+.live-badge{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:pulse-r 1.4s ease-in-out infinite;}
+.soon-badge{color:#2e7d32;background:#e8f5e9;border-color:#a5d6a7;animation:pulse-g 1.6s ease-in-out infinite;}
+.upcoming-badge{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
+.ended-badge{color:#555;background:#f5f5f5;border-color:#ccc;}
+@keyframes pulse-r{0%,100%{opacity:1;}50%{opacity:.6;}}
+@keyframes pulse-g{0%,100%{opacity:1;}50%{opacity:.85;}}
+.dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+/* Countdown — fixed-width digits to prevent layout shift */
+.cd-row{
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  background:linear-gradient(135deg,rgba(217,48,32,.05),rgba(239,102,64,.03));
+  border:1.5px solid rgba(217,48,32,.15);border-radius:10px;padding:6px 4px;
+}
+.cd-seg{display:flex;flex-direction:column;align-items:center;gap:1px;}
+.cd-num{
+  font-family:'Fredoka One',cursive;font-size:20px;color:var(--red-dark);line-height:1;
+  /* fixed width so digits don't cause reflow */
+  width:2ch;text-align:center;font-variant-numeric:tabular-nums;
+  display:inline-block;
+}
+.cd-unit{font-size:7px;font-weight:900;color:var(--text-mid);letter-spacing:.7px;text-transform:uppercase;}
+.cd-sep{font-family:'Fredoka One',cursive;font-size:18px;color:rgba(217,48,32,.35);align-self:flex-start;margin-top:1px;flex-shrink:0;}
+.cd-msg{font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);text-align:center;width:100%;padding:2px 0;}
+
+.join-btn{
+  display:block;text-align:center;font-family:'Fredoka One',cursive;font-size:12px;
+  color:#fff;background:linear-gradient(135deg,#d93020,#e85535);
+  padding:7px 8px;border-radius:999px;text-decoration:none;
+  box-shadow:0 2px 0 #8c1a10;transition:transform .15s,box-shadow .15s;
+  letter-spacing:.2px;
+}
+.join-btn:hover{transform:translateY(-1px);box-shadow:0 4px 0 #8c1a10;}
+
+/* Divider */
+.divider{display:flex;align-items:center;gap:8px;padding:0 4px;}
+.divider-line{flex:1;height:1.5px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
+.divider-label{font-family:'Fredoka One',cursive;font-size:9.5px;color:var(--text-mid);opacity:.6;white-space:nowrap;}
+
+/* Diamond */
+.diamond-card{
+  background:linear-gradient(135deg,rgba(106,13,173,.06),rgba(176,66,245,.03));
+  border:2px solid rgba(176,66,245,.3);border-radius:16px;
+  padding:11px 13px;display:flex;flex-direction:column;gap:9px;
+  box-shadow:0 2px 10px rgba(106,13,173,.06);
+}
+.diamond-header{display:flex;align-items:center;gap:10px;}
+.diamond-icon-wrap{font-size:30px;line-height:1;flex-shrink:0;}
+.diamond-info{flex:1;}
+.diamond-title{font-family:'Fredoka One',cursive;font-size:14px;color:#6a0dad;line-height:1.1;}
+.diamond-meta{font-size:10px;font-weight:800;color:#7b1fa2;opacity:.8;margin-top:2px;}
+
+.wheel-section{display:flex;align-items:center;justify-content:center;gap:14px;}
+.wheel-svg{animation:spin 5s linear infinite;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+.wheel-cd-col{display:flex;flex-direction:column;gap:3px;align-items:center;}
+.wheel-cd-label{font-family:'Fredoka One',cursive;font-size:10px;color:#7b1fa2;letter-spacing:.5px;}
+.wheel-cd-row{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(106,13,173,.06);border:1.5px solid rgba(176,66,245,.25);
+  border-radius:10px;padding:6px 10px;
+}
+.wcd-seg{display:flex;flex-direction:column;align-items:center;gap:1px;}
+.wcd-num{
+  font-family:'Fredoka One',cursive;font-size:22px;color:#6a0dad;line-height:1;
+  width:2ch;text-align:center;font-variant-numeric:tabular-nums;display:inline-block;
+}
+.wcd-unit{font-size:8px;font-weight:900;color:#7b1fa2;letter-spacing:.7px;text-transform:uppercase;}
+.wcd-sep{font-family:'Fredoka One',cursive;font-size:20px;color:rgba(106,13,173,.35);align-self:flex-start;margin-top:1px;flex-shrink:0;}
+
+.diamond-hint{font-size:10px;font-weight:800;color:#7b1fa2;text-align:center;opacity:.8;}
+
+.details-btn{
+  display:block;text-align:center;font-family:'Fredoka One',cursive;font-size:12.5px;
+  color:#6a0dad;background:rgba(106,13,173,.08);
+  border:2px solid rgba(176,66,245,.4);
+  padding:7px 16px;border-radius:999px;text-decoration:none;
+  transition:background .15s,border-color .15s;letter-spacing:.3px;
+}
+.details-btn:hover{background:rgba(106,13,173,.15);border-color:rgba(176,66,245,.7);}
+
+.footer{
+  text-align:center;font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.4px;
+  background:linear-gradient(135deg,#d93020,#ef6640);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));padding-top:2px;
+}
+</style>
+</head>
+<body>
+<div class="widget">
+  <div class="banner">
+    <div class="banner-title">🏆 Half-Year Anniversary Event! 🌶️</div>
+    <div class="banner-sub">Hot Chilli CheckMate · Saturday, May 30</div>
+  </div>
+
+  <div class="body">
+
+    <!-- TWO SWISS SIDE BY SIDE -->
+    <div class="swiss-row">
+
+      <!-- EARLY SWISS -->
+      <div class="t-card">
+        <div class="t-header">
+          <div class="t-logo">
+            <img src="https://www.chess.com/bundles/web/images/color-icons/tournaments.svg" alt="Tournament" onerror="this.parentElement.textContent='♟️'">
+          </div>
+          <div class="t-label">Early Swiss 🌅</div>
+          <div class="t-meta">12:00 UTC · 11 rounds</div>
+          <div class="badge-wrap" id="badge1"></div>
+        </div>
+        <div class="cd-row" id="cdwrap1">
+          <div class="cd-seg"><div class="cd-num" id="e-h">--</div><div class="cd-unit">HRS</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-seg"><div class="cd-num" id="e-m">--</div><div class="cd-unit">MIN</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-seg"><div class="cd-num" id="e-s">--</div><div class="cd-unit">SEC</div></div>
+        </div>
+        <a class="join-btn" href="https://www.chess.com/play/tournament/6486683" target="_blank" rel="noopener">♟ Join →</a>
+      </div>
+
+      <!-- LATE SWISS -->
+      <div class="t-card">
+        <div class="t-header">
+          <div class="t-logo">
+            <img src="https://www.chess.com/bundles/web/images/color-icons/tournaments.svg" alt="Tournament" onerror="this.parentElement.textContent='♟️'">
+          </div>
+          <div class="t-label">Late Swiss 🌙</div>
+          <div class="t-meta">18:00 UTC · 11 rounds</div>
+          <div class="badge-wrap" id="badge2"></div>
+        </div>
+        <div class="cd-row" id="cdwrap2">
+          <div class="cd-seg"><div class="cd-num" id="l-h">--</div><div class="cd-unit">HRS</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-seg"><div class="cd-num" id="l-m">--</div><div class="cd-unit">MIN</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-seg"><div class="cd-num" id="l-s">--</div><div class="cd-unit">SEC</div></div>
+        </div>
+        <a class="join-btn" href="https://www.chess.com/play/tournament/6486689" target="_blank" rel="noopener">♟ Join →</a>
+      </div>
+
+    </div><!-- end swiss-row -->
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-label">💎 GRAND PRIZE DRAW</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- DIAMOND WHEEL -->
+    <div class="diamond-card">
+      <div class="diamond-header">
+        <div class="diamond-icon-wrap">💎</div>
+        <div class="diamond-info">
+          <div class="diamond-title">Diamond Membership Giveaway</div>
+          <div class="diamond-meta">Spinning Wheel · May 31 · 12:00 UTC</div>
+        </div>
+      </div>
+
+      <div class="wheel-section">
+        <svg class="wheel-svg" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="33" fill="none" stroke="rgba(106,13,173,.12)" stroke-width="5"/>
+          <path d="M36 3 A33 33 0 0 1 69 36" fill="none" stroke="#9c27b0" stroke-width="5" stroke-linecap="round"/>
+          <path d="M69 36 A33 33 0 0 1 36 69" fill="none" stroke="#e040fb" stroke-width="5" stroke-linecap="round"/>
+          <path d="M36 69 A33 33 0 0 1 3 36" fill="none" stroke="#ce93d8" stroke-width="5" stroke-linecap="round"/>
+          <path d="M3 36 A33 33 0 0 1 36 3" fill="none" stroke="#6a0dad" stroke-width="5" stroke-linecap="round"/>
+          <line x1="36" y1="3" x2="36" y2="69" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
+          <line x1="3" y1="36" x2="69" y2="36" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
+          <line x1="12.6" y1="12.6" x2="59.4" y2="59.4" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
+          <line x1="59.4" y1="12.6" x2="12.6" y2="59.4" stroke="rgba(106,13,173,.18)" stroke-width="1.5"/>
+          <circle cx="36" cy="36" r="8" fill="#6a0dad"/>
+          <circle cx="36" cy="36" r="4" fill="#e040fb"/>
+          <polygon points="36,1 39.5,12 32.5,12" fill="#d93020"/>
+        </svg>
+        <div class="wheel-cd-col">
+          <div class="wheel-cd-label">STARTS IN</div>
+          <div class="wheel-cd-row">
+            <div class="wcd-seg"><div class="wcd-num" id="d-h">--</div><div class="wcd-unit">HRS</div></div>
+            <div class="wcd-sep">:</div>
+            <div class="wcd-seg"><div class="wcd-num" id="d-m">--</div><div class="wcd-unit">MIN</div></div>
+            <div class="wcd-sep">:</div>
+            <div class="wcd-seg"><div class="wcd-num" id="d-s">--</div><div class="wcd-unit">SEC</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diamond-hint">🎯 Score more points → bigger slice on the wheel</div>
+
+      <a class="details-btn" href="https://www.chess.com/announcements/view/diamond-membership-giveaway-tournament-1" target="_blank" rel="noopener">📢 Full Event Details →</a>
+    </div>
+
+    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
+  </div>
+</div>
+
+<script>
+const pad = n => String(n).padStart(2,'0');
+const EARLY   = new Date('2026-05-30T12:00:00Z');
+const LATE    = new Date('2026-05-30T18:00:00Z');
+const DIAMOND = new Date('2026-05-31T12:00:00Z');
+
+function countdown(target){
+  const diff = target - Date.now();
+  if(diff <= 0) return null;
+  const s = Math.floor(diff/1000);
+  return {h:Math.floor(s/3600), m:Math.floor((s%3600)/60), s:s%60, diff};
+}
+
+function setBadge(id, type){
+  const el = document.getElementById(id);
+  const labels = {live:'🔴 Live', soon:'⚡ Soon', upcoming:'Upcoming', ended:'✅ Ended'};
+  el.innerHTML = `<div class="${type}-badge"><span class="dot"></span>${labels[type]}</div>`;
+}
+
+function update(){
+  const now = Date.now();
+
+  // EARLY
+  const e = countdown(EARLY);
+  if(!e){
+    const ended = now > EARLY.getTime() + 2.5*3600000;
+    setBadge('badge1', ended ? 'ended' : 'live');
+    document.getElementById('cdwrap1').innerHTML = `<div class="cd-msg">${ended ? '✅ Ended' : '🔴 Live!'}</div>`;
+  } else {
+    setBadge('badge1', e.diff <= 3600000 ? 'soon' : 'upcoming');
+    document.getElementById('e-h').textContent = pad(e.h);
+    document.getElementById('e-m').textContent = pad(e.m);
+    document.getElementById('e-s').textContent = pad(e.s);
+  }
+
+  // LATE
+  const l = countdown(LATE);
+  if(!l){
+    const ended = now > LATE.getTime() + 2.5*3600000;
+    setBadge('badge2', ended ? 'ended' : 'live');
+    document.getElementById('cdwrap2').innerHTML = `<div class="cd-msg">${ended ? '✅ Ended' : '🔴 Live!'}</div>`;
+  } else {
+    setBadge('badge2', l.diff <= 3600000 ? 'soon' : 'upcoming');
+    document.getElementById('l-h').textContent = pad(l.h);
+    document.getElementById('l-m').textContent = pad(l.m);
+    document.getElementById('l-s').textContent = pad(l.s);
+  }
+
+  // DIAMOND
+  const d = countdown(DIAMOND);
+  if(!d){
+    document.getElementById('d-h').textContent = '00';
+    document.getElementById('d-m').textContent = '00';
+    document.getElementById('d-s').textContent = '00';
+  } else {
+    document.getElementById('d-h').textContent = pad(d.h);
+    document.getElementById('d-m').textContent = pad(d.m);
+    document.getElementById('d-s').textContent = pad(d.s);
+  }
+}
+
+update();
+setInterval(update, 1000);
+</script>
+</body>
+</html>
