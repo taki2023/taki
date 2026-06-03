@@ -28,7 +28,9 @@
 html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-serif;}
 
 /* WRAPPER */
-.tif-cal-wrap{width:100%;background:var(--bg0);border-radius:10px;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:440px;}
+.tif-cal-wrap{width:100%;background:var(--bg0);border-radius:10px;
+  /* KEY FIX: position:relative so the tooltip can be contained inside */
+  position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:440px;}
 .tif-cal-wrap::before{content:'';position:absolute;inset:-2px;border-radius:12px;z-index:0;background:linear-gradient(135deg,var(--c-blue-mid) 0%,var(--c-blue) 20%,rgba(40,0,80,.6) 45%,var(--c-fire) 70%,var(--c-spark) 100%);}
 .tif-cal-wrap>*{position:relative;z-index:1;}
 .tif-cal-wrap>.cal-banner,.tif-cal-wrap>.cal-skeleton,.tif-cal-wrap>.cal-real{background:var(--bg0);}
@@ -39,6 +41,7 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
 .skel-base{background:linear-gradient(90deg,rgba(60,20,0,.7) 0%,rgba(0,40,80,.5) 30%,rgba(100,35,0,.6) 55%,rgba(0,30,60,.5) 80%,rgba(60,20,0,.7) 100%);background-size:300% 100%;animation:shimmer .95s ease-in-out infinite;border-radius:4px;}
 .cal-skeleton{display:flex;flex-direction:column;gap:9px;padding:14px;flex:1;background:var(--bg0);}
 .skel-nav{display:flex;align-items:center;gap:8px;height:36px;}
+/* FIX: skeleton circles are pure decorative divs, NOT buttons */
 .skel-circle{width:36px;height:36px;min-width:36px;border-radius:50%;}
 .skel-label{flex:1;height:22px;border-radius:6px;}
 .skel-head{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;}
@@ -60,26 +63,17 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
 .cal-real{display:none;background:var(--bg0);}
 .tif-cal-wrap.loaded .cal-real{display:flex;flex-direction:column;}
 
-/* ═══════════════════════════════════════════════
-   HERO BANNER — full TIF sidebar hero design
-   ═══════════════════════════════════════════════ */
+/* HERO BANNER */
 .cal-banner{
-  padding:14px 18px 0;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  flex-shrink:0;
+  padding:14px 18px 0;text-align:center;position:relative;overflow:hidden;flex-shrink:0;
   background:linear-gradient(180deg,#000 0%,#0c0400 100%) !important;
 }
-/* subtle radial glows left/right like sidebar hero */
 .cal-banner::after{
   content:'';position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(ellipse 55% 90% at 8% 50%,rgba(0,80,200,.18) 0%,transparent 60%),
     radial-gradient(ellipse 55% 90% at 92% 50%,rgba(220,60,0,.2) 0%,transparent 60%);
 }
-
-/* ── RUNE RING ── */
 @keyframes spinRing{to{transform:rotate(360deg);}}
 .rune-ring{display:inline-block;width:90px;height:90px;position:relative;}
 .rune-ring svg{position:absolute;inset:0;animation:spinRing 20s linear infinite;}
@@ -89,15 +83,11 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
 .hero-pulse.blue{background:radial-gradient(circle,rgba(0,100,255,.18) 0%,transparent 70%);animation:pulseHero 2.4s ease-in-out infinite;}
 .hero-pulse.fire{background:radial-gradient(circle,rgba(255,80,0,.18) 0%,transparent 70%);animation:pulseHero 2.4s ease-in-out 0.4s infinite;}
 @keyframes pulseHero{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7;}50%{transform:translate(-50%,-50%) scale(1.25);opacity:.25;}}
-
-/* ── TITLE ROW ── */
 .hero-title-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:3;margin-bottom:0;padding:0 6px;}
 .hero-ring-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .hero-name{font-family:'Bebas Neue',cursive;font-size:34px;line-height:.95;color:#fff5e8;letter-spacing:2px;text-shadow:0 0 30px rgba(255,100,0,.5),0 2px 0 rgba(0,0,0,.8);flex-shrink:0;text-align:center;}
 .hero-name span{display:block;font-size:18px;letter-spacing:5px;background:linear-gradient(90deg,var(--c-blaze),var(--c-spark),var(--c-purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-tagline{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;position:relative;z-index:3;}
-
-/* ── SEPARATOR ── */
 @keyframes sepTravelL{0%{left:-30%;opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{left:110%;opacity:0;}}
 @keyframes sepTravelR{0%{right:-30%;opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{right:110%;opacity:0;}}
 @keyframes sepDiamondSpin{to{transform:translate(-50%,-50%) rotate(360deg);}}
@@ -181,9 +171,59 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
 .load-error{padding:10px 16px;margin:0 0 10px;border-radius:6px;background:rgba(200,30,0,.12);border:1.5px solid rgba(255,60,0,.35);font-size:11px;font-weight:700;color:rgba(255,160,80,.85);text-align:center;letter-spacing:.4px;display:none;}
 .load-error.show{display:block;}
 
-/* TOOLTIP */
-.evt-tip{position:fixed;background:linear-gradient(160deg,#050d18 0%,#0a0400 60%,#0e0500 100%);border:2px solid;border-image:linear-gradient(135deg,var(--c-blue-mid),var(--c-purple2),var(--c-fire)) 1;border-radius:10px;padding:12px 14px 11px;box-shadow:0 14px 55px rgba(0,0,0,.95),0 0 24px rgba(0,80,200,.12),0 0 24px rgba(255,80,0,.1);pointer-events:auto;opacity:0;transition:opacity .12s;z-index:99999;min-width:220px;max-width:300px;white-space:normal;font-family:'Barlow Condensed',sans-serif;display:none;flex-direction:column;gap:0;}
+/* ═══════════════════════════════════════════════
+   TOOLTIP — contained inside .tif-cal-wrap
+   On desktop: follows cursor (absolute within wrapper)
+   On mobile: centered modal inside wrapper
+   ═══════════════════════════════════════════════ */
+.evt-tip{
+  /* Absolutely positioned within .tif-cal-wrap (position:relative) */
+  position:absolute;
+  background:linear-gradient(160deg,#050d18 0%,#0a0400 60%,#0e0500 100%);
+  border:2px solid transparent;
+  border-radius:10px;
+  padding:12px 14px 11px;
+  box-shadow:0 14px 55px rgba(0,0,0,.95),0 0 24px rgba(0,80,200,.12),0 0 24px rgba(255,80,0,.1);
+  /* gradient border via outline trick */
+  background-clip:padding-box;
+  outline:2px solid transparent;
+  pointer-events:auto;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:9999;
+  min-width:220px;
+  max-width:min(300px, 90%);
+  white-space:normal;
+  font-family:'Barlow Condensed',sans-serif;
+  display:none;
+  flex-direction:column;
+  gap:0;
+}
+/* Gradient border overlay */
+.evt-tip::before{
+  content:'';position:absolute;inset:-2px;border-radius:12px;
+  background:linear-gradient(135deg,var(--c-blue-mid),var(--c-purple2),var(--c-fire));
+  z-index:-1;
+}
 .evt-tip.show{opacity:1;display:flex;}
+
+/* Mobile: centered within wrapper */
+.evt-tip.mobile-center{
+  left:50% !important;
+  top:50% !important;
+  transform:translate(-50%,-50%) !important;
+  max-width:min(290px, calc(100% - 24px));
+  max-height:80%;
+  overflow-y:auto;
+}
+
+/* Backdrop for mobile */
+.tip-backdrop{
+  position:absolute;inset:0;background:rgba(0,0,0,.6);
+  z-index:9998;display:none;border-radius:10px;
+}
+.tip-backdrop.show{display:block;}
+
 .tip-close{position:absolute;top:8px;right:10px;font-size:13px;font-weight:900;color:var(--c-blue-mid);cursor:pointer;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(0,80,200,.15);z-index:10;border:1px solid rgba(0,100,255,.35);transition:background .15s,transform .15s;user-select:none;}
 .tip-close:hover{background:rgba(0,100,255,.3);transform:scale(1.15);}
 .tip-row1{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
@@ -213,23 +253,16 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
 .tip-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,80,0,.55);}
 .tip-organizer{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;color:var(--c-blue-mid);background:rgba(0,80,200,.12);border:1px solid rgba(0,100,255,.28);border-radius:999px;padding:3px 10px 3px 8px;text-decoration:none;white-space:nowrap;transition:all .15s;pointer-events:auto;}
 .tip-organizer:hover{background:rgba(0,100,255,.22);border-color:rgba(80,160,255,.55);color:var(--c-blue-glow);}
-@media(hover:none)and(pointer:coarse){.evt-tip{position:fixed!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%);width:min(90vw,300px);max-width:min(90vw,300px);max-height:82vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.95),0 0 0 9999px rgba(0,0,0,.6);}.evt-tip.show{display:flex;}}
 </style>
 </head>
 <body>
 
 <div class="tif-cal-wrap" id="tifCalWrap">
 
-  <!-- ═══ HERO BANNER — TIF Sidebar Style ═══ -->
+  <!-- ═══ HERO BANNER ═══ -->
   <div class="cal-banner">
-
-    <!-- Tagline -->
     <div class="hero-tagline">Chess.com · Est. Jan 2025</div>
-
-    <!-- Title row: [blue rune ring] [THE ILLUSION / FIREBALLS] [fire rune ring] -->
     <div class="hero-title-row">
-
-      <!-- LEFT: Blue rune ring -->
       <div class="hero-ring-wrap">
         <div class="hero-pulse blue"></div>
         <div class="rune-ring">
@@ -247,14 +280,10 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
           <div class="rune-center" style="filter:hue-rotate(200deg) saturate(2) brightness(1.1);">🔥</div>
         </div>
       </div>
-
-      <!-- CENTER: Club name -->
       <div class="hero-name">
         The Illusion
         <span>Fireballs</span>
       </div>
-
-      <!-- RIGHT: Fire rune ring -->
       <div class="hero-ring-wrap">
         <div class="hero-pulse fire"></div>
         <div class="rune-ring">
@@ -272,19 +301,16 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
           <div class="rune-center">🔥</div>
         </div>
       </div>
-
-    </div><!-- /hero-title-row -->
-
-    <!-- Animated separator (same as sidebar) -->
+    </div>
     <div class="sep">
       <div class="sep-l"></div>
       <div class="sep-gem"></div>
       <div class="sep-r"></div>
     </div>
+  </div>
 
-  </div><!-- /cal-banner -->
-
-  <!-- SKELETON -->
+  <!-- ═══ SKELETON ═══ -->
+  <!-- FIX: skel-circle are plain divs, never buttons — no nav bleeds in -->
   <div class="cal-skeleton" id="calSkeleton">
     <div class="skel-nav">
       <div class="skel-circle skel-base"></div>
@@ -304,7 +330,7 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
     </div>
   </div>
 
-  <!-- REAL CONTENT -->
+  <!-- ═══ REAL CONTENT ═══ -->
   <div class="cal-real cal-inner" id="calReal">
     <div class="load-error" id="loadError"></div>
     <div class="cal-nav">
@@ -326,30 +352,34 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
     </div>
     <div class="cal-footer">© 2026 · The Illusion Fireballs</div>
   </div>
-</div>
 
-<!-- TOOLTIP -->
-<div class="evt-tip" id="globalTip">
-  <div class="tip-close" id="tipClose">✕</div>
-  <div class="tip-row1">
-    <div class="tip-logo" id="tipLogo"></div>
-    <div class="tip-date-wrap">
-      <div class="tip-title" id="tipTitle"></div>
-      <div class="tip-date-badge" id="tipDateBadge"></div>
+  <!-- ═══ TOOLTIP (inside wrapper for containment) ═══ -->
+  <!-- Backdrop for mobile tap-outside-to-close -->
+  <div class="tip-backdrop" id="tipBackdrop"></div>
+
+  <div class="evt-tip" id="globalTip">
+    <div class="tip-close" id="tipClose">✕</div>
+    <div class="tip-row1">
+      <div class="tip-logo" id="tipLogo"></div>
+      <div class="tip-date-wrap">
+        <div class="tip-title" id="tipTitle"></div>
+        <div class="tip-date-badge" id="tipDateBadge"></div>
+      </div>
     </div>
-  </div>
-  <div class="tip-countdown" id="tipCountdown"></div>
-  <div class="tip-repeat-badge" id="tipRepeatBadge" style="display:none;"></div>
-  <div class="tip-detail" id="tipDetail"></div>
-  <div class="tip-quote-block" id="tipQuoteBlock" style="display:none;">
-    <div class="tip-quote-bar"></div>
-    <div class="tip-quote-inner">
-      <div class="tip-quote-label">🔥 <span id="tipQuoteLbl">Message from organizer</span></div>
-      <div class="tip-quote-text" id="tipMsg"></div>
+    <div class="tip-countdown" id="tipCountdown"></div>
+    <div class="tip-repeat-badge" id="tipRepeatBadge" style="display:none;"></div>
+    <div class="tip-detail" id="tipDetail"></div>
+    <div class="tip-quote-block" id="tipQuoteBlock" style="display:none;">
+      <div class="tip-quote-bar"></div>
+      <div class="tip-quote-inner">
+        <div class="tip-quote-label">🔥 <span id="tipQuoteLbl">Message from organizer</span></div>
+        <div class="tip-quote-text" id="tipMsg"></div>
+      </div>
     </div>
+    <div class="tip-bottom-row" id="tipBottomRow"></div>
   </div>
-  <div class="tip-bottom-row" id="tipBottomRow"></div>
-</div>
+
+</div><!-- /tif-cal-wrap -->
 
 <script>
 const SHEET_API_URL='https://script.google.com/macros/s/AKfycbyQRC0v7VuR2zIygBFJJaDc49r-xkRe2pxaVWpnpqcY-wAlo0ChettGdCl8gkHEtSXF/exec';
@@ -360,7 +390,10 @@ const today=new Date();
 let viewYear=today.getFullYear(),viewMonth=today.getMonth();
 let eventMap={};
 
-/* SKELETON GRID */
+/* ── TOUCH DETECTION ── */
+const isTouch=()=>('ontouchstart' in window)||navigator.maxTouchPoints>0;
+
+/* ── SKELETON GRID ── */
 (function(){
   const grid=document.getElementById('skelGrid');if(!grid)return;
   const y=today.getFullYear(),m=today.getMonth();
@@ -373,7 +406,7 @@ let eventMap={};
   }
 })();
 
-/* IMAGE HELPERS */
+/* ── IMAGE HELPERS ── */
 function proxyImageURL(raw){
   if(!raw)return null;raw=raw.trim();
   if(raw.startsWith('data:'))return raw;
@@ -388,7 +421,7 @@ function preloadImg(url){if(!url||imgMem.has(url))return;imgMem.set(url,'loading
 function notify(url,s){const c=imgCbs.get(url)||[];imgCbs.delete(url);c.forEach(cb=>cb(s));}
 function onImgReady(url,cb){const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}if(!imgCbs.has(url))imgCbs.set(url,[]);imgCbs.get(url).push(cb);if(imgMem.get(url)!=='loading')preloadImg(url);}
 
-/* PARSERS */
+/* ── PARSERS ── */
 const pad=n=>String(n).padStart(2,'0');
 const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
@@ -443,7 +476,7 @@ function expandEvent(ev){
   return[];
 }
 
-/* PHASE / COUNTDOWN */
+/* ── PHASE / COUNTDOWN ── */
 function buildUTC(dObj,tObj){if(!dObj||!tObj)return null;return new Date(Date.UTC(dObj.y,dObj.m,dObj.d,tObj.h,tObj.min,0));}
 function getPhase(ev,dObjOv){
   const dObj=dObjOv||ev.dateObjActual||ev.dateObj;
@@ -475,12 +508,12 @@ function cellDotClass(events){
   return best?'dot-'+best:null;
 }
 
-/* MENTIONS */
+/* ── MENTIONS ── */
 function linkifyMentions(text){return text.split(/(@[\w-]+)/g).map(part=>{if(/^@[\w-]+$/.test(part)){const a=document.createElement('a');a.className='mention-link';a.href=`https://www.chess.com/member/${part.slice(1)}`;a.target='_blank';a.rel='noopener noreferrer';a.textContent=part;return a;}return document.createTextNode(part);});}
 function setTextWithMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
 function repeatLabel(rep){if(!rep||rep.type==='none')return'';if(rep.type==='weekly')return'🔄 WEEKLY';if(rep.type==='weekly-range'){const f=rep.from,t=rep.to;return`🔄 WEEKLY · ${MONTH_SHORT[f.m]} ${f.d} → ${MONTH_SHORT[t.m]} ${t.d}`;}return'';}
 
-/* LOAD SHEET */
+/* ── LOAD SHEET ── */
 async function loadSheet(){
   const errEl=document.getElementById('loadError');
   try{
@@ -524,7 +557,7 @@ function buildEventMap(rawEvents){
   rawEvents.forEach(ev=>{expandEvent(ev).forEach(inst=>{const d=inst.dateObjActual,k=dateKey(d.y,d.m,d.d);if(!eventMap[k])eventMap[k]=[];eventMap[k].push(inst);});});
 }
 
-/* CALENDAR RENDER */
+/* ── CALENDAR RENDER ── */
 const monthLabel=document.getElementById('monthLabel');
 const calHead=document.getElementById('calHead');
 const calBody=document.getElementById('calBody');
@@ -554,11 +587,11 @@ function applyCellWidth(){
 }
 
 function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
-  const isToday=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
+  const isTodayCell=(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
   const isLastRow=cellIdx>=35;
   const cell=document.createElement('div');
   let cls='cal-cell';
-  if(isToday)cls+=' today';if(adjMonth)cls+=' adj-month';if(isLastRow)cls+=' last-row';
+  if(isTodayCell)cls+=' today';if(adjMonth)cls+=' adj-month';if(isLastRow)cls+=' last-row';
   cell.className=cls;
   const wrap0=document.createElement('div');wrap0.className='day-num-wrap';
   const num=document.createElement('div');num.className='day-num';num.textContent=d;
@@ -575,11 +608,36 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
         const img=document.createElement('img');img.alt=ev.title;img.loading='eager';img.decoding='async';ico.appendChild(img);
         onImgReady(ev.logo,state=>{if(state==='ok'){img.src=ev.logo;const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();}else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='🔥';ico.appendChild(em);}});
       }else{const em=document.createElement('span');em.className='evt-emoji';em.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'🔥';ico.appendChild(em);}
-      ico.addEventListener('mouseenter',e=>{cancelLeave();if(!tipPinned){renderTip(ev,y,m,d);tip.classList.add('show');posTip(e);}});
-      ico.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
-      ico.addEventListener('mousemove',e=>{if(!tipPinned)posTip(e);});
-      ico.addEventListener('click',e=>{e.stopPropagation();pinTip(e,ev,y,m,d);});
-      ico.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();pinTip(e.changedTouches[0],ev,y,m,d);},{passive:false});
+
+      /* ── DESKTOP: hover to show, move to track ── */
+      if(!isTouch()){
+        ico.addEventListener('mouseenter',e=>{cancelLeave();if(!tipPinned){renderTip(ev,y,m,d);tip.classList.add('show');posDesktopTip(e);}});
+        ico.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
+        ico.addEventListener('mousemove',e=>{if(!tipPinned)posDesktopTip(e);});
+      }
+
+      /* ── UNIFIED CLICK/TOUCH: single reliable handler ── */
+      ico.addEventListener('click',e=>{
+        e.stopPropagation();
+        e.preventDefault();
+        if(tipPinned&&tip._currentEvKey===`${y}-${m}-${d}-${ev.title}`){
+          hideTip();
+        }else{
+          tip._currentEvKey=`${y}-${m}-${d}-${ev.title}`;
+          renderTip(ev,y,m,d);
+          tipPinned=true;
+          tip.classList.add('show');
+          if(isTouch()){
+            tip.classList.add('mobile-center');
+            backdrop.classList.add('show');
+            tip.style.left='';tip.style.top='';tip.style.transform='';
+          }else{
+            tip.classList.remove('mobile-center');
+            posDesktopTip(e);
+          }
+        }
+      });
+
       wrap.appendChild(ico);
     });
     cell.appendChild(wrap);
@@ -587,51 +645,82 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
   return cell;
 }
 
-/* TOOLTIP */
+/* ── TOOLTIP STATE ── */
 const tip=document.getElementById('globalTip');
+const backdrop=document.getElementById('tipBackdrop');
 const tipLogo=document.getElementById('tipLogo'),tipTitle=document.getElementById('tipTitle'),tipDateBadge=document.getElementById('tipDateBadge');
 const tipCountdown=document.getElementById('tipCountdown'),tipRepBadge=document.getElementById('tipRepeatBadge');
 const tipDetail=document.getElementById('tipDetail'),tipMsg=document.getElementById('tipMsg');
 const tipQuoteBlock=document.getElementById('tipQuoteBlock'),tipQuoteLbl=document.getElementById('tipQuoteLbl');
 const tipBottomRow=document.getElementById('tipBottomRow'),tipClose=document.getElementById('tipClose');
 let tipPinned=false,countdownTimer=null,leaveTimer=null;
+
 const scheduleLeave=()=>{leaveTimer=setTimeout(()=>{leaveTimer=null;hideTip();},130);};
 const cancelLeave=()=>{if(leaveTimer){clearTimeout(leaveTimer);leaveTimer=null;}};
-const hideTip=()=>{tipPinned=false;tip.classList.remove('show');clearInterval(countdownTimer);countdownTimer=null;};
-const pinTip=(e,ev,y,m,d)=>{cancelLeave();tipPinned=true;renderTip(ev,y,m,d);tip.classList.add('show');posTip(e);};
+const hideTip=()=>{tipPinned=false;tip._currentEvKey=null;tip.classList.remove('show','mobile-center');backdrop.classList.remove('show');clearInterval(countdownTimer);countdownTimer=null;};
+
+/* Keep tip alive when hovering over it (desktop) */
 tip.addEventListener('mouseenter',cancelLeave);
 tip.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
-tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
-tipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideTip();},{passive:false});
 
+/* Close button */
+tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
+
+/* Backdrop click closes on mobile */
+backdrop.addEventListener('click',hideTip);
+
+/* Desktop click-outside closes */
+document.addEventListener('click',e=>{
+  if(!tip.contains(e.target)&&!isTouch())hideTip();
+});
+
+/* ── DESKTOP TOOLTIP POSITIONING ── */
+/* Uses getBoundingClientRect relative to the wrapper for absolute positioning */
+function posDesktopTip(e){
+  const wrap=document.getElementById('tifCalWrap');
+  const wRect=wrap.getBoundingClientRect();
+  const TW=275,TH=240;
+  const wW=wRect.width,wH=wRect.height;
+  /* cursor relative to wrapper */
+  let x=(e.clientX-wRect.left)+14;
+  let y=(e.clientY-wRect.top)+14;
+  if(x+TW>wW-6)x=(e.clientX-wRect.left)-TW-14;
+  if(y+TH>wH-6)y=(e.clientY-wRect.top)-TH-14;
+  x=Math.max(4,Math.min(x,wW-TW-4));
+  y=Math.max(4,Math.min(y,wH-TH-4));
+  tip.style.left=x+'px';
+  tip.style.top=y+'px';
+  tip.style.transform='none';
+}
+
+/* ── RENDER TOOLTIP ── */
 function renderTip(ev,y,m,d){
   tipLogo.innerHTML='';
-  if(ev.isProxied){const skel=document.createElement('div');skel.className='tip-logo-skeleton';tipLogo.appendChild(skel);const img=document.createElement('img');img.alt=ev.title;img.decoding='async';tipLogo.appendChild(img);onImgReady(ev.logo,state=>{if(state==='ok'){img.src=ev.logo;const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();}else{skel.remove();tipLogo.textContent='🔥';}});}
-  else{tipLogo.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'🔥';}
+  if(ev.isProxied){
+    const skel=document.createElement('div');skel.className='tip-logo-skeleton';tipLogo.appendChild(skel);
+    const img=document.createElement('img');img.alt=ev.title;img.decoding='async';tipLogo.appendChild(img);
+    onImgReady(ev.logo,state=>{if(state==='ok'){img.src=ev.logo;const finish=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=finish;if(img.complete&&img.naturalWidth>0)finish();}else{skel.remove();tipLogo.textContent='🔥';}});
+  }else{tipLogo.textContent=(ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'🔥';}
   tipTitle.textContent=ev.title;
   tipDateBadge.textContent=ev.timeObj?`${formatDate(y,m,d)} · ${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`:formatDate(y,m,d);
   clearInterval(countdownTimer);countdownTimer=null;
   const dObj={y,m,d},st=getPhase(ev,dObj);
-  if(st){tipCountdown.style.display='flex';const update=()=>{const s=getPhase(ev,dObj);if(!s)return;tipCountdown.className='tip-countdown '+s.cssClass;tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;};update();countdownTimer=setInterval(update,st.status==='live'?60000:30000);}
-  else tipCountdown.style.display='none';
+  if(st){
+    tipCountdown.style.display='flex';
+    const update=()=>{const s=getPhase(ev,dObj);if(!s)return;tipCountdown.className='tip-countdown '+s.cssClass;tipCountdown.innerHTML=`<span class="cd-dot"></span>${s.text}`;};
+    update();countdownTimer=setInterval(update,st.status==='live'?60000:30000);
+  }else tipCountdown.style.display='none';
   const repLbl=repeatLabel(ev.repeat);
   if(repLbl){tipRepBadge.textContent=repLbl;tipRepBadge.style.display='inline-flex';}else tipRepBadge.style.display='none';
   tipDetail.textContent=ev.details;tipDetail.style.display=ev.details?'block':'none';
-  if(ev.message){setTextWithMentions(tipMsg,ev.message);tipQuoteLbl.textContent=ev.organizer?`Message from @${ev.organizer}`:'Message from organizer';tipQuoteBlock.style.display='block';}else tipQuoteBlock.style.display='none';
+  if(ev.message){setTextWithMentions(tipMsg,ev.message);tipQuoteLbl.textContent=ev.organizer?`Message from @${ev.organizer}`:'Message from organizer';tipQuoteBlock.style.display='block';}
+  else tipQuoteBlock.style.display='none';
   tipBottomRow.innerHTML='';
   if(ev.organizer){const a=document.createElement('a');a.className='tip-organizer';a.href=`https://www.chess.com/member/${ev.organizer}`;a.target='_blank';a.rel='noopener noreferrer';a.innerHTML=`♟ @${ev.organizer}`;tipBottomRow.appendChild(a);}
   if(ev.link){const a=document.createElement('a');a.className='tip-btn';a.href=ev.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='JOIN 🔥';tipBottomRow.appendChild(a);}
 }
-function posTip(e){
-  const TW=265,TH=230,vw=window.innerWidth,vh=window.innerHeight;
-  if(('ontouchstart' in window)||navigator.maxTouchPoints>0){tip.style.left='';tip.style.top='';return;}
-  let x=e.clientX+15,y=e.clientY+15;
-  if(x+TW>vw-8)x=e.clientX-TW-15;if(y+TH>vh-8)y=e.clientY-TH-15;
-  x=Math.max(6,x);y=Math.max(6,y);
-  tip.style.left=x+'px';tip.style.top=y+'px';
-}
-document.addEventListener('click',e=>{if(!tip.contains(e.target))hideTip();});
-document.addEventListener('touchstart',e=>{if(!tip.contains(e.target)&&tipPinned)hideTip();},{passive:true});
+
+/* ── NAV ── */
 document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
 document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
 new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
