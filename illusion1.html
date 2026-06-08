@@ -211,12 +211,11 @@ html,body{width:100%;background:#0c0400;}
 .book-card img{width:100%;display:block;height:auto;object-fit:contain;filter:brightness(.85);}
 .book-label{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-spark);}
 
-/* ── NEW TIF CALENDAR WIDGET STYLES ── */
+/* ── TIF CALENDAR WIDGET STYLES ── */
 .tif-cal-wrap{width:100%;background:#080300;border-radius:10px;position:relative;overflow:hidden;display:flex;flex-direction:column;}
 .tif-cal-wrap::before{content:'';position:absolute;inset:-2px;border-radius:12px;z-index:0;background:linear-gradient(135deg,rgba(64,160,255,1) 0%,rgba(0,112,255,1) 20%,rgba(40,0,80,.6) 45%,rgba(212,64,0,1) 70%,rgba(255,184,96,1) 100%);}
 .tif-cal-wrap>*{position:relative;z-index:1;}
-.tif-cal-wrap>.cal-banner-tif,.tif-cal-wrap>.cal-skeleton-tif,.tif-cal-wrap>.cal-real-tif{background:#080300;}
-.tif-cal-wrap>.cal-banner-tif{background:transparent;}
+.tif-cal-wrap>.cal-skeleton-tif,.tif-cal-wrap>.cal-real-tif{background:#080300;}
 
 @keyframes tif-shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
 .tif-skel-base{background:linear-gradient(90deg,#1e0c02 0%,#0a1e3a 20%,#3a1800 40%,#0d2850 60%,#2a1000 80%,#1e0c02 100%);background-size:300% 100%;animation:tif-shimmer 1.3s ease-in-out infinite;border-radius:4px;}
@@ -247,34 +246,6 @@ html,body{width:100%;background:#0c0400;}
 .cal-real-tif{display:none !important;background:#080300;}
 .tif-cal-wrap.loaded .cal-real-tif{display:flex !important;flex-direction:column;}
 
-.cal-banner-tif{padding:14px 18px 0;text-align:center;position:relative;overflow:hidden;flex-shrink:0;background:linear-gradient(180deg,#000 0%,#0c0400 100%) !important;}
-.cal-banner-tif::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 90% at 8% 50%,rgba(0,80,200,.18) 0%,transparent 60%),radial-gradient(ellipse 55% 90% at 92% 50%,rgba(220,60,0,.2) 0%,transparent 60%);}
-@keyframes tif-spinRing{to{transform:rotate(360deg);}}
-.tif-rune-ring{display:inline-block;width:90px;height:90px;position:relative;}
-.tif-rune-ring svg{position:absolute;inset:0;animation:tif-spinRing 20s linear infinite;}
-.tif-rune-ring svg.inner{inset:14px;animation:tif-spinRing 14s linear infinite reverse;}
-.tif-rune-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;filter:drop-shadow(0 0 14px rgba(255,100,0,.7));}
-.tif-hero-pulse{position:absolute;top:50%;left:50%;width:115px;height:115px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;}
-.tif-hero-pulse.blue{background:radial-gradient(circle,rgba(0,100,255,.18) 0%,transparent 70%);animation:tif-pulseHero 2.4s ease-in-out infinite;}
-.tif-hero-pulse.fire{background:radial-gradient(circle,rgba(255,80,0,.18) 0%,transparent 70%);animation:tif-pulseHero 2.4s ease-in-out 0.4s infinite;}
-@keyframes tif-pulseHero{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7;}50%{transform:translate(-50%,-50%) scale(1.25);opacity:.25;}}
-.tif-hero-title-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:3;margin-bottom:0;padding:0 6px;}
-.tif-hero-ring-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tif-hero-name{font-family:'Bebas Neue',cursive;font-size:34px;line-height:.95;color:#fff5e8;letter-spacing:2px;text-shadow:0 0 30px rgba(255,100,0,.5),0 2px 0 rgba(0,0,0,.8);flex-shrink:0;text-align:center;}
-.tif-hero-name span{display:block;font-size:18px;letter-spacing:5px;background:linear-gradient(90deg,#ff6010,#ffb860,#c060ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.tif-hero-tagline{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(255,200,110,.7);margin-bottom:4px;position:relative;z-index:3;}
-@keyframes tif-sepTravelL{0%{left:-30%;opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{left:110%;opacity:0;}}
-@keyframes tif-sepTravelR{0%{right:-30%;opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{right:110%;opacity:0;}}
-@keyframes tif-sepDiamondSpin{to{transform:translate(-50%,-50%) rotate(360deg);}}
-@keyframes tif-sepDiamondPulse{0%,100%{box-shadow:0 0 6px 1px rgba(255,100,0,.3);}50%{box-shadow:0 0 16px 4px rgba(255,140,40,.7);}}
-.tif-sep{margin:8px 16px 0;position:relative;height:18px;display:flex;align-items:center;position:relative;z-index:3;}
-.tif-sep-l{flex:1;height:1px;position:relative;overflow:hidden;background:linear-gradient(90deg,transparent 0%,rgba(40,110,255,.3) 40%,rgba(100,160,255,.65) 100%);}
-.tif-sep-r{flex:1;height:1px;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(255,90,0,.65) 0%,rgba(255,60,0,.3) 60%,transparent 100%);}
-.tif-sep-l::after{content:'';position:absolute;top:-2px;left:0;width:35%;height:5px;border-radius:3px;background:linear-gradient(90deg,transparent,rgba(140,200,255,.95),transparent);animation:tif-sepTravelL 2.6s ease-in-out infinite;}
-.tif-sep-r::before{content:'';position:absolute;top:-2px;right:0;width:35%;height:5px;border-radius:3px;background:linear-gradient(90deg,transparent,rgba(255,130,50,.95),transparent);animation:tif-sepTravelR 2.6s ease-in-out infinite;}
-.tif-sep-gem{width:18px;height:18px;flex-shrink:0;position:relative;}
-.tif-sep-gem::before{content:'';position:absolute;top:50%;left:50%;width:14px;height:14px;transform:translate(-50%,-50%) rotate(0deg);background:linear-gradient(135deg,#5ab4ff,#fffaf0,#ff6010);border-radius:1px;animation:tif-sepDiamondSpin 5s linear infinite,tif-sepDiamondPulse 2s ease-in-out infinite;}
-
 .tif-cal-inner{padding:14px 12px 16px;display:flex;flex-direction:column;gap:0;}
 .tif-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;}
 .tif-cal-month-lbl{font-family:'Bebas Neue',cursive;font-size:clamp(20px,5.5vw,30px);letter-spacing:2px;text-align:center;flex:1;white-space:nowrap;line-height:.95;text-shadow:0 0 30px rgba(255,100,0,.5),0 2px 0 rgba(0,0,0,.8);}
@@ -298,10 +269,32 @@ html,body{width:100%;background:#0c0400;}
 .tif-cal-cell:not(.overflow):not(.adj-month):hover{background:rgba(255,90,0,.1);}
 .tif-cal-cell.adj-month{background:rgba(8,3,0,.65);opacity:0.45;pointer-events:none;}
 .tif-cal-cell.adj-month .tif-day-num{color:rgba(255,160,80,.5);}
-.tif-cal-cell.today{background:linear-gradient(135deg,rgba(255,100,0,.2),rgba(180,50,0,.1));border-color:rgba(255,140,0,.75) !important;box-shadow:inset 0 0 16px rgba(255,90,0,.18);}
+
+/* ── TODAY CELL: stronger highlight ── */
+.tif-cal-cell.today{
+  background:linear-gradient(135deg,rgba(255,120,0,.22),rgba(180,50,0,.14));
+  border-color:rgba(255,160,0,.9) !important;
+  box-shadow:inset 0 0 18px rgba(255,100,0,.22), inset 0 0 4px rgba(255,200,0,.12), 0 0 8px rgba(255,100,0,.25);
+}
+
 .tif-day-num-wrap{height:22px;width:100%;display:flex;align-items:center;flex-shrink:0;padding:0 3px;justify-content:space-between;min-width:0;}
 .tif-day-num{font-family:'Bebas Neue',cursive;font-size:16px;color:#fff5e8;line-height:1;text-shadow:0 1px 4px rgba(0,0,0,.8);}
-.tif-cal-cell.today .tif-day-num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d44000,#ff6010);color:#fff;border-radius:5px;width:21px;height:21px;min-width:21px;padding:0;font-size:13px;box-shadow:0 0 12px rgba(255,90,0,.7);}
+
+/* ── TODAY NUMBER: compact badge ── */
+.tif-cal-cell.today .tif-day-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#d44000,#ff6010);
+  color:#fff;
+  border-radius:4px;
+  width:16px;
+  height:16px;
+  min-width:16px;
+  padding:0;
+  font-size:10px;
+  box-shadow:0 0 8px rgba(255,90,0,.65);
+}
 
 .tif-status-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(0,0,0,.5);flex-shrink:0;pointer-events:none;}
 .tif-status-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff7070,#e53935);box-shadow:0 0 0 2px rgba(229,57,53,.35);animation:tif-dotPulse 1s ease-in-out infinite;}
@@ -430,7 +423,7 @@ html,body{width:100%;background:#0c0400;}
 
   <div class="sep"><div class="sep-l"></div><div class="sep-gem"></div><div class="sep-r"></div></div>
 
-  <!-- ── NEW EVENT CALENDAR ── -->
+  <!-- ── EVENT CALENDAR ── -->
   <div class="sec-hd">
     <div class="sec-hd-bar"></div>
     <div class="sec-hd-text">
@@ -441,55 +434,8 @@ html,body{width:100%;background:#0c0400;}
     <div class="sec-hd-icon">📅</div>
   </div>
 
+  <!-- Calendar widget — banner & separator removed -->
   <div class="tif-cal-wrap" id="tifCalWrap">
-    <div class="cal-banner-tif">
-      <div class="tif-hero-tagline">Chess.com · Est. Jan 2025</div>
-      <div class="tif-hero-title-row">
-        <div class="tif-hero-ring-wrap">
-          <div class="tif-hero-pulse blue"></div>
-          <div class="tif-rune-ring">
-            <svg viewBox="0 0 86 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="43" cy="43" r="40" stroke="rgba(0,120,255,.45)" stroke-width="1.5" stroke-dasharray="4 6"/>
-              <circle cx="43" cy="43" r="40" stroke="rgba(80,180,255,.2)" stroke-width="3" stroke-dasharray="1 25"/>
-            </svg>
-            <svg class="inner" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="31" cy="31" r="28" stroke="rgba(0,140,255,.5)" stroke-width="1" stroke-dasharray="8 4"/>
-              <line x1="31" y1="3" x2="31" y2="10" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/>
-              <line x1="31" y1="52" x2="31" y2="59" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/>
-              <line x1="3" y1="31" x2="10" y2="31" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/>
-              <line x1="52" y1="31" x2="59" y2="31" stroke="rgba(80,200,255,.7)" stroke-width="1.5"/>
-            </svg>
-            <div class="tif-rune-center" style="filter:hue-rotate(200deg) saturate(2) brightness(1.1);">🔥</div>
-          </div>
-        </div>
-        <div class="tif-hero-name">
-          The Illusion
-          <span>Fireballs</span>
-        </div>
-        <div class="tif-hero-ring-wrap">
-          <div class="tif-hero-pulse fire"></div>
-          <div class="tif-rune-ring">
-            <svg viewBox="0 0 86 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="43" cy="43" r="40" stroke="rgba(255,100,0,.35)" stroke-width="1.5" stroke-dasharray="4 6"/>
-              <circle cx="43" cy="43" r="40" stroke="rgba(255,180,80,.15)" stroke-width="3" stroke-dasharray="1 25"/>
-            </svg>
-            <svg class="inner" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="31" cy="31" r="28" stroke="rgba(255,80,0,.4)" stroke-width="1" stroke-dasharray="8 4"/>
-              <line x1="31" y1="3" x2="31" y2="10" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/>
-              <line x1="31" y1="52" x2="31" y2="59" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/>
-              <line x1="3" y1="31" x2="10" y2="31" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/>
-              <line x1="52" y1="31" x2="59" y2="31" stroke="rgba(255,180,80,.6)" stroke-width="1.5"/>
-            </svg>
-            <div class="tif-rune-center">🔥</div>
-          </div>
-        </div>
-      </div>
-      <div class="tif-sep">
-        <div class="tif-sep-l"></div>
-        <div class="tif-sep-gem"></div>
-        <div class="tif-sep-r"></div>
-      </div>
-    </div>
 
     <div class="cal-skeleton-tif" id="tifCalSkeleton">
       <div class="tif-skel-nav">
@@ -560,7 +506,7 @@ html,body{width:100%;background:#0c0400;}
       <div class="tif-tip-bottom-row" id="tifTipBottomRow"></div>
     </div>
   </div>
-  <!-- ── END NEW EVENT CALENDAR ── -->
+  <!-- ── END EVENT CALENDAR ── -->
 
   <div class="sep"><div class="sep-l"></div><div class="sep-gem"></div><div class="sep-r"></div></div>
 
@@ -773,7 +719,7 @@ html,body{width:100%;background:#0c0400;}
   window.addEventListener('DOMContentLoaded',go);
 })();
 
-/* ── NEW TIF EVENT CALENDAR ── */
+/* ── TIF EVENT CALENDAR ── */
 (function(){
 const SHEET_API_URL='https://script.google.com/macros/s/AKfycbyQRC0v7VuR2zIygBFJJaDc49r-xkRe2pxaVWpnpqcY-wAlo0ChettGdCl8gkHEtSXF/exec';
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1098,7 +1044,7 @@ new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
 
 loadSheet();
 })();
-/* ── END NEW TIF EVENT CALENDAR ── */
+/* ── END TIF EVENT CALENDAR ── */
 
 /* MILESTONES */
 (function(){
