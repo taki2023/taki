@@ -382,7 +382,7 @@ function linkifyMentions(text){
 }
 function setTextWithMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
 
-/* ── CHESS.COM MATCHES — direct fetch, 5s timeout, no proxies ── */
+/* ── CHESS.COM DAILY MATCHES — direct fetch, 5s timeout ── */
 function slugToName(slug){
   if(!slug)return'Unknown Club';
   return slug.split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
@@ -411,14 +411,13 @@ async function loadChessMatches(){
       const dateObj={y:startDate.getUTCFullYear(),m:startDate.getUTCMonth(),d:startDate.getUTCDate()};
       const timeObj={h:startDate.getUTCHours(),min:startDate.getUTCMinutes()};
       const opSlug=(match.opponent||'').replace('https://api.chess.com/pub/club/','').replace(/\/$/,'');
-      const opName=slugToName(opSlug);
       const matchUrl=matchApiToWebUrl(match['@id']||'');
       const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
       if(!eventMap[key])eventMap[key]=[];
       if(eventMap[key].some(ev=>ev._matchUrl===matchUrl))continue;
       eventMap[key].push({
         dateObj,timeObj,duration:0,
-        title:'Daily Match ☀️ vs '+opName,
+        title:'Daily Match ☀️',
         detailsBefore:'♟ '+(match.name||'Club Match'),
         buttonBefore:'Join',linkBefore:matchUrl,
         detailsLive:'♟ '+(match.name||'Club Match'),
@@ -430,9 +429,7 @@ async function loadChessMatches(){
         isMatch:true,_matchUrl:matchUrl,_opSlug:opSlug,
       });
     }
-  }catch(e){
-    /* chess.com unavailable or timed out — silent fail */
-  }
+  }catch(e){/* silent fail */}
 }
 
 /* ── SHEET ── */
@@ -515,7 +512,6 @@ function makeCell(y,m,d,overflow){
     events.forEach(ev=>{
       const ico=document.createElement('div');ico.className='evt'+(ev.isMatch?' is-match':'');
       if(!ev.isMatch&&ev.isProxied){
-        /* Sheet event with proxied image */
         const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
         const img=document.createElement('img');img.alt=ev.title;img.loading='eager';img.decoding='async';ico.appendChild(img);
         onImgReady(ev.logo,state=>{
@@ -523,7 +519,6 @@ function makeCell(y,m,d,overflow){
           else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);}
         });
       }else{
-        /* Emoji directly — match events always use ☀️, sheet emojis use their rawLogo */
         const em=document.createElement('span');em.className='evt-emoji';
         em.textContent=ev.isMatch?'☀️':((ev.rawLogo&&ev.rawLogo.trim())?ev.rawLogo:'📅');
         ico.appendChild(em);
@@ -631,30 +626,13 @@ document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewM
 document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
 new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
 
-/* ── INIT ──
-   1. Sheet fetch starts immediately (primary data)
-   2. Chess matches fetch starts immediately in parallel
-   3. Calendar renders as soon as sheet resolves — no waiting for chess
-   4. If chess resolves after, re-render current month only
-*/
 async function init(){
   let chessLoaded=false;
-
   const chessPromise=loadChessMatches().then(()=>{chessLoaded=true;}).catch(()=>{});
-
-  /* Render immediately after sheet, don't wait for chess */
-  try{
-    await loadSheet();
-  }catch(e){
-    console.error('Sheet failed:',e);
-  }
+  try{await loadSheet();}catch(e){console.error('Sheet failed:',e);}
   buildCalendar();
   document.getElementById('pageSb').classList.add('loaded');
-
-  /* If chess finishes after, quietly re-render */
-  chessPromise.then(()=>{
-    if(chessLoaded)buildCalendar();
-  });
+  chessPromise.then(()=>{if(chessLoaded)buildCalendar();});
 }
 init();
 </script>
