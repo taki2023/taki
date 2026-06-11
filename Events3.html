@@ -197,12 +197,19 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
 
 @media(hover:none)and(pointer:coarse){
-  .evt-tip{position:fixed!important;left:50%!important;top:50%!important;
-    transform:translate(-50%,-52%) scale(.95)!important;
-    width:min(88vw,300px);max-width:min(88vw,300px);
+  /* On touch devices: always centered, JS never sets left/top */
+  .evt-tip{
+    position:fixed!important;
+    left:50%!important;top:50%!important;
+    /* hidden state: centered but scaled down */
+    transform:translate(-50%,-50%) scale(.9)!important;
+    width:min(88vw,300px)!important;max-width:min(88vw,300px)!important;
     max-height:80vh;overflow-y:auto;
-    box-shadow:0 16px 48px rgba(217,48,32,.35),0 0 0 9999px rgba(0,0,0,.45);}
-  .evt-tip.show{transform:translate(-50%,-50%) scale(1)!important;}
+    box-shadow:0 16px 48px rgba(217,48,32,.35),0 0 0 9999px rgba(0,0,0,.45);
+  }
+  .evt-tip.show{
+    transform:translate(-50%,-50%) scale(1)!important;
+  }
   .evt-tip.tip-match-style{border-color:#f9a825;}
 }
 
@@ -581,7 +588,7 @@ const scheduleLeave=()=>{leaveTimer=setTimeout(()=>{leaveTimer=null;hideTip();},
 const cancelLeave=()=>{if(leaveTimer){clearTimeout(leaveTimer);leaveTimer=null;}};
 const hideTip=()=>{tipPinned=false;tip.classList.remove('show');clearInterval(countdownTimer);countdownTimer=null;};
 const pinTip=(icoEl,ev,y,m,d)=>{cancelLeave();tipPinned=true;renderTip(ev,y,m,d);tip.classList.add('show');posTipFromRect(icoEl);};
-const pinTipTouch=(ev,y,m,d)=>{cancelLeave();tipPinned=true;renderTip(ev,y,m,d);tip.classList.add('show');tip.style.left='';tip.style.top='';};
+const pinTipTouch=(ev,y,m,d)=>{cancelLeave();tipPinned=true;tip.style.left='';tip.style.top='';renderTip(ev,y,m,d);tip.classList.add('show');};
 
 tip.addEventListener('mouseenter',cancelLeave);
 tip.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
@@ -636,8 +643,13 @@ function renderTip(ev,y,m,d){
 }
 
 function posTipFromRect(icoEl){
-  if(('ontouchstart' in window)||navigator.maxTouchPoints>0){tip.style.left='';tip.style.top='';return;}
-  /* Make tip invisible-but-rendered so we can measure its real size */
+  const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+  if(isTouch){
+    /* On touch: clear any JS-set position, CSS handles centering */
+    tip.style.left='';tip.style.top='';
+    return;
+  }
+  /* Desktop: measure real rendered size then position next to icon */
   tip.style.visibility='hidden';
   tip.style.opacity='0';
   tip.style.display='flex';
@@ -645,16 +657,17 @@ function posTipFromRect(icoEl){
     const r=icoEl.getBoundingClientRect();
     const tw=tip.offsetWidth||280, th=tip.offsetHeight||220;
     const vw=window.innerWidth, vh=window.innerHeight;
-    const GAP=8;
-    /* Prefer right; fall back to left */
+    const GAP=10;
+    /* Prefer right of icon; fall back to left */
     let x=r.right+GAP;
     if(x+tw>vw-6) x=r.left-tw-GAP;
-    /* Align top edge with icon; shift up if overflows bottom */
+    /* Align with icon top; nudge up if overflows bottom */
     let y=r.top;
     if(y+th>vh-6) y=Math.max(6, vh-th-6);
+    x=Math.max(6,x);
     tip.style.left=x+'px';
     tip.style.top=y+'px';
-    /* Now let the CSS transition take over */
+    /* Release back to CSS transition */
     tip.style.visibility='';
     tip.style.opacity='';
     tip.style.display='';
