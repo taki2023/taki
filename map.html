@@ -131,9 +131,13 @@ body { font-family: 'Nunito', sans-serif; }
 #map-svg:active { cursor: grabbing; }
 
 .country { stroke: #f5c5b8; stroke-width: 0.4px; cursor: pointer; transition: filter 0.12s; }
-.country:hover { filter: brightness(1.35) drop-shadow(0 0 5px rgba(217,48,32,0.8)); stroke: #d93020; stroke-width: 0.9px; }
+@media(hover:hover){
+  .country:hover { filter: brightness(1.35) drop-shadow(0 0 5px rgba(217,48,32,0.8)); stroke: #d93020; stroke-width: 0.9px; }
+}
 .country-zero { fill: #fce8e0; cursor: default; }
-.country-zero:hover { filter: none; stroke: #f5c5b8; stroke-width: 0.4px; }
+@media(hover:hover){
+  .country-zero:hover { filter: none; stroke: #f5c5b8; stroke-width: 0.4px; }
+}
 .graticule { fill: none; stroke: #f5c5b8; stroke-width: 0.25px; }
 .sphere { fill: #fff8f5; }
 
@@ -298,7 +302,7 @@ const DATA = {
   "Nigeria":8,"Morocco":8,"Iran":7,"Malaysia":7,"Hungary":7,
   "Russia":7,"Norway":6,"Czech Republic":6,"Romania":6,"Bangladesh":6,
   "Cuba":5,"European Union":5,"New Zealand":5,"Taiwan":5,"Serbia":5,
-  "South Africa":5,"Israel":5,"Hong Kong":5,"Ireland":4,"Belgium":4,
+  "South Africa":5,"Hong Kong":5,"Ireland":4,"Belgium":4,
   "Switzerland":4,"Greece":4,"Saudi Arabia":4,"Oman":4,"Syria":3,
   "Denmark":3,"Kenya":3,"Finland":3,"Luxembourg":3,"Armenia":3,
   "Azerbaijan":3,"Venezuela":2,"Nepal":2,"Portugal":2,"Bulgaria":2,
@@ -320,10 +324,34 @@ const DATA = {
 };
 
 const FLAGS = {
-  "United States":"🇺🇸","India":"🇮🇳","Vietnam":"🇻🇳","United Kingdom":"🇬🇧","Algeria":"🇩🇿",
-  "France":"🇫🇷","Germany":"🇩🇪","Australia":"🇦🇺","Japan":"🇯🇵","South Korea":"🇰🇷",
-  "Canada":"🇨🇦","Brazil":"🇧🇷","Philippines":"🇵🇭","Egypt":"🇪🇬","Italy":"🇮🇹",
-  "Spain":"🇪🇸","China":"🇨🇳","Indonesia":"🇮🇩","Pakistan":"🇵🇰","Ukraine":"🇺🇦"
+  "Afghanistan":"🇦🇫","Algeria":"🇩🇿","Angola":"🇦🇴","Argentina":"🇦🇷","Armenia":"🇦🇲",
+  "Australia":"🇦🇺","Austria":"🇦🇹","Azerbaijan":"🇦🇿","Bangladesh":"🇧🇩","Belarus":"🇧🇾",
+  "Belgium":"🇧🇪","Bolivia":"🇧🇴","Bosnia and Herzegovina":"🇧🇦","Botswana":"🇧🇼","Brazil":"🇧🇷",
+  "Bulgaria":"🇧🇬","Cambodia":"🇰🇭","Canada":"🇨🇦","Central African Republic":"🇨🇫","Chile":"🇨🇱",
+  "China":"🇨🇳","Colombia":"🇨🇴","Comoros":"🇰🇲","Croatia":"🇭🇷","Cuba":"🇨🇺",
+  "Czech Republic":"🇨🇿","Denmark":"🇩🇰","Dominican Republic":"🇩🇴","DR Congo":"🇨🇩","Egypt":"🇪🇬",
+  "Ethiopia":"🇪🇹","European Union":"🇪🇺","Finland":"🇫🇮","France":"🇫🇷","Georgia":"🇬🇪",
+  "Germany":"🇩🇪","Ghana":"🇬🇭","Greece":"🇬🇷","Greenland":"🇬🇱","Guatemala":"🇬🇹",
+  "Guernsey":"🇬🇬","Honduras":"🇭🇳","Hong Kong":"🇭🇰","Hungary":"🇭🇺","Iceland":"🇮🇸",
+  "India":"🇮🇳","Indonesia":"🇮🇩","Iran":"🇮🇷","Ireland":"🇮🇪","Isle of Man":"🇮🇲",
+  "Italy":"🇮🇹","Jamaica":"🇯🇲","Japan":"🇯🇵","Jordan":"🇯🇴","Kazakhstan":"🇰🇿",
+  "Kenya":"🇰🇪","Kosovo":"🇽🇰","Lebanon":"🇱🇧","Lesotho":"🇱🇸","Libya":"🇱🇾",
+  "Liechtenstein":"🇱🇮","Lithuania":"🇱🇹","Luxembourg":"🇱🇺","Macau":"🇲🇴","Malaysia":"🇲🇾",
+  "Maldives":"🇲🇻","Mexico":"🇲🇽","Moldova":"🇲🇩","Monaco":"🇲🇨","Morocco":"🇲🇦",
+  "Myanmar":"🇲🇲","Nepal":"🇳🇵","Netherlands":"🇳🇱","New Zealand":"🇳🇿","Nigeria":"🇳🇬",
+  "Niue":"🇳🇺","North Korea":"🇰🇵","North Macedonia":"🇲🇰","Norway":"🇳🇴","Oman":"🇴🇲",
+  "Pakistan":"🇵🇰","Palestine":"🇵🇸","Panama":"🇵🇦","Peru":"🇵🇪","Philippines":"🇵🇭",
+  "Poland":"🇵🇱","Portugal":"🇵🇹","Puerto Rico":"🇵🇷","Romania":"🇷🇴","Russia":"🇷🇺",
+  "Saudi Arabia":"🇸🇦","Serbia":"🇷🇸","Singapore":"🇸🇬","Slovakia":"🇸🇰","Somalia":"🇸🇴",
+  "South Africa":"🇿🇦","South Korea":"🇰🇷","South Sudan":"🇸🇸","Spain":"🇪🇸","Sri Lanka":"🇱🇰",
+  "Sudan":"🇸🇩","Sweden":"🇸🇪","Switzerland":"🇨🇭","Syria":"🇸🇾","Taiwan":"🇹🇼",
+  "Tanzania":"🇹🇿","Thailand":"🇹🇭","Trinidad and Tobago":"🇹🇹","Tunisia":"🇹🇳","Turkey":"🇹🇷",
+  "Turkmenistan":"🇹🇲","Turks and Caicos Islands":"🇹🇨","Uganda":"🇺🇬","Ukraine":"🇺🇦",
+  "United Arab Emirates":"🇦🇪","United Kingdom":"🇬🇧","United States":"🇺🇸","Uruguay":"🇺🇾",
+  "US Virgin Islands":"🇻🇮","Vatican City":"🇻🇦","Venezuela":"🇻🇪","Vietnam":"🇻🇳",
+  "Western Sahara":"🇪🇭","Yemen":"🇾🇪","Zambia":"🇿🇲","Zimbabwe":"🇿🇼",
+  "Albania":"🇦🇱","Åland Islands":"🇦🇽","Angola":"🇦🇴","British Virgin Islands":"🇻🇬",
+  "Colombia":"🇨🇴","Saint Pierre and Miquelon":"🇵🇲","Guernsey":"🇬🇬","Isle of Man":"🇮🇲"
 };
 
 const TOP3 = new Set(["United States","India","Vietnam"]);
@@ -473,6 +501,8 @@ const ID_NAME={
 d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
   const countries=topojson.feature(world,world.objects.countries);
 
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
   mapG.selectAll('.country')
     .data(countries.features)
     .enter().append('path')
@@ -484,22 +514,32 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(w
     .attr('d',path)
     .attr('fill',d=>{ const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw; return getColor(DATA[name]||0); })
     .attr('stroke',d=>{ const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw; return TOP3.has(name)?'#d93020':'#f5c5b8'; })
-    .on('mousemove',function(event,d){
+    .on('mousemove', isTouch ? null : function(event,d){
       const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw,count=DATA[name]||0;
       showTip(event.clientX,event.clientY,name||raw,count);
     })
-    .on('mouseleave',hideTip)
+    .on('mouseleave', isTouch ? null : hideTip)
     .on('touchend',function(event,d){
-      // tap on mobile shows tooltip briefly
       event.preventDefault();
-      const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw,count=DATA[name]||0;
+      // only show tooltip on a tap (not end of a pan/pinch)
       const t=event.changedTouches[0];
+      const dx=Math.abs(t.clientX-(this._touchStartX||t.clientX));
+      const dy=Math.abs(t.clientY-(this._touchStartY||t.clientY));
+      if(dx>8||dy>8) return; // was a drag, not a tap
+      const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw,count=DATA[name]||0;
       showTip(t.clientX,t.clientY,name||raw,count);
-      setTimeout(hideTip,2200);
-    },{passive:false});
+      clearTimeout(window._tipTimer);
+      window._tipTimer=setTimeout(hideTip,2400);
+    },{passive:false})
+    .on('touchstart',function(event){
+      const t=event.touches[0];
+      this._touchStartX=t.clientX; this._touchStartY=t.clientY;
+    },{passive:true});
 
-  svg.on('mousedown.tip',hideTip);
-  document.addEventListener('mousemove',e=>{ if(tooltip.style.display!=='none') placeTip(e.clientX,e.clientY); });
+  if(!isTouch){
+    svg.on('mousedown.tip',hideTip);
+    document.addEventListener('mousemove',e=>{ if(tooltip.style.display!=='none') placeTip(e.clientX,e.clientY); });
+  }
 });
 </script>
 </body>
