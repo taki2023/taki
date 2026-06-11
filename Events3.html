@@ -462,6 +462,14 @@ async function loadChessMatches(){
 const SHEET_CACHE_KEY='hcc_sheet_v3';
 const SHEET_CACHE_TTL=5*60*1000; /* 5 min */
 
+/* Remove all non-match events from eventMap so sheet data can be re-parsed cleanly */
+function clearSheetEvents(){
+  for(const key of Object.keys(eventMap)){
+    eventMap[key]=eventMap[key].filter(ev=>ev.isMatch);
+    if(eventMap[key].length===0)delete eventMap[key];
+  }
+}
+
 function parseSheetData(data){
   data.forEach(ev=>{
     if(!ev.date||!ev.title)return;
@@ -505,6 +513,7 @@ async function loadSheet(){
     if(raw){
       const {ts,data}=JSON.parse(raw);
       if(Date.now()-ts<SHEET_CACHE_TTL){
+        clearSheetEvents();
         parseSheetData(data);
         preloadCurrentMonthImgs();
         return {fromCache:true,data};
@@ -517,6 +526,7 @@ async function loadSheet(){
   if(!res.ok)throw new Error('HTTP '+res.status);
   const data=await res.json();
   try{localStorage.setItem(SHEET_CACHE_KEY,JSON.stringify({ts:Date.now(),data}));}catch(e){}
+  clearSheetEvents();
   parseSheetData(data);
   preloadCurrentMonthImgs();
   return {fromCache:false,data};
@@ -767,9 +777,8 @@ async function init(){
   pageSb.classList.add('loaded');
 
   if(fromCache){
-    /* Refresh data silently in background */
+    /* Refresh data silently in background — clearSheetEvents() inside loadSheet() prevents duplication */
     loadSheet().then(()=>{
-      /* Merge chess matches then rebuild */
       chessPromise.then(()=>buildCalendar());
     }).catch(()=>{});
   }
