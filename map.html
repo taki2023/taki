@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>HCC – Members by Country</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<style>
+/* ══════════════════════════════════════════
+   LAYOUT DIMENSIONS  ← edit these freely
+   Total widget height on desktop: 900px
+   Header height:                   72px
+   Stats bar height:                 58px
+   Map card height:                 340px
+   Divider height:                   42px  (×2 = 84px)
+   Top countries section:           280px  (label 30px + scroll 250px)
+   Footer:                           36px
+   Inner padding top+bottom:         38px
+   ══════════════════════════════════════════ */
+:root {
+  --widget-height:    900px;
+  --map-height:       340px;
+  --top-scroll-h:     250px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; background: #fff5f0; }
+body { font-family: 'Nunito', sans-serif; }
+
+/* ── WRAPPER ── */
+.sb {
+  width: 100%; max-width: none;
+  height: var(--widget-height);
+  background: #fff5f0;
+  border-radius: 28px;
+  border: 3px solid #e8553a;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(220,60,30,.18);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.sb-top {
+  flex-shrink: 0;
+  background: linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  border-radius: 24px 24px 0 0;
+  padding: 14px 16px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.sb-top::before {
+  content: '';
+  position: absolute; bottom: -10px; left: -10%;
+  width: 120%; height: 20px;
+  background: #fff5f0; border-radius: 50%;
+}
+.chilli-deco { position: absolute; font-size: 26px; opacity: .55; top: 6px; }
+.chilli-deco.left  { left: 8px;  transform: rotate(-20deg); }
+.chilli-deco.right { right: 8px; transform: rotate(20deg); }
+.club-title { font-family: 'Fredoka One', cursive; font-size: 20px; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.15); position: relative; z-index: 1; }
+.club-sub   { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.85); letter-spacing: .8px; text-transform: uppercase; margin-top: 2px; position: relative; z-index: 1; }
+
+/* ── INNER SCROLL AREA ── */
+.inner {
+  flex: 1;
+  overflow: hidden;        /* no outer scroll — sections are fixed */
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── DIVIDER ── */
+.div { width: 100%; height: 18px; flex-shrink: 0; margin: 6px 0; position: relative; opacity: .95; }
+.div::before, .div::after { content:""; position:absolute; left:0; width:100%; height:6px; border-radius:999px; }
+.div::before {
+  top: 4px;
+  background: radial-gradient(circle at 2% 50%,#e89080 0 6px,transparent 7px),
+    radial-gradient(circle at 98% 50%,#e89080 0 6px,transparent 7px),
+    linear-gradient(90deg,transparent 0%,#e89080 4%,#e08070 12%,#e99082 24%,#e18070 37%,#e89080 50%,#e28272 63%,#e99282 77%,#e08070 90%,#e89080 96%,transparent 100%);
+  transform: rotate(-0.35deg); filter: blur(.15px);
+}
+.div::after {
+  top: 8px; left: 4px; width: calc(100% - 8px);
+  background: radial-gradient(circle at 2% 50%,#e89080 0 5px,transparent 6px),
+    radial-gradient(circle at 98% 50%,#e89080 0 5px,transparent 6px),
+    linear-gradient(90deg,transparent 0%,#ea9282 5%,#df8070 16%,#e89080 28%,#e18272 41%,#e99282 56%,#e08070 71%,#e89080 86%,#ea9282 95%,transparent 100%);
+  transform: rotate(0.45deg); opacity: .82;
+}
+
+/* ── SEC LABEL ── */
+.sec-label {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Fredoka One', cursive; font-size: 14px; color: #c73520;
+  margin-bottom: 7px;
+}
+.sec-label .dot { width: 10px; height: 10px; border-radius: 50%; background: #d93020; flex-shrink: 0; }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  flex-shrink: 0;
+  display: flex; justify-content: center; gap: clamp(20px, 6vw, 60px);
+  background: #fff; border-radius: 14px; border: 2px solid #f5c5b8;
+  box-shadow: 0 3px 0 #e8aa98;
+  padding: 9px 20px; margin-bottom: 8px;
+}
+.stat { text-align: center; }
+.stat-num { font-family: 'Fredoka One', cursive; font-size: clamp(18px, 3.5vw, 26px); color: #d93020; line-height: 1; }
+.stat-label { font-size: 10px; font-weight: 900; color: #9a2010; letter-spacing: 1.2px; text-transform: uppercase; margin-top: 2px; }
+
+/* ── MAP CARD ── */
+.map-card {
+  flex-shrink: 0;
+  height: var(--map-height);
+  background: #fff; border-radius: 16px; border: 2px solid #f5c5b8;
+  box-shadow: 0 4px 0 #e8aa98;
+  padding: 8px 8px 0; margin-bottom: 4px;
+  overflow: hidden; position: relative;
+}
+#map-svg {
+  width: 100%; height: calc(var(--map-height) - 44px);
+  display: block;
+  cursor: grab;
+  touch-action: none;   /* critical: lets d3 capture touch events */
+}
+#map-svg:active { cursor: grabbing; }
+
+.country { stroke: #f5c5b8; stroke-width: 0.4px; cursor: pointer; transition: filter 0.12s; }
+.country:hover { filter: brightness(1.35) drop-shadow(0 0 5px rgba(217,48,32,0.8)); stroke: #d93020; stroke-width: 0.9px; }
+.country-zero { fill: #fce8e0; cursor: default; }
+.country-zero:hover { filter: none; stroke: #f5c5b8; stroke-width: 0.4px; }
+.graticule { fill: none; stroke: #f5c5b8; stroke-width: 0.25px; }
+.sphere { fill: #fff8f5; }
+
+@keyframes topGlow {
+  0%,100% { filter: brightness(1.1) drop-shadow(0 0 4px rgba(217,48,32,0.5)); }
+  50%      { filter: brightness(1.25) drop-shadow(0 0 10px rgba(217,48,32,0.9)); }
+}
+.country-top { animation: topGlow 2.2s ease-in-out infinite; stroke: #d93020 !important; stroke-width: 1.2px !important; cursor: pointer; }
+
+/* ── ZOOM CONTROLS ── */
+.zoom-controls {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; flex-direction: column; gap: 4px; z-index: 10;
+}
+.zoom-btn {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #fff; border: 2px solid #f5c5b8;
+  box-shadow: 0 3px 0 #e8aa98;
+  font-family: 'Fredoka One', cursive; font-size: 17px; color: #d93020;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s; user-select: none; line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+.zoom-btn:hover  { background: #fce8e0; border-color: #d93020; transform: translateY(-2px); box-shadow: 0 5px 0 #d93020; }
+.zoom-btn:active { transform: translateY(1px); box-shadow: 0 2px 0 #d93020; }
+.zoom-reset { font-size: 10px; font-weight: 900; font-family: 'Nunito', sans-serif; color: #9a2010; }
+
+/* ── LEGEND ── */
+.legend-wrap {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 6px 10px 6px; flex-wrap: wrap; flex-shrink: 0;
+}
+.legend-label { font-size: 10px; font-weight: 800; color: #e8aa98; }
+#legend-gradient { width: clamp(120px, 28vw, 220px); height: 9px; border-radius: 5px; display: block; border: 1.5px solid #f5c5b8; }
+.legend-ticks { display: flex; justify-content: space-between; width: clamp(120px, 28vw, 220px); margin-top: 2px; }
+.legend-tick  { font-size: 9px; font-weight: 700; color: #e8aa98; }
+
+/* ── TOOLTIP ── */
+#tooltip {
+  position: fixed;
+  background: #fff; border: 2px solid #f5c5b8; border-left: 4px solid #d93020;
+  padding: 9px 13px; border-radius: 14px;
+  pointer-events: none; font-size: 12px; display: none; z-index: 9999;
+  max-width: 190px; box-shadow: 0 6px 0 #e8aa98;
+}
+#tooltip .tt-country { font-family: 'Fredoka One', cursive; font-size: 15px; color: #c73520; margin-bottom: 2px; }
+#tooltip .tt-count   { font-weight: 900; color: #d93020; }
+#tooltip .tt-pct     { font-size: 10px; font-weight: 700; color: #e8aa98; margin-top: 2px; }
+#tooltip .tt-rank    { font-size: 9px; font-weight: 900; color: #9a2010; text-transform: uppercase; letter-spacing: .8px; }
+
+/* ── TOP COUNTRIES ── */
+.top-section { flex-shrink: 0; display: flex; flex-direction: column; }
+.top-scroll {
+  height: var(--top-scroll-h);
+  overflow-y: auto;
+  padding-right: 3px;
+  /* 2 columns always */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  align-content: start;
+}
+.top-scroll::-webkit-scrollbar { width: 5px; }
+.top-scroll::-webkit-scrollbar-track { background: #fce8e0; border-radius: 3px; }
+.top-scroll::-webkit-scrollbar-thumb { background: #d93020; border-radius: 3px; }
+.top-scroll { scrollbar-width: thin; scrollbar-color: #d93020 #fce8e0; }
+
+.top-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 9px; border-radius: 12px;
+  background: #fff8f5; border: 2px solid #f5c5b8;
+  box-shadow: 0 3px 0 #e8aa98; transition: all .15s ease;
+}
+.top-row:hover { background: #fce8e0; border-color: #d93020; transform: translateY(-2px); box-shadow: 0 5px 0 #d93020; }
+.top-row.rank1 { background: linear-gradient(135deg,rgba(217,48,32,.12),rgba(239,102,64,.07)); border-color: #d93020; box-shadow: 0 4px 0 #d93020; }
+.top-rank  { font-family: 'Fredoka One', cursive; font-size: 11px; color: #e8aa98; width: 18px; text-align: right; flex-shrink: 0; }
+.top-rank.r1 { color: #d93020; }
+.top-flag  { font-size: 15px; flex-shrink: 0; }
+.top-name  { font-size: 11px; font-weight: 800; color: #9a2010; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.top-count { font-family: 'Fredoka One', cursive; font-size: 13px; color: #d93020; flex-shrink: 0; }
+.bar-bg    { height: 3px; background: #fce8e0; border-radius: 2px; width: 100%; margin-top: 2px; }
+.bar-fill  { height: 100%; background: linear-gradient(90deg,#d93020,#e85535); border-radius: 2px; }
+
+.footer { flex-shrink: 0; text-align: center; margin-top: 8px; font-size: 11px; font-weight: 700; color: #e8553a; }
+</style>
+</head>
+<body>
+<div class="sb">
+
+  <div class="sb-top">
+    <div class="chilli-deco left">🌶</div>
+    <div class="chilli-deco right">♞</div>
+    <div class="club-title">Hot Chilli CheckMate</div>
+    <div class="club-sub">Members by Country 🌍</div>
+  </div>
+
+  <div class="inner">
+
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num" id="stat-countries">—</div>
+        <div class="stat-label">Countries</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">🇺🇸 305</div>
+        <div class="stat-label">Top Country</div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-card">
+      <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomIn">+</button>
+        <button class="zoom-btn zoom-reset" id="zoomReset">⌂</button>
+        <button class="zoom-btn" id="zoomOut">−</button>
+      </div>
+      <svg id="map-svg"></svg>
+      <div class="legend-wrap">
+        <span class="legend-label">few</span>
+        <div>
+          <canvas id="legend-gradient"></canvas>
+          <div class="legend-ticks">
+            <span class="legend-tick">1</span>
+            <span class="legend-tick">10</span>
+            <span class="legend-tick">50</span>
+            <span class="legend-tick">150</span>
+            <span class="legend-tick">305</span>
+          </div>
+        </div>
+        <span class="legend-label">most 🌶</span>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- TOP COUNTRIES -->
+    <div class="top-section">
+      <div class="sec-label"><div class="dot"></div>Top Countries 🏆</div>
+      <div class="top-scroll" id="top-grid"></div>
+    </div>
+
+    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
+  </div>
+</div>
+
+<div id="tooltip">
+  <div class="tt-rank" id="tt-rank"></div>
+  <div class="tt-country" id="tt-name"></div>
+  <div class="tt-count"><span id="tt-count"></span> members</div>
+  <div class="tt-pct" id="tt-pct"></div>
+</div>
+
+<script>
+const DATA = {
+  "United States":305,"India":213,"Vietnam":61,"United Kingdom":49,"Algeria":46,
+  "France":30,"Germany":29,"Australia":29,"Japan":27,"South Korea":24,
+  "Canada":24,"Brazil":22,"Philippines":21,"Egypt":20,"Italy":19,
+  "Spain":18,"China":13,"Indonesia":13,"Pakistan":13,"Ukraine":12,
+  "Poland":11,"Turkey":11,"Sri Lanka":11,"Mexico":9,"Netherlands":9,
+  "Sweden":9,"Argentina":9,"United Arab Emirates":9,"Colombia":9,"Singapore":8,
+  "Nigeria":8,"Morocco":8,"Iran":7,"Malaysia":7,"Hungary":7,
+  "Russia":7,"Norway":6,"Czech Republic":6,"Romania":6,"Bangladesh":6,
+  "Cuba":5,"European Union":5,"New Zealand":5,"Taiwan":5,"Serbia":5,
+  "South Africa":5,"Israel":5,"Hong Kong":5,"Ireland":4,"Belgium":4,
+  "Switzerland":4,"Greece":4,"Saudi Arabia":4,"Oman":4,"Syria":3,
+  "Denmark":3,"Kenya":3,"Finland":3,"Luxembourg":3,"Armenia":3,
+  "Azerbaijan":3,"Venezuela":2,"Nepal":2,"Portugal":2,"Bulgaria":2,
+  "Austria":2,"Libya":2,"Jordan":2,"Uganda":2,"Georgia":2,
+  "Myanmar":2,"Kazakhstan":2,"South Sudan":2,"Lithuania":2,"Belarus":2,
+  "Zimbabwe":2,"Iceland":2,"Panama":1,"Croatia":1,"Greenland":1,
+  "DR Congo":1,"Lesotho":1,"Uruguay":1,"US Virgin Islands":1,"Niue":1,
+  "Peru":1,"Central African Republic":1,"Ethiopia":1,"North Macedonia":1,
+  "Somalia":1,"British Virgin Islands":1,"Botswana":1,"Slovakia":1,
+  "Jamaica":1,"Bosnia and Herzegovina":1,"Bolivia":1,"North Korea":1,
+  "Kosovo":1,"Turks and Caicos Islands":1,"Zambia":1,"Vatican City":1,
+  "Dominican Republic":1,"Tunisia":1,"Macau":1,"Saint Pierre and Miquelon":1,
+  "Chile":1,"Ghana":1,"Maldives":1,"Comoros":1,"Thailand":1,
+  "Moldova":1,"Åland Islands":1,"Tanzania":1,"Trinidad and Tobago":1,
+  "Lebanon":1,"Puerto Rico":1,"Palestine":1,"Honduras":1,"Sudan":1,
+  "Afghanistan":1,"Western Sahara":1,"Guernsey":1,"Cambodia":1,
+  "Angola":1,"Yemen":1,"Monaco":1,"Turkmenistan":1,"Isle of Man":1,
+  "Liechtenstein":1,"Guatemala":1
+};
+
+const FLAGS = {
+  "United States":"🇺🇸","India":"🇮🇳","Vietnam":"🇻🇳","United Kingdom":"🇬🇧","Algeria":"🇩🇿",
+  "France":"🇫🇷","Germany":"🇩🇪","Australia":"🇦🇺","Japan":"🇯🇵","South Korea":"🇰🇷",
+  "Canada":"🇨🇦","Brazil":"🇧🇷","Philippines":"🇵🇭","Egypt":"🇪🇬","Italy":"🇮🇹",
+  "Spain":"🇪🇸","China":"🇨🇳","Indonesia":"🇮🇩","Pakistan":"🇵🇰","Ukraine":"🇺🇦"
+};
+
+const TOP3 = new Set(["United States","India","Vietnam"]);
+
+const NAME_MAP = {
+  "United States of America":"United States","S. Korea":"South Korea",
+  "Dem. Rep. Congo":"DR Congo","Central African Rep.":"Central African Republic",
+  "Bosnia and Herz.":"Bosnia and Herzegovina","Dominican Rep.":"Dominican Republic",
+  "N. Korea":"North Korea","Macedonia":"North Macedonia","North Macedonia":"North Macedonia",
+  "Trinidad and Tobago":"Trinidad and Tobago","W. Sahara":"Western Sahara",
+  "S. Sudan":"South Sudan","Czechia":"Czech Republic","Czech Rep.":"Czech Republic",
+  "Palestine":"Palestine","Taiwan":"Taiwan","Hong Kong":"Hong Kong",
+  "Macao":"Macau","Moldova":"Moldova","Syria":"Syria"
+};
+
+const sorted = Object.entries(DATA).sort((a,b)=>b[1]-a[1]);
+const rankMap = {};
+sorted.forEach(([name],i)=>{ rankMap[name]=i+1; });
+document.getElementById('stat-countries').textContent = Object.keys(DATA).length;
+
+function getColor(v){
+  if(!v||v===0) return '#fce8e0';
+  const t=Math.log(v+1)/Math.log(306);
+  const stops=[[0.0,[252,200,185]],[0.18,[240,140,110]],[0.42,[220,80,50]],[0.70,[210,48,32]],[1.0,[160,20,10]]];
+  let i=0; while(i<stops.length-2&&t>stops[i+1][0]) i++;
+  const [t0,c0]=stops[i],[t1,c1]=stops[i+1],f=(t-t0)/(t1-t0);
+  return `rgb(${Math.round(c0[0]+f*(c1[0]-c0[0]))},${Math.round(c0[1]+f*(c1[1]-c0[1]))},${Math.round(c0[2]+f*(c1[2]-c0[2]))})`;
+}
+
+// Legend
+const canvas=document.getElementById('legend-gradient'),ctx=canvas.getContext('2d');
+canvas.width=220; canvas.height=9;
+const grad=ctx.createLinearGradient(0,0,220,0);
+for(let i=0;i<=100;i++){ const v=Math.round(Math.pow(306,i/100)-1); grad.addColorStop(i/100,getColor(Math.max(v,1))); }
+ctx.fillStyle=grad; ctx.fillRect(0,0,220,9);
+
+// Top grid — 2 columns, all countries in scrollable area
+const topMax=sorted[0][1];
+const grid=document.getElementById('top-grid');
+sorted.forEach(([name,count],i)=>{
+  const flag=FLAGS[name]||'🏳️';
+  const barW=Math.round((count/topMax)*100);
+  const row=document.createElement('div');
+  row.className='top-row'+(i===0?' rank1':'');
+  row.innerHTML=`
+    <span class="top-rank${i===0?' r1':''}">${i+1}</span>
+    <span class="top-flag">${flag}</span>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:5px">
+        <span class="top-name">${name}</span>
+        <span class="top-count">${count}</span>
+      </div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${barW}%"></div></div>
+    </div>`;
+  grid.appendChild(row);
+});
+
+// Tooltip
+const tooltip=document.getElementById('tooltip');
+const total=Object.values(DATA).reduce((a,b)=>a+b,0);
+function showTip(x,y,name,count){
+  const rank=rankMap[name];
+  document.getElementById('tt-rank').textContent=rank?`#${rank} worldwide`:'';
+  document.getElementById('tt-name').textContent=name;
+  document.getElementById('tt-count').textContent=count;
+  document.getElementById('tt-pct').textContent=count>0?((count/total)*100).toFixed(2)+'% of club':'No members yet';
+  tooltip.style.display='block';
+  placeTip(x,y);
+}
+function placeTip(x,y){
+  const tw=tooltip.offsetWidth,th=tooltip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;
+  tooltip.style.left=(x+14+tw>vw?x-tw-10:x+14)+'px';
+  tooltip.style.top=(y+14+th>vh?y-th-10:y+14)+'px';
+}
+function hideTip(){ tooltip.style.display='none'; }
+
+// ── MAP SETUP ──
+const svgEl=document.getElementById('map-svg');
+const VW=960, VH=500;
+const svg=d3.select(svgEl).attr('viewBox',`0 0 ${VW} ${VH}`);
+const projection=d3.geoNaturalEarth1().scale(185).translate([VW/2,VH/2]);
+const path=d3.geoPath().projection(projection);
+const mapG=svg.append('g').attr('id','mapG');
+mapG.append('path').datum({type:'Sphere'}).attr('class','sphere').attr('d',path);
+mapG.append('path').datum(d3.geoGraticule()()).attr('class','graticule').attr('d',path);
+
+const initScale=1.35, initTx=VW*(1-initScale)/2, initTy=VH*(1-initScale)/2;
+const initTransform=d3.zoomIdentity.translate(initTx,initTy).scale(initScale);
+
+// ── D3 ZOOM (handles mouse wheel + touch pinch/pan natively) ──
+const zoom=d3.zoom()
+  .scaleExtent([0.5,14])
+  .on('zoom',(event)=>{ mapG.attr('transform',event.transform); });
+
+// Apply zoom to the SVG element directly — d3 handles touch internally
+svg.call(zoom).call(zoom.transform, initTransform);
+
+// Block native page scroll/zoom while touching the map
+svgEl.addEventListener('touchstart', e=>{ if(e.touches.length>1) e.preventDefault(); }, {passive:false});
+svgEl.addEventListener('touchmove',  e=>{ e.preventDefault(); }, {passive:false});
+
+// Zoom buttons
+document.getElementById('zoomIn').addEventListener('click',()=>{ svg.transition().duration(280).call(zoom.scaleBy,1.55); });
+document.getElementById('zoomOut').addEventListener('click',()=>{ svg.transition().duration(280).call(zoom.scaleBy,1/1.55); });
+document.getElementById('zoomReset').addEventListener('click',()=>{ svg.transition().duration(380).call(zoom.transform,initTransform); });
+
+const ID_NAME={
+  4:"Afghanistan",8:"Albania",12:"Algeria",24:"Angola",32:"Argentina",
+  36:"Australia",40:"Austria",31:"Azerbaijan",50:"Bangladesh",56:"Belgium",
+  64:"Bhutan",68:"Bolivia",70:"Bosnia and Herzegovina",72:"Botswana",
+  76:"Brazil",100:"Bulgaria",116:"Cambodia",120:"Cameroon",
+  124:"Canada",140:"Central African Republic",152:"Chile",156:"China",
+  170:"Colombia",174:"Comoros",180:"DR Congo",191:"Croatia",
+  192:"Cuba",196:"Cyprus",203:"Czech Republic",208:"Denmark",
+  214:"Dominican Republic",218:"Ecuador",818:"Egypt",222:"El Salvador",
+  231:"Ethiopia",246:"Finland",250:"France",268:"Georgia",
+  276:"Germany",288:"Ghana",300:"Greece",320:"Guatemala",
+  332:"Haiti",340:"Honduras",348:"Hungary",356:"India",
+  360:"Indonesia",364:"Iran",368:"Iraq",372:"Ireland",
+  376:"Israel",380:"Italy",388:"Jamaica",392:"Japan",
+  400:"Jordan",398:"Kazakhstan",404:"Kenya",408:"North Korea",
+  410:"South Korea",414:"Kuwait",418:"Laos",422:"Lebanon",
+  426:"Lesotho",434:"Libya",442:"Luxembourg",446:"Macau",
+  454:"Malawi",458:"Malaysia",462:"Maldives",484:"Mexico",
+  498:"Moldova",492:"Monaco",496:"Mongolia",504:"Morocco",
+  508:"Mozambique",104:"Myanmar",516:"Namibia",524:"Nepal",
+  528:"Netherlands",554:"New Zealand",566:"Nigeria",578:"Norway",
+  512:"Oman",586:"Pakistan",591:"Panama",604:"Peru",
+  608:"Philippines",616:"Poland",620:"Portugal",634:"Qatar",
+  642:"Romania",643:"Russia",682:"Saudi Arabia",686:"Senegal",
+  688:"Serbia",694:"Sierra Leone",703:"Slovakia",705:"Slovenia",
+  706:"Somalia",710:"South Africa",728:"South Sudan",724:"Spain",
+  144:"Sri Lanka",736:"Sudan",752:"Sweden",756:"Switzerland",
+  760:"Syria",158:"Taiwan",834:"Tanzania",764:"Thailand",
+  780:"Trinidad and Tobago",788:"Tunisia",792:"Turkey",
+  800:"Uganda",804:"Ukraine",784:"United Arab Emirates",
+  826:"United Kingdom",840:"United States",858:"Uruguay",
+  860:"Uzbekistan",862:"Venezuela",704:"Vietnam",887:"Yemen",
+  894:"Zambia",716:"Zimbabwe",304:"Greenland",440:"Lithuania",
+  112:"Belarus",275:"Palestine",795:"Turkmenistan",
+  270:"Gambia",324:"Guinea",430:"Liberia",466:"Mali",
+  478:"Mauritania",562:"Niger",646:"Rwanda",768:"Togo",
+  854:"Burkina Faso",204:"Benin",232:"Eritrea",262:"Djibouti",
+  740:"Suriname"
+};
+
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
+  const countries=topojson.feature(world,world.objects.countries);
+
+  mapG.selectAll('.country')
+    .data(countries.features)
+    .enter().append('path')
+    .attr('class',d=>{
+      const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw,count=DATA[name]||0;
+      if(TOP3.has(name)) return 'country country-top';
+      return count>0?'country':'country country-zero';
+    })
+    .attr('d',path)
+    .attr('fill',d=>{ const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw; return getColor(DATA[name]||0); })
+    .attr('stroke',d=>{ const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw; return TOP3.has(name)?'#d93020':'#f5c5b8'; })
+    .on('mousemove',function(event,d){
+      const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw,count=DATA[name]||0;
+      showTip(event.clientX,event.clientY,name||raw,count);
+    })
+    .on('mouseleave',hideTip)
+    .on('touchend',function(event,d){
+      // tap on mobile shows tooltip briefly
+      event.preventDefault();
+      const raw=ID_NAME[+d.id]||'',name=NAME_MAP[raw]||raw,count=DATA[name]||0;
+      const t=event.changedTouches[0];
+      showTip(t.clientX,t.clientY,name||raw,count);
+      setTimeout(hideTip,2200);
+    },{passive:false});
+
+  svg.on('mousedown.tip',hideTip);
+  document.addEventListener('mousemove',e=>{ if(tooltip.style.display!=='none') placeTip(e.clientX,e.clientY); });
+});
+</script>
+</body>
+</html>
