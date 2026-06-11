@@ -196,22 +196,17 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-close{position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;color:var(--red-dark);cursor:pointer;line-height:1;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(217,48,32,.1);z-index:10;border:1.5px solid rgba(217,48,32,.2);transition:background .15s,transform .15s;user-select:none;}
 .tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
 
-@media(hover:none)and(pointer:coarse){
-  /* On touch devices: always centered, JS never sets left/top */
-  .evt-tip{
-    position:fixed!important;
-    left:50%!important;top:50%!important;
-    /* hidden state: centered but scaled down */
-    transform:translate(-50%,-50%) scale(.9)!important;
-    width:min(88vw,300px)!important;max-width:min(88vw,300px)!important;
-    max-height:80vh;overflow-y:auto;
-    box-shadow:0 16px 48px rgba(217,48,32,.35),0 0 0 9999px rgba(0,0,0,.45);
-  }
-  .evt-tip.show{
-    transform:translate(-50%,-50%) scale(1)!important;
-  }
-  .evt-tip.tip-match-style{border-color:#f9a825;}
+/* Touch tooltip handled via JS backdrop overlay, no media query needed */
+
+.tip-backdrop{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:99998;
+  opacity:0;
+  transition:opacity .18s ease;
 }
+.tip-backdrop.show{display:block;}
+.tip-backdrop.visible{opacity:1;}
 
 .footer{text-align:center;font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.4px;background:linear-gradient(135deg,#d93020,#ef6640);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));padding-top:4px;}
 </style>
@@ -280,6 +275,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   </div>
   <div class="tip-bottom-row" id="tipBottomRow"></div>
 </div>
+<div class="tip-backdrop" id="tipBackdrop"></div>
 
 <script>
 const SHEET_API_URL='https://script.google.com/macros/s/AKfycbwLWbOvhgA9aiwEpatPngrRZCsUaGbBNNYDQR3KK5sm-p8lQjx1eili_e4IGUWM9cCL9w/exec';
@@ -462,11 +458,11 @@ async function loadChessMatches(){
   }catch(e){/* silent */}
 }
 
-/* ── SHEET ── */
-async function loadSheet(){
-  const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
-  if(!res.ok)throw new Error('HTTP '+res.status);
-  const data=await res.json();
+/* ── SHEET — with localStorage cache ── */
+const SHEET_CACHE_KEY='hcc_sheet_v3';
+const SHEET_CACHE_TTL=5*60*1000; /* 5 min */
+
+function parseSheetData(data){
   data.forEach(ev=>{
     if(!ev.date||!ev.title)return;
     const dateObj=parseDate(ev.date);if(!dateObj)return;
@@ -486,8 +482,44 @@ async function loadSheet(){
       admin:(ev.admin||'').trim().replace(/^@/,''),adminMessage:(ev.adminMessage||'').trim(),
       isMatch:false,
     });
-    if(proxiedLogo)preloadImg(proxiedLogo);
   });
+}
+
+function preloadCurrentMonthImgs(){
+  /* Prioritise images visible right now */
+  const y=viewYear,m=viewMonth,last=lastDay(y,m);
+  for(let d=1;d<=last;d++){
+    const evs=eventMap[dateKey(y,m,d)]||[];
+    evs.forEach(ev=>{if(ev.isProxied)preloadImg(ev.logo);});
+  }
+  /* Then remaining months in background */
+  setTimeout(()=>{
+    Object.values(eventMap).forEach(evs=>evs.forEach(ev=>{if(ev.isProxied)preloadImg(ev.logo);}));
+  },400);
+}
+
+async function loadSheet(){
+  /* ── 1. Serve from cache instantly ── */
+  try{
+    const raw=localStorage.getItem(SHEET_CACHE_KEY);
+    if(raw){
+      const {ts,data}=JSON.parse(raw);
+      if(Date.now()-ts<SHEET_CACHE_TTL){
+        parseSheetData(data);
+        preloadCurrentMonthImgs();
+        return {fromCache:true,data};
+      }
+    }
+  }catch(e){}
+
+  /* ── 2. Fetch fresh ── */
+  const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const data=await res.json();
+  try{localStorage.setItem(SHEET_CACHE_KEY,JSON.stringify({ts:Date.now(),data}));}catch(e){}
+  parseSheetData(data);
+  preloadCurrentMonthImgs();
+  return {fromCache:false,data};
 }
 
 /* ── CALENDAR ── */
@@ -568,6 +600,7 @@ function makeCell(y,m,d,overflow){
 
 /* ── TOOLTIP ── */
 const tip=document.getElementById('globalTip');
+const tipBackdrop=document.getElementById('tipBackdrop');
 const tipLogo=document.getElementById('tipLogo');
 const tipTitle=document.getElementById('tipTitle');
 const tipDateBadge=document.getElementById('tipDateBadge');
@@ -582,18 +615,57 @@ const tipAdminMsg=document.getElementById('tipAdminMsg');
 const tipBottomRow=document.getElementById('tipBottomRow');
 const tipClose=document.getElementById('tipClose');
 
+const isTouch=()=>('ontouchstart' in window)||navigator.maxTouchPoints>0;
 let tipPinned=false,countdownTimer=null,leaveTimer=null;
 const LEAVE_DELAY=400;
 const scheduleLeave=()=>{leaveTimer=setTimeout(()=>{leaveTimer=null;hideTip();},LEAVE_DELAY);};
 const cancelLeave=()=>{if(leaveTimer){clearTimeout(leaveTimer);leaveTimer=null;}};
-const hideTip=()=>{tipPinned=false;tip.classList.remove('show');clearInterval(countdownTimer);countdownTimer=null;};
-const pinTip=(icoEl,ev,y,m,d)=>{cancelLeave();tipPinned=true;renderTip(ev,y,m,d);tip.classList.add('show');posTipFromRect(icoEl);};
-const pinTipTouch=(ev,y,m,d)=>{cancelLeave();tipPinned=true;tip.style.left='';tip.style.top='';renderTip(ev,y,m,d);tip.classList.add('show');};
+
+function hideTip(){
+  tipPinned=false;
+  tip.classList.remove('show');
+  clearInterval(countdownTimer);countdownTimer=null;
+  /* Hide backdrop */
+  tipBackdrop.classList.remove('visible');
+  setTimeout(()=>tipBackdrop.classList.remove('show'),200);
+}
+
+function showTipMobile(ev,y,m,d){
+  /* Mobile: centered modal with backdrop, not fixed-position */
+  tip.style.position='fixed';
+  tip.style.left='50%';
+  tip.style.top='50%';
+  tip.style.transform='translate(-50%,-50%) scale(.92)';
+  tip.style.width='min(88vw,300px)';
+  tip.style.maxWidth='min(88vw,300px)';
+  tip.style.maxHeight='80vh';
+  tip.style.overflowY='auto';
+  tip.style.boxShadow='none'; /* backdrop handles dimming */
+  renderTip(ev,y,m,d);
+  /* Show backdrop first, then tooltip */
+  tipBackdrop.classList.add('show');
+  requestAnimationFrame(()=>{
+    tipBackdrop.classList.add('visible');
+    tip.classList.add('show');
+    requestAnimationFrame(()=>{
+      tip.style.transform='translate(-50%,-50%) scale(1)';
+    });
+  });
+}
+
+const pinTip=(icoEl,ev,y,m,d)=>{
+  cancelLeave();tipPinned=true;
+  if(isTouch()){showTipMobile(ev,y,m,d);}
+  else{renderTip(ev,y,m,d);tip.classList.add('show');posTipFromRect(icoEl);}
+};
+const pinTipTouch=(ev,y,m,d)=>{cancelLeave();tipPinned=true;showTipMobile(ev,y,m,d);};
 
 tip.addEventListener('mouseenter',cancelLeave);
 tip.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
 tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
 tipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideTip();},{passive:false});
+tipBackdrop.addEventListener('click',hideTip);
+tipBackdrop.addEventListener('touchstart',e=>{e.preventDefault();hideTip();},{passive:false});
 
 function renderTip(ev,y,m,d){
   ev.isMatch?tip.classList.add('tip-match-style'):tip.classList.remove('tip-match-style');
@@ -681,10 +753,28 @@ document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewM
 new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
 
 async function init(){
+  const pageSb=document.getElementById('pageSb');
+
+  /* ── Fire both fetches in parallel ── */
   const chessPromise=loadChessMatches().catch(()=>{});
-  try{await loadSheet();}catch(e){console.error('Sheet failed:',e);}
+  const sheetPromise=loadSheet().catch(e=>{console.error('Sheet failed:',e);return null;});
+
+  /* ── If cache available, show calendar immediately ── */
+  const sheetResult=await sheetPromise;
+  const fromCache=sheetResult&&sheetResult.fromCache;
+
   buildCalendar();
-  document.getElementById('pageSb').classList.add('loaded');
+  pageSb.classList.add('loaded');
+
+  if(fromCache){
+    /* Refresh data silently in background */
+    loadSheet().then(()=>{
+      /* Merge chess matches then rebuild */
+      chessPromise.then(()=>buildCalendar());
+    }).catch(()=>{});
+  }
+
+  /* Chess matches: rebuild once ready */
   chessPromise.then(()=>buildCalendar());
 }
 init();
