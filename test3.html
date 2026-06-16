@@ -398,14 +398,15 @@ body{display:block;}
   background:#fff;border-radius:18px;border:2px solid #f5c5b8;
   box-shadow:0 4px 0 #e8aa98;padding:14px;margin-bottom:14px;overflow:clip;
 }
-/* Badges row — scrollable if narrow */
+
+/* Badges row — centered, wraps instead of cropping */
 .ttp-score-legend{
-  display:flex;gap:6px;margin-bottom:4px;flex-wrap:nowrap;align-items:center;
-  overflow-x:auto;padding-bottom:4px;
+  display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center;
+  justify-content:center;
+  padding:0 2px 4px;
 }
-.ttp-score-legend::-webkit-scrollbar{height:0px;}
 .ttp-badge{
-  display:flex;align-items:center;gap:2px;padding:2px 4px;border-radius:999px;
+  display:flex;align-items:center;gap:2px;padding:3px 7px;border-radius:999px;
   font-size:8px;font-weight:900;border:1.5px solid;white-space:nowrap;flex-shrink:0;
 }
 .ttp-badge.bullet{background:#fff0ee;border-color:#f5c5b8;color:#c73520;}
@@ -976,8 +977,6 @@ const TTP = {
     document.getElementById('ttpResults').innerHTML =
       '<div class="ttp-empty"><span class="ttp-spin">🔄</span>Loading...</div>';
     document.getElementById('ttpLastUpdated').textContent = '';
-    const activeLine = document.getElementById('ttpActiveLine');
-    if (activeLine) activeLine.textContent = '';
 
     try {
       const r = await fetch(TTP_JSON_URL + '?v=' + Date.now());
@@ -990,13 +989,7 @@ const TTP = {
           '<div class="ttp-empty"><span>😴</span>No activity today yet!</div>';
       } else {
         TTP.render(players);
-        const updated = data.updated
-          ? new Date(data.updated).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
-          : '—';
-        if (activeLine) {
-          activeLine.textContent = 'Top ' + players.length + ' · ' + (data.activeToday || '?') + ' active today';
-        }
-        document.getElementById('ttpLastUpdated').textContent = 'Last updated: ' + updated;
+        document.getElementById('ttpLastUpdated').textContent = 'Updated ' + TTP.timeAgo(data.updated);
       }
     } catch(err) {
       console.error('TTP load error:', err);
@@ -1005,6 +998,18 @@ const TTP = {
     }
 
     TTP.loading = false;
+  },
+
+  timeAgo(isoStr) {
+    if (!isoStr) return '—';
+    const diffMs   = Date.now() - new Date(isoStr).getTime();
+    const totalMins = Math.floor(diffMs / 60000);
+    if (totalMins < 1) return 'just now';
+    const h = Math.floor(totalMins / 60);
+    const m = totalMins % 60;
+    if (h === 0) return m + 'm ago';
+    if (m === 0) return h + 'h ago';
+    return h + 'h ' + m + 'm ago';
   },
 
   tooltipHTML(p) {
