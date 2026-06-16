@@ -1,26 +1,26 @@
 {
-  "updated": "2026-06-16T21:44:46.637Z",
+  "updated": "2026-06-16T22:08:35.300Z",
   "totalMembers": 1423,
-  "activeToday": 339,
+  "activeToday": 346,
   "players": [
     {
       "username": "nuubinator",
-      "total_pts": 472,
-      "bullet_pts": 46,
+      "total_pts": 478,
+      "bullet_pts": 52,
       "blitz_pts": 426,
       "rapid_pts": 0,
-      "bullet_g": 16,
+      "bullet_g": 18,
       "blitz_g": 52,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/111749030.4ba0fa6e.200x200o.66dda7004b9d.png"
     },
     {
       "username": "shorttemperedbullet",
-      "total_pts": 326,
-      "bullet_pts": 209,
+      "total_pts": 344,
+      "bullet_pts": 227,
       "blitz_pts": 117,
       "rapid_pts": 0,
-      "bullet_g": 73,
+      "bullet_g": 79,
       "blitz_g": 13,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
