@@ -1,16 +1,16 @@
 {
-  "updated": "2026-06-16T10:01:31.229Z",
-  "totalMembers": 1422,
-  "activeToday": 212,
+  "updated": "2026-06-16T12:30:22.433Z",
+  "totalMembers": 1424,
+  "activeToday": 257,
   "players": [
     {
       "username": "xuyen1786",
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg",
-      "total_pts": 226,
-      "bullet_pts": 223,
+      "total_pts": 271,
+      "bullet_pts": 268,
       "blitz_pts": 3,
       "rapid_pts": 0,
-      "bullet_g": 81,
+      "bullet_g": 96,
       "blitz_g": 1,
       "rapid_g": 0
     },
