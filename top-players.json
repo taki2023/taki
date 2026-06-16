@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-16T12:30:22.433Z",
-  "totalMembers": 1424,
-  "activeToday": 257,
+  "updated": "2026-06-16T15:28:05.722Z",
+  "totalMembers": 1425,
+  "activeToday": 314,
   "players": [
     {
       "username": "xuyen1786",
@@ -17,23 +17,23 @@
     {
       "username": "clownape09",
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/321357215.eda21403.200x200o.8d6b2fef060a.jpg",
-      "total_pts": 195,
-      "bullet_pts": 195,
+      "total_pts": 270,
+      "bullet_pts": 270,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 71,
+      "bullet_g": 100,
       "blitz_g": 0,
       "rapid_g": 0
     },
     {
-      "username": "shorttemperedbullet",
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png",
-      "total_pts": 194,
-      "bullet_pts": 77,
-      "blitz_pts": 117,
+      "username": "nuubinator",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/111749030.4ba0fa6e.200x200o.66dda7004b9d.png",
+      "total_pts": 255,
+      "bullet_pts": 0,
+      "blitz_pts": 255,
       "rapid_pts": 0,
-      "bullet_g": 27,
-      "blitz_g": 13,
+      "bullet_g": 0,
+      "blitz_g": 31,
       "rapid_g": 0
     }
   ]
