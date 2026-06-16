@@ -1,0 +1,40 @@
+{
+  "updated": "2026-06-16T10:01:31.229Z",
+  "totalMembers": 1422,
+  "activeToday": 212,
+  "players": [
+    {
+      "username": "xuyen1786",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg",
+      "total_pts": 226,
+      "bullet_pts": 223,
+      "blitz_pts": 3,
+      "rapid_pts": 0,
+      "bullet_g": 81,
+      "blitz_g": 1,
+      "rapid_g": 0
+    },
+    {
+      "username": "clownape09",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/321357215.eda21403.200x200o.8d6b2fef060a.jpg",
+      "total_pts": 195,
+      "bullet_pts": 195,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 71,
+      "blitz_g": 0,
+      "rapid_g": 0
+    },
+    {
+      "username": "shorttemperedbullet",
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png",
+      "total_pts": 194,
+      "bullet_pts": 77,
+      "blitz_pts": 117,
+      "rapid_pts": 0,
+      "bullet_g": 27,
+      "blitz_g": 13,
+      "rapid_g": 0
+    }
+  ]
+}
