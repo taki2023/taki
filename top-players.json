@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-17T15:15:29.738Z",
+  "updated": "2026-06-17T15:39:32.931Z",
   "totalMembers": 1425,
-  "activeToday": 253,
+  "activeToday": 281,
   "players": [
     {
       "username": "erac001",
-      "total_pts": 291,
+      "total_pts": 300,
       "bullet_pts": 0,
-      "blitz_pts": 291,
+      "blitz_pts": 300,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 33,
+      "blitz_g": 34,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
+    },
+    {
+      "username": "tristannguyen_2011",
+      "total_pts": 270,
+      "bullet_pts": 150,
+      "blitz_pts": 90,
+      "rapid_pts": 30,
+      "bullet_g": 52,
+      "blitz_g": 10,
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.3411ba9e.200x200o.9fef672a7d87.jpg"
     },
     {
       "username": "sdm2026chess",
-      "total_pts": 253,
-      "bullet_pts": 3,
+      "total_pts": 265,
+      "bullet_pts": 15,
       "blitz_pts": 0,
       "rapid_pts": 250,
-      "bullet_g": 1,
+      "bullet_g": 5,
       "blitz_g": 0,
       "rapid_g": 18,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "quietkndofcrazy",
-      "total_pts": 215,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 215,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 15,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/419806721.d5aff27b.200x200o.820324ad3cf1.png"
     }
   ]
 }
