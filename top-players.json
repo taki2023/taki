@@ -1,18 +1,29 @@
 {
-  "updated": "2026-06-17T20:36:35.198Z",
+  "updated": "2026-06-17T22:45:29.400Z",
   "totalMembers": 1426,
-  "activeToday": 370,
+  "activeToday": 364,
   "players": [
     {
-      "username": "nikkotello",
-      "total_pts": 495,
+      "username": "syednadeem6t",
+      "total_pts": 390,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 495,
+      "rapid_pts": 390,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 35,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "rapid_g": 26,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382058229.e545233e.200x200o.e6a04982751c.jpg"
+    },
+    {
+      "username": "smorkusporkus",
+      "total_pts": 333,
+      "bullet_pts": 0,
+      "blitz_pts": 333,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 41,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
     },
     {
       "username": "erac001",
@@ -24,17 +35,6 @@
       "blitz_g": 34,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
-    },
-    {
-      "username": "smorkusporkus",
-      "total_pts": 288,
-      "bullet_pts": 0,
-      "blitz_pts": 288,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 36,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
     }
   ]
 }
