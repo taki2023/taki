@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot Chilli Match Announcement</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#1a1a1a;
+    font-family:'Nunito',sans-serif;
+    padding:20px;
+}
+
+.announcement{
+    max-width:700px;
+    margin:auto;
+    background:#fff5f0;
+    border:3px solid #e8553a;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(217,48,32,.25);
+}
+
+.header{
+    background:linear-gradient(135deg,#d93020,#ef6640);
+    padding:22px;
+    text-align:center;
+    color:white;
+}
+
+.header h1{
+    font-family:'Fredoka',sans-serif;
+    font-size:30px;
+    margin-bottom:6px;
+}
+
+.header p{
+    font-weight:800;
+    opacity:.9;
+}
+
+.content{
+    padding:25px;
+}
+
+.message{
+    text-align:center;
+    color:#8c1a10;
+    font-size:16px;
+    line-height:1.7;
+    font-weight:700;
+}
+
+.message strong{
+    color:#d93020;
+}
+
+.vs-section{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    margin:30px 0;
+    flex-wrap:wrap;
+}
+
+.club{
+    text-align:center;
+    flex:1;
+    min-width:180px;
+}
+
+.club img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:5px solid #d93020;
+    object-fit:cover;
+    background:white;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.club-name{
+    margin-top:10px;
+    font-weight:900;
+    color:#c73520;
+    font-size:15px;
+}
+
+.vs{
+    font-family:'Fredoka',sans-serif;
+    font-size:42px;
+    color:#d93020;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.12);
+    }
+}
+
+.info-box{
+    background:white;
+    border:2px solid #f5c5b8;
+    border-radius:20px;
+    padding:18px;
+    margin-top:15px;
+}
+
+.info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:12px 0;
+    color:#8c1a10;
+    font-weight:800;
+}
+
+.info span{
+    font-size:22px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+}
+
+.join-btn{
+    display:inline-block;
+    padding:16px 38px;
+    border-radius:999px;
+    text-decoration:none;
+    color:white;
+    font-weight:900;
+    font-size:18px;
+    background:linear-gradient(135deg,#d93020,#ef6640);
+    box-shadow:0 6px 0 #8c1a10;
+    transition:.2s;
+}
+
+.join-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 9px 0 #8c1a10;
+}
+
+.join-btn:active{
+    transform:translateY(2px);
+    box-shadow:0 3px 0 #8c1a10;
+}
+
+.countdown{
+    text-align:center;
+    margin-top:18px;
+    color:#d93020;
+    font-size:18px;
+    font-weight:900;
+}
+
+.battle{
+    text-align:center;
+    font-size:26px;
+    margin-bottom:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="announcement">
+
+    <div class="header">
+        <h1>🌶️ IMPORTANT DAILY MATCH 🌶️</h1>
+        <p>Hot Chilli Checkmate needs YOU!</p>
+    </div>
+
+    <div class="content">
+
+        <div class="message">
+            Hi guys 👋<br><br>
+
+            We have a <strong>very important Daily Chess match</strong>
+            against a <strong>formidable opponent</strong>,
+            and we need everyone to join and bring their
+            <strong>A-game</strong> 💪♟️
+        </div>
+
+        <div class="battle">
+            ⚔️ CLUB BATTLE ⚔️
+        </div>
+
+        <div class="vs-section">
+
+            <div class="club">
+                <img src="https://images.chesscomfiles.com/uploads/v1/group/856887.ca0c5404.160x160o.1b7d241b68be@2x.png">
+                <div class="club-name">
+                    Hot Chilli Checkmate 🌶️
+                </div>
+            </div>
+
+            <div class="vs">
+                VS
+            </div>
+
+            <div class="club">
+                <img src="https://images.chesscomfiles.com/uploads/v1/group/4493.854ee156.160x160o.db095280d826@2x.gif">
+                <div class="club-name">
+                    Team USA Southeast 🇺🇸
+                </div>
+            </div>
+
+        </div>
+
+        <div class="info-box">
+
+            <div class="info">
+                <span>♟️</span>
+                <div><strong>Format:</strong> Daily Chess • 3 Days per Move</div>
+            </div>
+
+            <div class="info">
+                <span>📅</span>
+                <div><strong>Starting Date:</strong> Today</div>
+            </div>
+
+            <div class="info">
+                <span>⏳</span>
+                <div>Join while you still can!</div>
+            </div>
+
+        </div>
+
+        <div class="countdown" id="hypeText">
+            🔥 Every board matters. Every player counts. 🔥
+        </div>
+
+        <div class="footer">
+            <a class="join-btn"
+               href="https://www.chess.com/club/matches/hot-chilli-checkmate/1960476"
+               target="_blank">
+               🚀 JOIN THE MATCH
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const messages = [
+"🔥 Every board matters. Every player counts. 🔥",
+"🏆 Let's bring home the victory! 🏆",
+"🌶️ Show them the power of Hot Chilli Checkmate! 🌶️",
+"♟️ Join now and fight for the club! ♟️"
+];
+
+let i = 0;
+
+setInterval(() => {
+    i = (i + 1) % messages.length;
+    document.getElementById("hypeText").textContent = messages[i];
+}, 3000);
+</script>
+
+</body>
+</html>
