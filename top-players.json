@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-17T11:44:46.272Z",
-  "totalMembers": 1423,
-  "activeToday": 175,
+  "updated": "2026-06-17T15:01:50.843Z",
+  "totalMembers": 1425,
+  "activeToday": 238,
   "players": [
     {
-      "username": "nikkotello",
-      "total_pts": 225,
+      "username": "erac001",
+      "total_pts": 273,
+      "bullet_pts": 0,
+      "blitz_pts": 273,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 31,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "sdm2026chess",
+      "total_pts": 250,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 225,
+      "rapid_pts": 250,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 18,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "quietkndofcrazy",
+      "total_pts": 215,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 215,
       "bullet_g": 0,
       "blitz_g": 0,
       "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "tristannguyen_2011",
-      "total_pts": 184,
-      "bullet_pts": 118,
-      "blitz_pts": 36,
-      "rapid_pts": 30,
-      "bullet_g": 40,
-      "blitz_g": 4,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.3411ba9e.200x200o.9fef672a7d87.jpg"
-    },
-    {
-      "username": "slickey1701",
-      "total_pts": 174,
-      "bullet_pts": 0,
-      "blitz_pts": 174,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 20,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
