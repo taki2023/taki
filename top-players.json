@@ -1,8 +1,19 @@
 {
-  "updated": "2026-06-18T16:30:27.661Z",
-  "totalMembers": 1422,
-  "activeToday": 257,
+  "updated": "2026-06-18T19:04:25.878Z",
+  "totalMembers": 1423,
+  "activeToday": 361,
   "players": [
+    {
+      "username": "nikkotello",
+      "total_pts": 639,
+      "bullet_pts": 0,
+      "blitz_pts": 234,
+      "rapid_pts": 405,
+      "bullet_g": 0,
+      "blitz_g": 26,
+      "rapid_g": 29,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
     {
       "username": "gmrecio2500",
       "total_pts": 326,
@@ -15,26 +26,15 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "sghirlag",
-      "total_pts": 254,
-      "bullet_pts": 0,
-      "blitz_pts": 9,
-      "rapid_pts": 245,
-      "bullet_g": 0,
-      "blitz_g": 1,
-      "rapid_g": 17,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "gm_shadowvn",
-      "total_pts": 212,
-      "bullet_pts": 0,
-      "blitz_pts": 102,
+      "username": "silencedseeker",
+      "total_pts": 288,
+      "bullet_pts": 13,
+      "blitz_pts": 165,
       "rapid_pts": 110,
-      "bullet_g": 0,
-      "blitz_g": 12,
+      "bullet_g": 5,
+      "blitz_g": 19,
       "rapid_g": 8,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/512133167.4a9e5c80.200x200o.46b218d5318f.jpg"
     }
   ]
 }
