@@ -1,19 +1,8 @@
 {
-  "updated": "2026-06-19T20:15:36.898Z",
-  "totalMembers": 1421,
-  "activeToday": 379,
+  "updated": "2026-06-19T21:44:44.755Z",
+  "totalMembers": 1419,
+  "activeToday": 385,
   "players": [
-    {
-      "username": "xxelproxx2nd",
-      "total_pts": 651,
-      "bullet_pts": 165,
-      "blitz_pts": 486,
-      "rapid_pts": 0,
-      "bullet_g": 55,
-      "blitz_g": 54,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/395703051.124f7fdc.200x200o.9cbdc6f0f0df.png"
-    },
     {
       "username": "nuubinator",
       "total_pts": 300,
@@ -24,6 +13,17 @@
       "blitz_g": 12,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/111749030.4ba0fa6e.200x200o.66dda7004b9d.png"
+    },
+    {
+      "username": "smorkusporkus",
+      "total_pts": 297,
+      "bullet_pts": 0,
+      "blitz_pts": 297,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 37,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
     },
     {
       "username": "lilia1858808",
