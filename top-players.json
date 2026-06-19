@@ -1,39 +1,39 @@
 {
-  "updated": "2026-06-19T16:11:56.772Z",
+  "updated": "2026-06-19T18:16:40.041Z",
   "totalMembers": 1421,
-  "activeToday": 283,
+  "activeToday": 308,
   "players": [
     {
-      "username": "lilia1858808",
-      "total_pts": 275,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 275,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 19,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "nuubinator",
+      "total_pts": 300,
+      "bullet_pts": 192,
+      "blitz_pts": 108,
+      "rapid_pts": 0,
+      "bullet_g": 70,
+      "blitz_g": 12,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/111749030.4ba0fa6e.200x200o.66dda7004b9d.png"
     },
     {
-      "username": "gmrecio2500",
-      "total_pts": 248,
-      "bullet_pts": 0,
-      "blitz_pts": 18,
-      "rapid_pts": 230,
-      "bullet_g": 0,
-      "blitz_g": 2,
-      "rapid_g": 16,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "xxelproxx2nd",
+      "total_pts": 282,
+      "bullet_pts": 165,
+      "blitz_pts": 117,
+      "rapid_pts": 0,
+      "bullet_g": 55,
+      "blitz_g": 13,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/395703051.124f7fdc.200x200o.9cbdc6f0f0df.png"
     },
     {
-      "username": "badr113101",
-      "total_pts": 223,
-      "bullet_pts": 28,
-      "blitz_pts": 0,
-      "rapid_pts": 195,
-      "bullet_g": 10,
-      "blitz_g": 0,
-      "rapid_g": 13,
+      "username": "dretal",
+      "total_pts": 267,
+      "bullet_pts": 0,
+      "blitz_pts": 267,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 31,
+      "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
