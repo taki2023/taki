@@ -8,7 +8,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
-
 :root{
   --red:#d93020;--red2:#e84535;--red3:#ef6640;
   --bg:#fff5f0;--card:#fff;
@@ -16,7 +15,6 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
   --text:#c73520;--subtext:#9a2010;--muted:#e8aa98;
   --fs-xs:9px;--fs-sm:10px;--fs-base:11px;--fs-md:12px;
 }
-
 @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes dot-pulse{0%,100%{box-shadow:0 0 0 2.5px rgba(229,57,53,.35);transform:scale(1);}50%{box-shadow:0 0 0 5px rgba(229,57,53,.1);transform:scale(1.15);}}
@@ -24,10 +22,8 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 @keyframes dot-glow-green{0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25);}50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12);}}
 @keyframes cd-tick{0%,100%{opacity:1;}50%{opacity:.55;}}
 @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.55;}}
-
 /* WRAPPER */
 .vcm{width:100%;background:var(--card);border-radius:18px;border:2px solid var(--border);box-shadow:0 4px 0 var(--shadow);overflow:hidden;}
-
 /* BANNER */
 .vcm-banner{
   background:linear-gradient(135deg,#d93020 0%,#e85535 55%,#ef6640 100%);
@@ -35,8 +31,7 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 }
 .vcm-banner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 13px,rgba(255,255,255,.045) 13px,rgba(255,255,255,.045) 26px);pointer-events:none;}
 .vcm-banner-inner{display:flex;align-items:center;gap:11px;position:relative;z-index:1;}
-
-/* banner logo — marathon trophy image */
+/* banner logo */
 .vcm-logo-wrap{
   width:48px;height:48px;border-radius:12px;flex-shrink:0;background:#fff;
   border:2.5px solid rgba(255,255,255,.9);
@@ -46,16 +41,12 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 .vcm-logo-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:9px;opacity:0;transition:opacity .25s;}
 .vcm-logo-wrap img.loaded{opacity:1;}
 .vcm-logo-skel{position:absolute;inset:0;border-radius:9px;background:linear-gradient(90deg,#f0d0c8 25%,#fde8e0 50%,#f0d0c8 75%);background-size:300% 100%;animation:shimmer 1s ease-in-out infinite;}
-
-/* banner text — smaller fonts */
+/* banner text */
 .vcm-banner-text{flex:1;min-width:0;}
 .vcm-banner-pre{font-size:8px;font-weight:900;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
 .vcm-banner-title{font-family:'Fredoka One',cursive;font-size:14px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.22);line-height:1.15;}
-.vcm-banner-date{font-size:8px;font-weight:800;color:rgba(255,255,255,.8);margin-top:3px;}
-
 /* INNER */
 .vcm-inner{padding:12px 12px 14px;}
-
 /* COUNTDOWN */
 .vcm-countdown-wrap{background:var(--card);border-radius:14px;border:2px solid var(--border);box-shadow:0 4px 0 var(--shadow);padding:12px;margin-bottom:12px;text-align:center;}
 .vcm-cd-label{font-size:var(--fs-xs);font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
@@ -66,7 +57,6 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 .vcm-cd-sep{font-family:'Fredoka One',cursive;font-size:20px;color:var(--muted);line-height:1;padding-bottom:12px;animation:cd-tick 1s ease-in-out infinite;}
 .vcm-cd-num.is-live{color:#22c55e;}
 .vcm-cd-num.is-ended{color:var(--muted);}
-
 .vcm-status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;border:1.5px solid;font-size:var(--fs-sm);font-weight:900;margin-top:8px;}
 .vcm-status-pill.upcoming{background:#e3f2fd;color:#1565c0;border-color:#90caf9;}
 .vcm-status-pill.soon{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;animation:cd-tick 1.6s ease-in-out infinite;}
@@ -76,11 +66,28 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 .vcm-pill-dot.pulse-red{animation:dot-pulse 1s ease-in-out infinite;}
 .vcm-pill-dot.pulse-green{animation:dot-glow-green 1.8s ease-in-out infinite;}
 .vcm-pill-dot.pulse-blue{animation:dot-glow-blue 2.5s ease-in-out infinite;}
-
 /* SECTION LABEL */
 .vcm-section-label{font-size:var(--fs-xs);font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;display:flex;align-items:center;gap:6px;}
 .vcm-section-label::after{content:'';flex:1;height:1.5px;background:var(--border);border-radius:1px;}
-
+/* COLLAPSIBLE SECTION HEADER */
+.vcm-collapse-header{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:var(--bg);border:2px solid var(--border);border-radius:12px;
+  padding:9px 10px 9px 12px;margin-bottom:9px;
+  cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 3px 0 var(--shadow);transition:border-color .15s,transform .1s,box-shadow .1s;
+}
+.vcm-collapse-header:hover{border-color:var(--red3);}
+.vcm-collapse-header:active{transform:translateY(1px);box-shadow:0 2px 0 var(--shadow);}
+.vcm-collapse-header .vcm-collapse-title{font-size:var(--fs-base);font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:1px;}
+.vcm-collapse-arrow-circle{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 0 #8c1a10;
+}
+.vcm-collapse-arrow-circle svg{width:12px;height:12px;transition:transform .3s ease;}
+.vcm-collapse-arrow-circle.is-collapsed svg{transform:rotate(-90deg);}
 /* DETAILS BOX */
 .vcm-details-box{background:var(--bg);border-radius:11px;border:1.5px solid var(--border);padding:9px 11px;margin-bottom:11px;font-size:var(--fs-sm);font-weight:700;color:var(--subtext);line-height:1.6;}
 .vcm-details-text{margin-bottom:8px;}
@@ -92,52 +99,76 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 }
 .vcm-check-btn:hover{transform:translateY(-1px);box-shadow:0 5px 0 #8c1a10;}
 .vcm-check-btn:active{transform:translateY(1px);box-shadow:0 2px 0 #8c1a10;}
-
-/* RULES */
-.vcm-rules-box{background:var(--card);border-radius:12px;border:1.5px dashed var(--border);padding:10px 12px;margin-bottom:11px;}
+/* RULES — collapsible */
+.vcm-rules-box{
+  background:var(--card);border-radius:12px;border:1.5px dashed var(--border);
+  padding:10px 12px;margin-bottom:11px;
+  max-height:600px;opacity:1;overflow:hidden;
+  transition:max-height .35s ease, opacity .3s ease, padding .3s ease, margin .3s ease, border-color .3s ease;
+}
+.vcm-rules-box.is-collapsed{
+  max-height:0;opacity:0;padding-top:0;padding-bottom:0;margin-bottom:0;border-color:transparent;
+}
 .vcm-rule{display:flex;align-items:baseline;gap:6px;font-size:var(--fs-sm);font-weight:700;color:var(--subtext);margin-bottom:5px;line-height:1.5;}
 .vcm-rule:last-child{margin-bottom:0;}
 .vcm-rule-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px;}
-
 /* REWARDS */
 .vcm-rewards-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
 .vcm-reward-item{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:11px;background:var(--card);border:2px solid var(--border);font-size:var(--fs-sm);font-weight:800;color:var(--subtext);}
 .vcm-reward-icon{font-size:14px;flex-shrink:0;}
-
 /* MATCHES */
 .vcm-matches-list{display:flex;flex-direction:column;gap:8px;margin-bottom:6px;}
-
-/* each match card — stacked layout */
+/* each match card */
 .vcm-match-card{
   background:var(--bg);border-radius:13px;border:1.5px solid var(--border);
   padding:10px 11px;
 }
-
-/* top row: logos + club name */
-.vcm-match-top{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;}
-
-/* vs logos */
-.vcm-match-vs{display:flex;align-items:center;gap:8px;justify-content:center;}
+/* top row: logos + middle column */
+.vcm-match-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+/* club logo — 1.5× bigger: 52 × 1.5 = 78px */
 .vcm-match-logo{
-  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  width:78px;height:78px;border-radius:16px;flex-shrink:0;
   background:#fff;border:2px solid var(--border);
   box-shadow:0 3px 8px rgba(0,0,0,.1);
   display:flex;align-items:center;justify-content:center;
-  font-size:24px;overflow:hidden;position:relative;
+  font-size:36px;overflow:hidden;position:relative;
 }
-.vcm-match-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;opacity:0;transition:opacity .2s;}
+.vcm-match-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px;opacity:0;transition:opacity .2s;}
 .vcm-match-logo img.loaded{opacity:1;}
-.vcm-match-logo-skel{position:absolute;inset:0;border-radius:10px;background:linear-gradient(90deg,#f0d0c8 25%,#fde8e0 50%,#f0d0c8 75%);background-size:300% 100%;animation:shimmer 1.1s ease-in-out infinite;}
-.vcm-match-vs-sep{font-family:'Fredoka One',cursive;font-size:13px;color:var(--muted);line-height:1;padding:0 2px;}
-
-/* bottom row: score + button */
-.vcm-match-bottom{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:2px;}
-
-/* match button */
+.vcm-match-logo-skel{position:absolute;inset:0;border-radius:14px;background:linear-gradient(90deg,#f0d0c8 25%,#fde8e0 50%,#f0d0c8 75%);background-size:300% 100%;animation:shimmer 1.1s ease-in-out infinite;}
+/* middle column: VS label + status badge + action button — all stacked */
+.vcm-match-mid{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;flex-shrink:0;
+}
+.vcm-match-vs-label{
+  font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.5px;
+  color:var(--muted);
+  -webkit-text-stroke:.4px var(--border);
+}
+/* status badge */
+.vcm-match-score-center{
+  display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;
+  border:1.5px solid;font-size:var(--fs-xs);font-weight:900;white-space:nowrap;
+}
+.vcm-match-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.vcm-match-score-label{white-space:nowrap;}
+.vcm-match-score-center.s-live{background:rgba(229,57,53,.1);color:#b71c1c;border-color:#ef9a9a;}
+.vcm-match-score-center.s-live .vcm-match-dot{animation:dot-pulse 1s ease-in-out infinite;}
+.vcm-match-score-center.s-win{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;}
+.vcm-match-score-center.s-loss{background:#ffebee;color:#c62828;border-color:#ef9a9a;}
+.vcm-match-score-center.s-draw{background:#fff8e1;color:#f57f17;border-color:#ffe082;}
+.vcm-match-score-center.s-soon{background:#f8fafc;color:#b0bec5;border-color:#e2e8f0;}
+/* match button — now part of mid column */
 .vcm-match-btn{
-  flex-shrink:0;border-radius:999px;padding:4px 12px;
-  font-family:'Nunito',sans-serif;font-size:var(--fs-xs);font-weight:900;
-  text-decoration:none;display:inline-flex;align-items:center;gap:3px;
+  flex-shrink:0;border-radius:999px;padding:5px 14px;
+  font-family:'Nunito',sans-serif;font-size:11px;font-weight:900;
+  text-decoration:none;display:inline-flex;align-items:center;gap:4px;
   transition:all .15s;white-space:nowrap;border:1.5px solid;cursor:pointer;
 }
 .vcm-match-btn.m-join{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;border-color:transparent;box-shadow:0 2px 0 #8c1a10;}
@@ -149,50 +180,43 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 </head>
 <body>
 <div class="vcm" id="vcmWidget">
-
   <div class="vcm-banner">
     <div class="vcm-banner-inner">
       <div class="vcm-logo-wrap" id="vcmBannerLogo">
-        <div class="vcm-logo-skel" id="vcmLogoSkel"></div>
+        <div class="vcm-logo-skel" id="vcmLogoSkel" style="display:none;"></div>
         <span id="vcmLogoEmoji" style="position:relative;z-index:1;display:none;">♟️</span>
+        <img alt="Marathon" decoding="async" src="https://www.chess.com/bundles/web/images/achievements/fun_chess_marathon.f89f743d.png" class="loaded">
       </div>
       <div class="vcm-banner-text">
         <div class="vcm-banner-pre">🌶 Hot Chilli CheckMate</div>
-        <div class="vcm-banner-title" id="vcmBannerTitle">Vote Chess Marathon</div>
-        <div class="vcm-banner-date" id="vcmBannerDate"></div>
+        <div class="vcm-banner-title" id="vcmBannerTitle">Vote Chess Marathon !</div>
       </div>
     </div>
   </div>
-
   <div class="vcm-inner" id="vcmInner"></div>
 </div>
-
 <script>
 /* ══════════════════════════════════════
    CONFIGURE EVERYTHING HERE
 ══════════════════════════════════════ */
-
 const EV = {
   title   : 'Vote Chess Marathon !',
   dateObj : { y:2026, m:5, d:20 },  /* month 0-indexed: 5 = June */
-  timeObj : { h:7, min:0 },
+  timeObj : { h:6, min:16 },
   duration: 16,
   details : 'A fun and brutal event — for more info and to follow the event all along, click the button below!',
   link    : 'https://www.chess.com/clubs/forum/view/vote-chess-marathon-subscription',
 };
-
 const MARATHON_RULES = [
   'Join any of the 3–4 matches freely throughout the day',
   'Always read comments & discuss before voting',
   '⏱ No voting in first 4 min — first 4 min are for analysis only',
   'Vote only when clock drops below 6 minutes',
 ];
-
 const MARATHON_REWARDS = [
   { icon:'🎉', text:'10 Cheers' },
-  { icon:'🎖️', text:'Marathon Completion Card' },
+  { icon:'🎖️', text:'Marathon Card' },
 ];
-
 /*
  * MATCHES — edit this list to add/update matches
  *
@@ -223,17 +247,13 @@ const MATCHES = [
     link : '',
   },
 ];
-
 const HCC_LOGO   = 'https://images.chesscomfiles.com/uploads/v1/group/856887.ca0c5404.160x160o.1b7d241b68be@2x.png';
 const EVENT_LOGO = 'https://www.chess.com/bundles/web/images/achievements/fun_chess_marathon.f89f743d.png';
-
 /* ══ HELPERS ══ */
 const pad = n => String(n).padStart(2,'0');
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const ordinal = d => { const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)%10]||s[v]||s[0]); };
 function toUTC(dObj,tObj){ return new Date(Date.UTC(dObj.y,dObj.m,dObj.d,tObj.h,tObj.min,0)); }
-function fmtDate(dObj,tObj){ return MONTHS[dObj.m]+' '+ordinal(dObj.d)+', '+dObj.y+' · '+pad(tObj.h)+':'+pad(tObj.min)+' UTC'; }
-
 function countdownState(startUTC, durHrs){
   const now=Date.now(), s0=startUTC.getTime();
   const endUTC = durHrs>0 ? new Date(s0+durHrs*3600000) : null;
@@ -247,7 +267,6 @@ function countdownState(startUTC, durHrs){
   }
   return { phase:'ended', d:0, h:0, mn:0, s:0 };
 }
-
 function mkLogo(url, alt){
   const wrap = document.createElement('div');
   wrap.className = 'vcm-match-logo';
@@ -265,25 +284,24 @@ function mkLogo(url, alt){
   }
   return wrap;
 }
-
 function mkMatchCard(m){
   const card = document.createElement('div');
   card.className = 'vcm-match-card';
-
-  /* top: logos + name */
+  const sc = m.score;
+  /* ── top row: [HCC logo]  [mid column]  [opponent logo] ── */
   const top = document.createElement('div');
   top.className = 'vcm-match-top';
-
-  const sc = m.score;
-
-  /* logos row with score in the middle */
-  const vs = document.createElement('div');
-  vs.className = 'vcm-match-vs';
-
-  vs.appendChild(mkLogo(HCC_LOGO,'HCC'));
-
+  /* HCC logo */
+  top.appendChild(mkLogo(HCC_LOGO,'HCC'));
+  /* middle column: VS label → status badge → action button */
   const mid = document.createElement('div');
   mid.className = 'vcm-match-mid';
+  /* VS label */
+  const vsLabel = document.createElement('div');
+  vsLabel.className = 'vcm-match-vs-label';
+  vsLabel.textContent = 'VS';
+  mid.appendChild(vsLabel);
+  /* status badge */
   const badge = document.createElement('div');
   badge.className = 'vcm-match-score-center';
   const SCORES = {
@@ -295,21 +313,12 @@ function mkMatchCard(m){
   };
   const sd = SCORES[sc] || SCORES['soon'];
   badge.classList.add(sd.cls);
-  const dotEl = document.createElement('div');  dotEl.className='vcm-match-dot';
-  const lblEl = document.createElement('div');  lblEl.className='vcm-match-score-label'; lblEl.textContent=sd.label;
+  const dotEl = document.createElement('div'); dotEl.className='vcm-match-dot';
+  const lblEl = document.createElement('div'); lblEl.className='vcm-match-score-label'; lblEl.textContent=sd.label;
   badge.appendChild(dotEl);
   badge.appendChild(lblEl);
   mid.appendChild(badge);
-  vs.appendChild(mid);
-
-  vs.appendChild(mkLogo(m.logo, m.club));
-  top.appendChild(vs);
-  card.appendChild(top);
-
-  /* bottom: action button centered */
-  const bottom = document.createElement('div');
-  bottom.className = 'vcm-match-bottom';
-
+  /* action button — placed right under the status badge, inside the mid column */
   let btn;
   if(sc==='live' && m.link){
     btn = document.createElement('a');
@@ -319,38 +328,26 @@ function mkMatchCard(m){
   } else if(sc==='soon'){
     btn = document.createElement('span');
     btn.className='vcm-match-btn m-soon';
-    btn.textContent='Soon';
+    btn.textContent='▶ Join';
   } else if(m.link){
     btn = document.createElement('a');
     btn.className='vcm-match-btn m-check';
     btn.href=m.link; btn.target='_blank'; btn.rel='noopener noreferrer';
     btn.textContent='🔍 Check';
   }
-  if(btn) bottom.appendChild(btn);
-  card.appendChild(bottom);
+  if(btn) mid.appendChild(btn);
+  top.appendChild(mid);
+  /* opponent logo */
+  top.appendChild(mkLogo(m.logo, m.club));
+  card.appendChild(top);
   return card;
 }
-
 /* ══ RENDER ══ */
 let cdTimer = null;
-
 (function init(){
   document.getElementById('vcmBannerTitle').textContent = EV.title;
-  document.getElementById('vcmBannerDate').textContent  = fmtDate(EV.dateObj, EV.timeObj);
-
-  /* banner logo → marathon trophy image */
-  const logoWrap  = document.getElementById('vcmBannerLogo');
-  const logoSkel  = document.getElementById('vcmLogoSkel');
-  const logoEmoji = document.getElementById('vcmLogoEmoji');
-  const logoImg = document.createElement('img');
-  logoImg.alt='Marathon'; logoImg.decoding='async'; logoImg.src=EVENT_LOGO;
-  logoImg.onload  = ()=>{ logoImg.classList.add('loaded'); logoSkel.style.display='none'; };
-  logoImg.onerror = ()=>{ logoSkel.style.display='none'; logoEmoji.style.display=''; };
-  logoWrap.appendChild(logoImg);
-
   const inner = document.getElementById('vcmInner');
   inner.innerHTML = '';
-
   /* COUNTDOWN */
   const startUTC = toUTC(EV.dateObj, EV.timeObj);
   const cdWrap = document.createElement('div');
@@ -368,7 +365,6 @@ let cdTimer = null;
     </div>
     <div id="vcmPill"></div>`;
   inner.appendChild(cdWrap);
-
   function tick(){
     const st=countdownState(startUTC, EV.duration);
     const elD=document.getElementById('cdD'), elH=document.getElementById('cdH'),
@@ -398,7 +394,6 @@ let cdTimer = null;
   tick();
   clearInterval(cdTimer);
   cdTimer = setInterval(tick,1000);
-
   /* ABOUT */
   const aboutLbl = document.createElement('div');
   aboutLbl.className='vcm-section-label'; aboutLbl.textContent='About the Event 📋';
@@ -413,20 +408,27 @@ let cdTimer = null;
   detBtn.textContent='Check Details →';
   detBox.appendChild(detTxt); detBox.appendChild(detBtn);
   inner.appendChild(detBox);
-
-  /* RULES */
-  const rulesLbl = document.createElement('div');
-  rulesLbl.className='vcm-section-label'; rulesLbl.textContent='Event Rules 📜';
-  inner.appendChild(rulesLbl);
+  /* RULES — collapsible, starts collapsed */
+  const rulesHeader = document.createElement('div');
+  rulesHeader.className = 'vcm-collapse-header';
+  rulesHeader.innerHTML = `<span class="vcm-collapse-title">Event Rules 📜</span>
+    <span class="vcm-collapse-arrow-circle is-collapsed" id="rulesArrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </span>`;
+  inner.appendChild(rulesHeader);
   const rulesBox = document.createElement('div');
-  rulesBox.className='vcm-rules-box';
+  rulesBox.className='vcm-rules-box is-collapsed';
+  rulesBox.id = 'rulesBox';
   MARATHON_RULES.forEach(r=>{
     const row=document.createElement('div'); row.className='vcm-rule';
     row.innerHTML=`<div class="vcm-rule-dot"></div>${r}`;
     rulesBox.appendChild(row);
   });
   inner.appendChild(rulesBox);
-
+  rulesHeader.addEventListener('click', ()=>{
+    rulesBox.classList.toggle('is-collapsed');
+    document.getElementById('rulesArrow').classList.toggle('is-collapsed');
+  });
   /* REWARDS */
   const rewLbl = document.createElement('div');
   rewLbl.className='vcm-section-label'; rewLbl.textContent='Marathon Rewards 🏆';
@@ -439,7 +441,6 @@ let cdTimer = null;
     rewGrid.appendChild(item);
   });
   inner.appendChild(rewGrid);
-
   /* MATCHES */
   if(MATCHES.length>0){
     const matchLbl = document.createElement('div');
