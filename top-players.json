@@ -1,39 +1,39 @@
 {
-  "updated": "2026-06-20T04:51:40.260Z",
+  "updated": "2026-06-20T08:21:46.437Z",
   "totalMembers": 1417,
-  "activeToday": 81,
+  "activeToday": 191,
   "players": [
     {
-      "username": "ecovoyager",
-      "total_pts": 117,
+      "username": "abd_allah_libyan",
+      "total_pts": 250,
       "bullet_pts": 0,
-      "blitz_pts": 117,
-      "rapid_pts": 0,
+      "blitz_pts": 120,
+      "rapid_pts": 130,
       "bullet_g": 0,
-      "blitz_g": 13,
+      "blitz_g": 14,
+      "rapid_g": 10,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.4afe0d1d.200x200o.68c2a63461f7.jpg"
+    },
+    {
+      "username": "shorttemperedbullet",
+      "total_pts": 217,
+      "bullet_pts": 160,
+      "blitz_pts": 57,
+      "rapid_pts": 0,
+      "bullet_g": 56,
+      "blitz_g": 7,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "eliminator_333",
-      "total_pts": 105,
+      "username": "valencia-jhino-m",
+      "total_pts": 170,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 105,
+      "rapid_pts": 170,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 7,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "abd_allah_libyan",
-      "total_pts": 100,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 100,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 8,
+      "rapid_g": 12,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
