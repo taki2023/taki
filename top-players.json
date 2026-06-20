@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-19T22:56:36.802Z",
-  "totalMembers": 1419,
-  "activeToday": 394,
+  "updated": "2026-06-20T00:09:26.498Z",
+  "totalMembers": 1418,
+  "activeToday": 5,
   "players": [
     {
-      "username": "xxelproxx2nd",
-      "total_pts": 714,
-      "bullet_pts": 228,
-      "blitz_pts": 486,
-      "rapid_pts": 0,
-      "bullet_g": 76,
-      "blitz_g": 54,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/395703051.124f7fdc.200x200o.9cbdc6f0f0df.png"
-    },
-    {
-      "username": "smorkusporkus",
-      "total_pts": 363,
-      "bullet_pts": 0,
-      "blitz_pts": 363,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 45,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
-    },
-    {
-      "username": "lilia1858808",
-      "total_pts": 310,
+      "username": "austinaccounted",
+      "total_pts": 30,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 310,
+      "rapid_pts": 30,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 22,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/369284575.02a18922.200x200o.c6eb44ed24b0.jpg"
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/381273949.6f75e88f.200x200o.d1aa174532e2.png"
+    },
+    {
+      "username": "syednadeem6t",
+      "total_pts": 15,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 15,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382058229.e545233e.200x200o.e6a04982751c.jpg"
+    },
+    {
+      "username": "eliminator_333",
+      "total_pts": 15,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 15,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/532454871.41da37e6.200x200o.c8ea49164e2d.png"
     }
   ]
 }
