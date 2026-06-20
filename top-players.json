@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-20T08:21:46.437Z",
-  "totalMembers": 1417,
-  "activeToday": 191,
+  "updated": "2026-06-20T10:58:20.877Z",
+  "totalMembers": 1413,
+  "activeToday": 218,
   "players": [
     {
       "username": "abd_allah_libyan",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.4afe0d1d.200x200o.68c2a63461f7.jpg"
     },
     {
+      "username": "valencia-jhino-m",
+      "total_pts": 245,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 245,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 17,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
       "username": "shorttemperedbullet",
       "total_pts": 217,
       "bullet_pts": 160,
@@ -23,17 +34,6 @@
       "bullet_g": 56,
       "blitz_g": 7,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "valencia-jhino-m",
-      "total_pts": 170,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 170,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 12,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
