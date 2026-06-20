@@ -18,10 +18,6 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes dot-pulse{0%,100%{box-shadow:0 0 0 2.5px rgba(229,57,53,.35);transform:scale(1);}50%{box-shadow:0 0 0 5px rgba(229,57,53,.1);transform:scale(1.15);}}
-@keyframes dot-glow-blue{0%,100%{box-shadow:0 0 0 2.5px rgba(30,136,229,.25);}50%{box-shadow:0 0 0 4px rgba(30,136,229,.12);}}
-@keyframes dot-glow-green{0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25);}50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12);}}
-@keyframes cd-tick{0%,100%{opacity:1;}50%{opacity:.55;}}
-@keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.55;}}
 /* WRAPPER */
 .vcm{width:100%;background:var(--card);border-radius:18px;border:2px solid var(--border);box-shadow:0 4px 0 var(--shadow);overflow:hidden;}
 /* BANNER */
@@ -47,25 +43,6 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 .vcm-banner-title{font-family:'Fredoka One',cursive;font-size:14px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.22);line-height:1.15;}
 /* INNER */
 .vcm-inner{padding:12px 12px 14px;}
-/* COUNTDOWN */
-.vcm-countdown-wrap{background:var(--card);border-radius:14px;border:2px solid var(--border);box-shadow:0 4px 0 var(--shadow);padding:12px;margin-bottom:12px;text-align:center;}
-.vcm-cd-label{font-size:var(--fs-xs);font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
-.vcm-cd-grid{display:flex;align-items:center;justify-content:center;gap:5px;}
-.vcm-cd-unit{display:flex;flex-direction:column;align-items:center;gap:3px;}
-.vcm-cd-num{font-family:'Fredoka One',cursive;font-size:24px;line-height:1;color:var(--red);background:var(--bg);border-radius:9px;border:2px solid var(--border);box-shadow:0 3px 0 var(--shadow);padding:3px 8px;min-width:42px;text-align:center;transition:color .3s;}
-.vcm-cd-unit-label{font-size:8px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;}
-.vcm-cd-sep{font-family:'Fredoka One',cursive;font-size:20px;color:var(--muted);line-height:1;padding-bottom:12px;animation:cd-tick 1s ease-in-out infinite;}
-.vcm-cd-num.is-live{color:#22c55e;}
-.vcm-cd-num.is-ended{color:var(--muted);}
-.vcm-status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;border:1.5px solid;font-size:var(--fs-sm);font-weight:900;margin-top:8px;}
-.vcm-status-pill.upcoming{background:#e3f2fd;color:#1565c0;border-color:#90caf9;}
-.vcm-status-pill.soon{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;animation:cd-tick 1.6s ease-in-out infinite;}
-.vcm-status-pill.live{background:rgba(229,57,53,.1);color:#b71c1c;border-color:#ef9a9a;animation:cd-tick 1.2s ease-in-out infinite;}
-.vcm-status-pill.ended{background:#f5f5f5;color:#555;border-color:#ccc;}
-.vcm-pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
-.vcm-pill-dot.pulse-red{animation:dot-pulse 1s ease-in-out infinite;}
-.vcm-pill-dot.pulse-green{animation:dot-glow-green 1.8s ease-in-out infinite;}
-.vcm-pill-dot.pulse-blue{animation:dot-glow-blue 2.5s ease-in-out infinite;}
 /* SECTION LABEL */
 .vcm-section-label{font-size:var(--fs-xs);font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;display:flex;align-items:center;gap:6px;}
 .vcm-section-label::after{content:'';flex:1;height:1.5px;background:var(--border);border-radius:1px;}
@@ -201,9 +178,6 @@ html,body{width:100%;background:#fff5f0;font-family:'Nunito',sans-serif;}
 ══════════════════════════════════════ */
 const EV = {
   title   : 'Vote Chess Marathon !',
-  dateObj : { y:2026, m:5, d:20 },  /* month 0-indexed: 5 = June */
-  timeObj : { h:6, min:16 },
-  duration: 16,
   details : 'A fun and brutal event — for more info and to follow the event all along, click the button below!',
   link    : 'https://www.chess.com/clubs/forum/view/vote-chess-marathon-subscription',
 };
@@ -250,23 +224,6 @@ const MATCHES = [
 const HCC_LOGO   = 'https://images.chesscomfiles.com/uploads/v1/group/856887.ca0c5404.160x160o.1b7d241b68be@2x.png';
 const EVENT_LOGO = 'https://www.chess.com/bundles/web/images/achievements/fun_chess_marathon.f89f743d.png';
 /* ══ HELPERS ══ */
-const pad = n => String(n).padStart(2,'0');
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const ordinal = d => { const s=['th','st','nd','rd'],v=d%100; return d+(s[(v-20)%10]||s[v]||s[0]); };
-function toUTC(dObj,tObj){ return new Date(Date.UTC(dObj.y,dObj.m,dObj.d,tObj.h,tObj.min,0)); }
-function countdownState(startUTC, durHrs){
-  const now=Date.now(), s0=startUTC.getTime();
-  const endUTC = durHrs>0 ? new Date(s0+durHrs*3600000) : null;
-  if(now < s0){
-    const diff=s0-now, tot=Math.floor(diff/1000);
-    return { phase: diff<=3600000?'soon':'upcoming', d:Math.floor(tot/86400), h:Math.floor((tot%86400)/3600), mn:Math.floor((tot%3600)/60), s:tot%60 };
-  }
-  if(endUTC && now < endUTC.getTime()){
-    const tot=Math.floor((endUTC.getTime()-now)/1000);
-    return { phase:'live', d:0, h:Math.floor(tot/3600), mn:Math.floor((tot%3600)/60), s:tot%60 };
-  }
-  return { phase:'ended', d:0, h:0, mn:0, s:0 };
-}
 function mkLogo(url, alt){
   const wrap = document.createElement('div');
   wrap.className = 'vcm-match-logo';
@@ -343,57 +300,10 @@ function mkMatchCard(m){
   return card;
 }
 /* ══ RENDER ══ */
-let cdTimer = null;
 (function init(){
   document.getElementById('vcmBannerTitle').textContent = EV.title;
   const inner = document.getElementById('vcmInner');
   inner.innerHTML = '';
-  /* COUNTDOWN */
-  const startUTC = toUTC(EV.dateObj, EV.timeObj);
-  const cdWrap = document.createElement('div');
-  cdWrap.className = 'vcm-countdown-wrap';
-  cdWrap.innerHTML = `
-    <div class="vcm-cd-label">Event Countdown ⏱</div>
-    <div class="vcm-cd-grid">
-      <div class="vcm-cd-unit" id="cdUnitD"><div class="vcm-cd-num" id="cdD">--</div><div class="vcm-cd-unit-label">Days</div></div>
-      <div class="vcm-cd-sep" id="cdSepD">:</div>
-      <div class="vcm-cd-unit"><div class="vcm-cd-num" id="cdH">--</div><div class="vcm-cd-unit-label">Hours</div></div>
-      <div class="vcm-cd-sep">:</div>
-      <div class="vcm-cd-unit"><div class="vcm-cd-num" id="cdM">--</div><div class="vcm-cd-unit-label">Min</div></div>
-      <div class="vcm-cd-sep">:</div>
-      <div class="vcm-cd-unit"><div class="vcm-cd-num" id="cdS">--</div><div class="vcm-cd-unit-label">Sec</div></div>
-    </div>
-    <div id="vcmPill"></div>`;
-  inner.appendChild(cdWrap);
-  function tick(){
-    const st=countdownState(startUTC, EV.duration);
-    const elD=document.getElementById('cdD'), elH=document.getElementById('cdH'),
-          elM=document.getElementById('cdM'), elS=document.getElementById('cdS'),
-          elUD=document.getElementById('cdUnitD'), elSD=document.getElementById('cdSepD'),
-          pill=document.getElementById('vcmPill');
-    if(!elH){ clearInterval(cdTimer); return; }
-    [elD,elH,elM,elS].forEach(e=>e.className='vcm-cd-num');
-    const showD=st.d>0;
-    elUD.style.display=showD?'':'none';
-    elSD.style.display=showD?'':'none';
-    if(showD) elD.textContent=pad(st.d);
-    elH.textContent=pad(st.h); elM.textContent=pad(st.mn); elS.textContent=pad(st.s);
-    if(st.phase==='ended'){
-      [elD,elH,elM,elS].forEach(e=>e.classList.add('is-ended'));
-      pill.innerHTML='<span class="vcm-status-pill ended"><span class="vcm-pill-dot"></span>Event Ended</span>';
-      clearInterval(cdTimer);
-    } else if(st.phase==='live'){
-      [elD,elH,elM,elS].forEach(e=>e.classList.add('is-live'));
-      pill.innerHTML='<span class="vcm-status-pill live"><span class="vcm-pill-dot pulse-red"></span>🔴 Live Now!</span>';
-    } else if(st.phase==='soon'){
-      pill.innerHTML='<span class="vcm-status-pill soon"><span class="vcm-pill-dot pulse-green"></span>Starting Soon 🔥</span>';
-    } else {
-      pill.innerHTML='<span class="vcm-status-pill upcoming"><span class="vcm-pill-dot pulse-blue"></span>Upcoming</span>';
-    }
-  }
-  tick();
-  clearInterval(cdTimer);
-  cdTimer = setInterval(tick,1000);
   /* ABOUT */
   const aboutLbl = document.createElement('div');
   aboutLbl.className='vcm-section-label'; aboutLbl.textContent='About the Event 📋';
