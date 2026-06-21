@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-20T23:45:47.968Z",
+  "updated": "2026-06-21T04:00:47.866Z",
   "totalMembers": 1417,
-  "activeToday": 377,
+  "activeToday": 84,
   "players": [
     {
-      "username": "damjan1989",
-      "total_pts": 708,
-      "bullet_pts": 78,
-      "blitz_pts": 285,
-      "rapid_pts": 345,
-      "bullet_g": 28,
-      "blitz_g": 33,
-      "rapid_g": 25,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "mastergoogle",
-      "total_pts": 550,
+      "username": "simpleclips",
+      "total_pts": 129,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 550,
+      "blitz_pts": 129,
+      "rapid_pts": 0,
       "bullet_g": 0,
+      "blitz_g": 15,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/9215582.50705f91.200x200o.890f3b1ed21a.jpg"
+    },
+    {
+      "username": "shorttemperedbullet",
+      "total_pts": 127,
+      "bullet_pts": 127,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 45,
       "blitz_g": 0,
-      "rapid_g": 40,
+      "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "nuubinator",
-      "total_pts": 465,
-      "bullet_pts": 132,
-      "blitz_pts": 228,
-      "rapid_pts": 105,
-      "bullet_g": 46,
-      "blitz_g": 26,
-      "rapid_g": 7,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "kamikiharuto",
+      "total_pts": 126,
+      "bullet_pts": 99,
+      "blitz_pts": 27,
+      "rapid_pts": 0,
+      "bullet_g": 33,
+      "blitz_g": 3,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/565549140.d5595697.200x200o.545d07d88367.jpg"
     }
   ]
 }
