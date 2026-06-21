@@ -1,8 +1,30 @@
 {
-  "updated": "2026-06-21T08:40:55.357Z",
-  "totalMembers": 1416,
-  "activeToday": 179,
+  "updated": "2026-06-21T11:46:30.364Z",
+  "totalMembers": 1415,
+  "activeToday": 251,
   "players": [
+    {
+      "username": "traker-86",
+      "total_pts": 378,
+      "bullet_pts": 0,
+      "blitz_pts": 378,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 44,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
+    },
+    {
+      "username": "diligent_dragon",
+      "total_pts": 302,
+      "bullet_pts": 4,
+      "blitz_pts": 48,
+      "rapid_pts": 250,
+      "bullet_g": 2,
+      "blitz_g": 6,
+      "rapid_g": 18,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.294c77be.200x200o.89f762ce3d98.jpg"
+    },
     {
       "username": "shorttemperedbullet",
       "total_pts": 229,
@@ -12,28 +34,6 @@
       "bullet_g": 52,
       "blitz_g": 9,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "traker-86",
-      "total_pts": 210,
-      "bullet_pts": 0,
-      "blitz_pts": 210,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 24,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "diligent_dragon",
-      "total_pts": 203,
-      "bullet_pts": 4,
-      "blitz_pts": 9,
-      "rapid_pts": 190,
-      "bullet_g": 2,
-      "blitz_g": 1,
-      "rapid_g": 14,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
