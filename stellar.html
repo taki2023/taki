@@ -33,24 +33,23 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body{background:var(--bg-void);font-family:'Rajdhani',sans-serif;min-height:100vh;width:100%;color:var(--text-body)}
-    body{display:flex;align-items:flex-start;justify-content:center}
-    #root{width:100%;max-width:900px}
+    body{display:flex;justify-content:center}
+    #root{width:100%}
     @keyframes spinBorder{to{transform:rotate(360deg)}}
     @keyframes pulse-green{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
     @keyframes barPulse{0%,100%{opacity:1}50%{opacity:.4}}
     @keyframes cdPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 10px currentColor}}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-100% 0}}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes scaleIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
     @keyframes enrichSlide{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
     .skel{background:linear-gradient(90deg,#0d1220 0%,#141d35 40%,#0d1220 100%);background-size:300% 100%;animation:shimmer 1.4s ease-in-out infinite;border-radius:4px}
-    .cal-header{position:relative;overflow:hidden;border-bottom:1px solid rgba(99,102,241,.18);background:linear-gradient(160deg,#0d1a35 0%,#111228 50%,#0e0d22 100%);padding:20px 20px 16px}
+    /* ── HEADER ── */
+    .cal-header{position:relative;overflow:hidden;border-bottom:1px solid rgba(99,102,241,.18);background:linear-gradient(160deg,#0d1a35 0%,#111228 50%,#0e0d22 100%);padding:24px 20px 16px}
     .header-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(99,102,241,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.06) 1px,transparent 1px);background-size:32px 32px}
-    .header-glow{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:280px;height:140px;background:radial-gradient(ellipse,rgba(99,102,241,.25) 0%,transparent 70%);pointer-events:none}
+    .header-glow{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:340px;height:170px;background:radial-gradient(ellipse,rgba(99,102,241,.25) 0%,transparent 70%);pointer-events:none}
     .header-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .header-left{display:flex;align-items:center;gap:10px}
-    .globe-icon{position:relative;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));box-shadow:0 0 24px rgba(99,102,241,.5),0 0 8px rgba(99,102,241,.3) inset}
-    .globe-ring{position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(139,92,246,.35);animation:spinBorder 8s linear infinite}
+    .header-left{display:flex;align-items:center;gap:14px}
+    .globe-icon{position:relative;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));box-shadow:0 0 32px rgba(99,102,241,.55),0 0 12px rgba(99,102,241,.3) inset}
+    .globe-ring{position:absolute;inset:-4px;border-radius:50%;border:1.5px solid rgba(139,92,246,.35);animation:spinBorder 8s linear infinite}
     .header-info{display:flex;flex-direction:column;gap:2px}
     .header-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--text-white);letter-spacing:.5px;line-height:1.2}
     .header-sub{font-size:12px;font-weight:600;color:var(--text-body);letter-spacing:2px;text-transform:uppercase}
@@ -60,8 +59,12 @@
     .header-deco{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:6px;padding-top:8px}
     .header-deco .pawn{font-size:13px;opacity:.35}
     .header-deco .deco-text{font-size:10px;font-weight:700;color:var(--text-dim);letter-spacing:3px;text-transform:uppercase}
-    .cal-wrap{width:100%;display:flex;flex-direction:column;overflow:hidden;border-bottom:1.5px solid var(--border-mid);background:var(--bg-base);box-shadow:0 0 60px rgba(99,102,241,.08) inset;position:relative;animation:fadeIn .4s ease-out}
-    .cal-content{display:flex;flex-direction:column;animation:fadeIn .3s ease-out}
+    /* ── WRAPPER ── */
+    .cal-wrap{width:100%;display:flex;flex-direction:column;overflow:hidden;border-bottom:1.5px solid var(--border-mid);background:var(--bg-base);box-shadow:0 0 60px rgba(99,102,241,.08) inset;position:relative}
+    /* ── CONTENT FADE ── */
+    #cal-content{opacity:1;transition:opacity .15s ease}
+    #cal-content.fading{opacity:0}
+    /* ── NAV ── */
     .cal-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;gap:12px}
     .nav-btn{width:40px;height:40px;border-radius:var(--radius);border:1.5px solid var(--border-mid);background:rgba(99,102,241,.12);color:var(--text-body);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s cubic-bezier(.34,1.56,.64,1);font-size:16px;flex-shrink:0}
     .nav-btn:hover{border-color:var(--border-hot);background:rgba(139,92,246,.2);color:var(--text-white);box-shadow:0 0 12px rgba(139,92,246,.25);transform:scale(1.08)}
@@ -69,9 +72,11 @@
     .nav-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
     .month-label{flex:1;text-align:center;font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--text-white);letter-spacing:1.5px}
     .month-label .yr{font-size:16px;font-weight:500;color:var(--text-body);margin-left:8px}
+    /* ── DAY HEADERS ── */
     .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:12px 16px 6px}
     .day-hdr{text-align:center;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-body);padding:6px 0;background:rgba(99,102,241,.08);border-radius:6px}
     .day-hdr.weekend{color:var(--globe-purple);background:rgba(139,92,246,.1)}
+    /* ── GRID ── */
     .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:0 16px 16px}
     .cal-cell{background:var(--bg-cell);border-radius:8px;border:1.5px solid rgba(99,102,241,.12);min-height:80px;display:flex;flex-direction:column;align-items:center;padding:6px 4px;position:relative;overflow:hidden;cursor:default;transition:background .15s,border-color .15s,box-shadow .15s,transform .15s;min-width:0}
     .cal-cell.has-event{cursor:pointer;border-color:var(--border-subtle);background:linear-gradient(160deg,#111a2e,#0f1428)}
@@ -94,6 +99,7 @@
     .status-bar.live{background:linear-gradient(90deg,var(--accent-red),#f97316);animation:barPulse .8s ease-in-out infinite}
     .status-bar.ended{background:rgba(99,102,241,.15)}
     .count-bubble{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--accent-red),#f97316);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;border:2px solid var(--bg-cell);box-shadow:0 2px 8px rgba(239,68,68,.4);z-index:10}
+    /* ── LEGEND ── */
     .cal-legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;padding:12px 16px 14px;border-top:1px solid var(--border-subtle);background:rgba(0,0,0,.15)}
     .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--text-body)}
     .legend-bar{width:18px;height:3px;border-radius:2px}
@@ -106,11 +112,11 @@
     .foot-dot{opacity:.4}
     .enriching-bar{height:3px;background:rgba(99,102,241,.1);margin:0 16px;border-radius:2px;overflow:hidden}
     .enriching-progress{height:100%;width:40%;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple));border-radius:2px;animation:enrichSlide 1.2s ease-in-out infinite}
-    .tip-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:none;animation:fadeIn .15s ease-out}
-    .tip-backdrop.show{display:block}
-    .tip-panel{position:fixed;z-index:600;background:#111827;border:1.5px solid var(--border-hot);border-radius:14px;padding:0;min-width:260px;max-width:min(340px,90vw);box-shadow:0 0 0 1px rgba(139,92,246,.12),0 24px 60px rgba(0,0,0,.9),0 0 30px rgba(99,102,241,.12) inset;display:none;flex-direction:column;overflow:hidden;animation:scaleIn .2s ease-out}
-    .tip-panel.show{display:flex}
-    .tip-panel.mobile-center{left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;max-width:min(380px,calc(100vw - 24px));max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
+    /* ── TOOLTIP ── */
+    .tip-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;opacity:0;transition:opacity .15s ease;pointer-events:none}
+    .tip-backdrop.show{opacity:1;pointer-events:auto}
+    .tip-panel{position:fixed;z-index:600;background:#111827;border:1.5px solid var(--border-hot);border-radius:14px;padding:0;min-width:260px;max-width:min(340px,90vw);box-shadow:0 0 0 1px rgba(139,92,246,.12),0 24px 60px rgba(0,0,0,.9),0 0 30px rgba(99,102,241,.12) inset;opacity:0;transform:translate(-50%,-50%) scale(.95);transition:opacity .15s ease,transform .15s ease;pointer-events:none;flex-direction:column;overflow:hidden;display:flex;left:50%;top:50%;max-width:min(380px,calc(100vw - 24px));max-height:85vh}
+    .tip-panel.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
     .tip-strip{background:linear-gradient(135deg,#141d35,#111228);padding:14px 14px 12px;border-bottom:1px solid var(--border-subtle);position:relative}
     .tip-strip::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple),var(--piece-violet))}
     .tip-close{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(99,102,241,.2);border:1px solid var(--border-mid);color:var(--text-body);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;z-index:5}
@@ -160,490 +166,354 @@
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <!-- STATIC SHELL — renders instantly, never touched again -->
+  <div id="root">
+    <div class="cal-wrap">
+      <!-- HEADER (static, painted once) -->
+      <div class="cal-header">
+        <div class="header-grid"></div>
+        <div class="header-glow"></div>
+        <div class="header-top">
+          <div class="header-left">
+            <div class="globe-icon">🌍<div class="globe-ring"></div></div>
+            <div class="header-info">
+              <div class="header-title">Club of 195 Countries</div>
+              <div class="header-sub">Chess.com · Est. March 2026</div>
+            </div>
+          </div>
+          <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+        </div>
+        <div class="header-divider"></div>
+        <div class="header-deco">
+          <span class="pawn">♟</span>
+          <span class="deco-text">Play · Learn · Compete · Grow</span>
+          <span class="pawn">♟</span>
+        </div>
+      </div>
+      <!-- CONTENT SLOT — only this part gets swapped -->
+      <div id="cal-content"></div>
+    </div>
+  </div>
+  <!-- TOOLTIP CONTAINERS (always in DOM, toggled via class) -->
+  <div class="tip-backdrop" id="tip-backdrop"></div>
+  <div class="tip-panel" id="tip-panel"></div>
   <script>
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
     // CONSTANTS
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
     var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     var MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var DAY_NAMES = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
     function ordinal(d) {
-      var s = ['th','st','nd','rd'];
-      var v = d % 100;
+      var s = ['th','st','nd','rd'], v = d % 100;
       return d + (s[(v - 20) % 10] || s[v] || s[0]);
     }
     function pad(n) { return String(n).padStart(2, '0'); }
     function dateKey(y, m, d) { return y + '-' + pad(m + 1) + '-' + pad(d); }
-    // ══════════════════════════════════════════════════════════════════════
-    // PHASE LOGIC
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
+    // PHASE
+    // ══════════════════════════════════════════════════════════════════
     function getPhase(ev) {
-      var now = Date.now();
-      var startMs = ev.startTs * 1000;
-      if (ev._status === 'finished' || (ev.endTs && now > ev.endTs * 1000)) {
+      var now = Date.now(), startMs = ev.startTs * 1000;
+      if (ev._status === 'finished' || (ev.endTs && now > ev.endTs * 1000))
         return { status: 'ended', text: 'Ended', cls: 'cd-ended' };
-      }
-      if (ev._status === 'live' || now >= startMs) {
+      if (ev._status === 'live' || now >= startMs)
         return { status: 'live', text: '\u{1F534} In Progress', cls: 'cd-live' };
-      }
       var ms = startMs - now;
-      var dd = Math.floor(ms / 86400000);
-      var hh = Math.floor((ms % 86400000) / 3600000);
-      var mm = Math.floor((ms % 3600000) / 60000);
+      var dd = Math.floor(ms / 86400000), hh = Math.floor((ms % 86400000) / 3600000), mm = Math.floor((ms % 3600000) / 60000);
       var txt = 'In ';
       if (dd > 0) txt += dd + 'd ' + hh + 'h';
       else if (hh > 0) txt += hh + 'h ' + mm + 'm';
       else txt += mm + 'm';
-      var isSoon = ms <= 3600000;
-      return { status: isSoon ? 'soon' : 'upcoming', text: txt, cls: isSoon ? 'cd-soon' : 'cd-upcoming' };
+      var soon = ms <= 3600000;
+      return { status: soon ? 'soon' : 'upcoming', text: txt, cls: soon ? 'cd-soon' : 'cd-upcoming' };
     }
     function bestPhase(events) {
-      var rank = { ended: 1, upcoming: 2, soon: 3, live: 4 };
-      var best = null;
+      var rank = { ended: 1, upcoming: 2, soon: 3, live: 4 }, best = null;
       for (var i = 0; i < events.length; i++) {
         var ph = getPhase(events[i]);
         if (!best || rank[ph.status] > rank[best.status]) best = ph;
       }
       return best;
     }
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
     // API
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
     var CLUB_API = 'https://api.chess.com/pub/club/the-club-of-195-countries/matches';
     var OUR_SLUGS = ['the-club-of-195-countries', 'the-club-of-129-countries'];
     function isOurClub(id) {
-      for (var i = 0; i < OUR_SLUGS.length; i++) {
-        if (id.indexOf(OUR_SLUGS[i]) !== -1) return true;
-      }
+      for (var i = 0; i < OUR_SLUGS.length; i++) if (id.indexOf(OUR_SLUGS[i]) !== -1) return true;
       return false;
     }
     function fetchJSON(url) {
-      return fetch(url, { cache: 'no-store' })
-        .then(function(r) {
-          if (r.ok) return r.json();
-          throw new Error('HTTP ' + r.status);
-        })
-        .catch(function() {
-          var proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
-          return fetch(proxy).then(function(r2) {
-            if (!r2.ok) throw new Error('Proxy ' + r2.status);
-            return r2.json();
-          }).then(function(d) {
-            return JSON.parse(d.contents);
-          });
-        });
+      return fetch(url, { cache: 'no-store' }).then(function(r) {
+        if (r.ok) return r.json();
+        throw new Error('HTTP ' + r.status);
+      }).catch(function() {
+        return fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url))
+          .then(function(r2) { if (!r2.ok) throw new Error('Proxy'); return r2.json(); })
+          .then(function(d) { return JSON.parse(d.contents); });
+      });
     }
-    function extractMatchId(apiUrl) {
-      var m = apiUrl.match(/\/match\/(\d+)$/);
-      return m ? m[1] : '';
-    }
-    function slugToName(slug) {
-      return slug.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-    }
+    function extractMatchId(u) { var m = u.match(/\/match\/(\d+)$/); return m ? m[1] : ''; }
+    function slugToName(s) { return s.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }); }
     function loadMatchList() {
       return fetchJSON(CLUB_API).then(function(data) {
         var all = [];
         (data.registered || []).forEach(function(m) { all.push(Object.assign({}, m, { _status: 'upcoming' })); });
         (data.in_progress || []).forEach(function(m) { all.push(Object.assign({}, m, { _status: 'live' })); });
         (data.finished || []).forEach(function(m) { all.push(Object.assign({}, m, { _status: 'finished' })); });
-        var eventMap = {};
-        var matchIds = [];
+        var map = {}, ids = [];
         all.forEach(function(m) {
           if (!m.start_time) return;
-          var matchId = extractMatchId(m['@id']);
-          if (!matchId) return;
+          var id = extractMatchId(m['@id']); if (!id) return;
           var d = new Date(m.start_time * 1000);
-          var y = d.getUTCFullYear(), mo = d.getUTCMonth(), dy = d.getUTCDate();
-          var oppParts = (m.opponent || '').split('/');
-          var oppSlug = oppParts[oppParts.length - 1] || '';
-          var ev = {
-            id: matchId,
-            title: m.name || 'Team Match',
-            opponent: slugToName(oppSlug),
-            opponentSlug: oppSlug,
-            link: 'https://www.chess.com/club/matches/' + matchId,
-            _status: m._status,
-            result: m.result || undefined,
-            startTs: m.start_time,
-            endTs: m.end_time || undefined,
-            timeClass: m.time_class || 'daily'
-          };
-          var key = dateKey(y, mo, dy);
-          if (!eventMap[key]) eventMap[key] = [];
-          eventMap[key].push(ev);
-          matchIds.push(matchId);
+          var pp = (m.opponent || '').split('/'), slug = pp[pp.length - 1] || '';
+          var ev = { id: id, title: m.name || 'Team Match', opponent: slugToName(slug), opponentSlug: slug,
+            link: 'https://www.chess.com/club/matches/' + id, _status: m._status, result: m.result || undefined,
+            startTs: m.start_time, endTs: m.end_time || undefined, timeClass: m.time_class || 'daily' };
+          var key = dateKey(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+          if (!map[key]) map[key] = [];
+          map[key].push(ev); ids.push(id);
         });
-        return { eventMap: eventMap, matchIds: matchIds };
+        return { eventMap: map, matchIds: ids };
       });
     }
-    function enrichMatches(eventMap, matchIds, onProgress) {
-      var eventsById = {};
-      Object.keys(eventMap).forEach(function(key) {
-        eventMap[key].forEach(function(ev) {
-          if (!eventsById[ev.id]) eventsById[ev.id] = [];
-          eventsById[ev.id].push(ev);
-        });
+    function enrichMatches(eventMap, matchIds, onDone) {
+      var byId = {};
+      Object.keys(eventMap).forEach(function(k) {
+        eventMap[k].forEach(function(ev) { if (!byId[ev.id]) byId[ev.id] = []; byId[ev.id].push(ev); });
       });
-      var batchSize = 8;
-      var i = 0;
-      function nextBatch() {
+      var bs = 8, i = 0;
+      function next() {
         if (i >= matchIds.length) return Promise.resolve();
-        var batch = matchIds.slice(i, i + batchSize);
-        i += batchSize;
-        return Promise.allSettled(
-          batch.map(function(id) { return fetchJSON('https://api.chess.com/pub/match/' + id); })
-        ).then(function(results) {
-          var anyUpdate = false;
-          results.forEach(function(res, idx) {
-            if (res.status === 'fulfilled') {
-              var detail = res.value;
-              var id = batch[idx];
-              var evs = eventsById[id] || [];
+        var batch = matchIds.slice(i, i + bs); i += bs;
+        return Promise.allSettled(batch.map(function(id) { return fetchJSON('https://api.chess.com/pub/match/' + id); }))
+          .then(function(results) {
+            results.forEach(function(res, idx) {
+              if (res.status !== 'fulfilled') return;
+              var det = res.value, id = batch[idx], evs = byId[id] || [];
               evs.forEach(function(ev) {
-                if (detail.url) { ev.matchDetailUrl = detail.url; ev.link = detail.url; }
-                if (detail.teams) {
-                  var t1 = detail.teams.team1, t2 = detail.teams.team2;
-                  var ourTeam, theirTeam;
-                  if (isOurClub(t1['@id'])) { ourTeam = t1; theirTeam = t2; }
-                  else if (isOurClub(t2['@id'])) { ourTeam = t2; theirTeam = t1; }
-                  else { ourTeam = t1; theirTeam = t2; }
-                  ev.ourName = ourTeam.name;
-                  ev.theirName = theirTeam.name;
-                  ev.ourScore = ourTeam.score;
-                  ev.theirScore = theirTeam.score;
-                  ev.boards = detail.boards;
-                  ev.opponent = theirTeam.name;
+                if (det.url) { ev.link = det.url; }
+                if (det.teams) {
+                  var t1 = det.teams.team1, t2 = det.teams.team2, our, their;
+                  if (isOurClub(t1['@id'])) { our = t1; their = t2; }
+                  else if (isOurClub(t2['@id'])) { our = t2; their = t1; }
+                  else { our = t1; their = t2; }
+                  ev.ourName = our.name; ev.theirName = their.name;
+                  ev.ourScore = our.score; ev.theirScore = their.score;
+                  ev.boards = det.boards; ev.opponent = their.name;
                 }
-                anyUpdate = true;
               });
-            }
+            });
+            return next();
           });
-          if (anyUpdate) onProgress();
-          return nextBatch();
-        });
       }
-      return nextBatch();
+      return next().then(onDone);
     }
-    // ══════════════════════════════════════════════════════════════════════
-    // DOM HELPERS
-    // ══════════════════════════════════════════════════════════════════════
-    function el(tag, cls, html) {
-      var e = document.createElement(tag);
-      if (cls) e.className = cls;
-      if (html !== undefined) e.innerHTML = html;
-      return e;
-    }
-    function elAttr(tag, cls, attrs) {
-      var e = el(tag, cls);
-      if (attrs) Object.keys(attrs).forEach(function(k) { e.setAttribute(k, attrs[k]); });
-      return e;
-    }
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
     // STATE
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
     var today = new Date();
-    var viewYear = today.getFullYear();
-    var viewMonth = today.getMonth();
+    var viewYear = today.getFullYear(), viewMonth = today.getMonth();
     var eventMap = {};
-    var loading = true;
-    var enriching = false;
-    var errorMsg = null;
-    // ══════════════════════════════════════════════════════════════════════
-    // RENDER HEADER
-    // ══════════════════════════════════════════════════════════════════════
-    function renderHeader() {
-      var h = el('div', 'cal-header');
-      h.innerHTML =
-        '<div class="header-grid"></div>' +
-        '<div class="header-glow"></div>' +
-        '<div class="header-top">' +
-          '<div class="header-left">' +
-            '<div class="globe-icon">\u{1F30D}<div class="globe-ring"></div></div>' +
-            '<div class="header-info">' +
-              '<div class="header-title">Club of 195 Countries</div>' +
-              '<div class="header-sub">Chess.com \u00B7 Est. March 2026</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="live-badge"><span class="live-dot"></span>LIVE</div>' +
-        '</div>' +
-        '<div class="header-divider"></div>' +
-        '<div class="header-deco">' +
-          '<span class="pawn">\u265F</span>' +
-          '<span class="deco-text">Play \u00B7 Learn \u00B7 Compete \u00B7 Grow</span>' +
-          '<span class="pawn">\u265F</span>' +
+    // ══════════════════════════════════════════════════════════════════
+    // RENDER CONTENT (only the calendar area, header stays)
+    // ══════════════════════════════════════════════════════════════════
+    function renderContent(showEnriching) {
+      var slot = document.getElementById('cal-content');
+      var html = '';
+      if (showEnriching) {
+        html += '<div class="enriching-bar"><div class="enriching-progress"></div></div>';
+      }
+      // Nav
+      html += '<div class="cal-nav">' +
+        '<button class="nav-btn" id="btn-prev" aria-label="Previous month"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>' +
+        '<div class="month-label">' + MONTHS[viewMonth] + ' <span class="yr">' + viewYear + '</span></div>' +
+        '<button class="nav-btn" id="btn-next" aria-label="Next month"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>' +
         '</div>';
-      return h;
+      // Day headers
+      html += '<div class="cal-days">';
+      for (var di = 0; di < 7; di++) {
+        html += '<div class="day-hdr' + (di >= 5 ? ' weekend' : '') + '">' + DAY_NAMES[di] + '</div>';
+      }
+      html += '</div>';
+      // Calendar cells
+      var firstDow = (new Date(viewYear, viewMonth, 1).getDay() + 6) % 7;
+      var lastDate = new Date(viewYear, viewMonth + 1, 0).getDate();
+      var pM = viewMonth === 0 ? 11 : viewMonth - 1;
+      var pY = viewMonth === 0 ? viewYear - 1 : viewYear;
+      var prevLast = new Date(pY, pM + 1, 0).getDate();
+      var nM = viewMonth === 11 ? 0 : viewMonth + 1;
+      var nY = viewMonth === 11 ? viewYear + 1 : viewYear;
+      html += '<div class="cal-grid">';
+      for (var i = 0; i < 42; i++) {
+        var cy, cm, cd, adj = false;
+        if (i < firstDow) { cd = prevLast - firstDow + 1 + i; cm = pM; cy = pY; adj = true; }
+        else if (i >= firstDow + lastDate) { cd = i - firstDow - lastDate + 1; cm = nM; cy = nY; adj = true; }
+        else { cd = i - firstDow + 1; cm = viewMonth; cy = viewYear; }
+        var isToday = !adj && cd === today.getDate() && cm === today.getMonth() && cy === today.getFullYear();
+        var evts = !adj ? (eventMap[dateKey(cy, cm, cd)] || []) : [];
+        var has = evts.length > 0;
+        var phase = has ? bestPhase(evts) : null;
+        var cls = 'cal-cell';
+        if (adj) cls += ' adj';
+        if (isToday) cls += ' today';
+        if (has) cls += ' has-event';
+        html += '<div class="' + cls + '"' + (has ? ' data-evkey="' + dateKey(cy, cm, cd) + '" data-y="' + cy + '" data-m="' + cm + '" data-d="' + cd + '"' : '') + '>';
+        html += '<div class="cell-num">' + cd + '</div>';
+        if (isToday) html += '<div class="today-dot"></div>';
+        if (has) {
+          var allD = evts.every(function(e) { return e.timeClass === 'daily'; });
+          html += '<div class="cell-icon-wrap"><div class="match-badge-container">' +
+            '<div class="match-badge">' + (allD ? '\u2600\uFE0F' : '\u26A1') + '</div>';
+          if (evts.length > 1) html += '<div class="count-bubble">' + evts.length + '</div>';
+          html += '</div></div>';
+        }
+        if (phase) html += '<div class="status-bar ' + phase.status + '"></div>';
+        html += '</div>';
+      }
+      html += '</div>';
+      // Legend
+      html += '<div class="cal-legend">' +
+        '<div class="legend-item"><div class="legend-bar upcoming"></div>Upcoming</div>' +
+        '<div class="legend-item"><div class="legend-bar soon"></div>Soon</div>' +
+        '<div class="legend-item"><div class="legend-bar live"></div>Live</div>' +
+        '<div class="legend-item"><div class="legend-bar ended"></div>Ended</div>' +
+        '</div>';
+      // Footer
+      html += '<div class="cal-foot"><span>\u{1F30D} 195 Countries</span><span class="foot-dot">\u00B7</span><span>@Stellar_Endgame</span></div>';
+      slot.innerHTML = html;
+      // Attach nav listeners
+      document.getElementById('btn-prev').onclick = function() {
+        viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+        closeTooltip(); renderContent(false);
+      };
+      document.getElementById('btn-next').onclick = function() {
+        viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+        closeTooltip(); renderContent(false);
+      };
+      // Attach cell click listeners (event delegation)
+      var grid = slot.querySelector('.cal-grid');
+      grid.onclick = function(e) {
+        var cell = e.target.closest('.has-event');
+        if (!cell) return;
+        var key = cell.getAttribute('data-evkey');
+        var y = parseInt(cell.getAttribute('data-y'));
+        var m = parseInt(cell.getAttribute('data-m'));
+        var d = parseInt(cell.getAttribute('data-d'));
+        if (eventMap[key]) showTooltip(eventMap[key], y, m, d);
+      };
     }
-    // ══════════════════════════════════════════════════════════════════════
-    // RENDER SKELETON
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
+    // SKELETON (shown only at first load, inside slot)
+    // ══════════════════════════════════════════════════════════════════
     function renderSkeleton() {
-      var wrap = el('div', '', '');
-      wrap.style.cssText = 'display:flex;flex-direction:column;gap:8px;padding:12px';
-      var nav = el('div', '', '');
-      nav.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:4px';
-      var s1 = el('div', 'skel'); s1.style.cssText = 'width:30px;height:30px;border-radius:6px';
-      var s2 = el('div', 'skel'); s2.style.cssText = 'flex:1;height:20px;border-radius:4px';
-      var s3 = el('div', 'skel'); s3.style.cssText = 'width:30px;height:30px;border-radius:6px';
-      nav.append(s1, s2, s3);
-      wrap.appendChild(nav);
-      var days = el('div', ''); days.style.cssText = 'display:flex;gap:3px';
-      for (var i = 0; i < 7; i++) {
-        var sd = el('div', 'skel'); sd.style.cssText = 'flex:1;height:18px;border-radius:4px;animation-delay:' + (i * 0.05) + 's';
-        days.appendChild(sd);
-      }
-      wrap.appendChild(days);
-      var grid = el('div', ''); grid.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:3px';
-      for (var j = 0; j < 42; j++) {
-        var sg = el('div', 'skel'); sg.style.cssText = 'height:62px;border-radius:6px;animation-delay:' + (j * 0.02) + 's';
-        grid.appendChild(sg);
-      }
-      wrap.appendChild(grid);
-      return wrap;
+      var slot = document.getElementById('cal-content');
+      var html = '<div style="display:flex;flex-direction:column;gap:8px;padding:12px">';
+      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">' +
+        '<div class="skel" style="width:30px;height:30px;border-radius:6px"></div>' +
+        '<div class="skel" style="flex:1;height:20px;border-radius:4px"></div>' +
+        '<div class="skel" style="width:30px;height:30px;border-radius:6px"></div></div>';
+      html += '<div style="display:flex;gap:3px">';
+      for (var i = 0; i < 7; i++) html += '<div class="skel" style="flex:1;height:18px;border-radius:4px;animation-delay:' + (i * .05) + 's"></div>';
+      html += '</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
+      for (var j = 0; j < 42; j++) html += '<div class="skel" style="height:62px;border-radius:6px;animation-delay:' + (j * .02) + 's"></div>';
+      html += '</div></div>';
+      slot.innerHTML = html;
     }
-    // ══════════════════════════════════════════════════════════════════════
-    // RENDER TOOLTIP
-    // ══════════════════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════════
+    // TOOLTIP
+    // ══════════════════════════════════════════════════════════════════
+    var backdropEl = document.getElementById('tip-backdrop');
+    var panelEl = document.getElementById('tip-panel');
     function showTooltip(events, year, month, day) {
-      closeTooltip();
-      var backdrop = el('div', 'tip-backdrop show');
-      backdrop.id = 'tip-backdrop';
-      backdrop.onclick = function(e) { e.stopPropagation(); closeTooltip(); };
-      var panel = el('div', 'tip-panel show mobile-center');
-      panel.id = 'tip-panel';
-      panel.onclick = function(e) { e.stopPropagation(); };
-      // Strip
-      var strip = el('div', 'tip-strip');
-      var closeBtn = el('div', 'tip-close', '\u2715');
-      closeBtn.onclick = closeTooltip;
       var allDaily = events.every(function(e) { return e.timeClass === 'daily'; });
       var titleText = events.length === 1
         ? (events[0].timeClass === 'daily' ? 'Daily Team Match' : 'Team Match')
         : events.length + ' Team Matches';
-      var hdrRow = el('div', 'tip-hdr-row');
-      hdrRow.innerHTML =
-        '<div class="tip-globe">' + (allDaily ? '\u2600\uFE0F' : '\u{1F30D}') + '</div>' +
-        '<div class="tip-info">' +
-          '<div class="tip-title">' + titleText + '</div>' +
-          '<div class="tip-date">' + MONTH_SHORT[month] + ' ' + ordinal(day) + ', ' + year + '</div>' +
-        '</div>';
-      strip.append(closeBtn, hdrRow);
-      panel.appendChild(strip);
-      // Body
-      var body = el('div', 'tip-body');
+      var html = '<div class="tip-strip">' +
+        '<div class="tip-close" id="tip-close">\u2715</div>' +
+        '<div class="tip-hdr-row">' +
+          '<div class="tip-globe">' + (allDaily ? '\u2600\uFE0F' : '\u{1F30D}') + '</div>' +
+          '<div class="tip-info">' +
+            '<div class="tip-title">' + titleText + '</div>' +
+            '<div class="tip-date">' + MONTH_SHORT[month] + ' ' + ordinal(day) + ', ' + year + '</div>' +
+          '</div>' +
+        '</div></div><div class="tip-body">';
       events.forEach(function(ev, idx) {
-        if (idx > 0) body.appendChild(el('div', 'tip-sep'));
-        var block = el('div', 'match-block');
+        if (idx > 0) html += '<div class="tip-sep"></div>';
         var phase = getPhase(ev);
+        html += '<div class="match-block">';
         // Countdown
-        var cd = el('div', 'tip-countdown ' + phase.cls);
-        cd.innerHTML = '<span class="cd-dot"></span>' + phase.text;
-        block.appendChild(cd);
+        html += '<div class="tip-countdown ' + phase.cls + '"><span class="cd-dot"></span>' + phase.text + '</div>';
         // Name
-        var name = ev.theirName
-          ? (ev.ourName || 'The Club Of 195 Countries') + ' vs ' + ev.theirName
-          : ev.title;
-        var nameEl = el('div', 'tip-match-name', name);
-        block.appendChild(nameEl);
+        var name = ev.theirName ? (ev.ourName || 'The Club Of 195 Countries') + ' vs ' + ev.theirName : ev.title;
+        html += '<div class="tip-match-name">' + name + '</div>';
         // Score
         if (ev.ourScore !== undefined && ev.theirScore !== undefined) {
-          var scoreWrap = el('div', 'score-display');
-          var ourCls = ev.ourScore > ev.theirScore ? ' winning' : (ev.ourScore < ev.theirScore ? ' losing' : '');
-          var theirCls = ev.theirScore > ev.ourScore ? ' winning' : (ev.theirScore < ev.ourScore ? ' losing' : '');
-          scoreWrap.innerHTML =
-            '<div class="score-teams">' +
-              '<span class="score-team-name our-team">' + (ev.ourName || 'Club of 195 Countries') + '</span>' +
-              '<span class="score-vs">vs</span>' +
-              '<span class="score-team-name their-team">' + (ev.theirName || ev.opponent) + '</span>' +
-            '</div>' +
-            '<div class="score-numbers">' +
-              '<span class="score-num' + ourCls + '">' + ev.ourScore + '</span>' +
-              '<span class="score-dash">\u2013</span>' +
-              '<span class="score-num' + theirCls + '">' + ev.theirScore + '</span>' +
-            '</div>';
-          block.appendChild(scoreWrap);
+          var oc = ev.ourScore > ev.theirScore ? ' winning' : (ev.ourScore < ev.theirScore ? ' losing' : '');
+          var tc = ev.theirScore > ev.ourScore ? ' winning' : (ev.theirScore < ev.ourScore ? ' losing' : '');
+          html += '<div class="score-display"><div class="score-teams">' +
+            '<span class="score-team-name our-team">' + (ev.ourName || 'Club of 195 Countries') + '</span>' +
+            '<span class="score-vs">vs</span>' +
+            '<span class="score-team-name their-team">' + (ev.theirName || ev.opponent) + '</span></div>' +
+            '<div class="score-numbers"><span class="score-num' + oc + '">' + ev.ourScore + '</span>' +
+            '<span class="score-dash">\u2013</span>' +
+            '<span class="score-num' + tc + '">' + ev.theirScore + '</span></div></div>';
         }
-        // Result badge
+        // Result
         if (ev._status === 'finished' && ev.result) {
-          var rb;
-          if (ev.result === 'win') rb = el('span', 'result-badge badge-win', '\u2713 WIN');
-          else if (ev.result === 'lose' || ev.result === 'loss') rb = el('span', 'result-badge badge-loss', '\u2717 LOSS');
-          else rb = el('span', 'result-badge badge-draw', '\u2B1B DRAW');
-          block.appendChild(rb);
+          if (ev.result === 'win') html += '<span class="result-badge badge-win">\u2713 WIN</span>';
+          else if (ev.result === 'lose' || ev.result === 'loss') html += '<span class="result-badge badge-loss">\u2717 LOSS</span>';
+          else html += '<span class="result-badge badge-draw">\u2B1B DRAW</span>';
         }
-        // Bottom row
-        var bottom = el('div', 'tip-bottom');
-        var opp = el('div', 'tip-opp');
-        opp.textContent = '\u2600\uFE0F ' + (ev.timeClass === 'daily' ? 'Daily' : ev.timeClass) + (ev.boards ? ' \u00B7 ' + ev.boards + ' boards' : '');
-        bottom.appendChild(opp);
+        // Bottom
+        html += '<div class="tip-bottom"><div class="tip-opp">\u2600\uFE0F ' +
+          (ev.timeClass === 'daily' ? 'Daily' : ev.timeClass) +
+          (ev.boards ? ' \u00B7 ' + ev.boards + ' boards' : '') + '</div>';
         if (ev.link) {
-          var a = document.createElement('a');
-          a.href = ev.link;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          if (phase.status === 'ended') {
-            a.className = 'tip-btn btn-ended-link';
-            a.textContent = 'VIEW';
-          } else if (phase.status === 'live') {
-            a.className = 'tip-btn btn-watch';
-            a.textContent = '\u{1F441} WATCH';
-          } else {
-            a.className = 'tip-btn btn-join';
-            a.textContent = '\u{1F30D} JOIN';
-          }
-          bottom.appendChild(a);
+          var bcls, btxt;
+          if (phase.status === 'ended') { bcls = 'btn-ended-link'; btxt = 'VIEW'; }
+          else if (phase.status === 'live') { bcls = 'btn-watch'; btxt = '\u{1F441} WATCH'; }
+          else { bcls = 'btn-join'; btxt = '\u{1F30D} JOIN'; }
+          html += '<a href="' + ev.link + '" target="_blank" rel="noopener noreferrer" class="tip-btn ' + bcls + '">' + btxt + '</a>';
         }
-        block.appendChild(bottom);
-        body.appendChild(block);
+        html += '</div></div>';
       });
-      panel.appendChild(body);
-      document.body.append(backdrop, panel);
+      html += '</div>';
+      panelEl.innerHTML = html;
+      // Show with class toggle (CSS transition handles animation)
+      backdropEl.classList.add('show');
+      panelEl.classList.add('show');
+      document.getElementById('tip-close').onclick = closeTooltip;
       document.addEventListener('keydown', escHandler);
     }
     function closeTooltip() {
-      var b = document.getElementById('tip-backdrop');
-      var p = document.getElementById('tip-panel');
-      if (b) b.remove();
-      if (p) p.remove();
+      backdropEl.classList.remove('show');
+      panelEl.classList.remove('show');
       document.removeEventListener('keydown', escHandler);
     }
     function escHandler(e) { if (e.key === 'Escape') closeTooltip(); }
-    // ══════════════════════════════════════════════════════════════════════
-    // RENDER CALENDAR
-    // ══════════════════════════════════════════════════════════════════════
-    function render() {
-      var root = document.getElementById('root');
-      root.innerHTML = '';
-      var wrap = el('div', 'cal-wrap');
-      wrap.appendChild(renderHeader());
-      if (loading) {
-        wrap.appendChild(renderSkeleton());
-        root.appendChild(wrap);
-        return;
-      }
-      var content = el('div', 'cal-content');
-      if (errorMsg) {
-        content.appendChild(el('div', 'load-err', errorMsg));
-      }
-      if (enriching) {
-        var ebar = el('div', 'enriching-bar');
-        ebar.innerHTML = '<div class="enriching-progress"></div>';
-        content.appendChild(ebar);
-      }
-      // Nav
-      var nav = el('div', 'cal-nav');
-      var prevBtn = el('button', 'nav-btn');
-      prevBtn.setAttribute('aria-label', 'Previous month');
-      prevBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
-      prevBtn.onclick = function() { viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; } closeTooltip(); render(); };
-      var label = el('div', 'month-label');
-      label.innerHTML = MONTHS[viewMonth] + ' <span class="yr">' + viewYear + '</span>';
-      var nextBtn = el('button', 'nav-btn');
-      nextBtn.setAttribute('aria-label', 'Next month');
-      nextBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>';
-      nextBtn.onclick = function() { viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; } closeTooltip(); render(); };
-      nav.append(prevBtn, label, nextBtn);
-      content.appendChild(nav);
-      // Day headers
-      var daysRow = el('div', 'cal-days');
-      DAY_NAMES.forEach(function(d, i) {
-        var dh = el('div', 'day-hdr' + (i >= 5 ? ' weekend' : ''), d);
-        daysRow.appendChild(dh);
-      });
-      content.appendChild(daysRow);
-      // Build cells
-      var firstDow = (new Date(viewYear, viewMonth, 1).getDay() + 6) % 7;
-      var lastDate = new Date(viewYear, viewMonth + 1, 0).getDate();
-      var pMonth = viewMonth === 0 ? 11 : viewMonth - 1;
-      var pYear = viewMonth === 0 ? viewYear - 1 : viewYear;
-      var prevLast = new Date(pYear, pMonth + 1, 0).getDate();
-      var nMonth = viewMonth === 11 ? 0 : viewMonth + 1;
-      var nYear = viewMonth === 11 ? viewYear + 1 : viewYear;
-      var grid = el('div', 'cal-grid');
-      for (var i = 0; i < 42; i++) {
-        var cy, cm, cd, adj = false;
-        if (i < firstDow) {
-          cd = prevLast - firstDow + 1 + i; cm = pMonth; cy = pYear; adj = true;
-        } else if (i >= firstDow + lastDate) {
-          cd = i - firstDow - lastDate + 1; cm = nMonth; cy = nYear; adj = true;
-        } else {
-          cd = i - firstDow + 1; cm = viewMonth; cy = viewYear;
-        }
-        var isToday = !adj && cd === today.getDate() && cm === today.getMonth() && cy === today.getFullYear();
-        var evts = !adj ? (eventMap[dateKey(cy, cm, cd)] || []) : [];
-        var hasEvent = evts.length > 0;
-        var phase = hasEvent ? bestPhase(evts) : null;
-        var cls = 'cal-cell';
-        if (adj) cls += ' adj';
-        if (isToday) cls += ' today';
-        if (hasEvent) cls += ' has-event';
-        var cell = el('div', cls);
-        // Day number
-        cell.appendChild(el('div', 'cell-num', String(cd)));
-        // Today dot
-        if (isToday) cell.appendChild(el('div', 'today-dot'));
-        // Match badge
-        if (hasEvent) {
-          var iconWrap = el('div', 'cell-icon-wrap');
-          var badgeContainer = el('div', 'match-badge-container');
-          var allD = evts.every(function(e) { return e.timeClass === 'daily'; });
-          badgeContainer.appendChild(el('div', 'match-badge', allD ? '\u2600\uFE0F' : '\u26A1'));
-          if (evts.length > 1) {
-            badgeContainer.appendChild(el('div', 'count-bubble', String(evts.length)));
-          }
-          iconWrap.appendChild(badgeContainer);
-          cell.appendChild(iconWrap);
-          // Click handler (closure)
-          (function(events, y, m, d) {
-            cell.onclick = function() { showTooltip(events, y, m, d); };
-          })(evts, cy, cm, cd);
-        }
-        // Status bar
-        if (phase) {
-          cell.appendChild(el('div', 'status-bar ' + phase.status));
-        }
-        grid.appendChild(cell);
-      }
-      content.appendChild(grid);
-      // Legend
-      var legend = el('div', 'cal-legend');
-      legend.innerHTML =
-        '<div class="legend-item"><div class="legend-bar upcoming"></div>Upcoming</div>' +
-        '<div class="legend-item"><div class="legend-bar soon"></div>Soon</div>' +
-        '<div class="legend-item"><div class="legend-bar live"></div>Live</div>' +
-        '<div class="legend-item"><div class="legend-bar ended"></div>Ended</div>';
-      content.appendChild(legend);
-      // Footer
-      var foot = el('div', 'cal-foot');
-      foot.innerHTML = '<span>\u{1F30D} 195 Countries</span><span class="foot-dot">\u00B7</span><span>@Stellar_Endgame</span>';
-      content.appendChild(foot);
-      wrap.appendChild(content);
-      root.appendChild(wrap);
-    }
-    // ══════════════════════════════════════════════════════════════════════
-    // INIT
-    // ══════════════════════════════════════════════════════════════════════
-    render();
+    backdropEl.onclick = function(e) { e.stopPropagation(); closeTooltip(); };
+    panelEl.onclick = function(e) { e.stopPropagation(); };
+    // ══════════════════════════════════════════════════════════════════
+    // INIT — skeleton shows instantly, data loads in background
+    // ══════════════════════════════════════════════════════════════════
+    renderSkeleton();
     loadMatchList()
       .then(function(result) {
         eventMap = result.eventMap;
-        loading = false;
-        enriching = true;
-        render();
+        renderContent(true);
         return enrichMatches(eventMap, result.matchIds, function() {
-          render();
+          renderContent(false);
         });
-      })
-      .then(function() {
-        enriching = false;
-        render();
       })
       .catch(function(e) {
         console.error(e);
-        errorMsg = '\u26A0 Could not load matches. Showing calendar.';
-        loading = false;
-        render();
+        var slot = document.getElementById('cal-content');
+        slot.innerHTML = '<div class="load-err">\u26A0 Could not load matches.</div>';
+        renderContent(false);
       });
   </script>
 </body>
