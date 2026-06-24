@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-24T12:06:52.422Z",
+  "updated": "2026-06-24T15:19:39.203Z",
   "totalMembers": 1424,
-  "activeToday": 237,
+  "activeToday": 308,
   "players": [
     {
-      "username": "balze_end1337",
-      "total_pts": 224,
-      "bullet_pts": 74,
-      "blitz_pts": 135,
-      "rapid_pts": 15,
-      "bullet_g": 28,
-      "blitz_g": 15,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.81107396.200x200o.59eb87edd6a0.png"
-    },
-    {
-      "username": "nikkotello",
-      "total_pts": 205,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 205,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "taisan-tin",
-      "total_pts": 201,
-      "bullet_pts": 0,
-      "blitz_pts": 201,
+      "username": "nin_chessy",
+      "total_pts": 591,
+      "bullet_pts": 507,
+      "blitz_pts": 84,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 23,
+      "bullet_g": 169,
+      "blitz_g": 10,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365933965.15f377ce.200x200o.0824fd5c52af.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/473789458.f9606cca.200x200o.44b5385eaf1d.jpg"
+    },
+    {
+      "username": "thtvk-0076",
+      "total_pts": 444,
+      "bullet_pts": 444,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 148,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/418956979.4a69a473.200x200o.ce42fa8cba43.png"
+    },
+    {
+      "username": "pikachugerman310",
+      "total_pts": 399,
+      "bullet_pts": 399,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 133,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/528859669.a7936adf.200x200o.b0d779fb17a3.jpg"
     }
   ]
 }
