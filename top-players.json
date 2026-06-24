@@ -1,18 +1,29 @@
 {
-  "updated": "2026-06-24T15:19:39.203Z",
-  "totalMembers": 1424,
-  "activeToday": 308,
+  "updated": "2026-06-24T17:28:19.851Z",
+  "totalMembers": 1425,
+  "activeToday": 329,
   "players": [
     {
       "username": "nin_chessy",
-      "total_pts": 591,
-      "bullet_pts": 507,
-      "blitz_pts": 84,
+      "total_pts": 603,
+      "bullet_pts": 510,
+      "blitz_pts": 93,
       "rapid_pts": 0,
-      "bullet_g": 169,
-      "blitz_g": 10,
+      "bullet_g": 170,
+      "blitz_g": 11,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/473789458.f9606cca.200x200o.44b5385eaf1d.jpg"
+    },
+    {
+      "username": "traker-86",
+      "total_pts": 480,
+      "bullet_pts": 0,
+      "blitz_pts": 480,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 56,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     },
     {
       "username": "thtvk-0076",
@@ -24,17 +35,6 @@
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/418956979.4a69a473.200x200o.ce42fa8cba43.png"
-    },
-    {
-      "username": "pikachugerman310",
-      "total_pts": 399,
-      "bullet_pts": 399,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 133,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/528859669.a7936adf.200x200o.b0d779fb17a3.jpg"
     }
   ]
 }
