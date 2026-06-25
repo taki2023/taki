@@ -1,1115 +1,709 @@
-<html lang="en"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
-<title>Hot Chilli CheckMate – Home</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --red-dark:#d93020;--red-mid:#e85535;--red-border:#e8553a;
-  --bg:#fff5f0;--card:#fff;--border:#f5c5b8;--shadow:#e8aa98;
-  --text-dark:#c73520;--text-mid:#9a2010;
-  --fs-xs:10px;--fs-sm:11px;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{color-scheme:light;}
-html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club of 195 Countries – Match Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void:#06090f;--bg-base:#0a0f1c;--bg-cell:#0d1525;
+      --globe-blue:#3b82f6;--globe-mid:#6366f1;--globe-purple:#8b5cf6;--piece-violet:#7c3aed;
+      --accent-cyan:#22d3ee;--accent-gold:#f59e0b;--accent-green:#10b981;--accent-red:#ef4444;
+      --text-head:#e2e8f0;--text-body:#b0b8cc;--text-dim:#5a6a84;--text-white:#f8fafc;
+      --border-subtle:rgba(99,102,241,.22);--border-mid:rgba(99,102,241,.40);--border-hot:rgba(139,92,246,.65);
+      --radius:12px;--radius-sm:8px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:var(--bg-void);font-family:'Barlow Condensed',sans-serif;min-height:100vh;width:100%;color:var(--text-body)}
+    body{display:flex;justify-content:center}
+    #root{width:100%}
 
-.page-sb{
-  width:100%;background:var(--bg);
-  border-radius:28px;border:3px solid var(--red-border);
-  overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:0 8px 32px rgba(217,48,32,.12);
-  height:492px;transition:height .3s ease;
-}
-.page-sb.loaded{height:auto;}
+    @keyframes spinBorder{to{transform:rotate(360deg)}}
+    @keyframes spinGlobe{to{transform:rotate(360deg)}}
+    @keyframes pulse-green{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+    @keyframes barPulse{0%,100%{opacity:1}50%{opacity:.4}}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-100% 0}}
 
-/* ── SKELETON ── */
-.cal-skeleton{display:flex;flex-direction:column;gap:8px;padding:10px 10px 12px;flex:1;}
-.skel-nav{display:flex;align-items:center;gap:8px;height:34px;}
-.skel-circle{width:34px;height:34px;min-width:34px;border-radius:50%;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;flex-shrink:0;}
-.skel-label{flex:1;height:20px;border-radius:8px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;}
-.skel-head{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;}
-.skel-head-cell{height:28px;border-radius:8px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;}
-.skel-head-cell:nth-child(odd){animation-delay:.1s;}
-.skel-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;flex:1;}
-.skel-cell{border-radius:9px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;min-height:46px;}
-.skel-cell:nth-child(3n){animation-delay:.12s;}
-.skel-cell:nth-child(5n){animation-delay:.22s;}
-.skel-cell:nth-child(7n){animation-delay:.07s;}
-.skel-cell.empty{background:#fff5f0;animation:none;border:1.5px dashed #f5c5b8;}
-.skel-legend{display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 4px 2px;margin-top:auto;}
-.skel-legend-item{height:12px;width:60px;border-radius:6px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;}
-.skel-legend-item:nth-child(2){animation-delay:.1s;}
-.skel-legend-item:nth-child(3){animation-delay:.2s;}
-.skel-legend-item:nth-child(4){animation-delay:.3s;}
-.skel-footer{height:14px;width:60%;border-radius:6px;margin:4px auto 0;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;}
-@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
+    .skel{background:linear-gradient(90deg,#0a0f1c 0%,#141d35 40%,#0a0f1c 100%);background-size:300% 100%;animation:shimmer 1.4s ease-in-out infinite;border-radius:4px}
 
-.page-sb.loaded .cal-skeleton{display:none;}
-.cal-real{display:none;}
-.page-sb.loaded .cal-real{display:flex;flex-direction:column;}
+    /* ── HEADER ── */
+    .cal-header{position:relative;overflow:hidden;border-bottom:1px solid rgba(99,102,241,.2);background:linear-gradient(160deg,#0b1830 0%,#0e1228 50%,#09091e 100%);padding:22px 20px 18px}
+    .header-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(99,102,241,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.05) 1px,transparent 1px);background-size:28px 28px}
+    .header-glow{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:300px;height:150px;background:radial-gradient(ellipse,rgba(99,102,241,.22) 0%,transparent 70%);pointer-events:none}
+    .header-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .header-left{display:flex;align-items:center;gap:14px}
+    .globe-icon{position:relative;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:52px;flex-shrink:0;background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));box-shadow:0 0 28px rgba(99,102,241,.5),0 0 10px rgba(99,102,241,.3) inset;overflow:hidden}
+    .globe-emoji{display:block;line-height:1;animation:spinGlobe 10s linear infinite;transform-origin:center center}
+    .globe-ring{position:absolute;inset:-4px;border-radius:50%;border:1.5px solid rgba(139,92,246,.35);animation:spinBorder 8s linear infinite}
+    .header-info{display:flex;flex-direction:column;gap:3px}
+    .header-title{font-family:'Bebas Neue',cursive;font-size:22px;color:var(--text-white);letter-spacing:2px;line-height:1}
+    .header-sub{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--text-body);letter-spacing:3px;text-transform:uppercase}
+    .live-badge{display:flex;align-items:center;gap:5px;background:rgba(99,102,241,.12);border:1px solid var(--border-subtle);border-radius:999px;padding:4px 10px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--accent-cyan)}
+    .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 6px var(--accent-green);animation:pulse-green 2s ease-in-out infinite}
 
-/* ── BANNER ── */
-.page-top{background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);border-radius:24px 24px 0 0;padding:8px 16px 14px;text-align:center;position:relative;overflow:hidden;flex-shrink:0;}
-.page-top::before{content:'';position:absolute;bottom:-10px;left:-10%;width:120%;height:20px;background:var(--bg);border-radius:50%;}
-.page-top::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 14px,rgba(255,255,255,.04) 14px,rgba(255,255,255,.04) 28px);pointer-events:none;}
-.page-title{font-family:'Fredoka One',cursive;font-size:18.5px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.22),0 4px 10px rgba(0,0,0,.15);position:relative;z-index:1;}
-.page-sub{font-size:var(--fs-sm);font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.9px;text-transform:uppercase;margin-top:1px;position:relative;z-index:1;}
-.inner{padding:10px 10px 12px;display:flex;flex-direction:column;gap:0;}
+    /* ── WRAPPER ── */
+    .cal-wrap{width:100%;display:flex;flex-direction:column;overflow:hidden;background:var(--bg-base);position:relative}
 
-/* ── NAV ── */
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
-.cal-month-label{font-family:'Fredoka One',cursive;font-size:clamp(14px,3.8vw,19px);background:linear-gradient(135deg,#d93020,#ef6640);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;flex:1;white-space:nowrap;filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));letter-spacing:.5px;}
-.nav-btn{width:34px;height:34px;min-width:34px;border-radius:50%;border:2px solid rgba(217,48,32,.3);outline:none;background:rgba(255,255,255,.7);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);user-select:none;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(217,48,32,.1),inset 0 1px 0 rgba(255,255,255,.8);}
-.nav-btn::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.5) 0%,transparent 65%);pointer-events:none;}
-.nav-btn svg{width:14px;height:14px;stroke:#d93020;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none;position:relative;z-index:1;transition:transform .2s cubic-bezier(.34,1.56,.64,1);}
-.nav-btn:hover{background:rgba(255,255,255,.95);border-color:rgba(217,48,32,.6);box-shadow:0 4px 16px rgba(217,48,32,.2),inset 0 1px 0 rgba(255,255,255,.9);transform:scale(1.1);}
-.nav-btn:hover svg{stroke:#c42818;}
-.nav-btn#prevBtn:hover svg{transform:translateX(-1.5px);}
-.nav-btn#nextBtn:hover svg{transform:translateX(1.5px);}
-.nav-btn:active{transform:scale(.93);}
+    /* ── NAV ── */
+    .cal-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 0;gap:12px}
+    .nav-btn{width:38px;height:38px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:rgba(99,102,241,.12);color:var(--text-head);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s cubic-bezier(.34,1.56,.64,1);flex-shrink:0}
+    .nav-btn:hover{border-color:var(--border-hot);background:rgba(139,92,246,.25);color:var(--text-white);box-shadow:0 0 12px rgba(139,92,246,.3);transform:scale(1.08)}
+    .nav-btn:active{transform:scale(.95)}
+    .nav-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+    .month-label{flex:1;text-align:center;font-family:'Bebas Neue',cursive;font-size:28px;color:var(--text-white);letter-spacing:2.5px;line-height:1;text-shadow:0 0 30px rgba(99,102,241,.4)}
+    .month-label .yr{font-size:22px;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-left:7px}
 
-/* ════════════════════════════════════════════
-   DAY HEADERS — improved typography
-════════════════════════════════════════════ */
-.cal-head{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:6px;}
-.cal-head-cell{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1px;padding:4px 2px 5px;
-  background:linear-gradient(160deg,#fff0eb 0%,#ffe4da 100%);
-  border-radius:8px;
-  border:1.5px solid rgba(232,85,53,.2);
-  box-shadow:0 1px 3px rgba(217,48,32,.08),inset 0 1px 0 rgba(255,255,255,.7);
-}
-.cal-head-emoji{
-  font-size:11px;line-height:1;
-}
-.cal-head-label{
-  font-family:'Fredoka One',cursive;
-  font-size:clamp(9px,2.2vw,12px);
-  letter-spacing:.8px;
-  background:linear-gradient(135deg,#c42818 0%,#e85535 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  line-height:1;
-  text-transform:uppercase;
-}
-/* weekend columns (sat=6th, sun=7th) slightly warmer */
-.cal-head-cell:nth-child(6) .cal-head-label,
-.cal-head-cell:nth-child(7) .cal-head-label{
-  background:linear-gradient(135deg,#a01808,#d93020);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.cal-head-cell:nth-child(6),
-.cal-head-cell:nth-child(7){
-  background:linear-gradient(160deg,#ffe8e0 0%,#ffd6c8 100%);
-  border-color:rgba(217,48,32,.28);
-}
+    /* ── DAY HEADERS ── */
+    .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:14px 16px 6px}
+    .day-hdr{text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--text-head);padding:6px 0;background:rgba(99,102,241,.10);border-radius:5px;border:1px solid rgba(99,102,241,.15)}
+    .day-hdr.weekend{color:#a78bfa;background:rgba(139,92,246,.14);border-color:rgba(139,92,246,.22)}
 
-/* ── GRID ── */
-.cal-body{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;overflow:visible;}
-.cal-cell{background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:2px;display:flex;flex-direction:column;align-items:flex-start;gap:0;overflow:visible;height:46px;position:relative;min-width:0;width:100%;transition:border-color .15s,box-shadow .15s;}
-.cal-cell:not(.empty):not(.overflow):hover{border-color:var(--red-mid);box-shadow:0 2px 10px rgba(217,48,32,.12);}
-.cal-cell.empty{background:transparent;border-color:transparent;}
-.cal-cell.overflow{opacity:.3;pointer-events:none;}
-.cal-cell.today{background:linear-gradient(135deg,rgba(217,48,32,.08),rgba(239,102,64,.04));border-color:var(--red-dark);box-shadow:0 2px 8px rgba(217,48,32,.1);}
+    /* ── GRID ── */
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:0 16px 16px}
+    .cal-cell{background:var(--bg-cell);border-radius:8px;border:1.5px solid rgba(99,102,241,.14);min-height:80px;display:flex;flex-direction:column;align-items:center;padding:6px 4px;position:relative;overflow:visible;cursor:default;transition:border-color .15s;min-width:0}
+    .cal-cell.has-event{border-color:var(--border-subtle);background:linear-gradient(160deg,#101a2c,#0e1326)}
+    .cal-cell.adj{opacity:.25;pointer-events:none;border-color:transparent}
+    .cal-cell.today{border-color:var(--accent-cyan);border-width:2px;background:linear-gradient(160deg,#0e1c38,#0c1630);box-shadow:0 0 0 2px rgba(34,211,238,.14) inset,0 0 18px rgba(34,211,238,.14)}
+    .cal-cell.has-event::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.6),transparent)}
+    .cell-num{font-family:'Bebas Neue',cursive;font-size:18px;color:var(--text-head);line-height:1;align-self:flex-end;margin-right:4px;width:100%;text-align:right;letter-spacing:.5px}
+    .cal-cell.today .cell-num{color:var(--accent-cyan);text-shadow:0 0 10px rgba(34,211,238,.6)}
+    .cal-cell.adj .cell-num{color:var(--text-dim);opacity:.5}
+    .today-dot{position:absolute;top:4px;left:4px;width:5px;height:5px;border-radius:50%;background:var(--globe-blue);box-shadow:0 0 6px var(--globe-blue)}
 
-/* ── DAY NUM ROW ── */
-.day-num-wrap{height:18px;width:100%;display:flex;align-items:center;flex-shrink:0;padding-left:2px;padding-right:3px;justify-content:space-between;min-width:0;overflow:visible;}
-.day-num{font-family:'Fredoka One',cursive;font-size:11px;color:var(--text-dark);line-height:1;display:flex;align-items:center;}
-.cal-cell.today .day-num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d93020,#e85535);color:#fff;border-radius:50%;width:17px;height:17px;min-width:17px;padding:0;font-size:11px;}
+    /* ── ICON WRAP ── */
+    .cell-icon-wrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;gap:3px;flex-wrap:wrap;overflow:visible}
 
-/* status dots */
-.status-dot{width:7px;height:7px;border-radius:50%;border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;pointer-events:none;}
-.status-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff6b6b,#e53935);box-shadow:0 0 0 2.5px rgba(229,57,53,.35);animation:dot-pulse 1s ease-in-out infinite;}
-.status-dot.dot-before{background:radial-gradient(circle at 35% 35%,#64b5f6,#1e88e5);box-shadow:0 0 0 2.5px rgba(30,136,229,.25);animation:dot-glow-blue 2.5s ease-in-out infinite;}
-.status-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#81c784,#43a047);box-shadow:0 0 0 2.5px rgba(67,160,71,.25);animation:dot-glow-green 1.8s ease-in-out infinite;}
-.status-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#757575,#212121);box-shadow:0 1px 3px rgba(0,0,0,.35);}
-@keyframes dot-pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
-@keyframes dot-glow-blue{0%,100%{box-shadow:0 0 0 2.5px rgba(30,136,229,.25);}50%{box-shadow:0 0 0 4px rgba(30,136,229,.12);}}
-@keyframes dot-glow-green{0%,100%{box-shadow:0 0 0 2.5px rgba(67,160,71,.25);}50%{box-shadow:0 0 0 4.5px rgba(67,160,71,.12);}}
+    /* ── CHESS MATCH BADGE ── */
+    .match-badge-container{position:relative;display:flex;align-items:center;justify-content:center}
+    .match-badge{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,rgba(99,102,241,.32),rgba(139,92,246,.26));border:1.5px solid rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;font-size:17px;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.4);cursor:pointer}
+    .match-badge:hover{transform:scale(1.22);box-shadow:0 0 18px rgba(139,92,246,.55);z-index:10}
+    .count-bubble{position:absolute;top:-6px;right:-6px;width:17px;height:17px;border-radius:50%;background:linear-gradient(135deg,var(--accent-red),#f97316);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;border:2px solid var(--bg-cell);box-shadow:0 2px 8px rgba(239,68,68,.4);z-index:11;pointer-events:none}
 
-/* ── EVT ICONS ── */
-.evt-icons{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;gap:0;width:100%;flex:1;min-height:0;min-width:0;overflow:visible;padding:0 0 3px;box-sizing:border-box;}
-.evt{
-  --ico:20px;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  width:var(--ico);height:var(--ico);min-width:var(--ico);min-height:var(--ico);
-  flex-shrink:0;border-radius:4px;font-size:calc(var(--ico)*0.76);
-  transform-origin:center center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);
-  z-index:1;border:1.5px solid rgba(217,48,32,.22);background:rgba(255,243,224,.7);
-  overflow:hidden;line-height:1;position:relative;
-  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
-  box-shadow:0 1px 3px rgba(217,48,32,.08);
-}
-.evt:hover{transform:scale(1.3);z-index:100;box-shadow:0 3px 10px rgba(217,48,32,.2);}
-.evt.evt-match{background:rgba(255,240,235,.9);border-color:rgba(217,48,32,.3);box-shadow:0 1px 3px rgba(217,48,32,.12);}
-.evt.evt-match:hover{box-shadow:0 3px 10px rgba(217,48,32,.25);}
-.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;padding:1px;}
-.evt img.loaded{opacity:1;}
-.evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;user-select:none;}
-.evt-skeleton,.tip-logo-skeleton{position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;z-index:2;}
-.tip-logo-skeleton{border-radius:6px;}
+    /* ── SHEET EVENT BADGE ── */
+    .sheet-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(99,102,241,.18));border:1.5px solid rgba(34,211,238,.35);display:flex;align-items:center;justify-content:center;font-size:15px;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer;position:relative}
+    .sheet-badge:hover{transform:scale(1.22);box-shadow:0 0 14px rgba(34,211,238,.45);z-index:10}
+    .sheet-badge-count{position:absolute;top:-5px;right:-5px;width:14px;height:14px;border-radius:50%;background:rgba(34,211,238,.85);color:#06090f;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;border:1.5px solid var(--bg-cell);z-index:11;pointer-events:none}
 
-/* ── LEGEND ── */
-.legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 12px;padding:6px 4px 2px;margin-top:5px;}
-.legend-item{display:flex;align-items:center;gap:5px;font-family:'Fredoka One',cursive;font-size:clamp(9px,2vw,11px);letter-spacing:.4px;white-space:nowrap;}
-.legend-item:nth-child(1) .legend-label{color:#1565c0;}
-.legend-item:nth-child(2) .legend-label{color:#2e7d32;}
-.legend-item:nth-child(3) .legend-label{color:#b71c1c;}
-.legend-item:nth-child(4) .legend-label{color:#424242;}
-.legend-item:nth-child(5) .legend-label{color:#8a6500;}
-.legend-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.9);flex-shrink:0;}
-.legend-dot.dot-before{background:radial-gradient(circle at 35% 35%,#64b5f6,#1e88e5);animation:dot-glow-blue 2.5s ease-in-out infinite;}
-.legend-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#81c784,#43a047);animation:dot-glow-green 1.8s ease-in-out infinite;}
-.legend-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff6b6b,#e53935);animation:dot-pulse 1s ease-in-out infinite;}
-.legend-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#757575,#212121);}
+    /* ── STATUS BAR ── */
+    .status-bar{position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 6px 6px}
+    .status-bar.upcoming{background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple))}
+    .status-bar.soon{background:linear-gradient(90deg,var(--accent-gold),#f97316);animation:barPulse 1.5s ease-in-out infinite}
+    .status-bar.live{background:linear-gradient(90deg,var(--accent-red),#f97316);animation:barPulse .8s ease-in-out infinite}
+    .status-bar.ended{background:rgba(99,102,241,.18)}
 
-/* ══════════════════════════════════════════
-   SHARED TOOLTIP BASE
-══════════════════════════════════════════ */
-.evt-tip, .match-tip {
-  position:fixed;
-  background:var(--card);
-  border:2px solid var(--red-dark);
-  border-radius:14px;
-  box-shadow:0 8px 28px rgba(217,48,32,.22);
-  pointer-events:auto;opacity:0;transition:opacity .12s;
-  z-index:99999;min-width:210px;max-width:300px;white-space:normal;
-  font-family:'Nunito',sans-serif;display:none;flex-direction:column;
-}
-.evt-tip.show, .match-tip.show{opacity:1;display:flex;}
+    /* ── LEGEND ── */
+    .cal-legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px;padding:10px 16px 12px;border-top:1px solid var(--border-subtle);background:rgba(0,0,0,.12)}
+    .legend-item{display:flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--text-head)}
+    .legend-bar{width:18px;height:3px;border-radius:2px}
+    .legend-bar.upcoming{background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple))}
+    .legend-bar.soon{background:linear-gradient(90deg,var(--accent-gold),#f97316)}
+    .legend-bar.live{background:var(--accent-red)}
+    .legend-bar.ended{background:rgba(99,102,241,.28)}
+    .cal-foot{padding:7px 16px 14px;display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-body)}
 
-/* ════════════════════════════════════════════
-   SHEET EVENT TOOLTIP
-   Now fully dynamic — rebuilt as a scroll container
-   so multi-event groups show all details stacked
-════════════════════════════════════════════ */
-.evt-tip{
-  padding:0;
-  max-height:min(480px,80vh);
-  overflow:hidden;
-}
+    /* ══════════════════════════════════════════
+       SHARED TOOLTIP BASE
+    ══════════════════════════════════════════ */
+    .tip-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;opacity:0;transition:opacity .15s ease;pointer-events:none}
+    .tip-backdrop.show{opacity:1;pointer-events:auto}
 
-/* accent bar at top */
-.evt-tip-bar{
-  height:3px;
-  background:linear-gradient(90deg,#d93020,#ef6640);
-  border-radius:12px 12px 0 0;
-  flex-shrink:0;
-}
+    /* both tooltip types share sizing */
+    .c195-tip{
+      position:fixed;z-index:600;
+      border-radius:14px;padding:0;
+      min-width:260px;max-width:min(360px,calc(100vw - 24px));
+      box-shadow:0 24px 60px rgba(0,0,0,.92);
+      opacity:0;transform:translate(-50%,-50%) scale(.95);
+      transition:opacity .15s ease,transform .15s ease;
+      pointer-events:none;flex-direction:column;overflow:hidden;
+      display:flex;left:50%;top:50%;
+      max-height:300px;
+    }
+    .c195-tip.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
 
-/* fixed header (logo + title + date) */
-.evt-tip-header{
-  padding:9px 13px 8px;
-  flex-shrink:0;
-  border-bottom:1.5px solid var(--border);
-  background:linear-gradient(135deg,rgba(217,48,32,.05),rgba(239,102,64,.02));
-  position:relative;
-}
-.tip-row1{display:flex;align-items:center;gap:8px;}
-.tip-logo{width:34px;height:34px;border-radius:7px;border:1.5px solid var(--border);flex-shrink:0;font-size:22px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff8f5;position:relative;}
-.tip-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px;display:block;opacity:0;transition:opacity .25s;}
-.tip-logo img.loaded{opacity:1;}
-.tip-date-wrap{display:flex;flex-direction:column;gap:1px;min-width:0;padding-right:22px;}
-.tip-title{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;word-break:break-word;}
-.tip-date-badge{font-size:9.5px;font-weight:800;color:var(--text-mid);opacity:.8;}
+    /* ── MATCH TOOLTIP (chess — purple theme) ── */
+    .match-tip{
+      background:#0f1828;
+      border:1.5px solid var(--border-hot);
+      box-shadow:0 0 0 1px rgba(139,92,246,.12),0 24px 60px rgba(0,0,0,.92);
+    }
+    .match-tip-bar{height:2px;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple),var(--piece-violet));flex-shrink:0}
+    .match-tip-hdr{background:linear-gradient(135deg,#131e38,#101530);padding:12px 14px 10px;border-bottom:1px solid var(--border-subtle);position:relative;flex-shrink:0}
+    .match-tip-close{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(99,102,241,.22);border:1px solid var(--border-mid);color:var(--text-head);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;z-index:5}
+    .match-tip-close:hover{background:rgba(139,92,246,.4);color:#fff;transform:scale(1.1)}
+    .match-tip-hdr-row{display:flex;align-items:center;gap:10px}
+    .match-tip-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,rgba(99,102,241,.32),rgba(139,92,246,.26));border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .match-tip-info{display:flex;flex-direction:column;gap:2px;min-width:0;padding-right:26px}
+    .match-tip-title{font-family:'Bebas Neue',cursive;font-size:17px;color:var(--text-white);line-height:1.1;letter-spacing:1px}
+    .match-tip-date{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--text-head);opacity:.8}
+    .match-tip-body{padding:10px 14px 12px;display:flex;flex-direction:column;gap:9px;overflow-y:auto;flex:1;min-height:0;scrollbar-width:thin;scrollbar-color:var(--border-mid) transparent}
+    .match-tip-body::-webkit-scrollbar{width:5px}
+    .match-tip-body::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:3px}
 
-.tip-close{position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;color:var(--red-dark);cursor:pointer;line-height:1;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(217,48,32,.1);z-index:10;border:1.5px solid rgba(217,48,32,.2);transition:background .15s,transform .15s;user-select:none;}
-.tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
+    /* ── SHEET EVENT TOOLTIP (cyan theme) ── */
+    .sheet-tip{
+      background:#091520;
+      border:1.5px solid rgba(34,211,238,.45);
+      box-shadow:0 0 0 1px rgba(34,211,238,.08),0 24px 60px rgba(0,0,0,.92);
+    }
+    .sheet-tip-bar{height:2px;background:linear-gradient(90deg,var(--accent-cyan),var(--globe-blue),var(--globe-purple));flex-shrink:0}
+    .sheet-tip-hdr{background:linear-gradient(135deg,#0c1e2e,#091828);padding:12px 14px 10px;border-bottom:1px solid rgba(34,211,238,.18);position:relative;flex-shrink:0}
+    .sheet-tip-close{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.3);color:var(--accent-cyan);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;z-index:5}
+    .sheet-tip-close:hover{background:rgba(34,211,238,.25);color:#fff;transform:scale(1.1)}
+    .sheet-tip-hdr-row{display:flex;align-items:center;gap:10px}
+    .sheet-tip-logo{width:34px;height:34px;border-radius:9px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .sheet-tip-info{display:flex;flex-direction:column;gap:2px;min-width:0;padding-right:26px}
+    .sheet-tip-title{font-family:'Bebas Neue',cursive;font-size:17px;color:var(--text-white);line-height:1.1;letter-spacing:1px}
+    .sheet-tip-date{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--accent-cyan);opacity:.8}
+    .sheet-tip-body{overflow-y:auto;flex:1;min-height:0;scrollbar-width:thin;scrollbar-color:rgba(34,211,238,.3) transparent;display:flex;flex-direction:column}
+    .sheet-tip-body::-webkit-scrollbar{width:5px}
+    .sheet-tip-body::-webkit-scrollbar-thumb{background:rgba(34,211,238,.3);border-radius:3px}
 
-/* scroll body */
-.evt-tip-scroll{
-  overflow-y:auto;flex:1;
-  scrollbar-width:thin;scrollbar-color:rgba(217,48,32,.3) transparent;
-  padding:0;display:flex;flex-direction:column;
-  max-height:340px;
-}
-.evt-tip-scroll::-webkit-scrollbar{width:4px;}
-.evt-tip-scroll::-webkit-scrollbar-track{background:transparent;}
-.evt-tip-scroll::-webkit-scrollbar-thumb{background:rgba(217,48,32,.3);border-radius:2px;}
+    /* event block inside sheet tooltip */
+    .sheet-evt-block{padding:10px 14px 11px;display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+    .sheet-evt-block+.sheet-evt-block{border-top:1px solid rgba(34,211,238,.12)}
+    .sheet-evt-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text-white);line-height:1.3}
+    .sheet-evt-time{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:var(--accent-cyan);opacity:.75}
+    .sheet-evt-detail{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;color:var(--text-head);line-height:1.5}
+    .sheet-evt-msg{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.18);border-radius:7px;padding:7px 10px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;color:var(--text-head);line-height:1.55}
+    .sheet-evt-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .sheet-evt-organizer{display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:.5px;color:var(--accent-cyan);background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);border-radius:999px;padding:3px 10px;text-decoration:none;transition:all .15s}
+    .sheet-evt-organizer:hover{background:rgba(34,211,238,.16)}
 
-/* each event block inside the scroll */
-.evt-block{
-  padding:9px 13px 10px;
-  display:flex;flex-direction:column;gap:5px;
-  flex-shrink:0;
-}
-.evt-block + .evt-block{
-  border-top:1.5px solid var(--border);
-}
+    /* ── SHARED ELEMENTS ── */
+    .tip-countdown{display:flex;align-items:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.5px;padding:4px 10px;border-radius:999px;border:1px solid;width:fit-content}
+    .tip-countdown .cd-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+    .cd-upcoming{color:#60a5fa;background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.35)}
+    .cd-soon{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.38)}
+    .cd-live{color:#f87171;background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.35)}
+    .cd-ended{color:#94a3b8;background:rgba(148,163,184,.06);border-color:rgba(148,163,184,.18)}
+    .tip-sep{height:1px;background:linear-gradient(90deg,transparent,var(--border-mid),var(--globe-purple),var(--border-mid),transparent);margin:2px 0}
+    .tip-btn{display:inline-flex;align-items:center;gap:5px;font-family:'Bebas Neue',cursive;font-size:13px;letter-spacing:1.5px;text-decoration:none;padding:5px 14px;border-radius:5px;white-space:nowrap;flex-shrink:0;transition:all .15s;cursor:pointer;border:none}
+    .btn-join{background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));color:#fff;box-shadow:0 2px 12px rgba(99,102,241,.38)}
+    .btn-join:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(99,102,241,.55)}
+    .btn-watch{background:linear-gradient(135deg,rgba(239,68,68,.85),rgba(249,115,22,.85));color:#fff;box-shadow:0 2px 12px rgba(239,68,68,.28)}
+    .btn-watch:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(239,68,68,.4)}
+    .btn-ended-link{background:rgba(255,255,255,.06);color:var(--text-head);border:1px solid var(--border-subtle) !important}
+    .btn-ended-link:hover{background:rgba(99,102,241,.14);border-color:var(--border-mid);color:var(--text-white)}
+    .btn-sheet-join{background:linear-gradient(135deg,var(--accent-cyan),var(--globe-blue));color:#fff;box-shadow:0 2px 10px rgba(34,211,238,.25)}
+    .btn-sheet-join:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(34,211,238,.4)}
 
-/* event name inside a block */
-.evt-block-name{
-  font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);line-height:1.2;
-}
+    /* match card inside match tooltip */
+    .match-block{display:flex;flex-direction:column;gap:7px}
+    .match-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text-white);line-height:1.4}
+    .score-display{background:rgba(99,102,241,.09);border:1px solid var(--border-subtle);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:5px}
+    .score-teams{display:flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;line-height:1.3}
+    .score-team-name{color:var(--text-head);flex:1;min-width:0}
+    .score-team-name.our-team{color:var(--accent-cyan);text-align:left}
+    .score-team-name.their-team{color:var(--text-head);text-align:right}
+    .score-vs{color:var(--text-dim);font-size:9px;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
+    .score-numbers{display:flex;align-items:center;justify-content:center;gap:10px}
+    .score-num{font-family:'Bebas Neue',cursive;font-size:26px;color:var(--text-white);min-width:32px;text-align:center;letter-spacing:1px}
+    .score-num.winning{color:var(--accent-green);text-shadow:0 0 12px rgba(16,185,129,.45)}
+    .score-num.losing{color:var(--accent-red);text-shadow:0 0 12px rgba(239,68,68,.35)}
+    .score-dash{color:var(--text-dim);font-size:20px;font-family:'Bebas Neue',cursive}
+    .result-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:4px;width:fit-content}
+    .badge-win{background:rgba(16,185,129,.18);color:#6ee7b7;border:1px solid rgba(16,185,129,.35)}
+    .badge-loss{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+    .badge-draw{background:rgba(148,163,184,.10);color:#cbd5e1;border:1px solid rgba(148,163,184,.25)}
+    .match-meta{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--text-body);opacity:.8}
+    .match-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .match-meta-pill{display:flex;align-items:center;gap:5px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:.5px;color:var(--text-head);background:rgba(99,102,241,.10);border:1px solid var(--border-subtle);border-radius:999px;padding:3px 9px}
 
-/* Countdown pill */
-.tip-countdown{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:900;padding:3px 9px;border-radius:999px;border:1.5px solid;width:fit-content;}
-.tip-countdown .cd-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
-.tip-countdown.status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
-.tip-countdown.status-soon{color:#2e7d32;background:#e8f5e9;border-color:#a5d6a7;}
-.tip-countdown.status-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;}
-.tip-countdown.status-ended{color:#424242;background:#f5f5f5;border-color:#ccc;}
-
-.tip-detail{font-size:10px;font-weight:700;color:var(--text-mid);line-height:1.55;}
-.tip-quote-block{background:#fff;border:1.5px solid #eee;border-radius:9px;padding:0;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06);}
-.tip-quote-block-bar{height:3px;width:100%;}
-.tip-quote-block-bar.bar-organizer{background:linear-gradient(90deg,#d93020,#ef6640);}
-.tip-quote-block-bar.bar-admin{background:linear-gradient(90deg,#6a0dad,#b042f5);}
-.tip-quote-inner{padding:6px 9px 7px;}
-.tip-quote-label{display:flex;align-items:center;gap:5px;font-family:'Nunito',sans-serif;font-size:8.5px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;color:#aaa;margin-bottom:4px;}
-.tip-quote-label-icon{display:flex;align-items:center;flex-shrink:0;}
-.admin-icon{font-size:11px;line-height:1;}
-.tip-quote-text{font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:#3a3a3a;line-height:1.55;}
-.mention-link{color:#d93020;font-weight:900;text-decoration:none;border-bottom:1px dotted rgba(217,48,32,.4);}
-.mention-link:hover{color:#a01808;}
-.tip-bottom-row{display:flex;align-items:center;justify-content:space-between;gap:6px;}
-.tip-btn{display:inline-block;font-size:10px;font-weight:900;color:#fff;background:linear-gradient(135deg,#d93020,#e85535);padding:4px 12px;border-radius:999px;text-decoration:none;box-shadow:0 2px 0 #8c1a10;pointer-events:auto;white-space:nowrap;flex-shrink:0;}
-.tip-organizer{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:900;color:var(--text-mid);background:#fff0eb;border:1.5px solid var(--border);border-radius:999px;padding:3px 8px 3px 6px;text-decoration:none;white-space:nowrap;transition:background .15s;pointer-events:auto;}
-.tip-organizer:hover{background:#fce0d5;border-color:var(--red-mid);}
-.tip-organizer-icon{font-size:11px;line-height:1;}
-
-/* scroll fade */
-.evt-tip-fade{
-  height:14px;
-  background:linear-gradient(to top,rgba(255,255,255,.9),transparent);
-  flex-shrink:0;pointer-events:none;border-radius:0 0 12px 12px;
-  margin-top:-14px;position:relative;z-index:5;
-}
-
-/* ════════════════════════════════════════════
-   MATCH TOOLTIP — red/warm theme
-════════════════════════════════════════════ */
-.match-tip{
-  padding:0;max-width:300px;min-width:220px;
-  max-height:min(460px,78vh);overflow:hidden;
-}
-.match-tip-bar{height:3px;background:linear-gradient(90deg,#d93020,#ef6640);border-radius:12px 12px 0 0;flex-shrink:0;}
-.match-tip-header{
-  padding:9px 12px 8px;flex-shrink:0;
-  border-bottom:1.5px solid var(--border);
-  position:relative;
-  background:linear-gradient(135deg,rgba(217,48,32,.05),rgba(239,102,64,.02));
-}
-.match-tip-header-row{display:flex;align-items:center;gap:8px;}
-.match-tip-club-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(255,240,235,.9);border:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:19px;flex-shrink:0;overflow:hidden;position:relative;
-}
-.match-tip-club-icon img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:7px;display:block;opacity:0;transition:opacity .25s;}
-.match-tip-club-icon img.loaded{opacity:1;}
-.match-tip-info{display:flex;flex-direction:column;gap:1px;min-width:0;padding-right:22px;}
-.match-tip-club-name{font-family:'Fredoka One',cursive;font-size:13px;color:var(--red-dark);line-height:1.2;}
-.match-tip-date{font-size:9.5px;font-weight:800;color:var(--text-mid);opacity:.85;}
-.match-tip-count-badge{
-  display:inline-flex;align-items:center;gap:3px;
-  font-size:9px;font-weight:900;letter-spacing:.4px;
-  background:rgba(217,48,32,.08);border:1px solid rgba(217,48,32,.2);
-  color:var(--red-dark);border-radius:999px;padding:1px 7px;
-  margin-top:2px;width:fit-content;
-}
-.match-tip-close{
-  position:absolute;top:7px;right:9px;font-size:13px;font-weight:900;
-  color:var(--red-dark);cursor:pointer;width:20px;height:20px;
-  display:flex;align-items:center;justify-content:center;border-radius:50%;
-  background:rgba(217,48,32,.1);border:1.5px solid rgba(217,48,32,.2);
-  transition:background .15s,transform .15s;user-select:none;z-index:10;
-}
-.match-tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.12);}
-.match-tip-scroll{
-  overflow-y:auto;flex:1;
-  scrollbar-width:thin;scrollbar-color:rgba(217,48,32,.3) transparent;
-  padding:8px 10px 10px;
-  display:flex;flex-direction:column;gap:7px;
-  max-height:340px;
-}
-.match-tip-scroll::-webkit-scrollbar{width:4px;}
-.match-tip-scroll::-webkit-scrollbar-track{background:transparent;}
-.match-tip-scroll::-webkit-scrollbar-thumb{background:rgba(217,48,32,.3);border-radius:2px;}
-.match-card{
-  background:linear-gradient(135deg,#fff8f5,#fff0eb);
-  border:1.5px solid var(--border);
-  border-radius:10px;padding:9px 10px 8px;
-  display:flex;flex-direction:column;gap:5px;
-  flex-shrink:0;
-}
-.mc-phase{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:9px;font-weight:900;letter-spacing:.3px;
-  padding:2px 8px;border-radius:999px;border:1.5px solid;width:fit-content;
-}
-.mc-phase .cd-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
-.mc-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
-.mc-soon{color:#2e7d32;background:#e8f5e9;border-color:#a5d6a7;animation:badge-pulse-green 1.6s ease-in-out infinite;}
-.mc-live{color:#b71c1c;background:#fce4ec;border-color:#ef9a9a;animation:badge-pulse-red 1.2s ease-in-out infinite;}
-.mc-ended{color:#424242;background:#f5f5f5;border-color:#ccc;}
-@keyframes badge-pulse-green{0%,100%{opacity:1;}50%{opacity:.65;}}
-@keyframes badge-pulse-red{0%,100%{opacity:1;}50%{opacity:.55;}}
-.mc-countdown-text{font-size:10px;font-weight:800;border-radius:6px;padding:3px 7px;width:fit-content;}
-.mc-countdown-text.cd-upcoming{color:#1565c0;background:rgba(21,101,192,.08);}
-.mc-countdown-text.cd-soon{color:#2e7d32;background:rgba(46,125,50,.08);}
-.mc-countdown-text.cd-live{color:#b71c1c;background:rgba(183,28,28,.07);}
-.mc-countdown-text.cd-ended{color:#424242;background:rgba(0,0,0,.04);}
-.mc-vs-row{display:flex;align-items:center;gap:5px;padding:4px 0 2px;}
-.mc-team{flex:1;font-size:10px;font-weight:800;color:var(--text-dark);line-height:1.3;min-width:0;word-break:break-word;}
-.mc-team.our{color:var(--red-dark);text-align:left;}
-.mc-team.their{color:var(--text-mid);text-align:right;}
-.mc-vs-sep{font-family:'Fredoka One',cursive;font-size:9px;color:#e8a090;flex-shrink:0;letter-spacing:.5px;}
-.mc-score-row{display:flex;align-items:center;justify-content:center;gap:8px;}
-.mc-score-num{font-family:'Fredoka One',cursive;font-size:20px;min-width:32px;text-align:center;line-height:1;}
-.mc-score-num.winning{color:#2e7d32;}
-.mc-score-num.losing{color:#c62828;}
-.mc-score-num.tied{color:var(--text-mid);}
-.mc-score-dash{color:#e8a090;font-weight:900;font-size:14px;}
-.mc-result{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:900;padding:2px 8px;border-radius:4px;width:fit-content;}
-.mc-result.win{background:rgba(46,125,50,.1);color:#2e7d32;border:1px solid rgba(46,125,50,.25);}
-.mc-result.loss{background:rgba(183,28,28,.08);color:#c62828;border:1px solid rgba(183,28,28,.2);}
-.mc-result.draw{background:rgba(0,0,0,.04);color:#555;border:1px solid #ddd;}
-.mc-meta{font-size:9px;font-weight:700;color:var(--text-mid);display:flex;align-items:center;gap:8px;flex-wrap:wrap;opacity:.8;}
-.mc-btn{display:inline-block;font-size:9.5px;font-weight:900;color:#fff;background:linear-gradient(135deg,#d93020,#e85535);padding:4px 13px;border-radius:999px;text-decoration:none;box-shadow:0 2px 0 #8c1a10;white-space:nowrap;align-self:flex-end;pointer-events:auto;}
-.mc-btn.watch{background:linear-gradient(135deg,#d93020,#e85535);box-shadow:0 2px 0 #8c1a10;}
-.mc-btn.view{background:linear-gradient(135deg,#9a2010,#c73520);box-shadow:0 2px 0 #5a0c04;}
-.match-tip-fade{height:16px;background:linear-gradient(to top,rgba(255,255,255,.9),transparent);flex-shrink:0;pointer-events:none;border-radius:0 0 12px 12px;margin-top:-16px;position:relative;z-index:5;}
-
-@media(hover:none) and (pointer:coarse){
-  .evt-tip,.match-tip{
-    position:fixed!important;left:50%!important;top:50%!important;
-    transform:translate(-50%,-50%);
-    width:min(88vw,300px);max-width:min(88vw,300px);
-    max-height:80vh;overflow-y:auto;
-    box-shadow:0 16px 48px rgba(217,48,32,.35),0 0 0 9999px rgba(0,0,0,.45);
-  }
-  .evt-tip.show,.match-tip.show{display:flex;}
-}
-
-.footer{text-align:center;font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.4px;background:linear-gradient(135deg,#d93020,#ef6640);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 rgba(217,48,32,.18));padding-top:4px;}
-</style>
+    .skeleton-wrap{padding:12px;display:flex;flex-direction:column;gap:8px}
+  </style>
 </head>
 <body>
-
-<div class="page-sb loaded" id="pageSb">
-  <div class="page-top">
-    <div class="page-title">🏠 Hot Chilli CheckMate #</div>
-    <div class="page-sub">Your Chess Home ♡</div>
-  </div>
-
-  <div class="cal-skeleton" id="calSkeleton">
-    <div class="skel-nav"><div class="skel-circle"></div><div class="skel-label"></div><div class="skel-circle"></div></div>
-    <div class="skel-head"><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div></div>
-    <div class="skel-grid" id="skelGrid"></div>
-    <div class="skel-legend"><div class="skel-legend-item"></div><div class="skel-legend-item"></div><div class="skel-legend-item"></div><div class="skel-legend-item"></div></div>
-    <div class="skel-footer"></div>
-  </div>
-
-  <div class="cal-real inner" id="calReal">
-    <div class="cal-nav">
-      <button class="nav-btn" id="prevBtn" aria-label="Previous month"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-      <div class="cal-month-label" id="monthLabel"></div>
-      <button class="nav-btn" id="nextBtn" aria-label="Next month"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+  <div id="root">
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <div class="header-grid"></div>
+        <div class="header-glow"></div>
+        <div class="header-top">
+          <div class="header-left">
+            <div class="globe-icon"><span class="globe-emoji">🌍</span><div class="globe-ring"></div></div>
+            <div class="header-info">
+              <div class="header-title">Club of 195 Countries</div>
+              <div class="header-sub">Chess.com · Est. March 2026</div>
+            </div>
+          </div>
+          <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+        </div>
+      </div>
+      <div id="cal-content"></div>
     </div>
-    <div class="cal-head" id="calHead"></div>
-    <div class="cal-body" id="calBody"></div>
-    <div class="legend">
-      <div class="legend-item"><span class="legend-dot dot-before"></span><span class="legend-label">Upcoming</span></div>
-      <div class="legend-item"><span class="legend-dot dot-soon"></span><span class="legend-label">Soon</span></div>
-      <div class="legend-item"><span class="legend-dot dot-live"></span><span class="legend-label">Live</span></div>
-      <div class="legend-item"><span class="legend-dot dot-ended"></span><span class="legend-label">Ended</span></div>
-      <div class="legend-item"><span style="font-size:10px;line-height:1;">☀️</span><span class="legend-label">Match</span></div>
-    </div>
-    <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
   </div>
-</div>
 
-<!-- Sheet event tooltip — fully dynamic, rebuilt each time -->
-<div class="evt-tip" id="globalTip">
-  <div class="evt-tip-bar"></div>
-  <div class="evt-tip-header" id="evtTipHeader">
-    <div class="tip-close" id="tipClose">✕</div>
-    <div class="tip-row1">
-      <div class="tip-logo" id="tipLogo"></div>
-      <div class="tip-date-wrap">
-        <div class="tip-title" id="tipTitle"></div>
-        <div class="tip-date-badge" id="tipDateBadge"></div>
+  <!-- Backdrop (shared) -->
+  <div class="tip-backdrop" id="tip-backdrop"></div>
+
+  <!-- Match tooltip (chess API) -->
+  <div class="c195-tip match-tip" id="matchTipEl">
+    <div class="match-tip-bar"></div>
+    <div class="match-tip-hdr" id="matchTipHdr">
+      <div class="match-tip-close" id="matchTipClose">✕</div>
+      <div class="match-tip-hdr-row">
+        <div class="match-tip-icon">☀️</div>
+        <div class="match-tip-info">
+          <div class="match-tip-title" id="matchTipTitle">Team Matches</div>
+          <div class="match-tip-date" id="matchTipDate"></div>
+        </div>
       </div>
     </div>
+    <div class="match-tip-body" id="matchTipBody"></div>
   </div>
-  <div class="evt-tip-scroll" id="evtTipScroll"></div>
-  <div class="evt-tip-fade" id="evtTipFade" style="display:none;"></div>
-</div>
 
-<!-- Match tooltip -->
-<div class="match-tip" id="matchTip">
-  <div class="match-tip-bar"></div>
-  <div class="match-tip-header" id="matchTipHeader">
-    <div class="match-tip-close" id="matchTipClose">✕</div>
-    <div class="match-tip-header-row">
-      <div class="match-tip-club-icon" id="matchTipIcon">☀️</div>
-      <div class="match-tip-info">
-        <div class="match-tip-club-name" id="matchTipClubName">Daily Team Matches</div>
-        <div class="match-tip-date" id="matchTipDate"></div>
-        <div class="match-tip-count-badge" id="matchTipCountBadge" style="display:none;"></div>
+  <!-- Sheet event tooltip (one per group, reused) -->
+  <div class="c195-tip sheet-tip" id="sheetTipEl">
+    <div class="sheet-tip-bar"></div>
+    <div class="sheet-tip-hdr" id="sheetTipHdr">
+      <div class="sheet-tip-close" id="sheetTipClose">✕</div>
+      <div class="sheet-tip-hdr-row">
+        <div class="sheet-tip-logo" id="sheetTipLogo"></div>
+        <div class="sheet-tip-info">
+          <div class="sheet-tip-title" id="sheetTipTitle"></div>
+          <div class="sheet-tip-date" id="sheetTipDate"></div>
+        </div>
       </div>
     </div>
+    <div class="sheet-tip-body" id="sheetTipBody"></div>
   </div>
-  <div class="match-tip-scroll" id="matchTipScroll"></div>
-  <div class="match-tip-fade" id="matchTipFade" style="display:none;"></div>
-</div>
 
-<script>
-/* ════════════════════════════════════════════
-   CONFIG
-════════════════════════════════════════════ */
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwLWbOvhgA9aiwEpatPngrRZCsUaGbBNNYDQR3KK5sm-p8lQjx1eili_e4IGUWM9cCL9w/exec';
-const CLUB_SLUG    = 'hot-chilli-checkmate';
-const CLUB_MATCH_URL = `https://api.chess.com/pub/club/${CLUB_SLUG}/matches`;
-const MATCH_DETAIL_URL = id => `https://api.chess.com/pub/match/${id}`;
+  <script>
+    var SHEET_API_URL='https://script.google.com/macros/s/AKfycbyQRC0v7VuR2zIygBFJJaDc49r-xkRe2pxaVWpnpqcY-wAlo0ChettGdCl8gkHEtSXF/exec';
+    var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var DAY_NAMES=['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-// Day headers: [emoji, short label]
-const DAYS_FUN=[['🌙','MON'],['🔥','TUE'],['⚡','WED'],['♟','THU'],['🎯','FRI'],['🌶','SAT'],['☀️','SUN']];
+    function ordinal(d){var s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||s[v]||s[0]);}
+    function pad(n){return String(n).padStart(2,'0');}
+    function dateKey(y,m,d){return y+'-'+pad(m+1)+'-'+pad(d);}
+    function formatDate(y,m,d){return MONTH_SHORT[m]+' '+ordinal(d)+', '+y;}
 
-const today = new Date();
-let viewYear = today.getFullYear(), viewMonth = today.getMonth();
-let eventMap  = {};  // dateKey → sheet groups[]
-let matchMap  = {};  // dateKey → match events[]
-
-/* ════════════════════════════════════════════
-   SKELETON
-════════════════════════════════════════════ */
-(function(){
-  const grid = document.getElementById('skelGrid'); if(!grid) return;
-  const y=today.getFullYear(),m=today.getMonth();
-  const first=(new Date(y,m,1).getDay()+6)%7, last=new Date(y,m+1,0).getDate();
-  for(let i=0;i<42;i++){
-    const c=document.createElement('div');
-    c.className=(i<first||(i-first+1)>last)?'skel-cell empty':'skel-cell';
-    grid.appendChild(c);
-  }
-})();
-
-/* ════════════════════════════════════════════
-   IMAGE CACHE
-════════════════════════════════════════════ */
-function proxyImageURL(raw){
-  if(!raw) return null; raw=raw.trim();
-  if(raw.startsWith('https://wsrv.nl')) return raw;
-  const dm=raw.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
-  if(dm){const direct=`https://drive.google.com/uc?export=download&id=${dm[1]}`;return `https://wsrv.nl/?url=${encodeURIComponent(direct)}&w=64&h=64&fit=contain&output=webp`;}
-  if(/^https?:\/\//i.test(raw)) return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=64&h=64&fit=contain&output=webp`;
-  return null;
-}
-const imgMem=new Map(), imgCbs=new Map();
-const lsKey=u=>'imgcache2:'+u;
-const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
-const lsSet=(u,v)=>{try{localStorage.setItem(lsKey(u),v);}catch(e){}};
-function preloadImg(url){
-  if(!url||imgMem.has(url))return;
-  const c=lsGet(url);if(c==='ok'||c==='err'){imgMem.set(url,c);return;}
-  imgMem.set(url,'loading');
-  const img=new Image();img.crossOrigin='anonymous';img.decoding='async';
-  img.onload=()=>{imgMem.set(url,'ok');lsSet(url,'ok');_notify(url,'ok');};
-  img.onerror=()=>{imgMem.set(url,'err');lsSet(url,'err');_notify(url,'err');};
-  img.src=url;
-}
-function _notify(url,state){const cbs=imgCbs.get(url)||[];imgCbs.delete(url);cbs.forEach(cb=>cb(state));}
-function onImgReady(url,cb){
-  const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}
-  const c=lsGet(url);if(c==='ok'||c==='err'){imgMem.set(url,c);cb(c);return;}
-  if(!imgCbs.has(url))imgCbs.set(url,[]);
-  imgCbs.get(url).push(cb);
-  if(!imgMem.has(url))preloadImg(url);
-}
-
-/* ════════════════════════════════════════════
-   DATE UTILS
-════════════════════════════════════════════ */
-const pad=n=>String(n).padStart(2,'0');
-const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
-const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
-const dowMon=(y,m,d)=>(new Date(y,m,d).getDay()+6)%7;
-const ordinal=d=>{const s=['th','st','nd','rd'],v=d%100;return d+(s[(v-20)%10]||s[v]||s[0]);};
-const formatDate=(y,m,d)=>`${MONTH_SHORT[m]} ${ordinal(d)}, ${y}`;
-const isURL=s=>s&&(/^https?:\/\//i.test(s)||s.includes('.'));
-
-function parseDate(str){
-  if(!str)return null;str=str.trim();
-  if(/^\d{4}-\d{2}-\d{2}$/.test(str)){const[y,m,d]=str.split('-').map(Number);return{y,m:m-1,d};}
-  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)){const[m,d,y]=str.split('/').map(Number);return{y,m:m-1,d};}
-  const dt=new Date(str);if(!isNaN(dt))return{y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
-  return null;
-}
-function parseTime(str){
-  if(!str||!str.trim())return null;
-  const m=str.trim().match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);if(!m)return null;
-  let h=parseInt(m[1]),min=parseInt(m[2]);
-  if(m[3]){if(m[3].toLowerCase()==='pm'&&h<12)h+=12;if(m[3].toLowerCase()==='am'&&h===12)h=0;}
-  return{h,min};
-}
-function buildUTC(dateObj,timeObj){
-  if(!dateObj||!timeObj)return null;
-  return new Date(Date.UTC(dateObj.y,dateObj.m,dateObj.d,timeObj.h,timeObj.min,0));
-}
-function linkifyMentions(text){
-  return text.split(/(@[\w-]+)/g).map(part=>{
-    if(/^@[\w-]+$/.test(part)){
-      const a=document.createElement('a');a.className='mention-link';
-      a.href=`https://www.chess.com/member/${part.slice(1)}`;a.target='_blank';a.rel='noopener noreferrer';a.textContent=part;return a;
+    // ── Chess phase ──
+    function getChessPhase(ev){
+      var now=Date.now(),startMs=ev.startTs*1000;
+      if(ev._status==='finished'||(ev.endTs&&now>ev.endTs*1000))return{status:'ended',text:'Ended',cls:'cd-ended'};
+      if(ev._status==='live'||now>=startMs)return{status:'live',text:'🔴 In Progress',cls:'cd-live'};
+      var ms=startMs-now,dd=Math.floor(ms/86400000),hh=Math.floor((ms%86400000)/3600000),mm=Math.floor((ms%3600000)/60000);
+      var txt='In ';if(dd>0)txt+=dd+'d '+hh+'h';else if(hh>0)txt+=hh+'h '+mm+'m';else txt+=mm+'m';
+      return{status:ms<=3600000?'soon':'upcoming',text:txt,cls:ms<=3600000?'cd-soon':'cd-upcoming'};
     }
-    return document.createTextNode(part);
-  });
-}
-function setTextWithMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
 
-/* ════════════════════════════════════════════
-   PHASE — SHEET EVENTS
-════════════════════════════════════════════ */
-function getPhase(ev){
-  if(!ev.timeObj)return null;
-  const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)return null;
-  const e=ev.duration>0?new Date(s.getTime()+ev.duration*3600000):null;
-  const now=Date.now();
-  if(now<s.getTime()){
-    const ms=s-now,sec=Math.floor(ms/1000);
-    const d=Math.floor(sec/86400),h=Math.floor((sec%86400)/3600),m2=Math.floor((sec%3600)/60);
-    const text='Starting in '+(d>0?`${d}d ${h}h ${m2}m`:h>0?`${h}h ${m2}m`:`${m2}m`);
-    const isSoon=ms<=3600000;
-    return{status:isSoon?'soon':'upcoming',text,cssClass:isSoon?'status-soon':'status-upcoming',phase:'before'};
-  }else if(e&&now<e.getTime()){
-    const msL=e.getTime()-now,hL=Math.floor(msL/3600000),mL=Math.floor((msL%3600000)/60000);
-    return{status:'live',text:'🔴 Live'+(hL>0?` · ends in ${hL}h ${mL}m`:mL>0?` · ends in ${mL}m`:' · ending soon'),cssClass:'status-live',phase:'live'};
-  }else if(!e&&now>=s.getTime()){
-    return{status:'live',text:'🔴 Live',cssClass:'status-live',phase:'live'};
-  }
-  return{status:'ended',text:'✅ Ended',cssClass:'status-ended',phase:'after'};
-}
-
-/* ════════════════════════════════════════════
-   PHASE — MATCH EVENTS
-════════════════════════════════════════════ */
-function getMatchPhase(match){
-  const now=Date.now(),startMs=match.startTs*1000;
-  if(match._status==='finished'||(match.endTs&&now>match.endTs*1000))
-    return{status:'ended',text:'Ended',cls:'mc-ended',cdCls:'cd-ended',phase:'after'};
-  if(match._status==='in_progress'||now>=startMs)
-    return{status:'live',text:'🔴 Live',cls:'mc-live',cdCls:'cd-live',phase:'live'};
-  const ms=startMs-now,isSoon=ms<=3600000;
-  const dd=Math.floor(ms/86400000),hh=Math.floor((ms%86400000)/3600000),mm2=Math.floor((ms%3600000)/60000);
-  const txt='Starting in '+(dd>0?`${dd}d ${hh}h`:hh>0?`${hh}h ${mm2}m`:`${mm2}m`);
-  return{status:isSoon?'soon':'upcoming',text:txt,cls:isSoon?'mc-soon':'mc-upcoming',cdCls:isSoon?'cd-soon':'cd-upcoming',phase:'before'};
-}
-
-function isCancelled(match){
-  return match._status==='finished'
-    &&match.ourScore!==undefined&&match.theirScore!==undefined
-    &&Number(match.ourScore)===0&&Number(match.theirScore)===0;
-}
-
-function cellDotClass(sheetGroups,matchEvts){
-  const rank={ended:1,before:2,soon:3,live:4};let best=null;
-  for(const g of sheetGroups){
-    for(const ev of g.events){
-      if(!ev.timeObj)continue;
-      const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)continue;
-      const e=ev.duration>0?new Date(s.getTime()+ev.duration*3600000):null;
-      const now=Date.now();
-      let cls=(e&&now>=e.getTime())?'ended':now>=s.getTime()?'live':(s-now<=3600000)?'soon':'before';
-      if(!best||rank[cls]>rank[best])best=cls;
-    }
-  }
-  for(const m of matchEvts){
-    const p=getMatchPhase(m);
-    const cls=p.status==='live'?'live':p.status==='soon'?'soon':p.status==='ended'?'ended':'before';
-    if(!best||rank[cls]>rank[best])best=cls;
-  }
-  return best?'dot-'+best:null;
-}
-
-function pick(ev,phase,field){
-  const key={before:{details:'detailsBefore',button:'buttonBefore',link:'linkBefore'},live:{details:'detailsLive',button:'buttonLive',link:'linkLive'},after:{details:'detailsAfter',button:'buttonAfter',link:'linkAfter'}};
-  const fallback={before:['before'],live:['live','before'],after:['after','live','before']};
-  for(const p of fallback[phase]){const val=ev[key[p][field]];if(val&&val.trim())return val.trim();}
-  return '';
-}
-
-/* ════════════════════════════════════════════
-   LOAD SHEET — groups same-logo events per day
-════════════════════════════════════════════ */
-async function loadSheet(){
-  try{
-    const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    const rawMap={};
-    data.forEach(ev=>{
-      if(!ev.date||!ev.title)return;
-      const dateObj=parseDate(ev.date);if(!dateObj)return;
-      const key=dateKey(dateObj.y,dateObj.m,dateObj.d);
-      if(!rawMap[key])rawMap[key]=[];
-      const rawLogo=(ev.logo||'').trim();
-      const proxiedLogo=isURL(rawLogo)?proxyImageURL(rawLogo):null;
-      rawMap[key].push({
-        _type:'sheet',dateObj,timeObj:parseTime(ev.time),duration:parseFloat(ev.duration)||0,
-        title:(ev.title||'').trim(),
-        detailsBefore:(ev.detailsBefore||'').trim(),buttonBefore:(ev.buttonBefore||'').trim(),linkBefore:(ev.linkBefore||'').trim(),
-        detailsLive:(ev.detailsLive||'').trim(),buttonLive:(ev.buttonLive||'').trim(),linkLive:(ev.linkLive||'').trim(),
-        detailsAfter:(ev.detailsAfter||'').trim(),buttonAfter:(ev.buttonAfter||'').trim(),linkAfter:(ev.linkAfter||'').trim(),
-        rawLogo,logo:proxiedLogo||rawLogo,isProxied:!!proxiedLogo,
-        organizer:(ev.organizer||'').trim(),
-        quoteBefore:(ev.quoteBefore||'').trim(),quoteAfter:(ev.quoteAfter||'').trim(),
-        admin:(ev.admin||'').trim().replace(/^@/,''),adminMessage:(ev.adminMessage||'').trim(),
-      });
-      if(proxiedLogo)preloadImg(proxiedLogo);
-    });
-    eventMap={};
-    Object.entries(rawMap).forEach(([key,evts])=>{
-      const groups=[],logoToGroup={};
-      evts.forEach(ev=>{
-        const logoKey=ev.rawLogo||'__none__';
-        if(!logoToGroup[logoKey]){
-          const g={logoKey,rawLogo:ev.rawLogo,logo:ev.logo,isProxied:ev.isProxied,events:[]};
-          logoToGroup[logoKey]=g;groups.push(g);
-        }
-        logoToGroup[logoKey].events.push(ev);
-      });
-      eventMap[key]=groups;
-    });
-  }catch(e){console.error('Sheet load failed:',e);}
-}
-
-/* ════════════════════════════════════════════
-   LOAD MATCHES
-════════════════════════════════════════════ */
-async function fetchJSON(url){
-  try{const r=await fetch(url,{cache:'no-store'});if(r.ok)return r.json();throw new Error(r.status);}
-  catch(e){
-    try{const r2=await fetch('https://api.allorigins.win/get?url='+encodeURIComponent(url));if(!r2.ok)throw new Error('proxy');const d=await r2.json();return JSON.parse(d.contents);}
-    catch(e2){throw e2;}
-  }
-}
-function extractMatchId(u){const m=u.match(/\/match\/(\d+)$/);return m?m[1]:'';}
-function slugToName(s){return s.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());}
-
-async function loadMatches(){
-  try{
-    const data=await fetchJSON(CLUB_MATCH_URL);
-    matchMap={};
-    const process=(arr,status)=>{
-      (arr||[]).forEach(m=>{
-        if(!m.start_time)return;
-        const id=extractMatchId(m['@id']);if(!id)return;
-        const d=new Date(m.start_time*1000);
-        const pp=(m.opponent||'').split('/'),slug=pp[pp.length-1]||'';
-        const ev={_type:'match',id,title:m.name||`vs ${slugToName(slug)}`,opponent:slugToName(slug),opponentSlug:slug,link:`https://www.chess.com/club/matches/${id}`,_status:status,startTs:m.start_time,endTs:m.end_time||undefined,timeClass:m.time_class||'daily',result:m.result||undefined,ourScore:undefined,theirScore:undefined,ourName:undefined,theirName:undefined,boards:undefined};
-        const key=dateKey(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate());
-        if(!matchMap[key])matchMap[key]=[];matchMap[key].push(ev);
-      });
-    };
-    process(data.registered,'upcoming');process(data.in_progress,'in_progress');process(data.finished,'finished');
-    enrichMatches();
-  }catch(e){console.error('Match load failed:',e);}
-}
-
-async function enrichMatches(){
-  const allMatches=[];Object.values(matchMap).forEach(arr=>arr.forEach(m=>allMatches.push(m)));
-  if(!allMatches.length)return;
-  for(let i=0;i<allMatches.length;i+=6){
-    const batch=allMatches.slice(i,i+6);
-    await Promise.allSettled(batch.map(async m=>{
-      try{
-        const det=await fetchJSON(MATCH_DETAIL_URL(m.id));
-        if(det.teams){
-          const t1=det.teams.team1,t2=det.teams.team2;
-          let our,their;
-          if((t1['@id']||'').includes(CLUB_SLUG)){our=t1;their=t2;}
-          else if((t2['@id']||'').includes(CLUB_SLUG)){our=t2;their=t1;}
-          else{our=t1;their=t2;}
-          m.ourName=our.name;m.theirName=their.name;m.ourScore=our.score;m.theirScore=their.score;
-        }
-        if(det.boards)m.boards=det.boards;if(det.url)m.link=det.url;
-      }catch(e){}
-    }));
-  }
-}
-
-/* ════════════════════════════════════════════
-   BUILD CALENDAR
-════════════════════════════════════════════ */
-function applyCellWidth(){
-  const cells=calBody.querySelectorAll('.cal-cell');if(!cells.length)return;
-  const r=cells[0].getBoundingClientRect();const cellW=r.width,cellH=r.height;if(cellW<1||cellH<1)return;
-  cells.forEach(cell=>{
-    cell.querySelectorAll('.evt-icons').forEach(wrap=>{
-      const n=parseInt(wrap.dataset.count)||1;const icons=wrap.querySelectorAll('.evt');
-      const ratio=cellW<cellH?(n===1?.58:n===2?.43:.28):(n===1?.50:n===2?.43:.28);
-      const base=Math.min(cellW,cellH);const ico=base*ratio;const space=(cellW-ico*n)/(n+1);
-      icons.forEach((el,i)=>{el.style.setProperty('--ico',ico.toFixed(2)+'px');el.style.marginLeft=space.toFixed(2)+'px';el.style.marginRight=(i===n-1?space:0).toFixed(2)+'px';});
-    });
-  });
-}
-
-const monthLabel=document.getElementById('monthLabel');
-const calHead=document.getElementById('calHead');
-const calBody=document.getElementById('calBody');
-
-function buildCalendar(){
-  monthLabel.textContent=MONTHS[viewMonth]+' '+viewYear;
-  calHead.innerHTML='';
-  DAYS_FUN.forEach(([emoji,lbl])=>{
-    const c=document.createElement('div');c.className='cal-head-cell';
-    c.innerHTML=`<span class="cal-head-emoji">${emoji}</span><span class="cal-head-label">${lbl}</span>`;
-    calHead.appendChild(c);
-  });
-  calBody.innerHTML='';
-  const first=dowMon(viewYear,viewMonth,1),last=lastDay(viewYear,viewMonth);
-  const pM=viewMonth===0?11:viewMonth-1,pY=viewMonth===0?viewYear-1:viewYear;
-  const nM=viewMonth===11?0:viewMonth+1,nY=viewMonth===11?viewYear+1:viewYear;
-  for(let i=0;i<first;i++)calBody.appendChild(makeCell(pY,pM,lastDay(pY,pM)-first+1+i,true));
-  for(let d=1;d<=last;d++)calBody.appendChild(makeCell(viewYear,viewMonth,d,false));
-  const filled=first+last;
-  for(let d=1;filled+d-1<42;d++)calBody.appendChild(makeCell(nY,nM,d,true));
-  requestAnimationFrame(applyCellWidth);
-}
-
-function makeCell(y,m,d,overflow){
-  const isToday=(!overflow&&d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear());
-  const cell=document.createElement('div');
-  cell.className='cal-cell'+(isToday?' today':'')+(overflow?' overflow':'');
-
-  const wrap0=document.createElement('div');wrap0.className='day-num-wrap';
-  const num=document.createElement('div');num.className='day-num';num.textContent=d;
-  wrap0.appendChild(num);
-
-  const sheetGroups=(!overflow&&eventMap[dateKey(y,m,d)])||[];
-  const rawMatchEvts=(!overflow&&matchMap[dateKey(y,m,d)])||[];
-  const matchEvts=rawMatchEvts.filter(mv=>!isCancelled(mv));
-
-  if(!overflow&&(sheetGroups.length||matchEvts.length)){
-    const dotCls=cellDotClass(sheetGroups,matchEvts);
-    if(dotCls){const dot=document.createElement('div');dot.className='status-dot '+dotCls;wrap0.appendChild(dot);}
-  }
-  cell.appendChild(wrap0);
-
-  // Build icon list
-  // Rule: if sheetGroups.length >= 2, don't show the match icon (cap at 3 sheet icons)
-  const icons=[];
-  sheetGroups.forEach(g=>icons.push({kind:'sheet',group:g}));
-  const matchSuppressed=sheetGroups.length>=2; // 2+ different-logo sheet events → hide match
-  if(matchEvts.length&&!matchSuppressed)icons.push({kind:'matches',matches:matchEvts});
-
-  if(icons.length){
-    const wrap=document.createElement('div');wrap.className='evt-icons';
-    const displayIcons=icons.slice(0,3); // max 3 visible
-    wrap.dataset.count=String(displayIcons.length);
-
-    displayIcons.forEach(item=>{
-      const ico=document.createElement('div');
-      if(item.kind==='matches'){
-        ico.className='evt evt-match';
-        const em=document.createElement('span');em.className='evt-emoji';em.textContent='☀️';ico.appendChild(em);
-        if(!overflow){
-          ico.addEventListener('mouseenter',e=>{cancelLeave();if(!sheetPinned&&!matchPinned){renderMatchTip(item.matches,y,m,d);matchTipEl.classList.add('show');posMatchTip(e);}});
-          ico.addEventListener('mouseleave',()=>{if(!matchPinned)scheduleMatchLeave();});
-          ico.addEventListener('mousemove',e=>{if(!matchPinned)posMatchTip(e);});
-          ico.addEventListener('click',e=>{e.stopPropagation();pinMatchTip(e,item.matches,y,m,d);});
-          ico.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();pinMatchTip(e.changedTouches[0],item.matches,y,m,d);},{passive:false});
-        }
-      }else{
-        const g=item.group;ico.className='evt';
-        if(g.isProxied){
-          const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
-          const img=document.createElement('img');img.alt=g.events[0].title;img.loading='eager';img.decoding='async';ico.appendChild(img);
-          onImgReady(g.logo,state=>{
-            if(state==='ok'){img.src=g.logo;const fin=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
-            else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);}
-          });
-        }else{
-          const em=document.createElement('span');em.className='evt-emoji';em.textContent=(g.rawLogo&&g.rawLogo.trim())?g.rawLogo:'📅';ico.appendChild(em);
-        }
-        if(!overflow){
-          ico.addEventListener('mouseenter',e=>{cancelLeave();if(!sheetPinned&&!matchPinned){renderSheetGroupTip(g,y,m,d);sheetTipEl.classList.add('show');posTip(e);}});
-          ico.addEventListener('mouseleave',()=>{if(!sheetPinned)scheduleLeave();});
-          ico.addEventListener('mousemove',e=>{if(!sheetPinned)posTip(e);});
-          ico.addEventListener('click',e=>{e.stopPropagation();pinSheetGroupTip(e,g,y,m,d);});
-          ico.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();pinSheetGroupTip(e.changedTouches[0],g,y,m,d);},{passive:false});
-        }
+    // ── Sheet phase ──
+    function getSheetPhase(ev){
+      if(!ev.timeObj||!ev.dateObj)return{status:'upcoming',text:'Upcoming',cls:'cd-upcoming'};
+      var s=new Date(Date.UTC(ev.dateObj.y,ev.dateObj.m,ev.dateObj.d,ev.timeObj.h,ev.timeObj.min,0));
+      var e=ev.duration>0?new Date(s.getTime()+ev.duration*3600000):null;
+      var now=Date.now();
+      if(now<s.getTime()){
+        var ms=s-now,dd=Math.floor(ms/86400000),hh=Math.floor((ms%86400000)/3600000),mm2=Math.floor((ms%3600000)/60000);
+        var txt='In ';if(dd>0)txt+=dd+'d '+hh+'h';else if(hh>0)txt+=hh+'h '+mm2+'m';else txt+=mm2+'m';
+        var soon=ms<=3600000;
+        return{status:soon?'soon':'upcoming',text:txt,cls:soon?'cd-soon':'cd-upcoming'};
+      }else if(e&&now<e.getTime()){
+        return{status:'live',text:'🔴 Live',cls:'cd-live'};
+      }else if(!e&&now>=s.getTime()){
+        return{status:'live',text:'🔴 Live',cls:'cd-live'};
       }
-      wrap.appendChild(ico);
-    });
-
-    // +N badge if more icons than fit (after suppression logic, unlikely but kept)
-    if(icons.length>3){
-      const more=document.createElement('div');more.className='evt';
-      more.style.cssText='background:rgba(217,48,32,.12);border-color:rgba(217,48,32,.3);';
-      const em=document.createElement('span');em.className='evt-emoji';em.style.cssText="font-size:8px;font-family:'Fredoka One',cursive;color:#c73520;";em.textContent=`+${icons.length-3}`;
-      more.appendChild(em);wrap.appendChild(more);
-      wrap.dataset.count=String(Math.min(4,icons.length));
+      return{status:'ended',text:'✅ Ended',cls:'cd-ended'};
     }
-    cell.appendChild(wrap);
-  }
-  return cell;
-}
 
-/* ════════════════════════════════════════════
-   SHEET EVENT TOOLTIP — fully dynamic
-════════════════════════════════════════════ */
-const sheetTipEl=document.getElementById('globalTip');
-const tipLogo=document.getElementById('tipLogo');
-const tipTitle=document.getElementById('tipTitle');
-const tipDateBadge=document.getElementById('tipDateBadge');
-const evtTipScroll=document.getElementById('evtTipScroll');
-const evtTipFade=document.getElementById('evtTipFade');
-const tipClose=document.getElementById('tipClose');
-
-let sheetPinned=false,sheetCountdownTimers=[],leaveTimer=null;
-const LEAVE_DELAY=120;
-
-const scheduleLeave=()=>{leaveTimer=setTimeout(()=>{leaveTimer=null;hideSheetTip();},LEAVE_DELAY);};
-const cancelLeave=()=>{if(leaveTimer){clearTimeout(leaveTimer);leaveTimer=null;}};
-const hideSheetTip=()=>{sheetPinned=false;sheetTipEl.classList.remove('show');sheetCountdownTimers.forEach(t=>clearInterval(t));sheetCountdownTimers=[];};
-const pinSheetGroupTip=(e,g,y,m,d)=>{cancelLeave();sheetPinned=true;renderSheetGroupTip(g,y,m,d);sheetTipEl.classList.add('show');posTip(e);};
-
-sheetTipEl.addEventListener('mouseenter',cancelLeave);
-sheetTipEl.addEventListener('mouseleave',()=>{if(!sheetPinned)scheduleLeave();});
-tipClose.addEventListener('click',e=>{e.stopPropagation();hideSheetTip();});
-tipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideSheetTip();},{passive:false});
-
-function updateEvtTipFade(){
-  const s=evtTipScroll;
-  const overflows=s.scrollHeight>s.clientHeight+4;
-  const atBottom=s.scrollTop+s.clientHeight>=s.scrollHeight-8;
-  evtTipFade.style.display=(overflows&&!atBottom)?'block':'none';
-}
-
-/* Render logo in the fixed header */
-function renderTipLogo(group){
-  tipLogo.innerHTML='';
-  if(group.isProxied){
-    const skel=document.createElement('div');skel.className='tip-logo-skeleton';tipLogo.appendChild(skel);
-    const img=document.createElement('img');img.alt='logo';img.decoding='async';tipLogo.appendChild(img);
-    onImgReady(group.logo,state=>{
-      if(state==='ok'){img.src=group.logo;const fin=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
-      else{skel.remove();tipLogo.textContent='📅';}
-    });
-  }else{tipLogo.textContent=(group.rawLogo&&group.rawLogo.trim())?group.rawLogo:'📅';}
-}
-
-/* Build a single event block for the scroll body */
-function buildEvtBlock(ev,y,m,d){
-  sheetCountdownTimers.forEach(t=>clearInterval(t));sheetCountdownTimers=[];
-
-  const block=document.createElement('div');block.className='evt-block';
-
-  // Event name (sub-title)
-  const nameEl=document.createElement('div');nameEl.className='evt-block-name';nameEl.textContent=ev.title;block.appendChild(nameEl);
-
-  // Time badge if exists
-  if(ev.timeObj){
-    const timeBadge=document.createElement('div');timeBadge.style.cssText='font-size:9px;font-weight:800;color:var(--text-mid);opacity:.7;';
-    timeBadge.textContent=`${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`;block.appendChild(timeBadge);
-  }
-
-  // Countdown
-  const st=getPhase(ev);
-  if(st){
-    const cd=document.createElement('div');cd.className='tip-countdown '+st.cssClass;
-    cd.innerHTML=`<span class="cd-dot"></span><span class="cd-txt">${st.text}</span>`;
-    block.appendChild(cd);
-    const t=setInterval(()=>{const s=getPhase(ev);if(!s)return;cd.className='tip-countdown '+s.cssClass;cd.querySelector('.cd-txt').textContent=s.text;},st.status==='live'?60000:30000);
-    sheetCountdownTimers.push(t);
-  }
-
-  // Details
-  const phase=st?st.phase:'before';
-  const details=pick(ev,phase,'details');
-  if(details){const det=document.createElement('div');det.className='tip-detail';det.textContent=details;block.appendChild(det);}
-
-  // Quote (organizer)
-  const quote=phase==='after'?ev.quoteAfter:ev.quoteBefore;
-  if(quote){
-    const qb=document.createElement('div');qb.className='tip-quote-block';
-    qb.innerHTML=`<div class="tip-quote-block-bar bar-organizer"></div><div class="tip-quote-inner"><div class="tip-quote-label"><span class="tip-quote-label-icon"><svg width="13" height="10" viewBox="0 0 24 18"><path d="M0 2.4C0 1.08 1.08 0 2.4 0h19.2C22.92 0 24 1.08 24 2.4v13.2C24 16.92 22.92 18 21.6 18H2.4C1.08 18 0 16.92 0 15.6V2.4z" fill="#f2f2f2"></path><path d="M0 3.6V15.6a2.4 2.4 0 002.4 2.4h1.2V6L12 12.6 20.4 6v12h1.2a2.4 2.4 0 002.4-2.4V3.6L12 10.8 0 3.6z" fill="#c5221f"></path><path d="M0 3.6L12 10.8 24 3.6 21.6 0 12 7.2 2.4 0 0 3.6z" fill="#ea4335"></path><path d="M0 3.6V15.6a2.4 2.4 0 002.4 2.4h1.2V6L0 3.6z" fill="#4285f4"></path><path d="M24 3.6V15.6a2.4 2.4 0 01-2.4 2.4h-1.2V6L24 3.6z" fill="#34a853"></path></svg></span><span>${ev.organizer?`From @${ev.organizer}`:'From organizer'}</span></div><div class="tip-quote-text"></div></div>`;
-    setTextWithMentions(qb.querySelector('.tip-quote-text'),quote);block.appendChild(qb);
-  }
-
-  // Admin message
-  if(ev.adminMessage){
-    const ab=document.createElement('div');ab.className='tip-quote-block';
-    ab.innerHTML=`<div class="tip-quote-block-bar bar-admin"></div><div class="tip-quote-inner"><div class="tip-quote-label"><span class="tip-quote-label-icon admin-icon">🛡️</span><span>${ev.admin?`From @${ev.admin}`:'Admin message'}</span></div><div class="tip-quote-text"></div></div>`;
-    setTextWithMentions(ab.querySelector('.tip-quote-text'),ev.adminMessage);block.appendChild(ab);
-  }
-
-  // Bottom row: organizer link + CTA button
-  const btnText=pick(ev,phase,'button'),btnLink=pick(ev,phase,'link');
-  if(ev.organizer||btnText){
-    const row=document.createElement('div');row.className='tip-bottom-row';
-    if(ev.organizer){
-      const a=document.createElement('a');a.className='tip-organizer';a.href=`https://www.chess.com/member/${ev.organizer}`;a.target='_blank';a.rel='noopener noreferrer';
-      a.innerHTML=`<span class="tip-organizer-icon">♟</span>@${ev.organizer}`;row.appendChild(a);
+    function bestPhaseStatus(chessEvts,sheetGroups){
+      var rank={ended:1,upcoming:2,soon:3,live:4},best=null;
+      chessEvts.forEach(function(ev){var ph=getChessPhase(ev);if(!best||rank[ph.status]>rank[best])best=ph.status;});
+      sheetGroups.forEach(function(g){g.events.forEach(function(ev){var ph=getSheetPhase(ev);if(!best||rank[ph.status]>rank[best])best=ph.status;});});
+      return best;
     }
-    if(btnText&&btnLink){
-      const a=document.createElement('a');a.className='tip-btn';a.href=btnLink;a.target='_blank';a.rel='noopener noreferrer';a.textContent=btnText;row.appendChild(a);
+
+    function isCancelled(ev){
+      return ev._status==='finished'&&ev.timeClass==='daily'
+        &&ev.ourScore!==undefined&&ev.theirScore!==undefined
+        &&Number(ev.ourScore)===0&&Number(ev.theirScore)===0;
     }
-    block.appendChild(row);
-  }
 
-  return block;
-}
-
-function renderSheetGroupTip(group,y,m,d){
-  sheetCountdownTimers.forEach(t=>clearInterval(t));sheetCountdownTimers=[];
-
-  // Header: logo + title "Events" + date
-  renderTipLogo(group);
-  tipTitle.textContent=group.events.length>1?'Events':group.events[0].title;
-  tipDateBadge.textContent=formatDate(y,m,d);
-
-  // Scroll body: one block per event
-  evtTipScroll.innerHTML='';
-  group.events.forEach(ev=>{
-    evtTipScroll.appendChild(buildEvtBlock(ev,y,m,d));
-  });
-
-  requestAnimationFrame(()=>{evtTipScroll.scrollTop=0;updateEvtTipFade();});
-  evtTipScroll.onscroll=updateEvtTipFade;
-}
-
-function posTip(e){
-  const TW=270,TH=220,vw=window.innerWidth,vh=window.innerHeight;
-  const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-  if(isTouchDevice){sheetTipEl.style.left='';sheetTipEl.style.top='';return;}
-  let x=e.clientX+14,y=e.clientY+14;
-  if(x+TW>vw-8)x=e.clientX-TW-14;if(y+TH>vh-8)y=e.clientY-TH-14;
-  x=Math.max(6,x);y=Math.max(6,y);
-  sheetTipEl.style.left=x+'px';sheetTipEl.style.top=y+'px';
-}
-
-/* ════════════════════════════════════════════
-   MATCH TOOLTIP
-════════════════════════════════════════════ */
-const matchTipEl=document.getElementById('matchTip');
-const matchTipIcon=document.getElementById('matchTipIcon');
-const matchTipClubName=document.getElementById('matchTipClubName');
-const matchTipDate=document.getElementById('matchTipDate');
-const matchTipCountBadge=document.getElementById('matchTipCountBadge');
-const matchTipScroll=document.getElementById('matchTipScroll');
-const matchTipFade=document.getElementById('matchTipFade');
-const matchTipClose=document.getElementById('matchTipClose');
-
-let matchPinned=false,matchLeaveTimer=null,matchCountdownTimer=null;
-
-const scheduleMatchLeave=()=>{matchLeaveTimer=setTimeout(()=>{matchLeaveTimer=null;hideMatchTip();},LEAVE_DELAY);};
-const cancelMatchLeave=()=>{if(matchLeaveTimer){clearTimeout(matchLeaveTimer);matchLeaveTimer=null;}};
-const hideMatchTip=()=>{matchPinned=false;matchTipEl.classList.remove('show');clearInterval(matchCountdownTimer);matchCountdownTimer=null;};
-const pinMatchTip=(e,matches,y,m,d)=>{cancelMatchLeave();matchPinned=true;renderMatchTip(matches,y,m,d);matchTipEl.classList.add('show');posMatchTip(e);};
-
-matchTipEl.addEventListener('mouseenter',cancelMatchLeave);
-matchTipEl.addEventListener('mouseleave',()=>{if(!matchPinned)scheduleMatchLeave();});
-matchTipClose.addEventListener('click',e=>{e.stopPropagation();hideMatchTip();});
-matchTipClose.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();hideMatchTip();},{passive:false});
-
-function updateMatchFade(){
-  const s=matchTipScroll;
-  const overflows=s.scrollHeight>s.clientHeight+4;
-  const atBottom=s.scrollTop+s.clientHeight>=s.scrollHeight-8;
-  matchTipFade.style.display=(overflows&&!atBottom)?'block':'none';
-}
-
-function renderMatchTip(matches,y,m,d){
-  clearInterval(matchCountdownTimer);matchCountdownTimer=null;
-  matchTipClubName.textContent='Daily Team Matches';
-  matchTipDate.textContent=formatDate(y,m,d);
-  if(matches.length>1){matchTipCountBadge.textContent=`${matches.length} matches`;matchTipCountBadge.style.display='inline-flex';}
-  else matchTipCountBadge.style.display='none';
-  matchTipIcon.innerHTML='☀️';
-  matchTipScroll.innerHTML='';
-
-  matches.forEach((match,idx)=>{
-    const ph=getMatchPhase(match);
-    const card=document.createElement('div');card.className='match-card';
-    const phRow=document.createElement('div');phRow.style.cssText='display:flex;align-items:center;gap:6px;flex-wrap:wrap;';
-    const badge=document.createElement('div');badge.className='mc-phase '+ph.cls;
-    badge.innerHTML=`<span class="cd-dot"></span>${ph.text}`;phRow.appendChild(badge);card.appendChild(phRow);
-    const cdEl=document.createElement('div');cdEl.className='mc-countdown-text '+ph.cdCls;
-    if(ph.phase==='before'){cdEl.textContent=ph.text;cdEl.style.display='block';}else cdEl.style.display='none';
-    card.appendChild(cdEl);
-    if(match.ourName||match.theirName||match.opponent){
-      const vsRow=document.createElement('div');vsRow.className='mc-vs-row';
-      const ourEl=document.createElement('div');ourEl.className='mc-team our';ourEl.textContent=match.ourName||'Hot Chilli CheckMate';
-      const sep=document.createElement('div');sep.className='mc-vs-sep';sep.textContent='VS';
-      const theirEl=document.createElement('div');theirEl.className='mc-team their';theirEl.textContent=match.theirName||match.opponent||'Opponent';
-      vsRow.appendChild(ourEl);vsRow.appendChild(sep);vsRow.appendChild(theirEl);card.appendChild(vsRow);
-    }else{
-      const t=document.createElement('div');t.style.cssText="font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);";t.textContent=match.title||'Team Match';card.appendChild(t);
+    // ── Chess API ──
+    var CLUB_API='https://api.chess.com/pub/club/the-club-of-195-countries/matches';
+    var OUR_SLUGS=['the-club-of-195-countries','the-club-of-129-countries'];
+    function isOurClub(id){for(var i=0;i<OUR_SLUGS.length;i++)if(id.indexOf(OUR_SLUGS[i])!==-1)return true;return false;}
+    function fetchJSON(url){
+      return fetch(url,{cache:'no-store'}).then(function(r){if(r.ok)return r.json();throw new Error(r.status);})
+        .catch(function(){
+          return fetch('https://api.allorigins.win/get?url='+encodeURIComponent(url))
+            .then(function(r2){if(!r2.ok)throw new Error('Proxy');return r2.json();})
+            .then(function(d){return JSON.parse(d.contents);});
+        });
     }
-    if(match.ourScore!==undefined&&match.theirScore!==undefined){
-      const scoreRow=document.createElement('div');scoreRow.className='mc-score-row';
-      const ourCls=match.ourScore>match.theirScore?' winning':match.ourScore<match.theirScore?' losing':' tied';
-      const theirCls=match.theirScore>match.ourScore?' winning':match.theirScore<match.ourScore?' losing':' tied';
-      scoreRow.innerHTML=`<span class="mc-score-num${ourCls}">${match.ourScore}</span><span class="mc-score-dash">–</span><span class="mc-score-num${theirCls}">${match.theirScore}</span>`;
-      card.appendChild(scoreRow);
+    function extractMatchId(u){var m=u.match(/\/match\/(\d+)$/);return m?m[1]:'';}
+    function slugToName(s){return s.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});}
+
+    function loadMatchList(){
+      return fetchJSON(CLUB_API).then(function(data){
+        var all=[];
+        (data.registered||[]).forEach(function(m){all.push(Object.assign({},m,{_status:'upcoming'}));});
+        (data.in_progress||[]).forEach(function(m){all.push(Object.assign({},m,{_status:'live'}));});
+        (data.finished||[]).forEach(function(m){all.push(Object.assign({},m,{_status:'finished'}));});
+        var map={},ids=[];
+        all.forEach(function(m){
+          if(!m.start_time)return;
+          var id=extractMatchId(m['@id']);if(!id)return;
+          var d=new Date(m.start_time*1000);
+          var pp=(m.opponent||'').split('/'),slug=pp[pp.length-1]||'';
+          var ev={id:id,title:m.name||'Team Match',opponent:slugToName(slug),opponentSlug:slug,
+            link:'https://www.chess.com/club/matches/'+id,_status:m._status,result:m.result||undefined,
+            startTs:m.start_time,endTs:m.end_time||undefined,timeClass:m.time_class||'daily',_type:'chess'};
+          var key=dateKey(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate());
+          if(!map[key])map[key]=[];map[key].push(ev);ids.push(id);
+        });
+        return{eventMap:map,matchIds:ids};
+      });
     }
-    if(match._status==='finished'&&match.result){
-      const rb=document.createElement('div');rb.className='mc-result '+(match.result==='win'?'win':match.result==='lose'||match.result==='loss'?'loss':'draw');
-      rb.textContent=match.result==='win'?'✓ WIN':match.result==='lose'||match.result==='loss'?'✗ LOSS':'⬛ DRAW';card.appendChild(rb);
+
+    function enrichMatches(eventMap,matchIds,onDone){
+      var byId={};
+      Object.keys(eventMap).forEach(function(k){eventMap[k].forEach(function(ev){if(!byId[ev.id])byId[ev.id]=[];byId[ev.id].push(ev);});});
+      var bs=8,i=0;
+      function next(){
+        if(i>=matchIds.length)return Promise.resolve();
+        var batch=matchIds.slice(i,i+bs);i+=bs;
+        return Promise.allSettled(batch.map(function(id){return fetchJSON('https://api.chess.com/pub/match/'+id);}))
+          .then(function(results){
+            results.forEach(function(res,idx){
+              if(res.status!=='fulfilled')return;
+              var det=res.value,id=batch[idx],evs=byId[id]||[];
+              evs.forEach(function(ev){
+                if(det.url)ev.link=det.url;
+                if(det.teams){
+                  var t1=det.teams.team1,t2=det.teams.team2,our,their;
+                  if(isOurClub(t1['@id'])){our=t1;their=t2;}
+                  else if(isOurClub(t2['@id'])){our=t2;their=t1;}
+                  else{our=t1;their=t2;}
+                  ev.ourName=our.name;ev.theirName=their.name;ev.ourScore=our.score;ev.theirScore=their.score;ev.boards=det.boards;ev.opponent=their.name;
+                }
+              });
+            });
+            return next();
+          });
+      }
+      return next().then(function(){
+        Object.keys(eventMap).forEach(function(k){
+          eventMap[k]=eventMap[k].filter(function(ev){return!isCancelled(ev);});
+          if(!eventMap[k].length)delete eventMap[k];
+        });
+        onDone();
+      });
     }
-    const meta=document.createElement('div');meta.className='mc-meta';
-    const tcText=match.timeClass==='daily'?'☀️ Daily':match.timeClass==='rapid'?'⚡ Rapid':'⚡ Live';
-    meta.innerHTML=`<span>${tcText}</span>${match.boards?`<span>♟ ${match.boards} boards</span>`:''}`;card.appendChild(meta);
-    if(match.link){
-      const a=document.createElement('a');a.className='mc-btn';
-      if(ph.status==='ended'){a.className+=' view';a.textContent='View';}
-      else if(ph.status==='live'){a.className+=' watch';a.textContent='👁 Watch';}
-      else a.textContent='⚔️ Join';
-      a.href=match.link;a.target='_blank';a.rel='noopener noreferrer';card.appendChild(a);
+
+    // ── Sheet events — grouped by logo ──
+    // sheetGroupMap: dateKey → [{logoKey, logo, events:[]}]
+    var sheetGroupMap={};
+
+    function parseSheetDate(raw){
+      if(!raw)return null;var s=String(raw).trim();
+      if(/^\d{4}-\d{2}-\d{2}$/.test(s)){var p=s.split('-').map(Number);return{y:p[0],m:p[1]-1,d:p[2]};}
+      if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(s)){var q=s.split('/').map(Number);return{y:q[2],m:q[0]-1,d:q[1]};}
+      var dt=new Date(s);if(!isNaN(dt))return{y:dt.getFullYear(),m:dt.getMonth(),d:dt.getDate()};
+      return null;
     }
-    matchTipScroll.appendChild(card);
-    if(idx===0){
-      const updateCard=()=>{const p=getMatchPhase(match);badge.className='mc-phase '+p.cls;badge.innerHTML=`<span class="cd-dot"></span>${p.text}`;cdEl.className='mc-countdown-text '+p.cdCls;if(p.phase==='before'){cdEl.textContent=p.text;cdEl.style.display='block';}else cdEl.style.display='none';};
-      matchCountdownTimer=setInterval(updateCard,ph.status==='live'?60000:30000);
+    function parseSheetTime(raw){
+      if(!raw)return null;var s=String(raw).trim();
+      if(/^\d{1,2}$/.test(s)){var h=parseInt(s);return(h>=0&&h<=23)?{h:h,min:0}:null;}
+      var m=s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);if(!m)return null;
+      var h=parseInt(m[1]),min=parseInt(m[2]);
+      if(m[3]){if(m[3].toLowerCase()==='pm'&&h<12)h+=12;if(m[3].toLowerCase()==='am'&&h===12)h=0;}
+      return{h:h,min:min};
     }
-  });
 
-  requestAnimationFrame(()=>{matchTipScroll.scrollTop=0;updateMatchFade();});
-  matchTipScroll.onscroll=updateMatchFade;
-}
+    function loadSheetEvents(){
+      return fetch(SHEET_API_URL,{cache:'no-store'})
+        .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+        .then(function(data){
+          if(!Array.isArray(data))throw new Error('not array');
+          var rawMap={};
+          data.forEach(function(row){
+            var title=String(row.title||'').trim();
+            var dateObj=parseSheetDate(row.date);
+            if(!title||!dateObj)return;
+            var timeRaw=row.time;
+            if(typeof timeRaw==='number'&&timeRaw>0&&timeRaw<1){
+              var tm=Math.round(timeRaw*1440);timeRaw=pad(Math.floor(tm/60))+':'+pad(tm%60);
+            }
+            var ev={
+              _type:'sheet',dateObj:dateObj,timeObj:parseSheetTime(timeRaw),
+              duration:parseFloat(String(row.duration||'0'))||0,
+              title:title,details:String(row.details||'').trim(),
+              link:String(row.link||'').trim(),logo:String(row.logo||'🌍').trim(),
+              organizer:String(row.organizer||'').trim().replace(/^@/,''),
+              message:String(row.message||'').trim()
+            };
+            var k=dateKey(dateObj.y,dateObj.m,dateObj.d);
+            if(!rawMap[k])rawMap[k]=[];rawMap[k].push(ev);
+          });
+          // Group by logo key per day
+          sheetGroupMap={};
+          Object.keys(rawMap).forEach(function(k){
+            var groups=[],logoToIdx={};
+            rawMap[k].forEach(function(ev){
+              var lk=ev.logo||'__none__';
+              if(logoToIdx[lk]===undefined){logoToIdx[lk]=groups.length;groups.push({logoKey:lk,logo:ev.logo,events:[]});}
+              groups[logoToIdx[lk]].events.push(ev);
+            });
+            sheetGroupMap[k]=groups;
+          });
+        })
+        .catch(function(e){console.warn('Sheet load error:',e.message);});
+    }
 
-function posMatchTip(e){
-  const TW=280,TH=220,vw=window.innerWidth,vh=window.innerHeight;
-  const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-  if(isTouchDevice){matchTipEl.style.left='';matchTipEl.style.top='';return;}
-  let x=e.clientX+14,y=e.clientY+14;
-  if(x+TW>vw-8)x=e.clientX-TW-14;if(y+TH>vh-8)y=e.clientY-TH-14;
-  x=Math.max(6,x);y=Math.max(6,y);
-  matchTipEl.style.left=x+'px';matchTipEl.style.top=y+'px';
-}
+    // ── State ──
+    var today=new Date();
+    var viewYear=today.getFullYear(),viewMonth=today.getMonth();
+    var matchEventMap={};
 
-document.addEventListener('click',e=>{
-  if(!sheetTipEl.contains(e.target))hideSheetTip();
-  if(!matchTipEl.contains(e.target))hideMatchTip();
-});
-document.addEventListener('touchstart',e=>{
-  if(!sheetTipEl.contains(e.target)&&sheetPinned)hideSheetTip();
-  if(!matchTipEl.contains(e.target)&&matchPinned)hideMatchTip();
-},{passive:true});
+    // ── Render ──
+    function renderContent(){
+      var slot=document.getElementById('cal-content');
+      var html='';
 
-document.getElementById('prevBtn').addEventListener('click',()=>{hideSheetTip();hideMatchTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
-document.getElementById('nextBtn').addEventListener('click',()=>{hideSheetTip();hideMatchTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
+      html+='<div class="cal-nav">'+
+        '<button class="nav-btn" id="btn-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>'+
+        '<div class="month-label">'+MONTHS[viewMonth]+'<span class="yr"> '+viewYear+'</span></div>'+
+        '<button class="nav-btn" id="btn-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>'+
+        '</div>';
 
-new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
+      html+='<div class="cal-days">';
+      for(var di=0;di<7;di++)html+='<div class="day-hdr'+(di>=5?' weekend':'')+'">'+DAY_NAMES[di]+'</div>';
+      html+='</div>';
 
-async function init(){
-  await Promise.allSettled([loadSheet(),loadMatches()]);
-  buildCalendar();
-  document.getElementById('pageSb').classList.add('loaded');
-}
-init();
-</script>
-</body></html>
+      var firstDow=(new Date(viewYear,viewMonth,1).getDay()+6)%7;
+      var lastDate=new Date(viewYear,viewMonth+1,0).getDate();
+      var pM=viewMonth===0?11:viewMonth-1,pY=viewMonth===0?viewYear-1:viewYear;
+      var prevLast=new Date(pY,pM+1,0).getDate();
+      var nM=viewMonth===11?0:viewMonth+1,nY=viewMonth===11?viewYear+1:viewYear;
+
+      html+='<div class="cal-grid" id="calGrid">';
+      for(var i=0;i<42;i++){
+        var cy,cm,cd,adj=false;
+        if(i<firstDow){cd=prevLast-firstDow+1+i;cm=pM;cy=pY;adj=true;}
+        else if(i>=firstDow+lastDate){cd=i-firstDow-lastDate+1;cm=nM;cy=nY;adj=true;}
+        else{cd=i-firstDow+1;cm=viewMonth;cy=viewYear;}
+        var isToday=!adj&&cd===today.getDate()&&cm===today.getMonth()&&cy===today.getFullYear();
+        var k=dateKey(cy,cm,cd);
+        var chessEvts=!adj?(matchEventMap[k]||[]):[];
+        var sheetGroups=!adj?(sheetGroupMap[k]||[]):[];
+        var hasChess=chessEvts.length>0,hasSheet=sheetGroups.length>0,has=hasChess||hasSheet;
+        var barStatus=has?bestPhaseStatus(chessEvts,sheetGroups):null;
+
+        var cls='cal-cell'+(adj?' adj':'')+(isToday?' today':'')+(has?' has-event':'');
+        html+='<div class="'+cls+'" data-key="'+k+'"><div class="cell-num">'+cd+'</div>';
+        if(isToday)html+='<div class="today-dot"></div>';
+        if(has){
+          html+='<div class="cell-icon-wrap">';
+          // Chess badge
+          if(hasChess){
+            var chessIcon=chessEvts.every(function(e){return e.timeClass==='daily';})? '☀️':'⚡';
+            html+='<div class="match-badge-container">'+
+              '<div class="match-badge" data-action="chess" data-key="'+k+'">'+chessIcon+'</div>';
+            if(chessEvts.length>1)html+='<div class="count-bubble">'+chessEvts.length+'</div>';
+            html+='</div>';
+          }
+          // Sheet group badges — one per group
+          sheetGroups.forEach(function(g,gi){
+            var logoChar=g.logo&&g.logo.trim()?g.logo:'🌍';
+            html+='<div class="sheet-badge" data-action="sheet" data-key="'+k+'" data-gi="'+gi+'">'+logoChar;
+            if(g.events.length>1)html+='<span class="sheet-badge-count">'+g.events.length+'</span>';
+            html+='</div>';
+          });
+          html+='</div>';
+          html+='<div class="status-bar '+barStatus+'"></div>';
+        }
+        html+='</div>';
+      }
+      html+='</div>';
+
+      html+='<div class="cal-legend">'+
+        '<div class="legend-item"><div class="legend-bar upcoming"></div>Upcoming</div>'+
+        '<div class="legend-item"><div class="legend-bar soon"></div>Soon</div>'+
+        '<div class="legend-item"><div class="legend-bar live"></div>Live</div>'+
+        '<div class="legend-item"><div class="legend-bar ended"></div>Ended</div>'+
+        '</div>';
+      html+='<div class="cal-foot"><span>🌍 195 Countries</span><span>·</span><span>@Stellar_Endgame</span></div>';
+
+      slot.innerHTML=html;
+
+      document.getElementById('btn-prev').onclick=function(){viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}hideAll();renderContent();};
+      document.getElementById('btn-next').onclick=function(){viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}hideAll();renderContent();};
+
+      // Delegated click on grid
+      document.getElementById('calGrid').addEventListener('click',function(e){
+        var mb=e.target.closest('[data-action="chess"]');
+        if(mb){var k=mb.getAttribute('data-key'),pts=k.split('-');showMatchTip(matchEventMap[k]||[],parseInt(pts[0]),parseInt(pts[1])-1,parseInt(pts[2]));return;}
+        var sb=e.target.closest('[data-action="sheet"]');
+        if(sb){var k=sb.getAttribute('data-key'),gi=parseInt(sb.getAttribute('data-gi'));var groups=sheetGroupMap[k]||[];if(groups[gi]){var pts=k.split('-');showSheetTip(groups[gi],parseInt(pts[0]),parseInt(pts[1])-1,parseInt(pts[2]));}}
+      });
+    }
+
+    // ── Skeleton ──
+    function renderSkeleton(){
+      var slot=document.getElementById('cal-content');
+      var html='<div class="skeleton-wrap">';
+      html+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">'+
+        '<div class="skel" style="width:28px;height:28px;border-radius:6px"></div>'+
+        '<div class="skel" style="flex:1;height:22px;border-radius:4px"></div>'+
+        '<div class="skel" style="width:28px;height:28px;border-radius:6px"></div></div>';
+      html+='<div style="display:flex;gap:4px">';
+      for(var i=0;i<7;i++)html+='<div class="skel" style="flex:1;height:18px;border-radius:4px"></div>';
+      html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">';
+      for(var j=0;j<42;j++)html+='<div class="skel" style="height:62px;border-radius:6px"></div>';
+      html+='</div></div>';
+      slot.innerHTML=html;
+    }
+
+    // ══════════════════════════════════════════
+    // MATCH TOOLTIP
+    // ══════════════════════════════════════════
+    var matchTipEl=document.getElementById('matchTipEl');
+    var matchTipTitle=document.getElementById('matchTipTitle');
+    var matchTipDate=document.getElementById('matchTipDate');
+    var matchTipBody=document.getElementById('matchTipBody');
+    var backdropEl=document.getElementById('tip-backdrop');
+
+    document.getElementById('matchTipClose').onclick=function(){hideMatchTip();};
+
+    function showMatchTip(evts,y,m,d){
+      hideSheetTip();
+      matchTipTitle.textContent=evts.length===1?'Team Match':'Team Matches ('+evts.length+')';
+      matchTipDate.textContent=formatDate(y,m,d);
+      matchTipBody.innerHTML='';
+      evts.forEach(function(ev,idx){
+        if(idx>0){var sep=document.createElement('div');sep.className='tip-sep';matchTipBody.appendChild(sep);}
+        var block=document.createElement('div');block.className='match-block';
+        var phase=getChessPhase(ev);
+        // Phase pill
+        var cd=document.createElement('div');cd.className='tip-countdown '+phase.cls;
+        cd.innerHTML='<span class="cd-dot"></span>'+phase.text;block.appendChild(cd);
+        // Match name
+        var nm=document.createElement('div');nm.className='match-name';
+        nm.textContent=ev.theirName?(ev.ourName||'Club of 195')+' vs '+ev.theirName:ev.title;block.appendChild(nm);
+        // Score
+        if(ev.ourScore!==undefined&&ev.theirScore!==undefined){
+          var oc=ev.ourScore>ev.theirScore?' winning':(ev.ourScore<ev.theirScore?' losing':'');
+          var tc=ev.theirScore>ev.ourScore?' winning':(ev.theirScore<ev.ourScore?' losing':'');
+          var sd=document.createElement('div');sd.className='score-display';
+          sd.innerHTML='<div class="score-teams"><span class="score-team-name our-team">'+(ev.ourName||'Club of 195')+'</span><span class="score-vs">vs</span><span class="score-team-name their-team">'+(ev.theirName||ev.opponent)+'</span></div>'+
+            '<div class="score-numbers"><span class="score-num'+oc+'">'+ev.ourScore+'</span><span class="score-dash">–</span><span class="score-num'+tc+'">'+ev.theirScore+'</span></div>';
+          block.appendChild(sd);
+        }
+        // Result badge
+        if(ev._status==='finished'&&ev.result){
+          var rb=document.createElement('span');
+          if(ev.result==='win'){rb.className='result-badge badge-win';rb.textContent='✓ WIN';}
+          else if(ev.result==='lose'||ev.result==='loss'){rb.className='result-badge badge-loss';rb.textContent='✗ LOSS';}
+          else{rb.className='result-badge badge-draw';rb.textContent='⬛ DRAW';}
+          block.appendChild(rb);
+        }
+        // Bottom row
+        var bot=document.createElement('div');bot.className='match-bottom';
+        var meta=document.createElement('div');meta.className='match-meta-pill';
+        meta.textContent=(ev.timeClass==='daily'?'☀️ Daily':ev.timeClass)+(ev.boards?' · '+ev.boards+' boards':'');
+        bot.appendChild(meta);
+        if(ev.link){
+          var a=document.createElement('a');a.target='_blank';a.rel='noopener noreferrer';a.href=ev.link;
+          if(phase.status==='ended'){a.className='tip-btn btn-ended-link';a.textContent='VIEW';}
+          else if(phase.status==='live'){a.className='tip-btn btn-watch';a.textContent='👁 WATCH';}
+          else{a.className='tip-btn btn-join';a.textContent='🌍 JOIN';}
+          bot.appendChild(a);
+        }
+        block.appendChild(bot);
+        matchTipBody.appendChild(block);
+      });
+      backdropEl.classList.add('show');
+      matchTipEl.classList.add('show');
+      document.addEventListener('keydown',escHandler);
+    }
+
+    function hideMatchTip(){matchTipEl.classList.remove('show');checkBackdrop();document.removeEventListener('keydown',escHandler);}
+
+    // ══════════════════════════════════════════
+    // SHEET TOOLTIP
+    // ══════════════════════════════════════════
+    var sheetTipEl=document.getElementById('sheetTipEl');
+    var sheetTipLogo=document.getElementById('sheetTipLogo');
+    var sheetTipTitle=document.getElementById('sheetTipTitle');
+    var sheetTipDate=document.getElementById('sheetTipDate');
+    var sheetTipBody=document.getElementById('sheetTipBody');
+
+    document.getElementById('sheetTipClose').onclick=function(){hideSheetTip();};
+
+    function showSheetTip(group,y,m,d){
+      hideMatchTip();
+      // Header
+      sheetTipLogo.textContent=group.logo&&group.logo.trim()?group.logo:'🌍';
+      sheetTipTitle.textContent=group.events.length>1?'Events':group.events[0].title;
+      sheetTipDate.textContent=formatDate(y,m,d);
+      // Body — one block per event
+      sheetTipBody.innerHTML='';
+      group.events.forEach(function(ev){
+        var block=document.createElement('div');block.className='sheet-evt-block';
+        // Event name (shown even when single event, since it's in header already it looks redundant — only show if multi)
+        if(group.events.length>1){
+          var nm=document.createElement('div');nm.className='sheet-evt-name';nm.textContent=ev.title;block.appendChild(nm);
+        }
+        // Time
+        if(ev.timeObj){
+          var tm=document.createElement('div');tm.className='sheet-evt-time';
+          tm.textContent=pad(ev.timeObj.h)+':'+pad(ev.timeObj.min)+' UTC'+(ev.duration>0?' · '+ev.duration+'h':'');block.appendChild(tm);
+        }
+        // Phase
+        var ph=getSheetPhase(ev);
+        var cd=document.createElement('div');cd.className='tip-countdown '+ph.cls;
+        cd.innerHTML='<span class="cd-dot"></span>'+ph.text;block.appendChild(cd);
+        // Details
+        if(ev.details){var det=document.createElement('div');det.className='sheet-evt-detail';det.textContent=ev.details;block.appendChild(det);}
+        // Message
+        if(ev.message){var msg=document.createElement('div');msg.className='sheet-evt-msg';msg.textContent=ev.message;block.appendChild(msg);}
+        // Bottom row
+        if(ev.organizer||ev.link){
+          var bot=document.createElement('div');bot.className='sheet-evt-bottom';
+          if(ev.organizer){
+            var org=document.createElement('a');org.className='sheet-evt-organizer';
+            org.href='https://www.chess.com/member/'+ev.organizer;org.target='_blank';org.rel='noopener noreferrer';
+            org.textContent='♟ @'+ev.organizer;bot.appendChild(org);
+          }
+          if(ev.link){
+            var a=document.createElement('a');a.className='tip-btn btn-sheet-join';
+            a.href=ev.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='JOIN';bot.appendChild(a);
+          }
+          block.appendChild(bot);
+        }
+        sheetTipBody.appendChild(block);
+      });
+      backdropEl.classList.add('show');
+      sheetTipEl.classList.add('show');
+      document.addEventListener('keydown',escHandler);
+    }
+
+    function hideSheetTip(){sheetTipEl.classList.remove('show');checkBackdrop();document.removeEventListener('keydown',escHandler);}
+    function checkBackdrop(){if(!matchTipEl.classList.contains('show')&&!sheetTipEl.classList.contains('show'))backdropEl.classList.remove('show');}
+    function hideAll(){hideMatchTip();hideSheetTip();}
+    function escHandler(e){if(e.key==='Escape')hideAll();}
+
+    backdropEl.onclick=function(){hideAll();};
+    matchTipEl.onclick=function(e){e.stopPropagation();};
+    sheetTipEl.onclick=function(e){e.stopPropagation();};
+
+    // ── Init ──
+    renderSkeleton();
+    Promise.all([loadMatchList(),loadSheetEvents()])
+      .then(function(results){
+        matchEventMap=results[0].eventMap;
+        var matchIds=results[0].matchIds;
+        renderContent();
+        return enrichMatches(matchEventMap,matchIds,function(){renderContent();});
+      })
+      .catch(function(e){console.error(e);renderContent();});
+  </script>
+</body>
+</html>
