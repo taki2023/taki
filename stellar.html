@@ -6,13 +6,13 @@
   <title>Club of 195 Countries – Match Calendar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-void: #080b14;
-      --bg-base: #0d1220;
-      --bg-card: #111827;
-      --bg-cell: #0f1520;
+      --bg-void: #06090f;
+      --bg-base: #0a0f1c;
+      --bg-card: #0f1625;
+      --bg-cell: #0c1220;
       --globe-blue: #3b82f6;
       --globe-mid: #6366f1;
       --globe-purple: #8b5cf6;
@@ -32,144 +32,178 @@
       --radius-sm: 8px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{background:var(--bg-void);font-family:'Rajdhani',sans-serif;min-height:100vh;width:100%;color:var(--text-body)}
+    html,body{background:var(--bg-void);font-family:'Barlow Condensed',sans-serif;min-height:100vh;width:100%;color:var(--text-body)}
     body{display:flex;justify-content:center}
-    #root{width:100%}
+    #root{width:100%;max-width:520px}
+
     @keyframes spinBorder{to{transform:rotate(360deg)}}
     @keyframes pulse-green{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
     @keyframes barPulse{0%,100%{opacity:1}50%{opacity:.4}}
-    @keyframes cdPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 10px currentColor}}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-100% 0}}
     @keyframes enrichSlide{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
-    .skel{background:linear-gradient(90deg,#0d1220 0%,#141d35 40%,#0d1220 100%);background-size:300% 100%;animation:shimmer 1.4s ease-in-out infinite;border-radius:4px}
+    @keyframes dotGlowBlue{0%,100%{box-shadow:0 0 0 2px rgba(59,130,246,.35)}50%{box-shadow:0 0 0 5px rgba(59,130,246,.08)}}
+    @keyframes dotGlowPurple{0%,100%{box-shadow:0 0 0 2px rgba(139,92,246,.35)}50%{box-shadow:0 0 0 5px rgba(139,92,246,.08)}}
+    @keyframes dotPulseRed{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+
+    .skel{background:linear-gradient(90deg,#0a0f1c 0%,#141d35 40%,#0a0f1c 100%);background-size:300% 100%;animation:shimmer 1.4s ease-in-out infinite;border-radius:4px}
+
     /* ── HEADER ── */
-    .cal-header{position:relative;overflow:hidden;border-bottom:1px solid rgba(99,102,241,.18);background:linear-gradient(160deg,#0d1a35 0%,#111228 50%,#0e0d22 100%);padding:24px 20px 16px}
-    .header-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(99,102,241,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.06) 1px,transparent 1px);background-size:32px 32px}
-    .header-glow{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:340px;height:170px;background:radial-gradient(ellipse,rgba(99,102,241,.25) 0%,transparent 70%);pointer-events:none}
+    .cal-header{position:relative;overflow:hidden;border-bottom:1px solid rgba(99,102,241,.2);background:linear-gradient(160deg,#0b1830 0%,#0e1228 50%,#09091e 100%);padding:22px 18px 14px}
+    .header-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(99,102,241,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.05) 1px,transparent 1px);background-size:28px 28px}
+    .header-glow{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:300px;height:150px;background:radial-gradient(ellipse,rgba(99,102,241,.22) 0%,transparent 70%);pointer-events:none}
     .header-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .header-left{display:flex;align-items:center;gap:14px}
-    .globe-icon{position:relative;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:50px;flex-shrink:0;background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));box-shadow:0 0 32px rgba(99,102,241,.55),0 0 12px rgba(99,102,241,.3) inset}
+    .globe-icon{position:relative;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;flex-shrink:0;background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));box-shadow:0 0 28px rgba(99,102,241,.5),0 0 10px rgba(99,102,241,.3) inset}
     .globe-ring{position:absolute;inset:-4px;border-radius:50%;border:1.5px solid rgba(139,92,246,.35);animation:spinBorder 8s linear infinite}
-    .header-info{display:flex;flex-direction:column;gap:2px}
-    .header-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--text-white);letter-spacing:.5px;line-height:1.2}
-    .header-sub{font-size:12px;font-weight:600;color:var(--text-body);letter-spacing:2px;text-transform:uppercase}
-    .live-badge{display:flex;align-items:center;gap:5px;background:rgba(99,102,241,.12);border:1px solid var(--border-subtle);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--accent-cyan);letter-spacing:.5px}
+    .header-info{display:flex;flex-direction:column;gap:3px}
+    .header-title{font-family:'Bebas Neue',cursive;font-size:22px;font-weight:400;color:var(--text-white);letter-spacing:2px;line-height:1}
+    .header-sub{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--text-body);letter-spacing:3px;text-transform:uppercase}
+    .live-badge{display:flex;align-items:center;gap:5px;background:rgba(99,102,241,.12);border:1px solid var(--border-subtle);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:800;font-family:'Barlow Condensed',sans-serif;letter-spacing:1.5px;color:var(--accent-cyan)}
     .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 6px var(--accent-green);animation:pulse-green 2s ease-in-out infinite}
     .header-divider{position:relative;z-index:2;height:1px;margin-top:12px;background:linear-gradient(90deg,transparent,var(--border-mid),transparent)}
-    .header-deco{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:6px;padding-top:8px}
-    .header-deco .pawn{font-size:13px;opacity:.35}
-    .header-deco .deco-text{font-size:10px;font-weight:700;color:var(--text-dim);letter-spacing:3px;text-transform:uppercase}
+    .header-deco{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:6px;padding-top:7px}
+    .header-deco .pawn{font-size:12px;opacity:.3}
+    .header-deco .deco-text{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;color:var(--text-dim);letter-spacing:4px;text-transform:uppercase}
+
     /* ── WRAPPER ── */
-    .cal-wrap{width:100%;display:flex;flex-direction:column;overflow:hidden;border-bottom:1.5px solid var(--border-mid);background:var(--bg-base);box-shadow:0 0 60px rgba(99,102,241,.08) inset;position:relative}
-    /* ── CONTENT FADE ── */
-    #cal-content{opacity:1;transition:opacity .15s ease}
-    #cal-content.fading{opacity:0}
+    .cal-wrap{width:100%;display:flex;flex-direction:column;overflow:hidden;background:var(--bg-base);box-shadow:0 0 50px rgba(99,102,241,.06) inset;position:relative;border:1.5px solid var(--border-mid);border-radius:14px}
+
     /* ── NAV ── */
     .cal-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;gap:12px}
-    .nav-btn{width:40px;height:40px;border-radius:var(--radius);border:1.5px solid var(--border-mid);background:rgba(99,102,241,.12);color:var(--text-body);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s cubic-bezier(.34,1.56,.64,1);font-size:16px;flex-shrink:0}
+    .nav-btn{width:38px;height:38px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:rgba(99,102,241,.1);color:var(--text-body);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s cubic-bezier(.34,1.56,.64,1);flex-shrink:0}
     .nav-btn:hover{border-color:var(--border-hot);background:rgba(139,92,246,.2);color:var(--text-white);box-shadow:0 0 12px rgba(139,92,246,.25);transform:scale(1.08)}
     .nav-btn:active{transform:scale(.95)}
-    .nav-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
-    .month-label{flex:1;text-align:center;font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--text-white);letter-spacing:1.5px}
-    .month-label .yr{font-size:16px;font-weight:500;color:var(--text-body);margin-left:8px}
+    .nav-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+    .month-label{flex:1;text-align:center;font-family:'Bebas Neue',cursive;font-size:26px;font-weight:400;color:var(--text-white);letter-spacing:2.5px;line-height:1}
+    .month-label .yr{font-size:20px;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-left:7px}
+
     /* ── DAY HEADERS ── */
-    .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:12px 16px 6px}
-    .day-hdr{text-align:center;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-body);padding:6px 0;background:rgba(99,102,241,.08);border-radius:6px}
+    .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:10px 12px 5px}
+    .day-hdr{text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--text-body);padding:5px 0;background:rgba(99,102,241,.07);border-radius:5px}
     .day-hdr.weekend{color:var(--globe-purple);background:rgba(139,92,246,.1)}
+
     /* ── GRID ── */
-    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:0 16px 16px}
-    .cal-cell{background:var(--bg-cell);border-radius:8px;border:1.5px solid rgba(99,102,241,.12);min-height:80px;display:flex;flex-direction:column;align-items:center;padding:6px 4px;position:relative;overflow:hidden;cursor:default;transition:background .15s,border-color .15s,box-shadow .15s,transform .15s;min-width:0}
-    .cal-cell.has-event{cursor:pointer;border-color:var(--border-subtle);background:linear-gradient(160deg,#111a2e,#0f1428)}
-    .cal-cell.has-event:hover{background:linear-gradient(160deg,#162040,#131835);border-color:var(--border-hot);box-shadow:0 0 16px rgba(139,92,246,.18);transform:translateY(-1px)}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:0 12px 12px}
+    .cal-cell{background:var(--bg-cell);border-radius:7px;border:1.5px solid rgba(99,102,241,.1);min-height:76px;display:flex;flex-direction:column;align-items:center;padding:5px 3px;position:relative;overflow:hidden;cursor:default;transition:background .15s,border-color .15s,box-shadow .15s,transform .15s;min-width:0}
+    .cal-cell.has-event{cursor:pointer;border-color:var(--border-subtle);background:linear-gradient(160deg,#101a2c,#0e1326)}
+    .cal-cell.has-event:hover{background:linear-gradient(160deg,#14203e,#121532);border-color:var(--border-hot);box-shadow:0 0 14px rgba(139,92,246,.16);transform:translateY(-1px)}
     .cal-cell.has-event:active{transform:scale(.97)}
-    .cal-cell.adj{opacity:.35;pointer-events:none;border-color:transparent}
-    .cal-cell.today{border-color:var(--accent-cyan);border-width:2px;background:linear-gradient(160deg,#0f1d3a,#0d1830);box-shadow:0 0 0 2px rgba(34,211,238,.15) inset,0 0 20px rgba(34,211,238,.15)}
+    .cal-cell.adj{opacity:.3;pointer-events:none;border-color:transparent}
+    .cal-cell.today{border-color:var(--accent-cyan);border-width:2px;background:linear-gradient(160deg,#0e1c38,#0c1630);box-shadow:0 0 0 2px rgba(34,211,238,.12) inset,0 0 18px rgba(34,211,238,.12)}
     .cal-cell.has-event::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.5),transparent)}
-    .cell-num{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--text-body);line-height:1;align-self:flex-end;margin-right:4px;width:100%;text-align:right}
-    .cal-cell.today .cell-num{color:var(--accent-cyan);text-shadow:0 0 10px rgba(34,211,238,.5);font-weight:900}
+    .cell-num{font-family:'Bebas Neue',cursive;font-size:17px;font-weight:400;color:var(--text-body);line-height:1;align-self:flex-end;margin-right:3px;width:100%;text-align:right;letter-spacing:.5px}
+    .cal-cell.today .cell-num{color:var(--accent-cyan);text-shadow:0 0 8px rgba(34,211,238,.5)}
     .cal-cell.adj .cell-num{color:var(--text-dim);opacity:.5}
     .today-dot{position:absolute;top:4px;left:4px;width:5px;height:5px;border-radius:50%;background:var(--globe-blue);box-shadow:0 0 6px var(--globe-blue)}
-    .cell-icon-wrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;gap:4px}
+    .cell-icon-wrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;gap:3px}
     .match-badge-container{position:relative;display:flex;align-items:center;justify-content:center}
-    .match-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(99,102,241,.3),rgba(139,92,246,.25));border:1.5px solid rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .2s,box-shadow .2s;position:relative;box-shadow:0 3px 12px rgba(0,0,0,.4)}
-    .cal-cell.has-event:hover .match-badge{transform:scale(1.15);box-shadow:0 0 20px rgba(139,92,246,.4)}
-    .status-bar{position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 6px 6px}
-    .status-bar.upcoming{background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple))}
-    .status-bar.soon{background:linear-gradient(90deg,var(--accent-gold),#f97316);animation:barPulse 1.5s ease-in-out infinite}
-    .status-bar.live{background:linear-gradient(90deg,var(--accent-red),#f97316);animation:barPulse .8s ease-in-out infinite}
-    .status-bar.ended{background:rgba(99,102,241,.15)}
-    .count-bubble{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--accent-red),#f97316);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;border:2px solid var(--bg-cell);box-shadow:0 2px 8px rgba(239,68,68,.4);z-index:10}
+    .match-badge{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,rgba(99,102,241,.28),rgba(139,92,246,.22));border:1.5px solid rgba(139,92,246,.45);display:flex;align-items:center;justify-content:center;font-size:18px;transition:transform .2s,box-shadow .2s;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+    .cal-cell.has-event:hover .match-badge{transform:scale(1.12);box-shadow:0 0 18px rgba(139,92,246,.4)}
+
+    /* Status dots (like screenshot) */
+    .status-dot{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;border:1.5px solid rgba(0,0,0,.5);flex-shrink:0}
+    .status-dot.dot-upcoming{background:radial-gradient(circle at 35% 35%,#60c0ff,#3b82f6);box-shadow:0 0 0 2px rgba(59,130,246,.3);animation:dotGlowBlue 2.5s ease-in-out infinite}
+    .status-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#ffd080,#f59e0b);box-shadow:0 0 0 2px rgba(245,158,11,.3);animation:dotGlowPurple 1.8s ease-in-out infinite}
+    .status-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff7070,#ef4444);box-shadow:0 0 0 2px rgba(239,68,68,.35);animation:dotPulseRed 1s ease-in-out infinite}
+    .status-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#555,#1a1a1a);box-shadow:0 1px 4px rgba(0,0,0,.5)}
+
+    .count-bubble{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--accent-red),#f97316);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;border:2px solid var(--bg-cell);box-shadow:0 2px 8px rgba(239,68,68,.4);z-index:10}
+
+    /* ── SHEET EVENTS SECTION ── */
+    .sheet-section{padding:0 12px 10px}
+    .sheet-day-group{margin-bottom:8px}
+    .sheet-day-label{font-family:'Bebas Neue',cursive;font-size:13px;letter-spacing:2px;color:var(--globe-purple);padding:4px 0 4px;opacity:.8}
+    .sheet-event-item{display:flex;align-items:center;gap:9px;background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(139,92,246,.05));border:1px solid var(--border-subtle);border-radius:8px;padding:7px 10px;margin-bottom:4px;cursor:pointer;transition:all .15s}
+    .sheet-event-item:hover{border-color:var(--border-hot);background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(139,92,246,.1))}
+    .sheet-event-icon{width:30px;height:30px;border-radius:7px;background:rgba(99,102,241,.15);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+    .sheet-event-info{flex:1;min-width:0}
+    .sheet-event-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--text-head);letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .sheet-event-time{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:var(--text-body);letter-spacing:.3px}
+    .sheet-event-badge{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 7px;border-radius:3px;flex-shrink:0}
+    .badge-upcoming{color:var(--accent-cyan);background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25)}
+    .badge-soon{color:var(--accent-gold);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25)}
+    .badge-live{color:var(--accent-red);background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25)}
+    .badge-ended{color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+
     /* ── LEGEND ── */
-    .cal-legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;padding:12px 16px 14px;border-top:1px solid var(--border-subtle);background:rgba(0,0,0,.15)}
-    .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--text-body)}
-    .legend-bar{width:18px;height:3px;border-radius:2px}
-    .legend-bar.upcoming{background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple))}
-    .legend-bar.soon{background:linear-gradient(90deg,var(--accent-gold),#f97316)}
-    .legend-bar.live{background:var(--accent-red)}
-    .legend-bar.ended{background:rgba(99,102,241,.25)}
-    .load-err{margin:8px 16px;padding:10px 14px;border-radius:var(--radius-sm);background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:13px;font-weight:600;color:#fca5a5}
-    .cal-foot{padding:8px 16px 14px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim)}
-    .foot-dot{opacity:.4}
-    .enriching-bar{height:3px;background:rgba(99,102,241,.1);margin:0 16px;border-radius:2px;overflow:hidden}
+    .cal-legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px;padding:10px 12px 12px;border-top:1px solid var(--border-subtle);background:rgba(0,0,0,.12)}
+    .legend-item{display:flex;align-items:center;gap:5px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--text-body)}
+    .legend-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(0,0,0,.5);flex-shrink:0}
+    .legend-dot.dot-upcoming{background:radial-gradient(circle at 35% 35%,#60c0ff,#3b82f6)}
+    .legend-dot.dot-soon{background:radial-gradient(circle at 35% 35%,#ffd080,#f59e0b)}
+    .legend-dot.dot-live{background:radial-gradient(circle at 35% 35%,#ff7070,#ef4444)}
+    .legend-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#555,#1a1a1a)}
+    .load-err{margin:8px 12px;padding:9px 12px;border-radius:6px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.22);font-size:12px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.3px;color:#fca5a5}
+    .cal-foot{padding:7px 12px 12px;display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim)}
+    .enriching-bar{height:2px;background:rgba(99,102,241,.08);margin:0 12px;border-radius:2px;overflow:hidden}
     .enriching-progress{height:100%;width:40%;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple));border-radius:2px;animation:enrichSlide 1.2s ease-in-out infinite}
+    .section-label{font-family:'Bebas Neue',cursive;font-size:14px;letter-spacing:3px;color:var(--text-dim);text-align:center;padding:8px 0 4px;border-top:1px solid var(--border-subtle);margin:0 12px}
+
     /* ── TOOLTIP ── */
     .tip-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;opacity:0;transition:opacity .15s ease;pointer-events:none}
     .tip-backdrop.show{opacity:1;pointer-events:auto}
-    .tip-panel{position:fixed;z-index:600;background:#111827;border:1.5px solid var(--border-hot);border-radius:14px;padding:0;min-width:260px;max-width:min(340px,90vw);box-shadow:0 0 0 1px rgba(139,92,246,.12),0 24px 60px rgba(0,0,0,.9),0 0 30px rgba(99,102,241,.12) inset;opacity:0;transform:translate(-50%,-50%) scale(.95);transition:opacity .15s ease,transform .15s ease;pointer-events:none;flex-direction:column;overflow:hidden;display:flex;left:50%;top:50%;max-width:min(380px,calc(100vw - 24px));max-height:85vh}
+    .tip-panel{position:fixed;z-index:600;background:#0f1625;border:1.5px solid var(--border-hot);border-radius:14px;padding:0;min-width:260px;max-width:min(360px,calc(100vw - 24px));box-shadow:0 0 0 1px rgba(139,92,246,.1),0 24px 60px rgba(0,0,0,.92),0 0 28px rgba(99,102,241,.1) inset;opacity:0;transform:translate(-50%,-50%) scale(.95);transition:opacity .15s ease,transform .15s ease;pointer-events:none;flex-direction:column;overflow:hidden;display:flex;left:50%;top:50%;max-height:85vh}
     .tip-panel.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
-    .tip-strip{background:linear-gradient(135deg,#141d35,#111228);padding:14px 14px 12px;border-bottom:1px solid var(--border-subtle);position:relative}
+    .tip-strip{background:linear-gradient(135deg,#121c34,#0f1228);padding:14px 14px 12px;border-bottom:1px solid var(--border-subtle);position:relative}
     .tip-strip::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--globe-blue),var(--globe-purple),var(--piece-violet))}
     .tip-close{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(99,102,241,.2);border:1px solid var(--border-mid);color:var(--text-body);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;z-index:5}
     .tip-close:hover{background:rgba(139,92,246,.35);color:#fff;transform:scale(1.1)}
     .tip-hdr-row{display:flex;align-items:center;gap:10px}
-    .tip-globe{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,rgba(99,102,241,.3),rgba(139,92,246,.25));border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .tip-globe{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,rgba(99,102,241,.28),rgba(139,92,246,.22));border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
     .tip-info{display:flex;flex-direction:column;gap:2px;min-width:0;padding-right:26px}
-    .tip-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--text-white);line-height:1.2}
-    .tip-date{font-size:11px;font-weight:600;color:var(--text-body);letter-spacing:.3px}
-    .tip-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;max-height:calc(85vh - 90px);scrollbar-width:thin;scrollbar-color:var(--border-mid) transparent}
+    .tip-title{font-family:'Bebas Neue',cursive;font-size:17px;font-weight:400;color:var(--text-white);line-height:1.1;letter-spacing:1px}
+    .tip-date{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--text-body);letter-spacing:.4px}
+    .tip-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:calc(85vh - 90px);scrollbar-width:thin;scrollbar-color:var(--border-mid) transparent}
     .tip-body::-webkit-scrollbar{width:6px}
     .tip-body::-webkit-scrollbar-track{background:transparent}
     .tip-body::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:3px}
-    .tip-countdown{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 11px;border-radius:999px;border:1px solid;width:fit-content}
+    .tip-countdown{display:flex;align-items:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;letter-spacing:.5px;padding:5px 11px;border-radius:999px;border:1px solid;width:fit-content}
     .tip-countdown .cd-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
     .cd-upcoming{color:var(--accent-cyan);background:rgba(34,211,238,.07);border-color:rgba(34,211,238,.3)}
-    .cd-soon{color:var(--accent-gold);background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.3);animation:cdPulse 1.8s ease-in-out infinite}
-    .cd-live{color:var(--accent-red);background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3);animation:cdPulse .9s ease-in-out infinite}
+    .cd-soon{color:var(--accent-gold);background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.3)}
+    .cd-live{color:var(--accent-red);background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
     .cd-ended{color:var(--text-dim);background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
-    .tip-match-name{font-size:12px;font-weight:700;color:var(--text-head);line-height:1.4}
-    .tip-sep{height:2px;background:linear-gradient(90deg,transparent,var(--border-mid),var(--globe-purple),var(--border-mid),transparent);margin:8px 0;border-radius:1px}
+    .tip-match-name{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text-head);line-height:1.4}
+    .tip-sep{height:2px;background:linear-gradient(90deg,transparent,var(--border-mid),var(--globe-purple),var(--border-mid),transparent);margin:6px 0;border-radius:1px}
     .tip-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .tip-opp{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--text-body);background:rgba(99,102,241,.08);border:1px solid var(--border-subtle);border-radius:999px;padding:4px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .tip-btn{display:inline-flex;align-items:center;gap:5px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:.8px;text-decoration:none;padding:6px 14px;border-radius:6px;white-space:nowrap;flex-shrink:0;transition:all .15s;cursor:pointer}
+    .tip-opp{display:flex;align-items:center;gap:5px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:.5px;color:var(--text-body);background:rgba(99,102,241,.08);border:1px solid var(--border-subtle);border-radius:999px;padding:4px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .tip-btn{display:inline-flex;align-items:center;gap:5px;font-family:'Bebas Neue',cursive;font-size:14px;letter-spacing:1.5px;text-decoration:none;padding:6px 16px;border-radius:5px;white-space:nowrap;flex-shrink:0;transition:all .15s;cursor:pointer}
     .btn-join{background:linear-gradient(135deg,var(--globe-blue),var(--globe-purple));color:#fff;border:none;box-shadow:0 2px 12px rgba(99,102,241,.35)}
     .btn-join:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(99,102,241,.5)}
     .btn-watch{background:linear-gradient(135deg,rgba(239,68,68,.8),rgba(249,115,22,.8));color:#fff;border:none;box-shadow:0 2px 12px rgba(239,68,68,.25)}
     .btn-watch:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(239,68,68,.35)}
     .btn-ended-link{background:rgba(255,255,255,.05);color:var(--text-body);border:1px solid var(--border-subtle)}
     .btn-ended-link:hover{background:rgba(99,102,241,.12);border-color:var(--border-mid);color:var(--text-white)}
-    .match-block{display:flex;flex-direction:column;gap:8px}
-    .result-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 9px;border-radius:4px;width:fit-content}
+    .match-block{display:flex;flex-direction:column;gap:7px}
+    .result-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:4px;width:fit-content}
     .badge-win{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
     .badge-loss{background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
     .badge-draw{background:rgba(148,163,184,.08);color:#94a3b8;border:1px solid rgba(148,163,184,.2)}
-    .score-display{background:rgba(99,102,241,.08);border:1px solid var(--border-subtle);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
-    .score-teams{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;line-height:1.3}
+    .badge-cancelled{background:rgba(100,100,100,.1);color:#64748b;border:1px solid rgba(100,100,100,.2)}
+    .score-display{background:rgba(99,102,241,.07);border:1px solid var(--border-subtle);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:5px}
+    .score-teams{display:flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;line-height:1.3}
     .score-team-name{color:var(--text-body);flex:1;min-width:0}
     .score-team-name.our-team{color:var(--accent-cyan);text-align:left}
     .score-team-name.their-team{color:var(--text-body);text-align:right}
     .score-vs{color:var(--text-dim);font-size:9px;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
     .score-numbers{display:flex;align-items:center;justify-content:center;gap:10px}
-    .score-num{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:var(--text-white);min-width:36px;text-align:center}
+    .score-num{font-family:'Bebas Neue',cursive;font-size:26px;font-weight:400;color:var(--text-white);min-width:36px;text-align:center;letter-spacing:1px}
     .score-num.winning{color:var(--accent-green);text-shadow:0 0 10px rgba(16,185,129,.4)}
     .score-num.losing{color:var(--accent-red);text-shadow:0 0 10px rgba(239,68,68,.3)}
-    .score-dash{color:var(--text-dim);font-size:16px;font-weight:700}
+    .score-dash{color:var(--text-dim);font-size:20px;font-weight:700;font-family:'Bebas Neue',cursive}
+
+    /* Sheet tip */
+    .tip-sheet-detail{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--text-head);line-height:1.5}
+    .tip-sheet-organizer{display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:.5px;color:#fff;background:rgba(0,45,115,.9);border:1.5px solid rgba(90,180,255,.4);border-radius:999px;padding:3px 10px;text-decoration:none;transition:all .15s}
+    .tip-sheet-organizer:hover{background:rgba(0,80,200,.4);color:#fff}
+
+    /* ── SKELETON ── */
+    .skeleton-wrap{padding:12px;display:flex;flex-direction:column;gap:8px}
   </style>
 </head>
 <body>
-  <!-- STATIC SHELL — renders instantly, never touched again -->
   <div id="root">
     <div class="cal-wrap">
-      <!-- HEADER (static, painted once) -->
       <div class="cal-header">
         <div class="header-grid"></div>
         <div class="header-glow"></div>
@@ -190,55 +224,79 @@
           <span class="pawn">♟</span>
         </div>
       </div>
-      <!-- CONTENT SLOT — only this part gets swapped -->
       <div id="cal-content"></div>
     </div>
   </div>
-  <!-- TOOLTIP CONTAINERS (always in DOM, toggled via class) -->
+
+  <!-- TOOLTIP -->
   <div class="tip-backdrop" id="tip-backdrop"></div>
   <div class="tip-panel" id="tip-panel"></div>
+
   <script>
-    // ══════════════════════════════════════════════════════════════════
+    // ════════════════════════════════════════════════
+    // CONFIG — paste your Google Sheet Apps Script URL here
+    // ════════════════════════════════════════════════
+    var SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbx_9kyKraYokivRRewTyDMukFfF710dv5mg2Oql6hyJma5TR8mD_J1HovRf-AimjPdiGQ/exec';
+    // Set to false if you don't have a Sheet yet
+    var SHEET_ENABLED = false;
+
+    // ════════════════════════════════════════════════
     // CONSTANTS
-    // ══════════════════════════════════════════════════════════════════
+    // ════════════════════════════════════════════════
     var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     var MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var DAY_NAMES = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+
     function ordinal(d) {
       var s = ['th','st','nd','rd'], v = d % 100;
       return d + (s[(v - 20) % 10] || s[v] || s[0]);
     }
     function pad(n) { return String(n).padStart(2, '0'); }
     function dateKey(y, m, d) { return y + '-' + pad(m + 1) + '-' + pad(d); }
-    // ══════════════════════════════════════════════════════════════════
-    // PHASE
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    // PHASE (chess.com matches)
+    // ════════════════════════════════════════════════
     function getPhase(ev) {
       var now = Date.now(), startMs = ev.startTs * 1000;
       if (ev._status === 'finished' || (ev.endTs && now > ev.endTs * 1000))
         return { status: 'ended', text: 'Ended', cls: 'cd-ended' };
       if (ev._status === 'live' || now >= startMs)
-        return { status: 'live', text: '\u{1F534} In Progress', cls: 'cd-live' };
+        return { status: 'live', text: '🔴 In Progress', cls: 'cd-live' };
       var ms = startMs - now;
       var dd = Math.floor(ms / 86400000), hh = Math.floor((ms % 86400000) / 3600000), mm = Math.floor((ms % 3600000) / 60000);
       var txt = 'In ';
       if (dd > 0) txt += dd + 'd ' + hh + 'h';
       else if (hh > 0) txt += hh + 'h ' + mm + 'm';
       else txt += mm + 'm';
-      var soon = ms <= 3600000;
-      return { status: soon ? 'soon' : 'upcoming', text: txt, cls: soon ? 'cd-soon' : 'cd-upcoming' };
+      return { status: ms <= 3600000 ? 'soon' : 'upcoming', text: txt, cls: ms <= 3600000 ? 'cd-soon' : 'cd-upcoming' };
     }
-    function bestPhase(events) {
+
+    function bestDotClass(events) {
       var rank = { ended: 1, upcoming: 2, soon: 3, live: 4 }, best = null;
       for (var i = 0; i < events.length; i++) {
         var ph = getPhase(events[i]);
         if (!best || rank[ph.status] > rank[best.status]) best = ph;
       }
-      return best;
+      return best ? 'dot-' + best.status : null;
     }
-    // ══════════════════════════════════════════════════════════════════
-    // API
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    // CANCELLATION FILTER
+    // A finished daily match with score 0-0 was cancelled
+    // ════════════════════════════════════════════════
+    function isCancelled(ev) {
+      return ev._status === 'finished'
+        && ev.timeClass === 'daily'
+        && ev.ourScore !== undefined
+        && ev.theirScore !== undefined
+        && ev.ourScore === 0
+        && ev.theirScore === 0;
+    }
+
+    // ════════════════════════════════════════════════
+    // CHESS.COM API
+    // ════════════════════════════════════════════════
     var CLUB_API = 'https://api.chess.com/pub/club/the-club-of-195-countries/matches';
     var OUR_SLUGS = ['the-club-of-195-countries', 'the-club-of-129-countries'];
     function isOurClub(id) {
@@ -257,6 +315,7 @@
     }
     function extractMatchId(u) { var m = u.match(/\/match\/(\d+)$/); return m ? m[1] : ''; }
     function slugToName(s) { return s.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }); }
+
     function loadMatchList() {
       return fetchJSON(CLUB_API).then(function(data) {
         var all = [];
@@ -271,7 +330,8 @@
           var pp = (m.opponent || '').split('/'), slug = pp[pp.length - 1] || '';
           var ev = { id: id, title: m.name || 'Team Match', opponent: slugToName(slug), opponentSlug: slug,
             link: 'https://www.chess.com/club/matches/' + id, _status: m._status, result: m.result || undefined,
-            startTs: m.start_time, endTs: m.end_time || undefined, timeClass: m.time_class || 'daily' };
+            startTs: m.start_time, endTs: m.end_time || undefined, timeClass: m.time_class || 'daily',
+            _type: 'chess' };
           var key = dateKey(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
           if (!map[key]) map[key] = [];
           map[key].push(ev); ids.push(id);
@@ -279,6 +339,7 @@
         return { eventMap: map, matchIds: ids };
       });
     }
+
     function enrichMatches(eventMap, matchIds, onDone) {
       var byId = {};
       Object.keys(eventMap).forEach(function(k) {
@@ -309,43 +370,134 @@
             return next();
           });
       }
-      return next().then(onDone);
+      return next().then(function() {
+        // Remove cancelled matches (finished daily 0-0) from eventMap
+        Object.keys(eventMap).forEach(function(k) {
+          eventMap[k] = eventMap[k].filter(function(ev) {
+            return !isCancelled(ev);
+          });
+          if (eventMap[k].length === 0) delete eventMap[k];
+        });
+        onDone();
+      });
     }
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    // GOOGLE SHEET EVENTS
+    // Expected columns: title, date (YYYY-MM-DD), time (HH:MM UTC),
+    //   duration (hours), logo (emoji or url), link, details, organizer, message
+    // ════════════════════════════════════════════════
+    var sheetEventMap = {}; // key -> array of sheet events
+
+    function parseSheetDate(raw) {
+      if (!raw) return null;
+      var s = String(raw).trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(s)) { var p = s.split('-').map(Number); return { y: p[0], m: p[1] - 1, d: p[2] }; }
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(s)) { var q = s.split('/').map(Number); return { y: q[2], m: q[0] - 1, d: q[1] }; }
+      var dt = new Date(s); if (!isNaN(dt)) return { y: dt.getFullYear(), m: dt.getMonth(), d: dt.getDate() };
+      return null;
+    }
+
+    function parseSheetTime(raw) {
+      if (!raw) return null;
+      var s = String(raw).trim();
+      if (/^\d{1,2}$/.test(s)) { var h = parseInt(s); return (h >= 0 && h <= 23) ? { h: h, min: 0 } : null; }
+      var m = s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(am|pm))?$/i);
+      if (!m) return null;
+      var h = parseInt(m[1]), min = parseInt(m[2]);
+      if (m[3]) { if (m[3].toLowerCase() === 'pm' && h < 12) h += 12; if (m[3].toLowerCase() === 'am' && h === 12) h = 0; }
+      return { h: h, min: min };
+    }
+
+    function getSheetPhase(ev) {
+      if (!ev.timeObj || !ev.dateObj) return null;
+      var s = new Date(Date.UTC(ev.dateObj.y, ev.dateObj.m, ev.dateObj.d, ev.timeObj.h, ev.timeObj.min, 0));
+      var e = ev.duration > 0 ? new Date(s.getTime() + ev.duration * 3600000) : null;
+      var now = Date.now();
+      if (now < s.getTime()) {
+        var ms = s - now, dd = Math.floor(ms / 86400000), hh = Math.floor((ms % 86400000) / 3600000), mm = Math.floor((ms % 3600000) / 60000);
+        var txt = 'In '; if (dd > 0) txt += dd + 'd ' + hh + 'h'; else if (hh > 0) txt += hh + 'h ' + mm + 'm'; else txt += mm + 'm';
+        return { status: ms <= 3600000 ? 'soon' : 'upcoming', text: txt, cls: ms <= 3600000 ? 'cd-soon' : 'cd-upcoming', badgeCls: ms <= 3600000 ? 'badge-soon' : 'badge-upcoming', badgeTxt: ms <= 3600000 ? 'SOON' : 'UPCOMING' };
+      } else if (e && now < e.getTime()) {
+        return { status: 'live', text: '🔴 Live', cls: 'cd-live', badgeCls: 'badge-live', badgeTxt: 'LIVE' };
+      } else {
+        return { status: 'ended', text: '✅ Ended', cls: 'cd-ended', badgeCls: 'badge-ended', badgeTxt: 'ENDED' };
+      }
+    }
+
+    function loadSheetEvents() {
+      if (!SHEET_ENABLED || SHEET_API_URL.indexOf('YOUR_SCRIPT_ID') !== -1) {
+        return Promise.resolve();
+      }
+      return fetch(SHEET_API_URL, { cache: 'no-store' })
+        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(data) {
+          if (!Array.isArray(data)) return;
+          sheetEventMap = {};
+          data.forEach(function(row) {
+            var title = String(row.title || '').trim();
+            var dateObj = parseSheetDate(row.date);
+            if (!title || !dateObj) return;
+            var timeRaw = row.time;
+            if (typeof timeRaw === 'number' && timeRaw > 0 && timeRaw < 1) {
+              var totalMin = Math.round(timeRaw * 1440);
+              timeRaw = pad(Math.floor(totalMin / 60)) + ':' + pad(totalMin % 60);
+            }
+            var ev = {
+              _type: 'sheet', dateObj: dateObj,
+              timeObj: parseSheetTime(timeRaw),
+              duration: parseFloat(String(row.duration || '0')) || 0,
+              title: title,
+              details: String(row.details || '').trim(),
+              link: String(row.link || '').trim(),
+              logo: String(row.logo || '🌍').trim(),
+              organizer: String(row.organizer || '').trim().replace(/^@/, ''),
+              message: String(row.message || '').trim()
+            };
+            var k = dateKey(dateObj.y, dateObj.m, dateObj.d);
+            if (!sheetEventMap[k]) sheetEventMap[k] = [];
+            sheetEventMap[k].push(ev);
+          });
+        })
+        .catch(function(e) { console.warn('Sheet load error:', e); });
+    }
+
+    // ════════════════════════════════════════════════
     // STATE
-    // ══════════════════════════════════════════════════════════════════
+    // ════════════════════════════════════════════════
     var today = new Date();
     var viewYear = today.getFullYear(), viewMonth = today.getMonth();
     var eventMap = {};
-    // ══════════════════════════════════════════════════════════════════
-    // RENDER CONTENT (only the calendar area, header stays)
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    // RENDER
+    // ════════════════════════════════════════════════
     function renderContent(showEnriching) {
       var slot = document.getElementById('cal-content');
       var html = '';
-      if (showEnriching) {
-        html += '<div class="enriching-bar"><div class="enriching-progress"></div></div>';
-      }
+      if (showEnriching) html += '<div class="enriching-bar"><div class="enriching-progress"></div></div>';
+
       // Nav
       html += '<div class="cal-nav">' +
-        '<button class="nav-btn" id="btn-prev" aria-label="Previous month"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>' +
-        '<div class="month-label">' + MONTHS[viewMonth] + ' <span class="yr">' + viewYear + '</span></div>' +
-        '<button class="nav-btn" id="btn-next" aria-label="Next month"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>' +
+        '<button class="nav-btn" id="btn-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>' +
+        '<div class="month-label">' + MONTHS[viewMonth] + '<span class="yr"> ' + viewYear + '</span></div>' +
+        '<button class="nav-btn" id="btn-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>' +
         '</div>';
+
       // Day headers
       html += '<div class="cal-days">';
       for (var di = 0; di < 7; di++) {
         html += '<div class="day-hdr' + (di >= 5 ? ' weekend' : '') + '">' + DAY_NAMES[di] + '</div>';
       }
       html += '</div>';
-      // Calendar cells
+
+      // Grid
       var firstDow = (new Date(viewYear, viewMonth, 1).getDay() + 6) % 7;
       var lastDate = new Date(viewYear, viewMonth + 1, 0).getDate();
-      var pM = viewMonth === 0 ? 11 : viewMonth - 1;
-      var pY = viewMonth === 0 ? viewYear - 1 : viewYear;
+      var pM = viewMonth === 0 ? 11 : viewMonth - 1, pY = viewMonth === 0 ? viewYear - 1 : viewYear;
       var prevLast = new Date(pY, pM + 1, 0).getDate();
-      var nM = viewMonth === 11 ? 0 : viewMonth + 1;
-      var nY = viewMonth === 11 ? viewYear + 1 : viewYear;
+      var nM = viewMonth === 11 ? 0 : viewMonth + 1, nY = viewMonth === 11 ? viewYear + 1 : viewYear;
+
       html += '<div class="cal-grid">';
       for (var i = 0; i < 42; i++) {
         var cy, cm, cd, adj = false;
@@ -353,38 +505,76 @@
         else if (i >= firstDow + lastDate) { cd = i - firstDow - lastDate + 1; cm = nM; cy = nY; adj = true; }
         else { cd = i - firstDow + 1; cm = viewMonth; cy = viewYear; }
         var isToday = !adj && cd === today.getDate() && cm === today.getMonth() && cy === today.getFullYear();
-        var evts = !adj ? (eventMap[dateKey(cy, cm, cd)] || []) : [];
-        var has = evts.length > 0;
-        var phase = has ? bestPhase(evts) : null;
-        var cls = 'cal-cell';
-        if (adj) cls += ' adj';
-        if (isToday) cls += ' today';
-        if (has) cls += ' has-event';
-        html += '<div class="' + cls + '"' + (has ? ' data-evkey="' + dateKey(cy, cm, cd) + '" data-y="' + cy + '" data-m="' + cm + '" data-d="' + cd + '"' : '') + '>';
+        var k = dateKey(cy, cm, cd);
+        var chessEvts = !adj ? (eventMap[k] || []) : [];
+        var sheetEvts = !adj ? (sheetEventMap[k] || []) : [];
+        var allEvts = chessEvts.concat(sheetEvts);
+        var has = allEvts.length > 0;
+        var dotCls = has ? bestDotClass(chessEvts.length ? chessEvts : sheetEvts) : null;
+        // For sheet events use time-based dot
+        if (!chessEvts.length && sheetEvts.length) {
+          var sp = getSheetPhase(sheetEvts[0]);
+          if (sp) dotCls = 'dot-' + sp.status;
+        }
+        var cls = 'cal-cell' + (adj ? ' adj' : '') + (isToday ? ' today' : '') + (has ? ' has-event' : '');
+        html += '<div class="' + cls + '"' + (has ? ' data-evkey="' + k + '"' : '') + '>';
         html += '<div class="cell-num">' + cd + '</div>';
         if (isToday) html += '<div class="today-dot"></div>';
         if (has) {
-          var allD = evts.every(function(e) { return e.timeClass === 'daily'; });
+          var icon = chessEvts.length ? (chessEvts.every(function(e) { return e.timeClass === 'daily'; }) ? '☀️' : '⚡') : (sheetEvts[0].logo || '🌍');
           html += '<div class="cell-icon-wrap"><div class="match-badge-container">' +
-            '<div class="match-badge">' + (allD ? '\u2600\uFE0F' : '\u26A1') + '</div>';
-          if (evts.length > 1) html += '<div class="count-bubble">' + evts.length + '</div>';
+            '<div class="match-badge">' + icon + '</div>';
+          if (allEvts.length > 1) html += '<div class="count-bubble">' + allEvts.length + '</div>';
           html += '</div></div>';
         }
-        if (phase) html += '<div class="status-bar ' + phase.status + '"></div>';
+        if (dotCls) html += '<div class="status-dot ' + dotCls + '"></div>';
         html += '</div>';
       }
       html += '</div>';
+
+      // Sheet events list for current month (upcoming/live)
+      var sheetKeys = Object.keys(sheetEventMap).filter(function(k) {
+        var parts = k.split('-'); var y = parseInt(parts[0]), m = parseInt(parts[1]) - 1;
+        return y === viewYear && m === viewMonth;
+      }).sort();
+
+      if (sheetKeys.length > 0) {
+        html += '<div class="section-label">CLUB EVENTS</div>';
+        html += '<div class="sheet-section">';
+        sheetKeys.forEach(function(k) {
+          var evts = sheetEventMap[k]; if (!evts || !evts.length) return;
+          var parts = k.split('-');
+          html += '<div class="sheet-day-group"><div class="sheet-day-label">' +
+            MONTH_SHORT[parseInt(parts[1]) - 1] + ' ' + ordinal(parseInt(parts[2])) +
+            '</div>';
+          evts.forEach(function(ev) {
+            var ph = getSheetPhase(ev);
+            var timeStr = ev.timeObj ? pad(ev.timeObj.h) + ':' + pad(ev.timeObj.min) + ' UTC' : '';
+            html += '<div class="sheet-event-item" data-sheet-key="' + k + '" data-sheet-title="' + ev.title.replace(/"/g, '&quot;') + '">' +
+              '<div class="sheet-event-icon">' + ev.logo + '</div>' +
+              '<div class="sheet-event-info">' +
+              '<div class="sheet-event-title">' + ev.title + '</div>' +
+              '<div class="sheet-event-time">' + timeStr + (ev.organizer ? ' · @' + ev.organizer : '') + '</div>' +
+              '</div>';
+            if (ph) html += '<div class="sheet-event-badge ' + ph.badgeCls + '">' + ph.badgeTxt + '</div>';
+            html += '</div>';
+          });
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
       // Legend
       html += '<div class="cal-legend">' +
-        '<div class="legend-item"><div class="legend-bar upcoming"></div>Upcoming</div>' +
-        '<div class="legend-item"><div class="legend-bar soon"></div>Soon</div>' +
-        '<div class="legend-item"><div class="legend-bar live"></div>Live</div>' +
-        '<div class="legend-item"><div class="legend-bar ended"></div>Ended</div>' +
+        '<div class="legend-item"><span class="legend-dot dot-upcoming"></span>Upcoming</div>' +
+        '<div class="legend-item"><span class="legend-dot dot-soon"></span>Soon</div>' +
+        '<div class="legend-item"><span class="legend-dot dot-live"></span>Live</div>' +
+        '<div class="legend-item"><span class="legend-dot dot-ended"></span>Ended</div>' +
         '</div>';
-      // Footer
-      html += '<div class="cal-foot"><span>\u{1F30D} 195 Countries</span><span class="foot-dot">\u00B7</span><span>@Stellar_Endgame</span></div>';
+      html += '<div class="cal-foot"><span>🌍 195 Countries</span><span>·</span><span>@Stellar_Endgame</span></div>';
+
       slot.innerHTML = html;
-      // Attach nav listeners
+
       document.getElementById('btn-prev').onclick = function() {
         viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
         closeTooltip(); renderContent(false);
@@ -393,102 +583,137 @@
         viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
         closeTooltip(); renderContent(false);
       };
-      // Attach cell click listeners (event delegation)
+
+      // Chess cell clicks
       var grid = slot.querySelector('.cal-grid');
       grid.onclick = function(e) {
         var cell = e.target.closest('.has-event');
         if (!cell) return;
-        var key = cell.getAttribute('data-evkey');
-        var y = parseInt(cell.getAttribute('data-y'));
-        var m = parseInt(cell.getAttribute('data-m'));
-        var d = parseInt(cell.getAttribute('data-d'));
-        if (eventMap[key]) showTooltip(eventMap[key], y, m, d);
+        var k = cell.getAttribute('data-evkey');
+        var parts = k.split('-');
+        var y = parseInt(parts[0]), m = parseInt(parts[1]) - 1, d = parseInt(parts[2]);
+        var chess = eventMap[k] || [], sheet = sheetEventMap[k] || [];
+        showTooltip(chess, sheet, y, m, d);
       };
+
+      // Sheet event item clicks
+      var sheetItems = slot.querySelectorAll('.sheet-event-item');
+      sheetItems.forEach(function(item) {
+        item.onclick = function() {
+          var k = item.getAttribute('data-sheet-key');
+          var title = item.getAttribute('data-sheet-title');
+          var evts = (sheetEventMap[k] || []).filter(function(ev) { return ev.title === title; });
+          if (!evts.length) return;
+          var parts = k.split('-');
+          var y = parseInt(parts[0]), m = parseInt(parts[1]) - 1, d = parseInt(parts[2]);
+          showTooltip([], evts, y, m, d);
+        };
+      });
     }
-    // ══════════════════════════════════════════════════════════════════
-    // SKELETON (shown only at first load, inside slot)
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    // SKELETON
+    // ════════════════════════════════════════════════
     function renderSkeleton() {
       var slot = document.getElementById('cal-content');
-      var html = '<div style="display:flex;flex-direction:column;gap:8px;padding:12px">';
+      var html = '<div class="skeleton-wrap">';
       html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">' +
-        '<div class="skel" style="width:30px;height:30px;border-radius:6px"></div>' +
-        '<div class="skel" style="flex:1;height:20px;border-radius:4px"></div>' +
-        '<div class="skel" style="width:30px;height:30px;border-radius:6px"></div></div>';
+        '<div class="skel" style="width:28px;height:28px;border-radius:6px"></div>' +
+        '<div class="skel" style="flex:1;height:22px;border-radius:4px"></div>' +
+        '<div class="skel" style="width:28px;height:28px;border-radius:6px"></div></div>';
       html += '<div style="display:flex;gap:3px">';
-      for (var i = 0; i < 7; i++) html += '<div class="skel" style="flex:1;height:18px;border-radius:4px;animation-delay:' + (i * .05) + 's"></div>';
+      for (var i = 0; i < 7; i++) html += '<div class="skel" style="flex:1;height:18px;border-radius:4px"></div>';
       html += '</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
-      for (var j = 0; j < 42; j++) html += '<div class="skel" style="height:62px;border-radius:6px;animation-delay:' + (j * .02) + 's"></div>';
+      for (var j = 0; j < 42; j++) html += '<div class="skel" style="height:60px;border-radius:5px"></div>';
       html += '</div></div>';
       slot.innerHTML = html;
     }
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
     // TOOLTIP
-    // ══════════════════════════════════════════════════════════════════
+    // ════════════════════════════════════════════════
     var backdropEl = document.getElementById('tip-backdrop');
     var panelEl = document.getElementById('tip-panel');
-    function showTooltip(events, year, month, day) {
-      var allDaily = events.every(function(e) { return e.timeClass === 'daily'; });
-      var titleText = events.length === 1
-        ? (events[0].timeClass === 'daily' ? 'Daily Team Match' : 'Team Match')
-        : events.length + ' Team Matches';
+
+    function showTooltip(chessEvents, sheetEvents, year, month, day) {
+      var allEvts = chessEvents.concat(sheetEvents);
+      var titleText = allEvts.length === 1
+        ? (sheetEvents.length ? sheetEvents[0].title : (chessEvents[0].timeClass === 'daily' ? 'Daily Team Match' : 'Team Match'))
+        : allEvts.length + ' Events';
+
       var html = '<div class="tip-strip">' +
-        '<div class="tip-close" id="tip-close">\u2715</div>' +
+        '<div class="tip-close" id="tip-close">✕</div>' +
         '<div class="tip-hdr-row">' +
-          '<div class="tip-globe">' + (allDaily ? '\u2600\uFE0F' : '\u{1F30D}') + '</div>' +
+          '<div class="tip-globe">' + (sheetEvents.length && !chessEvents.length ? sheetEvents[0].logo : (chessEvents.length && chessEvents.every(function(e) { return e.timeClass === 'daily'; }) ? '☀️' : '🌍')) + '</div>' +
           '<div class="tip-info">' +
             '<div class="tip-title">' + titleText + '</div>' +
             '<div class="tip-date">' + MONTH_SHORT[month] + ' ' + ordinal(day) + ', ' + year + '</div>' +
           '</div>' +
         '</div></div><div class="tip-body">';
-      events.forEach(function(ev, idx) {
+
+      // Chess.com matches
+      chessEvents.forEach(function(ev, idx) {
         if (idx > 0) html += '<div class="tip-sep"></div>';
         var phase = getPhase(ev);
         html += '<div class="match-block">';
-        // Countdown
         html += '<div class="tip-countdown ' + phase.cls + '"><span class="cd-dot"></span>' + phase.text + '</div>';
-        // Name
-        var name = ev.theirName ? (ev.ourName || 'The Club Of 195 Countries') + ' vs ' + ev.theirName : ev.title;
+        var name = ev.theirName ? (ev.ourName || 'Club of 195 Countries') + ' vs ' + ev.theirName : ev.title;
         html += '<div class="tip-match-name">' + name + '</div>';
-        // Score
         if (ev.ourScore !== undefined && ev.theirScore !== undefined) {
           var oc = ev.ourScore > ev.theirScore ? ' winning' : (ev.ourScore < ev.theirScore ? ' losing' : '');
           var tc = ev.theirScore > ev.ourScore ? ' winning' : (ev.theirScore < ev.ourScore ? ' losing' : '');
           html += '<div class="score-display"><div class="score-teams">' +
-            '<span class="score-team-name our-team">' + (ev.ourName || 'Club of 195 Countries') + '</span>' +
+            '<span class="score-team-name our-team">' + (ev.ourName || 'Club of 195') + '</span>' +
             '<span class="score-vs">vs</span>' +
             '<span class="score-team-name their-team">' + (ev.theirName || ev.opponent) + '</span></div>' +
-            '<div class="score-numbers"><span class="score-num' + oc + '">' + ev.ourScore + '</span>' +
-            '<span class="score-dash">\u2013</span>' +
-            '<span class="score-num' + tc + '">' + ev.theirScore + '</span></div></div>';
+            '<div class="score-numbers">' +
+            '<span class="score-num' + oc + '">' + ev.ourScore + '</span>' +
+            '<span class="score-dash">–</span>' +
+            '<span class="score-num' + tc + '">' + ev.theirScore + '</span>' +
+            '</div></div>';
         }
-        // Result
         if (ev._status === 'finished' && ev.result) {
-          if (ev.result === 'win') html += '<span class="result-badge badge-win">\u2713 WIN</span>';
-          else if (ev.result === 'lose' || ev.result === 'loss') html += '<span class="result-badge badge-loss">\u2717 LOSS</span>';
-          else html += '<span class="result-badge badge-draw">\u2B1B DRAW</span>';
+          if (ev.result === 'win') html += '<span class="result-badge badge-win">✓ WIN</span>';
+          else if (ev.result === 'lose' || ev.result === 'loss') html += '<span class="result-badge badge-loss">✗ LOSS</span>';
+          else html += '<span class="result-badge badge-draw">⬛ DRAW</span>';
         }
-        // Bottom
-        html += '<div class="tip-bottom"><div class="tip-opp">\u2600\uFE0F ' +
+        html += '<div class="tip-bottom"><div class="tip-opp">☀️ ' +
           (ev.timeClass === 'daily' ? 'Daily' : ev.timeClass) +
-          (ev.boards ? ' \u00B7 ' + ev.boards + ' boards' : '') + '</div>';
+          (ev.boards ? ' · ' + ev.boards + ' boards' : '') + '</div>';
         if (ev.link) {
           var bcls, btxt;
           if (phase.status === 'ended') { bcls = 'btn-ended-link'; btxt = 'VIEW'; }
-          else if (phase.status === 'live') { bcls = 'btn-watch'; btxt = '\u{1F441} WATCH'; }
-          else { bcls = 'btn-join'; btxt = '\u{1F30D} JOIN'; }
+          else if (phase.status === 'live') { bcls = 'btn-watch'; btxt = '👁 WATCH'; }
+          else { bcls = 'btn-join'; btxt = '🌍 JOIN'; }
           html += '<a href="' + ev.link + '" target="_blank" rel="noopener noreferrer" class="tip-btn ' + bcls + '">' + btxt + '</a>';
         }
         html += '</div></div>';
       });
+
+      // Sheet events
+      sheetEvents.forEach(function(ev, idx) {
+        if (chessEvents.length || idx > 0) html += '<div class="tip-sep"></div>';
+        var ph = getSheetPhase(ev);
+        html += '<div class="match-block">';
+        if (ph) html += '<div class="tip-countdown ' + ph.cls + '"><span class="cd-dot"></span>' + ph.text + '</div>';
+        html += '<div class="tip-match-name">' + ev.title + '</div>';
+        if (ev.timeObj) html += '<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:11px;color:var(--text-body);letter-spacing:.3px">' + pad(ev.timeObj.h) + ':' + pad(ev.timeObj.min) + ' UTC' + (ev.duration > 0 ? ' · ' + ev.duration + 'h' : '') + '</div>';
+        if (ev.details) html += '<div class="tip-sheet-detail">' + ev.details + '</div>';
+        if (ev.message) html += '<div style="background:rgba(99,102,241,.06);border:1px solid var(--border-subtle);border-radius:7px;padding:7px 10px;font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:600;color:var(--text-head);line-height:1.5">' + ev.message + '</div>';
+        html += '<div class="tip-bottom">';
+        if (ev.organizer) html += '<a class="tip-sheet-organizer" href="https://www.chess.com/member/' + ev.organizer + '" target="_blank" rel="noopener noreferrer">♟ @' + ev.organizer + '</a>';
+        if (ev.link) html += '<a href="' + ev.link + '" target="_blank" rel="noopener noreferrer" class="tip-btn btn-join">JOIN</a>';
+        html += '</div></div>';
+      });
+
       html += '</div>';
       panelEl.innerHTML = html;
-      // Show with class toggle (CSS transition handles animation)
       backdropEl.classList.add('show');
       panelEl.classList.add('show');
       document.getElementById('tip-close').onclick = closeTooltip;
       document.addEventListener('keydown', escHandler);
     }
+
     function closeTooltip() {
       backdropEl.classList.remove('show');
       panelEl.classList.remove('show');
@@ -497,24 +722,25 @@
     function escHandler(e) { if (e.key === 'Escape') closeTooltip(); }
     backdropEl.onclick = function(e) { e.stopPropagation(); closeTooltip(); };
     panelEl.onclick = function(e) { e.stopPropagation(); };
-    // ══════════════════════════════════════════════════════════════════
-    // INIT — skeleton shows instantly, data loads in background
-    // ══════════════════════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    // INIT
+    // ════════════════════════════════════════════════
     renderSkeleton();
-    loadMatchList()
-      .then(function(result) {
-        eventMap = result.eventMap;
-        renderContent(true);
-        return enrichMatches(eventMap, result.matchIds, function() {
-          renderContent(false);
-        });
-      })
-      .catch(function(e) {
-        console.error(e);
-        var slot = document.getElementById('cal-content');
-        slot.innerHTML = '<div class="load-err">\u26A0 Could not load matches.</div>';
+    Promise.all([
+      loadMatchList(),
+      loadSheetEvents()
+    ]).then(function(results) {
+      eventMap = results[0].eventMap;
+      var matchIds = results[0].matchIds;
+      renderContent(true);
+      return enrichMatches(eventMap, matchIds, function() {
         renderContent(false);
       });
+    }).catch(function(e) {
+      console.error(e);
+      renderContent(false);
+    });
   </script>
 </body>
 </html>
