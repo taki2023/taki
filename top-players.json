@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-25T08:23:00.010Z",
+  "updated": "2026-06-25T11:15:48.501Z",
   "totalMembers": 1428,
-  "activeToday": 175,
+  "activeToday": 247,
   "players": [
     {
       "username": "syednadeem6t",
@@ -26,15 +26,15 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "stas999999999",
-      "total_pts": 144,
+      "username": "nikkotello",
+      "total_pts": 160,
       "bullet_pts": 0,
-      "blitz_pts": 144,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 160,
       "bullet_g": 0,
-      "blitz_g": 18,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/415005431.3cae920c.200x200o.9547714bfe1f.jpg"
+      "blitz_g": 0,
+      "rapid_g": 12,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
