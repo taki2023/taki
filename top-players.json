@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-26T07:51:43.706Z",
-  "totalMembers": 1431,
-  "activeToday": 184,
+  "updated": "2026-06-26T10:50:57.722Z",
+  "totalMembers": 1434,
+  "activeToday": 239,
   "players": [
     {
       "username": "abd_allah_libyan",
@@ -26,15 +26,15 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "rajl2007",
-      "total_pts": 150,
+      "username": "traker-86",
+      "total_pts": 165,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 150,
+      "blitz_pts": 165,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 10,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/36502552.bd113065.200x200o.2fd9c0e22357.jpg"
+      "blitz_g": 19,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     }
   ]
 }
