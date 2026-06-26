@@ -1,17 +1,17 @@
 {
-  "updated": "2026-06-26T15:39:55.221Z",
-  "totalMembers": 1438,
-  "activeToday": 327,
+  "updated": "2026-06-26T17:46:49.921Z",
+  "totalMembers": 1439,
+  "activeToday": 334,
   "players": [
     {
       "username": "kaniyamudhanselvaraj",
-      "total_pts": 478,
+      "total_pts": 513,
       "bullet_pts": 131,
       "blitz_pts": 147,
-      "rapid_pts": 200,
+      "rapid_pts": 235,
       "bullet_g": 47,
       "blitz_g": 19,
-      "rapid_g": 14,
+      "rapid_g": 17,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
@@ -27,12 +27,12 @@
     },
     {
       "username": "damjan1989",
-      "total_pts": 277,
+      "total_pts": 325,
       "bullet_pts": 0,
-      "blitz_pts": 147,
+      "blitz_pts": 195,
       "rapid_pts": 130,
       "bullet_g": 0,
-      "blitz_g": 17,
+      "blitz_g": 23,
       "rapid_g": 12,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     }
