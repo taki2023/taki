@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-26T10:50:57.722Z",
+  "updated": "2026-06-26T13:11:50.611Z",
   "totalMembers": 1434,
-  "activeToday": 239,
+  "activeToday": 281,
   "players": [
     {
       "username": "abd_allah_libyan",
@@ -15,26 +15,26 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.9035ac23.200x200o.5054fa16e9f5.jpg"
     },
     {
-      "username": "shorttemperedbullet",
-      "total_pts": 167,
-      "bullet_pts": 86,
-      "blitz_pts": 81,
-      "rapid_pts": 0,
-      "bullet_g": 30,
-      "blitz_g": 9,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "traker-86",
-      "total_pts": 165,
+      "username": "taisan-tin",
+      "total_pts": 180,
       "bullet_pts": 0,
-      "blitz_pts": 165,
+      "blitz_pts": 180,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 19,
+      "blitz_g": 22,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365933965.15f377ce.200x200o.0824fd5c52af.jpg"
+    },
+    {
+      "username": "mastergoogle",
+      "total_pts": 170,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 170,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 12,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
