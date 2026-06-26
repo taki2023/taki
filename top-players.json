@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-26T17:46:49.921Z",
-  "totalMembers": 1439,
-  "activeToday": 334,
+  "updated": "2026-06-26T19:45:22.237Z",
+  "totalMembers": 1438,
+  "activeToday": 367,
   "players": [
     {
       "username": "kaniyamudhanselvaraj",
@@ -15,6 +15,17 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
+      "username": "damjan1989",
+      "total_pts": 361,
+      "bullet_pts": 0,
+      "blitz_pts": 231,
+      "rapid_pts": 130,
+      "bullet_g": 0,
+      "blitz_g": 27,
+      "rapid_g": 12,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+    },
+    {
       "username": "queiser",
       "total_pts": 327,
       "bullet_pts": 0,
@@ -24,17 +35,6 @@
       "blitz_g": 37,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
-    },
-    {
-      "username": "damjan1989",
-      "total_pts": 325,
-      "bullet_pts": 0,
-      "blitz_pts": 195,
-      "rapid_pts": 130,
-      "bullet_g": 0,
-      "blitz_g": 23,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     }
   ]
 }
