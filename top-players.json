@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-26T22:45:54.929Z",
+  "updated": "2026-06-27T00:06:38.118Z",
   "totalMembers": 1439,
-  "activeToday": 415,
+  "activeToday": 7,
   "players": [
     {
-      "username": "kaniyamudhanselvaraj",
-      "total_pts": 513,
-      "bullet_pts": 131,
-      "blitz_pts": 147,
-      "rapid_pts": 235,
-      "bullet_g": 47,
-      "blitz_g": 19,
-      "rapid_g": 17,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "kappenhouser",
+      "total_pts": 12,
+      "bullet_pts": 3,
+      "blitz_pts": 9,
+      "rapid_pts": 0,
+      "bullet_g": 1,
+      "blitz_g": 1,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/355199577.2e354d58.200x200o.8de49e2555ce.jpg"
     },
     {
-      "username": "damjan1989",
-      "total_pts": 379,
+      "username": "fahhhhhhhhhh12345678",
+      "total_pts": 9,
       "bullet_pts": 0,
-      "blitz_pts": 249,
-      "rapid_pts": 130,
-      "bullet_g": 0,
-      "blitz_g": 29,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
-    {
-      "username": "queiser",
-      "total_pts": 327,
-      "bullet_pts": 0,
-      "blitz_pts": 327,
+      "blitz_pts": 9,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 37,
+      "blitz_g": 1,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/536975867.525f278b.200x200o.f47f4f911240.jpg"
+    },
+    {
+      "username": "smorkusporkus",
+      "total_pts": 9,
+      "bullet_pts": 0,
+      "blitz_pts": 9,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 1,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
     }
   ]
 }
