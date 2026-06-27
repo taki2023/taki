@@ -74,7 +74,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .nav-btn#nextBtn:hover svg{transform:translateX(1.5px);}
 .nav-btn:active{transform:scale(.93);}
 
-/* ── DAY HEADERS — label only, no emoji ── */
+/* ── DAY HEADERS ── */
 .cal-head{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:6px;}
 .cal-head-cell{
   display:flex;align-items:center;justify-content:center;
@@ -136,15 +136,35 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   cursor:pointer;display:flex;align-items:center;justify-content:center;
   width:var(--ico);height:var(--ico);min-width:var(--ico);min-height:var(--ico);
   flex-shrink:0;border-radius:4px;font-size:calc(var(--ico)*0.76);
-  transform-origin:center center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);
+  transform-origin:center center;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),filter .15s ease;
   z-index:1;border:1.5px solid rgba(217,48,32,.22);background:rgba(255,243,224,.7);
   overflow:hidden;line-height:1;position:relative;
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
   box-shadow:0 1px 3px rgba(217,48,32,.08);
 }
-.evt:hover{transform:scale(1.3);z-index:100;box-shadow:0 3px 10px rgba(217,48,32,.2);}
+.evt:hover{
+  transform:scale(1.65);
+  z-index:100;
+  box-shadow:0 5px 16px rgba(217,48,32,.28),0 0 0 2px rgba(217,48,32,.2);
+  filter:brightness(1.06) saturate(1.08);
+}
+
+/* ── EVT IMAGE BUILD ANIMATION ──
+   Plays once when .img-reveal is added to the img element.
+   Sweeps a clip-path curtain from top→bottom while blur clears and scale settles.
+*/
+.evt img.img-reveal{
+  animation:img-build .72s cubic-bezier(.22,.8,.36,1) forwards;
+}
+@keyframes img-build{
+  0%  {clip-path:inset(0 0 100% 0 round 3px);opacity:1;filter:blur(4px) brightness(1.4);transform:scale(1.08);}
+  30% {clip-path:inset(0 0 60% 0 round 3px); opacity:1;filter:blur(2px) brightness(1.2);transform:scale(1.04);}
+  65% {clip-path:inset(0 0 15% 0 round 3px); opacity:1;filter:blur(.5px) brightness(1.05);transform:scale(1.01);}
+  100%{clip-path:inset(0 0 0% 0 round 3px);  opacity:1;filter:blur(0)  brightness(1);   transform:scale(1);}
+}
 .evt.evt-match{background:rgba(255,240,235,.9);border-color:rgba(217,48,32,.3);}
-.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;transition:opacity .25s;padding:1px;}
+.evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:3px;display:block;opacity:0;padding:1px;}
 .evt img.loaded{opacity:1;}
 .evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;user-select:none;}
 .evt-skeleton,.tip-logo-skeleton{position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;z-index:2;}
@@ -165,7 +185,7 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .legend-dot.dot-ended{background:radial-gradient(circle at 35% 35%,#757575,#212121);}
 
 /* ══════════════════════════════════════════
-   SHARED TOOLTIP BASE — max 300px, scrollable
+   SHARED TOOLTIP BASE
 ══════════════════════════════════════════ */
 .evt-tip, .match-tip {
   position:fixed;
@@ -188,7 +208,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .evt-tip.show, .match-tip.show{opacity:1;display:flex;}
 
-/* accent bar */
 .tip-top-bar{
   height:3px;
   background:linear-gradient(90deg,#d93020,#ef6640);
@@ -196,7 +215,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
   flex-shrink:0;
 }
 
-/* fixed header */
 .tip-header{
   padding:9px 13px 8px;
   flex-shrink:0;
@@ -224,7 +242,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .tip-close:hover{background:rgba(217,48,32,.2);transform:scale(1.15);}
 
-/* scroll body */
 .tip-scroll{
   overflow-y:auto;
   flex:1;
@@ -237,7 +254,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .tip-scroll::-webkit-scrollbar-track{background:transparent;}
 .tip-scroll::-webkit-scrollbar-thumb{background:rgba(217,48,32,.3);border-radius:2px;}
 
-/* scroll fade */
 .tip-fade{
   height:14px;
   background:linear-gradient(to top,rgba(255,255,255,.95),transparent);
@@ -255,7 +271,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .evt-block-name{font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);line-height:1.2;}
 .tip-time-badge{font-size:9px;font-weight:800;color:var(--text-mid);opacity:.7;}
 
-/* Countdown pill */
 .tip-countdown{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:900;padding:3px 9px;border-radius:999px;border:1.5px solid;width:fit-content;}
 .tip-countdown .cd-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
 .status-upcoming{color:#1565c0;background:#e3f2fd;border-color:#90caf9;}
@@ -287,32 +302,32 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .match-card+.match-card{border-top:1.5px solid var(--border);}
 
-/* match header: team names text line */
-.mc-title{font-family:'Fredoka One',cursive;font-size:12px;color:var(--red-dark);line-height:1.3;text-align:center;}
+/* ← REMOVED: mc-title rule no longer needed */
 
 /* logos + score row */
 .mc-teams-row{
   display:flex;align-items:center;justify-content:center;
   gap:8px;padding:4px 0 2px;
 }
+/* ← CHANGED: bigger logos 58→70px */
 .mc-logo{
-  width:36px;height:36px;border-radius:8px;
+  width:70px;height:70px;border-radius:12px;
   background:rgba(255,240,235,.9);border:1.5px solid var(--border);
   display:flex;align-items:center;justify-content:center;
-  font-size:20px;flex-shrink:0;overflow:hidden;position:relative;
+  font-size:34px;flex-shrink:0;overflow:hidden;position:relative;
 }
-.mc-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:7px;display:block;opacity:0;transition:opacity .25s;}
+.mc-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:9px;display:block;opacity:0;transition:opacity .25s;}
 .mc-logo img.loaded{opacity:1;}
-.mc-logo-skel{position:absolute;inset:0;border-radius:7px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;}
-.mc-vs-block{display:flex;flex-direction:column;align-items:center;gap:1px;flex-shrink:0;}
-.mc-vs-label{font-family:'Fredoka One',cursive;font-size:9px;color:#e8a090;letter-spacing:.5px;}
+.mc-logo-skel{position:absolute;inset:0;border-radius:9px;background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;}
+.mc-vs-block{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;}
+.mc-vs-label{font-family:'Fredoka One',cursive;font-size:18px;color:#d93020;letter-spacing:1.5px;text-shadow:0 1px 0 rgba(217,48,32,.18);opacity:.75;}
 .mc-score-row{display:flex;align-items:center;gap:5px;}
 .mc-score-num{font-family:'Fredoka One',cursive;font-size:18px;min-width:22px;text-align:center;line-height:1;}
 .mc-score-num.winning{color:#2e7d32;}
 .mc-score-num.losing{color:#c62828;}
 .mc-score-num.tied{color:var(--text-mid);}
 .mc-score-dash{color:#e8a090;font-weight:900;font-size:13px;}
-.mc-team-name{font-size:9px;font-weight:800;color:var(--text-mid);text-align:center;max-width:52px;word-break:break-word;line-height:1.2;}
+.mc-team-name{font-size:9px;font-weight:800;color:var(--text-mid);text-align:center;max-width:66px;word-break:break-word;line-height:1.2;}
 .mc-team-col{display:flex;flex-direction:column;align-items:center;gap:3px;}
 
 .mc-phase{
@@ -342,10 +357,8 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 .mc-btn{display:inline-block;font-size:9.5px;font-weight:900;color:#fff;background:linear-gradient(135deg,#d93020,#e85535);padding:4px 13px;border-radius:999px;text-decoration:none;box-shadow:0 2px 0 #8c1a10;white-space:nowrap;align-self:flex-end;pointer-events:auto;}
 .mc-btn.view{background:linear-gradient(135deg,#9a2010,#c73520);box-shadow:0 2px 0 #5a0c04;}
 
-/* match tip count badge */
 .match-count-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:900;letter-spacing:.4px;background:rgba(217,48,32,.08);border:1px solid rgba(217,48,32,.2);color:var(--red-dark);border-radius:999px;padding:1px 7px;margin-top:2px;width:fit-content;}
 
-/* mobile tooltip centering */
 @media(hover:none) and (pointer:coarse){
   .evt-tip,.match-tip{
     position:fixed!important;left:50%!important;top:50%!important;
@@ -368,7 +381,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     <div class="page-sub">Your Chess Home ♡</div>
   </div>
 
-  <!-- SKELETON -->
   <div class="cal-skeleton" id="calSkeleton">
     <div class="skel-nav"><div class="skel-circle"></div><div class="skel-label"></div><div class="skel-circle"></div></div>
     <div class="skel-head"><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div><div class="skel-head-cell"></div></div>
@@ -377,7 +389,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
     <div class="skel-footer"></div>
   </div>
 
-  <!-- REAL CONTENT -->
   <div class="cal-real inner" id="calReal">
     <div class="cal-nav">
       <button class="nav-btn" id="prevBtn" aria-label="Previous month"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
@@ -433,9 +444,6 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 </div>
 
 <script>
-/* ════════════════════════════════════════════
-   CONFIG
-════════════════════════════════════════════ */
 const SHEET_API_URL  = 'https://script.google.com/macros/s/AKfycbwLWbOvhgA9aiwEpatPngrRZCsUaGbBNNYDQR3KK5sm-p8lQjx1eili_e4IGUWM9cCL9w/exec';
 const CLUB_SLUG      = 'hot-chilli-checkmate';
 const CLUB_MATCH_URL = `https://api.chess.com/pub/club/${CLUB_SLUG}/matches`;
@@ -443,17 +451,13 @@ const MATCH_DETAIL   = id => `https://api.chess.com/pub/match/${id}`;
 
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-// Day headers: label only (no emoji per request)
 const DAY_LABELS=['MON','TUE','WED','THU','FRI','SAT','SUN'];
 
 const today = new Date();
 let viewYear = today.getFullYear(), viewMonth = today.getMonth();
-let eventMap = {};   // dateKey → groups[]
-let matchMap  = {};  // dateKey → match[]
+let eventMap = {};
+let matchMap  = {};
 
-/* ════════════════════════════════════════════
-   SKELETON — mirrors real calendar layout
-════════════════════════════════════════════ */
 (function(){
   const grid = document.getElementById('skelGrid'); if(!grid) return;
   const y=today.getFullYear(), m=today.getMonth();
@@ -465,9 +469,6 @@ let matchMap  = {};  // dateKey → match[]
   }
 })();
 
-/* ════════════════════════════════════════════
-   IMAGE CACHE
-════════════════════════════════════════════ */
 function proxyImageURL(raw){
   if(!raw)return null; raw=raw.trim();
   if(raw.startsWith('https://wsrv.nl'))return raw;
@@ -498,12 +499,11 @@ function onImgReady(url,cb){
   if(!imgMem.has(url))preloadImg(url);
 }
 
-/* club logo fetch + cache */
 const clubLogoCache = new Map();
 async function fetchClubLogo(slug){
   if(!slug)return null;
   if(clubLogoCache.has(slug))return clubLogoCache.get(slug);
-  clubLogoCache.set(slug, null); // mark pending
+  clubLogoCache.set(slug, null);
   try{
     const data=await fetchJSON(`https://api.chess.com/pub/club/${slug}`);
     const logo=data.icon||null;
@@ -514,9 +514,6 @@ async function fetchClubLogo(slug){
   }catch(e){return null;}
 }
 
-/* ════════════════════════════════════════════
-   DATE UTILS
-════════════════════════════════════════════ */
 const pad=n=>String(n).padStart(2,'0');
 const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const lastDay=(y,m)=>new Date(y,m+1,0).getDate();
@@ -554,9 +551,6 @@ function linkifyMentions(text){
 }
 function setTextWithMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
 
-/* ════════════════════════════════════════════
-   PHASE — SHEET EVENTS
-════════════════════════════════════════════ */
 function getPhase(ev){
   if(!ev.timeObj)return null;
   const s=buildUTC(ev.dateObj,ev.timeObj);if(!s)return null;
@@ -577,9 +571,6 @@ function getPhase(ev){
   return{status:'ended',text:'✅ Ended',cssClass:'status-ended',phase:'after'};
 }
 
-/* ════════════════════════════════════════════
-   PHASE — MATCH EVENTS
-════════════════════════════════════════════ */
 function getMatchPhase(match){
   const now=Date.now(),startMs=match.startTs*1000;
   if(match._status==='finished'||(match.endTs&&now>match.endTs*1000))
@@ -622,9 +613,6 @@ function pick(ev,phase,field){
   return '';
 }
 
-/* ════════════════════════════════════════════
-   LOAD SHEET
-════════════════════════════════════════════ */
 async function loadSheet(){
   try{
     const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
@@ -664,9 +652,6 @@ async function loadSheet(){
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
-/* ════════════════════════════════════════════
-   LOAD MATCHES
-════════════════════════════════════════════ */
 async function fetchJSON(url){
   try{const r=await fetch(url,{cache:'no-store'});if(r.ok)return r.json();throw new Error(r.status);}
   catch(e){
@@ -714,11 +699,9 @@ async function enrichMatches(){
           else if((t2['@id']||'').includes(CLUB_SLUG)){our=t2;their=t1;}
           else{our=t1;their=t2;}
           m.ourName=our.name;m.theirName=their.name;m.ourScore=our.score;m.theirScore=their.score;
-          // extract slugs from @id for logo fetch
           const ourSlug=(our['@id']||'').split('/').pop();
           const theirSlug=(their['@id']||'').split('/').pop();
           m.ourSlug=ourSlug;m.theirSlug=theirSlug;
-          // pre-fetch logos in background
           if(ourSlug)fetchClubLogo(ourSlug);
           if(theirSlug)fetchClubLogo(theirSlug);
         }
@@ -728,9 +711,6 @@ async function enrichMatches(){
   }
 }
 
-/* ════════════════════════════════════════════
-   BUILD CALENDAR
-════════════════════════════════════════════ */
 function applyCellWidth(){
   const cells=calBody.querySelectorAll('.cal-cell');if(!cells.length)return;
   const r=cells[0].getBoundingClientRect(),cellW=r.width,cellH=r.height;if(cellW<1||cellH<1)return;
@@ -814,7 +794,7 @@ function makeCell(y,m,d,overflow){
           const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
           const img=document.createElement('img');img.alt=g.events[0].title;img.loading='eager';img.decoding='async';ico.appendChild(img);
           onImgReady(g.logo,state=>{
-            if(state==='ok'){img.src=g.logo;const fin=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
+            if(state==='ok'){img.src=g.logo;const fin=()=>{img.classList.add('loaded','img-reveal');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
             else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);}
           });
         }else{
@@ -843,9 +823,6 @@ function makeCell(y,m,d,overflow){
   return cell;
 }
 
-/* ════════════════════════════════════════════
-   SHEET EVENT TOOLTIP
-════════════════════════════════════════════ */
 const sheetTipEl   = document.getElementById('globalTip');
 const tipLogo      = document.getElementById('tipLogo');
 const tipTitle     = document.getElementById('tipTitle');
@@ -942,9 +919,6 @@ function posTip(e){
   sheetTipEl.style.left=x+'px';sheetTipEl.style.top=y+'px';
 }
 
-/* ════════════════════════════════════════════
-   MATCH TOOLTIP — with logo pair + score
-════════════════════════════════════════════ */
 const matchTipEl        = document.getElementById('matchTip');
 const matchTipClubName  = document.getElementById('matchTipClubName');
 const matchTipDate      = document.getElementById('matchTipDate');
@@ -972,17 +946,15 @@ function updateMatchFade(){
   matchTipFade.style.display=(overflows&&!atBottom)?'block':'none';
 }
 
-/* Helper: build a logo element that async-loads from club slug */
 function buildMatchLogo(slug, fallbackName){
   const wrap=document.createElement('div');wrap.className='mc-logo';
   const skel=document.createElement('div');skel.className='mc-logo-skel';wrap.appendChild(skel);
-  const em=document.createElement('span');em.style.cssText='font-size:17px;position:relative;z-index:1;';em.textContent='⚔️';
-  // attempt to load logo
+  const em=document.createElement('span');em.style.cssText='font-size:24px;position:relative;z-index:1;';em.textContent='⚔️';
   if(slug){
     fetchClubLogo(slug).then(logoUrl=>{
       if(logoUrl){
         const img=document.createElement('img');img.decoding='async';
-        img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:7px;display:block;opacity:0;transition:opacity .25s;';
+        img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:9px;display:block;opacity:0;transition:opacity .25s;';
         wrap.appendChild(img);
         const proxied=logoUrl.startsWith('https://wsrv.nl')?logoUrl:proxyImageURL(logoUrl)||logoUrl;
         onImgReady(proxied, state=>{
@@ -1017,36 +989,32 @@ function renderMatchTip(matches,y,m,d){
     badge.innerHTML=`<span class="cd-dot"></span><span class="cd-txt">${ph.text}</span>`;
     phRow.appendChild(badge);card.appendChild(phRow);
 
-    /* ── Team names title: "Our Club vs Opponent" ── */
+    /* ── REMOVED: mc-title team names text line ── */
+
     const ourDisplayName=match.ourName||'Hot Chilli CheckMate';
     const theirDisplayName=match.theirName||match.opponent||'Opponent';
-    const titleEl=document.createElement('div');titleEl.className='mc-title';
-    titleEl.textContent=`${ourDisplayName} vs ${theirDisplayName}`;
-    card.appendChild(titleEl);
 
-    /* ── Logo pair row: [our logo col] [vs block] [their logo col] ── */
+    /* ── Logo pair row ── */
     const teamsRow=document.createElement('div');teamsRow.className='mc-teams-row';
 
-    // Our team column
     const ourCol=document.createElement('div');ourCol.className='mc-team-col';
     const ourLogo=buildMatchLogo(match.ourSlug, ourDisplayName);
     const ourLabel=document.createElement('div');ourLabel.className='mc-team-name';
     ourLabel.textContent=ourDisplayName;
     ourCol.appendChild(ourLogo);ourCol.appendChild(ourLabel);
 
-    // VS + score block in the middle
+    /* ── VS block: VS label ABOVE score ── */
     const vsBlock=document.createElement('div');vsBlock.className='mc-vs-block';
+    const vsLabel=document.createElement('div');vsLabel.className='mc-vs-label';vsLabel.textContent='VS';
+    vsBlock.appendChild(vsLabel);
     if(match.ourScore!==undefined&&match.theirScore!==undefined){
       const scoreRow=document.createElement('div');scoreRow.className='mc-score-row';
       const ourCls=match.ourScore>match.theirScore?' winning':match.ourScore<match.theirScore?' losing':' tied';
       const theirCls=match.theirScore>match.ourScore?' winning':match.theirScore<match.ourScore?' losing':' tied';
       scoreRow.innerHTML=`<span class="mc-score-num${ourCls}">${match.ourScore}</span><span class="mc-score-dash">–</span><span class="mc-score-num${theirCls}">${match.theirScore}</span>`;
       vsBlock.appendChild(scoreRow);
-    }else{
-      const vsLabel=document.createElement('div');vsLabel.className='mc-vs-label';vsLabel.textContent='VS';vsBlock.appendChild(vsLabel);
     }
 
-    // Their team column
     const theirCol=document.createElement('div');theirCol.className='mc-team-col';
     const theirLogo=buildMatchLogo(match.theirSlug||match.opponentSlug, theirDisplayName);
     const theirLabel=document.createElement('div');theirLabel.className='mc-team-name';
@@ -1056,19 +1024,16 @@ function renderMatchTip(matches,y,m,d){
     teamsRow.appendChild(ourCol);teamsRow.appendChild(vsBlock);teamsRow.appendChild(theirCol);
     card.appendChild(teamsRow);
 
-    /* ── Result pill (finished) ── */
     if(match._status==='finished'&&match.result){
       const rb=document.createElement('div');rb.className='mc-result '+(match.result==='win'?'win':match.result==='lose'||match.result==='loss'?'loss':'draw');
       rb.textContent=match.result==='win'?'✓ WIN':match.result==='lose'||match.result==='loss'?'✗ LOSS':'⬛ DRAW';card.appendChild(rb);
     }
 
-    /* ── Meta: time class + boards ── */
     const meta=document.createElement('div');meta.className='mc-meta';
     const tcText=match.timeClass==='daily'?'☀️ Daily':match.timeClass==='rapid'?'⚡ Rapid':'⚡ Live';
     meta.innerHTML=`<span>${tcText}</span>${match.boards?`<span>♟ ${match.boards} boards</span>`:''}`;
     card.appendChild(meta);
 
-    /* ── CTA button ── */
     if(match.link){
       const a=document.createElement('a');a.className='mc-btn';
       if(ph.status==='ended'){a.className+=' view';a.textContent='View';}
@@ -1079,7 +1044,6 @@ function renderMatchTip(matches,y,m,d){
 
     matchTipScroll.appendChild(card);
 
-    /* Countdown auto-refresh for first card */
     if(idx===0){
       const t=setInterval(()=>{
         const p=getMatchPhase(match);
