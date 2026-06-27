@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-27T10:07:56.942Z",
-  "totalMembers": 1447,
-  "activeToday": 231,
+  "updated": "2026-06-27T11:55:01.064Z",
+  "totalMembers": 1446,
+  "activeToday": 260,
   "players": [
     {
-      "username": "gm_shadowvn",
-      "total_pts": 222,
-      "bullet_pts": 3,
-      "blitz_pts": 219,
+      "username": "queiser",
+      "total_pts": 360,
+      "bullet_pts": 0,
+      "blitz_pts": 360,
       "rapid_pts": 0,
-      "bullet_g": 1,
-      "blitz_g": 25,
+      "bullet_g": 0,
+      "blitz_g": 40,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/458010368.44bf3416.200x200o.dcd7a7f86111.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
+    {
+      "username": "valentin-iulian",
+      "total_pts": 321,
+      "bullet_pts": 0,
+      "blitz_pts": 321,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 37,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/22411714.24bbe98d.200x200o.68fb8b0e4c24.jpg"
     },
     {
       "username": "diligent_dragon",
-      "total_pts": 210,
+      "total_pts": 261,
       "bullet_pts": 25,
-      "blitz_pts": 150,
-      "rapid_pts": 35,
+      "blitz_pts": 186,
+      "rapid_pts": 50,
       "bullet_g": 9,
-      "blitz_g": 18,
-      "rapid_g": 3,
+      "blitz_g": 22,
+      "rapid_g": 4,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.294c77be.200x200o.89f762ce3d98.jpg"
-    },
-    {
-      "username": "chesslover_mei-new",
-      "total_pts": 208,
-      "bullet_pts": 3,
-      "blitz_pts": 0,
-      "rapid_pts": 205,
-      "bullet_g": 1,
-      "blitz_g": 0,
-      "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/294160835.1ee4f9e4.200x200o.bb825c63ce33.jpg"
     }
   ]
 }
