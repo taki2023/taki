@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-27T07:49:47.411Z",
-  "totalMembers": 1443,
-  "activeToday": 183,
+  "updated": "2026-06-27T10:07:56.942Z",
+  "totalMembers": 1447,
+  "activeToday": 231,
   "players": [
     {
-      "username": "tsuna-chan",
-      "total_pts": 156,
-      "bullet_pts": 33,
-      "blitz_pts": 108,
-      "rapid_pts": 15,
-      "bullet_g": 11,
-      "blitz_g": 12,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/394145309.ec83d5ba.200x200o.17aba7a8f671.jpg"
+      "username": "gm_shadowvn",
+      "total_pts": 222,
+      "bullet_pts": 3,
+      "blitz_pts": 219,
+      "rapid_pts": 0,
+      "bullet_g": 1,
+      "blitz_g": 25,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/458010368.44bf3416.200x200o.dcd7a7f86111.jpg"
     },
     {
-      "username": "balze_end1337",
-      "total_pts": 153,
-      "bullet_pts": 0,
-      "blitz_pts": 153,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 17,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.81107396.200x200o.59eb87edd6a0.png"
+      "username": "diligent_dragon",
+      "total_pts": 210,
+      "bullet_pts": 25,
+      "blitz_pts": 150,
+      "rapid_pts": 35,
+      "bullet_g": 9,
+      "blitz_g": 18,
+      "rapid_g": 3,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.294c77be.200x200o.89f762ce3d98.jpg"
     },
     {
-      "username": "shorttemperedbullet",
-      "total_pts": 153,
-      "bullet_pts": 105,
-      "blitz_pts": 48,
-      "rapid_pts": 0,
-      "bullet_g": 37,
-      "blitz_g": 6,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "chesslover_mei-new",
+      "total_pts": 208,
+      "bullet_pts": 3,
+      "blitz_pts": 0,
+      "rapid_pts": 205,
+      "bullet_g": 1,
+      "blitz_g": 0,
+      "rapid_g": 15,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/294160835.1ee4f9e4.200x200o.bb825c63ce33.jpg"
     }
   ]
 }
