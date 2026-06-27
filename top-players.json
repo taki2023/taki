@@ -1,40 +1,40 @@
 {
-  "updated": "2026-06-27T00:06:38.118Z",
-  "totalMembers": 1439,
-  "activeToday": 7,
+  "updated": "2026-06-27T04:35:13.154Z",
+  "totalMembers": 1440,
+  "activeToday": 109,
   "players": [
     {
-      "username": "kappenhouser",
-      "total_pts": 12,
-      "bullet_pts": 3,
-      "blitz_pts": 9,
+      "username": "shorttemperedbullet",
+      "total_pts": 153,
+      "bullet_pts": 105,
+      "blitz_pts": 48,
       "rapid_pts": 0,
-      "bullet_g": 1,
-      "blitz_g": 1,
+      "bullet_g": 37,
+      "blitz_g": 6,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/355199577.2e354d58.200x200o.8de49e2555ce.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "fahhhhhhhhhh12345678",
-      "total_pts": 9,
-      "bullet_pts": 0,
-      "blitz_pts": 9,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 1,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/536975867.525f278b.200x200o.f47f4f911240.jpg"
+      "username": "tsuna-chan",
+      "total_pts": 123,
+      "bullet_pts": 27,
+      "blitz_pts": 81,
+      "rapid_pts": 15,
+      "bullet_g": 9,
+      "blitz_g": 9,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/394145309.ec83d5ba.200x200o.17aba7a8f671.jpg"
     },
     {
-      "username": "smorkusporkus",
-      "total_pts": 9,
+      "username": "balze_end1337",
+      "total_pts": 117,
       "bullet_pts": 0,
-      "blitz_pts": 9,
+      "blitz_pts": 117,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 1,
+      "blitz_g": 13,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.81107396.200x200o.59eb87edd6a0.png"
     }
   ]
 }
