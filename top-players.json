@@ -1,8 +1,19 @@
 {
-  "updated": "2026-06-28T15:49:12.251Z",
+  "updated": "2026-06-28T15:52:46.594Z",
   "totalMembers": 1451,
-  "activeToday": 165,
+  "activeToday": 335,
   "players": [
+    {
+      "username": "queiser",
+      "total_pts": 996,
+      "bullet_pts": 0,
+      "blitz_pts": 996,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 112,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
     {
       "username": "blitzymeisa",
       "total_pts": 435,
@@ -15,26 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/559954323.c64c5f7d.200x200o.29120c6454d6.jpg"
     },
     {
-      "username": "damjan1989",
-      "total_pts": 324,
+      "username": "nikkotello",
+      "total_pts": 335,
       "bullet_pts": 0,
-      "blitz_pts": 234,
-      "rapid_pts": 90,
+      "blitz_pts": 0,
+      "rapid_pts": 335,
       "bullet_g": 0,
-      "blitz_g": 28,
-      "rapid_g": 6,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
-    {
-      "username": "kaniyamudhanselvaraj",
-      "total_pts": 195,
-      "bullet_pts": 9,
-      "blitz_pts": 156,
-      "rapid_pts": 30,
-      "bullet_g": 3,
-      "blitz_g": 18,
-      "rapid_g": 2,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "blitz_g": 0,
+      "rapid_g": 25,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
