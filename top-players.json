@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-28T20:13:45.003Z",
+  "updated": "2026-06-28T21:39:12.451Z",
   "totalMembers": 1453,
-  "activeToday": 384,
+  "activeToday": 399,
   "players": [
     {
       "username": "queiser",
@@ -16,13 +16,13 @@
     },
     {
       "username": "nikkotello",
-      "total_pts": 535,
+      "total_pts": 597,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 535,
+      "blitz_pts": 27,
+      "rapid_pts": 570,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 39,
+      "blitz_g": 3,
+      "rapid_g": 42,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
