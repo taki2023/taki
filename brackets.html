@@ -32,9 +32,9 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   content:'';position:absolute;bottom:-10px;left:-10%;
   width:120%;height:20px;background:#fff5f0;border-radius:50%;
 }
-.chilli{position:absolute;font-size:20px;opacity:.55;top:8px;}
-.chilli.l{left:10px;transform:rotate(-20deg);}
-.chilli.r{right:10px;transform:rotate(20deg);}
+.corner-icon{position:absolute;opacity:.65;top:5px;}
+.corner-icon.l{left:10px;font-size:28px;transform:rotate(-20deg);}
+.corner-icon.r{right:10px;font-size:30px;transform:rotate(30deg);}
 .bk-title{font-family:'Fredoka One',cursive;font-size:17px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
 .bk-sub{font-size:10px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
 
@@ -75,7 +75,7 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   pointer-events:none;
 }
 
-/* HOVER - only scale avatar, no tooltip */
+/* HOVER */
 .node:hover .av{
   transform: scale(1.18);
   border-color: #d93020;
@@ -139,8 +139,8 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 <body>
 <div class="bracket-sb">
   <div class="bk-header">
-    <div class="chilli l">🌶</div>
-    <div class="chilli r">🌶</div>
+    <div class="corner-icon l">🌶️</div>
+    <div class="corner-icon r">♞</div>
     <div class="bk-title">⚔️ HCC Admin Bracket Fights ⚔️</div>
     <div class="bk-sub">Who's the spiciest admin?</div>
   </div>
@@ -256,11 +256,12 @@ function layout(){
   const W=arena.clientWidth, H=arena.clientHeight;
   if(W<10||H<10) return;
 
-  // Bigger avatars (increased multiplier)
+  // Bigger avatars
   const av  = Math.max(36, Math.min(58, W*0.1));
   const win = av*1.3;
-  const nfs = Math.max(7.5, Math.min(10, W*0.015));
-  const nfw = av*1.7;
+  // Bigger username font size
+  const nfs = Math.max(9, Math.min(13, W*0.02));
+  const nfw = av*2;
 
   const padV = av*0.55;
   const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
