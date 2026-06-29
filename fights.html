@@ -10,460 +10,497 @@
 html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 
 .bracket-sb{
-  width:100%;
+  width:100%;height:700px;
   background:#fff5f0;
   border-radius:28px;
   border:3px solid #e8553a;
   overflow:hidden;
   position:relative;
   box-shadow:0 8px 32px rgba(217,48,32,.2);
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
 }
 
-/* ── HEADER ── */
+/* HEADER */
 .bk-header{
+  height:60px;flex-shrink:0;
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
   border-radius:24px 24px 0 0;
-  padding:14px 16px 20px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  flex-shrink:0;
+  padding:10px 16px 0;
+  text-align:center;position:relative;overflow:hidden;
 }
 .bk-header::before{
   content:'';position:absolute;bottom:-10px;left:-10%;
   width:120%;height:20px;background:#fff5f0;border-radius:50%;
 }
-.chilli-deco{position:absolute;font-size:22px;opacity:.55;top:8px;}
-.chilli-deco.left{left:10px;transform:rotate(-20deg);}
-.chilli-deco.right{right:10px;transform:rotate(20deg);}
-.bk-title{font-family:'Fredoka One',cursive;font-size:18px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
-.bk-sub{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:3px;position:relative;z-index:1;}
+.chilli{position:absolute;font-size:20px;opacity:.55;top:8px;}
+.chilli.l{left:10px;transform:rotate(-20deg);}
+.chilli.r{right:10px;transform:rotate(20deg);}
+.bk-title{font-family:'Fredoka One',cursive;font-size:17px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
+.bk-sub{font-size:10px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
 
-/* ── ARENA: full SVG canvas + absolutely positioned avatar nodes ── */
+/* ARENA */
 .bk-arena{
-  position:relative;
-  width:100%;
-  /* height set by JS based on width */
-  flex-shrink:0;
+  position:relative;width:100%;flex:1;min-height:0;
 }
 .bk-arena svg{
   position:absolute;inset:0;width:100%;height:100%;
   pointer-events:none;z-index:0;
 }
 
-/* ── AVATAR NODE ── */
+/* NODE */
 .node{
   position:absolute;
   display:flex;flex-direction:column;align-items:center;
-  transform:translate(-50%,-50%); /* centered on x,y */
-  z-index:2;cursor:pointer;
-  transition:transform .15s cubic-bezier(.34,1.56,.64,1);
+  transform:translate(-50%,-50%);
+  z-index:2;
 }
-.node:hover{transform:translate(-50%,-50%) scale(1.12);}
 .av{
   border-radius:50%;
   border:2.5px solid #f5c5b8;
   background:#fff;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Fredoka One',cursive;
-  color:#e8aa98;
+  font-family:'Fredoka One',cursive;color:#e8aa98;
   overflow:hidden;
   box-shadow:0 3px 0 #e8aa98;
-  transition:border-color .15s,box-shadow .15s;
   flex-shrink:0;
 }
-.node:hover .av{border-color:#d93020;box-shadow:0 5px 0 #d93020;}
 .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .aname{
   font-weight:900;color:#9a2010;
-  margin-top:3px;text-align:center;
+  margin-top:2px;text-align:center;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  letter-spacing:.2px;
 }
 
-/* winner glow */
+/* winner */
 .node.winner .av{
   border-color:#d93020;
   box-shadow:0 0 0 4px rgba(217,48,32,.15),0 4px 0 #8c1a10;
-  animation:winnerPulse 2.5s ease-in-out infinite;
+  animation:wp 2.5s ease-in-out infinite;
 }
-@keyframes winnerPulse{
+.node.winner .aname{color:#d93020;font-weight:900;}
+@keyframes wp{
   0%,100%{box-shadow:0 0 0 4px rgba(217,48,32,.15),0 4px 0 #8c1a10,0 0 18px rgba(217,48,32,.2);}
   50%{box-shadow:0 0 0 7px rgba(217,48,32,.1),0 6px 0 #8c1a10,0 0 34px rgba(217,48,32,.35);}
 }
 
-/* FINAL label */
-.final-label{
-  position:absolute;z-index:3;
-  font-family:'Fredoka One',cursive;color:#c73520;
-  letter-spacing:1.5px;text-transform:uppercase;
-  transform:translateX(-50%);
-  white-space:nowrap;
-}
 /* crown */
-.crown-label{
+.crown{
   position:absolute;z-index:3;
   transform:translate(-50%,-100%);
-  font-size:20px;line-height:1;
+  line-height:1;
   filter:drop-shadow(0 1px 4px rgba(217,48,32,.4));
-  animation:crownBob 2s ease-in-out infinite;
+  animation:cb 2s ease-in-out infinite;
   pointer-events:none;
 }
-@keyframes crownBob{0%,100%{transform:translate(-50%,-100%) translateY(0);}50%{transform:translate(-50%,-100%) translateY(-3px);}}
+@keyframes cb{0%,100%{transform:translate(-50%,-100%) translateY(0);}50%{transform:translate(-50%,-100%) translateY(-3px);}}
 
-/* VS label */
-.vs-label{
-  position:absolute;z-index:3;
-  font-family:'Fredoka One',cursive;color:#e8aa98;
-  letter-spacing:2px;
-  transform:translate(-50%,-50%);
-  white-space:nowrap;
+/* FOOTER */
+.bk-footer{
+  text-align:center;padding:4px 8px 7px;
+  font-size:10px;font-weight:700;color:#e8553a;flex-shrink:0;
 }
-
-/* ── FOOTER ── */
-.bk-footer{text-align:center;padding:6px 8px 10px;font-size:11px;font-weight:700;color:#e8553a;flex-shrink:0;}
 </style>
 </head>
 <body>
-<div class="bracket-sb" id="bracketSb">
+<div class="bracket-sb">
   <div class="bk-header">
-    <div class="chilli-deco left">🌶</div>
-    <div class="chilli-deco right">🌶</div>
+    <div class="chilli l">🌶</div>
+    <div class="chilli r">🌶</div>
     <div class="bk-title">⚔️ HCC Admin Bracket Fights ⚔️</div>
-    <div class="bk-sub">Who's the spiciest admin? Cast your votes!</div>
+    <div class="bk-sub">Who's the spiciest admin?</div>
   </div>
   <div class="bk-arena" id="arena">
     <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="crown" id="crown">👑</div>
   </div>
   <div class="bk-footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 </div>
 
 <script>
-/* ══ DATA ══ */
+/* ══════════════════════════════════════════
+   EDIT ONLY THIS SECTION
+   ══════════════════════════════════════════
+   admins: list of 8 players in bracket order.
+     Pairing: 0vs1, 2vs3 (left), 4vs5, 6vs7 (right)
+   
+   scores: enter as {w, l} where w = winner's score, l = loser's score.
+     Leave as null if match not yet played.
+   
+   winners: index into admins[] — who won each match.
+     Leave as null if not yet played.
+   ══════════════════════════════════════════ */
+
 const admins = [
-  {name:'@Admin1',avatar:''},
-  {name:'@Admin2',avatar:''},
-  {name:'@Admin3',avatar:''},
-  {name:'@Admin4',avatar:''},
-  {name:'@Admin5',avatar:''},
-  {name:'@Admin6',avatar:''},
-  {name:'@Admin7',avatar:''},
-  {name:'@Admin8',avatar:''},
+  { name:'Admin1', chess:'Admin1' },
+  { name:'Admin2', chess:'Admin2' },
+  { name:'Admin3', chess:'Admin3' },
+  { name:'Admin4', chess:'Admin4' },
+  { name:'Admin5', chess:'Admin5' },
+  { name:'Admin6', chess:'Admin6' },
+  { name:'Admin7', chess:'Admin7' },
+  { name:'Admin8', chess:'Admin8' },
 ];
 
-/* ══ STATE ══ */
-// semi[0,1] = winner of QF pair 0,1 (left side)
-// semi[2,3] = winner of QF pair 2,3 (right side)
-const semi    = [4,5,6,3];
-const finals  = [2,3]; // finals[0]=winner of semi[0,1], finals[1]=winner of semi[2,3]
-let   champion = 3;
+// Quarter finals: QF0=0vs1, QF1=2vs3, QF2=4vs5, QF3=6vs7
+// score: { w: winner_score, l: loser_score }  or  null
+const MATCHES = {
+  qf0: { winner: null, score: null },   // e.g. { winner: 0, score: { w:3, l:1 } }
+  qf1: { winner: null, score: null },
+  qf2: { winner: null, score: null },
+  qf3: { winner: null, score: null },
+  sf0: { winner: null, score: null },   // semi left:  winner of qf0 vs winner of qf1
+  sf1: { winner: null, score: null },   // semi right: winner of qf2 vs winner of qf3
+  fin: { winner: null, score: null },   // final: winner of sf0 vs winner of sf1
+};
 
-/* ══ NODE DOM REFS ══ */
-// qf[0-3]=left, qf[4-7]=right
-const qfNodes   = [];
-const semiNodes = [];
-const finNodes  = [];
-let   winNode   = null;
+/* ══════════════════════════════════════════
+   END OF EDIT SECTION — don't touch below
+   ══════════════════════════════════════════ */
 
-const arena  = document.getElementById('arena');
-const svg    = document.getElementById('svg');
-
-/* ══ CREATE NODE ══ */
-function createNode(cls=''){
-  const wrap = document.createElement('div');
-  wrap.className = 'node'+(cls?' '+cls:'');
-  const av = document.createElement('div');
-  av.className = 'av';
-  av.textContent = '?';
-  const nm = document.createElement('div');
-  nm.className = 'aname';
-  nm.textContent = '?';
-  wrap.appendChild(av);
-  wrap.appendChild(nm);
-  arena.appendChild(wrap);
-  return wrap;
+// Derive participant of each slot from winners
+function qfPlayer(qi, side){ // side 0=top, 1=bottom of that QF pair
+  const pairs = [[0,1],[2,3],[4,5],[6,7]];
+  return pairs[qi][side];
+}
+function sfPlayer(si, side){ // side 0=top winner of qf, 1=bottom winner of qf
+  const qi = si===0 ? (side===0?0:1) : (side===0?2:3);
+  return MATCHES['qf'+qi].winner;
+}
+function finPlayer(side){ // 0=sf0 winner, 1=sf1 winner
+  return MATCHES['sf'+side].winner;
 }
 
-function setNodeContent(node, adminIdx){
-  const av = node.querySelector('.av');
-  const nm = node.querySelector('.aname');
+/* ══ AVATAR CACHE ══ */
+const avatarCache = {};
+async function fetchAvatar(username){
+  if(!username) return null;
+  if(avatarCache[username]!==undefined) return avatarCache[username];
+  try{
+    const r = await fetch(`https://api.chess.com/pub/player/${username.toLowerCase()}`);
+    if(!r.ok){ avatarCache[username]=null; return null; }
+    const d = await r.json();
+    avatarCache[username] = d.avatar||null;
+    return avatarCache[username];
+  }catch{ avatarCache[username]=null; return null; }
+}
+
+/* ══ DOM ══ */
+const arena = document.getElementById('arena');
+const svgEl = document.getElementById('svg');
+const crown = document.getElementById('crown');
+
+function makeNode(cls=''){
+  const w=document.createElement('div');
+  w.className='node'+(cls?' '+cls:'');
+  const av=document.createElement('div'); av.className='av'; av.textContent='?';
+  const nm=document.createElement('div'); nm.className='aname'; nm.textContent='—';
+  w.appendChild(av); w.appendChild(nm);
+  arena.appendChild(w);
+  return w;
+}
+
+// 8 QF nodes, 4 SF nodes (winners of QFs), 2 FIN nodes, 1 WIN node
+const qfN  = Array.from({length:8},  ()=>makeNode());
+const sfN  = Array.from({length:4},  ()=>makeNode());
+const finN = Array.from({length:2},  ()=>makeNode());
+const winN = makeNode('winner');
+
+async function setNode(node, adminIdx, isWinner=false){
+  const av=node.querySelector('.av'), nm=node.querySelector('.aname');
+  node.classList.toggle('winner', isWinner);
   if(adminIdx===null||adminIdx===undefined){
-    av.textContent='?'; nm.textContent='?'; return;
+    av.innerHTML=''; av.textContent='?'; nm.textContent='—'; return;
   }
-  const a = admins[adminIdx];
-  nm.textContent = a.name;
-  if(a.avatar){
+  const a=admins[adminIdx];
+  nm.textContent='@'+a.chess;
+  const url=await fetchAvatar(a.chess);
+  if(url){
+    av.innerHTML='';
     const img=document.createElement('img');
-    img.src=a.avatar; img.alt=a.name;
-    img.onerror=()=>{img.remove();av.textContent='?';};
-    av.innerHTML=''; av.appendChild(img);
+    img.src=url; img.alt=a.name;
+    img.onerror=()=>{ img.remove(); av.textContent=a.chess.slice(0,2).toUpperCase(); };
+    av.appendChild(img);
   } else {
-    av.textContent='?';
+    av.innerHTML=''; av.textContent=a.chess.slice(0,2).toUpperCase();
   }
 }
 
-/* ══ BUILD DOM NODES ONCE ══ */
-function buildNodes(){
-  for(let i=0;i<8;i++){
-    const n=createNode();
-    n.querySelector('.av').addEventListener('click',()=>clickQF(i));
-    qfNodes[i]=n;
-  }
-  for(let i=0;i<4;i++){
-    const n=createNode();
-    n.querySelector('.av').addEventListener('click',()=>clickSemi(i));
-    semiNodes[i]=n;
-  }
-  for(let i=0;i<2;i++){
-    const n=createNode();
-    n.querySelector('.av').addEventListener('click',()=>clickFinal(i));
-    finNodes[i]=n;
-  }
-  winNode=createNode('winner');
-
-  // decorative labels
-  const fl=document.createElement('div');fl.className='final-label';fl.id='finalLabel';arena.appendChild(fl);
-  const cr=document.createElement('div');cr.className='crown-label';cr.id='crownLabel';cr.textContent='👑';arena.appendChild(cr);
-  const vs=document.createElement('div');vs.className='vs-label';vs.id='vsLabel';vs.textContent='VS';arena.appendChild(vs);
-
-  refreshContent();
-  layout();
+async function refreshNodes(){
+  // QF: always fixed
+  for(let i=0;i<8;i++) await setNode(qfN[i], i);
+  // SF: winners of QFs
+  for(let i=0;i<4;i++) await setNode(sfN[i], MATCHES['qf'+i].winner);
+  // FIN: winners of SFs
+  for(let i=0;i<2;i++) await setNode(finN[i], MATCHES['sf'+i].winner);
+  // WIN
+  const champ = MATCHES.fin.winner;
+  await setNode(winN, champ, champ!==null);
+  if(champ===null) winN.querySelector('.aname').textContent='Champion';
 }
 
-/* ══ CLICK HANDLERS ══ */
-function clickQF(idx){
-  const si = idx<4 ? Math.floor(idx/2) : 2+Math.floor((idx-4)/2);
-  semi[si]=idx;
-  refreshContent(); layout();
-}
-function clickSemi(si){
-  const fi = si<2?0:1;
-  finals[fi]=semi[si];
-  refreshContent(); layout();
-}
-function clickFinal(fi){
-  champion=finals[fi];
-  refreshContent(); layout();
-}
+/* ══ LAYOUT ══ */
+let L = null; // last layout params
 
-function refreshContent(){
-  for(let i=0;i<8;i++) setNodeContent(qfNodes[i],i);
-  for(let i=0;i<4;i++) setNodeContent(semiNodes[i],semi[i]);
-  for(let i=0;i<2;i++) setNodeContent(finNodes[i],finals[i]);
-  setNodeContent(winNode,champion);
-  winNode.querySelector('.aname').textContent = champion!==null ? admins[champion].name : 'Champion';
-}
-
-/* ══ LAYOUT — fully computed from arena width ══ */
 function layout(){
-  const W = arena.clientWidth;
-  if(W < 10) return;
+  const W=arena.clientWidth, H=arena.clientHeight;
+  if(W<10||H<10) return;
 
-  // Responsive sizes
-  const avSize  = Math.max(32, Math.min(54, W * 0.095));
-  const nameSize= Math.max(7,  Math.min(9,  W * 0.016));
-  const nameW   = avSize * 1.4;
-  const winSize = avSize * 1.15;
+  const av  = Math.max(26, Math.min(44, W*0.075));
+  const win = av*1.2;
+  const nfs = Math.max(7, Math.min(9, W*0.014));
+  const nfw = av*1.5;
 
-  // Row heights: arena height = avSize * 9 (enough for 4 QF rows with spacing)
-  const rows = 4;
-  const padV = avSize * 0.6;
-  const H    = avSize * rows * 2.4 + padV * 2;
-  arena.style.height = H + 'px';
+  // 4 QF rows evenly spaced
+  const padV = av*0.55;
+  const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
 
-  // Column X centers (5 columns: LQF, LSemi, Center, RSemi, RQF)
-  const colW = W / 5;
-  const xLQF   = colW * 0.5;
-  const xLSemi = colW * 1.5;
-  const xC     = colW * 2.5;
-  const xRSemi = colW * 3.5;
-  const xRQF   = colW * 4.5;
-
-  // QF Y positions: 4 slots evenly spaced
-  const qfYs = [];
-  for(let i=0;i<4;i++) qfYs.push(padV + (H - padV*2) * (i / 3));
-
-  // Semi Y positions: midpoint between each pair of QF
-  const semiYs = [
-    (qfYs[0]+qfYs[1])/2,
-    (qfYs[2]+qfYs[3])/2,
-    (qfYs[0]+qfYs[1])/2,
-    (qfYs[2]+qfYs[3])/2,
+  // SF nodes sit at the midpoint Y between their two QFs
+  // and at the midpoint X between QF column and the finalists column
+  const sfY = [
+    (qfY[0]+qfY[1])/2,
+    (qfY[2]+qfY[3])/2,
+    (qfY[0]+qfY[1])/2,
+    (qfY[2]+qfY[3])/2,
   ];
 
-  // Final Y = midpoint between the two semi Y positions
-  const finY   = (semiYs[0]+semiYs[1])/2;
-  const finGap = avSize * 1.1;  // gap between the two finalist circles
-  const finX0  = xC - finGap;
-  const finX1  = xC + finGap;
+  // Columns
+  const cw   = W/5;
+  const xLQF = cw*0.5;
+  const xRQF = cw*4.5;
+  // SF nodes sit midway between QF and center
+  const xLSF = cw*1.5;
+  const xRSF = cw*3.5;
+  const xC   = cw*2.5;
 
-  // Winner sits above finalists
-  const winY   = finY - avSize * 2.4;
-  const finalLabelY = finY - avSize * 0.85;
-  const crownY = winY - winSize/2 - 2;
+  // Finalist nodes sit midway between SF and center
+  const xLFin = (xLSF+xC)/2;
+  const xRFin = (xRSF+xC)/2;
 
-  // Apply sizes to all avatars
-  function styleAv(node, size){
+  // Finalist Y = midpoint of the two SF rows = center of bracket
+  const finY = (sfY[0]+sfY[1])/2;
+
+  // Winner sits directly above, vertically centered between finalists and top
+  const winY = finY - av*2.4;
+
+  L = {W,H,av,win,nfs,nfw,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin};
+
+  function sizeNode(node, size){
     const av=node.querySelector('.av');
     av.style.width=size+'px'; av.style.height=size+'px';
-    av.style.fontSize=(size*0.4)+'px';
+    av.style.fontSize=(size*0.38)+'px';
     const nm=node.querySelector('.aname');
-    nm.style.fontSize=nameSize+'px';
-    nm.style.maxWidth=nameW+'px';
+    nm.style.fontSize=nfs+'px'; nm.style.maxWidth=nfw+'px';
   }
-  for(let i=0;i<8;i++) styleAv(qfNodes[i], avSize);
-  for(let i=0;i<4;i++) styleAv(semiNodes[i], avSize);
-  for(let i=0;i<2;i++) styleAv(finNodes[i], avSize);
-  styleAv(winNode, winSize);
+  for(let i=0;i<8;i++) sizeNode(qfN[i], av);
+  for(let i=0;i<4;i++) sizeNode(sfN[i], av);
+  for(let i=0;i<2;i++) sizeNode(finN[i], av);
+  sizeNode(winN, win);
 
-  // Position nodes
-  function pos(node, x, y){
-    node.style.left = x+'px';
-    node.style.top  = y+'px';
+  function posNode(node, x, y){
+    node.style.left=x+'px'; node.style.top=y+'px';
   }
   // Left QF
-  pos(qfNodes[0], xLQF,  qfYs[0]);
-  pos(qfNodes[1], xLQF,  qfYs[1]);
-  pos(qfNodes[2], xLQF,  qfYs[2]);
-  pos(qfNodes[3], xLQF,  qfYs[3]);
-  // Left Semi
-  pos(semiNodes[0], xLSemi, semiYs[0]);
-  pos(semiNodes[1], xLSemi, semiYs[1]);
+  posNode(qfN[0], xLQF, qfY[0]);
+  posNode(qfN[1], xLQF, qfY[1]);
+  posNode(qfN[2], xLQF, qfY[2]);
+  posNode(qfN[3], xLQF, qfY[3]);
+  // Left SF (at QF bracket intersection)
+  posNode(sfN[0], xLSF, sfY[0]);
+  posNode(sfN[1], xLSF, sfY[1]);
   // Right QF
-  pos(qfNodes[4], xRQF, qfYs[0]);
-  pos(qfNodes[5], xRQF, qfYs[1]);
-  pos(qfNodes[6], xRQF, qfYs[2]);
-  pos(qfNodes[7], xRQF, qfYs[3]);
-  // Right Semi
-  pos(semiNodes[2], xRSemi, semiYs[2]);
-  pos(semiNodes[3], xRSemi, semiYs[3]);
-  // Finalists
-  pos(finNodes[0], finX0, finY);
-  pos(finNodes[1], finX1, finY);
+  posNode(qfN[4], xRQF, qfY[0]);
+  posNode(qfN[5], xRQF, qfY[1]);
+  posNode(qfN[6], xRQF, qfY[2]);
+  posNode(qfN[7], xRQF, qfY[3]);
+  // Right SF
+  posNode(sfN[2], xRSF, sfY[2]);
+  posNode(sfN[3], xRSF, sfY[3]);
+  // Finalists (at SF bracket intersection)
+  posNode(finN[0], xLFin, finY);
+  posNode(finN[1], xRFin, finY);
   // Winner
-  pos(winNode, xC, winY);
+  posNode(winN, xC, winY);
 
-  // Decorative labels
-  const fl=document.getElementById('finalLabel');
-  fl.style.left=xC+'px'; fl.style.top=finalLabelY+'px';
-  fl.style.fontSize=Math.max(9, nameSize*1.1)+'px';
+  // Crown
+  crown.style.left=xC+'px';
+  crown.style.top=(winY-win/2)+'px';
+  crown.style.fontSize=Math.max(14,av*0.38)+'px';
 
-  const cr=document.getElementById('crownLabel');
-  cr.style.left=xC+'px'; cr.style.top=crownY+'px';
-  cr.style.fontSize=Math.max(14, avSize*0.35)+'px';
-
-  const vs=document.getElementById('vsLabel');
-  vs.style.left=xC+'px'; vs.style.top=finY+'px';
-  vs.style.fontSize=Math.max(10, avSize*0.28)+'px';
-
-  drawLines({xLQF,xLSemi,xC,xRSemi,xRQF,qfYs,semiYs,finY,finX0,finX1,winY,winSize,avSize});
+  drawLines();
 }
 
-/* ══ DRAW LINES ══ */
-function drawLines(p){
-  svg.innerHTML='';
-  const {xLQF,xLSemi,xC,xRSemi,xRQF,qfYs,semiYs,finY,finX0,finX1,winY,winSize,avSize} = p;
+/* ══ DRAW SVG LINES + SCORE LABELS ══ */
+function drawLines(){
+  svgEl.innerHTML='';
+  if(!L) return;
+  const {av,win,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin} = L;
+  const r  = av/2;
+  const rw = win/2;
 
   const DIM    = '#f5c5b8';
-  const BRIGHT = '#d93020';
-  const r = avSize/2;
-  const rW= winSize/2;
+  const WIN_C  = '#d93020';  // advancing line
+  const LOSE_C = '#f5c5b8';  // loser's line stays dim
+  const SCORE_WIN  = '#2a9a4a';
+  const SCORE_LOSE = '#c03020';
+  const FS = Math.max(7.5, av*0.22);
 
-  function seg(x1,y1,x2,y2,color,width=2){
+  function line(x1,y1,x2,y2,color,w=1.8){
     const l=document.createElementNS('http://www.w3.org/2000/svg','line');
     l.setAttribute('x1',x1);l.setAttribute('y1',y1);
     l.setAttribute('x2',x2);l.setAttribute('y2',y2);
-    l.setAttribute('stroke',color);
-    l.setAttribute('stroke-width',width);
+    l.setAttribute('stroke',color);l.setAttribute('stroke-width',w);
     l.setAttribute('stroke-linecap','round');
-    svg.appendChild(l);
+    svgEl.appendChild(l); return l;
   }
 
-  // ── LEFT QF → Semi ──
-  for(let p=0;p<2;p++){
-    const ya=qfYs[p*2], yb=qfYs[p*2+1];
-    const ys=semiYs[p];
-    const midX=(xLQF+xLSemi)/2;
-    const adv=semi[p]!==null;
-    const wA=adv && semi[p]===p*2;
-    const wB=adv && semi[p]===p*2+1;
-    // from each QF avatar right edge → midX
-    seg(xLQF+r, ya, midX, ya, wA?BRIGHT:DIM);
-    seg(xLQF+r, yb, midX, yb, wB?BRIGHT:DIM);
-    // vertical bracket
-    seg(midX, ya, midX, yb, adv?BRIGHT:DIM);
-    // midX at midY → semi left edge
-    seg(midX, ys, xLSemi-r, ys, adv?BRIGHT:DIM);
+  function scoreLabel(x,y,text,color,anchor='middle'){
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',x);t.setAttribute('y',y);
+    t.setAttribute('text-anchor',anchor);
+    t.setAttribute('dominant-baseline','middle');
+    t.setAttribute('font-family','Fredoka One, cursive');
+    t.setAttribute('font-size',FS);
+    t.setAttribute('fill',color);
+    t.textContent=text;
+    svgEl.appendChild(t);
   }
 
-  // ── LEFT Semi → Finalist[0] ──
+  // ── QF brackets ──
+  // Left QF pair 0 (players 0 & 1 → sfN[0] at xLSF, sfY[0])
+  function drawQFPair(pairIdx){
+    // pairIdx 0 or 1 for left; 2 or 3 for right
+    const isRight = pairIdx >= 2;
+    const qi = pairIdx; // matches MATCHES['qf'+qi]
+    const localPair = isRight ? pairIdx-2 : pairIdx;
+    const ya = qfY[localPair*2];
+    const yb = qfY[localPair*2+1];
+    const ymid = (ya+yb)/2;
+    const sfX  = isRight ? xRSF : xLSF;
+    const sfYi = isRight ? sfY[2+localPair] : sfY[localPair];
+    const qfX  = isRight ? xRQF : xLQF;
+    const m    = MATCHES['qf'+qi];
+    const pairs= [[0,1],[2,3],[4,5],[6,7]];
+    const [pA, pB] = pairs[qi];
+    const hasWinner = m.winner !== null;
+    const wA = hasWinner && m.winner===pA;
+    const wB = hasWinner && m.winner===pB;
+
+    // Three segments: QF_A → junction, QF_B → junction, junction → SF node
+    // Only the winner's segment + the outgoing segment are bright
+    const colA = wA ? WIN_C : DIM;
+    const colB = wB ? WIN_C : DIM;
+    const colOut = hasWinner ? WIN_C : DIM;
+
+    if(!isRight){
+      // horizontal from player right edge to junction X
+      const jX = xLSF; // junction is the SF node itself
+      line(qfX+r, ya, jX-r, ya, colA);
+      line(qfX+r, yb, jX-r, yb, colB);
+      // vertical bracket at junction
+      line(jX-r, ya, jX-r, sfYi, colA);
+      line(jX-r, yb, jX-r, sfYi, colB);
+      // SF node is right there — score label on the bracket arm
+      if(m.score && hasWinner){
+        const losIdx = wA ? pB : pA;
+        const winScore = m.score.w, loseScore = m.score.l;
+        const winY2 = wA?ya:yb, loseY2 = wA?yb:ya;
+        scoreLabel(jX-r-4, winY2,  winScore,  SCORE_WIN,  'end');
+        scoreLabel(jX-r-4, loseY2, loseScore, SCORE_LOSE, 'end');
+      }
+    } else {
+      const jX = xRSF;
+      line(qfX-r, ya, jX+r, ya, colA);
+      line(qfX-r, yb, jX+r, yb, colB);
+      line(jX+r, ya, jX+r, sfYi, colA);
+      line(jX+r, yb, jX+r, sfYi, colB);
+      if(m.score && hasWinner){
+        const winY2 = wA?ya:yb, loseY2 = wA?yb:ya;
+        scoreLabel(jX+r+4, winY2,  m.score.w, SCORE_WIN,  'start');
+        scoreLabel(jX+r+4, loseY2, m.score.l, SCORE_LOSE, 'start');
+      }
+    }
+  }
+  for(let i=0;i<4;i++) drawQFPair(i);
+
+  // ── SF → Finalist lines ──
+  // sfN[0] at (xLSF, sfY[0]), sfN[1] at (xLSF, sfY[1]) → finN[0] at (xLFin, finY)
+  function drawSFPair(si){
+    const m = MATCHES['sf'+si];
+    const sfXA = si===0 ? xLSF : xRSF;
+    const sfXB = si===0 ? xLSF : xRSF;
+    const finX = si===0 ? xLFin : xRFin;
+    const sfYA = si===0 ? sfY[0] : sfY[2];
+    const sfYB = si===0 ? sfY[1] : sfY[3];
+    const pA = MATCHES['qf'+(si*2)].winner;
+    const pB = MATCHES['qf'+(si*2+1)].winner;
+    const hasWinner = m.winner!==null;
+    const wA = hasWinner && m.winner===pA;
+    const wB = hasWinner && m.winner===pB;
+    const colA = wA ? WIN_C : DIM;
+    const colB = wB ? WIN_C : DIM;
+
+    if(si===0){
+      // horizontal from sf right edge → junctionX, vertical down/up to finY
+      const jX = xLFin;
+      line(sfXA+r, sfYA, jX-r, sfYA, colA);
+      line(sfXB+r, sfYB, jX-r, sfYB, colB);
+      line(jX-r, sfYA, jX-r, sfYB, hasWinner?WIN_C:DIM);
+      if(m.score && hasWinner){
+        const winYs = wA?sfYA:sfYB, loseYs = wA?sfYB:sfYA;
+        scoreLabel(jX-r-4, winYs,  m.score.w, SCORE_WIN,  'end');
+        scoreLabel(jX-r-4, loseYs, m.score.l, SCORE_LOSE, 'end');
+      }
+    } else {
+      const jX = xRFin;
+      line(sfXA-r, sfYA, jX+r, sfYA, colA);
+      line(sfXB-r, sfYB, jX+r, sfYB, colB);
+      line(jX+r, sfYA, jX+r, sfYB, hasWinner?WIN_C:DIM);
+      if(m.score && hasWinner){
+        const winYs = wA?sfYA:sfYB, loseYs = wA?sfYB:sfYA;
+        scoreLabel(jX+r+4, winYs,  m.score.w, SCORE_WIN,  'start');
+        scoreLabel(jX+r+4, loseYs, m.score.l, SCORE_LOSE, 'start');
+      }
+    }
+  }
+  drawSFPair(0);
+  drawSFPair(1);
+
+  // ── Finals → Winner: direct straight lines from each finalist to winner ──
   {
-    const ys0=semiYs[0], ys1=semiYs[1];
-    const midX=(xLSemi+finX0)/2;
-    const adv0 = finals[0]!==null && finals[0]===semi[0];
-    const adv1 = finals[0]!==null && finals[0]===semi[1];
-    const adv  = finals[0]!==null;
-    // from each semi right edge → midX
-    seg(xLSemi+r, ys0, midX, ys0, adv0?BRIGHT:DIM);
-    seg(xLSemi+r, ys1, midX, ys1, adv1?BRIGHT:DIM);
-    // vertical bracket
-    seg(midX, ys0, midX, ys1, adv?BRIGHT:DIM);
-    // midX at finY → finalist[0] left edge
-    seg(midX, finY, finX0-r, finY, adv?BRIGHT:DIM);
-  }
+    const m = MATCHES.fin;
+    const pA = MATCHES.sf0.winner;
+    const pB = MATCHES.sf1.winner;
+    const hasWinner = m.winner!==null;
+    const wA = hasWinner && m.winner===pA;
+    const wB = hasWinner && m.winner===pB;
+    const colA = wA ? WIN_C : DIM;
+    const colB = wB ? WIN_C : DIM;
 
-  // ── RIGHT QF → Semi ──
-  for(let p=0;p<2;p++){
-    const qi=4+p*2;
-    const ya=qfYs[p*2], yb=qfYs[p*2+1];
-    const ys=semiYs[2+p];
-    const midX=(xRQF+xRSemi)/2;
-    const adv=semi[2+p]!==null;
-    const wA=adv && semi[2+p]===qi;
-    const wB=adv && semi[2+p]===qi+1;
-    seg(xRQF-r, ya, midX, ya, wA?BRIGHT:DIM);
-    seg(xRQF-r, yb, midX, yb, wB?BRIGHT:DIM);
-    seg(midX, ya, midX, yb, adv?BRIGHT:DIM);
-    seg(midX, ys, xRSemi+r, ys, adv?BRIGHT:DIM);
-  }
+    // Straight line from finN[0] top → winN bottom
+    // finN[0] at (xLFin, finY), winN at (xC, winY)
+    line(xLFin, finY-r,   xC, winY+rw, colA, 2);
+    line(xRFin, finY-r,   xC, winY+rw, colB, 2);
 
-  // ── RIGHT Semi → Finalist[1] ──
-  {
-    const ys2=semiYs[2], ys3=semiYs[3];
-    const midX=(xRSemi+finX1)/2;
-    const adv2 = finals[1]!==null && finals[1]===semi[2];
-    const adv3 = finals[1]!==null && finals[1]===semi[3];
-    const adv  = finals[1]!==null;
-    seg(xRSemi-r, ys2, midX, ys2, adv2?BRIGHT:DIM);
-    seg(xRSemi-r, ys3, midX, ys3, adv3?BRIGHT:DIM);
-    seg(midX, ys2, midX, ys3, adv?BRIGHT:DIM);
-    seg(midX, finY, finX1+r, finY, adv?BRIGHT:DIM);
-  }
-
-  // ── Finalists → Winner ──
-  // Each finalist goes up, they meet at a horizontal bridge, then up to winner bottom
-  {
-    const joinY  = winY + rW + 10; // just below winner circle bottom edge
-    const colW   = champion!==null ? BRIGHT : DIM;
-    const col0   = champion!==null && champion===finals[0] ? BRIGHT : DIM;
-    const col1   = champion!==null && champion===finals[1] ? BRIGHT : DIM;
-    // finalist[0] top → joinY, then across to midX
-    seg(finX0, finY-r, finX0, joinY, col0);
-    seg(finX0, joinY, xC, joinY, col0);
-    // finalist[1] top → joinY, then across to midX
-    seg(finX1, finY-r, finX1, joinY, col1);
-    seg(finX1, joinY, xC, joinY, col1);
-    // midX down from joinY to winner bottom
-    seg(xC, joinY, xC, winY+rW, colW);
+    // Score labels: place along the line, offset perpendicular
+    if(m.score && hasWinner){
+      // midpoint of each line
+      const mx0 = (xLFin+xC)/2, my0 = ((finY-r)+(winY+rw))/2;
+      const mx1 = (xRFin+xC)/2, my1 = ((finY-r)+(winY+rw))/2;
+      const sW0 = wA?m.score.w:m.score.l;
+      const sL0 = wA?m.score.l:m.score.w;
+      scoreLabel(mx0-6, my0, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
+      scoreLabel(mx1+6, my1, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
+    }
   }
 }
 
-/* ══ INIT + RESIZE ══ */
-buildNodes();
-const ro = new ResizeObserver(()=>layout());
-ro.observe(arena);
+/* ══ INIT ══ */
+async function init(){
+  await refreshNodes();
+  layout();
+}
+init();
+new ResizeObserver(()=>layout()).observe(arena);
 </script>
 </body>
 </html>
