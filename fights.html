@@ -53,6 +53,7 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   display:flex;flex-direction:column;align-items:center;
   transform:translate(-50%,-50%);
   z-index:2;
+  cursor:pointer;
 }
 .av{
   border-radius:50%;
@@ -63,12 +64,50 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   overflow:hidden;
   box-shadow:0 3px 0 #e8aa98;
   flex-shrink:0;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s ease, border-color 0.18s ease;
 }
 .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .aname{
   font-weight:900;color:#9a2010;
-  margin-top:2px;text-align:center;
+  margin-top:3px;text-align:center;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+/* HOVER */
+.node:hover .av{
+  transform: scale(1.18);
+  border-color: #d93020;
+  box-shadow: 0 0 0 3px rgba(217,48,32,.2), 0 5px 0 #c0300a;
+}
+.node:hover .aname{
+  color: #d93020;
+  transform: scale(1.08);
+}
+
+/* TOOLTIP */
+.node .tooltip{
+  position:absolute;
+  bottom:calc(100% + 6px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#d93020;
+  color:#fff;
+  font-family:'Fredoka One',cursive;
+  font-size:10px;
+  padding:3px 8px;
+  border-radius:20px;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.15s ease, transform 0.15s ease;
+  transform:translateX(-50%) translateY(4px);
+  box-shadow:0 2px 8px rgba(217,48,32,.3);
+  z-index:10;
+}
+.node:hover .tooltip{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 /* winner */
@@ -78,10 +117,30 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   animation:wp 2.5s ease-in-out infinite;
 }
 .node.winner .aname{color:#d93020;font-weight:900;}
+.node.winner:hover .av{
+  animation: none;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 6px rgba(217,48,32,.25), 0 6px 0 #8c1a10;
+}
 @keyframes wp{
   0%,100%{box-shadow:0 0 0 4px rgba(217,48,32,.15),0 4px 0 #8c1a10,0 0 18px rgba(217,48,32,.2);}
   50%{box-shadow:0 0 0 7px rgba(217,48,32,.1),0 6px 0 #8c1a10,0 0 34px rgba(217,48,32,.35);}
 }
+
+/* champion label */
+.champion-label{
+  position:absolute;
+  z-index:4;
+  transform:translateX(-50%);
+  font-family:'Fredoka One',cursive;
+  color:#d93020;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.champion-label.visible{ opacity:1; }
 
 /* crown */
 .crown{
@@ -112,6 +171,7 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   <div class="bk-arena" id="arena">
     <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
     <div class="crown" id="crown">👑</div>
+    <div class="champion-label" id="champLabel">🏆 Champion</div>
   </div>
   <div class="bk-footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 </div>
@@ -119,58 +179,33 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 <script>
 /* ══════════════════════════════════════════
    EDIT ONLY THIS SECTION
-   ══════════════════════════════════════════
-   admins: list of 8 players in bracket order.
-     Pairing: 0vs1, 2vs3 (left), 4vs5, 6vs7 (right)
-   
-   scores: enter as {w, l} where w = winner's score, l = loser's score.
-     Leave as null if match not yet played.
-   
-   winners: index into admins[] — who won each match.
-     Leave as null if not yet played.
    ══════════════════════════════════════════ */
 
 const admins = [
   { name:'Iamplayerofchess', chess:'Iamplayerofchess' },
-  { name:'cello_jello', chess:'cello_jello' },
-  { name:'Tengen', chess:'Tengen' },
-  { name:'Vaseegaren-V', chess:'Vaseegaren-V' },
-  { name:'lokesh-gamer-18', chess:'lokesh-gamer-18' },
-  { name:'Juliana3377', chess:'Juliana3377' },
-  { name:'TrofAndy', chess:'TrofAndy' },
-  { name:'Daniel2040', chess:'Daniel2040' },
+  { name:'cello_jello',      chess:'cello_jello' },
+  { name:'Tengen',           chess:'Tengen' },
+  { name:'Vaseegaren-V',     chess:'Vaseegaren-V' },
+  { name:'lokesh-gamer-18',  chess:'lokesh-gamer-18' },
+  { name:'Juliana3377',      chess:'Juliana3377' },
+  { name:'TrofAndy',         chess:'TrofAndy' },
+  { name:'Daniel2040',       chess:'Daniel2040' },
 ];
 
-// Quarter finals: QF0=0vs1, QF1=2vs3, QF2=4vs5, QF3=6vs7
-// score: { w: winner_score, l: loser_score }  or  null
 const MATCHES = {
-  qf0: { winner: null, score: null },   // e.g. { winner: 0, score: { w:3, l:1 } }
+  qf0: { winner: null, score: null },
   qf1: { winner: null, score: null },
   qf2: { winner: null, score: null },
   qf3: { winner: null, score: null },
-  sf0: { winner: null, score: null },   // semi left:  winner of qf0 vs winner of qf1
-  sf1: { winner: null, score: null },   // semi right: winner of qf2 vs winner of qf3
-  fin: { winner: null, score: null },   // final: winner of sf0 vs winner of sf1
+  sf0: { winner: null, score: null },
+  sf1: { winner: null, score: null },
+  fin: { winner: null, score: null },
 };
 
 /* ══════════════════════════════════════════
-   END OF EDIT SECTION — don't touch below
+   END OF EDIT SECTION
    ══════════════════════════════════════════ */
 
-// Derive participant of each slot from winners
-function qfPlayer(qi, side){ // side 0=top, 1=bottom of that QF pair
-  const pairs = [[0,1],[2,3],[4,5],[6,7]];
-  return pairs[qi][side];
-}
-function sfPlayer(si, side){ // side 0=top winner of qf, 1=bottom winner of qf
-  const qi = si===0 ? (side===0?0:1) : (side===0?2:3);
-  return MATCHES['qf'+qi].winner;
-}
-function finPlayer(side){ // 0=sf0 winner, 1=sf1 winner
-  return MATCHES['sf'+side].winner;
-}
-
-/* ══ AVATAR CACHE ══ */
 const avatarCache = {};
 async function fetchAvatar(username){
   if(!username) return null;
@@ -184,40 +219,56 @@ async function fetchAvatar(username){
   }catch{ avatarCache[username]=null; return null; }
 }
 
-/* ══ DOM ══ */
-const arena = document.getElementById('arena');
-const svgEl = document.getElementById('svg');
-const crown = document.getElementById('crown');
+const arena       = document.getElementById('arena');
+const svgEl       = document.getElementById('svg');
+const crown       = document.getElementById('crown');
+const champLabel  = document.getElementById('champLabel');
 
 function makeNode(cls=''){
-  const w=document.createElement('div');
-  w.className='node'+(cls?' '+cls:'');
-  const av=document.createElement('div'); av.className='av'; av.textContent='?';
-  const nm=document.createElement('div'); nm.className='aname'; nm.textContent='—';
-  w.appendChild(av); w.appendChild(nm);
+  const w  = document.createElement('div');
+  w.className = 'node'+(cls?' '+cls:'');
+  const av = document.createElement('div'); av.className='av'; av.textContent='?';
+  const nm = document.createElement('div'); nm.className='aname'; nm.textContent='—';
+  const tt = document.createElement('div'); tt.className='tooltip';
+  w.appendChild(tt);
+  w.appendChild(av);
+  w.appendChild(nm);
   arena.appendChild(w);
   return w;
 }
 
-// 8 QF nodes, 4 SF nodes (winners of QFs), 2 FIN nodes, 1 WIN node
 const qfN  = Array.from({length:8},  ()=>makeNode());
 const sfN  = Array.from({length:4},  ()=>makeNode());
 const finN = Array.from({length:2},  ()=>makeNode());
 const winN = makeNode('winner');
 
 async function setNode(node, adminIdx, isWinner=false){
-  const av=node.querySelector('.av'), nm=node.querySelector('.aname');
+  const av = node.querySelector('.av');
+  const nm = node.querySelector('.aname');
+  const tt = node.querySelector('.tooltip');
   node.classList.toggle('winner', isWinner);
+
   if(adminIdx===null||adminIdx===undefined){
-    av.innerHTML=''; av.textContent='?'; nm.textContent='—'; return;
+    av.innerHTML=''; av.textContent='?';
+    nm.textContent = isWinner ? 'Champion' : '—';
+    tt.textContent = '';
+    return;
   }
-  const a=admins[adminIdx];
-  nm.textContent='@'+a.chess;
-  const url=await fetchAvatar(a.chess);
+
+  const a = admins[adminIdx];
+  // Only username
+  nm.textContent = '@'+a.chess;
+  tt.textContent = '♟ '+a.chess+' on chess.com';
+
+  if(isWinner){
+    nm.textContent = '🏆 '+a.chess;
+  }
+
+  const url = await fetchAvatar(a.chess);
   if(url){
     av.innerHTML='';
-    const img=document.createElement('img');
-    img.src=url; img.alt=a.name;
+    const img = document.createElement('img');
+    img.src=url; img.alt=a.chess;
     img.onerror=()=>{ img.remove(); av.textContent=a.chess.slice(0,2).toUpperCase(); };
     av.appendChild(img);
   } else {
@@ -226,36 +277,32 @@ async function setNode(node, adminIdx, isWinner=false){
 }
 
 async function refreshNodes(){
-  // QF: always fixed
   for(let i=0;i<8;i++) await setNode(qfN[i], i);
-  // SF: winners of QFs
   for(let i=0;i<4;i++) await setNode(sfN[i], MATCHES['qf'+i].winner);
-  // FIN: winners of SFs
   for(let i=0;i<2;i++) await setNode(finN[i], MATCHES['sf'+i].winner);
-  // WIN
   const champ = MATCHES.fin.winner;
   await setNode(winN, champ, champ!==null);
-  if(champ===null) winN.querySelector('.aname').textContent='Champion';
+  if(champ===null){
+    winN.querySelector('.aname').textContent='Champion';
+  }
 }
 
 /* ══ LAYOUT ══ */
-let L = null; // last layout params
+let L = null;
 
 function layout(){
   const W=arena.clientWidth, H=arena.clientHeight;
   if(W<10||H<10) return;
 
-  const av  = Math.max(26, Math.min(44, W*0.075));
-  const win = av*1.2;
-  const nfs = Math.max(7, Math.min(9, W*0.014));
-  const nfw = av*1.5;
+  // Slightly bigger avatars
+  const av  = Math.max(30, Math.min(50, W*0.085));
+  const win = av*1.25;
+  const nfs = Math.max(7.5, Math.min(10, W*0.015));
+  const nfw = av*1.7;
 
-  // 4 QF rows evenly spaced
   const padV = av*0.55;
   const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
 
-  // SF nodes sit at the midpoint Y between their two QFs
-  // and at the midpoint X between QF column and the finalists column
   const sfY = [
     (qfY[0]+qfY[1])/2,
     (qfY[2]+qfY[3])/2,
@@ -263,68 +310,61 @@ function layout(){
     (qfY[2]+qfY[3])/2,
   ];
 
-  // Columns
-  const cw   = W/5;
-  const xLQF = cw*0.5;
-  const xRQF = cw*4.5;
-  // SF nodes sit midway between QF and center
-  const xLSF = cw*1.5;
-  const xRSF = cw*3.5;
-  const xC   = cw*2.5;
-
-  // Finalist nodes sit midway between SF and center
+  const cw    = W/5;
+  const xLQF  = cw*0.5;
+  const xRQF  = cw*4.5;
+  const xLSF  = cw*1.5;
+  const xRSF  = cw*3.5;
+  const xC    = cw*2.5;
   const xLFin = (xLSF+xC)/2;
   const xRFin = (xRSF+xC)/2;
-
-  // Finalist Y = midpoint of the two SF rows = center of bracket
-  const finY = (sfY[0]+sfY[1])/2;
-
-  // Winner sits directly above, vertically centered between finalists and top
-  const winY = finY - av*2.4;
+  const finY  = (sfY[0]+sfY[1])/2;
+  const winY  = finY - av*2.6;
 
   L = {W,H,av,win,nfs,nfw,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin};
 
   function sizeNode(node, size){
-    const av=node.querySelector('.av');
-    av.style.width=size+'px'; av.style.height=size+'px';
-    av.style.fontSize=(size*0.38)+'px';
-    const nm=node.querySelector('.aname');
-    nm.style.fontSize=nfs+'px'; nm.style.maxWidth=nfw+'px';
+    const a = node.querySelector('.av');
+    a.style.width=size+'px'; a.style.height=size+'px';
+    a.style.fontSize=(size*0.38)+'px';
+    const nm = node.querySelector('.aname');
+    nm.style.fontSize=nfs+'px'; nm.style.maxWidth=(nfw)+'px';
   }
-  for(let i=0;i<8;i++) sizeNode(qfN[i], av);
-  for(let i=0;i<4;i++) sizeNode(sfN[i], av);
-  for(let i=0;i<2;i++) sizeNode(finN[i], av);
+  for(let i=0;i<8;i++)  sizeNode(qfN[i], av);
+  for(let i=0;i<4;i++)  sizeNode(sfN[i], av);
+  for(let i=0;i<2;i++)  sizeNode(finN[i], av);
   sizeNode(winN, win);
 
   function posNode(node, x, y){
     node.style.left=x+'px'; node.style.top=y+'px';
   }
-  // Left QF
   posNode(qfN[0], xLQF, qfY[0]);
   posNode(qfN[1], xLQF, qfY[1]);
   posNode(qfN[2], xLQF, qfY[2]);
   posNode(qfN[3], xLQF, qfY[3]);
-  // Left SF (at QF bracket intersection)
   posNode(sfN[0], xLSF, sfY[0]);
   posNode(sfN[1], xLSF, sfY[1]);
-  // Right QF
   posNode(qfN[4], xRQF, qfY[0]);
   posNode(qfN[5], xRQF, qfY[1]);
   posNode(qfN[6], xRQF, qfY[2]);
   posNode(qfN[7], xRQF, qfY[3]);
-  // Right SF
   posNode(sfN[2], xRSF, sfY[2]);
   posNode(sfN[3], xRSF, sfY[3]);
-  // Finalists (at SF bracket intersection)
   posNode(finN[0], xLFin, finY);
   posNode(finN[1], xRFin, finY);
-  // Winner
   posNode(winN, xC, winY);
 
-  // Crown
   crown.style.left=xC+'px';
   crown.style.top=(winY-win/2)+'px';
-  crown.style.fontSize=Math.max(14,av*0.38)+'px';
+  crown.style.fontSize=Math.max(14,av*0.4)+'px';
+
+  // Champion label below winner node
+  champLabel.style.left=xC+'px';
+  champLabel.style.top=(winY+win/2+nfs+6)+'px';
+  champLabel.style.fontSize=Math.max(8,nfs*0.85)+'px';
+  const champ = MATCHES.fin.winner;
+  champLabel.classList.toggle('visible', champ!==null);
+  if(champ!==null) champLabel.textContent='🏆 Champion';
 
   drawLines();
 }
@@ -337,9 +377,8 @@ function drawLines(){
   const r  = av/2;
   const rw = win/2;
 
-  const DIM    = '#f5c5b8';
-  const WIN_C  = '#d93020';  // advancing line
-  const LOSE_C = '#f5c5b8';  // loser's line stays dim
+  const DIM        = '#f5c5b8';
+  const WIN_C      = '#d93020';
   const SCORE_WIN  = '#2a9a4a';
   const SCORE_LOSE = '#c03020';
   const FS = Math.max(7.5, av*0.22);
@@ -350,7 +389,7 @@ function drawLines(){
     l.setAttribute('x2',x2);l.setAttribute('y2',y2);
     l.setAttribute('stroke',color);l.setAttribute('stroke-width',w);
     l.setAttribute('stroke-linecap','round');
-    svgEl.appendChild(l); return l;
+    svgEl.appendChild(l);
   }
 
   function scoreLabel(x,y,text,color,anchor='middle'){
@@ -365,47 +404,33 @@ function drawLines(){
     svgEl.appendChild(t);
   }
 
-  // ── QF brackets ──
-  // Left QF pair 0 (players 0 & 1 → sfN[0] at xLSF, sfY[0])
   function drawQFPair(pairIdx){
-    // pairIdx 0 or 1 for left; 2 or 3 for right
-    const isRight = pairIdx >= 2;
-    const qi = pairIdx; // matches MATCHES['qf'+qi]
+    const isRight   = pairIdx >= 2;
+    const qi        = pairIdx;
     const localPair = isRight ? pairIdx-2 : pairIdx;
-    const ya = qfY[localPair*2];
-    const yb = qfY[localPair*2+1];
-    const ymid = (ya+yb)/2;
-    const sfX  = isRight ? xRSF : xLSF;
+    const ya   = qfY[localPair*2];
+    const yb   = qfY[localPair*2+1];
     const sfYi = isRight ? sfY[2+localPair] : sfY[localPair];
     const qfX  = isRight ? xRQF : xLQF;
     const m    = MATCHES['qf'+qi];
     const pairs= [[0,1],[2,3],[4,5],[6,7]];
-    const [pA, pB] = pairs[qi];
-    const hasWinner = m.winner !== null;
+    const [pA,pB] = pairs[qi];
+    const hasWinner = m.winner!==null;
     const wA = hasWinner && m.winner===pA;
     const wB = hasWinner && m.winner===pB;
-
-    // Three segments: QF_A → junction, QF_B → junction, junction → SF node
-    // Only the winner's segment + the outgoing segment are bright
     const colA = wA ? WIN_C : DIM;
     const colB = wB ? WIN_C : DIM;
-    const colOut = hasWinner ? WIN_C : DIM;
 
     if(!isRight){
-      // horizontal from player right edge to junction X
-      const jX = xLSF; // junction is the SF node itself
+      const jX = xLSF;
       line(qfX+r, ya, jX-r, ya, colA);
       line(qfX+r, yb, jX-r, yb, colB);
-      // vertical bracket at junction
       line(jX-r, ya, jX-r, sfYi, colA);
       line(jX-r, yb, jX-r, sfYi, colB);
-      // SF node is right there — score label on the bracket arm
       if(m.score && hasWinner){
-        const losIdx = wA ? pB : pA;
-        const winScore = m.score.w, loseScore = m.score.l;
-        const winY2 = wA?ya:yb, loseY2 = wA?yb:ya;
-        scoreLabel(jX-r-4, winY2,  winScore,  SCORE_WIN,  'end');
-        scoreLabel(jX-r-4, loseY2, loseScore, SCORE_LOSE, 'end');
+        const winY2=wA?ya:yb, loseY2=wA?yb:ya;
+        scoreLabel(jX-r-4, winY2,  m.score.w, SCORE_WIN,  'end');
+        scoreLabel(jX-r-4, loseY2, m.score.l, SCORE_LOSE, 'end');
       }
     } else {
       const jX = xRSF;
@@ -414,7 +439,7 @@ function drawLines(){
       line(jX+r, ya, jX+r, sfYi, colA);
       line(jX+r, yb, jX+r, sfYi, colB);
       if(m.score && hasWinner){
-        const winY2 = wA?ya:yb, loseY2 = wA?yb:ya;
+        const winY2=wA?ya:yb, loseY2=wA?yb:ya;
         scoreLabel(jX+r+4, winY2,  m.score.w, SCORE_WIN,  'start');
         scoreLabel(jX+r+4, loseY2, m.score.l, SCORE_LOSE, 'start');
       }
@@ -422,17 +447,14 @@ function drawLines(){
   }
   for(let i=0;i<4;i++) drawQFPair(i);
 
-  // ── SF → Finalist lines ──
-  // sfN[0] at (xLSF, sfY[0]), sfN[1] at (xLSF, sfY[1]) → finN[0] at (xLFin, finY)
   function drawSFPair(si){
-    const m = MATCHES['sf'+si];
+    const m    = MATCHES['sf'+si];
     const sfXA = si===0 ? xLSF : xRSF;
     const sfXB = si===0 ? xLSF : xRSF;
-    const finX = si===0 ? xLFin : xRFin;
     const sfYA = si===0 ? sfY[0] : sfY[2];
     const sfYB = si===0 ? sfY[1] : sfY[3];
-    const pA = MATCHES['qf'+(si*2)].winner;
-    const pB = MATCHES['qf'+(si*2+1)].winner;
+    const pA   = MATCHES['qf'+(si*2)].winner;
+    const pB   = MATCHES['qf'+(si*2+1)].winner;
     const hasWinner = m.winner!==null;
     const wA = hasWinner && m.winner===pA;
     const wB = hasWinner && m.winner===pB;
@@ -440,13 +462,12 @@ function drawLines(){
     const colB = wB ? WIN_C : DIM;
 
     if(si===0){
-      // horizontal from sf right edge → junctionX, vertical down/up to finY
       const jX = xLFin;
       line(sfXA+r, sfYA, jX-r, sfYA, colA);
       line(sfXB+r, sfYB, jX-r, sfYB, colB);
       line(jX-r, sfYA, jX-r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
-        const winYs = wA?sfYA:sfYB, loseYs = wA?sfYB:sfYA;
+        const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
         scoreLabel(jX-r-4, winYs,  m.score.w, SCORE_WIN,  'end');
         scoreLabel(jX-r-4, loseYs, m.score.l, SCORE_LOSE, 'end');
       }
@@ -456,7 +477,7 @@ function drawLines(){
       line(sfXB-r, sfYB, jX+r, sfYB, colB);
       line(jX+r, sfYA, jX+r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
-        const winYs = wA?sfYA:sfYB, loseYs = wA?sfYB:sfYA;
+        const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
         scoreLabel(jX+r+4, winYs,  m.score.w, SCORE_WIN,  'start');
         scoreLabel(jX+r+4, loseYs, m.score.l, SCORE_LOSE, 'start');
       }
@@ -465,7 +486,7 @@ function drawLines(){
   drawSFPair(0);
   drawSFPair(1);
 
-  // ── Finals → Winner: direct straight lines from each finalist to winner ──
+  // ── Finals → Winner: straight orthogonal L-shaped lines (no diagonals) ──
   {
     const m = MATCHES.fin;
     const pA = MATCHES.sf0.winner;
@@ -476,20 +497,22 @@ function drawLines(){
     const colA = wA ? WIN_C : DIM;
     const colB = wB ? WIN_C : DIM;
 
-    // Straight line from finN[0] top → winN bottom
+    // Left finalist → winner: go up from finN[0] to winY, then horizontal to winner center
     // finN[0] at (xLFin, finY), winN at (xC, winY)
-    line(xLFin, finY-r,   xC, winY+rw, colA, 2);
-    line(xRFin, finY-r,   xC, winY+rw, colB, 2);
+    // Vertical segment: xLFin, finY-r  →  xLFin, winY
+    // Horizontal segment: xLFin, winY  →  xC, winY
+    line(xLFin, finY-r,  xLFin, winY,    colA, 2);
+    line(xLFin, winY,    xC-rw, winY,    colA, 2);
 
-    // Score labels: place along the line, offset perpendicular
+    // Right finalist → winner: go up from finN[1] to winY, then horizontal to winner center
+    line(xRFin, finY-r,  xRFin, winY,    colB, 2);
+    line(xRFin, winY,    xC+rw, winY,    colB, 2);
+
     if(m.score && hasWinner){
-      // midpoint of each line
-      const mx0 = (xLFin+xC)/2, my0 = ((finY-r)+(winY+rw))/2;
-      const mx1 = (xRFin+xC)/2, my1 = ((finY-r)+(winY+rw))/2;
-      const sW0 = wA?m.score.w:m.score.l;
-      const sL0 = wA?m.score.l:m.score.w;
-      scoreLabel(mx0-6, my0, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
-      scoreLabel(mx1+6, my1, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
+      // Score labels on the vertical segments, near mid-height
+      const midY = (finY+winY)/2;
+      scoreLabel(xLFin-4, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
+      scoreLabel(xRFin+4, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
     }
   }
 }
