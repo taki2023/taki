@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
+html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 
 .bracket-sb{
-  width:100%;height:100vh;
+  width:100%;height:600px;
   background:#fff5f0;
-  border:none;
-  border-radius:0;
+  border-radius:28px;
+  border:3px solid #e8553a;
   overflow:hidden;
   position:relative;
-  box-shadow:none;
+  box-shadow:0 8px 32px rgba(217,48,32,.2);
   display:flex;flex-direction:column;
 }
 
@@ -24,7 +24,7 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
 .bk-header{
   height:60px;flex-shrink:0;
   background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
-  border-radius:0;
+  border-radius:24px 24px 0 0;
   padding:10px 16px 0;
   text-align:center;position:relative;overflow:hidden;
 }
@@ -38,13 +38,9 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
 .bk-title{font-family:'Fredoka One',cursive;font-size:17px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
 .bk-sub{font-size:10px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
 
-/* ARENA — hidden until layout ready */
+/* ARENA */
 .bk-arena{
   position:relative;width:100%;flex:1;min-height:0;
-  visibility:hidden;
-}
-.bk-arena.ready{
-  visibility:visible;
 }
 .bk-arena svg{
   position:absolute;inset:0;width:100%;height:100%;
@@ -57,11 +53,7 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
   display:flex;flex-direction:column;align-items:center;
   transform:translate(-50%,-50%);
   z-index:2;
-  opacity:0;
-  transition:opacity .35s ease;
-}
-.node.show{
-  opacity:1;
+  cursor:pointer;
 }
 .av{
   border-radius:50%;
@@ -72,12 +64,26 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
   overflow:hidden;
   box-shadow:0 3px 0 #e8aa98;
   flex-shrink:0;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s ease, border-color 0.18s ease;
 }
 .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .aname{
   font-weight:900;color:#9a2010;
-  margin-top:2px;text-align:center;
+  margin-top:8px;text-align:center;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition: color 0.15s ease, transform 0.15s ease;
+  pointer-events:none;
+}
+
+/* HOVER - only scale avatar, no tooltip */
+.node:hover .av{
+  transform: scale(1.18);
+  border-color: #d93020;
+  box-shadow: 0 0 0 3px rgba(217,48,32,.2), 0 5px 0 #c0300a;
+}
+.node:hover .aname{
+  color: #d93020;
+  transform: scale(1.08);
 }
 
 /* winner */
@@ -87,26 +93,41 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
   animation:wp 2.5s ease-in-out infinite;
 }
 .node.winner .aname{color:#d93020;font-weight:900;}
+.node.winner:hover .av{
+  animation: none;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 6px rgba(217,48,32,.25), 0 6px 0 #8c1a10;
+}
 @keyframes wp{
   0%,100%{box-shadow:0 0 0 4px rgba(217,48,32,.15),0 4px 0 #8c1a10,0 0 18px rgba(217,48,32,.2);}
   50%{box-shadow:0 0 0 7px rgba(217,48,32,.1),0 6px 0 #8c1a10,0 0 34px rgba(217,48,32,.35);}
 }
 
-/* crown */
+/* champion label */
+.champion-label{
+  position:absolute;
+  z-index:4;
+  transform:translateX(-50%);
+  font-family:'Fredoka One',cursive;
+  color:#d93020;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.champion-label.visible{ opacity:1; }
+
+/* pepper above winner */
 .crown{
   position:absolute;z-index:3;
   transform:translate(-50%,-100%);
   line-height:1;
-  filter:drop-shadow(0 2px 8px rgba(217,48,32,.5));
+  filter:drop-shadow(0 1px 4px rgba(217,48,32,.4));
   animation:cb 2s ease-in-out infinite;
   pointer-events:none;
-  opacity:0;
-  transition:opacity .35s ease;
 }
-.crown.show{
-  opacity:1;
-}
-@keyframes cb{0%,100%{transform:translate(-50%,-100%) translateY(0);}50%{transform:translate(-50%,-100%) translateY(-5px);}}
+@keyframes cb{0%,100%{transform:translate(-50%,-100%) translateY(0);}50%{transform:translate(-50%,-100%) translateY(-3px);}}
 
 /* FOOTER */
 .bk-footer{
@@ -125,7 +146,8 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
   </div>
   <div class="bk-arena" id="arena">
     <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
-    <div class="crown" id="crown">👑</div>
+    <div class="crown" id="crown">🌶️</div>
+    <div class="champion-label" id="champLabel">🌶️ Winner</div>
   </div>
   <div class="bk-footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 </div>
@@ -133,13 +155,13 @@ html,body{width:100%;height:100%;background:#1a1a1a;font-family:'Nunito',sans-se
 <script>
 const admins = [
   { name:'Iamplayerofchess', chess:'Iamplayerofchess' },
-  { name:'cello_jello', chess:'cello_jello' },
-  { name:'Tengen', chess:'Tengen' },
-  { name:'Vaseegaren-V', chess:'Vaseegaren-V' },
-  { name:'lokesh-gamer-18', chess:'lokesh-gamer-18' },
-  { name:'Juliana3377', chess:'Juliana3377' },
-  { name:'TrofAndy', chess:'TrofAndy' },
-  { name:'Daniel2040', chess:'Daniel2040' },
+  { name:'cello_jello',      chess:'cello_jello' },
+  { name:'Tengen',           chess:'Tengen' },
+  { name:'Vaseegaren-V',     chess:'Vaseegaren-V' },
+  { name:'lokesh-gamer-18',  chess:'lokesh-gamer-18' },
+  { name:'Juliana3377',      chess:'Juliana3377' },
+  { name:'TrofAndy',         chess:'TrofAndy' },
+  { name:'Daniel2040',       chess:'Daniel2040' },
 ];
 
 const MATCHES = {
@@ -152,7 +174,6 @@ const MATCHES = {
   fin: { winner: null, score: null },
 };
 
-/* ══ AVATAR CACHE ══ */
 const avatarCache = {};
 async function fetchAvatar(username){
   if(!username) return null;
@@ -166,17 +187,18 @@ async function fetchAvatar(username){
   }catch{ avatarCache[username]=null; return null; }
 }
 
-/* ══ DOM ══ */
-const arena = document.getElementById('arena');
-const svgEl = document.getElementById('svg');
-const crown = document.getElementById('crown');
+const arena       = document.getElementById('arena');
+const svgEl       = document.getElementById('svg');
+const crown       = document.getElementById('crown');
+const champLabel  = document.getElementById('champLabel');
 
 function makeNode(cls=''){
-  const w=document.createElement('div');
-  w.className='node'+(cls?' '+cls:'');
-  const av=document.createElement('div'); av.className='av'; av.textContent='?';
-  const nm=document.createElement('div'); nm.className='aname'; nm.textContent='—';
-  w.appendChild(av); w.appendChild(nm);
+  const w  = document.createElement('div');
+  w.className = 'node'+(cls?' '+cls:'');
+  const av = document.createElement('div'); av.className='av'; av.textContent='?';
+  const nm = document.createElement('div'); nm.className='aname'; nm.textContent='—';
+  w.appendChild(av);
+  w.appendChild(nm);
   arena.appendChild(w);
   return w;
 }
@@ -185,21 +207,30 @@ const qfN  = Array.from({length:8},  ()=>makeNode());
 const sfN  = Array.from({length:4},  ()=>makeNode());
 const finN = Array.from({length:2},  ()=>makeNode());
 const winN = makeNode('winner');
-const allNodes = [...qfN, ...sfN, ...finN, winN];
 
 async function setNode(node, adminIdx, isWinner=false){
-  const av=node.querySelector('.av'), nm=node.querySelector('.aname');
+  const av = node.querySelector('.av');
+  const nm = node.querySelector('.aname');
   node.classList.toggle('winner', isWinner);
+
   if(adminIdx===null||adminIdx===undefined){
-    av.innerHTML=''; av.textContent='?'; nm.textContent='—'; return;
+    av.innerHTML=''; av.textContent='?';
+    nm.textContent = isWinner ? 'Winner' : '—';
+    return;
   }
-  const a=admins[adminIdx];
-  nm.textContent='@'+a.chess;
-  const url=await fetchAvatar(a.chess);
+
+  const a = admins[adminIdx];
+  nm.textContent = '@'+a.chess;
+
+  if(isWinner){
+    nm.textContent = '🌶️ '+a.chess;
+  }
+
+  const url = await fetchAvatar(a.chess);
   if(url){
     av.innerHTML='';
-    const img=document.createElement('img');
-    img.src=url; img.alt=a.name;
+    const img = document.createElement('img');
+    img.src=url; img.alt=a.chess;
     img.onerror=()=>{ img.remove(); av.textContent=a.chess.slice(0,2).toUpperCase(); };
     av.appendChild(img);
   } else {
@@ -213,21 +244,23 @@ async function refreshNodes(){
   for(let i=0;i<2;i++) await setNode(finN[i], MATCHES['sf'+i].winner);
   const champ = MATCHES.fin.winner;
   await setNode(winN, champ, champ!==null);
-  if(champ===null) winN.querySelector('.aname').textContent='Champion';
+  if(champ===null){
+    winN.querySelector('.aname').textContent='Winner';
+  }
 }
 
 /* ══ LAYOUT ══ */
 let L = null;
-let firstLayoutDone = false;
 
 function layout(){
   const W=arena.clientWidth, H=arena.clientHeight;
   if(W<10||H<10) return;
 
-  const av  = Math.max(26, Math.min(52, W*0.075));
-  const win = av*1.35;
-  const nfs = Math.max(7, Math.min(10, W*0.014));
-  const nfw = av*1.6;
+  // Bigger avatars (increased multiplier)
+  const av  = Math.max(36, Math.min(58, W*0.1));
+  const win = av*1.3;
+  const nfs = Math.max(7.5, Math.min(10, W*0.015));
+  const nfw = av*1.7;
 
   const padV = av*0.55;
   const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
@@ -239,32 +272,29 @@ function layout(){
     (qfY[2]+qfY[3])/2,
   ];
 
-  const cw   = W/5;
-  const xLQF = cw*0.5;
-  const xRQF = cw*4.5;
-  const xLSF = cw*1.5;
-  const xRSF = cw*3.5;
-  const xC   = cw*2.5;
+  const cw    = W/5;
+  const xLQF  = cw*0.5;
+  const xRQF  = cw*4.5;
+  const xLSF  = cw*1.5;
+  const xRSF  = cw*3.5;
+  const xC    = cw*2.5;
   const xLFin = (xLSF+xC)/2;
   const xRFin = (xRSF+xC)/2;
-  const finY = (sfY[0]+sfY[1])/2;
-  const winY = finY - av*2.4;
+  const finY  = (sfY[0]+sfY[1])/2;
+  const winY  = finY - av*2.6;
 
-  // Crown size — make it much bigger
-  const crownSize = Math.max(28, av * 0.85);
-
-  L = {W,H,av,win,nfs,nfw,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin,crownSize};
+  L = {W,H,av,win,nfs,nfw,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin};
 
   function sizeNode(node, size){
-    const avEl=node.querySelector('.av');
-    avEl.style.width=size+'px'; avEl.style.height=size+'px';
-    avEl.style.fontSize=(size*0.38)+'px';
-    const nm=node.querySelector('.aname');
-    nm.style.fontSize=nfs+'px'; nm.style.maxWidth=nfw+'px';
+    const a = node.querySelector('.av');
+    a.style.width=size+'px'; a.style.height=size+'px';
+    a.style.fontSize=(size*0.38)+'px';
+    const nm = node.querySelector('.aname');
+    nm.style.fontSize=nfs+'px'; nm.style.maxWidth=(nfw)+'px';
   }
-  for(let i=0;i<8;i++) sizeNode(qfN[i], av);
-  for(let i=0;i<4;i++) sizeNode(sfN[i], av);
-  for(let i=0;i<2;i++) sizeNode(finN[i], av);
+  for(let i=0;i<8;i++)  sizeNode(qfN[i], av);
+  for(let i=0;i<4;i++)  sizeNode(sfN[i], av);
+  for(let i=0;i<2;i++)  sizeNode(finN[i], av);
   sizeNode(winN, win);
 
   function posNode(node, x, y){
@@ -286,24 +316,18 @@ function layout(){
   posNode(finN[1], xRFin, finY);
   posNode(winN, xC, winY);
 
-  // Crown — bigger and positioned
   crown.style.left=xC+'px';
-  crown.style.top=(winY - win/2 - 2)+'px';
-  crown.style.fontSize=crownSize+'px';
+  crown.style.top=(winY-win/2)+'px';
+  crown.style.fontSize=Math.max(14,av*0.4)+'px';
+
+  champLabel.style.left=xC+'px';
+  champLabel.style.top=(winY+win/2+nfs+10)+'px';
+  champLabel.style.fontSize=Math.max(8,nfs*0.85)+'px';
+  const champ = MATCHES.fin.winner;
+  champLabel.classList.toggle('visible', champ!==null);
+  if(champ!==null) champLabel.textContent='🌶️ Winner';
 
   drawLines();
-
-  // Reveal everything smoothly after first layout
-  if(!firstLayoutDone){
-    firstLayoutDone = true;
-    // Force a reflow so positions are committed before we reveal
-    arena.offsetHeight;
-    requestAnimationFrame(()=>{
-      arena.classList.add('ready');
-      allNodes.forEach(n => n.classList.add('show'));
-      crown.classList.add('show');
-    });
-  }
 }
 
 /* ══ DRAW SVG LINES + SCORE LABELS ══ */
@@ -314,8 +338,8 @@ function drawLines(){
   const r  = av/2;
   const rw = win/2;
 
-  const DIM    = '#f5c5b8';
-  const WIN_C  = '#d93020';
+  const DIM        = '#f5c5b8';
+  const WIN_C      = '#d93020';
   const SCORE_WIN  = '#2a9a4a';
   const SCORE_LOSE = '#c03020';
   const FS = Math.max(7.5, av*0.22);
@@ -326,7 +350,7 @@ function drawLines(){
     l.setAttribute('x2',x2);l.setAttribute('y2',y2);
     l.setAttribute('stroke',color);l.setAttribute('stroke-width',w);
     l.setAttribute('stroke-linecap','round');
-    svgEl.appendChild(l); return l;
+    svgEl.appendChild(l);
   }
 
   function scoreLabel(x,y,text,color,anchor='middle'){
@@ -342,21 +366,19 @@ function drawLines(){
   }
 
   function drawQFPair(pairIdx){
-    const isRight = pairIdx >= 2;
-    const qi = pairIdx;
+    const isRight   = pairIdx >= 2;
+    const qi        = pairIdx;
     const localPair = isRight ? pairIdx-2 : pairIdx;
-    const ya = qfY[localPair*2];
-    const yb = qfY[localPair*2+1];
-    const sfX  = isRight ? xRSF : xLSF;
+    const ya   = qfY[localPair*2];
+    const yb   = qfY[localPair*2+1];
     const sfYi = isRight ? sfY[2+localPair] : sfY[localPair];
     const qfX  = isRight ? xRQF : xLQF;
     const m    = MATCHES['qf'+qi];
     const pairs= [[0,1],[2,3],[4,5],[6,7]];
-    const [pA, pB] = pairs[qi];
-    const hasWinner = m.winner !== null;
+    const [pA,pB] = pairs[qi];
+    const hasWinner = m.winner!==null;
     const wA = hasWinner && m.winner===pA;
     const wB = hasWinner && m.winner===pB;
-
     const colA = wA ? WIN_C : DIM;
     const colB = wB ? WIN_C : DIM;
 
@@ -367,7 +389,7 @@ function drawLines(){
       line(jX-r, ya, jX-r, sfYi, colA);
       line(jX-r, yb, jX-r, sfYi, colB);
       if(m.score && hasWinner){
-        const winY2 = wA?ya:yb, loseY2 = wA?yb:ya;
+        const winY2=wA?ya:yb, loseY2=wA?yb:ya;
         scoreLabel(jX-r-4, winY2,  m.score.w, SCORE_WIN,  'end');
         scoreLabel(jX-r-4, loseY2, m.score.l, SCORE_LOSE, 'end');
       }
@@ -378,7 +400,7 @@ function drawLines(){
       line(jX+r, ya, jX+r, sfYi, colA);
       line(jX+r, yb, jX+r, sfYi, colB);
       if(m.score && hasWinner){
-        const winY2 = wA?ya:yb, loseY2 = wA?yb:ya;
+        const winY2=wA?ya:yb, loseY2=wA?yb:ya;
         scoreLabel(jX+r+4, winY2,  m.score.w, SCORE_WIN,  'start');
         scoreLabel(jX+r+4, loseY2, m.score.l, SCORE_LOSE, 'start');
       }
@@ -387,14 +409,13 @@ function drawLines(){
   for(let i=0;i<4;i++) drawQFPair(i);
 
   function drawSFPair(si){
-    const m = MATCHES['sf'+si];
+    const m    = MATCHES['sf'+si];
     const sfXA = si===0 ? xLSF : xRSF;
     const sfXB = si===0 ? xLSF : xRSF;
-    const finX = si===0 ? xLFin : xRFin;
     const sfYA = si===0 ? sfY[0] : sfY[2];
     const sfYB = si===0 ? sfY[1] : sfY[3];
-    const pA = MATCHES['qf'+(si*2)].winner;
-    const pB = MATCHES['qf'+(si*2+1)].winner;
+    const pA   = MATCHES['qf'+(si*2)].winner;
+    const pB   = MATCHES['qf'+(si*2+1)].winner;
     const hasWinner = m.winner!==null;
     const wA = hasWinner && m.winner===pA;
     const wB = hasWinner && m.winner===pB;
@@ -407,7 +428,7 @@ function drawLines(){
       line(sfXB+r, sfYB, jX-r, sfYB, colB);
       line(jX-r, sfYA, jX-r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
-        const winYs = wA?sfYA:sfYB, loseYs = wA?sfYB:sfYA;
+        const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
         scoreLabel(jX-r-4, winYs,  m.score.w, SCORE_WIN,  'end');
         scoreLabel(jX-r-4, loseYs, m.score.l, SCORE_LOSE, 'end');
       }
@@ -417,7 +438,7 @@ function drawLines(){
       line(sfXB-r, sfYB, jX+r, sfYB, colB);
       line(jX+r, sfYA, jX+r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
-        const winYs = wA?sfYA:sfYB, loseYs = wA?sfYB:sfYA;
+        const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
         scoreLabel(jX+r+4, winYs,  m.score.w, SCORE_WIN,  'start');
         scoreLabel(jX+r+4, loseYs, m.score.l, SCORE_LOSE, 'start');
       }
@@ -436,14 +457,16 @@ function drawLines(){
     const colA = wA ? WIN_C : DIM;
     const colB = wB ? WIN_C : DIM;
 
-    line(xLFin, finY-r,   xC, winY+rw, colA, 2);
-    line(xRFin, finY-r,   xC, winY+rw, colB, 2);
+    line(xLFin, finY-r,  xLFin, winY,    colA, 2);
+    line(xLFin, winY,    xC-rw, winY,    colA, 2);
+
+    line(xRFin, finY-r,  xRFin, winY,    colB, 2);
+    line(xRFin, winY,    xC+rw, winY,    colB, 2);
 
     if(m.score && hasWinner){
-      const mx0 = (xLFin+xC)/2, my0 = ((finY-r)+(winY+rw))/2;
-      const mx1 = (xRFin+xC)/2, my1 = ((finY-r)+(winY+rw))/2;
-      scoreLabel(mx0-6, my0, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
-      scoreLabel(mx1+6, my1, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
+      const midY = (finY+winY)/2;
+      scoreLabel(xLFin-4, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
+      scoreLabel(xRFin+4, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
     }
   }
 }
