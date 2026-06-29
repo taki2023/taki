@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-29T21:52:36.321Z",
+  "updated": "2026-06-29T22:56:33.886Z",
   "totalMembers": 1460,
-  "activeToday": 381,
+  "activeToday": 391,
   "players": [
     {
       "username": "petrjuza",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/99192700.58e97ea1.200x200o.027ea8f1c832.jpeg"
     },
     {
+      "username": "smorkusporkus",
+      "total_pts": 363,
+      "bullet_pts": 0,
+      "blitz_pts": 363,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 49,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
+    },
+    {
       "username": "misterjj1681",
       "total_pts": 346,
       "bullet_pts": 301,
@@ -24,17 +35,6 @@
       "blitz_g": 4,
       "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/449476112.f97964d8.200x200o.8a5e59f7c6c2.jpg"
-    },
-    {
-      "username": "smorkusporkus",
-      "total_pts": 339,
-      "bullet_pts": 0,
-      "blitz_pts": 339,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 45,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.46e04765.200x200o.b4a81ba6cf85.jpg"
     }
   ]
 }
