@@ -32,9 +32,9 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   content:'';position:absolute;bottom:-10px;left:-10%;
   width:120%;height:20px;background:#fff5f0;border-radius:50%;
 }
-.chilli{position:absolute;font-size:20px;opacity:.55;top:8px;}
-.chilli.l{left:10px;transform:rotate(-20deg);}
-.chilli.r{right:10px;transform:rotate(20deg);}
+.corner-icon{position:absolute;opacity:.65;top:5px;}
+.corner-icon.l{left:10px;font-size:28px;transform:rotate(-20deg);}
+.corner-icon.r{right:10px;font-size:30px;transform:rotate(30deg);}
 .bk-title{font-family:'Fredoka One',cursive;font-size:17px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
 .bk-sub{font-size:10px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
 
@@ -69,9 +69,10 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .aname{
   font-weight:900;color:#9a2010;
-  margin-top:3px;text-align:center;
+  margin-top:8px;text-align:center;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   transition: color 0.15s ease, transform 0.15s ease;
+  pointer-events:none;
 }
 
 /* HOVER */
@@ -83,31 +84,6 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 .node:hover .aname{
   color: #d93020;
   transform: scale(1.08);
-}
-
-/* TOOLTIP */
-.node .tooltip{
-  position:absolute;
-  bottom:calc(100% + 6px);
-  left:50%;
-  transform:translateX(-50%);
-  background:#d93020;
-  color:#fff;
-  font-family:'Fredoka One',cursive;
-  font-size:10px;
-  padding:3px 8px;
-  border-radius:20px;
-  white-space:nowrap;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity 0.15s ease, transform 0.15s ease;
-  transform:translateX(-50%) translateY(4px);
-  box-shadow:0 2px 8px rgba(217,48,32,.3);
-  z-index:10;
-}
-.node:hover .tooltip{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
 }
 
 /* winner */
@@ -142,7 +118,7 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 }
 .champion-label.visible{ opacity:1; }
 
-/* crown */
+/* pepper above winner */
 .crown{
   position:absolute;z-index:3;
   transform:translate(-50%,-100%);
@@ -163,37 +139,35 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 <body>
 <div class="bracket-sb">
   <div class="bk-header">
-    <div class="chilli l">🌶</div>
-    <div class="chilli r">🌶</div>
+    <div class="corner-icon l">🌶️</div>
+    <div class="corner-icon r">♞</div>
     <div class="bk-title">⚔️ HCC Admin Bracket Fights ⚔️</div>
     <div class="bk-sub">Who's the spiciest admin?</div>
   </div>
   <div class="bk-arena" id="arena">
     <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
-    <div class="crown" id="crown">👑</div>
-    <div class="champion-label" id="champLabel">🏆 Champion</div>
+    <div class="crown" id="crown">🌶️</div>
+    <div class="champion-label" id="champLabel">🌶️ Winner</div>
   </div>
   <div class="bk-footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 </div>
 
 <script>
-/* ══════════════════════════════════════════
-   EDIT ONLY THIS SECTION
-   ══════════════════════════════════════════ */
-
 const admins = [
   { name:'Iamplayerofchess', chess:'Iamplayerofchess' },
   { name:'cello_jello',      chess:'cello_jello' },
   { name:'Tengen',           chess:'Tengen' },
-  { name:'Vaseegaren-V',     chess:'Vaseegaren-V' },
+  { name:'TALented_Vasee_18',chess:'TALented_Vasee_18' },
   { name:'lokesh-gamer-18',  chess:'lokesh-gamer-18' },
   { name:'Juliana3377',      chess:'Juliana3377' },
   { name:'TrofAndy',         chess:'TrofAndy' },
   { name:'Daniel2040',       chess:'Daniel2040' },
 ];
 
+// winner = index into admins[] (0-7), or null if not decided yet
+// score = { w: '<winner score>', l: '<loser score>' }, or null if not decided yet
 const MATCHES = {
-  qf0: { winner: null, score: null },
+  qf0: { winner: 0, score: { w: '11', l: '9' } },
   qf1: { winner: null, score: null },
   qf2: { winner: null, score: null },
   qf3: { winner: null, score: null },
@@ -201,10 +175,6 @@ const MATCHES = {
   sf1: { winner: null, score: null },
   fin: { winner: null, score: null },
 };
-
-/* ══════════════════════════════════════════
-   END OF EDIT SECTION
-   ══════════════════════════════════════════ */
 
 const avatarCache = {};
 async function fetchAvatar(username){
@@ -229,8 +199,6 @@ function makeNode(cls=''){
   w.className = 'node'+(cls?' '+cls:'');
   const av = document.createElement('div'); av.className='av'; av.textContent='?';
   const nm = document.createElement('div'); nm.className='aname'; nm.textContent='—';
-  const tt = document.createElement('div'); tt.className='tooltip';
-  w.appendChild(tt);
   w.appendChild(av);
   w.appendChild(nm);
   arena.appendChild(w);
@@ -245,23 +213,19 @@ const winN = makeNode('winner');
 async function setNode(node, adminIdx, isWinner=false){
   const av = node.querySelector('.av');
   const nm = node.querySelector('.aname');
-  const tt = node.querySelector('.tooltip');
   node.classList.toggle('winner', isWinner);
 
   if(adminIdx===null||adminIdx===undefined){
     av.innerHTML=''; av.textContent='?';
-    nm.textContent = isWinner ? 'Champion' : '—';
-    tt.textContent = '';
+    nm.textContent = isWinner ? 'Winner' : '—';
     return;
   }
 
   const a = admins[adminIdx];
-  // Only username
   nm.textContent = '@'+a.chess;
-  tt.textContent = '♟ '+a.chess+' on chess.com';
 
   if(isWinner){
-    nm.textContent = '🏆 '+a.chess;
+    nm.textContent = '🌶️ '+a.chess;
   }
 
   const url = await fetchAvatar(a.chess);
@@ -283,7 +247,7 @@ async function refreshNodes(){
   const champ = MATCHES.fin.winner;
   await setNode(winN, champ, champ!==null);
   if(champ===null){
-    winN.querySelector('.aname').textContent='Champion';
+    winN.querySelector('.aname').textContent='Winner';
   }
 }
 
@@ -294,11 +258,12 @@ function layout(){
   const W=arena.clientWidth, H=arena.clientHeight;
   if(W<10||H<10) return;
 
-  // Slightly bigger avatars
-  const av  = Math.max(30, Math.min(50, W*0.085));
-  const win = av*1.25;
-  const nfs = Math.max(7.5, Math.min(10, W*0.015));
-  const nfw = av*1.7;
+  // Bigger avatars
+  const av  = Math.max(46, Math.min(62, W*0.1));
+  const win = av*1.3;
+  // Bigger username font size
+  const nfs = Math.max(9, Math.min(13, W*0.02));
+  const nfw = av*2;
 
   const padV = av*0.55;
   const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
@@ -358,13 +323,12 @@ function layout(){
   crown.style.top=(winY-win/2)+'px';
   crown.style.fontSize=Math.max(14,av*0.4)+'px';
 
-  // Champion label below winner node
   champLabel.style.left=xC+'px';
-  champLabel.style.top=(winY+win/2+nfs+6)+'px';
+  champLabel.style.top=(winY+win/2+nfs+10)+'px';
   champLabel.style.fontSize=Math.max(8,nfs*0.85)+'px';
   const champ = MATCHES.fin.winner;
   champLabel.classList.toggle('visible', champ!==null);
-  if(champ!==null) champLabel.textContent='🏆 Champion';
+  if(champ!==null) champLabel.textContent='🌶️ Winner';
 
   drawLines();
 }
@@ -381,7 +345,9 @@ function drawLines(){
   const WIN_C      = '#d93020';
   const SCORE_WIN  = '#2a9a4a';
   const SCORE_LOSE = '#c03020';
-  const FS = Math.max(7.5, av*0.22);
+  const FS   = Math.max(12, av*0.34);   // bigger score text
+  const HGAP = FS*0.9;                  // horizontal clearance from vertical lines
+  const VGAP = FS*0.85;                 // vertical clearance from horizontal lines
 
   function line(x1,y1,x2,y2,color,w=1.8){
     const l=document.createElementNS('http://www.w3.org/2000/svg','line');
@@ -429,8 +395,8 @@ function drawLines(){
       line(jX-r, yb, jX-r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(jX-r-4, winY2,  m.score.w, SCORE_WIN,  'end');
-        scoreLabel(jX-r-4, loseY2, m.score.l, SCORE_LOSE, 'end');
+        scoreLabel(jX-r-HGAP, winY2-VGAP,  m.score.w, SCORE_WIN,  'end');
+        scoreLabel(jX-r-HGAP, loseY2-VGAP, m.score.l, SCORE_LOSE, 'end');
       }
     } else {
       const jX = xRSF;
@@ -440,8 +406,8 @@ function drawLines(){
       line(jX+r, yb, jX+r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(jX+r+4, winY2,  m.score.w, SCORE_WIN,  'start');
-        scoreLabel(jX+r+4, loseY2, m.score.l, SCORE_LOSE, 'start');
+        scoreLabel(jX+r+HGAP, winY2-VGAP,  m.score.w, SCORE_WIN,  'start');
+        scoreLabel(jX+r+HGAP, loseY2-VGAP, m.score.l, SCORE_LOSE, 'start');
       }
     }
   }
@@ -468,8 +434,8 @@ function drawLines(){
       line(jX-r, sfYA, jX-r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(jX-r-4, winYs,  m.score.w, SCORE_WIN,  'end');
-        scoreLabel(jX-r-4, loseYs, m.score.l, SCORE_LOSE, 'end');
+        scoreLabel(jX-r-HGAP, winYs-VGAP,  m.score.w, SCORE_WIN,  'end');
+        scoreLabel(jX-r-HGAP, loseYs-VGAP, m.score.l, SCORE_LOSE, 'end');
       }
     } else {
       const jX = xRFin;
@@ -478,15 +444,14 @@ function drawLines(){
       line(jX+r, sfYA, jX+r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(jX+r+4, winYs,  m.score.w, SCORE_WIN,  'start');
-        scoreLabel(jX+r+4, loseYs, m.score.l, SCORE_LOSE, 'start');
+        scoreLabel(jX+r+HGAP, winYs-VGAP,  m.score.w, SCORE_WIN,  'start');
+        scoreLabel(jX+r+HGAP, loseYs-VGAP, m.score.l, SCORE_LOSE, 'start');
       }
     }
   }
   drawSFPair(0);
   drawSFPair(1);
 
-  // ── Finals → Winner: straight orthogonal L-shaped lines (no diagonals) ──
   {
     const m = MATCHES.fin;
     const pA = MATCHES.sf0.winner;
@@ -497,22 +462,16 @@ function drawLines(){
     const colA = wA ? WIN_C : DIM;
     const colB = wB ? WIN_C : DIM;
 
-    // Left finalist → winner: go up from finN[0] to winY, then horizontal to winner center
-    // finN[0] at (xLFin, finY), winN at (xC, winY)
-    // Vertical segment: xLFin, finY-r  →  xLFin, winY
-    // Horizontal segment: xLFin, winY  →  xC, winY
     line(xLFin, finY-r,  xLFin, winY,    colA, 2);
     line(xLFin, winY,    xC-rw, winY,    colA, 2);
 
-    // Right finalist → winner: go up from finN[1] to winY, then horizontal to winner center
     line(xRFin, finY-r,  xRFin, winY,    colB, 2);
     line(xRFin, winY,    xC+rw, winY,    colB, 2);
 
     if(m.score && hasWinner){
-      // Score labels on the vertical segments, near mid-height
       const midY = (finY+winY)/2;
-      scoreLabel(xLFin-4, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
-      scoreLabel(xRFin+4, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
+      scoreLabel(xLFin-HGAP, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
+      scoreLabel(xRFin+HGAP, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
     }
   }
 }
