@@ -101,48 +101,36 @@
                 return;
             }
 
-            // Nettoyage rigoureux de l'identifiant du club
+            // Nettoyage de l'URL pour n'avoir que le nom
             let clubId = clubInput.toLowerCase();
             clubId = clubId.replace('https://chess.com', '');
             clubId = clubId.replace('https://chess.com', '');
-            clubId = clubId.split('/')[0].trim(); // Récupère uniquement le premier segment propre
+            clubId = clubId.split('/')[0].trim();
 
-            // URL directe propre de l'API AllOrigins (sans inversion ni mauvaise concaténation)
-            const apiUrl = 'https://allorigins.win' + encodeURIComponent('https://api.chess.com/pub/club/' + clubId + '/members');
+            // Utilisation de corsproxy.io (Simple, direct, sans parsing complexe de JSON imbriqué)
+            const targetUrl = `https://chess.com{clubId}/members`;
+            const proxyUrl = `https://corsproxy.io{encodeURIComponent(targetUrl)}`;
 
             try {
-                const response = await fetch(apiUrl);
+                const response = await fetch(proxyUrl);
                 
                 if (!response.ok) {
-                    throw new Error("Erreur serveur ou proxy inaccessible.");
+                    throw new Error(`Erreur Chess.com (${response.status}). Vérifiez le nom du club.`);
                 }
 
-                const jsonWrapper = await response.json();
-                
-                if (!jsonWrapper.contents) {
-                    throw new Error("Impossible de lire le contenu du club.");
-                }
+                const data = await response.json();
 
-                const data = JSON.parse(jsonWrapper.contents);
-
-                if (data.status === "error" || (!data.weekly && !data.monthly && !data.all_time)) {
-                    throw new Error("Club introuvable sur Chess.com.");
-                }
-
-                // Récupération des longueurs de tableaux
                 const weekly = data.weekly ? data.weekly.length : 0;
                 const monthly = data.monthly ? data.monthly.length : 0;
                 const allTime = data.all_time ? data.all_time.length : 0;
                 const totalMembers = weekly + monthly + allTime;
 
                 if (totalMembers === 0) {
-                    throw new Error("Ce club ne possède aucun membre enregistré.");
+                    throw new Error("Ce club ne possède aucun membre.");
                 }
 
-                // Calcul du ratio d'activité
                 const activityRate = ((weekly / totalMembers) * 100).toFixed(2);
 
-                // Remplissage du DOM
                 document.getElementById('weeklyCount').innerText = weekly;
                 document.getElementById('monthlyCount').innerText = monthly;
                 document.getElementById('inactiveCount').innerText = allTime;
@@ -152,7 +140,7 @@
                 resultDiv.style.display = 'block';
 
             } catch (err) {
-                errorDiv.innerText = err.message + " (Vérifiez le nom fourni ou réessayez).";
+                errorDiv.innerText = err.message;
             } finally {
                 loadingDiv.style.display = 'none';
             }
