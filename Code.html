@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur d'Activité de Club Chess.com</title>
+    <title>Calculateur d'Activité Chess.com</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 500px;
             margin: 40px auto;
             padding: 20px;
             background-color: #262522;
@@ -15,49 +15,23 @@
             border-radius: 8px;
         }
         h2 { color: #81b64c; text-align: center; }
-        .input-group {
-            display: flex;
-            margin-bottom: 20px;
-        }
+        .input-group { display: flex; margin-bottom: 20px; }
         input {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            background-color: #fff;
-            color: #000;
+            flex: 1; padding: 10px; font-size: 16px;
+            border: none; border-radius: 4px 0 0 4px;
+            background-color: #fff; color: #000;
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #81b64c;
-            color: white;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            font-weight: bold;
+            padding: 10px 20px; font-size: 16px;
+            background-color: #81b64c; color: white;
+            border: none; border-radius: 0 4px 4px 0;
+            cursor: pointer; font-weight: bold;
         }
         button:hover { background-color: #a3d96c; }
-        .result-box {
-            background-color: #312e2b;
-            padding: 20px;
-            border-radius: 4px;
-            display: none;
-        }
-        .metric {
-            font-size: 18px;
-            margin: 10px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-        .highlight {
-            font-size: 24px;
-            color: #81b64c;
-            font-weight: bold;
-        }
+        .result-box { background-color: #312e2b; padding: 20px; border-radius: 4px; display: none; }
+        .metric { font-size: 18px; margin: 10px 0; display: flex; justify-content: space-between; }
+        .highlight { font-size: 24px; color: #81b64c; font-weight: bold; }
         .error { color: #ff5f5f; text-align: center; margin-bottom: 15px; }
-        .loading { color: #f7c631; text-align: center; margin-bottom: 15px; display: none; }
     </style>
 </head>
 <body>
@@ -65,84 +39,80 @@
     <h2>Activité de Club Chess.com</h2>
     
     <div class="input-group">
-        <input type="text" id="clubInput" placeholder="Ex: hot-chilli-checkmate" value="hot-chilli-checkmate">
+        <input type="text" id="clubInput" placeholder="Nom du club" value="hot-chilli-checkmate">
         <button onclick="calculateActivity()">Calculer</button>
     </div>
 
-    <div id="loading" class="loading">Connexion à Chess.com...</div>
     <div id="error" class="error"></div>
 
     <div id="result" class="result-box">
         <div class="metric">
-            <span>Taux d'Activité Hebdomadaire :</span>
+            <span>Taux d'Activité :</span>
             <span id="activityRate" class="highlight">0%</span>
         </div>
         <hr style="border-color: #403c39;">
-        <div class="metric"><span>Membres Actifs (7 jours) :</span> <span id="weeklyCount">0</span></div>
-        <div class="metric"><span>Membres Actifs (30 jours) :</span> <span id="monthlyCount">0</span></div>
+        <div class="metric"><span>Membres Actifs (Hebdo) :</span> <span id="weeklyCount">0</span></div>
+        <div class="metric"><span>Membres Actifs (Mensuel) :</span> <span id="monthlyCount">0</span></div>
         <div class="metric"><span>Membres Inactifs :</span> <span id="inactiveCount">0</span></div>
         <div class="metric"><strong>Total des Membres :</strong> <strong id="totalCount">0</strong></div>
     </div>
 
     <script>
         async function calculateActivity() {
-            const clubInput = document.getElementById('clubInput').value.trim();
             const errorDiv = document.getElementById('error');
-            const loadingDiv = document.getElementById('loading');
             const resultDiv = document.getElementById('result');
             
             errorDiv.innerText = '';
-            loadingDiv.style.display = 'block';
             resultDiv.style.display = 'none';
 
-            if (!clubInput) {
-                errorDiv.innerText = "Veuillez entrer l'identifiant du club.";
-                loadingDiv.style.display = 'none';
+            let rawInput = document.getElementById('clubInput').value.trim();
+            if (!rawInput) {
+                errorDiv.innerText = "Veuillez entrer un nom de club.";
                 return;
             }
 
-            // Nettoyage de l'URL pour n'avoir que le nom
-            let clubId = clubInput.toLowerCase();
+            // Nettoyage de l'identifiant pour ne garder que le nom pur
+            let clubId = rawInput.toLowerCase();
             clubId = clubId.replace('https://chess.com', '');
             clubId = clubId.replace('https://chess.com', '');
-            clubId = clubId.split('/')[0].trim();
+            // Retire les barres obliques de fin si l'utilisateur a collé une URL complète
+            clubId = clubId.split('/')[0].trim(); 
 
-            // Utilisation de corsproxy.io (Simple, direct, sans parsing complexe de JSON imbriqué)
-            const targetUrl = `https://chess.com{clubId}/members`;
-            const proxyUrl = `https://corsproxy.io{encodeURIComponent(targetUrl)}`;
+            // Utilisation d'un proxy public ultra-simple
+            const target = 'https://api.chess.com/pub/club/' + clubId + '/members';
+            const url = 'https://corsproxy.io?' + encodeURIComponent(target);
 
             try {
-                const response = await fetch(proxyUrl);
-                
+                const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error(`Erreur Chess.com (${response.status}). Vérifiez le nom du club.`);
+                    throw new Error("Impossible de joindre Chess.com ou club inexistant.");
                 }
 
                 const data = await response.json();
 
+                // Validation de la structure de l'API Chess.com
                 const weekly = data.weekly ? data.weekly.length : 0;
                 const monthly = data.monthly ? data.monthly.length : 0;
                 const allTime = data.all_time ? data.all_time.length : 0;
-                const totalMembers = weekly + monthly + allTime;
+                const total = weekly + monthly + allTime;
 
-                if (totalMembers === 0) {
-                    throw new Error("Ce club ne possède aucun membre.");
+                if (total === 0) {
+                    throw new Error("Ce club n'a aucun membre.");
                 }
 
-                const activityRate = ((weekly / totalMembers) * 100).toFixed(2);
+                // Calcul du pourcentage d'activité basé sur la semaine en cours
+                const rate = ((weekly / total) * 100).toFixed(2);
 
                 document.getElementById('weeklyCount').innerText = weekly;
                 document.getElementById('monthlyCount').innerText = monthly;
                 document.getElementById('inactiveCount').innerText = allTime;
-                document.getElementById('totalCount').innerText = totalMembers;
-                document.getElementById('activityRate').innerText = activityRate + '%';
+                document.getElementById('totalCount').innerText = total;
+                document.getElementById('activityRate').innerText = rate + '%';
                 
                 resultDiv.style.display = 'block';
 
             } catch (err) {
                 errorDiv.innerText = err.message;
-            } finally {
-                loadingDiv.style.display = 'none';
             }
         }
     </script>
