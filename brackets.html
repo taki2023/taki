@@ -69,7 +69,7 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
 .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .aname{
   font-weight:900;color:#9a2010;
-  margin-top:8px;text-align:center;
+  margin-top:6px;text-align:center;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   transition: color 0.15s ease, transform 0.15s ease;
   pointer-events:none;
@@ -193,6 +193,7 @@ const arena       = document.getElementById('arena');
 const svgEl       = document.getElementById('svg');
 const crown       = document.getElementById('crown');
 const champLabel  = document.getElementById('champLabel');
+const SVGNS       = 'http://www.w3.org/2000/svg';
 
 function makeNode(cls=''){
   const w  = document.createElement('div');
@@ -258,12 +259,12 @@ function layout(){
   const W=arena.clientWidth, H=arena.clientHeight;
   if(W<10||H<10) return;
 
-  // Bigger avatars
+  // Avatars
   const av  = Math.max(46, Math.min(62, W*0.1));
   const win = av*1.3;
-  // Bigger username font size
-  const nfs = Math.max(9, Math.min(13, W*0.02));
-  const nfw = av*2;
+  // Username: smaller font + tighter max width so names don't eat up column space
+  const nfs = Math.max(8, Math.min(11, W*0.017));
+  const nfw = av*1.25;
 
   const padV = av*0.55;
   const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
@@ -345,12 +346,15 @@ function drawLines(){
   const WIN_C      = '#d93020';
   const SCORE_WIN  = '#2a9a4a';
   const SCORE_LOSE = '#c03020';
-  const FS   = Math.max(12, av*0.34);   // bigger score text
-  const HGAP = FS*0.9;                  // horizontal clearance from vertical lines
-  const VGAP = FS*0.85;                 // vertical clearance from horizontal lines
+  const FS     = Math.max(12, av*0.34);
+  const VGAP   = FS*0.95;              // clearance above the wire for score text
+  const RADIUS = Math.min(16, av*0.28); // corner rounding for connector elbows
+  const LW     = 3;                     // connector thickness
+  const LW_FIN = 3.6;
 
-  function line(x1,y1,x2,y2,color,w=1.8){
-    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  // simple straight line (used only where no bend exists)
+  function line(x1,y1,x2,y2,color,w=LW){
+    const l=document.createElementNS(SVGNS,'line');
     l.setAttribute('x1',x1);l.setAttribute('y1',y1);
     l.setAttribute('x2',x2);l.setAttribute('y2',y2);
     l.setAttribute('stroke',color);l.setAttribute('stroke-width',w);
@@ -358,8 +362,25 @@ function drawLines(){
     svgEl.appendChild(l);
   }
 
+  // rounded elbow: start -> corner -> end, with the corner smoothed by a radius
+  function elbow(x1,y1,cx,cy,x2,y2,color,w=LW,radius=RADIUS){
+    const d1x=cx-x1, d1y=cy-y1, d2x=x2-cx, d2y=y2-cy;
+    const len1=Math.hypot(d1x,d1y)||1, len2=Math.hypot(d2x,d2y)||1;
+    const rad = Math.min(radius, len1/2, len2/2);
+    const p1x=cx-(d1x/len1)*rad, p1y=cy-(d1y/len1)*rad;
+    const p2x=cx+(d2x/len2)*rad, p2y=cy+(d2y/len2)*rad;
+    const path=document.createElementNS(SVGNS,'path');
+    path.setAttribute('d',`M ${x1} ${y1} L ${p1x} ${p1y} Q ${cx} ${cy} ${p2x} ${p2y} L ${x2} ${y2}`);
+    path.setAttribute('stroke',color);
+    path.setAttribute('stroke-width',w);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke-linecap','round');
+    path.setAttribute('stroke-linejoin','round');
+    svgEl.appendChild(path);
+  }
+
   function scoreLabel(x,y,text,color,anchor='middle'){
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    const t=document.createElementNS(SVGNS,'text');
     t.setAttribute('x',x);t.setAttribute('y',y);
     t.setAttribute('text-anchor',anchor);
     t.setAttribute('dominant-baseline','middle');
@@ -389,25 +410,23 @@ function drawLines(){
 
     if(!isRight){
       const jX = xLSF;
-      line(qfX+r, ya, jX-r, ya, colA);
-      line(qfX+r, yb, jX-r, yb, colB);
-      line(jX-r, ya, jX-r, sfYi, colA);
-      line(jX-r, yb, jX-r, sfYi, colB);
+      const midX = (qfX+r + jX-r)/2;
+      elbow(qfX+r, ya, jX-r, ya, jX-r, sfYi, colA);
+      elbow(qfX+r, yb, jX-r, yb, jX-r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(jX-r-HGAP, winY2-VGAP,  m.score.w, SCORE_WIN,  'end');
-        scoreLabel(jX-r-HGAP, loseY2-VGAP, m.score.l, SCORE_LOSE, 'end');
+        scoreLabel(midX, winY2-VGAP,  m.score.w, SCORE_WIN,  'middle');
+        scoreLabel(midX, loseY2-VGAP, m.score.l, SCORE_LOSE, 'middle');
       }
     } else {
       const jX = xRSF;
-      line(qfX-r, ya, jX+r, ya, colA);
-      line(qfX-r, yb, jX+r, yb, colB);
-      line(jX+r, ya, jX+r, sfYi, colA);
-      line(jX+r, yb, jX+r, sfYi, colB);
+      const midX = (qfX-r + jX+r)/2;
+      elbow(qfX-r, ya, jX+r, ya, jX+r, sfYi, colA);
+      elbow(qfX-r, yb, jX+r, yb, jX+r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(jX+r+HGAP, winY2-VGAP,  m.score.w, SCORE_WIN,  'start');
-        scoreLabel(jX+r+HGAP, loseY2-VGAP, m.score.l, SCORE_LOSE, 'start');
+        scoreLabel(midX, winY2-VGAP,  m.score.w, SCORE_WIN,  'middle');
+        scoreLabel(midX, loseY2-VGAP, m.score.l, SCORE_LOSE, 'middle');
       }
     }
   }
@@ -429,23 +448,23 @@ function drawLines(){
 
     if(si===0){
       const jX = xLFin;
-      line(sfXA+r, sfYA, jX-r, sfYA, colA);
-      line(sfXB+r, sfYB, jX-r, sfYB, colB);
-      line(jX-r, sfYA, jX-r, sfYB, hasWinner?WIN_C:DIM);
+      const midX = (sfXA+r + jX-r)/2;
+      elbow(sfXA+r, sfYA, jX-r, sfYA, jX-r, sfYB, colA);
+      elbow(sfXB+r, sfYB, jX-r, sfYB, jX-r, sfYA, colB);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(jX-r-HGAP, winYs-VGAP,  m.score.w, SCORE_WIN,  'end');
-        scoreLabel(jX-r-HGAP, loseYs-VGAP, m.score.l, SCORE_LOSE, 'end');
+        scoreLabel(midX, winYs-VGAP,  m.score.w, SCORE_WIN,  'middle');
+        scoreLabel(midX, loseYs-VGAP, m.score.l, SCORE_LOSE, 'middle');
       }
     } else {
       const jX = xRFin;
-      line(sfXA-r, sfYA, jX+r, sfYA, colA);
-      line(sfXB-r, sfYB, jX+r, sfYB, colB);
-      line(jX+r, sfYA, jX+r, sfYB, hasWinner?WIN_C:DIM);
+      const midX = (sfXA-r + jX+r)/2;
+      elbow(sfXA-r, sfYA, jX+r, sfYA, jX+r, sfYB, colA);
+      elbow(sfXB-r, sfYB, jX+r, sfYB, jX+r, sfYA, colB);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(jX+r+HGAP, winYs-VGAP,  m.score.w, SCORE_WIN,  'start');
-        scoreLabel(jX+r+HGAP, loseYs-VGAP, m.score.l, SCORE_LOSE, 'start');
+        scoreLabel(midX, winYs-VGAP,  m.score.w, SCORE_WIN,  'middle');
+        scoreLabel(midX, loseYs-VGAP, m.score.l, SCORE_LOSE, 'middle');
       }
     }
   }
@@ -462,16 +481,13 @@ function drawLines(){
     const colA = wA ? WIN_C : DIM;
     const colB = wB ? WIN_C : DIM;
 
-    line(xLFin, finY-r,  xLFin, winY,    colA, 2);
-    line(xLFin, winY,    xC-rw, winY,    colA, 2);
-
-    line(xRFin, finY-r,  xRFin, winY,    colB, 2);
-    line(xRFin, winY,    xC+rw, winY,    colB, 2);
+    elbow(xLFin, finY-r, xLFin, winY, xC-rw, winY, colA, LW_FIN);
+    elbow(xRFin, finY-r, xRFin, winY, xC+rw, winY, colB, LW_FIN);
 
     if(m.score && hasWinner){
       const midY = (finY+winY)/2;
-      scoreLabel(xLFin-HGAP, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
-      scoreLabel(xRFin+HGAP, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
+      scoreLabel((xLFin+xC)/2, midY-VGAP*0.4, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'middle');
+      scoreLabel((xRFin+xC)/2, midY-VGAP*0.4, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'middle');
     }
   }
 }
