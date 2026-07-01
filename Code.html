@@ -55,7 +55,7 @@
             font-weight: bold;
         }
         .error { color: #ff5f5f; text-align: center; margin-bottom: 15px; }
-        .info-text { font-size: 12px; color: #b2b2b2; margin-top: 15px; text-align: justify; }
+        .loading { color: #f7c631; text-align: center; margin-bottom: 15px; display: none; }
     </style>
 </head>
 <body>
@@ -63,10 +63,11 @@
     <h2>Activité de Club Chess.com</h2>
     
     <div class="input-group">
-        <input type="text" id="clubInput" placeholder="Ex: hot-chilli-checkmate">
+        <input type="text" id="clubInput" placeholder="Ex: hot-chilli-checkmate" value="hot-chilli-checkmate">
         <button onclick="calculateActivity()">Calculer</button>
     </div>
 
+    <div id="loading" class="loading">Connexion à Chess.com en cours... (via proxy anti-blocage)</div>
     <div id="error" class="error"></div>
 
     <div id="result" class="result-box">
@@ -85,31 +86,43 @@
         async function calculateActivity() {
             const clubInput = document.getElementById('clubInput').value.trim();
             const errorDiv = document.getElementById('error');
+            const loadingDiv = document.getElementById('loading');
             const resultDiv = document.getElementById('result');
             
             errorDiv.innerText = '';
+            loadingDiv.style.display = 'block';
             resultDiv.style.display = 'none';
 
             if (!clubInput) {
                 errorDiv.innerText = "Veuillez entrer l'identifiant du club.";
+                loadingDiv.style.display = 'none';
                 return;
             }
 
-            // Nettoie l'URL pour extraire uniquement le nom du club
             let clubId = clubInput.toLowerCase();
-            clubId = clubId.replace('https://www.chess.com/clubs/about/', '');
+            clubId = clubId.replace('https://chess.com', '');
             clubId = clubId.replace('https://www.chess.com/club/', '');
             clubId = clubId.split('/')[0];
 
+            // Utilisation d'un proxy CORS public pour injecter les bons en-têtes requis par Chess.com
+            const proxyUrl = 'https://allorigins.win';
+            const targetUrl = encodeURIComponent(`https://chess.com{clubId}/members`);
+
             try {
-                // Chess.com exige un User-Agent ou un en-tête d'identification pour éviter les blocages
-                const response = await fetch(`https://chess.com{clubId}/members`);
+                const response = await fetch(`${proxyUrl}${targetUrl}`);
                 
                 if (!response.ok) {
-                    throw new Error(`Erreur Chess.com (${response.status}) : Club introuvable.`);
+                    throw new Error("Erreur de connexion avec le serveur proxy.");
                 }
 
-                const data = await response.json();
+                const proxyData = await response.json();
+                
+                // Allorigins encapsule la réponse dans proxyData.contents au format texte
+                const data = JSON.parse(proxyData.contents);
+
+                if (!data || (!data.weekly && !data.monthly && !data.all_time)) {
+                    throw new Error("Données introuvables. Vérifiez le nom du club.");
+                }
 
                 const weekly = data.weekly ? data.weekly.length : 0;
                 const monthly = data.monthly ? data.monthly.length : 0;
@@ -118,7 +131,7 @@
                 const totalMembers = weekly + monthly + allTime;
 
                 if (totalMembers === 0) {
-                    throw new Error("Ce club ne possède aucun membre actif ou répertorié.");
+                    throw new Error("Ce club ne possède aucun membre.");
                 }
 
                 const activityRate = ((weekly / totalMembers) * 100).toFixed(2);
@@ -132,7 +145,9 @@
                 resultDiv.style.display = 'block';
 
             } catch (err) {
-                errorDiv.innerText = err.message + " Vérifiez l'orthographe ou la connexion.";
+                errorDiv.innerText = err.message + " Erreur de récupération. Le club existe-t-il bien ?";
+            } finally {
+                loadingDiv.style.display = 'none';
             }
         }
     </script>
