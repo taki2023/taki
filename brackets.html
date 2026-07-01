@@ -164,7 +164,8 @@ const admins = [
   { name:'Daniel2040',       chess:'Daniel2040' },
 ];
 
-
+// winner = index into admins[] (0-7), or null if not decided yet
+// score = { w: '<winner score>', l: '<loser score>' }, or null if not decided yet
 const MATCHES = {
   qf0: { winner: 0, score: { w: 11, l: 9 } },
   qf1: { winner: 3, score: { w: 11, l: 10 } },
@@ -344,7 +345,9 @@ function drawLines(){
   const WIN_C      = '#d93020';
   const SCORE_WIN  = '#2a9a4a';
   const SCORE_LOSE = '#c03020';
-  const FS = Math.max(7.5, av*0.22);
+  const FS   = Math.max(12, av*0.34);   // bigger score text
+  const HGAP = FS*0.9;                  // horizontal clearance from vertical lines
+  const VGAP = FS*0.85;                 // vertical clearance from horizontal lines
 
   function line(x1,y1,x2,y2,color,w=1.8){
     const l=document.createElementNS('http://www.w3.org/2000/svg','line');
@@ -392,8 +395,8 @@ function drawLines(){
       line(jX-r, yb, jX-r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(jX-r-4, winY2,  m.score.w, SCORE_WIN,  'end');
-        scoreLabel(jX-r-4, loseY2, m.score.l, SCORE_LOSE, 'end');
+        scoreLabel(jX-r-HGAP, winY2-VGAP,  m.score.w, SCORE_WIN,  'end');
+        scoreLabel(jX-r-HGAP, loseY2-VGAP, m.score.l, SCORE_LOSE, 'end');
       }
     } else {
       const jX = xRSF;
@@ -403,8 +406,8 @@ function drawLines(){
       line(jX+r, yb, jX+r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(jX+r+4, winY2,  m.score.w, SCORE_WIN,  'start');
-        scoreLabel(jX+r+4, loseY2, m.score.l, SCORE_LOSE, 'start');
+        scoreLabel(jX+r+HGAP, winY2-VGAP,  m.score.w, SCORE_WIN,  'start');
+        scoreLabel(jX+r+HGAP, loseY2-VGAP, m.score.l, SCORE_LOSE, 'start');
       }
     }
   }
@@ -431,8 +434,8 @@ function drawLines(){
       line(jX-r, sfYA, jX-r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(jX-r-4, winYs,  m.score.w, SCORE_WIN,  'end');
-        scoreLabel(jX-r-4, loseYs, m.score.l, SCORE_LOSE, 'end');
+        scoreLabel(jX-r-HGAP, winYs-VGAP,  m.score.w, SCORE_WIN,  'end');
+        scoreLabel(jX-r-HGAP, loseYs-VGAP, m.score.l, SCORE_LOSE, 'end');
       }
     } else {
       const jX = xRFin;
@@ -441,8 +444,8 @@ function drawLines(){
       line(jX+r, sfYA, jX+r, sfYB, hasWinner?WIN_C:DIM);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(jX+r+4, winYs,  m.score.w, SCORE_WIN,  'start');
-        scoreLabel(jX+r+4, loseYs, m.score.l, SCORE_LOSE, 'start');
+        scoreLabel(jX+r+HGAP, winYs-VGAP,  m.score.w, SCORE_WIN,  'start');
+        scoreLabel(jX+r+HGAP, loseYs-VGAP, m.score.l, SCORE_LOSE, 'start');
       }
     }
   }
@@ -467,8 +470,8 @@ function drawLines(){
 
     if(m.score && hasWinner){
       const midY = (finY+winY)/2;
-      scoreLabel(xLFin-4, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
-      scoreLabel(xRFin+4, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
+      scoreLabel(xLFin-HGAP, midY, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'end');
+      scoreLabel(xRFin+HGAP, midY, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'start');
     }
   }
 }
