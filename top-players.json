@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-02T11:43:21.967Z",
-  "totalMembers": 1467,
-  "activeToday": 216,
+  "updated": "2026-07-02T11:52:40.118Z",
+  "totalMembers": 1468,
+  "activeToday": 230,
   "players": [
     {
       "username": "silent-sniper",
@@ -16,13 +16,13 @@
     },
     {
       "username": "mastergoogle",
-      "total_pts": 235,
+      "total_pts": 250,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 235,
+      "rapid_pts": 250,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 17,
+      "rapid_g": 18,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
