@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-01T23:24:22.549Z",
+  "updated": "2026-07-02T01:32:24.764Z",
   "totalMembers": 1470,
-  "activeToday": 348,
+  "activeToday": 35,
   "players": [
     {
-      "username": "nikkotello",
-      "total_pts": 460,
+      "username": "twonineking",
+      "total_pts": 81,
+      "bullet_pts": 0,
+      "blitz_pts": 81,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 9,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/258229153.b608bd15.200x200o.307ade594b3e.jpg"
+    },
+    {
+      "username": "chessunicorn_cn",
+      "total_pts": 63,
+      "bullet_pts": 0,
+      "blitz_pts": 63,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/489061181.619066a2.200x200o.e10df6902665.png"
+    },
+    {
+      "username": "sdm2026chess",
+      "total_pts": 60,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 460,
+      "rapid_pts": 60,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 32,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "magicchessemotion",
-      "total_pts": 342,
-      "bullet_pts": 0,
-      "blitz_pts": 72,
-      "rapid_pts": 270,
-      "bullet_g": 0,
-      "blitz_g": 8,
-      "rapid_g": 18,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/528471239.60284f0e.200x200o.bdc1be65d5a8.jpg"
-    },
-    {
-      "username": "cutie_jessuu",
-      "total_pts": 275,
-      "bullet_pts": 0,
-      "blitz_pts": 90,
-      "rapid_pts": 185,
-      "bullet_g": 0,
-      "blitz_g": 10,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/572967572.bace36d9.200x200o.1a6187f578bb.png"
+      "rapid_g": 4,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/419806721.d5aff27b.200x200o.820324ad3cf1.png"
     }
   ]
 }
