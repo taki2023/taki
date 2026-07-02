@@ -1,8 +1,19 @@
 {
-  "updated": "2026-07-02T16:05:23.902Z",
+  "updated": "2026-07-02T18:13:54.825Z",
   "totalMembers": 1465,
-  "activeToday": 263,
+  "activeToday": 306,
   "players": [
+    {
+      "username": "mastergoogle",
+      "total_pts": 475,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 475,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 33,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
     {
       "username": "silent-sniper",
       "total_pts": 404,
@@ -12,28 +23,17 @@
       "bullet_g": 6,
       "blitz_g": 9,
       "rapid_g": 21,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.0f6d4efc.200x200o.e72ead921f5b.png"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "iamportaitchess",
-      "total_pts": 240,
+      "total_pts": 285,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 240,
+      "rapid_pts": 285,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 16,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
-    },
-    {
-      "username": "im_baokhanh",
-      "total_pts": 213,
-      "bullet_pts": 0,
-      "blitz_pts": 168,
-      "rapid_pts": 45,
-      "bullet_g": 0,
-      "blitz_g": 20,
-      "rapid_g": 3,
+      "rapid_g": 19,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
