@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-02T13:55:35.330Z",
-  "totalMembers": 1467,
-  "activeToday": 267,
+  "updated": "2026-07-02T16:05:23.902Z",
+  "totalMembers": 1465,
+  "activeToday": 263,
   "players": [
     {
       "username": "silent-sniper",
@@ -15,26 +15,26 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.0f6d4efc.200x200o.e72ead921f5b.png"
     },
     {
-      "username": "diligent_dragon",
-      "total_pts": 204,
-      "bullet_pts": 21,
-      "blitz_pts": 153,
-      "rapid_pts": 30,
-      "bullet_g": 7,
-      "blitz_g": 19,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.294c77be.200x200o.89f762ce3d98.jpg"
+      "username": "iamportaitchess",
+      "total_pts": 240,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 240,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 16,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
     },
     {
-      "username": "chessunicorn_cn",
-      "total_pts": 181,
+      "username": "im_baokhanh",
+      "total_pts": 213,
       "bullet_pts": 0,
-      "blitz_pts": 126,
-      "rapid_pts": 55,
+      "blitz_pts": 168,
+      "rapid_pts": 45,
       "bullet_g": 0,
-      "blitz_g": 14,
-      "rapid_g": 5,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/489061181.619066a2.200x200o.e10df6902665.png"
+      "blitz_g": 20,
+      "rapid_g": 3,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
