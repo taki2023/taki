@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-03T15:56:24.140Z",
+  "updated": "2026-07-03T17:25:26.167Z",
   "totalMembers": 1468,
-  "activeToday": 318,
+  "activeToday": 302,
   "players": [
     {
-      "username": "sweet_devil095",
-      "total_pts": 341,
-      "bullet_pts": 6,
-      "blitz_pts": 0,
-      "rapid_pts": 335,
-      "bullet_g": 2,
-      "blitz_g": 0,
-      "rapid_g": 23,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/407174319.660dfe57.200x200o.d4761f897ad0.jpg"
-    },
-    {
       "username": "nikkotello",
-      "total_pts": 320,
+      "total_pts": 410,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 320,
+      "rapid_pts": 410,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 24,
+      "rapid_g": 30,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "iamportaitchess",
-      "total_pts": 290,
-      "bullet_pts": 0,
+      "username": "sweet_devil095",
+      "total_pts": 361,
+      "bullet_pts": 6,
       "blitz_pts": 0,
-      "rapid_pts": 290,
-      "bullet_g": 0,
+      "rapid_pts": 355,
+      "bullet_g": 2,
       "blitz_g": 0,
-      "rapid_g": 20,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
+      "rapid_g": 25,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/407174319.660dfe57.200x200o.d4761f897ad0.jpg"
+    },
+    {
+      "username": "blitzymeisa",
+      "total_pts": 327,
+      "bullet_pts": 12,
+      "blitz_pts": 315,
+      "rapid_pts": 0,
+      "bullet_g": 4,
+      "blitz_g": 35,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/559954323.96065907.200x200o.10f71db901af.jpg"
     }
   ]
 }
