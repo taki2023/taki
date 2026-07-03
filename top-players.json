@@ -1,17 +1,17 @@
 {
-  "updated": "2026-07-03T21:40:12.801Z",
-  "totalMembers": 1467,
-  "activeToday": 358,
+  "updated": "2026-07-03T23:01:54.794Z",
+  "totalMembers": 1468,
+  "activeToday": 354,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 565,
+      "total_pts": 610,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 565,
+      "rapid_pts": 610,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 41,
+      "rapid_g": 44,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
@@ -26,13 +26,13 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "blitzymeisa",
-      "total_pts": 327,
-      "bullet_pts": 12,
-      "blitz_pts": 315,
+      "username": "yael981",
+      "total_pts": 409,
+      "bullet_pts": 409,
+      "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 4,
-      "blitz_g": 35,
+      "bullet_g": 145,
+      "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
