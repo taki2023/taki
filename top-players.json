@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-03T08:34:41.060Z",
+  "updated": "2026-07-03T11:31:25.209Z",
   "totalMembers": 1466,
-  "activeToday": 164,
+  "activeToday": 191,
   "players": [
     {
+      "username": "sweet_devil095",
+      "total_pts": 308,
+      "bullet_pts": 3,
+      "blitz_pts": 0,
+      "rapid_pts": 305,
+      "bullet_g": 1,
+      "blitz_g": 0,
+      "rapid_g": 21,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/407174319.660dfe57.200x200o.d4761f897ad0.jpg"
+    },
+    {
       "username": "iamportaitchess",
-      "total_pts": 210,
+      "total_pts": 275,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 210,
+      "rapid_pts": 275,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 14,
+      "rapid_g": 19,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
     },
     {
-      "username": "shivsolan",
-      "total_pts": 170,
+      "username": "koenigsegg2026",
+      "total_pts": 173,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 170,
+      "blitz_pts": 18,
+      "rapid_pts": 155,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/253741157.f9232d79.200x200o.ade6e024c288.png"
-    },
-    {
-      "username": "dhan4win",
-      "total_pts": 165,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 165,
-      "bullet_g": 0,
-      "blitz_g": 0,
+      "blitz_g": 2,
       "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/464395614.32205db9.200x200o.2e74dace2999.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463162092.ff563bc5.200x200o.bbd442a9fa34.jpg"
     }
   ]
 }
