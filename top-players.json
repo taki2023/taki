@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-04T18:31:44.176Z",
+  "updated": "2026-07-04T20:08:46.790Z",
   "totalMembers": 1478,
-  "activeToday": 324,
+  "activeToday": 375,
   "players": [
     {
       "username": "queiser",
@@ -27,13 +27,13 @@
     },
     {
       "username": "mastergoogle",
-      "total_pts": 430,
+      "total_pts": 445,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 430,
+      "rapid_pts": 445,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 30,
+      "rapid_g": 31,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
