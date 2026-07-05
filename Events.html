@@ -503,14 +503,18 @@ const clubLogoCache = new Map();
 async function fetchClubLogo(slug){
   if(!slug)return null;
   if(clubLogoCache.has(slug))return clubLogoCache.get(slug);
+  const lsCached=lsGet('clublogo:'+slug);
+  if(lsCached){clubLogoCache.set(slug,lsCached);if(lsCached)preloadImg(lsCached);return lsCached;}
   clubLogoCache.set(slug, null);
   try{
     const data=await fetchJSON(`https://api.chess.com/pub/club/${slug}`);
     const logo=data.icon||null;
     const proxied=logo?proxyImageURL(logo):null;
-    clubLogoCache.set(slug, proxied||logo);
+    const result=proxied||logo;
+    clubLogoCache.set(slug, result);
+    if(result)lsSet('clublogo:'+slug,result);
     if(proxied)preloadImg(proxied);
-    return clubLogoCache.get(slug);
+    return result;
   }catch(e){return null;}
 }
 
@@ -613,7 +617,35 @@ function pick(ev,phase,field){
   return '';
 }
 
+const SHEET_CACHE_KEY='hccsheetcache:v1';
+const SHEET_CACHE_TTL=5*60*1000;
+function readSheetCache(){
+  try{
+    const raw=localStorage.getItem(SHEET_CACHE_KEY);if(!raw)return null;
+    const parsed=JSON.parse(raw);
+    if(!parsed||!parsed.t||(Date.now()-parsed.t)>SHEET_CACHE_TTL)return null;
+    return parsed.data||null;
+  }catch(e){return null;}
+}
+function writeSheetCache(data){
+  try{localStorage.setItem(SHEET_CACHE_KEY,JSON.stringify({t:Date.now(),data}));}catch(e){}
+}
+function applySheetData(rawMap){
+  eventMap={};
+  Object.entries(rawMap).forEach(([key,evts])=>{
+    const groups=[],logoToGroup={};
+    evts.forEach(ev=>{
+      const logoKey=ev.rawLogo||'__none__';
+      if(!logoToGroup[logoKey]){const g={logoKey,rawLogo:ev.rawLogo,logo:ev.logo,isProxied:ev.isProxied,events:[]};logoToGroup[logoKey]=g;groups.push(g);}
+      logoToGroup[logoKey].events.push(ev);
+    });
+    eventMap[key]=groups;
+  });
+}
+
 async function loadSheet(){
+  const cached=readSheetCache();
+  if(cached){applySheetData(cached);renderIfReady();}
   try{
     const res=await fetch(SHEET_API_URL,{cache:'no-store',headers:{'Accept':'application/json'}});
     if(!res.ok)throw new Error('HTTP '+res.status);
@@ -639,17 +671,14 @@ async function loadSheet(){
       });
       if(proxiedLogo)preloadImg(proxiedLogo);
     });
-    eventMap={};
-    Object.entries(rawMap).forEach(([key,evts])=>{
-      const groups=[],logoToGroup={};
-      evts.forEach(ev=>{
-        const logoKey=ev.rawLogo||'__none__';
-        if(!logoToGroup[logoKey]){const g={logoKey,rawLogo:ev.rawLogo,logo:ev.logo,isProxied:ev.isProxied,events:[]};logoToGroup[logoKey]=g;groups.push(g);}
-        logoToGroup[logoKey].events.push(ev);
-      });
-      eventMap[key]=groups;
-    });
+    applySheetData(rawMap);
+    writeSheetCache(rawMap);
+    if(window._hccCalReady)buildCalendar();
   }catch(e){console.error('Sheet load failed:',e);}
+}
+
+function renderIfReady(){
+  if(window._hccCalReady)buildCalendar();
 }
 
 async function fetchJSON(url){
@@ -662,7 +691,23 @@ async function fetchJSON(url){
 function extractMatchId(u){const m=u.match(/\/match\/(\d+)$/);return m?m[1]:'';}
 function slugToName(s){return s.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());}
 
+const MATCH_CACHE_KEY='hccmatchcache:v1';
+const MATCH_CACHE_TTL=5*60*1000;
+function readMatchCache(){
+  try{
+    const raw=localStorage.getItem(MATCH_CACHE_KEY);if(!raw)return null;
+    const parsed=JSON.parse(raw);
+    if(!parsed||!parsed.t||(Date.now()-parsed.t)>MATCH_CACHE_TTL)return null;
+    return parsed.data||null;
+  }catch(e){return null;}
+}
+function writeMatchCache(data){
+  try{localStorage.setItem(MATCH_CACHE_KEY,JSON.stringify({t:Date.now(),data}));}catch(e){}
+}
+
 async function loadMatches(){
+  const cached=readMatchCache();
+  if(cached){matchMap=cached;renderIfReady();}
   try{
     const data=await fetchJSON(CLUB_MATCH_URL);
     matchMap={};
@@ -680,15 +725,38 @@ async function loadMatches(){
     process(data.registered,'upcoming');
     process(data.in_progress,'in_progress');
     process(data.finished,'finished');
-    enrichMatches();
+    // Icons/dots for every match are visible right away without waiting for
+    // per-match detail enrichment (team names/scores/logos) — that's the
+    // slow part when a club has a lot of match history.
+    if(window._hccCalReady)buildCalendar();
+    // Enrichment runs in the background and does NOT block this function
+    // from resolving, so callers awaiting loadMatches() don't stall on it.
+    enrichMatchesProgressive();
   }catch(e){console.error('Match load failed:',e);}
 }
 
-async function enrichMatches(){
+async function enrichMatchesProgressive(){
   const all=[];Object.values(matchMap).forEach(arr=>arr.forEach(m=>all.push(m)));
   if(!all.length)return;
-  for(let i=0;i<all.length;i+=6){
-    const batch=all.slice(i,i+6);
+  // Priority order: matches in the month currently being viewed first, then
+  // everything else ordered by closeness to "now". The matches the person
+  // is actually looking at get enriched (team names/scores/logos) within
+  // the first batch or two; a big backlog of old finished matches keeps
+  // enriching quietly in the background without blocking anything.
+  const now=Date.now();
+  const priorityKey=m=>{
+    const d=new Date(m.startTs*1000);
+    const inViewedMonth=(d.getUTCFullYear()===viewYear&&d.getUTCMonth()===viewMonth)?0:1;
+    const dist=Math.abs(m.startTs*1000-now);
+    return[inViewedMonth,dist];
+  };
+  all.sort((a,b)=>{
+    const ka=priorityKey(a),kb=priorityKey(b);
+    return ka[0]!==kb[0]?ka[0]-kb[0]:ka[1]-kb[1];
+  });
+  const CONCURRENCY=10;
+  for(let i=0;i<all.length;i+=CONCURRENCY){
+    const batch=all.slice(i,i+CONCURRENCY);
     await Promise.allSettled(batch.map(async m=>{
       try{
         const det=await fetchJSON(MATCH_DETAIL(m.id));
@@ -708,7 +776,11 @@ async function enrichMatches(){
         if(det.boards)m.boards=det.boards;if(det.url)m.link=det.url;
       }catch(e){}
     }));
+    // Re-render after every batch so nearby/current-month matches show
+    // enriched info as soon as they're ready, instead of all-or-nothing.
+    if(window._hccCalReady)buildCalendar();
   }
+  writeMatchCache(matchMap);
 }
 
 function applyCellWidth(){
@@ -1083,9 +1155,22 @@ document.getElementById('nextBtn').addEventListener('click',()=>{hideSheetTip();
 new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
 
 async function init(){
-  await Promise.allSettled([loadSheet(),loadMatches()]);
+  window._hccCalReady=true;
+  const hadCache=!!readSheetCache()||!!readMatchCache();
+  const sheetP=loadSheet();
+  const matchP=loadMatches();
+  if(hadCache){
+    buildCalendar();
+    document.getElementById('pageSb').classList.add('loaded');
+  }
+  // Reveal as soon as the sheet (fast, single Apps Script call) is ready —
+  // don't block the initial reveal on the matches API. Matches pop in with
+  // icons immediately (single list call) and their tooltip details fill in
+  // afterward via prioritized background enrichment.
+  await sheetP;
   buildCalendar();
   document.getElementById('pageSb').classList.add('loaded');
+  matchP.catch(()=>{});
 }
 init();
 </script>
