@@ -242,6 +242,8 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
   z-index:9999;
   min-width:220px;
   max-width:min(300px, 90%);
+  max-height:320px;
+  overflow-y:auto;
   white-space:normal;
   font-family:'Barlow Condensed',sans-serif;
   display:none;
@@ -672,9 +674,24 @@ function proxyImageURL(raw){
   return null;
 }
 const imgMem=new Map(),imgCbs=new Map();
-function preloadImg(url){if(!url||imgMem.has(url))return;imgMem.set(url,'loading');const img=new Image();img.crossOrigin='anonymous';img.onload=()=>{imgMem.set(url,'ok');notify(url,'ok');};img.onerror=()=>{imgMem.set(url,'err');notify(url,'err');};img.src=url;}
+const lsKey=u=>'tifimgcache:'+u;
+const lsGet=u=>{try{return localStorage.getItem(lsKey(u));}catch(e){return null;}};
+const lsSet=(u,v)=>{try{localStorage.setItem(lsKey(u),v);}catch(e){}};
+function preloadImg(url){
+  if(!url||imgMem.has(url))return;
+  const cached=lsGet(url);
+  if(cached==='ok'||cached==='err'){imgMem.set(url,cached);return;}
+  imgMem.set(url,'loading');const img=new Image();img.crossOrigin='anonymous';
+  img.onload=()=>{imgMem.set(url,'ok');lsSet(url,'ok');notify(url,'ok');};
+  img.onerror=()=>{imgMem.set(url,'err');lsSet(url,'err');notify(url,'err');};
+  img.src=url;
+}
 function notify(url,s){const c=imgCbs.get(url)||[];imgCbs.delete(url);c.forEach(cb=>cb(s));}
-function onImgReady(url,cb){const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}if(!imgCbs.has(url))imgCbs.set(url,[]);imgCbs.get(url).push(cb);if(imgMem.get(url)!=='loading')preloadImg(url);}
+function onImgReady(url,cb){
+  const s=imgMem.get(url);if(s==='ok'||s==='err'){cb(s);return;}
+  const cached=lsGet(url);if(cached==='ok'||cached==='err'){imgMem.set(url,cached);cb(cached);return;}
+  if(!imgCbs.has(url))imgCbs.set(url,[]);imgCbs.get(url).push(cb);if(imgMem.get(url)!=='loading')preloadImg(url);
+}
 
 const pad=n=>String(n).padStart(2,'0');
 const dateKey=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
@@ -785,14 +802,18 @@ const clubLogoCache=new Map();
 async function fetchClubLogo(slug){
   if(!slug)return null;
   if(clubLogoCache.has(slug))return clubLogoCache.get(slug);
+  const lsCached=lsGet('clublogo:'+slug);
+  if(lsCached){clubLogoCache.set(slug,lsCached);if(lsCached)preloadImg(lsCached);return lsCached;}
   clubLogoCache.set(slug,null);
   try{
     const data=await fetchJSON(`https://api.chess.com/pub/club/${slug}`);
     const logo=data.icon||null;
     const proxied=logo?proxyImageURL(logo):null;
-    clubLogoCache.set(slug,proxied||logo);
+    const result=proxied||logo;
+    clubLogoCache.set(slug,result);
+    if(result)lsSet('clublogo:'+slug,result);
     if(proxied)preloadImg(proxied);
-    return clubLogoCache.get(slug);
+    return result;
   }catch(e){return null;}
 }
 function getMatchPhase(match){
@@ -809,7 +830,13 @@ function getMatchPhase(match){
 function isCancelled(m){
   return m._status==='finished'&&m.ourScore!==undefined&&m.theirScore!==undefined&&Number(m.ourScore)===0&&Number(m.theirScore)===0;
 }
+
+const MATCH_CACHE_KEY='tifmatchcache:v1';
+const MATCH_CACHE_TTL=5*60*1000;
+
 async function loadMatches(){
+  const cached=readMatchCache();
+  if(cached){matchMap=cached;renderIfReady();}
   try{
     const data=await fetchJSON(CLUB_MATCH_URL);
     matchMap={};
@@ -827,14 +854,48 @@ async function loadMatches(){
     process(data.registered,'upcoming');
     process(data.in_progress,'in_progress');
     process(data.finished,'finished');
-    await enrichMatches();
+    // Icons/dots for every match are now visible without waiting for per-match
+    // detail enrichment (team names/scores/logos), which is the slow part
+    // when a club has a large match history.
+    if(window._tifCalReady)buildCalendar();
+    // Enrichment continues in the background and does NOT block this
+    // function from resolving, so callers awaiting loadMatches() don't stall.
+    enrichMatchesProgressive();
   }catch(e){console.error('Match load failed:',e);}
 }
-async function enrichMatches(){
+function readMatchCache(){
+  try{
+    const raw=localStorage.getItem(MATCH_CACHE_KEY);if(!raw)return null;
+    const parsed=JSON.parse(raw);
+    if(!parsed||!parsed.t||(Date.now()-parsed.t)>MATCH_CACHE_TTL)return null;
+    return parsed.data||null;
+  }catch(e){return null;}
+}
+function writeMatchCache(data){
+  try{localStorage.setItem(MATCH_CACHE_KEY,JSON.stringify({t:Date.now(),data}));}catch(e){}
+}
+async function enrichMatchesProgressive(){
   const all=[];Object.values(matchMap).forEach(arr=>arr.forEach(m=>all.push(m)));
   if(!all.length)return;
-  for(let i=0;i<all.length;i+=6){
-    const batch=all.slice(i,i+6);
+  // Priority order: matches in the month currently being viewed first,
+  // then everything else ordered by closeness to "now". This means the
+  // matches the person is actually looking at get their team names/scores
+  // filled in within the first batch or two, while a huge backlog of old
+  // finished matches keeps enriching quietly in the background.
+  const now=Date.now();
+  const priorityKey=m=>{
+    const d=new Date(m.startTs*1000);
+    const inViewedMonth=(d.getUTCFullYear()===viewYear&&d.getUTCMonth()===viewMonth)?0:1;
+    const dist=Math.abs(m.startTs*1000-now);
+    return[inViewedMonth,dist];
+  };
+  all.sort((a,b)=>{
+    const ka=priorityKey(a),kb=priorityKey(b);
+    return ka[0]!==kb[0]?ka[0]-kb[0]:ka[1]-kb[1];
+  });
+  const CONCURRENCY=10;
+  for(let i=0;i<all.length;i+=CONCURRENCY){
+    const batch=all.slice(i,i+CONCURRENCY);
     await Promise.allSettled(batch.map(async m=>{
       try{
         const det=await fetchJSON(MATCH_DETAIL(m.id));
@@ -853,11 +914,35 @@ async function enrichMatches(){
         if(det.boards)m.boards=det.boards;if(det.url)m.link=det.url;
       }catch(e){}
     }));
+    // Re-render after every batch so nearby/current-month matches show
+    // enriched info as soon as they're ready, instead of all-or-nothing.
+    if(window._tifCalReady)buildCalendar();
   }
+  writeMatchCache(matchMap);
+}
+
+const SHEET_CACHE_KEY='tifsheetcache:v1';
+const SHEET_CACHE_TTL=5*60*1000;
+function readSheetCache(){
+  try{
+    const raw=localStorage.getItem(SHEET_CACHE_KEY);if(!raw)return null;
+    const parsed=JSON.parse(raw);
+    if(!parsed||!parsed.t||(Date.now()-parsed.t)>SHEET_CACHE_TTL)return null;
+    return parsed.data||null;
+  }catch(e){return null;}
+}
+function writeSheetCache(data){
+  try{localStorage.setItem(SHEET_CACHE_KEY,JSON.stringify({t:Date.now(),data}));}catch(e){}
 }
 
 async function loadSheet(){
   const errEl=document.getElementById('loadError');
+  const cached=readSheetCache();
+  if(cached){
+    window._tifRawEvents=cached;
+    buildEventMap(cached);
+    renderIfReady();
+  }
   try{
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),15000);
@@ -884,10 +969,16 @@ async function loadSheet(){
     });
     window._tifRawEvents=rawEvents;
     buildEventMap(rawEvents);
+    writeSheetCache(rawEvents);
+    if(window._tifCalReady)buildCalendar();
   }catch(e){
     console.error('Sheet load error:',e);
-    errEl.textContent='⚠ '+e.message;errEl.classList.add('show');
+    if(!cached){errEl.textContent='⚠ '+e.message;errEl.classList.add('show');}
   }
+}
+
+function renderIfReady(){
+  if(window._tifCalReady)buildCalendar();
 }
 
 function buildEventMap(rawEvents){
@@ -1077,7 +1168,8 @@ document.addEventListener('click',e=>{
 function posDesktopTip(e){
   const wrap=document.getElementById('tifCalWrap');
   const wRect=wrap.getBoundingClientRect();
-  const TW=275,TH=240;
+  const tRect=tip.getBoundingClientRect();
+  const TW=tRect.width||275,TH=tRect.height||240;
   const wW=wRect.width,wH=wRect.height;
   let x=(e.clientX-wRect.left)+14;
   let y=(e.clientY-wRect.top)+14;
@@ -1114,6 +1206,7 @@ function renderTip(ev,y,m,d){
   tipBottomRow.innerHTML='';
   if(ev.organizer){const a=document.createElement('a');a.className='tip-organizer';a.href=`https://www.chess.com/member/${ev.organizer}`;a.target='_blank';a.rel='noopener noreferrer';a.innerHTML=`♟ @${ev.organizer}`;tipBottomRow.appendChild(a);}
   if(ev.link){const a=document.createElement('a');a.className='tip-btn';a.href=ev.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='JOIN 🔥';tipBottomRow.appendChild(a);}
+  requestAnimationFrame(()=>{if(tip.classList.contains('show')&&!tip.classList.contains('mobile-center')){const wrap=document.getElementById('tifCalWrap');const wRect=wrap.getBoundingClientRect();const tRect=tip.getBoundingClientRect();const TW=tRect.width,TH=tRect.height;let x=parseFloat(tip.style.left)||0,y=parseFloat(tip.style.top)||0;x=Math.max(4,Math.min(x,wRect.width-TW-4));y=Math.max(4,Math.min(y,wRect.height-TH-4));tip.style.left=x+'px';tip.style.top=y+'px';}});
 }
 
 const matchTip=document.getElementById('matchTip');
@@ -1137,7 +1230,8 @@ matchTipClose.addEventListener('touchend',e=>{e.stopPropagation();e.preventDefau
 function posDesktopMatchTip(e){
   const wrap=document.getElementById('tifCalWrap');
   const wRect=wrap.getBoundingClientRect();
-  const TW=275,TH=280;
+  const tRect=matchTip.getBoundingClientRect();
+  const TW=tRect.width||275,TH=tRect.height||280;
   const wW=wRect.width,wH=wRect.height;
   let x=(e.clientX-wRect.left)+14;
   let y=(e.clientY-wRect.top)+14;
@@ -1243,6 +1337,8 @@ function renderMatchTip(matches,y,m,d){
       matchCountdownTimers.push(t);
     }
   });
+
+  requestAnimationFrame(()=>{if(matchTip.classList.contains('show')&&!matchTip.classList.contains('mobile-center')){const wrap=document.getElementById('tifCalWrap');const wRect=wrap.getBoundingClientRect();const tRect=matchTip.getBoundingClientRect();const TW=tRect.width,TH=tRect.height;let x=parseFloat(matchTip.style.left)||0,y=parseFloat(matchTip.style.top)||0;x=Math.max(4,Math.min(x,wRect.width-TW-4));y=Math.max(4,Math.min(y,wRect.height-TH-4));matchTip.style.left=x+'px';matchTip.style.top=y+'px';}});
 }
 
 document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();hideMatchTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
@@ -1250,9 +1346,22 @@ document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();hideM
 new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
 
 async function init(){
-  await Promise.allSettled([loadSheet(),loadMatches()]);
+  window._tifCalReady=true;
+  const hadCache=!!readSheetCache()||!!readMatchCache();
+  const sheetP=loadSheet();
+  const matchP=loadMatches();
+  if(hadCache){
+    buildCalendar();
+    document.getElementById('tifCalWrap').classList.add('loaded');
+  }
+  // Reveal as soon as the sheet (fast, single Apps Script call) is ready —
+  // don't block the initial reveal on the matches API, since a club with a
+  // large match history can take much longer to fully enrich. Matches pop
+  // in with icons immediately and their tooltip details fill in afterward.
+  await sheetP;
   buildCalendar();
   document.getElementById('tifCalWrap').classList.add('loaded');
+  matchP.catch(()=>{});
 }
 init();
 </script>
