@@ -1,29 +1,18 @@
 {
-  "updated": "2026-07-05T20:36:07.696Z",
+  "updated": "2026-07-05T22:00:23.231Z",
   "totalMembers": 1481,
-  "activeToday": 397,
+  "activeToday": 354,
   "players": [
     {
-      "username": "diligent_dragon",
-      "total_pts": 472,
-      "bullet_pts": 46,
-      "blitz_pts": 426,
-      "rapid_pts": 0,
-      "bullet_g": 16,
-      "blitz_g": 50,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.294c77be.200x200o.89f762ce3d98.jpg"
-    },
-    {
-      "username": "flabbi",
-      "total_pts": 460,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 460,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 36,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/3907324.3af46c6b.200x200o.da6204a56491.jpg"
+      "username": "silencedseeker",
+      "total_pts": 483,
+      "bullet_pts": 39,
+      "blitz_pts": 144,
+      "rapid_pts": 300,
+      "bullet_g": 13,
+      "blitz_g": 16,
+      "rapid_g": 20,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/512133167.4a9e5c80.200x200o.46b218d5318f.jpg"
     },
     {
       "username": "chechebureche1204",
@@ -35,6 +24,17 @@
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176040881.cacc160f.200x200o.1fd1604dc8fd.jpg"
+    },
+    {
+      "username": "abbasbarati1998",
+      "total_pts": 435,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 435,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 29,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504500653.73d8e762.200x200o.f95ed679dd28.jpg"
     }
   ]
 }
