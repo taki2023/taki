@@ -206,6 +206,7 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
 .evt-icons{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;gap:0;width:100%;flex:1;min-height:0;min-width:0;overflow:visible;padding:0 0 4px;}
 .evt{--ico:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;width:var(--ico);height:var(--ico);min-width:var(--ico);min-height:var(--ico);flex-shrink:0;border-radius:5px;font-size:calc(var(--ico)*.74);transform-origin:center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);z-index:1;overflow:hidden;line-height:1;position:relative;-webkit-tap-highlight-color:transparent;touch-action:manipulation;border:1.5px solid rgba(80,160,255,.4);background:linear-gradient(135deg,rgba(0,30,60,.75),rgba(20,8,0,.75));box-shadow:0 1px 6px rgba(0,0,0,.6),inset 0 1px 0 rgba(100,180,255,.1);}
 .evt:hover{transform:scale(1.45);z-index:100;box-shadow:0 4px 16px rgba(0,100,255,.35),0 4px 16px rgba(255,80,0,.25);}
+.evt.evt-match{border-color:rgba(255,180,60,.55);background:linear-gradient(135deg,rgba(60,20,0,.8),rgba(0,20,50,.6));}
 .evt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;opacity:0;transition:opacity .25s;padding:1px;}
 .evt img.loaded{opacity:1;}
 .evt-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:inherit;line-height:1;user-select:none;}
@@ -412,6 +413,78 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
   text-shadow:0 1px 0 rgba(0,0,0,.5);
 }
 .tip-organizer:hover{background:rgba(0,80,200,.5);border-color:rgba(120,190,255,.8);color:#fff;}
+
+.tip-match-count{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
+  background:rgba(255,90,0,.18);
+  border:1.5px solid rgba(255,140,0,.45);
+  color:var(--c-spark);
+  border-radius:999px;padding:3px 10px;
+  margin-bottom:8px;width:fit-content;
+}
+.tip-match-scroll{
+  max-height:260px;overflow-y:auto;
+  display:flex;flex-direction:column;
+  scrollbar-width:thin;scrollbar-color:rgba(255,120,0,.4) transparent;
+}
+.tip-match-scroll::-webkit-scrollbar{width:4px;}
+.tip-match-scroll::-webkit-scrollbar-track{background:transparent;}
+.tip-match-scroll::-webkit-scrollbar-thumb{background:rgba(255,120,0,.4);border-radius:2px;}
+
+.match-card{padding:9px 0 10px;display:flex;flex-direction:column;gap:6px;}
+.match-card+.match-card{border-top:1.5px solid rgba(255,90,0,.22);margin-top:2px;}
+
+.mc-teams-row{display:flex;align-items:center;justify-content:center;gap:8px;padding:3px 0 2px;}
+.mc-logo{
+  width:46px;height:46px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(20,8,0,.9),rgba(0,20,50,.6));
+  border:1.5px solid rgba(255,120,0,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;overflow:hidden;position:relative;
+}
+.mc-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:7px;display:block;opacity:0;transition:opacity .25s;}
+.mc-logo img.loaded{opacity:1;}
+.mc-logo-skel{position:absolute;inset:0;border-radius:7px;background:linear-gradient(90deg,rgba(0,30,60,.8) 0%,rgba(60,20,0,.6) 40%,rgba(0,30,60,.7) 100%);background-size:300% 100%;animation:shimmer .9s ease-in-out infinite;}
+.mc-vs-block{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;}
+.mc-vs-label{font-family:'Bebas Neue',cursive;font-size:15px;letter-spacing:1.5px;color:var(--c-spark);opacity:.85;}
+.mc-score-row{display:flex;align-items:center;gap:5px;}
+.mc-score-num{font-family:'Bebas Neue',cursive;font-size:17px;min-width:20px;text-align:center;line-height:1;color:var(--text-main);}
+.mc-score-num.winning{color:#7dffb0;}
+.mc-score-num.losing{color:#ff7d7d;}
+.mc-score-num.tied{color:var(--text-dim);}
+.mc-score-dash{color:rgba(255,180,100,.5);font-weight:900;font-size:13px;}
+.mc-team-name{font-size:9.5px;font-weight:800;color:var(--text-dim);text-align:center;max-width:74px;word-break:break-word;line-height:1.25;}
+.mc-team-col{display:flex;flex-direction:column;align-items:center;gap:4px;}
+
+.mc-phase{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:9.5px;font-weight:900;letter-spacing:.3px;
+  padding:3px 9px;border-radius:999px;border:1.5px solid;width:fit-content;
+}
+.mc-phase .cd-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.mc-upcoming{color:#fff;background:rgba(0,50,120,.85);border-color:#5ab4ff;}
+.mc-soon{color:#fff;background:rgba(130,55,0,.9);border-color:#ffaa00;}
+.mc-live{color:#fff;background:rgba(130,15,15,.9);border-color:#ff5555;}
+.mc-ended{color:#ccc;background:rgba(45,45,45,.9);border-color:#777;}
+
+.mc-result{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:900;padding:2px 8px;border-radius:4px;width:fit-content;}
+.mc-result.win{background:rgba(60,200,110,.16);color:#7dffb0;border:1px solid rgba(60,200,110,.4);}
+.mc-result.loss{background:rgba(255,80,80,.14);color:#ff9d9d;border:1px solid rgba(255,80,80,.3);}
+.mc-result.draw{background:rgba(255,255,255,.06);color:#ddd;border:1px solid rgba(255,255,255,.18);}
+
+.mc-meta{font-size:9.5px;font-weight:700;color:var(--text-muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+
+.mc-btn{
+  display:inline-block;font-family:'Bebas Neue',cursive;
+  font-size:13px;letter-spacing:1px;color:#fff;
+  background:linear-gradient(135deg,var(--c-lava),var(--c-fire),var(--c-blaze));
+  padding:5px 14px;border-radius:4px;text-decoration:none;
+  box-shadow:0 2px 0 rgba(40,10,0,.8),0 0 12px rgba(255,80,0,.3);
+  white-space:nowrap;align-self:flex-end;pointer-events:auto;
+  text-shadow:0 1px 0 rgba(0,0,0,.5);
+}
+.mc-btn.view{background:linear-gradient(135deg,#0a1a40,#0070ff);}
 </style>
 </head>
 <body>
@@ -506,6 +579,7 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
       <div class="legend-item"><span class="legend-dot dot-soon"></span>Soon</div>
       <div class="legend-item"><span class="legend-dot dot-live"></span>Live</div>
       <div class="legend-item"><span class="legend-dot dot-ended"></span>Ended</div>
+      <div class="legend-item"><span style="font-size:12px;line-height:1;">☀️</span>Match</div>
     </div>
     <div class="cal-footer">© 2026 · The Illusion Fireballs</div>
   </div>
@@ -532,16 +606,33 @@ html,body{width:100%;background:var(--bg0);font-family:'Barlow Condensed',sans-s
     <div class="tip-bottom-row" id="tipBottomRow"></div>
   </div>
 
+  <div class="evt-tip" id="matchTip">
+    <div class="tip-close" id="matchTipClose">✕</div>
+    <div class="tip-row1">
+      <div class="tip-logo" id="matchTipLogo">☀️</div>
+      <div class="tip-date-wrap">
+        <div class="tip-title" id="matchTipTitle">Daily Team Matches</div>
+        <div class="tip-date-badge" id="matchTipDateBadge"></div>
+      </div>
+    </div>
+    <div class="tip-match-count" id="matchTipCountBadge" style="display:none;"></div>
+    <div class="tip-match-scroll" id="matchTipScroll"></div>
+  </div>
+
 </div>
 
 <script>
 const SHEET_API_URL='https://script.google.com/macros/s/AKfycbyQRC0v7VuR2zIygBFJJaDc49r-xkRe2pxaVWpnpqcY-wAlo0ChettGdCl8gkHEtSXF/exec';
+const CLUB_SLUG='the-illusion-fireballs';
+const CLUB_MATCH_URL=`https://api.chess.com/pub/club/${CLUB_SLUG}/matches`;
+const MATCH_DETAIL=id=>`https://api.chess.com/pub/match/${id}`;
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAY_LABELS=['MON','TUE','WED','THU','FRI','SAT','SUN'];
 const today=new Date();
 let viewYear=today.getFullYear(),viewMonth=today.getMonth();
 let eventMap={};
+let matchMap={};
 
 const isTouch=()=>('ontouchstart' in window)||navigator.maxTouchPoints>0;
 
@@ -658,7 +749,7 @@ function getPhase(ev,dObjOv){
     return{status:'ended',text:'✅ Ended',cssClass:'countdown-ended'};
   }
 }
-function cellDotClass(events){
+function cellDotClass(events,matchEvts){
   let best=null;const rank={ended:1,before:2,soon:3,live:4};
   for(const ev of events){
     if(!ev.timeObj)continue;
@@ -667,12 +758,103 @@ function cellDotClass(events){
     let cls=e&&now>=e.getTime()?'ended':now>=s.getTime()?'live':s-now<=3600000?'soon':'before';
     if(!best||rank[cls]>rank[best])best=cls;
   }
+  if(matchEvts){
+    for(const mv of matchEvts){
+      const p=getMatchPhase(mv);
+      const cls=p.status==='live'?'live':p.status==='soon'?'soon':p.status==='ended'?'ended':'before';
+      if(!best||rank[cls]>rank[best])best=cls;
+    }
+  }
   return best?'dot-'+best:null;
 }
 
 function linkifyMentions(text){return text.split(/(@[\w-]+)/g).map(part=>{if(/^@[\w-]+$/.test(part)){const a=document.createElement('a');a.className='mention-link';a.href=`https://www.chess.com/member/${part.slice(1)}`;a.target='_blank';a.rel='noopener noreferrer';a.textContent=part;return a;}return document.createTextNode(part);});}
 function setTextWithMentions(el,text){el.innerHTML='';linkifyMentions(text).forEach(n=>el.appendChild(n));}
 function repeatLabel(rep){if(!rep||rep.type==='none')return'';if(rep.type==='weekly')return'🔄 WEEKLY';if(rep.type==='weekly-range'){const f=rep.from,t=rep.to;return`🔄 WEEKLY · ${MONTH_SHORT[f.m]} ${f.d} → ${MONTH_SHORT[t.m]} ${t.d}`;}return'';}
+
+function extractMatchId(u){const m=(u||'').match(/\/match\/(\d+)$/);return m?m[1]:'';}
+function slugToName(s){return(s||'').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());}
+async function fetchJSON(url){
+  try{const r=await fetch(url,{cache:'no-store'});if(r.ok)return r.json();throw new Error('HTTP '+r.status);}
+  catch(e){
+    try{const r2=await fetch('https://api.allorigins.win/get?url='+encodeURIComponent(url));if(!r2.ok)throw new Error('proxy');const d=await r2.json();return JSON.parse(d.contents);}
+    catch(e2){throw e2;}
+  }
+}
+const clubLogoCache=new Map();
+async function fetchClubLogo(slug){
+  if(!slug)return null;
+  if(clubLogoCache.has(slug))return clubLogoCache.get(slug);
+  clubLogoCache.set(slug,null);
+  try{
+    const data=await fetchJSON(`https://api.chess.com/pub/club/${slug}`);
+    const logo=data.icon||null;
+    const proxied=logo?proxyImageURL(logo):null;
+    clubLogoCache.set(slug,proxied||logo);
+    if(proxied)preloadImg(proxied);
+    return clubLogoCache.get(slug);
+  }catch(e){return null;}
+}
+function getMatchPhase(match){
+  const now=Date.now(),startMs=match.startTs*1000;
+  if(match._status==='finished'||(match.endTs&&now>match.endTs*1000))
+    return{status:'ended',text:'Ended',cls:'mc-ended',phase:'after'};
+  if(match._status==='in_progress'||now>=startMs)
+    return{status:'live',text:'🔴 Live',cls:'mc-live',phase:'live'};
+  const ms=startMs-now,isSoon=ms<=3600000;
+  const dd=Math.floor(ms/86400000),hh=Math.floor((ms%86400000)/3600000),mm=Math.floor((ms%3600000)/60000);
+  const txt='Starting in '+(dd>0?`${dd}d ${hh}h`:hh>0?`${hh}h ${mm}m`:`${mm}m`);
+  return{status:isSoon?'soon':'upcoming',text:txt,cls:isSoon?'mc-soon':'mc-upcoming',phase:'before'};
+}
+function isCancelled(m){
+  return m._status==='finished'&&m.ourScore!==undefined&&m.theirScore!==undefined&&Number(m.ourScore)===0&&Number(m.theirScore)===0;
+}
+async function loadMatches(){
+  try{
+    const data=await fetchJSON(CLUB_MATCH_URL);
+    matchMap={};
+    const process=(arr,status)=>{
+      (arr||[]).forEach(m=>{
+        if(!m.start_time)return;
+        const id=extractMatchId(m['@id']);if(!id)return;
+        const d=new Date(m.start_time*1000);
+        const pp=(m.opponent||'').split('/'),slug=pp[pp.length-1]||'';
+        const ev={_type:'match',id,title:m.name||`vs ${slugToName(slug)}`,opponent:slugToName(slug),opponentSlug:slug,link:`https://www.chess.com/club/matches/${id}`,_status:status,startTs:m.start_time,endTs:m.end_time||undefined,timeClass:m.time_class||'daily',result:m.result||undefined,ourScore:undefined,theirScore:undefined,ourName:undefined,theirName:undefined,ourSlug:undefined,theirSlug:undefined,boards:undefined};
+        const key=dateKey(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate());
+        if(!matchMap[key])matchMap[key]=[];matchMap[key].push(ev);
+      });
+    };
+    process(data.registered,'upcoming');
+    process(data.in_progress,'in_progress');
+    process(data.finished,'finished');
+    await enrichMatches();
+  }catch(e){console.error('Match load failed:',e);}
+}
+async function enrichMatches(){
+  const all=[];Object.values(matchMap).forEach(arr=>arr.forEach(m=>all.push(m)));
+  if(!all.length)return;
+  for(let i=0;i<all.length;i+=6){
+    const batch=all.slice(i,i+6);
+    await Promise.allSettled(batch.map(async m=>{
+      try{
+        const det=await fetchJSON(MATCH_DETAIL(m.id));
+        if(det.teams){
+          const t1=det.teams.team1,t2=det.teams.team2;
+          let our,their;
+          if((t1['@id']||'').includes(CLUB_SLUG)){our=t1;their=t2;}
+          else if((t2['@id']||'').includes(CLUB_SLUG)){our=t2;their=t1;}
+          else{our=t1;their=t2;}
+          m.ourName=our.name;m.theirName=their.name;m.ourScore=our.score;m.theirScore=their.score;
+          m.ourSlug=(our['@id']||'').split('/').pop();
+          m.theirSlug=(their['@id']||'').split('/').pop();
+          if(m.ourSlug)fetchClubLogo(m.ourSlug);
+          if(m.theirSlug)fetchClubLogo(m.theirSlug);
+        }
+        if(det.boards)m.boards=det.boards;if(det.url)m.link=det.url;
+      }catch(e){}
+    }));
+  }
+}
 
 async function loadSheet(){
   const errEl=document.getElementById('loadError');
@@ -702,13 +884,9 @@ async function loadSheet(){
     });
     window._tifRawEvents=rawEvents;
     buildEventMap(rawEvents);
-    buildCalendar();
-    document.getElementById('tifCalWrap').classList.add('loaded');
   }catch(e){
     console.error('Sheet load error:',e);
     errEl.textContent='⚠ '+e.message;errEl.classList.add('show');
-    buildCalendar();
-    document.getElementById('tifCalWrap').classList.add('loaded');
   }
 }
 
@@ -756,10 +934,12 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
   const num=document.createElement('div');num.className='day-num';num.textContent=d;
   wrap0.appendChild(num);
   const events=!adjMonth?(eventMap[dateKey(y,m,d)]||[]):[];
-  if(events.length){const dotCls=cellDotClass(events);if(dotCls){const dot=document.createElement('div');dot.className='status-dot '+dotCls;wrap0.appendChild(dot);}}
+  const matchEvts=!adjMonth?((matchMap[dateKey(y,m,d)]||[]).filter(mv=>!isCancelled(mv))):[];
+  const hasMatchIcon=matchEvts.length>0;
+  if(events.length||hasMatchIcon){const dotCls=cellDotClass(events,matchEvts);if(dotCls){const dot=document.createElement('div');dot.className='status-dot '+dotCls;wrap0.appendChild(dot);}}
   cell.appendChild(wrap0);
-  if(events.length){
-    const wrap=document.createElement('div');wrap.className='evt-icons';wrap.dataset.count=String(events.length);
+  if(events.length||hasMatchIcon){
+    const wrap=document.createElement('div');wrap.className='evt-icons';wrap.dataset.count=String(events.length+(hasMatchIcon?1:0));
     events.forEach(ev=>{
       const ico=document.createElement('div');ico.className='evt';
       if(ev.isProxied){
@@ -770,7 +950,7 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
 
       
       if(!isTouch()){
-        ico.addEventListener('mouseenter',e=>{cancelLeave();if(!tipPinned){renderTip(ev,y,m,d);tip.classList.add('show');posDesktopTip(e);}});
+        ico.addEventListener('mouseenter',e=>{cancelLeave();cancelMatchLeave();if(!tipPinned&&!matchTipPinned){hideMatchTip();renderTip(ev,y,m,d);tip.classList.add('show');posDesktopTip(e);}});
         ico.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
         ico.addEventListener('mousemove',e=>{if(!tipPinned)posDesktopTip(e);});
       }
@@ -784,6 +964,7 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
           if(tipPinned&&tip._currentEvKey===key){
             hideTip();
           }else{
+            hideMatchTip();
             tip._currentEvKey=key;
             renderTip(ev,y,m,d);
             tipPinned=true;
@@ -800,6 +981,7 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
           if(tipPinned&&tip._currentEvKey===key){
             hideTip();
           }else{
+            hideMatchTip();
             tip._currentEvKey=key;
             renderTip(ev,y,m,d);
             tipPinned=true;
@@ -812,6 +994,52 @@ function makeCell(y,m,d,adjMonth,cellIdx,totalCells){
 
       wrap.appendChild(ico);
     });
+    if(hasMatchIcon){
+      const ico=document.createElement('div');ico.className='evt evt-match';
+      const em=document.createElement('span');em.className='evt-emoji';em.textContent='☀️';ico.appendChild(em);
+
+      if(!isTouch()){
+        ico.addEventListener('mouseenter',e=>{cancelLeave();cancelMatchLeave();if(!tipPinned&&!matchTipPinned){hideTip();renderMatchTip(matchEvts,y,m,d);matchTip.classList.add('show');posDesktopMatchTip(e);}});
+        ico.addEventListener('mouseleave',()=>{if(!matchTipPinned)scheduleMatchLeave();});
+        ico.addEventListener('mousemove',e=>{if(!matchTipPinned)posDesktopMatchTip(e);});
+      }
+
+      if(isTouch()){
+        ico.addEventListener('touchend',e=>{
+          e.stopPropagation();
+          e.preventDefault();
+          const key=`match-${y}-${m}-${d}`;
+          if(matchTipPinned&&matchTip._currentEvKey===key){
+            hideMatchTip();
+          }else{
+            hideTip();
+            matchTip._currentEvKey=key;
+            renderMatchTip(matchEvts,y,m,d);
+            matchTipPinned=true;
+            matchTip.classList.add('show','mobile-center');
+            backdrop.classList.add('show');
+            matchTip.style.left='';matchTip.style.top='';matchTip.style.transform='';
+          }
+        },{passive:false});
+      }else{
+        ico.addEventListener('click',e=>{
+          e.stopPropagation();
+          const key=`match-${y}-${m}-${d}`;
+          if(matchTipPinned&&matchTip._currentEvKey===key){
+            hideMatchTip();
+          }else{
+            hideTip();
+            matchTip._currentEvKey=key;
+            renderMatchTip(matchEvts,y,m,d);
+            matchTipPinned=true;
+            matchTip.classList.add('show');
+            matchTip.classList.remove('mobile-center');
+            posDesktopMatchTip(e);
+          }
+        });
+      }
+      wrap.appendChild(ico);
+    }
     cell.appendChild(wrap);
   }
   return cell;
@@ -836,11 +1064,14 @@ tip.addEventListener('mouseleave',()=>{if(!tipPinned)scheduleLeave();});
 tipClose.addEventListener('click',e=>{e.stopPropagation();hideTip();});
 tipClose.addEventListener('touchend',e=>{e.stopPropagation();e.preventDefault();hideTip();},{passive:false});
 
-backdrop.addEventListener('touchend',e=>{e.stopPropagation();e.preventDefault();hideTip();},{passive:false});
-backdrop.addEventListener('click',hideTip);
+backdrop.addEventListener('touchend',e=>{e.stopPropagation();e.preventDefault();hideTip();hideMatchTip();},{passive:false});
+backdrop.addEventListener('click',()=>{hideTip();hideMatchTip();});
 
 document.addEventListener('click',e=>{
-  if(!isTouch()&&!tip.contains(e.target))hideTip();
+  if(!isTouch()){
+    if(!tip.contains(e.target))hideTip();
+    if(!matchTip.contains(e.target))hideMatchTip();
+  }
 });
 
 function posDesktopTip(e){
@@ -885,11 +1116,145 @@ function renderTip(ev,y,m,d){
   if(ev.link){const a=document.createElement('a');a.className='tip-btn';a.href=ev.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='JOIN 🔥';tipBottomRow.appendChild(a);}
 }
 
-document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
-document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
+const matchTip=document.getElementById('matchTip');
+const matchTipClose=document.getElementById('matchTipClose');
+const matchTipLogo=document.getElementById('matchTipLogo');
+const matchTipTitle=document.getElementById('matchTipTitle');
+const matchTipDateBadge=document.getElementById('matchTipDateBadge');
+const matchTipCountBadge=document.getElementById('matchTipCountBadge');
+const matchTipScroll=document.getElementById('matchTipScroll');
+let matchTipPinned=false,matchLeaveTimer=null,matchCountdownTimers=[];
+
+const scheduleMatchLeave=()=>{matchLeaveTimer=setTimeout(()=>{matchLeaveTimer=null;hideMatchTip();},130);};
+const cancelMatchLeave=()=>{if(matchLeaveTimer){clearTimeout(matchLeaveTimer);matchLeaveTimer=null;}};
+const hideMatchTip=()=>{matchTipPinned=false;matchTip._currentEvKey=null;matchTip.classList.remove('show','mobile-center');backdrop.classList.remove('show');matchCountdownTimers.forEach(t=>clearInterval(t));matchCountdownTimers=[];};
+
+matchTip.addEventListener('mouseenter',cancelMatchLeave);
+matchTip.addEventListener('mouseleave',()=>{if(!matchTipPinned)scheduleMatchLeave();});
+matchTipClose.addEventListener('click',e=>{e.stopPropagation();hideMatchTip();});
+matchTipClose.addEventListener('touchend',e=>{e.stopPropagation();e.preventDefault();hideMatchTip();},{passive:false});
+
+function posDesktopMatchTip(e){
+  const wrap=document.getElementById('tifCalWrap');
+  const wRect=wrap.getBoundingClientRect();
+  const TW=275,TH=280;
+  const wW=wRect.width,wH=wRect.height;
+  let x=(e.clientX-wRect.left)+14;
+  let y=(e.clientY-wRect.top)+14;
+  if(x+TW>wW-6)x=(e.clientX-wRect.left)-TW-14;
+  if(y+TH>wH-6)y=(e.clientY-wRect.top)-TH-14;
+  x=Math.max(4,Math.min(x,wW-TW-4));
+  y=Math.max(4,Math.min(y,wH-TH-4));
+  matchTip.style.left=x+'px';
+  matchTip.style.top=y+'px';
+  matchTip.style.transform='none';
+}
+
+function buildMatchLogo(slug){
+  const wrap=document.createElement('div');wrap.className='mc-logo';
+  const skel=document.createElement('div');skel.className='mc-logo-skel';wrap.appendChild(skel);
+  const em=document.createElement('span');em.style.position='relative';em.style.zIndex='1';em.textContent='⚔️';
+  if(slug){
+    fetchClubLogo(slug).then(logoUrl=>{
+      if(logoUrl){
+        const img=document.createElement('img');img.decoding='async';wrap.appendChild(img);
+        const proxied=logoUrl.startsWith('https://wsrv.nl')?logoUrl:(proxyImageURL(logoUrl)||logoUrl);
+        onImgReady(proxied,state=>{
+          if(state==='ok'){img.src=proxied;const fin=()=>{img.classList.add('loaded');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
+          else{skel.remove();wrap.appendChild(em);}
+        });
+        preloadImg(proxied);
+      }else{skel.remove();wrap.appendChild(em);}
+    });
+  }else{skel.remove();wrap.appendChild(em);}
+  return wrap;
+}
+
+function renderMatchTip(matches,y,m,d){
+  matchCountdownTimers.forEach(t=>clearInterval(t));matchCountdownTimers=[];
+  matchTipLogo.textContent='☀️';
+  matchTipTitle.textContent='Daily Team Matches';
+  matchTipDateBadge.textContent=formatDate(y,m,d);
+  if(matches.length>1){matchTipCountBadge.textContent=`${matches.length} matches`;matchTipCountBadge.style.display='inline-flex';}
+  else matchTipCountBadge.style.display='none';
+  matchTipScroll.innerHTML='';
+
+  matches.forEach((match,idx)=>{
+    const ph=getMatchPhase(match);
+    const card=document.createElement('div');card.className='match-card';
+
+    const badgeRow=document.createElement('div');
+    const badge=document.createElement('div');badge.className='mc-phase '+ph.cls;
+    badge.innerHTML=`<span class="cd-dot"></span><span class="cd-txt">${ph.text}</span>`;
+    badgeRow.appendChild(badge);card.appendChild(badgeRow);
+
+    const ourDisplayName=match.ourName||'The Illusion Fireballs';
+    const theirDisplayName=match.theirName||match.opponent||'Opponent';
+
+    const teamsRow=document.createElement('div');teamsRow.className='mc-teams-row';
+    const ourCol=document.createElement('div');ourCol.className='mc-team-col';
+    ourCol.appendChild(buildMatchLogo(match.ourSlug));
+    const ourLabel=document.createElement('div');ourLabel.className='mc-team-name';ourLabel.textContent=ourDisplayName;
+    ourCol.appendChild(ourLabel);
+
+    const vsBlock=document.createElement('div');vsBlock.className='mc-vs-block';
+    const vsLabel=document.createElement('div');vsLabel.className='mc-vs-label';vsLabel.textContent='VS';
+    vsBlock.appendChild(vsLabel);
+    if(match.ourScore!==undefined&&match.theirScore!==undefined){
+      const scoreRow=document.createElement('div');scoreRow.className='mc-score-row';
+      const ourCls=match.ourScore>match.theirScore?' winning':match.ourScore<match.theirScore?' losing':' tied';
+      const theirCls=match.theirScore>match.ourScore?' winning':match.theirScore<match.ourScore?' losing':' tied';
+      scoreRow.innerHTML=`<span class="mc-score-num${ourCls}">${match.ourScore}</span><span class="mc-score-dash">–</span><span class="mc-score-num${theirCls}">${match.theirScore}</span>`;
+      vsBlock.appendChild(scoreRow);
+    }
+    const theirCol=document.createElement('div');theirCol.className='mc-team-col';
+    theirCol.appendChild(buildMatchLogo(match.theirSlug||match.opponentSlug));
+    const theirLabel=document.createElement('div');theirLabel.className='mc-team-name';theirLabel.textContent=theirDisplayName;
+    theirCol.appendChild(theirLabel);
+
+    teamsRow.appendChild(ourCol);teamsRow.appendChild(vsBlock);teamsRow.appendChild(theirCol);
+    card.appendChild(teamsRow);
+
+    if(match._status==='finished'&&match.result){
+      const rb=document.createElement('div');rb.className='mc-result '+(match.result==='win'?'win':(match.result==='lose'||match.result==='loss')?'loss':'draw');
+      rb.textContent=match.result==='win'?'✓ WIN':(match.result==='lose'||match.result==='loss')?'✗ LOSS':'⬛ DRAW';
+      card.appendChild(rb);
+    }
+
+    const meta=document.createElement('div');meta.className='mc-meta';
+    const tcText=match.timeClass==='daily'?'☀️ Daily':match.timeClass==='rapid'?'⚡ Rapid':'⚡ Live';
+    meta.innerHTML=`<span>${tcText}</span>${match.boards?`<span>♟ ${match.boards} boards</span>`:''}`;
+    card.appendChild(meta);
+
+    if(match.link){
+      const a=document.createElement('a');a.className='mc-btn'+(ph.status==='ended'?' view':'');
+      a.textContent=ph.status==='ended'?'View':ph.status==='live'?'👁 Watch':'⚔️ Join';
+      a.href=match.link;a.target='_blank';a.rel='noopener noreferrer';
+      card.appendChild(a);
+    }
+    matchTipScroll.appendChild(card);
+
+    if(idx===0){
+      const t=setInterval(()=>{
+        const p=getMatchPhase(match);
+        badge.className='mc-phase '+p.cls;
+        badge.querySelector('.cd-txt').textContent=p.text;
+      },ph.status==='live'?60000:30000);
+      matchCountdownTimers.push(t);
+    }
+  });
+}
+
+document.getElementById('prevBtn').addEventListener('click',()=>{hideTip();hideMatchTip();viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}buildCalendar();});
+document.getElementById('nextBtn').addEventListener('click',()=>{hideTip();hideMatchTip();viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}buildCalendar();});
 new ResizeObserver(()=>requestAnimationFrame(applyCellWidth)).observe(calBody);
 
-loadSheet();
+async function init(){
+  await Promise.allSettled([loadSheet(),loadMatches()]);
+  buildCalendar();
+  document.getElementById('tifCalWrap').classList.add('loaded');
+}
+init();
 </script>
 </body>
 </html>
