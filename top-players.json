@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-05T14:41:58.529Z",
-  "totalMembers": 1478,
-  "activeToday": 313,
+  "updated": "2026-07-05T16:07:21.911Z",
+  "totalMembers": 1479,
+  "activeToday": 331,
   "players": [
     {
       "username": "flabbi",
@@ -16,24 +16,24 @@
     },
     {
       "username": "chechebureche1204",
-      "total_pts": 440,
-      "bullet_pts": 440,
+      "total_pts": 446,
+      "bullet_pts": 446,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 152,
+      "bullet_g": 154,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176040881.cacc160f.200x200o.1fd1604dc8fd.jpg"
     },
     {
       "username": "silencedseeker",
-      "total_pts": 378,
+      "total_pts": 393,
       "bullet_pts": 39,
       "blitz_pts": 144,
-      "rapid_pts": 195,
+      "rapid_pts": 210,
       "bullet_g": 13,
       "blitz_g": 16,
-      "rapid_g": 13,
+      "rapid_g": 14,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/512133167.4a9e5c80.200x200o.46b218d5318f.jpg"
     }
   ]
