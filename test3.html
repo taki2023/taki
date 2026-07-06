@@ -52,6 +52,30 @@ body{display:block;}
 }
 .sec-label .dot{width:12px;height:10px;border-radius:50%;background:#d93020;flex-shrink:0;}
 
+/* ══ TAB NAVIGATION ══ */
+.tab-nav{
+  display:flex;gap:6px;padding:10px 14px 8px;
+  position:sticky;top:0;z-index:40;background:#fff5f0;
+  border-bottom:2px solid #f5c5b8;
+}
+.tab-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 4px 7px;border-radius:14px;border:2px solid transparent;
+  background:transparent;cursor:pointer;font-family:'Nunito',sans-serif;
+  font-size:10px;font-weight:900;color:#c73520;opacity:.5;
+  transition:all .18s ease;text-transform:uppercase;letter-spacing:.4px;
+}
+.tab-btn .tab-ico{font-size:18px;line-height:1;}
+.tab-btn:hover{opacity:.8;}
+.tab-btn.active{
+  background:#fff;border-color:#f5c5b8;opacity:1;
+  box-shadow:0 3px 0 #e8aa98;transform:translateY(-1px);
+}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:tabFadeIn .22s ease;}
+@keyframes tabFadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+.always-on{margin-top:4px;}
+
 .div{width:100%;max-width:980px;height:18px;margin:10px auto 14px;position:relative;opacity:.95;}
 .div::before,.div::after{content:"";position:absolute;left:0;width:100%;height:6px;border-radius:999px;}
 .div::before{
@@ -503,7 +527,16 @@ body{display:block;}
     <div class="club-sub">Your chess home ♡</div>
   </div>
 
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="home"><span class="tab-ico">🏠</span>Home</button>
+    <button class="tab-btn" data-tab="community"><span class="tab-ico">🏆</span>Community</button>
+    <button class="tab-btn" data-tab="fun"><span class="tab-ico">🎉</span>Fun</button>
+  </div>
+
   <div class="inner">
+
+    <!-- ══════════ TAB: HOME ══════════ -->
+    <div class="tab-panel active" data-tab="home">
 
     <!-- WELCOME -->
     <div style="text-align:center;margin-top:-14px;margin-bottom:10px;">
@@ -534,7 +567,11 @@ body{display:block;}
       <a class="lbtn" href="https://smartpolls.co.uk/p/145078" target="_blank" rel="noopener noreferrer"><span class="ico">⭐</span><span>Rate Our Club!</span><span class="arr">›</span></a>
     </div>
 
-    <div class="div"></div>
+    </div>
+    <!-- ══════════ END TAB: HOME ══════════ -->
+
+    <!-- ══════════ TAB: COMMUNITY ══════════ -->
+    <div class="tab-panel" data-tab="community">
 
     <!-- TODAY'S TOP PLAYERS -->
     <div class="sec-label"><div class="dot"></div>Today's Top Chillies 🏅</div>
@@ -571,6 +608,40 @@ body{display:block;}
     </div>
 
     <div class="div"></div>
+    <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
+
+    <div class="live-members-bar">
+      <div class="live-dot"></div>
+      <span class="live-label">Members</span>
+      <span class="live-count" id="liveCount">—</span>
+      <span class="live-sub">and growing 🌶</span>
+    </div>
+
+    <div class="progress-wrapper">
+      <svg class="progress-svg" preserveAspectRatio="none">
+        <polyline class="progress-bg" fill="none"/>
+        <polyline class="progress-active" fill="none"/>
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d93020"/>
+            <stop offset="100%" stop-color="#e8553a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="milestone" data-value="10"   data-date="Nov 21">10<br><span>Nov 21</span></div>
+      <div class="milestone" data-value="100"  data-date="Nov 27">100<br><span>Nov 27</span></div>
+      <div class="milestone" data-value="200"  data-date="Dec 12">200<br><span>Dec 12</span></div>
+      <div class="milestone" data-value="300"  data-date="Jan 11">300<br><span>Jan 11</span></div>
+      <div class="milestone" data-value="500"  data-date="Feb 06">500<br><span>Feb 06</span></div>
+      <div class="milestone" data-value="1000" data-date="Apr 09">1000<br><span>Apr 09</span></div>
+      <div class="milestone locked" data-value="2000+" data-date="—">?<br><span>2000+</span></div>
+    </div>
+
+    </div>
+    <!-- ══════════ END TAB: COMMUNITY ══════════ -->
+
+    <!-- ══════════ TAB: FUN ══════════ -->
+    <div class="tab-panel" data-tab="fun">
 
     <!-- BIRTHDAY SECTION -->
     <div class="sec-label"><div class="dot"></div>Birthdays 🎂</div>
@@ -658,35 +729,11 @@ body{display:block;}
       </div>
     </div>
 
-    <div class="div"></div>
-    <div class="sec-label"><div class="dot"></div>Club Progress 🎉</div>
-
-    <div class="live-members-bar">
-      <div class="live-dot"></div>
-      <span class="live-label">Members</span>
-      <span class="live-count" id="liveCount">—</span>
-      <span class="live-sub">and growing 🌶</span>
     </div>
+    <!-- ══════════ END TAB: FUN ══════════ -->
 
-    <div class="progress-wrapper">
-      <svg class="progress-svg" preserveAspectRatio="none">
-        <polyline class="progress-bg" fill="none"/>
-        <polyline class="progress-active" fill="none"/>
-        <defs>
-          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#d93020"/>
-            <stop offset="100%" stop-color="#e8553a"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <div class="milestone" data-value="10"   data-date="Nov 21">10<br><span>Nov 21</span></div>
-      <div class="milestone" data-value="100"  data-date="Nov 27">100<br><span>Nov 27</span></div>
-      <div class="milestone" data-value="200"  data-date="Dec 12">200<br><span>Dec 12</span></div>
-      <div class="milestone" data-value="300"  data-date="Jan 11">300<br><span>Jan 11</span></div>
-      <div class="milestone" data-value="500"  data-date="Feb 06">500<br><span>Feb 06</span></div>
-      <div class="milestone" data-value="1000" data-date="Apr 09">1000<br><span>Apr 09</span></div>
-      <div class="milestone locked" data-value="2000+" data-date="—">?<br><span>2000+</span></div>
-    </div>
+    <!-- ══════════ ALWAYS VISIBLE ══════════ -->
+    <div class="always-on">
 
     <div class="div"></div>
 
@@ -709,12 +756,42 @@ body{display:block;}
 
     <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 
+    </div>
+
   </div>
 </div>
 
 <audio id="audio"></audio>
 
 <script>
+/* ══ TAB NAVIGATION ══ */
+(function initTabs(){
+  const btns   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  function setTab(name){
+    btns.forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.tab === name));
+    try { localStorage.setItem('hcc_tab', name); } catch(e) {}
+    if (name === 'community') {
+      // progress bar was hidden (width 0) — recompute + replay the draw animation now that it's visible
+      setTimeout(() => {
+        const wrapper = document.querySelector('.progress-wrapper');
+        const activeLine = wrapper && wrapper.querySelector('.progress-active');
+        if (activeLine) { activeLine.style.animation = 'none'; void activeLine.getBoundingClientRect(); activeLine.style.animation = ''; }
+        if (typeof updateProgress === 'function') updateProgress();
+      }, 30);
+    }
+  }
+
+  btns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+  let saved = null;
+  try { saved = localStorage.getItem('hcc_tab'); } catch(e) {}
+  const validSaved = saved && document.querySelector('.tab-panel[data-tab="' + saved + '"]');
+  setTab(validSaved ? saved : 'home');
+})();
+
 /* ══ COPY INVITE LINK ══ */
 document.getElementById('copyInviteBtn').addEventListener('click', function() {
   const link = 'https://www.chess.com/club/hot-chilli-checkmate';
