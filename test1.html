@@ -104,8 +104,8 @@ body{display:block;}
 /* ══ TAB NAVIGATION — iOS segmented control ══ */
 .tab-nav{
   display:flex;gap:2px;
-  margin:-18px 14px 16px;padding:5px;
-  position:sticky;top:10px;z-index:40;
+  margin:-14px 14px 16px;padding:4px;
+  position:sticky;top:12px;z-index:40;
   background:rgba(255,255,255,.65);border-radius:20px;
   box-shadow:0 10px 26px -10px rgba(179,35,15,.35), 0 0 0 1px rgba(255,220,201,.7) inset;
   backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
@@ -114,16 +114,16 @@ body{display:block;}
   flex:1;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:5px;
   padding:9px 4px;border-radius:15px;border:none;
   background:transparent;cursor:pointer;font-family:'Nunito',sans-serif;
-  font-size:10.5px;font-weight:900;color:var(--ink-soft);opacity:.7;
+  font-size:10px;font-weight:900;color:var(--ink-soft);opacity:.7;
   transition:color .25s var(--ease),opacity .25s var(--ease),transform .15s var(--spring);
-  text-transform:uppercase;letter-spacing:.3px;
+  text-transform:uppercase;letter-spacing:.25px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:100%;
   position:relative;z-index:2;
 }
 .tab-btn .tab-ico{font-size:15px;line-height:1;transition:transform .25s var(--spring);}
 .tab-btn:active{transform:scale(.92);}
 .tab-btn.active{color:#fff;opacity:1;}
-.tab-btn.active .tab-ico{transform:scale(1.15) rotate(-6deg);}
+.tab-btn.active .tab-ico{transform:scale(1.15) rotate(-9deg);}
 .tab-indicator{
   position:absolute;top:5px;bottom:5px;left:5px;
   width:calc((100% - 10px)/3);border-radius:15px;z-index:1;
