@@ -199,22 +199,18 @@ body{display:block;}
 
 .footer{text-align:center;margin-top:16px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
 
-.tagline{
-  display:inline-flex;align-items:center;gap:7px;margin-top:10px;
-  padding:9px 18px;border-radius:999px;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#FF5B3D,var(--red-mid) 60%,var(--red-deep));
-  box-shadow:0 5px 0 var(--red-deep),0 10px 20px -8px rgba(224,48,31,.55);
+  .tagline{
+    margin:14px 0 0;
+    text-align:center;
+    font-family:'Fredoka One', cursive;
+    font-size:18px;
+    color:#e53935;
+    text-shadow:
+        0 1px 0 #fff,
+        0 2px 6px rgba(255,80,50,.18);
+    line-height:1.35;
 }
-.tagline span{
-  font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;color:#fff;
-  text-shadow:0 2px 0 rgba(120,15,5,.35);letter-spacing:.2px;position:relative;z-index:1;
-}
-.tagline::before{
-  content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
-  background:linear-gradient(115deg,transparent,rgba(255,255,255,.45),transparent);
-  animation:taglineShine 3.2s ease-in-out infinite;
-}
-@keyframes taglineShine{0%{left:-60%;}55%{left:130%;}100%{left:130%;}}
+
 
 /* ══ LIVE MEMBERS BAR ══ */
 .live-members-bar{
