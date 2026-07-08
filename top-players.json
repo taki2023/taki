@@ -1,8 +1,30 @@
 {
-  "updated": "2026-07-08T04:45:06.170Z",
+  "updated": "2026-07-08T07:27:36.246Z",
   "totalMembers": 1494,
-  "activeToday": 99,
+  "activeToday": 143,
   "players": [
+    {
+      "username": "hreedhaanf-22eagle",
+      "total_pts": 209,
+      "bullet_pts": 12,
+      "blitz_pts": 117,
+      "rapid_pts": 80,
+      "bullet_g": 4,
+      "blitz_g": 15,
+      "rapid_g": 6,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/471397400.8e2d879a.200x200o.47e858e33c86.jpg"
+    },
+    {
+      "username": "xuyen1786",
+      "total_pts": 206,
+      "bullet_pts": 71,
+      "blitz_pts": 135,
+      "rapid_pts": 0,
+      "bullet_g": 25,
+      "blitz_g": 15,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+    },
     {
       "username": "nikkotello",
       "total_pts": 156,
@@ -13,28 +35,6 @@
       "blitz_g": 8,
       "rapid_g": 6,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "xuyen1786",
-      "total_pts": 155,
-      "bullet_pts": 65,
-      "blitz_pts": 90,
-      "rapid_pts": 0,
-      "bullet_g": 23,
-      "blitz_g": 10,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
-    },
-    {
-      "username": "hreedhaanf-22eagle",
-      "total_pts": 117,
-      "bullet_pts": 12,
-      "blitz_pts": 90,
-      "rapid_pts": 15,
-      "bullet_g": 4,
-      "blitz_g": 12,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/471397400.f6bcd8c0.200x200o.baaf24366626.png"
     }
   ]
 }
