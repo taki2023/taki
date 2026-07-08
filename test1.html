@@ -195,29 +195,91 @@ body{display:block;}
   padding:16px;
   text-align:center;
   position:relative;
-  overflow:hidden;
+
+  /* Allow the pepper to render fully */
+  overflow:visible;
+
+  isolation:isolate;
 }
 
 .invite-box::before{
   content:'🌶';
   position:absolute;
-  font-size:62px;
-  opacity:.07;
-  right:10px;
-  bottom:8px;
-  transform:rotate(-18deg);
-  pointer-events:none;
-}
-.copy-btn{
-  display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:999px;
-  background:linear-gradient(135deg,#FF5B3D,var(--red-mid));border:none;color:#fff;
-  font-size:var(--fs-md);font-weight:900;font-family:'Nunito',sans-serif;cursor:pointer;
-  box-shadow:0 5px 0 var(--red-deep),0 10px 20px -8px rgba(224,48,31,.5);
-  transition:transform .15s var(--spring),box-shadow .15s var(--ease);position:relative;
-}
-.copy-btn:hover{transform:translateY(-2px);}
-.copy-btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--red-deep);}
 
+  font-size:60px;
+  line-height:1;
+
+  opacity:.06;
+
+  right:-8px;
+  bottom:-8px;
+
+  transform:rotate(-18deg);
+
+  pointer-events:none;
+  z-index:0;
+}
+
+.invite-title{
+  position:relative;
+  z-index:1;
+
+  font-family:'Fredoka',sans-serif;
+  font-weight:600;
+  font-size:15px;
+  color:var(--red-mid);
+  margin-bottom:5px;
+}
+
+.invite-sub{
+  position:relative;
+  z-index:1;
+
+  font-size:var(--fs-base);
+  font-weight:700;
+  color:var(--ink-soft);
+  margin-bottom:13px;
+}
+
+.copy-btn{
+  position:relative;
+  z-index:1;
+
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+
+  padding:12px 22px;
+
+  border-radius:999px;
+  border:none;
+
+  background:linear-gradient(135deg,#FF5B3D,var(--red-mid));
+  color:#fff;
+
+  font-size:var(--fs-md);
+  font-weight:900;
+  font-family:'Nunito',sans-serif;
+
+  cursor:pointer;
+
+  box-shadow:
+      0 5px 0 var(--red-deep),
+      0 10px 20px -8px rgba(224,48,31,.5);
+
+  transition:
+      transform .15s var(--spring),
+      box-shadow .15s var(--ease);
+}
+
+.copy-btn:hover{
+  transform:translateY(-2px);
+}
+
+.copy-btn:active{
+  transform:translateY(3px);
+  box-shadow:0 2px 0 var(--red-deep);
+}
 .socials{display:flex;gap:10px;}
 .s-btn{
   flex:1;display:flex;align-items:center;justify-content:center;
