@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-08T16:06:19.111Z",
+  "updated": "2026-07-08T17:59:37.538Z",
   "totalMembers": 1498,
-  "activeToday": 318,
+  "activeToday": 251,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 369,
+      "total_pts": 449,
       "bullet_pts": 0,
       "blitz_pts": 84,
-      "rapid_pts": 285,
+      "rapid_pts": 365,
       "bullet_g": 0,
       "blitz_g": 10,
-      "rapid_g": 19,
+      "rapid_g": 25,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
       "username": "90smp3",
-      "total_pts": 318,
-      "bullet_pts": 318,
+      "total_pts": 360,
+      "bullet_pts": 360,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 110,
+      "bullet_g": 124,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/183098845.6b9242e6.200x200o.1b2479b9019f.jpg"
     },
     {
-      "username": "vannamcovua",
-      "total_pts": 310,
-      "bullet_pts": 283,
-      "blitz_pts": 27,
+      "username": "steellasking77",
+      "total_pts": 240,
+      "bullet_pts": 165,
+      "blitz_pts": 75,
       "rapid_pts": 0,
-      "bullet_g": 97,
-      "blitz_g": 3,
+      "bullet_g": 57,
+      "blitz_g": 9,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/523120267.3ad49cd1.200x200o.c255db2dd45e.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     }
   ]
 }
