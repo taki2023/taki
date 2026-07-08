@@ -189,12 +189,25 @@ body{display:block;}
 .lbtn:hover .arr{transform:translateX(4px);color:var(--red);}
 
 .invite-box{
-  background:linear-gradient(160deg,#FFF1EA,var(--paper));border-radius:20px;
-  border:2px dashed var(--peach);padding:16px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#FFF1EA,var(--paper));
+  border-radius:20px;
+  border:2px dashed var(--peach);
+  padding:16px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
 }
-.invite-box::before{content:'🌶';position:absolute;font-size:55px;opacity:.06;right:-25px;bottom:-30px;transform:rotate(-12deg);}
-.invite-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;color:var(--red-mid);margin-bottom:5px;position:relative;}
-.invite-sub{font-size:var(--fs-base);font-weight:700;color:var(--ink-soft);margin-bottom:13px;position:relative;}
+
+.invite-box::before{
+  content:'🌶';
+  position:absolute;
+  font-size:62px;
+  opacity:.07;
+  right:10px;
+  bottom:8px;
+  transform:rotate(-18deg);
+  pointer-events:none;
+}
 .copy-btn{
   display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:999px;
   background:linear-gradient(135deg,#FF5B3D,var(--red-mid));border:none;color:#fff;
