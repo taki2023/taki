@@ -272,18 +272,12 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   ADMIN ZONE — edit everything below to run the event.
-   Add as many clubs as you like: just add an entry to CLUBS, then
-   add a matching row + column to RESULTS and LINKS. Everything else
-   (standings, tiebreak, colors, sorting) is calculated automatically.
+   ADMIN ZONE
    ════════════════════════════════════════════════════════════════ */
 
-// 1) CLUBS — order here is just the "registration order", not the
-//    display order (the table sorts by standings automatically).
-//    slug = the part of the URL after chess.com/club/
 const CLUBS = [
   { name: "Hot Chilli CheckMate", slug: "hot-chilli-checkmate", isHost: true },
-  { name: "Club 2",               slug: "club-2-slug" },
+  { name: "Hybrid Chess Federation",               slug: "hybrid-chess-federation" },
   { name: "Club 3",               slug: "club-3-slug" },
   { name: "Club 4",               slug: "club-4-slug" },
   { name: "Club 5",               slug: "club-5-slug" },
