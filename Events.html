@@ -302,14 +302,11 @@ html,body{width:100%;background:transparent;font-family:'Nunito',sans-serif;}
 }
 .match-card+.match-card{border-top:1.5px solid var(--border);}
 
-/* ← REMOVED: mc-title rule no longer needed */
-
 /* logos + score row */
 .mc-teams-row{
   display:flex;align-items:center;justify-content:center;
   gap:8px;padding:4px 0 2px;
 }
-/* ← CHANGED: bigger logos 58→70px */
 .mc-logo{
   width:70px;height:70px;border-radius:12px;
   background:rgba(255,240,235,.9);border:1.5px solid var(--border);
@@ -499,6 +496,21 @@ function onImgReady(url,cb){
   if(!imgMem.has(url))preloadImg(url);
 }
 
+/* ── Debounced calendar rebuild ──
+   Multiple sources (sheet load, match load, per-batch enrichment) can each
+   trigger a rebuild in quick succession. Rebuilding tears down and recreates
+   every DOM node, including <img> elements, which — even when the image is
+   already cached — causes a visible skeleton/pop-in flicker each time.
+   Coalescing rapid-fire triggers into a single animation-frame rebuild,
+   combined with skipping the skeleton entirely for already-loaded images
+   (see makeCell / buildMatchLogo below), eliminates the flicker.
+*/
+let _buildCalRAF=null;
+function scheduleBuildCalendar(){
+  if(_buildCalRAF)return;
+  _buildCalRAF=requestAnimationFrame(()=>{_buildCalRAF=null;buildCalendar();});
+}
+
 const clubLogoCache = new Map();
 async function fetchClubLogo(slug){
   if(!slug)return null;
@@ -673,12 +685,12 @@ async function loadSheet(){
     });
     applySheetData(rawMap);
     writeSheetCache(rawMap);
-    if(window._hccCalReady)buildCalendar();
+    if(window._hccCalReady)scheduleBuildCalendar();
   }catch(e){console.error('Sheet load failed:',e);}
 }
 
 function renderIfReady(){
-  if(window._hccCalReady)buildCalendar();
+  if(window._hccCalReady)scheduleBuildCalendar();
 }
 
 async function fetchJSON(url){
@@ -728,7 +740,7 @@ async function loadMatches(){
     // Icons/dots for every match are visible right away without waiting for
     // per-match detail enrichment (team names/scores/logos) — that's the
     // slow part when a club has a lot of match history.
-    if(window._hccCalReady)buildCalendar();
+    if(window._hccCalReady)scheduleBuildCalendar();
     // Enrichment runs in the background and does NOT block this function
     // from resolving, so callers awaiting loadMatches() don't stall on it.
     enrichMatchesProgressive();
@@ -778,7 +790,9 @@ async function enrichMatchesProgressive(){
     }));
     // Re-render after every batch so nearby/current-month matches show
     // enriched info as soon as they're ready, instead of all-or-nothing.
-    if(window._hccCalReady)buildCalendar();
+    // Debounced via scheduleBuildCalendar so back-to-back batches collapse
+    // into a single rebuild instead of one teardown per batch.
+    if(window._hccCalReady)scheduleBuildCalendar();
   }
   writeMatchCache(matchMap);
 }
@@ -863,12 +877,22 @@ function makeCell(y,m,d,overflow){
       }else{
         const g=item.group;ico.className='evt';
         if(g.isProxied){
-          const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
-          const img=document.createElement('img');img.alt=g.events[0].title;img.loading='eager';img.decoding='async';ico.appendChild(img);
-          onImgReady(g.logo,state=>{
-            if(state==='ok'){img.src=g.logo;const fin=()=>{img.classList.add('loaded','img-reveal');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
-            else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);}
-          });
+          // Skip the skeleton/build-in animation entirely if this logo is
+          // already known-loaded (e.g. after a rebuild triggered by match
+          // enrichment) — otherwise every rebuild replays the reveal even
+          // though the image is instantly available from browser cache.
+          const knownLoaded = imgMem.get(g.logo)==='ok';
+          const img=document.createElement('img');img.alt=g.events[0].title;img.loading='eager';img.decoding='async';
+          if(knownLoaded){
+            img.src=g.logo;img.classList.add('loaded');ico.appendChild(img);
+          }else{
+            const skel=document.createElement('div');skel.className='evt-skeleton';ico.appendChild(skel);
+            ico.appendChild(img);
+            onImgReady(g.logo,state=>{
+              if(state==='ok'){img.src=g.logo;const fin=()=>{img.classList.add('loaded','img-reveal');skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();}
+              else{skel.remove();const em=document.createElement('span');em.className='evt-emoji';em.textContent='📅';ico.appendChild(em);}
+            });
+          }
         }else{
           const em=document.createElement('span');em.className='evt-emoji';em.textContent=(g.rawLogo&&g.rawLogo.trim())?g.rawLogo:'📅';ico.appendChild(em);
         }
@@ -935,10 +959,20 @@ function renderTipLogo(group){
   }else{tipLogo.textContent=(group.rawLogo&&group.rawLogo.trim())?group.rawLogo:'📅';}
 }
 
-function buildEvtBlock(ev){
+/*
+  buildEvtBlock(ev, showTitle)
+  showTitle defaults to true. When a sheet-icon group has only ONE event,
+  renderSheetGroupTip puts that event's title + time in the tooltip header
+  and passes showTitle=false, so the body isn't a duplicate of the header.
+  When a group has multiple events, each block still shows its own title
+  and time badge so they stay distinguishable.
+*/
+function buildEvtBlock(ev, showTitle=true){
   const block=document.createElement('div');block.className='evt-block';
-  const nameEl=document.createElement('div');nameEl.className='evt-block-name';nameEl.textContent=ev.title;block.appendChild(nameEl);
-  if(ev.timeObj){const tb=document.createElement('div');tb.className='tip-time-badge';tb.textContent=`${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`;block.appendChild(tb);}
+  if(showTitle){
+    const nameEl=document.createElement('div');nameEl.className='evt-block-name';nameEl.textContent=ev.title;block.appendChild(nameEl);
+    if(ev.timeObj){const tb=document.createElement('div');tb.className='tip-time-badge';tb.textContent=`${pad(ev.timeObj.h)}:${pad(ev.timeObj.min)} UTC`;block.appendChild(tb);}
+  }
   const st=getPhase(ev);
   if(st){
     const cd=document.createElement('div');cd.className='tip-countdown '+st.cssClass;
@@ -970,13 +1004,28 @@ function buildEvtBlock(ev){
   return block;
 }
 
+/*
+  renderSheetGroupTip(group,y,m,d)
+  For a single-event group: the header title becomes the event's own title
+  (instead of the generic "Events" label) and the date badge gets the
+  event's time appended (e.g. "Jul 9th, 2026 · 14:30 UTC"), so the time
+  sits right next to the date instead of being repeated lower down.
+  For multi-event groups: header stays "Events" and each block keeps its
+  own title/time as before.
+*/
 function renderSheetGroupTip(group,y,m,d){
   sheetCountdownTimers.forEach(t=>clearInterval(t));sheetCountdownTimers=[];
   renderTipLogo(group);
-  tipTitle.textContent=group.events.length>1?'Events':group.events[0].title;
-  tipDateBadge.textContent=formatDate(y,m,d);
+  const singleEvent = group.events.length===1;
+  tipTitle.textContent = singleEvent ? group.events[0].title : 'Events';
+  let dateText = formatDate(y,m,d);
+  if(singleEvent && group.events[0].timeObj){
+    const t = group.events[0].timeObj;
+    dateText += ` · ${pad(t.h)}:${pad(t.min)} UTC`;
+  }
+  tipDateBadge.textContent = dateText;
   evtTipScroll.innerHTML='';
-  group.events.forEach(ev=>evtTipScroll.appendChild(buildEvtBlock(ev)));
+  group.events.forEach(ev=>evtTipScroll.appendChild(buildEvtBlock(ev, !singleEvent)));
   requestAnimationFrame(()=>{evtTipScroll.scrollTop=0;updateEvtFade();});
   evtTipScroll.onscroll=updateEvtFade;
 }
@@ -1020,26 +1069,35 @@ function updateMatchFade(){
 
 function buildMatchLogo(slug, fallbackName){
   const wrap=document.createElement('div');wrap.className='mc-logo';
-  const skel=document.createElement('div');skel.className='mc-logo-skel';wrap.appendChild(skel);
   const em=document.createElement('span');em.style.cssText='font-size:24px;position:relative;z-index:1;';em.textContent='⚔️';
   if(slug){
     fetchClubLogo(slug).then(logoUrl=>{
       if(logoUrl){
+        const proxied=logoUrl.startsWith('https://wsrv.nl')?logoUrl:proxyImageURL(logoUrl)||logoUrl;
+        // If this logo is already known-loaded, render it immediately at
+        // full opacity with no skeleton — avoids the flicker that happened
+        // when repeated calendar rebuilds (from enrichment batches) kept
+        // recreating fresh <img> elements for an already-cached image.
+        const knownLoaded = imgMem.get(proxied)==='ok';
         const img=document.createElement('img');img.decoding='async';
         img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:9px;display:block;opacity:0;transition:opacity .25s;';
-        wrap.appendChild(img);
-        const proxied=logoUrl.startsWith('https://wsrv.nl')?logoUrl:proxyImageURL(logoUrl)||logoUrl;
-        onImgReady(proxied, state=>{
-          if(state==='ok'){
-            img.src=proxied;
-            const fin=()=>{img.style.opacity='1';skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};
-            img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();
-          }else{skel.remove();wrap.appendChild(em);}
-        });
-        preloadImg(proxied);
-      }else{skel.remove();wrap.appendChild(em);}
+        if(knownLoaded){
+          img.src=proxied;img.style.opacity='1';wrap.appendChild(img);
+        }else{
+          const skel=document.createElement('div');skel.className='mc-logo-skel';wrap.appendChild(skel);
+          wrap.appendChild(img);
+          onImgReady(proxied, state=>{
+            if(state==='ok'){
+              img.src=proxied;
+              const fin=()=>{img.style.opacity='1';skel.style.opacity='0';setTimeout(()=>skel.remove(),250);};
+              img.onload=fin;if(img.complete&&img.naturalWidth>0)fin();
+            }else{skel.remove();wrap.appendChild(em);}
+          });
+          preloadImg(proxied);
+        }
+      }else{wrap.appendChild(em);}
     });
-  }else{skel.remove();wrap.appendChild(em);}
+  }else{wrap.appendChild(em);}
   return wrap;
 }
 
@@ -1060,8 +1118,6 @@ function renderMatchTip(matches,y,m,d){
     const badge=document.createElement('div');badge.className='mc-phase '+ph.cls;
     badge.innerHTML=`<span class="cd-dot"></span><span class="cd-txt">${ph.text}</span>`;
     phRow.appendChild(badge);card.appendChild(phRow);
-
-    /* ── REMOVED: mc-title team names text line ── */
 
     const ourDisplayName=match.ourName||'Hot Chilli CheckMate';
     const theirDisplayName=match.theirName||match.opponent||'Opponent';
