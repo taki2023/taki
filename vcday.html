@@ -247,12 +247,10 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
 .footer{text-align:center;margin-top:6px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
 
-/* ══ RESPONSIVE: club name is hidden ONLY when JS measures that the row
-   actually doesn't have room for it (see updateCompactMode() below) —
-   boards, score and tiebreak columns always get priority and are never
-   sacrificed for name space. Whenever there IS room, the name shows. ══ */
+
 .standings-card.compact .club-cell{min-width:0;gap:6px;}
-.standings-card.compact .club-name-wrap{display:none;}      /* hide club name + host label */
+.standings-card.compact .club-name-wrap{display:none;}      
+
 .standings-card.compact .club-avatar{width:36px;height:36px;}
 .standings-card.compact .club-rank{width:18px;height:18px;font-size:10px;}
 .standings-card.compact table.standings thead th:not(:first-child),
@@ -323,7 +321,7 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 const CLUBS = [
   { name: "Hot Chilli CheckMate", slug: "hot-chilli-checkmate", isHost: true },
   { name: "Hybrid Chess Federation",               slug: "hybrid-chess-federation" },
-  { name: "Club 3",               slug: "club-3-slug" },
+  { name: "Chess.com vs Lichess.org",               slug: "chesscom-vs-lichessorg" },
   { name: "Club 4",               slug: "club-4-slug" },
   { name: "Club 5",               slug: "club-5-slug" },
 ];
