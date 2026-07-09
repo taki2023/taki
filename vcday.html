@@ -133,6 +133,8 @@ body{display:block;font-family:'Nunito',sans-serif;}
   box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -10px rgba(224,48,31,.32);
   padding:6px;margin-bottom:14px;overflow:hidden;
   transition:height .35s var(--ease);
+  container-type:inline-size;
+  container-name:standings;
 }
 .table-scroll{overflow-x:auto;border-radius:18px;}
 .table-scroll::-webkit-scrollbar{height:6px;}
@@ -174,8 +176,10 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 .club-rank.r1{background:linear-gradient(135deg,var(--gold),#E0301F);box-shadow:0 2px 8px -2px rgba(255,176,32,.6);}
 .club-rank.r2{background:linear-gradient(135deg,var(--silver),#8E97A8);}
 .club-rank.r3{background:linear-gradient(135deg,var(--bronze),#96591F);}
-.club-avatar{width:30px;height:30px;border-radius:9px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;opacity:0;transition:opacity .3s ease;}
+.club-avatar-link{display:inline-flex;flex-shrink:0;border-radius:11px;}
+.club-avatar{width:46px;height:46px;border-radius:11px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;opacity:0;transition:opacity .3s ease, transform .15s ease;display:block;}
 .club-avatar.loaded{opacity:1;}
+.club-avatar-link:hover .club-avatar{transform:scale(1.05);}
 .club-name-wrap{display:flex;flex-direction:column;text-align:left;min-width:0;}
 .club-name{font-size:12px;font-weight:800;color:var(--red-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:135px;}
 .club-name a{color:inherit;text-decoration:none;}
@@ -219,14 +223,12 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
 .footer{text-align:center;margin-top:6px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
 
-/* ══ RESPONSIVE: narrow screens — drop the min-width floor so the table
-   doesn't get artificially stretched, and hide club names, keeping only
-   the rank badge + logo so the club column collapses to just the avatar
-   width instead of leaving empty space before the result columns. ══ */
-@media(max-width:480px){
-  .event-title{font-size:18px;}
-  .info-chip{min-width:100px;}
-
+/* ══ RESPONSIVE: reacts to the standings card's own rendered width (not
+   just the browser viewport) via a CSS container query, so it also
+   works correctly inside narrower blog/iframe embeds. Boards, score and
+   tiebreak columns are prioritized — the club name (and the empty space
+   it leaves behind) is dropped first, keeping only the rank badge + logo. ══ */
+@container standings (max-width: 640px){
   table.standings{min-width:0;}
 
   table.standings thead th:not(:first-child),
@@ -237,11 +239,17 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
   .club-cell{min-width:0;gap:6px;}
   .club-name-wrap{display:none;}      /* hide club name + host label */
-  .club-avatar{width:26px;height:26px;}
+  .club-avatar{width:36px;height:36px;}
   .club-rank{width:18px;height:18px;font-size:10px;}
 
   table.standings tbody td:first-child{padding-left:8px;}
 }
+
+@media(max-width:480px){
+  .event-title{font-size:18px;}
+  .info-chip{min-width:100px;}
+}
+
 </style>
 </head>
 <body>
@@ -514,7 +522,9 @@ async function render() {
       <td>
         <div class="club-cell">
           <div class="club-rank ${rankClass}">${rank + 1}</div>
-          <img class="club-avatar" src="${avatars[origRowIdx]}" onload="this.classList.add('loaded')" onerror="this.src='${DEFAULT_AVATAR}';this.classList.add('loaded')">
+          <a class="club-avatar-link" href="https://www.chess.com/club/${club.slug}" target="_blank" rel="noopener noreferrer">
+            <img class="club-avatar" src="${avatars[origRowIdx]}" onload="this.classList.add('loaded')" onerror="this.src='${DEFAULT_AVATAR}';this.classList.add('loaded')">
+          </a>
           <div class="club-name-wrap">
             <div class="club-name"><a href="https://www.chess.com/club/${club.slug}" target="_blank" rel="noopener noreferrer">${club.name}</a></div>
             ${club.isHost ? '<div class="club-you">Host club</div>' : ''}
