@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spicy Vote Chess Day — Standings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;margin:0;padding:0;background:#1a1a1a;}
+body{display:block;font-family:'Nunito',sans-serif;}
+
+:root{
+  --fs-xs:  10px;
+  --fs-sm:  11px;
+  --fs-base:12px;
+  --fs-md:  13px;
+  --fs-lg:  15px;
+
+  --cream:      #FFF7F1;
+  --cream-deep: #FFEADC;
+  --paper:      #FFFFFF;
+  --ink:        #6B2A1E;
+  --ink-soft:   #B4685A;
+  --ink-faint:  #E8B6A6;
+  --red:        #FF4433;
+  --red-mid:    #E0301F;
+  --red-deep:   #B3230F;
+  --orange:     #FF8A50;
+  --peach:      #FFD7C2;
+  --line:       #FFDCC9;
+  --good:       #34C759;
+  --good-deep:  #1B8A3A;
+  --gold:       #FFB020;
+  --gold-deep:  #B4790C;
+  --silver:     #B8C0CC;
+  --bronze:     #D98A4B;
+  --violet:     #7C5CFC;
+  --shadow-red: rgba(224,48,31,.16);
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --ease:   cubic-bezier(.22,.61,.36,1);
+}
+
+.sb{
+  font-family:'Nunito',sans-serif;
+  width:100%;max-width:none;margin:0;
+  background:var(--cream);border-radius:32px;
+  border:none;position:relative;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 20px 50px -18px rgba(179,35,15,.35);
+  overflow:clip;isolation:isolate;
+}
+
+/* ══ HEADER ══ */
+.sb-top{
+  background:
+    radial-gradient(120% 160% at 15% -30%, rgba(255,255,255,.35), transparent 55%),
+    linear-gradient(135deg,#FF5B3D 0%,#FF4433 45%,#E0301F 100%);
+  border-radius:32px 32px 0 0;padding:26px 18px 36px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.sb-top::before{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:26px;background:var(--cream);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  transform:scaleX(1.3);
+}
+.chilli-deco{
+  position:absolute;top:14px;width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+  background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.35);
+  box-shadow:0 4px 10px -3px rgba(0,0,0,.2);
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));
+  animation:wiggle 3.4s ease-in-out infinite;
+}
+.chilli-deco.left{left:14px;font-size:24px;transform-origin:60% 80%;}
+.chilli-deco.right{right:14px;font-size:16px;transform-origin:40% 80%;animation-delay:.6s;}
+.chilli-deco.right span{display:inline-block;transform:scale(1.7);}
+@keyframes wiggle{0%,100%{transform:rotate(-8deg);}50%{transform:rotate(10deg);}}
+
+.event-title{
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:22px;color:#fff;
+  text-shadow:0 3px 0 rgba(150,20,10,.35);position:relative;z-index:1;letter-spacing:.2px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.event-title svg{width:22px;height:22px;fill:#fff;flex-shrink:0;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));}
+.event-sub{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:9.5px;font-weight:800;color:#fff;letter-spacing:.6px;text-transform:uppercase;
+  margin-top:10px;position:relative;z-index:1;
+  background:rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;
+  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.3);
+}
+.event-sub::before{content:'🌶';font-size:10px;}
+
+.inner{width:100%;margin:0 auto;padding:0 16px 20px;}
+
+.sec-label{
+  display:flex;align-items:center;gap:8px;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:var(--red-mid);
+  margin-bottom:10px;margin-top:4px;
+}
+.sec-label .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));flex-shrink:0;box-shadow:0 0 0 4px rgba(255,68,51,.14);}
+
+.div{width:100%;height:2px;margin:18px 2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent);
+}
+
+/* ══ SKELETON LOADER (shimmer, same treatment as the HCC calendar) ══ */
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
+
+.standings-skeleton{display:flex;flex-direction:column;gap:8px;padding:14px;}
+.standings-card.loaded .standings-skeleton{display:none;}
+.standings-real{opacity:0;transition:opacity .35s ease;}
+.standings-card.loaded .standings-real{opacity:1;}
+
+.skel-row{display:flex;align-items:center;gap:8px;}
+.skel-blk{
+  border-radius:8px;flex-shrink:0;
+  background:linear-gradient(90deg,#f0cfc4 0%,#fce5de 40%,#f9d6cd 60%,#f0cfc4 100%);
+  background-size:300% 100%;animation:shimmer .85s ease-in-out infinite;
+}
+.skel-row:nth-child(odd) .skel-blk{animation-delay:.08s;}
+.skel-row:nth-child(3n) .skel-blk{animation-delay:.16s;}
+.skel-club-blk{width:150px;height:30px;border-radius:14px;}
+.skel-avatar-blk{width:30px;height:30px;border-radius:9px;}
+.skel-col-blk{flex:1;height:26px;min-width:26px;}
+.skel-score-blk{width:32px;height:22px;}
+
+/* ══ STANDINGS TABLE ══ */
+.standings-card{
+  background:var(--paper);border-radius:24px;border:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -10px rgba(224,48,31,.32);
+  padding:6px;margin-bottom:14px;overflow:hidden;
+}
+.table-scroll{overflow-x:auto;border-radius:18px;}
+.table-scroll::-webkit-scrollbar{height:6px;}
+.table-scroll::-webkit-scrollbar-thumb{background:var(--peach);border-radius:3px;}
+.table-scroll::-webkit-scrollbar-track{background:transparent;}
+
+table.standings{
+  width:100%;border-collapse:separate;border-spacing:0;min-width:560px;
+}
+table.standings thead th{
+  background:linear-gradient(135deg,#3a2018,#241009);
+  color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;
+  padding:12px 6px;text-align:center;white-space:nowrap;position:relative;
+}
+table.standings thead th:first-child{
+  text-align:left;padding-left:14px;border-radius:16px 0 0 0;
+}
+table.standings thead th:last-child{border-radius:0 16px 0 0;}
+table.standings thead th .col-ico{display:flex;align-items:center;justify-content:center;gap:4px;}
+table.standings thead th .col-ico svg{fill:#fff;width:15px;height:15px;}
+
+table.standings tbody tr{background:var(--paper);transition:background .15s;}
+table.standings tbody tr:nth-child(odd){background:#FFFAF7;}
+table.standings tbody tr:hover{background:#FFF1EA;}
+
+table.standings tbody td{
+  padding:10px 6px;text-align:center;font-size:12px;font-weight:800;color:var(--ink);
+  border-top:1px solid var(--cream-deep);white-space:nowrap;
+}
+table.standings tbody td:first-child{text-align:left;padding-left:10px;}
+
+.club-cell{display:flex;align-items:center;gap:9px;min-width:170px;}
+.club-rank{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;color:#fff;
+  background:linear-gradient(135deg,var(--peach),var(--orange));
+}
+.club-rank.r1{background:linear-gradient(135deg,var(--gold),#E0301F);box-shadow:0 2px 8px -2px rgba(255,176,32,.6);}
+.club-rank.r2{background:linear-gradient(135deg,var(--silver),#8E97A8);}
+.club-rank.r3{background:linear-gradient(135deg,var(--bronze),#96591F);}
+.club-avatar{width:30px;height:30px;border-radius:9px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;opacity:0;transition:opacity .3s ease;}
+.club-avatar.loaded{opacity:1;}
+.club-name-wrap{display:flex;flex-direction:column;text-align:left;min-width:0;}
+.club-name{font-size:12px;font-weight:800;color:var(--red-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:135px;}
+.club-name a{color:inherit;text-decoration:none;}
+.club-name a:hover{text-decoration:underline;}
+.club-you{font-size:8.5px;font-weight:900;color:var(--good-deep);text-transform:uppercase;letter-spacing:.4px;}
+
+.cell-x{color:var(--ink-faint);font-size:14px;font-weight:900;}
+.cell-board{display:flex;align-items:center;justify-content:center;}
+.cell-board svg{fill:#9AA3AF;width:16px;height:16px;opacity:.9;}
+.cell-board.live svg{fill:#3B82F6;}
+.cell-link{text-decoration:none;display:inline-flex;}
+
+.badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:30px;padding:3px 7px;border-radius:9px;font-size:11px;font-weight:900;
+  font-family:'Nunito',sans-serif;
+}
+.badge.win{background:#E1EEFF;color:#1D4ED8;border:1.5px solid #BBD3FF;}
+.badge.loss{background:#FFE4E1;color:var(--red-deep);border:1.5px solid #FFC5BE;}
+
+.standing-val{
+  display:inline-flex;align-items:center;gap:4px;font-family:'Fredoka',sans-serif;
+  font-weight:600;font-size:14px;color:var(--red-mid);
+}
+.tiebreak-val{font-size:12px;font-weight:800;color:var(--ink-soft);}
+
+.table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
+
+/* ══ LEGEND ══ */
+.legend-card{
+  background:var(--paper);border-radius:18px;border:none;padding:13px 14px;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 5px 14px -6px rgba(224,48,31,.25);
+  display:flex;flex-wrap:wrap;gap:10px 16px;margin-bottom:14px;
+}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;color:var(--ink-soft);}
+.legend-swatch{width:16px;height:16px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;}
+.legend-swatch.win{background:#E1EEFF;border:1.5px solid #BBD3FF;color:#1D4ED8;}
+.legend-swatch.loss{background:#FFE4E1;border:1.5px solid #FFC5BE;color:var(--red-deep);}
+.legend-swatch.pending svg{fill:#9AA3AF;width:12px;height:12px;}
+.legend-swatch.live svg{fill:#3B82F6;width:12px;height:12px;}
+
+.footer{text-align:center;margin-top:6px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
+
+@media(max-width:480px){
+  .event-title{font-size:18px;}
+  .info-chip{min-width:100px;}
+}
+</style>
+</head>
+<body>
+<div class="sb">
+
+  <div class="sb-top">
+    <div class="chilli-deco left">🌶</div>
+    <div class="chilli-deco right"><span>♞</span></div>
+    <div class="event-title">
+      <svg viewBox="0 0 24 24" data-glyph="trophy-numbered-podium" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M13.07 22.03h-2.13c-1.03 0-1.43-.4-1.43-1.43V9.43c0-1.03.4-1.43 1.43-1.43h2.13c1.03 0 1.43.4 1.43 1.43V20.6c0 1.03-.4 1.43-1.43 1.43zm-7.5 0H3.44c-1.03 0-1.43-.4-1.43-1.43v-7.17c0-1.03.4-1.43 1.43-1.43h2.13C6.6 12 7 12.4 7 13.43v7.17c0 1.03-.4 1.43-1.43 1.43zM2.43 10V8.77l2-1.5c1-.73 1.4-1.07 1.4-1.47 0-.43-.43-.73-1.07-.73-1 0-1.73.93-1.73.93l-.77-.67s.83-1.27 2.47-1.27c1.17 0 2.1.67 2.1 1.7 0 .8-.57 1.37-1.5 2.07L3.76 9h3.23v1H2.43zm18.14 12.03h-2.13c-1.03 0-1.43-.4-1.43-1.43v-5.17c0-1.03.4-1.43 1.43-1.43h2.13c1.03 0 1.43.4 1.43 1.43v5.17c0 1.03-.4 1.43-1.43 1.43zm-8.74-16V1.56l-2 1.17-.47-.87 2.87-1.7h.6v5.87h-1zm7.6 6.1c-1.63 0-2.57-1.07-2.57-1.07l.67-.77s.83.83 1.93.83c.77 0 1.23-.4 1.23-.9 0-.53-.47-.77-1.43-.77h-.8v-1h.8c.97 0 1.3-.27 1.3-.8s-.43-.83-1.13-.83c-1.2 0-1.9.83-1.9.83l-.67-.77s.83-1.07 2.47-1.07c1.3 0 2.23.7 2.23 1.73 0 1.17-1.23 1.8-2.3 1.8v-.77c1.07 0 2.43.63 2.43 1.83 0 1-.97 1.7-2.27 1.7l.01.03z"></path></svg>
+      Spicy Vote Chess Day
+    </div>
+    <div class="event-sub">1,500 Members Celebration</div>
+  </div>
+
+  <div class="inner">
+
+    <div class="div" style="margin-top:22px;"></div>
+
+    <!-- STANDINGS -->
+    <div class="sec-label"><div class="dot"></div>Live Standings 🏆</div>
+    <div class="standings-card" id="standingsCard">
+      <div class="standings-skeleton" id="standingsSkeleton"></div>
+      <div class="table-scroll standings-real" id="standingsReal">
+        <table class="standings" id="standingsTable">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend-card">
+      <div class="legend-item"><span class="legend-swatch win">W</span> Win — 5 pts</div>
+      <div class="legend-item"><span class="legend-swatch win">D</span> Draw — 2 pts</div>
+      <div class="legend-item"><span class="legend-swatch pending"><svg viewBox="0 0 24 24" data-glyph="board" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Not started</div>
+      <div class="legend-item"><span class="legend-swatch live"><svg viewBox="0 0 24 24" data-glyph="board" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Live</div>
+      <div class="legend-item">Tap any result to open the game</div>
+    </div>
+
+    <div class="footer">
+      🌶 Hot Chilli CheckMate © 2026 ♞
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   ADMIN ZONE — edit everything below to run the event.
+   Add as many clubs as you like: just add an entry to CLUBS, then
+   add a matching row + column to RESULTS and LINKS. Everything else
+   (standings, tiebreak, colors, sorting) is calculated automatically.
+   ════════════════════════════════════════════════════════════════ */
+
+// 1) CLUBS — order here is just the "registration order", not the
+//    display order (the table sorts by standings automatically).
+//    slug = the part of the URL after chess.com/club/
+const CLUBS = [
+  { name: "Hot Chilli CheckMate", slug: "hot-chilli-checkmate", isHost: true },
+  { name: "Club 2",               slug: "club-2-slug" },
+  { name: "Club 3",               slug: "club-3-slug" },
+  { name: "Club 4",               slug: "club-4-slug" },
+  { name: "Club 5",               slug: "club-5-slug" },
+];
+
+// 2) RESULTS MATRIX — RESULTS[i][j] = result of CLUBS[i] vs CLUBS[j],
+//    from CLUBS[i]'s point of view.
+//    Allowed values:
+//      "X"    -> diagonal (self), always required
+//      "/"    -> no result yet. Whether the board shows grey ("not
+//                started") or blue ("live") depends only on the LINKS
+//                matrix below: if a link exists for this cell, it's live.
+//      "1"    -> win (blue)
+//      "1T"   -> win on time (blue)
+//      "1/2"  -> draw (blue)
+//      "0"    -> loss (blue)
+//      "0T"   -> loss on time (red) -- the ONLY case shown in red
+//    IMPORTANT: keep it symmetric, e.g. if RESULTS[0][1] = "1" then
+//    RESULTS[1][0] must be "0" (and "1/2" mirrors "1/2", "1T" mirrors "0T").
+const RESULTS = [
+  ["X",   "/", "/", "/", "/"],
+  ["/",   "X", "/", "/", "/"],
+  ["/",   "/", "X", "/", "/"],
+  ["/",   "/", "/", "X", "/"],
+  ["/",   "/", "/", "/", "X"],
+];
+
+// 3) GAME LINKS MATRIX — same shape as RESULTS. Put the chess.com game
+//    URL here once it exists, e.g. "https://www.chess.com/game/live/123456789".
+//    Leave "" if there is no link yet. LINKS[i][j] and LINKS[j][i] should
+//    point to the same game.
+const LINKS = [
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+];
+
+/* ════════════════════════════════════════════════════════════════
+   ENGINE — no need to touch anything below this line.
+   ════════════════════════════════════════════════════════════════ */
+
+const DEFAULT_AVATAR = "https://www.chess.com/bundles/web/images/user-image.007dad08.svg";
+
+const BOARD_SVG = `<svg viewBox="0 0 24 24" data-glyph="board" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg>`;
+
+const TROPHY_SVG = `<svg viewBox="0 0 24 24" data-glyph="trophy-numbered-podium" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M13.07 22.03h-2.13c-1.03 0-1.43-.4-1.43-1.43V9.43c0-1.03.4-1.43 1.43-1.43h2.13c1.03 0 1.43.4 1.43 1.43V20.6c0 1.03-.4 1.43-1.43 1.43zm-7.5 0H3.44c-1.03 0-1.43-.4-1.43-1.43v-7.17c0-1.03.4-1.43 1.43-1.43h2.13C6.6 12 7 12.4 7 13.43v7.17c0 1.03-.4 1.43-1.43 1.43zM2.43 10V8.77l2-1.5c1-.73 1.4-1.07 1.4-1.47 0-.43-.43-.73-1.07-.73-1 0-1.73.93-1.73.93l-.77-.67s.83-1.27 2.47-1.27c1.17 0 2.1.67 2.1 1.7 0 .8-.57 1.37-1.5 2.07L3.76 9h3.23v1H2.43zm18.14 12.03h-2.13c-1.03 0-1.43-.4-1.43-1.43v-5.17c0-1.03.4-1.43 1.43-1.43h2.13c1.03 0 1.43.4 1.43 1.43v5.17c0 1.03-.4 1.43-1.43 1.43zm-8.74-16V1.56l-2 1.17-.47-.87 2.87-1.7h.6v5.87h-1zm7.6 6.1c-1.63 0-2.57-1.07-2.57-1.07l.67-.77s.83.83 1.93.83c.77 0 1.23-.4 1.23-.9 0-.53-.47-.77-1.43-.77h-.8v-1h.8c.97 0 1.3-.27 1.3-.8s-.43-.83-1.13-.83c-1.2 0-1.9.83-1.9.83l-.67-.77s.83-1.07 2.47-1.07c1.3 0 2.23.7 2.23 1.73 0 1.17-1.23 1.8-2.3 1.8v-.77c1.07 0 2.43.63 2.43 1.83 0 1-.97 1.7-2.27 1.7l.01.03z"></path></svg>`;
+
+const SCALE_SVG = `<svg viewBox="0 0 24 24" data-glyph="tool-scale" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M0.399983 12L3.32998 3.83C3.89998 2.3 4.32998 2 5.92998 2H18.06C19.66 2 20.09 2.3 20.66 3.83L23.59 12C24.49 14.47 22.96 16.33 19.99 16.33C17.02 16.33 15.49 14.46 16.39 12L19.26 4H12.99V16.3C12.99 19.4 12.99 19.63 17.06 20.1C17.66 20.17 17.99 20.53 17.99 21.13V21.06C17.99 21.66 17.66 21.99 17.06 21.99H6.92998C6.32998 21.99 5.99998 21.66 5.99998 21.06V21.13C5.99998 20.53 6.32998 20.16 6.92998 20.1C11 19.63 11 19.4 11 16.3V4H4.72998L7.59998 12C8.49998 14.47 6.96998 16.33 3.99998 16.33C1.02998 16.33 -0.500017 14.46 0.399983 12ZM1.42998 12H6.55998L3.98998 4.83L1.42998 12ZM22.57 12L20 4.83L17.43 12H22.57Z"></path></svg>`;
+
+// --- scoring helpers ---------------------------------------------------
+function pointsForResult(val) {
+  switch (val) {
+    case "1":
+    case "1T": return 5;
+    case "1/2": return 2;
+    case "0":
+    case "0T": return 0;
+    default: return null; // "/" or unknown = pending, not counted
+  }
+}
+function isPending(val) { return val === "/" || val === undefined; }
+
+function computeStandings() {
+  return CLUBS.map((_, i) => {
+    let pts = 0;
+    for (let j = 0; j < CLUBS.length; j++) {
+      if (j === i) continue;
+      const p = pointsForResult(RESULTS[i][j]);
+      if (p !== null) pts += p;
+    }
+    return pts;
+  });
+}
+
+function computeTiebreaks(standings) {
+  return CLUBS.map((_, i) => {
+    let tb = 0;
+    for (let j = 0; j < CLUBS.length; j++) {
+      if (j === i) continue;
+      const p = pointsForResult(RESULTS[i][j]);
+      if (p === 5) tb += 5 * standings[j];
+      else if (p === 2) tb += 2 * standings[j];
+      // loss or pending contributes 0
+    }
+    return tb;
+  });
+}
+
+// --- skeleton loader ------------------------------------------------------
+function buildStandingsSkeleton() {
+  const skel = document.getElementById("standingsSkeleton");
+  if (!skel) return;
+  const n = CLUBS.length;
+
+  const rowHTML = (isHead) => {
+    let h = '<div class="skel-row' + (isHead ? ' head' : '') + '">';
+    if (!isHead) h += '<div class="skel-blk skel-avatar-blk"></div>';
+    h += '<div class="skel-blk skel-club-blk"></div>';
+    for (let i = 0; i < n; i++) h += '<div class="skel-blk skel-col-blk"></div>';
+    h += '<div class="skel-blk skel-score-blk"></div><div class="skel-blk skel-score-blk"></div>';
+    h += '</div>';
+    return h;
+  };
+
+  let html = rowHTML(true);
+  for (let r = 0; r < n; r++) html += rowHTML(false);
+  skel.innerHTML = html;
+}
+
+// --- avatar fetching (Chess.com public API) ----------------------------
+const avatarCache = {};
+async function fetchClubAvatar(slug) {
+  if (avatarCache[slug]) return avatarCache[slug];
+  try {
+    const r = await fetch("https://api.chess.com/pub/club/" + slug);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    avatarCache[slug] = d.icon || d.avatar || DEFAULT_AVATAR;
+  } catch (e) {
+    avatarCache[slug] = DEFAULT_AVATAR;
+  }
+  return avatarCache[slug];
+}
+
+// --- rendering -----------------------------------------------------------
+function resultCellHTML(rowOriginalIdx, colOriginalIdx) {
+  const val = RESULTS[rowOriginalIdx][colOriginalIdx];
+  const link = (LINKS[rowOriginalIdx] && LINKS[rowOriginalIdx][colOriginalIdx]) || "";
+
+  let inner;
+  if (isPending(val)) {
+    // no result yet -> live (blue) if a link is already posted, else not started (grey)
+    const liveClass = link ? " live" : "";
+    inner = `<span class="cell-board${liveClass}">${BOARD_SVG}</span>`;
+  } else {
+    // Only "0T" (lost on time) is shown in red. Every other result -
+    // win, draw, or plain loss - is shown in blue.
+    const cls = (val === "0T") ? "loss" : "win";
+    inner = `<span class="badge ${cls}">${val}</span>`;
+  }
+
+  if (link) {
+    return `<a class="cell-link" href="${link}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+  }
+  return inner;
+}
+
+async function render() {
+  const standings = computeStandings();
+  const tiebreaks = computeTiebreaks(standings);
+
+  // fetch all avatars in parallel
+  const avatars = await Promise.all(CLUBS.map(c => fetchClubAvatar(c.slug)));
+
+  // sorted display order: standings desc, then tiebreak desc
+  const order = CLUBS.map((_, i) => i)
+    .sort((a, b) => (standings[b] - standings[a]) || (tiebreaks[b] - tiebreaks[a]));
+
+  // ---- header ----
+  const thead = document.getElementById("tableHead");
+  let headHTML = "<tr><th>Club</th>";
+  order.forEach((_, col) => { headHTML += `<th>${col + 1}</th>`; });
+  headHTML += `<th><div class="col-ico">${TROPHY_SVG}</div></th>`;
+  headHTML += `<th><div class="col-ico">${SCALE_SVG}</div></th></tr>`;
+  thead.innerHTML = headHTML;
+
+  // ---- body ----
+  const tbody = document.getElementById("tableBody");
+  let bodyHTML = "";
+  order.forEach((origRowIdx, rank) => {
+    const club = CLUBS[origRowIdx];
+    const rankClass = rank === 0 ? "r1" : rank === 1 ? "r2" : rank === 2 ? "r3" : "";
+    bodyHTML += `<tr>
+      <td>
+        <div class="club-cell">
+          <div class="club-rank ${rankClass}">${rank + 1}</div>
+          <img class="club-avatar" src="${avatars[origRowIdx]}" onload="this.classList.add('loaded')" onerror="this.src='${DEFAULT_AVATAR}';this.classList.add('loaded')">
+          <div class="club-name-wrap">
+            <div class="club-name"><a href="https://www.chess.com/club/${club.slug}" target="_blank" rel="noopener noreferrer">${club.name}</a></div>
+            ${club.isHost ? '<div class="club-you">Host club</div>' : ''}
+          </div>
+        </div>
+      </td>`;
+
+    order.forEach(origColIdx => {
+      if (origColIdx === origRowIdx) {
+        bodyHTML += `<td><span class="cell-x">✕</span></td>`;
+      } else {
+        bodyHTML += `<td>${resultCellHTML(origRowIdx, origColIdx)}</td>`;
+      }
+    });
+
+    bodyHTML += `
+      <td><span class="standing-val">${standings[origRowIdx]}</span></td>
+      <td><span class="tiebreak-val">${tiebreaks[origRowIdx]}</span></td>
+    </tr>`;
+  });
+  tbody.innerHTML = bodyHTML || `<tr><td class="table-empty" colspan="99">No clubs registered yet.</td></tr>`;
+
+  // reveal smoothly (skeleton -> real content) instead of popping in
+  document.getElementById("standingsCard").classList.add("loaded");
+}
+
+buildStandingsSkeleton();
+render();
+// re-fetch avatars / re-render every 5 minutes in case club icons change
+setInterval(render, 5 * 60 * 1000);
+</script>
+</body>
+</html>
