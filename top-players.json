@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-09T14:04:57.678Z",
+  "updated": "2026-07-09T17:01:51.826Z",
   "totalMembers": 1501,
-  "activeToday": 276,
+  "activeToday": 341,
   "players": [
     {
       "username": "hreedhaanf-22eagle",
@@ -16,24 +16,24 @@
     },
     {
       "username": "iamportaitchess",
-      "total_pts": 270,
+      "total_pts": 350,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 270,
+      "rapid_pts": 350,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 18,
+      "rapid_g": 24,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
     },
     {
       "username": "sdm2026chess",
-      "total_pts": 265,
+      "total_pts": 280,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 265,
+      "rapid_pts": 280,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 19,
+      "rapid_g": 20,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/419806721.9225e986.200x200o.cc3c987f6e13.png"
     }
   ]
