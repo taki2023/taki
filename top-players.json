@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-08T22:33:06.638Z",
+  "updated": "2026-07-09T00:08:06.317Z",
   "totalMembers": 1500,
-  "activeToday": 312,
+  "activeToday": 6,
   "players": [
     {
-      "username": "nikkotello",
-      "total_pts": 539,
+      "username": "chandlerkb",
+      "total_pts": 18,
       "bullet_pts": 0,
-      "blitz_pts": 84,
-      "rapid_pts": 455,
+      "blitz_pts": 18,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 10,
-      "rapid_g": 31,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "blitz_g": 2,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/234013177.d7216a87.200x200o.62c86e9fbfb8.jpg"
     },
     {
-      "username": "90smp3",
-      "total_pts": 392,
-      "bullet_pts": 392,
+      "username": "juniogpt",
+      "total_pts": 15,
+      "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 136,
+      "rapid_pts": 15,
+      "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/183098845.6b9242e6.200x200o.1b2479b9019f.jpg"
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/381587637.61deb1e2.200x200o.84b0bc59eca9.jpg"
     },
     {
-      "username": "smorkusporkus",
-      "total_pts": 283,
-      "bullet_pts": 244,
-      "blitz_pts": 39,
-      "rapid_pts": 0,
-      "bullet_g": 88,
-      "blitz_g": 5,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "nikkotello",
+      "total_pts": 15,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 15,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
