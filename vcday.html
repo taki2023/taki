@@ -132,6 +132,7 @@ body{display:block;font-family:'Nunito',sans-serif;}
   background:var(--paper);border-radius:24px;border:none;
   box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -10px rgba(224,48,31,.32);
   padding:6px;margin-bottom:14px;overflow:hidden;
+  transition:height .35s var(--ease);
 }
 .table-scroll{overflow-x:auto;border-radius:18px;}
 .table-scroll::-webkit-scrollbar{height:6px;}
@@ -432,6 +433,45 @@ function resultCellHTML(rowOriginalIdx, colOriginalIdx) {
   return inner;
 }
 
+// --- smooth skeleton -> real content transition --------------------------
+// The skeleton and the real table can end up at slightly different heights.
+// Simply toggling visibility would make the card (and everything below it)
+// jump by that difference. Instead we measure both heights and animate the
+// card's own height across the gap, so it grows/shrinks smoothly instead.
+function revealStandingsCard() {
+  const card = document.getElementById("standingsCard");
+  if (card.classList.contains("loaded")) return; // already revealed, nothing to animate
+
+  const skel = document.getElementById("standingsSkeleton");
+  const real = document.getElementById("standingsReal");
+
+  // By this point the real table already has its rows filled in (just
+  // invisible via opacity:0), so both blocks are stacked in the flow at
+  // once. Measure each one in isolation (temporarily hiding the other)
+  // instead of reading the combined height, otherwise the animation
+  // would start from a too-tall "skeleton + real" height.
+  const realDisplay = real.style.display;
+  real.style.display = "none";
+  const fromH = card.getBoundingClientRect().height; // skeleton-only height
+  real.style.display = realDisplay;
+
+  const skelDisplay = skel.style.display;
+  skel.style.display = "none";
+  const toH = card.getBoundingClientRect().height;    // real-only height
+  skel.style.display = skelDisplay;
+
+  card.style.height = fromH + "px";
+  requestAnimationFrame(() => {
+    card.classList.add("loaded");   // fades skeleton out / real in (CSS-driven)
+    card.style.height = toH + "px";
+    card.addEventListener("transitionend", function onEnd(e) {
+      if (e.target !== card || e.propertyName !== "height") return;
+      card.style.height = "";       // release back to natural auto-height
+      card.removeEventListener("transitionend", onEnd);
+    });
+  });
+}
+
 async function render() {
   const standings = computeStandings();
   const tiebreaks = computeTiebreaks(standings);
@@ -484,8 +524,8 @@ async function render() {
   });
   tbody.innerHTML = bodyHTML || `<tr><td class="table-empty" colspan="99">No clubs registered yet.</td></tr>`;
 
-  // reveal smoothly (skeleton -> real content) instead of popping in
-  document.getElementById("standingsCard").classList.add("loaded");
+  // reveal smoothly (skeleton -> real content), animating the height gap away
+  revealStandingsCard();
 }
 
 buildStandingsSkeleton();
