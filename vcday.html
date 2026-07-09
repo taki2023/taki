@@ -56,7 +56,7 @@ body{display:block;font-family:'Nunito',sans-serif;}
   background:
     radial-gradient(120% 160% at 15% -30%, rgba(255,255,255,.35), transparent 55%),
     linear-gradient(135deg,#FF5B3D 0%,#FF4433 45%,#E0301F 100%);
-  border-radius:32px 32px 0 0;padding:26px 18px 36px;
+  border-radius:32px 32px 0 0;padding:14px 18px 34px;
   text-align:center;position:relative;overflow:hidden;
 }
 .sb-top::before{
@@ -104,9 +104,9 @@ body{display:block;font-family:'Nunito',sans-serif;}
 
 /* ══ COUNTDOWN / LIVE / FINISHED BANNER ══ */
 .countdown-card{
-  margin-top:16px;margin-bottom:16px;
+  margin-top:0;margin-bottom:16px;
   background:var(--paper);border-radius:14px;border:none;
-  padding:9px 14px;text-align:center;
+  padding:11px 14px;text-align:center;
   box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 4px 12px -8px rgba(224,48,31,.28);
   transition:background .3s ease;
 }
@@ -115,14 +115,14 @@ body{display:block;font-family:'Nunito',sans-serif;}
 
 .countdown-line{
   display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;
-  gap:5px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:12.5px;color:var(--red-mid);
+  gap:6px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:var(--red-mid);
 }
-.cd-num{color:var(--red-deep);font-size:14px;}
+.cd-num{color:var(--red-deep);font-size:16px;}
 .cd-unit-group{display:inline-flex;align-items:baseline;gap:1px;}
-.cd-lbl{font-size:11px;font-weight:600;color:var(--ink-soft);}
+.cd-lbl{font-size:12.5px;font-weight:600;color:var(--ink-soft);}
 
 .countdown-live,.countdown-finished{
-  font-family:'Fredoka',sans-serif;font-weight:600;font-size:13.5px;color:var(--red-mid);
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;color:var(--red-mid);
   display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;
 }
 .countdown-finished .winner-name{color:var(--gold-deep);}
@@ -170,7 +170,7 @@ table.standings{
 }
 table.standings thead th{
   background:linear-gradient(135deg,#3a2018,#241009);
-  color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;
+  color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;
   padding:12px 6px;text-align:center;white-space:nowrap;position:relative;
 }
 table.standings thead th:first-child{
@@ -178,7 +178,7 @@ table.standings thead th:first-child{
 }
 table.standings thead th:last-child{border-radius:0 16px 0 0;}
 table.standings thead th .col-ico{display:flex;align-items:center;justify-content:center;gap:4px;}
-table.standings thead th .col-ico svg{fill:#fff;width:15px;height:15px;}
+table.standings thead th .col-ico svg{fill:#fff;width:18px;height:18px;}
 
 table.standings tbody tr{background:var(--paper);transition:background .15s;}
 table.standings tbody tr:nth-child(odd){background:#FFFAF7;}
@@ -210,15 +210,15 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 .club-name a:hover{text-decoration:underline;}
 .club-you{font-size:8.5px;font-weight:900;color:var(--good-deep);text-transform:uppercase;letter-spacing:.4px;}
 
-.cell-x{color:var(--ink-faint);font-size:14px;font-weight:900;}
+.cell-x{color:var(--ink-faint);font-size:16px;font-weight:900;}
 .cell-board{display:flex;align-items:center;justify-content:center;}
-.cell-board svg{fill:#9AA3AF;width:16px;height:16px;opacity:.9;}
+.cell-board svg{fill:#9AA3AF;width:19px;height:19px;opacity:.9;}
 .cell-board.live svg{fill:#3B82F6;}
 .cell-link{text-decoration:none;display:inline-flex;}
 
 .badge{
   display:inline-flex;align-items:center;justify-content:center;
-  min-width:30px;padding:3px 7px;border-radius:9px;font-size:11px;font-weight:900;
+  min-width:34px;padding:4px 8px;border-radius:9px;font-size:12.5px;font-weight:900;
   font-family:'Nunito',sans-serif;
 }
 .badge.win{background:#E1EEFF;color:#1D4ED8;border:1.5px solid #BBD3FF;}
@@ -226,9 +226,9 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
 .standing-val{
   display:inline-flex;align-items:center;gap:4px;font-family:'Fredoka',sans-serif;
-  font-weight:600;font-size:14px;color:var(--red-mid);
+  font-weight:600;font-size:16px;color:var(--red-mid);
 }
-.tiebreak-val{font-size:12px;font-weight:800;color:var(--ink-soft);}
+.tiebreak-val{font-size:13.5px;font-weight:800;color:var(--ink-soft);}
 
 .table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
 
@@ -247,15 +247,17 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
 .footer{text-align:center;margin-top:6px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
 
-
+/* ══ RESPONSIVE: club name is hidden ONLY when JS measures that the row
+   actually doesn't have room for it (see updateCompactMode() below) —
+   boards, score and tiebreak columns always get priority and are never
+   sacrificed for name space. Whenever there IS room, the name shows. ══ */
 .standings-card.compact .club-cell{min-width:0;gap:6px;}
-.standings-card.compact .club-name-wrap{display:none;}      
-
+.standings-card.compact .club-name-wrap{display:none;}      /* hide club name + host label */
 .standings-card.compact .club-avatar{width:36px;height:36px;}
 .standings-card.compact .club-rank{width:18px;height:18px;font-size:10px;}
 .standings-card.compact table.standings thead th:not(:first-child),
 .standings-card.compact table.standings tbody td:not(:first-child){
-  width:30px;
+  width:34px;
   padding:8px 2px;
 }
 .standings-card.compact table.standings tbody td:first-child{padding-left:8px;}
