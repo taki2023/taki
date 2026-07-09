@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-09T11:35:52.321Z",
-  "totalMembers": 1502,
-  "activeToday": 239,
+  "updated": "2026-07-09T14:04:57.678Z",
+  "totalMembers": 1501,
+  "activeToday": 276,
   "players": [
     {
       "username": "hreedhaanf-22eagle",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
     },
     {
-      "username": "misterjj1681",
-      "total_pts": 225,
+      "username": "sdm2026chess",
+      "total_pts": 265,
       "bullet_pts": 0,
-      "blitz_pts": 225,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 265,
       "bullet_g": 0,
-      "blitz_g": 27,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/449476112.f97964d8.200x200o.8a5e59f7c6c2.jpg"
+      "blitz_g": 0,
+      "rapid_g": 19,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/419806721.9225e986.200x200o.cc3c987f6e13.png"
     }
   ]
 }
