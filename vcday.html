@@ -219,9 +219,28 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
 .footer{text-align:center;margin-top:6px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
 
+/* ══ RESPONSIVE: narrow screens — drop the min-width floor so the table
+   doesn't get artificially stretched, and hide club names, keeping only
+   the rank badge + logo so the club column collapses to just the avatar
+   width instead of leaving empty space before the result columns. ══ */
 @media(max-width:480px){
   .event-title{font-size:18px;}
   .info-chip{min-width:100px;}
+
+  table.standings{min-width:0;}
+
+  table.standings thead th:not(:first-child),
+  table.standings tbody td:not(:first-child){
+    width:30px;
+    padding:8px 2px;
+  }
+
+  .club-cell{min-width:0;gap:6px;}
+  .club-name-wrap{display:none;}      /* hide club name + host label */
+  .club-avatar{width:26px;height:26px;}
+  .club-rank{width:18px;height:18px;font-size:10px;}
+
+  table.standings tbody td:first-child{padding-left:8px;}
 }
 </style>
 </head>
