@@ -1,17 +1,17 @@
 {
-  "updated": "2026-07-10T17:46:51.729Z",
+  "updated": "2026-07-10T19:25:05.673Z",
   "totalMembers": 1503,
-  "activeToday": 360,
+  "activeToday": 384,
   "players": [
     {
       "username": "damjan1989",
-      "total_pts": 334,
+      "total_pts": 357,
       "bullet_pts": 0,
-      "blitz_pts": 219,
-      "rapid_pts": 115,
+      "blitz_pts": 222,
+      "rapid_pts": 135,
       "bullet_g": 0,
-      "blitz_g": 25,
-      "rapid_g": 9,
+      "blitz_g": 26,
+      "rapid_g": 11,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
     {
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
-      "username": "iamportaitchess",
-      "total_pts": 260,
-      "bullet_pts": 0,
+      "username": "aungaungtun",
+      "total_pts": 271,
+      "bullet_pts": 271,
       "blitz_pts": 0,
-      "rapid_pts": 260,
-      "bullet_g": 0,
+      "rapid_pts": 0,
+      "bullet_g": 95,
       "blitz_g": 0,
-      "rapid_g": 18,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/437303705.9b2975fe.200x200o.51e225665986.png"
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/32384204.4eddb7b6.200x200o.7cfc211c5c08.jpg"
     }
   ]
 }
