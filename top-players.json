@@ -1,8 +1,30 @@
 {
-  "updated": "2026-07-10T22:00:51.838Z",
-  "totalMembers": 1504,
-  "activeToday": 394,
+  "updated": "2026-07-10T23:08:22.388Z",
+  "totalMembers": 1505,
+  "activeToday": 401,
   "players": [
+    {
+      "username": "damjan1989",
+      "total_pts": 438,
+      "bullet_pts": 0,
+      "blitz_pts": 303,
+      "rapid_pts": 135,
+      "bullet_g": 0,
+      "blitz_g": 35,
+      "rapid_g": 11,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+    },
+    {
+      "username": "denis_moore",
+      "total_pts": 330,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 330,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 24,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505197953.444b4275.200x200o.7758f132a621.png"
+    },
     {
       "username": "xuyen1786",
       "total_pts": 322,
@@ -13,28 +35,6 @@
       "blitz_g": 6,
       "rapid_g": 5,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
-    },
-    {
-      "username": "denis_moore",
-      "total_pts": 285,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 285,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 21,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505197953.444b4275.200x200o.7758f132a621.png"
-    },
-    {
-      "username": "takemiqueen",
-      "total_pts": 280,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 280,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 22,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/237242245.b5be4b53.200x200o.ba3676908cfb.jpg"
     }
   ]
 }
