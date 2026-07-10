@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-10T13:27:16.111Z",
-  "totalMembers": 1504,
-  "activeToday": 284,
+  "updated": "2026-07-10T15:56:00.645Z",
+  "totalMembers": 1503,
+  "activeToday": 319,
   "players": [
     {
       "username": "xuyen1786",
@@ -15,17 +15,6 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
-      "username": "boeing-747-8i",
-      "total_pts": 310,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 310,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 24,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/389024815.4c919af0.200x200o.c0d926d7b7de.jpg"
-    },
-    {
       "username": "chessfork7849",
       "total_pts": 222,
       "bullet_pts": 0,
@@ -35,6 +24,17 @@
       "blitz_g": 26,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/491703655.d5090621.200x200o.b5e4cdcb966f.png"
+    },
+    {
+      "username": "mastergoogle",
+      "total_pts": 220,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 220,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 16,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
