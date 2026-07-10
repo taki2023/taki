@@ -1,19 +1,8 @@
 {
-  "updated": "2026-07-10T20:49:42.032Z",
+  "updated": "2026-07-10T22:00:51.838Z",
   "totalMembers": 1504,
-  "activeToday": 399,
+  "activeToday": 394,
   "players": [
-    {
-      "username": "damjan1989",
-      "total_pts": 375,
-      "bullet_pts": 0,
-      "blitz_pts": 240,
-      "rapid_pts": 135,
-      "bullet_g": 0,
-      "blitz_g": 28,
-      "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
     {
       "username": "xuyen1786",
       "total_pts": 322,
@@ -35,6 +24,17 @@
       "blitz_g": 0,
       "rapid_g": 21,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505197953.444b4275.200x200o.7758f132a621.png"
+    },
+    {
+      "username": "takemiqueen",
+      "total_pts": 280,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 280,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 22,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/237242245.b5be4b53.200x200o.ba3676908cfb.jpg"
     }
   ]
 }
