@@ -1,15 +1,15 @@
 {
-  "updated": "2026-07-10T08:21:37.732Z",
+  "updated": "2026-07-10T11:25:28.420Z",
   "totalMembers": 1504,
-  "activeToday": 179,
+  "activeToday": 226,
   "players": [
     {
       "username": "xuyen1786",
-      "total_pts": 248,
-      "bullet_pts": 119,
+      "total_pts": 322,
+      "bullet_pts": 193,
       "blitz_pts": 54,
       "rapid_pts": 75,
-      "bullet_g": 43,
+      "bullet_g": 69,
       "blitz_g": 6,
       "rapid_g": 5,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/491703655.d5090621.200x200o.b5e4cdcb966f.png"
     },
     {
-      "username": "yael981",
-      "total_pts": 192,
+      "username": "boeing-747-8i",
+      "total_pts": 215,
       "bullet_pts": 0,
-      "blitz_pts": 192,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 215,
       "bullet_g": 0,
-      "blitz_g": 22,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
+      "blitz_g": 0,
+      "rapid_g": 17,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/389024815.4c919af0.200x200o.c0d926d7b7de.jpg"
     }
   ]
 }
