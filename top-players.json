@@ -1,29 +1,40 @@
 {
-  "updated": "2026-07-10T00:03:28.817Z",
-  "totalMembers": 1506,
-  "activeToday": 2,
+  "updated": "2026-07-10T04:33:48.628Z",
+  "totalMembers": 1505,
+  "activeToday": 107,
   "players": [
     {
-      "username": "the-ultimate-koi",
-      "total_pts": 15,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 15,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/449893738.1ff35a60.200x200o.c6dc5c36965d.jpg"
+      "username": "xuyen1786",
+      "total_pts": 167,
+      "bullet_pts": 65,
+      "blitz_pts": 27,
+      "rapid_pts": 75,
+      "bullet_g": 23,
+      "blitz_g": 3,
+      "rapid_g": 5,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
-      "username": "cabokurtz",
-      "total_pts": 9,
+      "username": "yael981",
+      "total_pts": 138,
       "bullet_pts": 0,
-      "blitz_pts": 9,
+      "blitz_pts": 138,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 1,
+      "blitz_g": 16,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/163048663.11bee71c.200x200o.8c8a58c9dfac.jpeg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
+    },
+    {
+      "username": "hreedhaanf-22eagle",
+      "total_pts": 137,
+      "bullet_pts": 6,
+      "blitz_pts": 6,
+      "rapid_pts": 125,
+      "bullet_g": 2,
+      "blitz_g": 2,
+      "rapid_g": 9,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/471397400.8e2d879a.200x200o.47e858e33c86.jpg"
     }
   ]
 }
