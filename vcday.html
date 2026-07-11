@@ -173,9 +173,6 @@ table.standings thead th{
   color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;
   padding:12px 6px;text-align:center;white-space:nowrap;position:relative;
 }
-table.standings thead th:not(:first-child){
-  padding:12px 4px;
-}
 table.standings thead th:first-child{
   text-align:left;padding-left:14px;border-radius:16px 0 0 0;
 }
@@ -191,21 +188,21 @@ table.standings tbody td{
   padding:10px 6px;text-align:center;font-size:12px;font-weight:800;color:var(--ink);
   border-top:1px solid var(--cream-deep);white-space:nowrap;
 }
-table.standings tbody td:not(:first-child){padding:10px 4px;}
 table.standings tbody td:first-child{text-align:left;padding-left:10px;}
 
-.club-cell{display:flex;align-items:center;gap:8px;min-width:140px;}
+.club-cell{display:flex;align-items:center;gap:9px;min-width:170px;}
 .club-rank{
-  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Fredoka',sans-serif;font-weight:600;font-size:10.5px;color:#fff;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;color:#fff;
   background:linear-gradient(135deg,var(--peach),var(--orange));
+  margin-left:-4px;margin-right:-4px;
 }
 .club-rank.r1{background:linear-gradient(135deg,var(--gold),#E0301F);box-shadow:0 2px 8px -2px rgba(255,176,32,.6);}
 .club-rank.r2{background:linear-gradient(135deg,var(--silver),#8E97A8);}
 .club-rank.r3{background:linear-gradient(135deg,var(--bronze),#96591F);}
 .club-avatar-link{display:inline-flex;flex-shrink:0;border-radius:11px;}
-.club-avatar{width:40px;height:40px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;opacity:0;transition:opacity .3s ease, transform .15s ease;display:block;}
+.club-avatar{width:46px;height:46px;border-radius:11px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;opacity:0;transition:opacity .3s ease, transform .15s ease;display:block;}
 .club-avatar.loaded{opacity:1;}
 .club-avatar-link:hover .club-avatar{transform:scale(1.05);}
 .club-name-wrap{display:flex;flex-direction:column;text-align:left;min-width:0;}
@@ -255,34 +252,20 @@ table.standings tbody td:first-child{text-align:left;padding-left:10px;}
    actually doesn't have room for it (see updateCompactMode() below) —
    boards, score and tiebreak columns always get priority and are never
    sacrificed for name space. Whenever there IS room, the name shows. ══ */
-.standings-card.compact .club-cell{min-width:0;gap:4px;}
+.standings-card.compact .club-cell{min-width:0;gap:6px;}
 .standings-card.compact .club-name-wrap{display:none;}      /* hide club name + host label */
-.standings-card.compact .club-avatar{width:26px;height:26px;border-radius:7px;}
-.standings-card.compact .club-rank{width:15px;height:15px;font-size:8.5px;}
-.standings-card.compact table.standings thead th{font-size:11px;}
+.standings-card.compact .club-avatar{width:36px;height:36px;}
+.standings-card.compact .club-rank{width:18px;height:18px;font-size:10px;}
 .standings-card.compact table.standings thead th:not(:first-child),
 .standings-card.compact table.standings tbody td:not(:first-child){
-  width:24px;
-  padding:6px 1px;
+  width:34px;
+  padding:8px 2px;
 }
-.standings-card.compact table.standings tbody td{font-size:11px;}
-.standings-card.compact table.standings tbody td:first-child{padding:6px 4px;}
-.standings-card.compact .cell-x{font-size:13px;}
-.standings-card.compact .cell-board svg{width:15px;height:15px;}
-.standings-card.compact .badge{font-size:11px;}
-.standings-card.compact table.standings thead th .col-ico svg{width:14px;height:14px;}
-.standings-card.compact .standing-val{font-size:13px;gap:2px;}
-.standings-card.compact .tiebreak-val{font-size:10.5px;}
+.standings-card.compact table.standings tbody td:first-child{padding-left:8px;}
 
-/* Belt-and-suspenders: on genuinely narrow viewports, tighten the outer
-   chrome too, so the table gets as much room as possible before it ever
-   needs to fall back to horizontal scrolling. */
 @media(max-width:480px){
   .event-title{font-size:18px;}
   .info-chip{min-width:100px;}
-  .inner{padding:0 10px 16px;}
-  .standings-card{padding:4px;}
-  .sec-label{font-size:13px;}
 }
 
 </style>
