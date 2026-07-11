@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-10T23:08:22.388Z",
-  "totalMembers": 1505,
-  "activeToday": 401,
+  "updated": "2026-07-11T00:57:07.922Z",
+  "totalMembers": 1506,
+  "activeToday": 33,
   "players": [
     {
-      "username": "damjan1989",
-      "total_pts": 438,
+      "username": "samidaalmnswb",
+      "total_pts": 72,
       "bullet_pts": 0,
-      "blitz_pts": 303,
-      "rapid_pts": 135,
+      "blitz_pts": 72,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 35,
-      "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+      "blitz_g": 8,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     },
     {
-      "username": "denis_moore",
-      "total_pts": 330,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 330,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 24,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505197953.444b4275.200x200o.7758f132a621.png"
+      "username": "l_i_v_e_r_p_o_l_fan",
+      "total_pts": 42,
+      "bullet_pts": 33,
+      "blitz_pts": 9,
+      "rapid_pts": 0,
+      "bullet_g": 11,
+      "blitz_g": 1,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/436713913.ba024854.200x200o.ba76e134d798.jpg"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 322,
-      "bullet_pts": 193,
-      "blitz_pts": 54,
-      "rapid_pts": 75,
-      "bullet_g": 69,
-      "blitz_g": 6,
-      "rapid_g": 5,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "username": "koenigsegg2026",
+      "total_pts": 39,
+      "bullet_pts": 0,
+      "blitz_pts": 39,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 5,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463162092.ff563bc5.200x200o.bbd442a9fa34.jpg"
     }
   ]
 }
