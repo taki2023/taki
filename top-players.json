@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-12T04:51:59.175Z",
-  "totalMembers": 1513,
-  "activeToday": 101,
+  "updated": "2026-07-12T07:28:22.074Z",
+  "totalMembers": 1514,
+  "activeToday": 172,
   "players": [
     {
       "username": "bughouse_partner",
-      "total_pts": 567,
-      "bullet_pts": 528,
-      "blitz_pts": 39,
+      "total_pts": 579,
+      "bullet_pts": 531,
+      "blitz_pts": 48,
       "rapid_pts": 0,
-      "bullet_g": 176,
-      "blitz_g": 5,
+      "bullet_g": 177,
+      "blitz_g": 6,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.c8a25092.200x200o.65e145143b7c.jpg"
     },
     {
       "username": "thai_minh_triet",
-      "total_pts": 493,
+      "total_pts": 532,
       "bullet_pts": 493,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
+      "blitz_pts": 9,
+      "rapid_pts": 30,
       "bullet_g": 165,
-      "blitz_g": 0,
-      "rapid_g": 0,
+      "blitz_g": 1,
+      "rapid_g": 2,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/485305313.f6033bd2.200x200o.2dba86963cdd.jpg"
     },
     {
-      "username": "nikkotello",
-      "total_pts": 147,
-      "bullet_pts": 0,
-      "blitz_pts": 117,
-      "rapid_pts": 30,
-      "bullet_g": 0,
-      "blitz_g": 13,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "username": "uniqueboyakigmailcom",
+      "total_pts": 180,
+      "bullet_pts": 24,
+      "blitz_pts": 156,
+      "rapid_pts": 0,
+      "bullet_g": 8,
+      "blitz_g": 18,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
