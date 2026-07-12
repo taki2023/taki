@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-12T11:58:27.420Z",
-  "totalMembers": 1513,
-  "activeToday": 252,
+  "updated": "2026-07-12T13:36:12.353Z",
+  "totalMembers": 1511,
+  "activeToday": 304,
   "players": [
     {
       "username": "bughouse_partner",
@@ -16,12 +16,12 @@
     },
     {
       "username": "thai_minh_triet",
-      "total_pts": 541,
+      "total_pts": 631,
       "bullet_pts": 502,
-      "blitz_pts": 9,
+      "blitz_pts": 99,
       "rapid_pts": 30,
       "bullet_g": 168,
-      "blitz_g": 1,
+      "blitz_g": 11,
       "rapid_g": 2,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/485305313.f6033bd2.200x200o.2dba86963cdd.jpg"
     },
