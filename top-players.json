@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-12T20:44:00.457Z",
+  "updated": "2026-07-12T21:47:57.828Z",
   "totalMembers": 1512,
-  "activeToday": 372,
+  "activeToday": 379,
   "players": [
     {
       "username": "bughouse_partner",
@@ -27,13 +27,13 @@
     },
     {
       "username": "syednadeem6t",
-      "total_pts": 380,
+      "total_pts": 425,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 380,
+      "rapid_pts": 425,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 26,
+      "rapid_g": 29,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382058229.e545233e.200x200o.e6a04982751c.jpg"
     }
   ]
