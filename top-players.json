@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-13T12:30:38.661Z",
-  "totalMembers": 1515,
-  "activeToday": 265,
+  "updated": "2026-07-13T15:27:04.430Z",
+  "totalMembers": 1516,
+  "activeToday": 316,
   "players": [
     {
       "username": "abd_allah_libyan",
@@ -27,12 +27,12 @@
     },
     {
       "username": "financial_dragon",
-      "total_pts": 215,
+      "total_pts": 233,
       "bullet_pts": 76,
-      "blitz_pts": 9,
+      "blitz_pts": 27,
       "rapid_pts": 130,
       "bullet_g": 28,
-      "blitz_g": 1,
+      "blitz_g": 3,
       "rapid_g": 10,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     }
