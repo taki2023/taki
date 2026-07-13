@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-12T23:52:37.132Z",
-  "totalMembers": 1512,
-  "activeToday": 391,
+  "updated": "2026-07-13T02:35:37.068Z",
+  "totalMembers": 1514,
+  "activeToday": 58,
   "players": [
     {
-      "username": "bughouse_partner",
-      "total_pts": 669,
-      "bullet_pts": 540,
-      "blitz_pts": 129,
+      "username": "royalmighty",
+      "total_pts": 102,
+      "bullet_pts": 84,
+      "blitz_pts": 18,
       "rapid_pts": 0,
-      "bullet_g": 180,
-      "blitz_g": 15,
+      "bullet_g": 28,
+      "blitz_g": 2,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.c8a25092.200x200o.65e145143b7c.jpg"
-    },
-    {
-      "username": "thai_minh_triet",
-      "total_pts": 646,
-      "bullet_pts": 502,
-      "blitz_pts": 99,
-      "rapid_pts": 45,
-      "bullet_g": 168,
-      "blitz_g": 11,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/485305313.f6033bd2.200x200o.2dba86963cdd.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/371675181.8a425232.200x200o.c588b519a487.jpg"
     },
     {
       "username": "syednadeem6t",
-      "total_pts": 470,
+      "total_pts": 90,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 470,
+      "rapid_pts": 90,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 32,
+      "rapid_g": 6,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382058229.e545233e.200x200o.e6a04982751c.jpg"
+    },
+    {
+      "username": "juniogpt",
+      "total_pts": 66,
+      "bullet_pts": 0,
+      "blitz_pts": 36,
+      "rapid_pts": 30,
+      "bullet_g": 0,
+      "blitz_g": 4,
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/381587637.61deb1e2.200x200o.84b0bc59eca9.jpg"
     }
   ]
 }
