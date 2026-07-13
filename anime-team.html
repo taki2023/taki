@@ -193,6 +193,7 @@ html,body{margin:0;padding:0;background:#070e1a;width:100%;overflow-x:hidden;}
 .at-goal-sub{display:flex;justify-content:space-between;font-size:10px;color:var(--ink-faint);margin-top:6px;}
 .at-goal-pct{color:var(--accent);font-weight:700;}
 .at-goal-milestone{color:var(--gold-soft);font-weight:700;}
+.at-goal-skel-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 
 /* ── LEADERS ── */
 .at-role-title{font-weight:700;font-size:11px;color:var(--accent);margin-bottom:8px;text-align:center;letter-spacing:.3px;}
@@ -241,6 +242,9 @@ html,body{margin:0;padding:0;background:#070e1a;width:100%;overflow-x:hidden;}
 .skel-partner-tile{border-radius:14px;min-height:88px;background:linear-gradient(90deg,rgba(20,34,55,.55) 25%,rgba(60,90,130,.35) 50%,rgba(20,34,55,.55) 75%);background-size:200% 100%;animation:skel-pulse 1.6s ease-in-out infinite;}
 .skel-match{height:132px;border-radius:16px;margin-bottom:9px;background:linear-gradient(90deg,rgba(20,34,55,.55) 25%,rgba(60,90,130,.35) 50%,rgba(20,34,55,.55) 75%);background-size:200% 100%;animation:skel-pulse 1.6s ease-in-out infinite;}
 .skel-match:last-child{margin-bottom:0;}
+.skel-goal-count{height:11px;width:70px;border-radius:5px;}
+.skel-goal-track{height:10px;border-radius:10px;background:linear-gradient(90deg,rgba(20,34,55,.55) 25%,rgba(60,90,130,.35) 50%,rgba(20,34,55,.55) 75%);background-size:200% 100%;animation:skel-pulse 1.6s ease-in-out infinite;}
+.skel-goal-sub{height:9px;width:90px;border-radius:4px;margin-top:6px;}
 #leaders-inner{min-height:280px;}
 #at-links{min-height:128px;}
 #at-partners{min-height:213px;}
@@ -349,13 +353,37 @@ audio{width:100%;height:32px;}
     <!-- ══════════ TAB: SOCIAL ══════════ -->
     <div class="tab-panel active" data-tab="social">
 
+
+
       <!-- MUSIC -->
       <div class="at-card">
         <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/crayon/phptebg65us5va54ud5LAp.gif" class="at-music-gif" alt="" loading="lazy">
         <div style="text-align:center;font-weight:800;font-size:13px;margin-bottom:7px;color:var(--gold-soft);letter-spacing:.4px;">♪ Music Player ♪</div>
         <audio controls><source src="https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3" type="audio/mpeg"></audio>
       </div>
-
+      <!-- MEMBER GOAL -->
+      <div class="at-goal-card" id="at-goal-card">
+        <div class="at-goal-inner">
+          <div class="at-goal-header">
+            <div class="at-goal-label">
+              <span class="at-goal-label-icon">🎯</span>
+              Member Goal
+            </div>
+            <div class="at-goal-count">
+              <span class="at-live">● LIVE</span>
+              <span id="goal-current" class="at-current">—</span>
+              <span style="color:var(--ink-faint);font-size:10.5px;"> / <span id="goal-target">11,000</span></span>
+            </div>
+          </div>
+          <div class="at-goal-track">
+            <div class="at-goal-bar" id="goal-bar"></div>
+          </div>
+          <div class="at-goal-sub">
+            <span id="goal-pct" class="at-goal-pct">—%</span>
+            <span id="goal-left" class="at-goal-milestone">— to go!</span>
+          </div>
+        </div>
+      </div>
       <!-- NEWEST MEMBERS -->
       <div class="at-card">
         <div class="at-section-title">🍀 ✦ NEWEST MEMBERS ✦</div>
@@ -446,30 +474,6 @@ audio{width:100%;height:32px;}
               <div class="skel skel-leader-avatar" id="skel-pfp-lucius"></div>
               <div class="skel skel-leader-name"></div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MEMBER GOAL -->
-      <div class="at-goal-card" id="at-goal-card">
-        <div class="at-goal-inner">
-          <div class="at-goal-header">
-            <div class="at-goal-label">
-              <span class="at-goal-label-icon">🎯</span>
-              Member Goal
-            </div>
-            <div class="at-goal-count">
-              <span class="at-live">● LIVE</span>
-              <span id="goal-current" class="at-current">—</span>
-              <span style="color:var(--ink-faint);font-size:10.5px;"> / <span id="goal-target">11,000</span></span>
-            </div>
-          </div>
-          <div class="at-goal-track">
-            <div class="at-goal-bar" id="goal-bar"></div>
-          </div>
-          <div class="at-goal-sub">
-            <span id="goal-pct" class="at-goal-pct">—%</span>
-            <span id="goal-left" class="at-goal-milestone">— to go!</span>
           </div>
         </div>
       </div>
@@ -696,10 +700,20 @@ var sparkColors=['rgba(230,225,205,.75)','rgba(160,195,230,.7)','rgba(227,184,10
 
 /* ══ CACHE ══ */
 var CACHE_TTL=5*60*1000;
-function cacheSet(k,v){try{localStorage.setItem(k,JSON.stringify({ts:Date.now(),data:v}));}catch(e){}}
-function cacheGet(k){
-  try{var r=localStorage.getItem(k);if(!r)return null;var p=JSON.parse(r);if(Date.now()-p.ts>CACHE_TTL)return null;return p.data;}
-  catch(e){return null;}
+var memCache=Object.create(null);
+function cacheSet(k,v){
+  memCache[k]={ts:Date.now(),data:v};
+  try{localStorage.setItem(k,JSON.stringify(memCache[k]));}catch(e){}
+}
+function cacheGet(k,allowStaleMs){
+  var p=memCache[k];
+  if(!p){
+    try{var r=localStorage.getItem(k);if(r)p=JSON.parse(r);}catch(e){}
+  }
+  if(!p)return null;
+  var maxAge=(typeof allowStaleMs==='number')?allowStaleMs:CACHE_TTL;
+  if(Date.now()-p.ts>maxAge)return null;
+  return p.data;
 }
 async function cachedFetch(url,key){
   var h=cacheGet(key);if(h)return h;
@@ -757,7 +771,10 @@ Object.entries(leaderDefs).forEach(function([username,def]){
 /* ══ MEMBER COUNT + DYNAMIC GOAL ══
    Goal always sits at the NEXT 1000-milestone above the current count.
    e.g. 10,164 members -> goal 11,000. Once the club crosses 11,000,
-   the goal automatically re-targets 12,000, and so on. */
+   the goal automatically re-targets 12,000, and so on.
+   Cached count is painted instantly (no animation) so the card never
+   shows the "—" skeleton state on repeat visits; a fresh fetch then
+   updates it live in the background. */
 function computeNextGoal(n){
   return Math.floor(n/1000)*1000 + 1000;
 }
@@ -771,10 +788,11 @@ function animCount(el,target){
   }
   requestAnimationFrame(step);
 }
-function renderGoal(n){
+function renderGoal(n,animate){
   var goal=computeNextGoal(n);
   var pct=Math.min(n/goal*100,100),left=Math.max(goal-n,0);
-  animCount(document.getElementById('goal-current'),n);
+  if(animate) animCount(document.getElementById('goal-current'),n);
+  else document.getElementById('goal-current').textContent=n.toLocaleString();
   document.getElementById('goal-target').textContent=goal.toLocaleString();
   var bar=document.getElementById('goal-bar');
   bar.style.setProperty('--goal-w',pct.toFixed(1)+'%');
@@ -783,14 +801,24 @@ function renderGoal(n){
   document.getElementById('goal-left').textContent=left.toLocaleString()+' to go!';
 }
 (function(){
-  var c=cacheGet('club_count');if(c)renderGoal(c);
+  // Paint instantly from cache (even slightly stale) so there's no visible
+  // skeleton flash for returning visitors — bar renders with no fill-in delay.
+  var c=cacheGet('club_count',30*60*1000);
+  if(c){
+    var bar=document.getElementById('goal-bar');
+    bar.style.transition='none';
+    bar.style.animation='goal-glow 2.5s ease-in-out infinite';
+    renderGoal(c,false);
+    requestAnimationFrame(function(){bar.style.transition='';});
+  }
 })();
 (async function(){
   try{
     var d=await fetch('https://api.chess.com/pub/club/anime-team-3').then(function(r){return r.json();});
-    var n=d.members_count||0;cacheSet('club_count',n);renderGoal(n);
+    var n=d.members_count||0;cacheSet('club_count',n);
+    renderGoal(n,true);
   }catch(e){
-    if(!cacheGet('club_count')){
+    if(!cacheGet('club_count',30*60*1000)){
       document.getElementById('goal-current').textContent='?';
       document.getElementById('goal-left').textContent='N/A';
     }
@@ -805,7 +833,21 @@ function timeAgo(ts){
   if(dy<7)return dy+'d ago';var w=Math.floor(dy/7);if(w<4)return w+'w ago';
   return Math.floor(dy/30)+'mo ago';
 }
+function renderNewest(results){
+  document.getElementById('nm-list').innerHTML=results.map(function(m){
+    return'<a class="nm-item" href="https://www.chess.com/member/'+m.username+'" target="_blank" rel="noopener">'
+      +'<img class="nm-avatar" src="'+m.avatar+'" onerror="this.src=\''+DP+'\'" alt="" loading="lazy">'
+      +'<div class="nm-info"><div class="nm-name">@'+m.username+'</div>'
+      +'<div class="nm-meta"><span class="nm-rating">'+m.ratingType+': '+m.ratingValue+'</span>'
+      +'<span class="nm-joined">⏱ '+timeAgo(m.joined)+'</span></div></div></a>';
+  }).join('');
+  if(typeof window.syncTabHeights==='function') setTimeout(window.syncTabHeights,60);
+}
 async function loadNewest(){
+  // Instant paint from cache (stale-while-revalidate) to skip the skeleton
+  // entirely for repeat visitors.
+  var cachedResults=cacheGet('nm_rendered',30*60*1000);
+  if(cachedResults) renderNewest(cachedResults);
   try{
     var d=await cachedFetch('https://api.chess.com/pub/club/anime-team-3/members','club_nm');
     var members=[...(d.weekly||[]),...(d.monthly||[]),...(d.all_time||[])];
@@ -833,15 +875,12 @@ async function loadNewest(){
       var best=rats.length?rats.sort(function(a,b){return b.value-a.value;})[0]:{type:'—',value:'—'};
       return{username:m.username,avatar:(pj&&pj.avatar)?pj.avatar:FALLBACK,ratingType:best.type,ratingValue:best.value,joined:m.joined};
     }));
-    document.getElementById('nm-list').innerHTML=results.map(function(m){
-      return'<a class="nm-item" href="https://www.chess.com/member/'+m.username+'" target="_blank" rel="noopener">'
-        +'<img class="nm-avatar" src="'+m.avatar+'" onerror="this.src=\''+DP+'\'" alt="" loading="lazy">'
-        +'<div class="nm-info"><div class="nm-name">@'+m.username+'</div>'
-        +'<div class="nm-meta"><span class="nm-rating">'+m.ratingType+': '+m.ratingValue+'</span>'
-        +'<span class="nm-joined">⏱ '+timeAgo(m.joined)+'</span></div></div></a>';
-    }).join('');
+    cacheSet('nm_rendered',results);
+    renderNewest(results);
   }catch(e){
-    document.getElementById('nm-list').innerHTML='<div style="color:#4d6485;font-size:12px;padding:8px;text-align:center;">Unable to load members.</div>';
+    if(!cachedResults){
+      document.getElementById('nm-list').innerHTML='<div style="color:#4d6485;font-size:12px;padding:8px;text-align:center;">Unable to load members.</div>';
+    }
   }
   if(typeof window.syncTabHeights==='function') setTimeout(window.syncTabHeights,60);
 }
@@ -873,14 +912,22 @@ async function fetchClubBrief(slug){
   }catch(e){return{name:slug,icon:MATCH_FALLBACK_LOGO};}
 }
 
+function renderMatches(cards){
+  document.getElementById('matches-list').innerHTML=cards.join('');
+  if(typeof window.syncTabHeights==='function') setTimeout(window.syncTabHeights,60);
+}
+
 async function loadMatches(){
   var listEl=document.getElementById('matches-list');
+  var cachedCards=cacheGet('matches_rendered',30*60*1000);
+  if(cachedCards) renderMatches(cachedCards);
   try{
     var ownBrief=await fetchClubBrief(CLUB_SLUG);
     var data=await cachedFetch('https://api.chess.com/pub/club/'+CLUB_SLUG+'/matches','club_matches');
     var registered=(data.registered||[]).slice(0,6);
     if(!registered.length){
       listEl.innerHTML='<div class="match-empty"><span>🐉</span>No upcoming daily matches right now.</div>';
+      cacheSet('matches_rendered',[]);
       if(typeof window.syncTabHeights==='function') setTimeout(window.syncTabHeights,60);
       return;
     }
@@ -907,9 +954,12 @@ async function loadMatches(){
         +'</div>'
       +'</div>';
     }));
-    listEl.innerHTML=cards.join('');
+    cacheSet('matches_rendered',cards);
+    renderMatches(cards);
   }catch(e){
-    listEl.innerHTML='<div class="match-empty"><span>⚠️</span>Could not load upcoming matches.</div>';
+    if(!cachedCards){
+      listEl.innerHTML='<div class="match-empty"><span>⚠️</span>Could not load upcoming matches.</div>';
+    }
   }
   if(typeof window.syncTabHeights==='function') setTimeout(window.syncTabHeights,60);
 }
@@ -919,8 +969,6 @@ loadMatches();
 var SCRIPT_URL='https://script.google.com/macros/s/AKfycbxnNF-TZUUj0MjM4GLT2u21drPcCNtRkeOg7J8wZrCOIrj3825JjWz3YJZBB5qDR6M1/exec';
 function initials(n){return n.trim().split(/\s+/).map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();}
 function fbLogo(n){return'https://ui-avatars.com/api/?name='+encodeURIComponent(initials(n))+'&background=101d33&color=e3b869&size=200&bold=true&font-size=0.45';}
-
-(function(){var c=cacheGet('sheet_data');if(c)renderSheetData(c);})();
 
 function renderSheetData(data){
   var links=Array.isArray(data.links)?data.links:[],partners=Array.isArray(data.partners)?data.partners:[];
@@ -938,12 +986,16 @@ function renderSheetData(data){
   }).join('');
   if(typeof window.syncTabHeights==='function') setTimeout(window.syncTabHeights,60);
 }
+// Instant paint from cache (stale-while-revalidate) so links/partners show
+// immediately for repeat visits instead of the skeleton.
+(function(){var c=cacheGet('sheet_data',30*60*1000);if(c)renderSheetData(c);})();
+
 window.__atSheetCallback=function(data){cacheSet('sheet_data',data);renderSheetData(data);};
 (function(){
   var s=document.createElement('script');s.defer=true;
   s.src=SCRIPT_URL+'?callback=__atSheetCallback&t='+Math.floor(Date.now()/CACHE_TTL);
   s.onerror=function(){
-    if(!cacheGet('sheet_data')){
+    if(!cacheGet('sheet_data',30*60*1000)){
       document.getElementById('at-links').innerHTML='<div style="text-align:center;color:#4d6485;font-size:12px;padding:10px;">Could not load links</div>';
       document.getElementById('at-partners').innerHTML='<div style="text-align:center;color:#4d6485;font-size:12px;padding:10px;">Could not load partners</div>';
     }
