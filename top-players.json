@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-14T12:10:27.307Z",
-  "totalMembers": 1517,
-  "activeToday": 225,
+  "updated": "2026-07-14T14:24:46.823Z",
+  "totalMembers": 1518,
+  "activeToday": 295,
   "players": [
     {
       "username": "financial_dragon",
-      "total_pts": 417,
-      "bullet_pts": 52,
-      "blitz_pts": 150,
-      "rapid_pts": 215,
-      "bullet_g": 20,
-      "blitz_g": 18,
-      "rapid_g": 15,
+      "total_pts": 507,
+      "bullet_pts": 58,
+      "blitz_pts": 159,
+      "rapid_pts": 290,
+      "bullet_g": 22,
+      "blitz_g": 19,
+      "rapid_g": 20,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
       "username": "nikkotello",
-      "total_pts": 215,
+      "total_pts": 335,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 215,
+      "rapid_pts": 335,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 17,
+      "rapid_g": 25,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "erac001",
-      "total_pts": 210,
+      "username": "arunavo7970",
+      "total_pts": 240,
       "bullet_pts": 0,
-      "blitz_pts": 210,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 240,
       "bullet_g": 0,
-      "blitz_g": 24,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
+      "blitz_g": 0,
+      "rapid_g": 16,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/569726772.272de163.200x200o.b5afca41c275.png"
     }
   ]
 }
