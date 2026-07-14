@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-14T03:56:02.413Z",
-  "totalMembers": 1517,
-  "activeToday": 89,
+  "updated": "2026-07-14T06:10:04.778Z",
+  "totalMembers": 1518,
+  "activeToday": 113,
   "players": [
     {
       "username": "erac001",
-      "total_pts": 156,
+      "total_pts": 210,
       "bullet_pts": 0,
-      "blitz_pts": 156,
+      "blitz_pts": 210,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 18,
+      "blitz_g": 24,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
     },
     {
-      "username": "hectorcista",
-      "total_pts": 135,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 135,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 9,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "financial_dragon",
+      "total_pts": 153,
+      "bullet_pts": 27,
+      "blitz_pts": 36,
+      "rapid_pts": 90,
+      "bullet_g": 11,
+      "blitz_g": 4,
+      "rapid_g": 6,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
-      "username": "bosticoart",
-      "total_pts": 102,
-      "bullet_pts": 102,
+      "username": "hectorcista",
+      "total_pts": 150,
+      "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 36,
+      "rapid_pts": 150,
+      "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
+      "rapid_g": 10,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
