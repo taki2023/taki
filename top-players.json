@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-14T22:56:06.883Z",
-  "totalMembers": 1522,
-  "activeToday": 404,
+  "updated": "2026-07-14T23:53:33.756Z",
+  "totalMembers": 1523,
+  "activeToday": 403,
   "players": [
     {
       "username": "nikkotello",
@@ -27,11 +27,11 @@
     },
     {
       "username": "mishrafish",
-      "total_pts": 291,
-      "bullet_pts": 291,
+      "total_pts": 329,
+      "bullet_pts": 329,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 107,
+      "bullet_g": 121,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/16716510.7131de21.200x200o.2199085e79b7.png"
