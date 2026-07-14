@@ -1,8 +1,19 @@
 {
-  "updated": "2026-07-14T06:10:04.778Z",
-  "totalMembers": 1518,
-  "activeToday": 113,
+  "updated": "2026-07-14T08:36:20.569Z",
+  "totalMembers": 1519,
+  "activeToday": 159,
   "players": [
+    {
+      "username": "financial_dragon",
+      "total_pts": 211,
+      "bullet_pts": 40,
+      "blitz_pts": 36,
+      "rapid_pts": 135,
+      "bullet_g": 16,
+      "blitz_g": 4,
+      "rapid_g": 9,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
+    },
     {
       "username": "erac001",
       "total_pts": 210,
@@ -13,17 +24,6 @@
       "blitz_g": 24,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 153,
-      "bullet_pts": 27,
-      "blitz_pts": 36,
-      "rapid_pts": 90,
-      "bullet_g": 11,
-      "blitz_g": 4,
-      "rapid_g": 6,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
       "username": "hectorcista",
