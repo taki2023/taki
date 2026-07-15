@@ -1,8 +1,30 @@
 {
-  "updated": "2026-07-15T14:49:12.151Z",
+  "updated": "2026-07-15T16:20:51.683Z",
   "totalMembers": 1525,
-  "activeToday": 273,
+  "activeToday": 300,
   "players": [
+    {
+      "username": "nikkotello",
+      "total_pts": 430,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 430,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 30,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
+    {
+      "username": "abd_allah_libyan",
+      "total_pts": 374,
+      "bullet_pts": 0,
+      "blitz_pts": 9,
+      "rapid_pts": 365,
+      "bullet_g": 0,
+      "blitz_g": 1,
+      "rapid_g": 25,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.00d08fce.200x200o.b4daa9d7dbc1.jpg"
+    },
     {
       "username": "financial_dragon",
       "total_pts": 369,
@@ -13,28 +35,6 @@
       "blitz_g": 25,
       "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
-    },
-    {
-      "username": "abd_allah_libyan",
-      "total_pts": 329,
-      "bullet_pts": 0,
-      "blitz_pts": 9,
-      "rapid_pts": 320,
-      "bullet_g": 0,
-      "blitz_g": 1,
-      "rapid_g": 22,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.00d08fce.200x200o.b4daa9d7dbc1.jpg"
-    },
-    {
-      "username": "borderwatch",
-      "total_pts": 290,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 290,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 22,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
