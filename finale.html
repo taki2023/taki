@@ -1,0 +1,526 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCC Admin Bracket Fights</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Nunito:wght@400;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
+
+.bracket-sb{
+  width:100%;height:600px;
+  background:#fff5f0;
+  border-radius:28px;
+  border:3px solid #e8553a;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 8px 32px rgba(217,48,32,.2);
+  display:flex;flex-direction:column;
+}
+
+@media (max-width:480px){
+  .bracket-sb{ height:480px; }
+}
+
+/* HEADER */
+.bk-header{
+  height:60px;flex-shrink:0;
+  background:linear-gradient(135deg,#d93020 0%,#e85535 60%,#ef6640 100%);
+  border-radius:24px 24px 0 0;
+  padding:10px 16px 0;
+  text-align:center;position:relative;overflow:hidden;
+}
+.bk-header::before{
+  content:'';position:absolute;bottom:-10px;left:-10%;
+  width:120%;height:20px;background:#fff5f0;border-radius:50%;
+}
+.corner-icon{position:absolute;opacity:.65;top:5px;}
+.corner-icon.l{left:10px;font-size:28px;transform:rotate(-20deg);}
+.corner-icon.r{right:10px;font-size:30px;transform:rotate(30deg);}
+.bk-title{font-family:'Fredoka One',cursive;font-size:17px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.15);position:relative;z-index:1;}
+.bk-sub{font-size:10px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.8px;text-transform:uppercase;margin-top:2px;position:relative;z-index:1;}
+
+/* ARENA */
+.bk-arena{
+  position:relative;width:100%;flex:1;min-height:0;
+}
+.bk-arena svg{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+
+/* NODE */
+.node{
+  position:absolute;
+  display:flex;flex-direction:column;align-items:center;
+  transform:translate(-50%,-50%);
+  z-index:2;
+  cursor:pointer;
+}
+.av{
+  border-radius:50%;
+  border:2.5px solid #f5c5b8;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka One',cursive;color:#e8aa98;
+  overflow:hidden;
+  box-shadow:0 3px 0 #e8aa98;
+  flex-shrink:0;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
+.aname{
+  font-weight:900;color:#9a2010;
+  margin-top:6px;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition: color 0.15s ease, transform 0.15s ease;
+  pointer-events:none;
+}
+
+/* HOVER */
+.node:hover .av{
+  transform: scale(1.18);
+  border-color: #d93020;
+  box-shadow: 0 0 0 3px rgba(217,48,32,.2), 0 5px 0 #c0300a;
+}
+.node:hover .aname{
+  color: #d93020;
+  transform: scale(1.08);
+}
+
+/* winner */
+.node.winner .av{
+  border-color:#d93020;
+  box-shadow:0 0 0 4px rgba(217,48,32,.15),0 4px 0 #8c1a10;
+  animation:wp 2.5s ease-in-out infinite;
+}
+.node.winner .aname{color:#d93020;font-weight:900;}
+.node.winner:hover .av{
+  animation: none;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 6px rgba(217,48,32,.25), 0 6px 0 #8c1a10;
+}
+@keyframes wp{
+  0%,100%{box-shadow:0 0 0 4px rgba(217,48,32,.15),0 4px 0 #8c1a10,0 0 18px rgba(217,48,32,.2);}
+  50%{box-shadow:0 0 0 7px rgba(217,48,32,.1),0 6px 0 #8c1a10,0 0 34px rgba(217,48,32,.35);}
+}
+
+/* champion label */
+.champion-label{
+  position:absolute;
+  z-index:4;
+  transform:translateX(-50%);
+  font-family:'Fredoka One',cursive;
+  color:#d93020;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.champion-label.visible{ opacity:1; }
+
+/* pepper above winner */
+.crown{
+  position:absolute;z-index:3;
+  transform:translate(-50%,-100%);
+  line-height:1;
+  filter:drop-shadow(0 1px 4px rgba(217,48,32,.4));
+  animation:cb 2s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes cb{0%,100%{transform:translate(-50%,-100%) translateY(0);}50%{transform:translate(-50%,-100%) translateY(-3px);}}
+
+/* FOOTER */
+.bk-footer{
+  text-align:center;padding:4px 8px 7px;
+  font-size:10px;font-weight:700;color:#e8553a;flex-shrink:0;
+}
+</style>
+</head>
+<body>
+<div class="bracket-sb">
+  <div class="bk-header">
+    <div class="corner-icon l">🌶️</div>
+    <div class="corner-icon r">♞</div>
+    <div class="bk-title">⚔️ HCC Admin Bracket Fights ⚔️</div>
+    <div class="bk-sub">Who's the spiciest admin?</div>
+  </div>
+  <div class="bk-arena" id="arena">
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg"><path d="M 128.9 24.200000000000003 L 286.38000000000005 24.200000000000003 Q 298.70000000000005 24.200000000000003 298.70000000000005 36.52 L 298.70000000000005 101.29999999999998" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 128.9 178.39999999999998 L 286.38000000000005 178.39999999999998 Q 298.70000000000005 178.39999999999998 298.70000000000005 166.07999999999998 L 298.70000000000005 101.29999999999998" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 128.9 332.59999999999997 L 286.38000000000005 332.59999999999997 Q 298.70000000000005 332.59999999999997 298.70000000000005 344.91999999999996 L 298.70000000000005 409.7" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 128.9 486.8 L 286.38000000000005 486.8 Q 298.70000000000005 486.8 298.70000000000005 474.48 L 298.70000000000005 409.7" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 24.200000000000003 L 782.6200000000001 24.200000000000003 Q 770.3000000000001 24.200000000000003 770.3000000000001 36.52 L 770.3000000000001 101.29999999999998" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 178.39999999999998 L 782.6200000000001 178.39999999999998 Q 770.3000000000001 178.39999999999998 770.3000000000001 166.07999999999998 L 770.3000000000001 101.29999999999998" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 332.59999999999997 L 782.6200000000001 332.59999999999997 Q 770.3000000000001 332.59999999999997 770.3000000000001 344.91999999999996 L 770.3000000000001 409.7" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 486.8 L 782.6200000000001 486.8 Q 770.3000000000001 486.8 770.3000000000001 474.48 L 770.3000000000001 409.7" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 342.70000000000005 101.29999999999998 L 393.28000000000003 101.29999999999998 Q 405.6 101.29999999999998 405.6 113.61999999999998 L 405.6 255.5" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 342.70000000000005 409.7 L 393.28000000000003 409.7 Q 405.6 409.7 405.6 397.38 L 405.6 255.5" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 726.3000000000001 101.29999999999998 L 675.7200000000001 101.29999999999998 Q 663.4000000000001 101.29999999999998 663.4000000000001 113.61999999999998 L 663.4000000000001 255.5" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 726.3000000000001 409.7 L 675.7200000000001 409.7 Q 663.4000000000001 409.7 663.4000000000001 397.38 L 663.4000000000001 255.5" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 427.6 233.5 L 427.6 153.42 Q 427.6 141.1 439.92 141.1 L 505.9 141.1" stroke="#f5c5b8" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 641.4000000000001 233.5 L 641.4000000000001 153.42 Q 641.4000000000001 141.1 629.08 141.1 L 563.1 141.1" stroke="#f5c5b8" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><rect x="181.98000000000002" y="-0.2999999999999954" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="10.900000000000004" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">11</text><rect x="186.46000000000004" y="153.89999999999998" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="165.09999999999997" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">9</text><rect x="181.98000000000002" y="462.3" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="473.5" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">11</text><rect x="181.98000000000002" y="308.09999999999997" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="319.29999999999995" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">10</text><rect x="840.36" y="-0.2999999999999954" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="10.900000000000004" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">10</text><rect x="844.84" y="153.89999999999998" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="165.09999999999997" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">7</text><rect x="840.36" y="462.3" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="473.5" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">13</text><rect x="844.84" y="308.09999999999997" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="319.29999999999995" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">7</text><rect x="359.31000000000006" y="76.79999999999998" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="374.15000000000003" y="87.99999999999999" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">13</text><rect x="359.31000000000006" y="385.2" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="374.15000000000003" y="396.4" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">11</text><rect x="680.0100000000001" y="385.2" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="694.8500000000001" y="396.4" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">15</text><rect x="684.4900000000001" y="76.79999999999998" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="694.8500000000001" y="87.99999999999999" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">8</text></svg>
+    <div class="crown" id="crown" style="left: 534.5px; top: 112.5px; font-size: 17.6px;">🌶️</div>
+    <div class="champion-label" id="champLabel" style="left: 534.5px; top: 190.7px; font-size: 9.35px;">🌶️ Winner</div>
+  <div class="node" style="left: 106.9px; top: 24.2px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/334087811.6b32186d.200x200o.d94234c035db.png" alt="Iamplayerofchess"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Iamplayerofchess</div></div><div class="node" style="left: 106.9px; top: 178.4px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/349443015.24f8fe7c.200x200o.eafcfcc41a6a.jpg" alt="cello_jello"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@cello_jello</div></div><div class="node" style="left: 106.9px; top: 332.6px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/466828074.27f0d6e2.200x200o.5163ba4e51ca.jpg" alt="Tengen"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Tengen</div></div><div class="node" style="left: 106.9px; top: 486.8px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/417947819.a78cb7b9.200x200o.134c775976cb.jpg" alt="TALented_Vasee_18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@TALented_Vasee_18</div></div><div class="node" style="left: 962.1px; top: 24.2px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/401656879.c9a8648e.200x200o.da56681c680c.jpg" alt="lokesh-gamer-18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@lokesh-gamer-18</div></div><div class="node" style="left: 962.1px; top: 178.4px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/419128621.5c9bbecd.200x200o.43e5ba498fd2.jpg" alt="Juliana3377"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Juliana3377</div></div><div class="node" style="left: 962.1px; top: 332.6px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;">TR</div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@TrofAndy</div></div><div class="node" style="left: 962.1px; top: 486.8px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/462324478.5a6244fa.200x200o.bf24441835be.jpg" alt="Daniel2040"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Daniel2040</div></div><div class="node" style="left: 320.7px; top: 101.3px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/334087811.6b32186d.200x200o.d94234c035db.png" alt="Iamplayerofchess"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Iamplayerofchess</div></div><div class="node" style="left: 320.7px; top: 409.7px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/417947819.a78cb7b9.200x200o.134c775976cb.jpg" alt="TALented_Vasee_18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@TALented_Vasee_18</div></div><div class="node" style="left: 748.3px; top: 101.3px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/401656879.c9a8648e.200x200o.da56681c680c.jpg" alt="lokesh-gamer-18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@lokesh-gamer-18</div></div><div class="node" style="left: 748.3px; top: 409.7px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/462324478.5a6244fa.200x200o.bf24441835be.jpg" alt="Daniel2040"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Daniel2040</div></div><div class="node" style="left: 427.6px; top: 255.5px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/334087811.6b32186d.200x200o.d94234c035db.png" alt="Iamplayerofchess"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Iamplayerofchess</div></div><div class="node" style="left: 641.4px; top: 255.5px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/462324478.5a6244fa.200x200o.bf24441835be.jpg" alt="Daniel2040"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Daniel2040</div></div><div class="node" style="left: 534.5px; top: 141.1px;"><div class="av" style="width: 57.2px; height: 57.2px; font-size: 21.736px;">?</div><div class="aname" style="font-size: 11px; max-width: 196.696px;">Winner</div></div></div>
+  <div class="bk-footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
+</div>
+
+<script>
+const admins = [
+  { name:'Iamplayerofchess', chess:'Iamplayerofchess' },
+  { name:'cello_jello',      chess:'cello_jello' },
+  { name:'Tengen',           chess:'Tengen' },
+  { name:'TALented_Vasee_18',chess:'TALented_Vasee_18' },
+  { name:'lokesh-gamer-18',  chess:'lokesh-gamer-18' },
+  { name:'Juliana3377',      chess:'Juliana3377' },
+  { name:'TrofAndy',         chess:'TrofAndy' },
+  { name:'Daniel2040',       chess:'Daniel2040' },
+];
+
+// winner = index into admins[] (0-7), or null if not decided yet
+// score = { w: '<winner score>', l: '<loser score>' }, or null if not decided yet
+const MATCHES = {
+  qf0: { winner: 0, score: { w: 11, l: 9 } },
+  qf1: { winner: 3, score: { w: 11, l: 10 } },
+  qf2: { winner: 4, score: { w: 10, l: 7 } },
+  qf3: { winner: 7, score: { w: 13, l: 7 } },
+  sf0: { winner: 0, score: { w: 13, l: 11 } },
+  sf1: { winner: 7, score: { w: 15, l: 8 } },
+  fin: { winner: null, score: null },
+};
+
+const avatarCache = {};
+async function fetchAvatar(username){
+  if(!username) return null;
+  if(avatarCache[username]!==undefined) return avatarCache[username];
+  try{
+    const r = await fetch(`https://api.chess.com/pub/player/${username.toLowerCase()}`);
+    if(!r.ok){ avatarCache[username]=null; return null; }
+    const d = await r.json();
+    avatarCache[username] = d.avatar||null;
+    return avatarCache[username];
+  }catch{ avatarCache[username]=null; return null; }
+}
+
+const arena       = document.getElementById('arena');
+const svgEl       = document.getElementById('svg');
+const crown       = document.getElementById('crown');
+const champLabel  = document.getElementById('champLabel');
+const SVGNS       = 'http://www.w3.org/2000/svg';
+
+function makeNode(cls=''){
+  const w  = document.createElement('div');
+  w.className = 'node'+(cls?' '+cls:'');
+  const av = document.createElement('div'); av.className='av'; av.textContent='?';
+  const nm = document.createElement('div'); nm.className='aname'; nm.textContent='—';
+  w.appendChild(av);
+  w.appendChild(nm);
+  arena.appendChild(w);
+  return w;
+}
+
+const qfN  = Array.from({length:8},  ()=>makeNode());
+const sfN  = Array.from({length:4},  ()=>makeNode());
+const finN = Array.from({length:2},  ()=>makeNode());
+const winN = makeNode('winner');
+
+async function setNode(node, adminIdx, isWinner=false){
+  const av = node.querySelector('.av');
+  const nm = node.querySelector('.aname');
+  node.classList.toggle('winner', isWinner);
+
+  if(adminIdx===null||adminIdx===undefined){
+    av.innerHTML=''; av.textContent='?';
+    nm.textContent = isWinner ? 'Winner' : '—';
+    return;
+  }
+
+  const a = admins[adminIdx];
+  nm.textContent = '@'+a.chess;
+
+  if(isWinner){
+    nm.textContent = '🌶️ '+a.chess;
+  }
+
+  const url = await fetchAvatar(a.chess);
+  if(url){
+    av.innerHTML='';
+    const img = document.createElement('img');
+    img.src=url; img.alt=a.chess;
+    img.onerror=()=>{ img.remove(); av.textContent=a.chess.slice(0,2).toUpperCase(); };
+    av.appendChild(img);
+  } else {
+    av.innerHTML=''; av.textContent=a.chess.slice(0,2).toUpperCase();
+  }
+}
+
+async function refreshNodes(){
+  for(let i=0;i<8;i++) await setNode(qfN[i], i);
+  for(let i=0;i<4;i++) await setNode(sfN[i], MATCHES['qf'+i].winner);
+  for(let i=0;i<2;i++) await setNode(finN[i], MATCHES['sf'+i].winner);
+  const champ = MATCHES.fin.winner;
+  await setNode(winN, champ, champ!==null);
+  if(champ===null){
+    winN.querySelector('.aname').textContent='Winner';
+  }
+}
+
+/* ══ LAYOUT ══ */
+let L = null;
+
+function layout(){
+  const W=arena.clientWidth, H=arena.clientHeight;
+  if(W<10||H<10) return;
+
+  // Column width drives every other size, so avatars/labels always fit
+  // their column with room to spare -- no matter how narrow the screen is.
+  const cw  = W/5;
+  const av  = Math.max(16, Math.min(44, cw*0.42));
+  const win = av*1.3;
+  // Username: smaller font + tighter max width so names don't eat up column space
+  const nfs = Math.max(6, Math.min(11, cw*0.11));
+  const nfw = cw*0.92;
+
+  const padV = av*0.55;
+  const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
+
+  const sfY = [
+    (qfY[0]+qfY[1])/2,
+    (qfY[2]+qfY[3])/2,
+    (qfY[0]+qfY[1])/2,
+    (qfY[2]+qfY[3])/2,
+  ];
+
+  const xLQF  = cw*0.5;
+  const xRQF  = cw*4.5;
+  const xLSF  = cw*1.5;
+  const xRSF  = cw*3.5;
+  const xC    = cw*2.5;
+  const xLFin = (xLSF+xC)/2;
+  const xRFin = (xRSF+xC)/2;
+  const finY  = (sfY[0]+sfY[1])/2;
+  const winY  = finY - av*2.6;
+
+  L = {W,H,av,win,nfs,nfw,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin};
+
+  function sizeNode(node, size){
+    const a = node.querySelector('.av');
+    a.style.width=size+'px'; a.style.height=size+'px';
+    a.style.fontSize=(size*0.38)+'px';
+    const nm = node.querySelector('.aname');
+    nm.style.fontSize=nfs+'px'; nm.style.maxWidth=(nfw)+'px';
+  }
+  for(let i=0;i<8;i++)  sizeNode(qfN[i], av);
+  for(let i=0;i<4;i++)  sizeNode(sfN[i], av);
+  for(let i=0;i<2;i++)  sizeNode(finN[i], av);
+  sizeNode(winN, win);
+
+  function posNode(node, x, y){
+    node.style.left=x+'px'; node.style.top=y+'px';
+  }
+  posNode(qfN[0], xLQF, qfY[0]);
+  posNode(qfN[1], xLQF, qfY[1]);
+  posNode(qfN[2], xLQF, qfY[2]);
+  posNode(qfN[3], xLQF, qfY[3]);
+  posNode(sfN[0], xLSF, sfY[0]);
+  posNode(sfN[1], xLSF, sfY[1]);
+  posNode(qfN[4], xRQF, qfY[0]);
+  posNode(qfN[5], xRQF, qfY[1]);
+  posNode(qfN[6], xRQF, qfY[2]);
+  posNode(qfN[7], xRQF, qfY[3]);
+  posNode(sfN[2], xRSF, sfY[2]);
+  posNode(sfN[3], xRSF, sfY[3]);
+  posNode(finN[0], xLFin, finY);
+  posNode(finN[1], xRFin, finY);
+  posNode(winN, xC, winY);
+
+  crown.style.left=xC+'px';
+  crown.style.top=(winY-win/2)+'px';
+  crown.style.fontSize=Math.max(9,Math.min(20,av*0.4))+'px';
+
+  champLabel.style.left=xC+'px';
+  champLabel.style.top=(winY+win/2+nfs+10)+'px';
+  champLabel.style.fontSize=Math.max(8,nfs*0.85)+'px';
+  const champ = MATCHES.fin.winner;
+  champLabel.classList.toggle('visible', champ!==null);
+  if(champ!==null) champLabel.textContent='🌶️ Winner';
+
+  drawLines();
+}
+
+/* ══ DRAW SVG LINES + SCORE LABELS ══ */
+function drawLines(){
+  svgEl.innerHTML='';
+  if(!L) return;
+  const {av,win,qfY,sfY,finY,winY,xLQF,xRQF,xLSF,xRSF,xC,xLFin,xRFin} = L;
+  const r  = av/2;
+  const rw = win/2;
+
+  const DIM        = '#f5c5b8';
+  const WIN_C      = '#d93020';
+  const SCORE_WIN  = '#2a9a4a';
+  const SCORE_LOSE = '#c03020';
+  const FS     = Math.max(7, Math.min(14, av*0.34));
+  const VGAP   = FS*0.95;              // clearance above the wire for score text
+  const RADIUS = Math.min(16, av*0.28); // corner rounding for connector elbows
+  const LW     = 3;                     // connector thickness
+  const LW_FIN = 3.6;
+
+  // simple straight line (used only where no bend exists)
+  function line(x1,y1,x2,y2,color,w=LW){
+    const l=document.createElementNS(SVGNS,'line');
+    l.setAttribute('x1',x1);l.setAttribute('y1',y1);
+    l.setAttribute('x2',x2);l.setAttribute('y2',y2);
+    l.setAttribute('stroke',color);l.setAttribute('stroke-width',w);
+    l.setAttribute('stroke-linecap','round');
+    svgEl.appendChild(l);
+  }
+
+  // rounded elbow: start -> corner -> end, with the corner smoothed by a radius
+  function elbow(x1,y1,cx,cy,x2,y2,color,w=LW,radius=RADIUS){
+    const d1x=cx-x1, d1y=cy-y1, d2x=x2-cx, d2y=y2-cy;
+    const len1=Math.hypot(d1x,d1y)||1, len2=Math.hypot(d2x,d2y)||1;
+    const rad = Math.min(radius, len1/2, len2/2);
+    const p1x=cx-(d1x/len1)*rad, p1y=cy-(d1y/len1)*rad;
+    const p2x=cx+(d2x/len2)*rad, p2y=cy+(d2y/len2)*rad;
+    const path=document.createElementNS(SVGNS,'path');
+    path.setAttribute('d',`M ${x1} ${y1} L ${p1x} ${p1y} Q ${cx} ${cy} ${p2x} ${p2y} L ${x2} ${y2}`);
+    path.setAttribute('stroke',color);
+    path.setAttribute('stroke-width',w);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke-linecap','round');
+    path.setAttribute('stroke-linejoin','round');
+    svgEl.appendChild(path);
+  }
+
+  const scoreQueue = [];
+
+  function scoreLabel(x,y,text,color){
+    const str = String(text);
+    const padX = FS*0.42, padY = FS*0.3;
+    const w = str.length*FS*0.64 + padX*2;
+    const h = FS + padY*2;
+    const rect = document.createElementNS(SVGNS,'rect');
+    rect.setAttribute('x', x-w/2);
+    rect.setAttribute('y', y-h/2);
+    rect.setAttribute('width', w);
+    rect.setAttribute('height', h);
+    rect.setAttribute('rx', h/2);
+    rect.setAttribute('fill', '#fff5f0');
+    svgEl.appendChild(rect);
+
+    const t=document.createElementNS(SVGNS,'text');
+    t.setAttribute('x',x);t.setAttribute('y',y);
+    t.setAttribute('text-anchor','middle');
+    t.setAttribute('dominant-baseline','middle');
+    t.setAttribute('font-family','Fredoka One, cursive');
+    t.setAttribute('font-size',FS);
+    t.setAttribute('fill',color);
+    t.textContent=text;
+    svgEl.appendChild(t);
+  }
+
+  function drawQFPair(pairIdx){
+    const isRight   = pairIdx >= 2;
+    const qi        = pairIdx;
+    const localPair = isRight ? pairIdx-2 : pairIdx;
+    const ya   = qfY[localPair*2];
+    const yb   = qfY[localPair*2+1];
+    const sfYi = isRight ? sfY[2+localPair] : sfY[localPair];
+    const qfX  = isRight ? xRQF : xLQF;
+    const m    = MATCHES['qf'+qi];
+    const pairs= [[0,1],[2,3],[4,5],[6,7]];
+    const [pA,pB] = pairs[qi];
+    const hasWinner = m.winner!==null;
+    const wA = hasWinner && m.winner===pA;
+    const wB = hasWinner && m.winner===pB;
+    const colA = wA ? WIN_C : DIM;
+    const colB = wB ? WIN_C : DIM;
+
+    if(!isRight){
+      const jX = xLSF;
+      const midX = (qfX+r) + ((jX-r)-(qfX+r))*0.4;
+      elbow(qfX+r, ya, jX-r, ya, jX-r, sfYi, colA);
+      elbow(qfX+r, yb, jX-r, yb, jX-r, sfYi, colB);
+      if(m.score && hasWinner){
+        const winY2=wA?ya:yb, loseY2=wA?yb:ya;
+        scoreQueue.push({x:midX, y:winY2-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseY2-VGAP, text:m.score.l, color:SCORE_LOSE});
+      }
+    } else {
+      const jX = xRSF;
+      const midX = (qfX-r + jX+r)/2;
+      elbow(qfX-r, ya, jX+r, ya, jX+r, sfYi, colA);
+      elbow(qfX-r, yb, jX+r, yb, jX+r, sfYi, colB);
+      if(m.score && hasWinner){
+        const winY2=wA?ya:yb, loseY2=wA?yb:ya;
+        scoreQueue.push({x:midX, y:winY2-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseY2-VGAP, text:m.score.l, color:SCORE_LOSE});
+      }
+    }
+  }
+  for(let i=0;i<4;i++) drawQFPair(i);
+
+  function drawSFPair(si){
+    const m    = MATCHES['sf'+si];
+    const sfXA = si===0 ? xLSF : xRSF;
+    const sfXB = si===0 ? xLSF : xRSF;
+    const sfYA = si===0 ? sfY[0] : sfY[2];
+    const sfYB = si===0 ? sfY[1] : sfY[3];
+    const pA   = MATCHES['qf'+(si*2)].winner;
+    const pB   = MATCHES['qf'+(si*2+1)].winner;
+    const hasWinner = m.winner!==null;
+    const wA = hasWinner && m.winner===pA;
+    const wB = hasWinner && m.winner===pB;
+    const colA = wA ? WIN_C : DIM;
+    const colB = wB ? WIN_C : DIM;
+
+    if(si===0){
+      const jX = xLFin;
+      const midX = (sfXA+r + jX-r)/2;
+      elbow(sfXA+r, sfYA, jX-r, sfYA, jX-r, finY, colA);
+      elbow(sfXB+r, sfYB, jX-r, sfYB, jX-r, finY, colB);
+      if(m.score && hasWinner){
+        const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
+        scoreQueue.push({x:midX, y:winYs-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseYs-VGAP, text:m.score.l, color:SCORE_LOSE});
+      }
+    } else {
+      const jX = xRFin;
+      const midX = (sfXA-r + jX+r)/2;
+      elbow(sfXA-r, sfYA, jX+r, sfYA, jX+r, finY, colA);
+      elbow(sfXB-r, sfYB, jX+r, sfYB, jX+r, finY, colB);
+      if(m.score && hasWinner){
+        const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
+        scoreQueue.push({x:midX, y:winYs-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseYs-VGAP, text:m.score.l, color:SCORE_LOSE});
+      }
+    }
+  }
+  drawSFPair(0);
+  drawSFPair(1);
+
+  {
+    const m = MATCHES.fin;
+    const pA = MATCHES.sf0.winner;
+    const pB = MATCHES.sf1.winner;
+    const hasWinner = m.winner!==null;
+    const wA = hasWinner && m.winner===pA;
+    const wB = hasWinner && m.winner===pB;
+    const colA = wA ? WIN_C : DIM;
+    const colB = wB ? WIN_C : DIM;
+
+    elbow(xLFin, finY-r, xLFin, winY, xC-rw, winY, colA, LW_FIN);
+    elbow(xRFin, finY-r, xRFin, winY, xC+rw, winY, colB, LW_FIN);
+
+    if(m.score && hasWinner){
+      const midY = (finY+winY)/2;
+      scoreQueue.push({x:(xLFin+xC)/2, y:midY-VGAP*0.4, text:wA?m.score.w:m.score.l, color:wA?SCORE_WIN:SCORE_LOSE});
+      scoreQueue.push({x:(xRFin+xC)/2, y:midY-VGAP*0.4, text:wB?m.score.w:m.score.l, color:wB?SCORE_WIN:SCORE_LOSE});
+    }
+  }
+
+  // draw all scores last so they always sit on top of every connector line
+  scoreQueue.forEach(s => scoreLabel(s.x, s.y, s.text, s.color));
+}
+
+/* ══ INIT ══ */
+async function init(){
+  await refreshNodes();
+  layout();
+}
+init();
+new ResizeObserver(()=>layout()).observe(arena);
+</script>
+
+
+</body></html>
