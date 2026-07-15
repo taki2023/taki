@@ -1,19 +1,8 @@
 {
-  "updated": "2026-07-15T21:58:58.663Z",
+  "updated": "2026-07-15T23:02:14.854Z",
   "totalMembers": 1527,
-  "activeToday": 363,
+  "activeToday": 371,
   "players": [
-    {
-      "username": "nikkotello",
-      "total_pts": 590,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 590,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 42,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
     {
       "username": "borderwatch",
       "total_pts": 490,
@@ -35,6 +24,17 @@
       "blitz_g": 1,
       "rapid_g": 31,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.00d08fce.200x200o.b4daa9d7dbc1.jpg"
+    },
+    {
+      "username": "financial_dragon",
+      "total_pts": 447,
+      "bullet_pts": 141,
+      "blitz_pts": 291,
+      "rapid_pts": 15,
+      "bullet_g": 47,
+      "blitz_g": 35,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     }
   ]
 }
