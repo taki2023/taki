@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-15T12:53:47.979Z",
-  "totalMembers": 1526,
-  "activeToday": 238,
+  "updated": "2026-07-15T14:49:12.151Z",
+  "totalMembers": 1525,
+  "activeToday": 273,
   "players": [
     {
       "username": "financial_dragon",
@@ -15,26 +15,26 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
-      "username": "mishrafish",
-      "total_pts": 261,
-      "bullet_pts": 96,
-      "blitz_pts": 0,
-      "rapid_pts": 165,
-      "bullet_g": 34,
-      "blitz_g": 0,
-      "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/16716510.7131de21.200x200o.2199085e79b7.png"
-    },
-    {
       "username": "abd_allah_libyan",
-      "total_pts": 254,
+      "total_pts": 329,
       "bullet_pts": 0,
       "blitz_pts": 9,
-      "rapid_pts": 245,
+      "rapid_pts": 320,
       "bullet_g": 0,
       "blitz_g": 1,
-      "rapid_g": 17,
+      "rapid_g": 22,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.00d08fce.200x200o.b4daa9d7dbc1.jpg"
+    },
+    {
+      "username": "borderwatch",
+      "total_pts": 290,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 290,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 22,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
