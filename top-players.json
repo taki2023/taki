@@ -1,8 +1,19 @@
 {
-  "updated": "2026-07-15T07:29:27.364Z",
+  "updated": "2026-07-15T09:31:48.673Z",
   "totalMembers": 1526,
-  "activeToday": 118,
+  "activeToday": 161,
   "players": [
+    {
+      "username": "financial_dragon",
+      "total_pts": 297,
+      "bullet_pts": 114,
+      "blitz_pts": 183,
+      "rapid_pts": 0,
+      "bullet_g": 38,
+      "blitz_g": 21,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
+    },
     {
       "username": "mishrafish",
       "total_pts": 261,
@@ -13,17 +24,6 @@
       "blitz_g": 0,
       "rapid_g": 11,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/16716510.7131de21.200x200o.2199085e79b7.png"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 189,
-      "bullet_pts": 42,
-      "blitz_pts": 147,
-      "rapid_pts": 0,
-      "bullet_g": 14,
-      "blitz_g": 17,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
       "username": "smorkusporkus",
