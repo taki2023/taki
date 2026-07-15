@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HCC Admin Bracket Fights</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Nunito:wght@400;700;800;900&amp;display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
@@ -18,6 +16,10 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
   position:relative;
   box-shadow:0 8px 32px rgba(217,48,32,.2);
   display:flex;flex-direction:column;
+}
+
+@media (max-width:480px){
+  .bracket-sb{ height:480px; }
 }
 
 /* HEADER */
@@ -145,10 +147,10 @@ html,body{width:100%;background:#1a1a1a;font-family:'Nunito',sans-serif;}
     <div class="bk-sub">Who's the spiciest admin?</div>
   </div>
   <div class="bk-arena" id="arena">
-    <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
-    <div class="crown" id="crown">🌶️</div>
-    <div class="champion-label" id="champLabel">🌶️ Winner</div>
-  </div>
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg"><path d="M 128.9 24.200000000000003 L 286.38000000000005 24.200000000000003 Q 298.70000000000005 24.200000000000003 298.70000000000005 36.52 L 298.70000000000005 101.29999999999998" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 128.9 178.39999999999998 L 286.38000000000005 178.39999999999998 Q 298.70000000000005 178.39999999999998 298.70000000000005 166.07999999999998 L 298.70000000000005 101.29999999999998" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 128.9 332.59999999999997 L 286.38000000000005 332.59999999999997 Q 298.70000000000005 332.59999999999997 298.70000000000005 344.91999999999996 L 298.70000000000005 409.7" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 128.9 486.8 L 286.38000000000005 486.8 Q 298.70000000000005 486.8 298.70000000000005 474.48 L 298.70000000000005 409.7" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 24.200000000000003 L 782.6200000000001 24.200000000000003 Q 770.3000000000001 24.200000000000003 770.3000000000001 36.52 L 770.3000000000001 101.29999999999998" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 178.39999999999998 L 782.6200000000001 178.39999999999998 Q 770.3000000000001 178.39999999999998 770.3000000000001 166.07999999999998 L 770.3000000000001 101.29999999999998" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 332.59999999999997 L 782.6200000000001 332.59999999999997 Q 770.3000000000001 332.59999999999997 770.3000000000001 344.91999999999996 L 770.3000000000001 409.7" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 940.1 486.8 L 782.6200000000001 486.8 Q 770.3000000000001 486.8 770.3000000000001 474.48 L 770.3000000000001 409.7" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 342.70000000000005 101.29999999999998 L 393.28000000000003 101.29999999999998 Q 405.6 101.29999999999998 405.6 113.61999999999998 L 405.6 255.5" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 342.70000000000005 409.7 L 393.28000000000003 409.7 Q 405.6 409.7 405.6 397.38 L 405.6 255.5" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 726.3000000000001 101.29999999999998 L 675.7200000000001 101.29999999999998 Q 663.4000000000001 101.29999999999998 663.4000000000001 113.61999999999998 L 663.4000000000001 255.5" stroke="#f5c5b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 726.3000000000001 409.7 L 675.7200000000001 409.7 Q 663.4000000000001 409.7 663.4000000000001 397.38 L 663.4000000000001 255.5" stroke="#d93020" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 427.6 233.5 L 427.6 153.42 Q 427.6 141.1 439.92 141.1 L 505.9 141.1" stroke="#f5c5b8" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M 641.4000000000001 233.5 L 641.4000000000001 153.42 Q 641.4000000000001 141.1 629.08 141.1 L 563.1 141.1" stroke="#f5c5b8" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><rect x="181.98000000000002" y="-0.2999999999999954" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="10.900000000000004" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">11</text><rect x="186.46000000000004" y="153.89999999999998" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="165.09999999999997" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">9</text><rect x="181.98000000000002" y="462.3" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="473.5" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">11</text><rect x="181.98000000000002" y="308.09999999999997" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="196.82000000000002" y="319.29999999999995" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">10</text><rect x="840.36" y="-0.2999999999999954" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="10.900000000000004" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">10</text><rect x="844.84" y="153.89999999999998" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="165.09999999999997" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">7</text><rect x="840.36" y="462.3" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="473.5" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">13</text><rect x="844.84" y="308.09999999999997" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="855.2" y="319.29999999999995" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">7</text><rect x="359.31000000000006" y="76.79999999999998" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="374.15000000000003" y="87.99999999999999" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">13</text><rect x="359.31000000000006" y="385.2" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="374.15000000000003" y="396.4" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">11</text><rect x="680.0100000000001" y="385.2" width="29.68" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="694.8500000000001" y="396.4" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#2a9a4a">15</text><rect x="684.4900000000001" y="76.79999999999998" width="20.72" height="22.4" rx="11.2" fill="#fff5f0"></rect><text x="694.8500000000001" y="87.99999999999999" text-anchor="middle" dominant-baseline="middle" font-family="Fredoka One, cursive" font-size="14" fill="#c03020">8</text></svg>
+    <div class="crown" id="crown" style="left: 534.5px; top: 112.5px; font-size: 17.6px;">🌶️</div>
+    <div class="champion-label" id="champLabel" style="left: 534.5px; top: 190.7px; font-size: 9.35px;">🌶️ Winner</div>
+  <div class="node" style="left: 106.9px; top: 24.2px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/334087811.6b32186d.200x200o.d94234c035db.png" alt="Iamplayerofchess"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Iamplayerofchess</div></div><div class="node" style="left: 106.9px; top: 178.4px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/349443015.24f8fe7c.200x200o.eafcfcc41a6a.jpg" alt="cello_jello"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@cello_jello</div></div><div class="node" style="left: 106.9px; top: 332.6px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/466828074.27f0d6e2.200x200o.5163ba4e51ca.jpg" alt="Tengen"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Tengen</div></div><div class="node" style="left: 106.9px; top: 486.8px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/417947819.a78cb7b9.200x200o.134c775976cb.jpg" alt="TALented_Vasee_18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@TALented_Vasee_18</div></div><div class="node" style="left: 962.1px; top: 24.2px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/401656879.c9a8648e.200x200o.da56681c680c.jpg" alt="lokesh-gamer-18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@lokesh-gamer-18</div></div><div class="node" style="left: 962.1px; top: 178.4px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/419128621.5c9bbecd.200x200o.43e5ba498fd2.jpg" alt="Juliana3377"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Juliana3377</div></div><div class="node" style="left: 962.1px; top: 332.6px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;">TR</div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@TrofAndy</div></div><div class="node" style="left: 962.1px; top: 486.8px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/462324478.5a6244fa.200x200o.bf24441835be.jpg" alt="Daniel2040"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Daniel2040</div></div><div class="node" style="left: 320.7px; top: 101.3px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/334087811.6b32186d.200x200o.d94234c035db.png" alt="Iamplayerofchess"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Iamplayerofchess</div></div><div class="node" style="left: 320.7px; top: 409.7px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/417947819.a78cb7b9.200x200o.134c775976cb.jpg" alt="TALented_Vasee_18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@TALented_Vasee_18</div></div><div class="node" style="left: 748.3px; top: 101.3px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/401656879.c9a8648e.200x200o.da56681c680c.jpg" alt="lokesh-gamer-18"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@lokesh-gamer-18</div></div><div class="node" style="left: 748.3px; top: 409.7px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/462324478.5a6244fa.200x200o.bf24441835be.jpg" alt="Daniel2040"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Daniel2040</div></div><div class="node" style="left: 427.6px; top: 255.5px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/334087811.6b32186d.200x200o.d94234c035db.png" alt="Iamplayerofchess"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Iamplayerofchess</div></div><div class="node" style="left: 641.4px; top: 255.5px;"><div class="av" style="width: 44px; height: 44px; font-size: 16.72px;"><img src="https://images.chesscomfiles.com/uploads/v1/user/462324478.5a6244fa.200x200o.bf24441835be.jpg" alt="Daniel2040"></div><div class="aname" style="font-size: 11px; max-width: 196.696px;">@Daniel2040</div></div><div class="node" style="left: 534.5px; top: 141.1px;"><div class="av" style="width: 57.2px; height: 57.2px; font-size: 21.736px;">?</div><div class="aname" style="font-size: 11px; max-width: 196.696px;">Winner</div></div></div>
   <div class="bk-footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
 </div>
 
@@ -259,12 +261,14 @@ function layout(){
   const W=arena.clientWidth, H=arena.clientHeight;
   if(W<10||H<10) return;
 
-  // Avatars
-  const av  = Math.max(46, Math.min(62, W*0.1));
+  // Column width drives every other size, so avatars/labels always fit
+  // their column with room to spare -- no matter how narrow the screen is.
+  const cw  = W/5;
+  const av  = Math.max(16, Math.min(44, cw*0.42));
   const win = av*1.3;
   // Username: smaller font + tighter max width so names don't eat up column space
-  const nfs = Math.max(8, Math.min(11, W*0.017));
-  const nfw = av*1.25;
+  const nfs = Math.max(6, Math.min(11, cw*0.11));
+  const nfw = cw*0.92;
 
   const padV = av*0.55;
   const qfY = Array.from({length:4},(_,i)=>padV+(H-padV*2)*(i/3));
@@ -276,7 +280,6 @@ function layout(){
     (qfY[2]+qfY[3])/2,
   ];
 
-  const cw    = W/5;
   const xLQF  = cw*0.5;
   const xRQF  = cw*4.5;
   const xLSF  = cw*1.5;
@@ -322,7 +325,7 @@ function layout(){
 
   crown.style.left=xC+'px';
   crown.style.top=(winY-win/2)+'px';
-  crown.style.fontSize=Math.max(14,av*0.4)+'px';
+  crown.style.fontSize=Math.max(9,Math.min(20,av*0.4))+'px';
 
   champLabel.style.left=xC+'px';
   champLabel.style.top=(winY+win/2+nfs+10)+'px';
@@ -346,7 +349,7 @@ function drawLines(){
   const WIN_C      = '#d93020';
   const SCORE_WIN  = '#2a9a4a';
   const SCORE_LOSE = '#c03020';
-  const FS     = Math.max(12, av*0.34);
+  const FS     = Math.max(7, Math.min(14, av*0.34));
   const VGAP   = FS*0.95;              // clearance above the wire for score text
   const RADIUS = Math.min(16, av*0.28); // corner rounding for connector elbows
   const LW     = 3;                     // connector thickness
@@ -379,10 +382,25 @@ function drawLines(){
     svgEl.appendChild(path);
   }
 
-  function scoreLabel(x,y,text,color,anchor='middle'){
+  const scoreQueue = [];
+
+  function scoreLabel(x,y,text,color){
+    const str = String(text);
+    const padX = FS*0.42, padY = FS*0.3;
+    const w = str.length*FS*0.64 + padX*2;
+    const h = FS + padY*2;
+    const rect = document.createElementNS(SVGNS,'rect');
+    rect.setAttribute('x', x-w/2);
+    rect.setAttribute('y', y-h/2);
+    rect.setAttribute('width', w);
+    rect.setAttribute('height', h);
+    rect.setAttribute('rx', h/2);
+    rect.setAttribute('fill', '#fff5f0');
+    svgEl.appendChild(rect);
+
     const t=document.createElementNS(SVGNS,'text');
     t.setAttribute('x',x);t.setAttribute('y',y);
-    t.setAttribute('text-anchor',anchor);
+    t.setAttribute('text-anchor','middle');
     t.setAttribute('dominant-baseline','middle');
     t.setAttribute('font-family','Fredoka One, cursive');
     t.setAttribute('font-size',FS);
@@ -410,13 +428,13 @@ function drawLines(){
 
     if(!isRight){
       const jX = xLSF;
-      const midX = (qfX+r + jX-r)/2;
+      const midX = (qfX+r) + ((jX-r)-(qfX+r))*0.4;
       elbow(qfX+r, ya, jX-r, ya, jX-r, sfYi, colA);
       elbow(qfX+r, yb, jX-r, yb, jX-r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(midX, winY2-VGAP,  m.score.w, SCORE_WIN,  'middle');
-        scoreLabel(midX, loseY2-VGAP, m.score.l, SCORE_LOSE, 'middle');
+        scoreQueue.push({x:midX, y:winY2-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseY2-VGAP, text:m.score.l, color:SCORE_LOSE});
       }
     } else {
       const jX = xRSF;
@@ -425,8 +443,8 @@ function drawLines(){
       elbow(qfX-r, yb, jX+r, yb, jX+r, sfYi, colB);
       if(m.score && hasWinner){
         const winY2=wA?ya:yb, loseY2=wA?yb:ya;
-        scoreLabel(midX, winY2-VGAP,  m.score.w, SCORE_WIN,  'middle');
-        scoreLabel(midX, loseY2-VGAP, m.score.l, SCORE_LOSE, 'middle');
+        scoreQueue.push({x:midX, y:winY2-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseY2-VGAP, text:m.score.l, color:SCORE_LOSE});
       }
     }
   }
@@ -449,22 +467,22 @@ function drawLines(){
     if(si===0){
       const jX = xLFin;
       const midX = (sfXA+r + jX-r)/2;
-      elbow(sfXA+r, sfYA, jX-r, sfYA, jX-r, sfYB, colA);
-      elbow(sfXB+r, sfYB, jX-r, sfYB, jX-r, sfYA, colB);
+      elbow(sfXA+r, sfYA, jX-r, sfYA, jX-r, finY, colA);
+      elbow(sfXB+r, sfYB, jX-r, sfYB, jX-r, finY, colB);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(midX, winYs-VGAP,  m.score.w, SCORE_WIN,  'middle');
-        scoreLabel(midX, loseYs-VGAP, m.score.l, SCORE_LOSE, 'middle');
+        scoreQueue.push({x:midX, y:winYs-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseYs-VGAP, text:m.score.l, color:SCORE_LOSE});
       }
     } else {
       const jX = xRFin;
       const midX = (sfXA-r + jX+r)/2;
-      elbow(sfXA-r, sfYA, jX+r, sfYA, jX+r, sfYB, colA);
-      elbow(sfXB-r, sfYB, jX+r, sfYB, jX+r, sfYA, colB);
+      elbow(sfXA-r, sfYA, jX+r, sfYA, jX+r, finY, colA);
+      elbow(sfXB-r, sfYB, jX+r, sfYB, jX+r, finY, colB);
       if(m.score && hasWinner){
         const winYs=wA?sfYA:sfYB, loseYs=wA?sfYB:sfYA;
-        scoreLabel(midX, winYs-VGAP,  m.score.w, SCORE_WIN,  'middle');
-        scoreLabel(midX, loseYs-VGAP, m.score.l, SCORE_LOSE, 'middle');
+        scoreQueue.push({x:midX, y:winYs-VGAP,  text:m.score.w, color:SCORE_WIN});
+        scoreQueue.push({x:midX, y:loseYs-VGAP, text:m.score.l, color:SCORE_LOSE});
       }
     }
   }
@@ -486,10 +504,13 @@ function drawLines(){
 
     if(m.score && hasWinner){
       const midY = (finY+winY)/2;
-      scoreLabel((xLFin+xC)/2, midY-VGAP*0.4, wA?m.score.w:m.score.l, wA?SCORE_WIN:SCORE_LOSE, 'middle');
-      scoreLabel((xRFin+xC)/2, midY-VGAP*0.4, wB?m.score.w:m.score.l, wB?SCORE_WIN:SCORE_LOSE, 'middle');
+      scoreQueue.push({x:(xLFin+xC)/2, y:midY-VGAP*0.4, text:wA?m.score.w:m.score.l, color:wA?SCORE_WIN:SCORE_LOSE});
+      scoreQueue.push({x:(xRFin+xC)/2, y:midY-VGAP*0.4, text:wB?m.score.w:m.score.l, color:wB?SCORE_WIN:SCORE_LOSE});
     }
   }
+
+  // draw all scores last so they always sit on top of every connector line
+  scoreQueue.forEach(s => scoreLabel(s.x, s.y, s.text, s.color));
 }
 
 /* ══ INIT ══ */
@@ -500,5 +521,6 @@ async function init(){
 init();
 new ResizeObserver(()=>layout()).observe(arena);
 </script>
-</body>
-</html>
+
+
+</body></html>
