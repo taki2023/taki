@@ -1,39 +1,39 @@
 {
-  "updated": "2026-07-15T19:08:30.763Z",
+  "updated": "2026-07-15T20:33:18.661Z",
   "totalMembers": 1526,
-  "activeToday": 348,
+  "activeToday": 352,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 495,
+      "total_pts": 530,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 495,
+      "rapid_pts": 530,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 35,
+      "rapid_g": 38,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
       "username": "borderwatch",
-      "total_pts": 475,
+      "total_pts": 490,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 475,
+      "rapid_pts": 490,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 37,
+      "rapid_g": 38,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "abd_allah_libyan",
-      "total_pts": 449,
+      "total_pts": 464,
       "bullet_pts": 0,
       "blitz_pts": 9,
-      "rapid_pts": 440,
+      "rapid_pts": 455,
       "bullet_g": 0,
       "blitz_g": 1,
-      "rapid_g": 30,
+      "rapid_g": 31,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.00d08fce.200x200o.b4daa9d7dbc1.jpg"
     }
   ]
