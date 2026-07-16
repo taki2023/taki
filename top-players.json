@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-16T00:56:21.979Z",
+  "updated": "2026-07-16T04:08:05.522Z",
   "totalMembers": 1527,
-  "activeToday": 36,
+  "activeToday": 104,
   "players": [
     {
-      "username": "hreedhaanf-22eagle",
-      "total_pts": 50,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 50,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/471397400.8e2d879a.200x200o.47e858e33c86.jpg"
-    },
-    {
-      "username": "neil_goat",
-      "total_pts": 45,
-      "bullet_pts": 0,
-      "blitz_pts": 45,
+      "username": "pikachu_playz3",
+      "total_pts": 183,
+      "bullet_pts": 6,
+      "blitz_pts": 177,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 5,
+      "bullet_g": 2,
+      "blitz_g": 21,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/169154443.9a87b3a1.200x200o.98b8f593c7b7.gif"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/445935762.5d991120.200x200o.e10055c17dfe.png"
     },
     {
-      "username": "m_here_to_learn",
-      "total_pts": 45,
+      "username": "nikkotello",
+      "total_pts": 105,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 45,
+      "rapid_pts": 105,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/432590759.2327fd6d.200x200o.ad9fbb7ab9d5.png"
+      "rapid_g": 7,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
+    {
+      "username": "hreedhaanf-22eagle",
+      "total_pts": 85,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 85,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 7,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/471397400.8e2d879a.200x200o.47e858e33c86.jpg"
     }
   ]
 }
