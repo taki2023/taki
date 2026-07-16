@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-16T19:41:31.613Z",
+  "updated": "2026-07-16T20:56:13.268Z",
   "totalMembers": 1531,
-  "activeToday": 356,
+  "activeToday": 369,
   "players": [
     {
       "username": "financial_dragon",
@@ -27,12 +27,12 @@
     },
     {
       "username": "usogui885",
-      "total_pts": 244,
+      "total_pts": 271,
       "bullet_pts": 69,
-      "blitz_pts": 0,
+      "blitz_pts": 27,
       "rapid_pts": 175,
       "bullet_g": 25,
-      "blitz_g": 0,
+      "blitz_g": 3,
       "rapid_g": 13,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
