@@ -1,17 +1,17 @@
 {
-  "updated": "2026-07-17T20:27:56.558Z",
+  "updated": "2026-07-17T21:22:51.361Z",
   "totalMembers": 1535,
-  "activeToday": 378,
+  "activeToday": 385,
   "players": [
     {
       "username": "financial_dragon",
-      "total_pts": 514,
-      "bullet_pts": 199,
+      "total_pts": 562,
+      "bullet_pts": 202,
       "blitz_pts": 225,
-      "rapid_pts": 90,
-      "bullet_g": 71,
+      "rapid_pts": 135,
+      "bullet_g": 72,
       "blitz_g": 25,
-      "rapid_g": 6,
+      "rapid_g": 9,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
@@ -27,12 +27,12 @@
     },
     {
       "username": "damjan1989",
-      "total_pts": 378,
+      "total_pts": 390,
       "bullet_pts": 0,
-      "blitz_pts": 303,
+      "blitz_pts": 315,
       "rapid_pts": 75,
       "bullet_g": 0,
-      "blitz_g": 35,
+      "blitz_g": 37,
       "rapid_g": 5,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     }
