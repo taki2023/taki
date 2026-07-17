@@ -1,27 +1,27 @@
 {
-  "updated": "2026-07-17T19:05:07.642Z",
+  "updated": "2026-07-17T20:27:56.558Z",
   "totalMembers": 1535,
-  "activeToday": 356,
+  "activeToday": 378,
   "players": [
     {
       "username": "financial_dragon",
-      "total_pts": 475,
-      "bullet_pts": 190,
+      "total_pts": 514,
+      "bullet_pts": 199,
       "blitz_pts": 225,
-      "rapid_pts": 60,
-      "bullet_g": 68,
+      "rapid_pts": 90,
+      "bullet_g": 71,
       "blitz_g": 25,
-      "rapid_g": 4,
+      "rapid_g": 6,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     },
     {
       "username": "usogui885",
-      "total_pts": 410,
+      "total_pts": 419,
       "bullet_pts": 6,
-      "blitz_pts": 54,
+      "blitz_pts": 63,
       "rapid_pts": 350,
       "bullet_g": 2,
-      "blitz_g": 6,
+      "blitz_g": 7,
       "rapid_g": 24,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
