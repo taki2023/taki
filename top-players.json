@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-18T03:54:25.278Z",
-  "totalMembers": 1536,
-  "activeToday": 96,
+  "updated": "2026-07-18T06:03:56.518Z",
+  "totalMembers": 1537,
+  "activeToday": 154,
   "players": [
     {
-      "username": "8f30021",
-      "total_pts": 112,
-      "bullet_pts": 22,
+      "username": "ds20191",
+      "total_pts": 123,
+      "bullet_pts": 3,
       "blitz_pts": 0,
-      "rapid_pts": 90,
-      "bullet_g": 8,
+      "rapid_pts": 120,
+      "bullet_g": 1,
       "blitz_g": 0,
-      "rapid_g": 6,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/514042401.2182b9cb.200x200o.0d45baa43871.png"
+      "rapid_g": 8,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/387504667.8f4a1ebb.200x200o.ef3154356834.jpg"
     },
     {
-      "username": "mejdiwelawejdi55",
-      "total_pts": 110,
-      "bullet_pts": 0,
-      "blitz_pts": 90,
-      "rapid_pts": 20,
-      "bullet_g": 0,
-      "blitz_g": 10,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/573781136.4b1ef470.200x200o.b5bb56037994.jpg"
-    },
-    {
-      "username": "ahmmed_m",
-      "total_pts": 110,
+      "username": "chefkoch42o",
+      "total_pts": 120,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 110,
+      "rapid_pts": 120,
       "bullet_g": 0,
       "blitz_g": 0,
       "rapid_g": 8,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/36751868.5580fefd.200x200o.35164f6769f1.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/221894671.38f0015d.200x200o.dba67861c279.jpg"
+    },
+    {
+      "username": "financial_dragon",
+      "total_pts": 116,
+      "bullet_pts": 53,
+      "blitz_pts": 63,
+      "rapid_pts": 0,
+      "bullet_g": 19,
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     }
   ]
 }
