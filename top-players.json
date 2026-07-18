@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-18T15:55:52.578Z",
+  "updated": "2026-07-18T16:56:44.601Z",
   "totalMembers": 1527,
-  "activeToday": 342,
+  "activeToday": 363,
   "players": [
     {
       "username": "mastergoogle",
@@ -16,11 +16,11 @@
     },
     {
       "username": "damjan1989",
-      "total_pts": 315,
-      "bullet_pts": 0,
+      "total_pts": 344,
+      "bullet_pts": 29,
       "blitz_pts": 165,
       "rapid_pts": 150,
-      "bullet_g": 0,
+      "bullet_g": 11,
       "blitz_g": 19,
       "rapid_g": 12,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
