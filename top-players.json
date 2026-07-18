@@ -1,8 +1,19 @@
 {
-  "updated": "2026-07-18T16:56:44.601Z",
-  "totalMembers": 1527,
-  "activeToday": 363,
+  "updated": "2026-07-18T17:56:23.538Z",
+  "totalMembers": 1526,
+  "activeToday": 372,
   "players": [
+    {
+      "username": "damjan1989",
+      "total_pts": 377,
+      "bullet_pts": 62,
+      "blitz_pts": 165,
+      "rapid_pts": 150,
+      "bullet_g": 24,
+      "blitz_g": 19,
+      "rapid_g": 12,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+    },
     {
       "username": "mastergoogle",
       "total_pts": 352,
@@ -15,26 +26,15 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "damjan1989",
-      "total_pts": 344,
-      "bullet_pts": 29,
-      "blitz_pts": 165,
-      "rapid_pts": 150,
-      "bullet_g": 11,
-      "blitz_g": 19,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
-    {
-      "username": "bughouse_partner",
-      "total_pts": 245,
-      "bullet_pts": 50,
-      "blitz_pts": 195,
+      "username": "vikingviking1984",
+      "total_pts": 288,
+      "bullet_pts": 0,
+      "blitz_pts": 288,
       "rapid_pts": 0,
-      "bullet_g": 18,
-      "blitz_g": 23,
+      "bullet_g": 0,
+      "blitz_g": 34,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/361141051.c2f9429c.200x200o.5b76c74b2ea4.jpg"
     }
   ]
 }
