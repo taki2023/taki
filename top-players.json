@@ -1,8 +1,19 @@
 {
-  "updated": "2026-07-19T10:54:17.891Z",
-  "totalMembers": 1527,
-  "activeToday": 250,
+  "updated": "2026-07-19T11:57:06.403Z",
+  "totalMembers": 1528,
+  "activeToday": 277,
   "players": [
+    {
+      "username": "abd_allah_libyan",
+      "total_pts": 234,
+      "bullet_pts": 19,
+      "blitz_pts": 0,
+      "rapid_pts": 215,
+      "bullet_g": 7,
+      "blitz_g": 0,
+      "rapid_g": 15,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.98046bf1.200x200o.5848273b44e1.jpg"
+    },
     {
       "username": "samidaalmnswb",
       "total_pts": 216,
@@ -15,26 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     },
     {
-      "username": "abd_allah_libyan",
-      "total_pts": 174,
-      "bullet_pts": 19,
-      "blitz_pts": 0,
-      "rapid_pts": 155,
-      "bullet_g": 7,
-      "blitz_g": 0,
-      "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.98046bf1.200x200o.5848273b44e1.jpg"
-    },
-    {
-      "username": "ajmeakins",
-      "total_pts": 156,
-      "bullet_pts": 117,
-      "blitz_pts": 39,
-      "rapid_pts": 0,
-      "bullet_g": 41,
-      "blitz_g": 5,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/251668971.462e77db.200x200o.5eab2fbe2edc.jpg"
+      "username": "damjan1989",
+      "total_pts": 161,
+      "bullet_pts": 0,
+      "blitz_pts": 96,
+      "rapid_pts": 65,
+      "bullet_g": 0,
+      "blitz_g": 12,
+      "rapid_g": 5,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     }
   ]
 }
