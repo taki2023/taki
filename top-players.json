@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19T20:26:59.531Z",
+  "updated": "2026-07-19T21:24:20.091Z",
   "totalMembers": 1527,
   "activeToday": 385,
   "players": [
@@ -16,12 +16,12 @@
     },
     {
       "username": "chessblackbelt",
-      "total_pts": 261,
+      "total_pts": 306,
       "bullet_pts": 0,
-      "blitz_pts": 201,
+      "blitz_pts": 246,
       "rapid_pts": 60,
       "bullet_g": 0,
-      "blitz_g": 23,
+      "blitz_g": 28,
       "rapid_g": 4,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/74624564.561451c4.200x200o.0dc38922ba31.png"
     },
