@@ -1,16 +1,16 @@
 {
-  "updated": "2026-07-20T08:25:05.691Z",
-  "totalMembers": 1527,
-  "activeToday": 159,
+  "updated": "2026-07-20T11:22:59.011Z",
+  "totalMembers": 1528,
+  "activeToday": 229,
   "players": [
     {
       "username": "isabelcibrian",
-      "total_pts": 258,
+      "total_pts": 294,
       "bullet_pts": 15,
-      "blitz_pts": 243,
+      "blitz_pts": 279,
       "rapid_pts": 0,
       "bullet_g": 5,
-      "blitz_g": 29,
+      "blitz_g": 33,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/319105535.5f2e9fa0.200x200o.34299fbdf200.jpg"
     },
@@ -27,13 +27,13 @@
     },
     {
       "username": "borderwatch",
-      "total_pts": 170,
+      "total_pts": 205,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 170,
+      "rapid_pts": 205,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 12,
+      "rapid_g": 15,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
