@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-21T03:56:10.931Z",
+  "updated": "2026-07-21T06:27:22.077Z",
   "totalMembers": 1528,
-  "activeToday": 87,
+  "activeToday": 138,
   "players": [
     {
-      "username": "mejdiwelawejdi55",
-      "total_pts": 131,
+      "username": "stas999999999",
+      "total_pts": 177,
       "bullet_pts": 0,
-      "blitz_pts": 21,
-      "rapid_pts": 110,
+      "blitz_pts": 177,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 3,
-      "rapid_g": 8,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "blitz_g": 21,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/415005431.3cae920c.200x200o.9547714bfe1f.jpg"
     },
     {
       "username": "t4bl3r0",
-      "total_pts": 99,
+      "total_pts": 171,
       "bullet_pts": 0,
-      "blitz_pts": 99,
+      "blitz_pts": 171,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 11,
+      "blitz_g": 19,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/112886280.792fb9f4.200x200o.51de82200bf7.jpeg"
     },
     {
-      "username": "isabelcibrian",
-      "total_pts": 91,
-      "bullet_pts": 7,
-      "blitz_pts": 9,
-      "rapid_pts": 75,
-      "bullet_g": 3,
-      "blitz_g": 1,
-      "rapid_g": 5,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "mejdiwelawejdi55",
+      "total_pts": 158,
+      "bullet_pts": 0,
+      "blitz_pts": 48,
+      "rapid_pts": 110,
+      "bullet_g": 0,
+      "blitz_g": 6,
+      "rapid_g": 8,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/573781136.4b1ef470.200x200o.b5bb56037994.jpg"
     }
   ]
 }
