@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-21T09:10:26.449Z",
+  "updated": "2026-07-21T11:23:24.869Z",
   "totalMembers": 1528,
-  "activeToday": 184,
+  "activeToday": 241,
   "players": [
     {
       "username": "stas999999999",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "t4bl3r0",
-      "total_pts": 171,
-      "bullet_pts": 0,
-      "blitz_pts": 171,
+      "username": "xuyen1786",
+      "total_pts": 190,
+      "bullet_pts": 145,
+      "blitz_pts": 45,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 19,
+      "bullet_g": 53,
+      "blitz_g": 5,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/112886280.792fb9f4.200x200o.51de82200bf7.jpeg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     }
   ]
 }
