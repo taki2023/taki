@@ -1,27 +1,27 @@
 {
-  "updated": "2026-07-21T22:27:33.475Z",
+  "updated": "2026-07-21T23:30:04.278Z",
   "totalMembers": 1530,
-  "activeToday": 392,
+  "activeToday": 397,
   "players": [
     {
       "username": "joaog2004",
-      "total_pts": 444,
+      "total_pts": 462,
       "bullet_pts": 0,
-      "blitz_pts": 444,
+      "blitz_pts": 462,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 52,
+      "blitz_g": 54,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/65546316.ce417772.200x200o.9b2f1b66ab93.png"
     },
     {
       "username": "nikkotello",
-      "total_pts": 385,
+      "total_pts": 451,
       "bullet_pts": 0,
-      "blitz_pts": 90,
+      "blitz_pts": 156,
       "rapid_pts": 295,
       "bullet_g": 0,
-      "blitz_g": 10,
+      "blitz_g": 18,
       "rapid_g": 21,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
