@@ -1,18 +1,29 @@
 {
-  "updated": "2026-07-22T07:10:09.789Z",
+  "updated": "2026-07-22T09:58:55.673Z",
   "totalMembers": 1530,
-  "activeToday": 153,
+  "activeToday": 204,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 321,
+      "total_pts": 461,
       "bullet_pts": 9,
-      "blitz_pts": 312,
-      "rapid_pts": 0,
+      "blitz_pts": 447,
+      "rapid_pts": 5,
       "bullet_g": 3,
-      "blitz_g": 36,
-      "rapid_g": 0,
+      "blitz_g": 51,
+      "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
+    {
+      "username": "smorkusporkus",
+      "total_pts": 159,
+      "bullet_pts": 159,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 61,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.c900b30a.200x200o.906bd687f7fd.jpg"
     },
     {
       "username": "blazinghotbullet",
@@ -24,17 +35,6 @@
       "blitz_g": 10,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/519120873.3e7ad3cf.200x200o.df3a68b30737.jpg"
-    },
-    {
-      "username": "samidaalmnswb",
-      "total_pts": 113,
-      "bullet_pts": 77,
-      "blitz_pts": 36,
-      "rapid_pts": 0,
-      "bullet_g": 27,
-      "blitz_g": 4,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     }
   ]
 }
