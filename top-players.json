@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-22T11:51:19.547Z",
-  "totalMembers": 1530,
-  "activeToday": 249,
+  "updated": "2026-07-22T13:48:12.713Z",
+  "totalMembers": 1532,
+  "activeToday": 286,
   "players": [
     {
       "username": "nikkotello",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502924193.7c98dff2.200x200o.30a9a781b43d.png"
     },
     {
-      "username": "hashinkaa",
-      "total_pts": 192,
-      "bullet_pts": 129,
-      "blitz_pts": 63,
+      "username": "bughouse_partner",
+      "total_pts": 199,
+      "bullet_pts": 118,
+      "blitz_pts": 81,
       "rapid_pts": 0,
-      "bullet_g": 43,
-      "blitz_g": 7,
+      "bullet_g": 42,
+      "blitz_g": 9,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.487fe5b2.200x200o.5c7a3e8df8c1.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
     }
   ]
 }
