@@ -1,39 +1,39 @@
 {
-  "updated": "2026-07-24T06:09:46.902Z",
-  "totalMembers": 1531,
-  "activeToday": 124,
+  "updated": "2026-07-24T09:04:05.534Z",
+  "totalMembers": 1530,
+  "activeToday": 182,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 285,
+      "total_pts": 375,
       "bullet_pts": 0,
-      "blitz_pts": 0,
+      "blitz_pts": 90,
       "rapid_pts": 285,
       "bullet_g": 0,
-      "blitz_g": 0,
+      "blitz_g": 10,
       "rapid_g": 19,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
       "username": "badr113101",
-      "total_pts": 211,
-      "bullet_pts": 211,
+      "total_pts": 229,
+      "bullet_pts": 229,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 71,
+      "bullet_g": 77,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/333299295.27913ba9.200x200o.4a1374f11017.jpg"
     },
     {
       "username": "roo8515",
-      "total_pts": 174,
+      "total_pts": 214,
       "bullet_pts": 0,
       "blitz_pts": 9,
-      "rapid_pts": 165,
+      "rapid_pts": 205,
       "bullet_g": 0,
       "blitz_g": 1,
-      "rapid_g": 13,
+      "rapid_g": 17,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/291471971.35b6b145.200x200o.039c78d86401.jpg"
     }
   ]
