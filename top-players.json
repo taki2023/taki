@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-26T09:57:37.503Z",
-  "totalMembers": 1532,
-  "activeToday": 237,
+  "updated": "2026-07-26T11:20:45.137Z",
+  "totalMembers": 1531,
+  "activeToday": 268,
   "players": [
     {
       "username": "queiser",
@@ -27,12 +27,12 @@
     },
     {
       "username": "ozzyozzo",
-      "total_pts": 219,
+      "total_pts": 249,
       "bullet_pts": 0,
-      "blitz_pts": 219,
+      "blitz_pts": 249,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 25,
+      "blitz_g": 29,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/86179670.8b49834e.200x200o.ea4beac60fa0.jpg"
     }
