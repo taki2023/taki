@@ -1,16 +1,16 @@
 {
-  "updated": "2026-07-26T07:35:12.084Z",
+  "updated": "2026-07-26T09:57:37.503Z",
   "totalMembers": 1532,
-  "activeToday": 190,
+  "activeToday": 237,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 441,
+      "total_pts": 450,
       "bullet_pts": 0,
-      "blitz_pts": 441,
+      "blitz_pts": 450,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 49,
+      "blitz_g": 50,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/150310941.266fcc3f.200x200o.dff5a0e660e7.jpg"
     },
     {
-      "username": "m1dnight_crimsn",
-      "total_pts": 165,
+      "username": "ozzyozzo",
+      "total_pts": 219,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 165,
+      "blitz_pts": 219,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/319222053.43a58e00.200x200o.12a06cfcd129.jpg"
+      "blitz_g": 25,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/86179670.8b49834e.200x200o.ea4beac60fa0.jpg"
     }
   ]
 }
