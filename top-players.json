@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-27T12:21:41.550Z",
-  "totalMembers": 1529,
-  "activeToday": 258,
+  "updated": "2026-07-27T15:24:33.778Z",
+  "totalMembers": 1528,
+  "activeToday": 312,
   "players": [
     {
       "username": "uniqueboyakigmailcom",
-      "total_pts": 360,
-      "bullet_pts": 294,
+      "total_pts": 478,
+      "bullet_pts": 397,
       "blitz_pts": 36,
-      "rapid_pts": 30,
-      "bullet_g": 102,
+      "rapid_pts": 45,
+      "bullet_g": 137,
       "blitz_g": 4,
-      "rapid_g": 2,
+      "rapid_g": 3,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "aiikoh",
-      "total_pts": 256,
-      "bullet_pts": 43,
+      "total_pts": 269,
+      "bullet_pts": 56,
       "blitz_pts": 213,
       "rapid_pts": 0,
-      "bullet_g": 15,
+      "bullet_g": 20,
       "blitz_g": 25,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/75348440.4f1c4a86.200x200o.7a1513a4720b.png"
     },
     {
-      "username": "the_lonely_manof_thenight",
-      "total_pts": 215,
+      "username": "tero2021",
+      "total_pts": 252,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 215,
+      "blitz_pts": 252,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504500653.7dbc865a.200x200o.e09f78ca34bf.jpg"
+      "blitz_g": 32,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/150310941.266fcc3f.200x200o.dff5a0e660e7.jpg"
     }
   ]
 }
