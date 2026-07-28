@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-28T22:07:32.390Z",
+  "updated": "2026-07-28T23:30:46.720Z",
   "totalMembers": 1529,
-  "activeToday": 401,
+  "activeToday": 408,
   "players": [
     {
       "username": "queiser",
@@ -27,12 +27,12 @@
     },
     {
       "username": "bughouse_partner",
-      "total_pts": 350,
+      "total_pts": 368,
       "bullet_pts": 251,
-      "blitz_pts": 99,
+      "blitz_pts": 117,
       "rapid_pts": 0,
       "bullet_g": 95,
-      "blitz_g": 11,
+      "blitz_g": 13,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
     }
