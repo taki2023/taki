@@ -1,16 +1,16 @@
 {
-  "updated": "2026-07-28T16:19:44.340Z",
+  "updated": "2026-07-28T17:53:46.480Z",
   "totalMembers": 1529,
-  "activeToday": 328,
+  "activeToday": 355,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 465,
+      "total_pts": 513,
       "bullet_pts": 0,
-      "blitz_pts": 465,
+      "blitz_pts": 513,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 53,
+      "blitz_g": 59,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
@@ -27,13 +27,13 @@
     },
     {
       "username": "steellasking77",
-      "total_pts": 252,
-      "bullet_pts": 78,
+      "total_pts": 340,
+      "bullet_pts": 121,
       "blitz_pts": 174,
-      "rapid_pts": 0,
-      "bullet_g": 28,
+      "rapid_pts": 45,
+      "bullet_g": 43,
       "blitz_g": 20,
-      "rapid_g": 0,
+      "rapid_g": 3,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     }
   ]
