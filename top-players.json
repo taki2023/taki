@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-28T00:08:25.332Z",
+  "updated": "2026-07-28T03:47:01.119Z",
   "totalMembers": 1527,
-  "activeToday": 11,
+  "activeToday": 92,
   "players": [
     {
+      "username": "queiser",
+      "total_pts": 192,
+      "bullet_pts": 0,
+      "blitz_pts": 192,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 22,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
+    {
       "username": "reefrhino26",
-      "total_pts": 24,
+      "total_pts": 129,
       "bullet_pts": 0,
       "blitz_pts": 9,
-      "rapid_pts": 15,
+      "rapid_pts": 120,
       "bullet_g": 0,
       "blitz_g": 1,
-      "rapid_g": 1,
+      "rapid_g": 8,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/508764961.a99386be.200x200o.06fa20690ab8.jpg"
     },
     {
-      "username": "chessbender1025",
-      "total_pts": 16,
-      "bullet_pts": 16,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 6,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/91107426.50cd5ba8.200x200o.e32def9e4303.jpg"
-    },
-    {
-      "username": "8f30021",
-      "total_pts": 15,
+      "username": "isabelcibrian",
+      "total_pts": 126,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 15,
+      "blitz_pts": 126,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/514042401.2182b9cb.200x200o.0d45baa43871.png"
+      "blitz_g": 14,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/319105535.64b40884.200x200o.afe21a5b45b6.jpg"
     }
   ]
 }
