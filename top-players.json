@@ -1,39 +1,39 @@
 {
-  "updated": "2026-07-29T16:50:36.493Z",
+  "updated": "2026-07-29T18:08:22.018Z",
   "totalMembers": 1531,
-  "activeToday": 353,
+  "activeToday": 367,
   "players": [
     {
       "username": "mishrafish",
-      "total_pts": 362,
-      "bullet_pts": 362,
+      "total_pts": 427,
+      "bullet_pts": 427,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 136,
+      "bullet_g": 159,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/16716510.7131de21.200x200o.2199085e79b7.png"
     },
     {
       "username": "steellasking77",
-      "total_pts": 342,
-      "bullet_pts": 126,
-      "blitz_pts": 216,
-      "rapid_pts": 0,
-      "bullet_g": 44,
-      "blitz_g": 24,
-      "rapid_g": 0,
+      "total_pts": 384,
+      "bullet_pts": 144,
+      "blitz_pts": 225,
+      "rapid_pts": 15,
+      "bullet_g": 50,
+      "blitz_g": 25,
+      "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     },
     {
       "username": "mastergoogle",
-      "total_pts": 265,
+      "total_pts": 270,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 265,
+      "rapid_pts": 270,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 19,
+      "rapid_g": 20,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
