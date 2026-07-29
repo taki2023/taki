@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-29T22:00:32.734Z",
+  "updated": "2026-07-29T23:05:34.495Z",
   "totalMembers": 1531,
-  "activeToday": 407,
+  "activeToday": 416,
   "players": [
     {
       "username": "mishrafish",
@@ -27,12 +27,12 @@
     },
     {
       "username": "puricfm",
-      "total_pts": 316,
+      "total_pts": 361,
       "bullet_pts": 13,
-      "blitz_pts": 303,
+      "blitz_pts": 348,
       "rapid_pts": 0,
       "bullet_g": 5,
-      "blitz_g": 37,
+      "blitz_g": 44,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/69722492.93838c36.200x200o.ac6abbee24a0.jpg"
     }
