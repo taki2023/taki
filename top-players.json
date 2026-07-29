@@ -1,8 +1,19 @@
 {
-  "updated": "2026-07-29T15:13:07.146Z",
+  "updated": "2026-07-29T16:50:36.493Z",
   "totalMembers": 1531,
-  "activeToday": 319,
+  "activeToday": 353,
   "players": [
+    {
+      "username": "mishrafish",
+      "total_pts": 362,
+      "bullet_pts": 362,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 136,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/16716510.7131de21.200x200o.2199085e79b7.png"
+    },
     {
       "username": "steellasking77",
       "total_pts": 342,
@@ -13,17 +24,6 @@
       "blitz_g": 24,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
-    },
-    {
-      "username": "mishrafish",
-      "total_pts": 314,
-      "bullet_pts": 314,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 116,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/16716510.7131de21.200x200o.2199085e79b7.png"
     },
     {
       "username": "mastergoogle",
