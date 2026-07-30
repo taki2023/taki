@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-30T13:09:59.333Z",
-  "totalMembers": 1532,
-  "activeToday": 280,
+  "updated": "2026-07-30T15:32:00.442Z",
+  "totalMembers": 1531,
+  "activeToday": 327,
   "players": [
     {
       "username": "misterjj1681",
@@ -16,24 +16,24 @@
     },
     {
       "username": "sara24jefic",
-      "total_pts": 311,
-      "bullet_pts": 311,
+      "total_pts": 364,
+      "bullet_pts": 364,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 107,
+      "bullet_g": 126,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/398120571.64e5d3c6.200x200o.cdd4368d1a49.jpg"
     },
     {
-      "username": "arildt6",
-      "total_pts": 220,
+      "username": "mastergoogle",
+      "total_pts": 300,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 220,
+      "rapid_pts": 300,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 16,
+      "rapid_g": 20,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
