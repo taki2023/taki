@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-31T21:39:27.256Z",
+  "updated": "2026-07-31T22:59:07.541Z",
   "totalMembers": 1531,
-  "activeToday": 397,
+  "activeToday": 411,
   "players": [
     {
       "username": "damjan1989",
@@ -16,12 +16,12 @@
     },
     {
       "username": "tero2021",
-      "total_pts": 285,
+      "total_pts": 303,
       "bullet_pts": 0,
-      "blitz_pts": 285,
+      "blitz_pts": 303,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 37,
+      "blitz_g": 39,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/150310941.266fcc3f.200x200o.dff5a0e660e7.jpg"
     },
