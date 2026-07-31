@@ -312,8 +312,8 @@ body{display:block;}
   position:relative;overflow:visible;isolation:isolate;
 }
 .nt-header{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px;}
-.nt-logo-emoji{font-size:22px;line-height:1;}
-.nt-logo-img{width:26px;height:26px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.nt-logo-emoji{font-size:32px;line-height:1;}
+.nt-logo-img{width:40px;height:40px;border-radius:11px;object-fit:cover;flex-shrink:0;box-shadow:0 3px 8px -2px rgba(224,48,31,.35);}
 .nt-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;color:var(--red-mid);}
 .nt-details{font-size:var(--fs-base);font-weight:700;color:var(--ink-soft);margin-bottom:13px;text-transform:uppercase;letter-spacing:.3px;}
 .nt-timer{display:flex;justify-content:center;gap:8px;margin-bottom:12px;}
@@ -1258,16 +1258,16 @@ document.getElementById('copyInviteBtn').addEventListener('click', function() {
   window.spawnConfetti = spawn;
 })();
 
-/* ══ NEXT TOURNAMENT COUNTDOWN  ══ */
+/* ══ NEXT TOURNAMENT COUNTDOWN — edit this block to change/disable ══ */
 const NEXT_TOURNAMENT = {
-  enabled: true,                         
-  logo: { type: 'image', value: 'https://www.chess.com/tournament/live/1p-swiss--6648737' },   // type: 'emoji' | 'image' | 'svg'  (image/svg = a URL in value)
+  enabled: true,
+  logo: 'https://www.chess.com/tournament/live/arena/chesscom-membership-giveaway-4651911',                             // put an emoji OR a direct image/svg URL here — auto-detected below
   title: 'Spicy Swiss Tournament',
   details: '3+0 • Unrated • 7 Rounds',
   startUTC: '2026-08-01T15:00:00Z',       // always UTC ("Z")
-  liveMinutes: 120,                       
+  liveMinutes: 120,
   joinUrl: 'https://www.chess.com/play/tournament/6653311',
-  organizer: 'Taki'                   
+  organizer: 'Taki'
 };
 
 (function initNextTournament(){
@@ -1277,12 +1277,19 @@ const NEXT_TOURNAMENT = {
   if (!cfg.enabled) { box.remove(); return; }
 
   const logoEl = document.getElementById('ntLogo');
-  if (cfg.logo.type === 'emoji') {
+  const logoValue = (cfg.logo || '').trim();
+  const isLogoUrl = /^(https?:)?\/\//i.test(logoValue);
+  if (!isLogoUrl) {
     logoEl.className = 'nt-logo-emoji';
-    logoEl.textContent = cfg.logo.value;
+    logoEl.textContent = logoValue;
   } else {
     const img = document.createElement('img');
-    img.id = 'ntLogo'; img.className = 'nt-logo-img'; img.src = cfg.logo.value;
+    img.id = 'ntLogo'; img.className = 'nt-logo-img'; img.src = logoValue;
+    img.onerror = function(){
+      const fallback = document.createElement('span');
+      fallback.id = 'ntLogo'; fallback.className = 'nt-logo-emoji'; fallback.textContent = '🌶';
+      img.replaceWith(fallback);
+    };
     logoEl.replaceWith(img);
   }
 
