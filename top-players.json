@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-30T23:05:22.803Z",
-  "totalMembers": 1532,
-  "activeToday": 421,
+  "updated": "2026-07-31T01:05:02.580Z",
+  "totalMembers": 1533,
+  "activeToday": 35,
   "players": [
     {
-      "username": "arildt6",
-      "total_pts": 545,
+      "username": "t4bl3r0",
+      "total_pts": 84,
+      "bullet_pts": 0,
+      "blitz_pts": 84,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 10,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/112886280.792fb9f4.200x200o.51de82200bf7.jpeg"
+    },
+    {
+      "username": "nikkotello",
+      "total_pts": 60,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 545,
+      "rapid_pts": 60,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 41,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "rapid_g": 4,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "misterjj1681",
-      "total_pts": 468,
-      "bullet_pts": 3,
-      "blitz_pts": 465,
+      "username": "samidaalmnswb",
+      "total_pts": 60,
+      "bullet_pts": 21,
+      "blitz_pts": 39,
       "rapid_pts": 0,
-      "bullet_g": 1,
-      "blitz_g": 55,
+      "bullet_g": 7,
+      "blitz_g": 5,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/449476112.f97964d8.200x200o.8a5e59f7c6c2.jpg"
-    },
-    {
-      "username": "sara24jefic",
-      "total_pts": 382,
-      "bullet_pts": 382,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 132,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/398120571.64e5d3c6.200x200o.cdd4368d1a49.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     }
   ]
 }
