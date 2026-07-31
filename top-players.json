@@ -1,40 +1,40 @@
 {
-  "updated": "2026-07-31T04:59:03.356Z",
+  "updated": "2026-07-31T07:53:53.832Z",
   "totalMembers": 1533,
-  "activeToday": 101,
+  "activeToday": 153,
   "players": [
     {
       "username": "t4bl3r0",
-      "total_pts": 174,
+      "total_pts": 219,
       "bullet_pts": 0,
-      "blitz_pts": 174,
+      "blitz_pts": 219,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 20,
+      "blitz_g": 25,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/112886280.792fb9f4.200x200o.51de82200bf7.jpeg"
     },
     {
-      "username": "yael981",
-      "total_pts": 159,
+      "username": "misterjj1681",
+      "total_pts": 195,
       "bullet_pts": 0,
-      "blitz_pts": 159,
+      "blitz_pts": 195,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 19,
+      "blitz_g": 23,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/449476112.f97964d8.200x200o.8a5e59f7c6c2.jpg"
     },
     {
-      "username": "tero2021",
-      "total_pts": 147,
+      "username": "nikkotello",
+      "total_pts": 194,
       "bullet_pts": 0,
-      "blitz_pts": 147,
-      "rapid_pts": 0,
+      "blitz_pts": 9,
+      "rapid_pts": 185,
       "bullet_g": 0,
-      "blitz_g": 19,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/150310941.266fcc3f.200x200o.dff5a0e660e7.jpg"
+      "blitz_g": 1,
+      "rapid_g": 13,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
