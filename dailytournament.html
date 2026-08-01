@@ -348,43 +348,23 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 <div id="matchPopover"></div>
 
 <script>
-/* ════════════════════════════════════════════════════════════════
-   CONFIG — paste your tournament matrix here instead of a sheet URL
-   ════════════════════════════════════════════════════════════════
-   Rules:
-   - Columns are separated by TAB characters (exactly what you get
-     when you copy cells straight out of Google Sheets / Excel and
-     paste them into this template literal).
-   - A row whose first cell starts with "Round" begins a new round.
-     Everything after "Round" (e.g. "Round 1") becomes its display name.
-   - A row whose first cell starts with "group" begins a new group
-     inside the current round. Everything after "group" becomes its
-     display name.
-   - Every other row is a club: first cell = the club's chess.com
-     slug (the bit after /club/ in its URL), then one cell per club
-     in the group, in the SAME order the clubs are listed. Put "x" on
-     the diagonal (a club vs itself), exactly like the sheet did.
-   - For a real pairing, put the chess.com match URL in that cell
-     instead of leaving it blank (either the row->column cell or the
-     column->row cell — whichever is easiest to fill in). Leave a
-     cell blank if that match hasn't been created yet.
-   - Blank lines are ignored, so feel free to keep the visual spacing.
-   ════════════════════════════════════════════════════════════════ */
+
+
 
 const TOURNAMENT_DATA = `
-Round 1
-group 1
-hot-chilli-checkmate	x
-hybrid-chess-federation		x
-the-royal-file			x
-chess-universe				x
+Round 1					
+group 1					
+hot-chilli-checkmate	x				
+the-royal-file		x			
+hybrid-chess-federation			x		
+chess-universe				x	
 the-hindu					x
-
-group 2
-masters-of-64-squares	x
-the-eternal		x
-eminence-in-shadow			x
-the-club-of-195-countries				x
+					
+group 2					
+the-eternal	x				
+chess-on-earth-2		x			
+eminence-in-shadow			x		
+the-club-of-195-countries				x	
 chess-like-a-tiger					x
 
 `;
