@@ -233,6 +233,21 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 
 .table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
 
+/* ══ SKELETON PLACEHOLDERS (sized to match final content — no layout jump) ══ */
+.skel{
+  display:inline-block;border-radius:6px;
+  background:linear-gradient(90deg,#F1E4DB 25%,#FFEFE6 37%,#F1E4DB 63%);
+  background-size:400% 100%;
+  animation:skel-shimmer 1.4s ease infinite;
+}
+@keyframes skel-shimmer{0%{background-position:100% 50%;}100%{background-position:0 50%;}}
+.skel-avatar{width:32px;height:32px;border-radius:9px;flex-shrink:0;}
+.skel-rank{width:22px;height:22px;border-radius:50%;flex-shrink:0;}
+.skel-name{width:84px;height:11px;border-radius:5px;}
+.skel-cell{width:19px;height:19px;border-radius:50%;}
+.skel-standing{width:22px;height:15px;border-radius:5px;}
+.skel-tiebreak{width:18px;height:12px;border-radius:5px;}
+
 /* ══ LEGEND ══ */
 .legend-card{
   background:var(--paper);border-radius:18px;border:none;padding:13px 14px;
@@ -667,13 +682,17 @@ function renderRoundNav() {
   });
 })();
 
-/* ---- round-level match/game counters, shown as small pills next to the round picker ---- */
-function resetRoundStats() {
+/* ---- round-level match/game counters, shown as small pills next to the round picker ----
+   The total number of matches is already known synchronously from the parsed
+   TOURNAMENT_DATA (no fetch needed), so that half of the pill can be correct
+   immediately. Only "done" counts and total games (which depend on each
+   match's board count) need the live chess.com data. */
+function resetRoundStats(matchesTotal) {
   const statsWrap = document.getElementById('roundStats');
   const statMatches = document.getElementById('statMatches');
   const statGames = document.getElementById('statGames');
   statsWrap.style.display = 'flex';
-  statMatches.innerHTML = '<span class="stat-num">…</span> / <span class="stat-num">…</span> matches';
+  statMatches.innerHTML = `<span class="stat-num">0</span> / <span class="stat-num">${matchesTotal}</span> matches`;
   statGames.innerHTML = '<span class="stat-num">…</span> / <span class="stat-num">…</span> games';
 }
 function renderRoundStats(stats) {
@@ -701,8 +720,12 @@ async function renderActiveRound() {
   // that's the only place rank #1/#2/#3 get gold/silver/bronze styling.
   const isLastRound = round.groups.length === 1;
 
+  // Full-sized skeleton: correct number of groups, correct number of rows
+  // and columns in every table, right from the very first paint — nothing
+  // about the layout's dimensions changes once real data streams in.
   content.innerHTML = round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('');
-  resetRoundStats();
+  const matchesTotal = round.groups.reduce((sum, g) => sum + g.matches.length, 0);
+  resetRoundStats(matchesTotal);
 
   // Now fetch data and fill each group in (in parallel across groups),
   // then roll all of their per-group tallies up into the round-level pills.
@@ -716,14 +739,48 @@ async function renderActiveRound() {
   renderRoundStats(roundStats);
 }
 
+/* header only depends on how many clubs are in the group (a plain count,
+   known synchronously), so it's real content from the very first paint —
+   no skeleton needed for it. */
+function headerRowHTML(clubCount) {
+  let html = '<tr><th>Club</th>';
+  for (let col = 0; col < clubCount; col++) html += `<th>${col + 1}</th>`;
+  html += `<th><div class="col-ico">${TROPHY_SVG}</div></th>`;
+  html += `<th><div class="col-ico">${SCALE_SVG}</div></th></tr>`;
+  return html;
+}
+
+/* one skeleton row per club, in the matrix's original order, with the exact
+   same column count / cell sizes as the final row so nothing reflows later */
+function clubRowSkeletonHTML(clubCount) {
+  let html = `<tr>
+    <td>
+      <div class="club-cell">
+        <div class="skel skel-rank"></div>
+        <div class="skel skel-avatar"></div>
+        <div class="club-name-wrap"><div class="skel skel-name"></div></div>
+      </div>
+    </td>`;
+  for (let col = 0; col < clubCount; col++) {
+    html += `<td><span class="skel skel-cell"></span></td>`;
+  }
+  html += `
+    <td><span class="skel skel-standing"></span></td>
+    <td><span class="skel skel-tiebreak"></span></td>
+  </tr>`;
+  return html;
+}
+
 function groupSkeletonHTML(group, gi, isLastRound) {
+  const clubCount = group.clubs.length;
+  const rows = group.clubs.map(() => clubRowSkeletonHTML(clubCount)).join('');
   return `
     <div class="group-card" id="group-${gi}">
       <div class="group-card-head"><div class="dot"></div>${group.name}</div>
       <div class="table-scroll">
         <table class="pairings${isLastRound ? ' final-round' : ''}">
-          <thead id="ghead-${gi}"></thead>
-          <tbody id="gbody-${gi}"><tr><td class="table-empty" colspan="99">Loading clubs & scores…</td></tr></tbody>
+          <thead id="ghead-${gi}">${headerRowHTML(clubCount)}</thead>
+          <tbody id="gbody-${gi}">${rows}</tbody>
         </table>
       </div>
     </div>
@@ -791,13 +848,10 @@ async function fillGroup(group, gi, isLastRound) {
 
   const order = clubs.slice().sort((x, y) => (score[y] - score[x]) || (tiebreak[y] - tiebreak[x]));
 
-  // header
+  // header (already rendered by groupSkeletonHTML, but re-set here too since
+  // it's cheap and keeps this function self-contained)
   const thead = document.getElementById('ghead-' + gi);
-  let headHTML = '<tr><th>Club</th>';
-  order.forEach((_, col) => { headHTML += `<th>${col + 1}</th>`; });
-  headHTML += `<th><div class="col-ico">${TROPHY_SVG}</div></th>`;
-  headHTML += `<th><div class="col-ico">${SCALE_SVG}</div></th></tr>`;
-  thead.innerHTML = headHTML;
+  thead.innerHTML = headerRowHTML(order.length);
 
   // body
   const tbody = document.getElementById('gbody-' + gi);
