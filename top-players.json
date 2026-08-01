@@ -1,18 +1,18 @@
 {
-  "updated": "2026-08-01T19:42:46.980Z",
+  "updated": "2026-08-01T20:49:51.070Z",
   "totalMembers": 1529,
-  "activeToday": 235,
+  "activeToday": 277,
   "players": [
     {
       "username": "damjan1989",
-      "total_pts": 440,
+      "total_pts": 455,
       "bullet_pts": 0,
       "blitz_pts": 300,
-      "rapid_pts": 140,
+      "rapid_pts": 155,
       "bullet_g": 0,
       "blitz_g": 34,
-      "rapid_g": 10,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "rapid_g": 11,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
     {
       "username": "m1dnight_crimsn",
@@ -23,17 +23,17 @@
       "bullet_g": 6,
       "blitz_g": 0,
       "rapid_g": 16,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/319222053.43a58e00.200x200o.12a06cfcd129.jpg"
     },
     {
       "username": "charan_smaran",
-      "total_pts": 225,
+      "total_pts": 245,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 225,
+      "rapid_pts": 245,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 15,
+      "rapid_g": 17,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
