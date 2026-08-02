@@ -1,38 +1,38 @@
 {
-  "updated": "2026-08-02T17:08:25.989Z",
+  "updated": "2026-08-02T18:29:39.998Z",
   "totalMembers": 1529,
-  "activeToday": 321,
+  "activeToday": 338,
   "players": [
     {
       "username": "damjan1989",
-      "total_pts": 617,
+      "total_pts": 629,
       "bullet_pts": 0,
-      "blitz_pts": 312,
+      "blitz_pts": 324,
       "rapid_pts": 305,
       "bullet_g": 0,
-      "blitz_g": 36,
+      "blitz_g": 38,
       "rapid_g": 21,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "flabbi",
-      "total_pts": 435,
+      "total_pts": 453,
       "bullet_pts": 0,
-      "blitz_pts": 30,
+      "blitz_pts": 48,
       "rapid_pts": 405,
       "bullet_g": 0,
-      "blitz_g": 4,
+      "blitz_g": 6,
       "rapid_g": 29,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "financial_dragon",
-      "total_pts": 311,
-      "bullet_pts": 65,
-      "blitz_pts": 246,
+      "username": "swiss_paradise",
+      "total_pts": 417,
+      "bullet_pts": 0,
+      "blitz_pts": 417,
       "rapid_pts": 0,
-      "bullet_g": 23,
-      "blitz_g": 30,
+      "bullet_g": 0,
+      "blitz_g": 49,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
