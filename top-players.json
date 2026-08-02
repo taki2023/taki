@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-01T23:56:05.438Z",
+  "updated": "2026-08-02T02:34:24.446Z",
   "totalMembers": 1529,
-  "activeToday": 278,
+  "activeToday": 76,
   "players": [
     {
-      "username": "damjan1989",
-      "total_pts": 518,
-      "bullet_pts": 0,
-      "blitz_pts": 318,
-      "rapid_pts": 200,
-      "bullet_g": 0,
-      "blitz_g": 36,
-      "rapid_g": 14,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
-    {
-      "username": "charan_smaran",
-      "total_pts": 290,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 290,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 20,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
       "username": "flabbi",
-      "total_pts": 275,
+      "total_pts": 120,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 275,
+      "rapid_pts": 120,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 19,
+      "rapid_g": 8,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/3907324.3af46c6b.200x200o.da6204a56491.jpg"
+    },
+    {
+      "username": "blazinghotbullet",
+      "total_pts": 74,
+      "bullet_pts": 74,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 26,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/519120873.3e7ad3cf.200x200o.df3a68b30737.jpg"
+    },
+    {
+      "username": "yael981",
+      "total_pts": 66,
+      "bullet_pts": 0,
+      "blitz_pts": 66,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 8,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
     }
   ]
 }
