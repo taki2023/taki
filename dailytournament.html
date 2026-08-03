@@ -212,6 +212,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 .club-avatar-link{display:inline-flex;flex-shrink:0;border-radius:11px;}
 .club-avatar{width:32px;height:32px;border-radius:9px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;display:block;}
 .club-name-wrap{display:flex;flex-direction:column;text-align:left;min-width:0;}
+.club-host-tag{font-size:9px;font-weight:800;color:var(--good-deep);letter-spacing:.2px;margin-top:1px;white-space:nowrap;}
 .club-name{font-size:12px;font-weight:800;color:var(--red-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
 .club-name a{color:inherit;text-decoration:none;}
 .club-name a:hover{text-decoration:underline;}
@@ -389,6 +390,9 @@ chess-like-a-tiger					x
    ════════════════════════════════════════════════════════════════ */
 
 const DEFAULT_CLUB_ICON = 'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
+
+// the club running the whole event — shown with a small green "Hosting Club" tag
+const HOST_CLUB_SLUG = 'hot-chilli-checkmate';
 
 const BOARD_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg>`;
 
@@ -882,7 +886,10 @@ async function fillGroup(group, gi, isLastRound) {
           <a class="club-avatar-link" href="https://www.chess.com/club/${rowSlug}" target="_blank" rel="noopener noreferrer">
             <img class="club-avatar" src="${info.icon}" onerror="this.src='${DEFAULT_CLUB_ICON}'">
           </a>
-          <div class="club-name-wrap"><div class="club-name"><a href="https://www.chess.com/club/${rowSlug}" target="_blank" rel="noopener noreferrer">${info.name}</a></div></div>
+          <div class="club-name-wrap">
+            <div class="club-name"><a href="https://www.chess.com/club/${rowSlug}" target="_blank" rel="noopener noreferrer">${info.name}</a></div>
+            ${rowSlug === HOST_CLUB_SLUG ? '<div class="club-host-tag">Hosting Club</div>' : ''}
+          </div>
         </div>
       </td>`;
 
@@ -898,7 +905,7 @@ async function fillGroup(group, gi, isLastRound) {
         const pts = pointsFromScores(flippedA, flippedB);
         cellInner = `<a class="badge ${pointsClass(pts)}" data-a="${rowSlug}" data-b="${colSlug}" ${link ? `href="${link}" target="_blank" rel="noopener noreferrer"` : ''}>${pointsLabel(pts)}</a>`;
       } else {
-        const liveClass = rec.view ? ' live' : '';
+        const liveClass = link ? ' live' : '';
         cellInner = link
           ? `<a class="cell-link cell-board${liveClass}" data-a="${rowSlug}" data-b="${colSlug}" href="${link}" target="_blank" rel="noopener noreferrer">${BOARD_SVG}</a>`
           : `<span class="cell-board" data-a="${rowSlug}" data-b="${colSlug}">${BOARD_SVG}</span>`;
