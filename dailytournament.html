@@ -898,7 +898,7 @@ async function fillGroup(group, gi, isLastRound) {
         const pts = pointsFromScores(flippedA, flippedB);
         cellInner = `<a class="badge ${pointsClass(pts)}" data-a="${rowSlug}" data-b="${colSlug}" ${link ? `href="${link}" target="_blank" rel="noopener noreferrer"` : ''}>${pointsLabel(pts)}</a>`;
       } else {
-        const liveClass = (rec.view && rec.view.status === 'in_progress') ? ' live' : '';
+        const liveClass = rec.view ? ' live' : '';
         cellInner = link
           ? `<a class="cell-link cell-board${liveClass}" data-a="${rowSlug}" data-b="${colSlug}" href="${link}" target="_blank" rel="noopener noreferrer">${BOARD_SVG}</a>`
           : `<span class="cell-board" data-a="${rowSlug}" data-b="${colSlug}">${BOARD_SVG}</span>`;
