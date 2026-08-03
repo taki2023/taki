@@ -612,12 +612,28 @@ function scoreCompareClasses(scoreA, scoreB) {
   return { a: 'tie', b: 'tie' };
 }
 
+/* Chess.com club-match statuses come in three real flavors:
+     - "registration" (or similar pre-start values) -> hasn't started yet
+     - "in_progress"                                  -> currently being played
+     - "finished"                                     -> completely done
+   The popover's badge text/color AND its action button both need to
+   reflect all three, not just finished-vs-not. */
+function matchStage(view) {
+  if (!view) return 'pending';
+  if (view.status === 'finished') return 'finished';
+  if (view.status === 'in_progress') return 'live';
+  return 'pending'; // registration / upcoming / anything else not yet underway
+}
+
 function popoverHTML(clubA, clubB, view) {
-  let statusClass = 'pending', statusText = 'Not started';
-  if (view) {
-    if (view.status === 'finished') { statusClass = 'finished'; statusText = 'Finished'; }
-    else { statusClass = 'live'; statusText = 'Live'; }
-  }
+  const stage = matchStage(view);
+  const STAGE_META = {
+    pending:  { statusClass: 'pending',  statusText: 'Not started', buttonText: 'Join match'  },
+    live:     { statusClass: 'live',     statusText: 'Live',        buttonText: 'Watch match'  },
+    finished: { statusClass: 'finished', statusText: 'Finished',    buttonText: 'Check match'  }
+  };
+  const meta = STAGE_META[stage];
+
   const rawScoreA = view && view.scoreA != null && !isNaN(view.scoreA) ? view.scoreA : null;
   const rawScoreB = view && view.scoreB != null && !isNaN(view.scoreB) ? view.scoreB : null;
   const scoreA = rawScoreA != null ? rawScoreA : '–';
@@ -628,7 +644,7 @@ function popoverHTML(clubA, clubB, view) {
   const watchUrl = view && view.url ? view.url : '';
 
   return `
-    <div class="mp-status ${statusClass}">${statusClass === 'live' ? '<span class="mp-dot"></span>' : ''}${statusText}</div>
+    <div class="mp-status ${meta.statusClass}">${meta.statusClass === 'live' ? '<span class="mp-dot"></span>' : ''}${meta.statusText}</div>
     <div class="mp-teams-row">
       <div class="mp-team"><img src="${clubA.icon}" onerror="this.src='${DEFAULT_CLUB_ICON}'"><div class="mp-team-name">${clubA.name}</div></div>
       <div class="mp-vs">vs</div>
@@ -636,7 +652,7 @@ function popoverHTML(clubA, clubB, view) {
     </div>
     <div class="mp-score-row"><span class="mp-score-num ${cls.a}">${scoreA}</span><span class="mp-score-sep">–</span><span class="mp-score-num ${cls.b}">${scoreB}</span></div>
     <div class="mp-meta">${timeClass} · ${boards} boards</div>
-    ${watchUrl ? `<a class="mp-watch" href="${watchUrl}" target="_blank" rel="noopener noreferrer">Watch match</a>` : ''}
+    ${watchUrl ? `<a class="mp-watch" href="${watchUrl}" target="_blank" rel="noopener noreferrer">${meta.buttonText}</a>` : ''}
   `;
 }
 
@@ -882,7 +898,7 @@ async function fillGroup(group, gi, isLastRound) {
         const pts = pointsFromScores(flippedA, flippedB);
         cellInner = `<a class="badge ${pointsClass(pts)}" data-a="${rowSlug}" data-b="${colSlug}" ${link ? `href="${link}" target="_blank" rel="noopener noreferrer"` : ''}>${pointsLabel(pts)}</a>`;
       } else {
-        const liveClass = rec.view ? ' live' : '';
+        const liveClass = (rec.view && rec.view.status === 'in_progress') ? ' live' : '';
         cellInner = link
           ? `<a class="cell-link cell-board${liveClass}" data-a="${rowSlug}" data-b="${colSlug}" href="${link}" target="_blank" rel="noopener noreferrer">${BOARD_SVG}</a>`
           : `<span class="cell-board" data-a="${rowSlug}" data-b="${colSlug}">${BOARD_SVG}</span>`;
