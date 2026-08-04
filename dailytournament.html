@@ -39,6 +39,7 @@ body{display:block;font-family:'Nunito',sans-serif;}
   --violet:     #7C5CFC;
   --blue:       #1D4ED8;
   --blue-soft:  #E1EEFF;
+  --grey-band:  #9AA3AF;
   --shadow-red: rgba(224,48,31,.16);
   --spring: cubic-bezier(.34,1.56,.64,1);
   --ease:   cubic-bezier(.22,.61,.36,1);
@@ -104,22 +105,23 @@ body{display:block;font-family:'Nunito',sans-serif;}
 }
 .sec-label .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));flex-shrink:0;box-shadow:0 0 0 4px rgba(255,68,51,.14);}
 
-/* ══ ROUND BAR (stats on the left, round dropdown pinned far right) ══ */
+/* ══ ROUND BAR ══ */
 .round-bar{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   margin:-16px 0 16px;z-index:6;position:relative;flex-wrap:wrap;
+  row-gap:10px;
 }
-.round-stats{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.round-stats{display:flex;align-items:center;gap:6px;flex-wrap:wrap;row-gap:6px;}
 .stat-pill{
   display:inline-flex;align-items:center;gap:5px;
   font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;color:var(--ink-soft);
   background:rgba(255,255,255,.65);backdrop-filter:blur(10px) saturate(1.3);
-  padding:6px 11px;border-radius:999px;white-space:nowrap;
+  padding:6px 11px;border-radius:999px;white-space:nowrap;flex-shrink:0;
   box-shadow:0 0 0 1px rgba(255,220,201,.7) inset,0 4px 10px -6px rgba(179,35,15,.25);
 }
 .stat-pill .stat-num{color:var(--red-mid);font-weight:900;}
 
-/* ══ ROUND DROPDOWN (chess.com-style: click to reveal the full list) ══ */
+/* ══ ROUND DROPDOWN ══ */
 .round-dropdown{position:relative;z-index:6;margin-left:auto;}
 .round-dropdown-btn{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -182,38 +184,51 @@ table.pairings thead th{
   color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:12.5px;
   padding:11px 5px;text-align:center;white-space:nowrap;position:relative;
 }
-table.pairings thead th:first-child{text-align:left;padding-left:14px;border-radius:16px 0 0 0;}
+table.pairings thead th:first-child{text-align:left;padding-left:18px;border-radius:16px 0 0 0;}
 table.pairings thead th:last-child{border-radius:0 16px 0 0;}
 table.pairings thead th .col-ico{display:flex;align-items:center;justify-content:center;gap:4px;}
 table.pairings thead th .col-ico svg{fill:#fff;width:17px;height:17px;}
 
-table.pairings tbody tr{background:var(--paper);transition:background .15s;}
+table.pairings tbody tr{background:var(--paper);transition:background .15s;position:relative;}
 table.pairings tbody tr:nth-child(odd){background:#FFFAF7;}
 table.pairings tbody tr:hover{background:#FFF1EA;}
+
+/* qualification stripes on the left edge of each row, same idea as
+   Champions League / domestic league tables: blue = through to the
+   next round, grey = still alive, red = eliminated */
+table.pairings tbody tr.band-through{box-shadow:inset 4px 0 0 var(--blue);}
+table.pairings tbody tr.band-out{box-shadow:inset 4px 0 0 var(--red-deep);}
+table.pairings tbody tr.band-mid{box-shadow:inset 4px 0 0 var(--grey-band);}
 
 table.pairings tbody td{
   padding:9px 5px;text-align:center;font-size:12px;font-weight:800;color:var(--ink);
   border-top:1px solid var(--cream-deep);white-space:nowrap;
 }
-table.pairings tbody td:first-child{text-align:left;padding-left:10px;}
+table.pairings tbody td:first-child{text-align:left;padding-left:14px;}
 
-.club-cell{display:flex;align-items:center;gap:9px;min-width:190px;}
+.club-cell{display:flex;align-items:center;gap:9px;min-width:210px;}
 .club-rank{
   width:22px;height:22px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;color:#fff;
   background:linear-gradient(135deg,var(--peach),var(--orange));
 }
-/* Gold/silver/bronze only shows up in the final round (the round that
-   has a single group left — see isLastRound in the script below). */
+/* gold/silver/bronze ranks only apply once a round is down to a single
+   group — the true final standings */
 table.final-round .club-rank.r1{background:linear-gradient(135deg,var(--gold),#E0301F);box-shadow:0 2px 8px -2px rgba(255,176,32,.6);}
 table.final-round .club-rank.r2{background:linear-gradient(135deg,var(--silver),#8E97A8);}
 table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),#96591F);}
 .club-avatar-link{display:inline-flex;flex-shrink:0;border-radius:11px;}
 .club-avatar{width:32px;height:32px;border-radius:9px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;display:block;}
 .club-name-wrap{display:flex;flex-direction:column;text-align:left;min-width:0;}
-.club-host-tag{font-size:9px;font-weight:800;color:var(--good-deep);letter-spacing:.2px;margin-top:1px;white-space:nowrap;}
-.club-name{font-size:12px;font-weight:800;color:var(--red-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+.club-host-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:9px;font-weight:900;letter-spacing:.3px;text-transform:uppercase;
+  color:var(--good-deep);background:#E4F8E9;border:1px solid #BFEACB;
+  padding:1px 7px;border-radius:999px;margin-top:3px;white-space:nowrap;width:fit-content;
+}
+.club-host-tag::before{content:'★';font-size:8px;}
+.club-name{font-size:12px;font-weight:800;color:var(--red-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:210px;}
 .club-name a{color:inherit;text-decoration:none;}
 .club-name a:hover{text-decoration:underline;}
 
@@ -234,7 +249,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 
 .table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
 
-/* ══ SKELETON PLACEHOLDERS (sized to match final content — no layout jump) ══ */
+/* ══ SKELETON PLACEHOLDERS (sized to match final content so nothing jumps) ══ */
 .skel{
   display:inline-block;border-radius:6px;
   background:linear-gradient(90deg,#F1E4DB 25%,#FFEFE6 37%,#F1E4DB 63%);
@@ -244,7 +259,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 @keyframes skel-shimmer{0%{background-position:100% 50%;}100%{background-position:0 50%;}}
 .skel-avatar{width:32px;height:32px;border-radius:9px;flex-shrink:0;}
 .skel-rank{width:22px;height:22px;border-radius:50%;flex-shrink:0;}
-.skel-name{width:84px;height:11px;border-radius:5px;}
+.skel-name{width:110px;height:11px;border-radius:5px;}
 .skel-cell{width:19px;height:19px;border-radius:50%;}
 .skel-standing{width:22px;height:15px;border-radius:5px;}
 .skel-tiebreak{width:18px;height:12px;border-radius:5px;}
@@ -262,6 +277,8 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 .legend-swatch.loss{background:#FFE4E1;border:1.5px solid #FFC5BE;color:var(--red-deep);}
 .legend-swatch.pending svg{fill:#9AA3AF;width:12px;height:12px;}
 .legend-swatch.live svg{fill:#3B82F6;width:12px;height:12px;}
+.legend-swatch.through{background:var(--blue);}
+.legend-swatch.eliminated{background:var(--red-deep);}
 
 .footer{text-align:center;margin-top:6px;font-size:var(--fs-sm);font-weight:800;color:var(--ink-faint);letter-spacing:.2px;}
 
@@ -307,10 +324,12 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 
 @media(max-width:480px){
   .event-title{font-size:18px;}
-  .club-name{max-width:90px;}
-  .round-bar{justify-content:flex-end;}
-  .round-stats{order:2;width:100%;justify-content:flex-end;}
-  .round-dropdown{order:1;}
+  .club-name{max-width:150px;}
+  .club-cell{min-width:0;}
+  .round-bar{flex-direction:column;align-items:stretch;}
+  .round-stats{order:2;width:100%;justify-content:flex-start;}
+  .round-dropdown{order:1;margin-left:0;width:100%;}
+  .round-dropdown-btn{width:100%;}
 }
 </style>
 </head>
@@ -353,6 +372,8 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
       <div class="legend-item"><span class="legend-swatch loss">0</span> Loss — 0 pt</div>
       <div class="legend-item"><span class="legend-swatch pending"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Not started</div>
       <div class="legend-item"><span class="legend-swatch live"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Live / in progress</div>
+      <div class="legend-item"><span class="legend-swatch through"></span> Qualifies for next round</div>
+      <div class="legend-item"><span class="legend-swatch eliminated"></span> Eliminated</div>
       <div class="legend-item">Tap any board icon to open the match</div>
     </div>
 
@@ -385,14 +406,16 @@ chess-like-a-tiger	https://www.chess.com/club/matches/chess-like-a-tiger/1983396
 
 `;
 
-/* ════════════════════════════════════════════════════════════════
-   ENGINE
-   ════════════════════════════════════════════════════════════════ */
-
 const DEFAULT_CLUB_ICON = 'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
 
-// the club running the whole event — shown with a small green "Hosting Club" tag
+// the club running the whole event — shown with a "Host Club" badge
 const HOST_CLUB_SLUG = 'hot-chilli-checkmate';
+
+// number of top spots that advance to the next round in every group,
+// and how many bottom spots are eliminated — same layout as the
+// Champions League league phase / domestic tables (blue = through, red = out)
+const ADVANCING_CLUBS_PER_GROUP = 2;
+const ELIMINATE_SPOTS = 3;
 
 const BOARD_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg>`;
 
@@ -400,12 +423,11 @@ const TROPHY_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
 const SCALE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0.399983 12L3.32998 3.83C3.89998 2.3 4.32998 2 5.92998 2H18.06C19.66 2 20.09 2.3 20.66 3.83L23.59 12C24.49 14.47 22.96 16.33 19.99 16.33C17.02 16.33 15.49 14.46 16.39 12L19.26 4H12.99V16.3C12.99 19.4 12.99 19.63 17.06 20.1C17.66 20.17 17.99 20.53 17.99 21.13V21.06C17.99 21.66 17.66 21.99 17.06 21.99H6.92998C6.32998 21.99 5.99998 21.66 5.99998 21.06V21.13C5.99998 20.53 6.32998 20.16 6.92998 20.1C11 19.63 11 19.4 11 16.3V4H4.72998L7.59998 12C8.49998 14.47 6.96998 16.33 3.99998 16.33C1.02998 16.33 -0.500017 14.46 0.399983 12ZM1.42998 12H6.55998L3.98998 4.83L1.42998 12ZM22.57 12L20 4.83L17.43 12H22.57Z"></path></svg>`;
 
-// ---- tiny fetch caches so we never re-hit the same endpoint twice ----
-const clubCache  = {}; // slug -> { name, icon } (promise then resolved value)
+const clubCache  = {}; // slug -> resolved { name, icon, slug }
 const matchCache = {}; // matchId -> match json (or null on failure)
 
-// Chess.com's API asks clients not to hammer it with parallel requests,
-// so every fetch goes through a tiny concurrency-limited queue.
+// chess.com's API doesn't like being hammered with parallel requests,
+// so every fetch runs through a small concurrency-limited queue
 function makeLimiter(concurrency) {
   let active = 0;
   const queue = [];
@@ -481,10 +503,6 @@ function prettifySlug(slug) {
   return (slug || '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
-/**
- * Given a fetched /pub/match/{id} response and the two slugs we expect
- * to see, return { scoreFor(slug), teamJson(slug), status }.
- */
 function matchView(matchJson, slugA, slugB) {
   if (!matchJson || !matchJson.teams) return null;
   const t1 = matchJson.teams.team1, t2 = matchJson.teams.team2;
@@ -496,7 +514,6 @@ function matchView(matchJson, slugA, slugB) {
   } else if (t2Slug === slugA.toLowerCase() || t1Slug === slugB.toLowerCase()) {
     teamA = t2; teamB = t1;
   } else {
-    // fall back to positional order if slugs didn't match cleanly
     teamA = t1; teamB = t2;
   }
   return {
@@ -509,7 +526,6 @@ function matchView(matchJson, slugA, slugB) {
   };
 }
 
-/* ---- scoring: 1 = win, 0.5 = draw, 0 = loss, from a club's POV ---- */
 function pointsFromScores(scoreA, scoreB) {
   if (scoreA == null || scoreB == null || isNaN(scoreA) || isNaN(scoreB)) return null;
   if (scoreA > scoreB) return 1;
@@ -528,14 +544,12 @@ function pointsClass(p) {
   return 'draw';
 }
 
-/* ════════════════════════════════════════════════════════════════
-   MATRIX PARSER — turns TOURNAMENT_DATA into { rounds: [...] }
-   ════════════════════════════════════════════════════════════════ */
+/* turns TOURNAMENT_DATA into { rounds: [...] } */
 function parseTournamentData(text) {
   const rounds = [];
   let currentRound = null;
   let currentGroup = null;
-  let groupRows = []; // [{ slug, cells: [...] }] for the group being built
+  let groupRows = [];
 
   function flushGroup() {
     if (!currentGroup) return;
@@ -561,7 +575,7 @@ function parseTournamentData(text) {
 
   text.split('\n').forEach(rawLine => {
     const line = rawLine.replace(/\r$/, '');
-    if (!line.trim()) return; // skip blank spacer lines
+    if (!line.trim()) return;
     const cells = line.split('\t');
     const first = (cells[0] || '').trim();
 
@@ -577,7 +591,7 @@ function parseTournamentData(text) {
       currentGroup = { name: first };
       return;
     }
-    if (!currentGroup) return; // stray row before any "group" header — ignore
+    if (!currentGroup) return;
     groupRows.push({ slug: first, cells: cells.slice(1) });
   });
   flushGroup();
@@ -586,9 +600,6 @@ function parseTournamentData(text) {
   return { rounds };
 }
 
-/* ════════════════════════════════════════════════════════════════
-   POPOVER
-   ════════════════════════════════════════════════════════════════ */
 const popover = document.getElementById('matchPopover');
 
 function showPopover(x, y, html) {
@@ -616,17 +627,11 @@ function scoreCompareClasses(scoreA, scoreB) {
   return { a: 'tie', b: 'tie' };
 }
 
-/* Chess.com club-match statuses come in three real flavors:
-     - "registration" (or similar pre-start values) -> hasn't started yet
-     - "in_progress"                                  -> currently being played
-     - "finished"                                     -> completely done
-   The popover's badge text/color AND its action button both need to
-   reflect all three, not just finished-vs-not. */
 function matchStage(view) {
   if (!view) return 'pending';
   if (view.status === 'finished') return 'finished';
   if (view.status === 'in_progress') return 'live';
-  return 'pending'; // registration / upcoming / anything else not yet underway
+  return 'pending';
 }
 
 function popoverHTML(clubA, clubB, view) {
@@ -660,9 +665,6 @@ function popoverHTML(clubA, clubB, view) {
   `;
 }
 
-/* ════════════════════════════════════════════════════════════════
-   RENDERING
-   ════════════════════════════════════════════════════════════════ */
 let TOURNAMENT = { rounds: [] };
 let activeRoundIdx = 0;
 
@@ -702,11 +704,6 @@ function renderRoundNav() {
   });
 })();
 
-/* ---- round-level match/game counters, shown as small pills next to the round picker ----
-   The total number of matches is already known synchronously from the parsed
-   TOURNAMENT_DATA (no fetch needed), so that half of the pill can be correct
-   immediately. Only "done" counts and total games (which depend on each
-   match's board count) need the live chess.com data. */
 function resetRoundStats(matchesTotal) {
   const statsWrap = document.getElementById('roundStats');
   const statMatches = document.getElementById('statMatches');
@@ -736,19 +733,12 @@ async function renderActiveRound() {
     return;
   }
 
-  // The "final round" is whichever round has only a single group left —
-  // that's the only place rank #1/#2/#3 get gold/silver/bronze styling.
   const isLastRound = round.groups.length === 1;
 
-  // Full-sized skeleton: correct number of groups, correct number of rows
-  // and columns in every table, right from the very first paint — nothing
-  // about the layout's dimensions changes once real data streams in.
   content.innerHTML = round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('');
   const matchesTotal = round.groups.reduce((sum, g) => sum + g.matches.length, 0);
   resetRoundStats(matchesTotal);
 
-  // Now fetch data and fill each group in (in parallel across groups),
-  // then roll all of their per-group tallies up into the round-level pills.
   const groupStats = await Promise.all(round.groups.map((g, gi) => fillGroup(g, gi, isLastRound)));
   const roundStats = groupStats.reduce((acc, s) => ({
     matchesDone: acc.matchesDone + s.matchesDone,
@@ -759,9 +749,6 @@ async function renderActiveRound() {
   renderRoundStats(roundStats);
 }
 
-/* header only depends on how many clubs are in the group (a plain count,
-   known synchronously), so it's real content from the very first paint —
-   no skeleton needed for it. */
 function headerRowHTML(clubCount) {
   let html = '<tr><th>Club</th>';
   for (let col = 0; col < clubCount; col++) html += `<th>${col + 1}</th>`;
@@ -770,8 +757,6 @@ function headerRowHTML(clubCount) {
   return html;
 }
 
-/* one skeleton row per club, in the matrix's original order, with the exact
-   same column count / cell sizes as the final row so nothing reflows later */
 function clubRowSkeletonHTML(clubCount) {
   let html = `<tr>
     <td>
@@ -807,15 +792,21 @@ function groupSkeletonHTML(group, gi, isLastRound) {
   `;
 }
 
+// which qualification band a row lands in, based on its rank in the
+// group (0-indexed) and how many clubs are in that group
+function qualificationBandClass(rank, clubCount) {
+  if (rank < ADVANCING_CLUBS_PER_GROUP) return 'band-through';
+  if (rank >= clubCount - ELIMINATE_SPOTS) return 'band-out';
+  return 'band-mid';
+}
+
 async function fillGroup(group, gi, isLastRound) {
   const clubs = group.clubs;
 
-  // club profile lookups (name + icon)
   const clubInfos = {};
   await Promise.all(clubs.map(async slug => { clubInfos[slug] = await fetchClub(slug); }));
 
-  // match lookups
-  const matchViews = {}; // key "slugA|slugB" (both directions) -> view
+  const matchViews = {};
   await Promise.all(group.matches.map(async m => {
     let view = null;
     if (m.link) {
@@ -833,8 +824,6 @@ async function fillGroup(group, gi, isLastRound) {
     return rec;
   }
 
-  // compute score (win/draw/loss points) + tiebreak (raw score sum) per club,
-  // and tally this group's matches/games finished-vs-total along the way.
   const score = {}, tiebreak = {};
   clubs.forEach(c => { score[c] = 0; tiebreak[c] = 0; });
   let matchesDone = 0, gamesDone = 0, gamesTotal = 0;
@@ -843,9 +832,7 @@ async function fillGroup(group, gi, isLastRound) {
     const rec = matchViews[m.clubA + '|' + m.clubB];
     const view = rec && rec.view;
     if (view && view.status === 'finished') matchesDone++;
-    // each board plays 2 games (both clubs get a turn with each colour), so total games = boards × 2
     if (view && view.boards) gamesTotal += (Number(view.boards) || 0) * 2;
-    // games already decided = scoreA + scoreB (a win contributes 1, a draw contributes 0.5+0.5 = 1)
     if (view && view.scoreA != null && view.scoreB != null && !isNaN(view.scoreA) && !isNaN(view.scoreB)) {
       gamesDone += (Number(view.scoreA) + Number(view.scoreB));
     }
@@ -868,18 +855,16 @@ async function fillGroup(group, gi, isLastRound) {
 
   const order = clubs.slice().sort((x, y) => (score[y] - score[x]) || (tiebreak[y] - tiebreak[x]));
 
-  // header (already rendered by groupSkeletonHTML, but re-set here too since
-  // it's cheap and keeps this function self-contained)
   const thead = document.getElementById('ghead-' + gi);
   thead.innerHTML = headerRowHTML(order.length);
 
-  // body
   const tbody = document.getElementById('gbody-' + gi);
   let bodyHTML = '';
   order.forEach((rowSlug, rank) => {
     const info = clubInfos[rowSlug] || { name: prettifySlug(rowSlug), icon: DEFAULT_CLUB_ICON };
     const rankClass = rank === 0 ? 'r1' : rank === 1 ? 'r2' : rank === 2 ? 'r3' : '';
-    bodyHTML += `<tr>
+    const bandClass = qualificationBandClass(rank, order.length);
+    bodyHTML += `<tr class="${bandClass}">
       <td>
         <div class="club-cell">
           <div class="club-rank ${rankClass}">${rank + 1}</div>
@@ -888,7 +873,7 @@ async function fillGroup(group, gi, isLastRound) {
           </a>
           <div class="club-name-wrap">
             <div class="club-name"><a href="https://www.chess.com/club/${rowSlug}" target="_blank" rel="noopener noreferrer">${info.name}</a></div>
-            ${rowSlug === HOST_CLUB_SLUG ? '<div class="club-host-tag">Hosting Club</div>' : ''}
+            ${rowSlug === HOST_CLUB_SLUG ? '<div class="club-host-tag">Host Club</div>' : ''}
           </div>
         </div>
       </td>`;
@@ -920,7 +905,6 @@ async function fillGroup(group, gi, isLastRound) {
   });
   tbody.innerHTML = bodyHTML;
 
-  // wire up hover popovers for every match cell in this group
   tbody.querySelectorAll('[data-a][data-b]').forEach(el => {
     el.addEventListener('mouseenter', (e) => {
       const a = el.dataset.a, b = el.dataset.b;
@@ -941,12 +925,6 @@ async function fillGroup(group, gi, isLastRound) {
   return { matchesDone, matchesTotal, gamesDone, gamesTotal };
 }
 
-/* ════════════════════════════════════════════════════════════════
-   BOOT — the tournament structure comes straight from TOURNAMENT_DATA
-   above, no network round-trip needed to load it. We still fetch
-   live club/match info from chess.com's public API, which refreshes
-   itself every 2 minutes.
-   ════════════════════════════════════════════════════════════════ */
 function boot() {
   const content = document.getElementById('content');
   try {
@@ -965,11 +943,11 @@ function boot() {
 }
 
 boot();
-// refresh live scores/status every 2 minutes without touching the tournament structure
+// refresh live scores/status every 5 minutes without touching the tournament structure
 setInterval(() => {
   Object.keys(matchCache).forEach(k => delete matchCache[k]);
   renderActiveRound();
-}, 120000);
+}, 300000);
 </script>
 </body>
 </html>
