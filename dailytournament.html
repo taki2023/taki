@@ -372,7 +372,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
       <div class="legend-item"><span class="legend-swatch live"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Live / in progress</div>
       <div class="legend-item"><span class="legend-swatch through"></span> Qualifies for next round</div>
       <div class="legend-item"><span class="legend-swatch eliminated"></span> Eliminated</div>
-      <div class="legend-item">Tap any board icon to open the match</div>
+      <div class="legend-item">Tap board once for a preview, twice to open the match</div>
     </div>
 
     <div class="footer">🌶 Hot Chilli CheckMate © 2026 ♞</div>
@@ -901,7 +901,7 @@ async function fillGroup(group, gi, isLastRound) {
       } else {
         const liveClass = link ? ' live' : '';
         cellInner = link
-          ? `<a class="cell-link cell-board${liveClass}" data-a="${rowSlug}" data-b="${colSlug}" href="${link}" target="_blank" rel="noopener noreferrer">${BOARD_SVG}</a>`
+          ? `<span class="cell-link cell-board${liveClass}" data-a="${rowSlug}" data-b="${colSlug}" data-link="${link}" role="button" tabindex="0">${BOARD_SVG}</span>`
           : `<span class="cell-board" data-a="${rowSlug}" data-b="${colSlug}">${BOARD_SVG}</span>`;
       }
       bodyHTML += `<td>${cellInner}</td>`;
@@ -916,6 +916,7 @@ async function fillGroup(group, gi, isLastRound) {
 
   tbody.querySelectorAll('[data-a][data-b]').forEach(el => {
     el.addEventListener('mouseenter', (e) => {
+      if (pinnedCellEl) return; // a click already froze the popover — hover shouldn't steal it
       const a = el.dataset.a, b = el.dataset.b;
       const rec = getView(a, b);
       const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
@@ -927,8 +928,38 @@ async function fillGroup(group, gi, isLastRound) {
       const rect = e.currentTarget.getBoundingClientRect();
       showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
     });
-    el.addEventListener('mouseleave', hidePopover);
-    el.addEventListener('mousemove', (e) => { if (popover.classList.contains('show')) positionPopover(e.clientX, e.clientY - 10); });
+    el.addEventListener('mouseleave', () => { if (!pinnedCellEl) hidePopover(); });
+    el.addEventListener('mousemove', (e) => {
+      if (pinnedCellEl) return; // frozen in place after a click, ignore further mouse movement
+      if (popover.classList.contains('show')) positionPopover(e.clientX, e.clientY - 10);
+    });
+
+    // board cells (pending/live, with a match link) get click-to-freeze /
+    // double-click-to-open instead of navigating straight away
+    if (el.classList.contains('cell-board') && el.dataset.link) {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const a = el.dataset.a, b = el.dataset.b;
+        const rec = getView(a, b);
+        const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
+        const clubB = clubInfos[b] || { name: prettifySlug(b), icon: DEFAULT_CLUB_ICON };
+        let view = rec.view;
+        if (view && rec.flipped) {
+          view = { status: view.status, boards: view.boards, timeClass: view.timeClass, url: view.url, scoreA: view.scoreB, scoreB: view.scoreA };
+        }
+        const rect = el.getBoundingClientRect();
+        showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
+        pinnedCellEl = el; // freeze it here — mousemove/mouseleave won't move or hide it now
+      });
+      el.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        pinnedCellEl = null;
+        hidePopover();
+        window.open(el.dataset.link, '_blank', 'noopener,noreferrer');
+      });
+    }
   });
 
   return { matchesDone, matchesTotal, gamesDone, gamesTotal };
