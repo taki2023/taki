@@ -1,39 +1,39 @@
 {
-  "updated": "2026-08-04T03:47:59.294Z",
-  "totalMembers": 1521,
-  "activeToday": 66,
+  "updated": "2026-08-04T06:26:01.244Z",
+  "totalMembers": 1522,
+  "activeToday": 118,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 135,
+      "total_pts": 210,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 135,
+      "rapid_pts": 210,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 9,
+      "rapid_g": 14,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "becky-incheck",
-      "total_pts": 81,
+      "username": "the_lonely_manof_thenight",
+      "total_pts": 110,
       "bullet_pts": 0,
-      "blitz_pts": 81,
+      "blitz_pts": 0,
+      "rapid_pts": 110,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 8,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "vannamcovua",
+      "total_pts": 102,
+      "bullet_pts": 102,
+      "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 9,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "mounamecaling",
-      "total_pts": 75,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 75,
-      "bullet_g": 0,
+      "bullet_g": 36,
       "blitz_g": 0,
-      "rapid_g": 5,
+      "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
