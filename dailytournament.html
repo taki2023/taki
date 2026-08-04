@@ -241,7 +241,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 .badge.loss{color:var(--red-deep);}
 
 .standing-val{display:inline-flex;align-items:center;gap:4px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:16px;color:var(--red-mid);}
-.tiebreak-val{font-size:13.5px;font-weight:800;color:var(--ink-soft);}
+.tiebreak-val{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;color:var(--ink-soft);}
 
 .table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
 
@@ -363,9 +363,9 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
     </div>
 
     <div class="legend-card">
-      <div class="legend-item"><span class="legend-swatch win">1</span> Win — 1 pt</div>
-      <div class="legend-item"><span class="legend-swatch draw">½</span> Draw — ½ pt</div>
-      <div class="legend-item"><span class="legend-swatch loss">0</span> Loss — 0 pt</div>
+      <div class="legend-item"><span class="legend-swatch win">1</span> Win</div>
+      <div class="legend-item"><span class="legend-swatch draw">½</span> Draw</div>
+      <div class="legend-item"><span class="legend-swatch loss">0</span> Loss</div>
       <div class="legend-item"><span class="legend-swatch pending"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Not started</div>
       <div class="legend-item"><span class="legend-swatch live"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Live / in progress</div>
       <div class="legend-item"><span class="legend-swatch through"></span> Qualifies for next round</div>
@@ -862,7 +862,7 @@ async function fillGroup(group, gi, isLastRound) {
   order.forEach((rowSlug, rank) => {
     const info = clubInfos[rowSlug] || { name: prettifySlug(rowSlug), icon: DEFAULT_CLUB_ICON };
     const rankClass = rank === 0 ? 'r1' : rank === 1 ? 'r2' : rank === 2 ? 'r3' : '';
-    const bandClass = qualificationBandClass(rank, order.length);
+    const bandClass = isLastRound ? '' : qualificationBandClass(rank, order.length);
     bodyHTML += `<tr class="${bandClass}">
       <td>
         <div class="club-cell">
