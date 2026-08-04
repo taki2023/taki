@@ -166,12 +166,6 @@ body{display:block;font-family:'Nunito',sans-serif;}
   box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -10px rgba(224,48,31,.32);
   padding:6px;margin-bottom:16px;overflow:visible;
 }
-.group-card-head{
-  display:flex;align-items:center;gap:8px;
-  font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:var(--red-mid);
-  padding:12px 12px 8px;
-}
-.group-card-head .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));}
 
 .table-scroll{overflow-x:auto;border-radius:18px;-webkit-overflow-scrolling:touch;}
 .table-scroll::-webkit-scrollbar{height:6px;}
@@ -188,6 +182,8 @@ table.pairings thead th:first-child{text-align:left;padding-left:18px;border-rad
 table.pairings thead th:last-child{border-radius:0 16px 0 0;}
 table.pairings thead th .col-ico{display:flex;align-items:center;justify-content:center;gap:4px;}
 table.pairings thead th .col-ico svg{fill:#fff;width:17px;height:17px;}
+.th-group-label{display:flex;align-items:center;gap:7px;font-size:13px;}
+.th-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--red),var(--orange));}
 
 table.pairings tbody tr{background:var(--paper);transition:background .15s;position:relative;}
 table.pairings tbody tr:nth-child(odd){background:#FFFAF7;}
@@ -503,6 +499,10 @@ function prettifySlug(slug) {
   return (slug || '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
+function prettifyGroupName(name) {
+  return (name || '').replace(/\b\w/g, c => c.toUpperCase());
+}
+
 function matchView(matchJson, slugA, slugB) {
   if (!matchJson || !matchJson.teams) return null;
   const t1 = matchJson.teams.team1, t2 = matchJson.teams.team2;
@@ -749,8 +749,8 @@ async function renderActiveRound() {
   renderRoundStats(roundStats);
 }
 
-function headerRowHTML(clubCount) {
-  let html = '<tr><th>Club</th>';
+function headerRowHTML(clubCount, groupName) {
+  let html = `<tr><th><div class="th-group-label"><span class="th-dot"></span>${groupName}</div></th>`;
   for (let col = 0; col < clubCount; col++) html += `<th>${col + 1}</th>`;
   html += `<th><div class="col-ico">${TROPHY_SVG}</div></th>`;
   html += `<th><div class="col-ico">${SCALE_SVG}</div></th></tr>`;
@@ -781,10 +781,9 @@ function groupSkeletonHTML(group, gi, isLastRound) {
   const rows = group.clubs.map(() => clubRowSkeletonHTML(clubCount)).join('');
   return `
     <div class="group-card" id="group-${gi}">
-      <div class="group-card-head"><div class="dot"></div>${group.name}</div>
       <div class="table-scroll">
         <table class="pairings${isLastRound ? ' final-round' : ''}">
-          <thead id="ghead-${gi}">${headerRowHTML(clubCount)}</thead>
+          <thead id="ghead-${gi}">${headerRowHTML(clubCount, prettifyGroupName(group.name))}</thead>
           <tbody id="gbody-${gi}">${rows}</tbody>
         </table>
       </div>
@@ -856,7 +855,7 @@ async function fillGroup(group, gi, isLastRound) {
   const order = clubs.slice().sort((x, y) => (score[y] - score[x]) || (tiebreak[y] - tiebreak[x]));
 
   const thead = document.getElementById('ghead-' + gi);
-  thead.innerHTML = headerRowHTML(order.length);
+  thead.innerHTML = headerRowHTML(order.length, prettifyGroupName(group.name));
 
   const tbody = document.getElementById('gbody-' + gi);
   let bodyHTML = '';
