@@ -189,7 +189,9 @@ table.pairings tbody tr{background:var(--paper);transition:background .15s;posit
 table.pairings tbody tr:nth-child(odd){background:#FFFAF7;}
 table.pairings tbody tr:hover{background:#FFF1EA;}
 
-
+/* qualification stripes on the left edge of each row, same idea as
+   Champions League / domestic league tables: blue = through to the
+   next round, grey = still alive, red = eliminated */
 table.pairings tbody tr.band-through{box-shadow:inset 4px 0 0 var(--blue);}
 table.pairings tbody tr.band-out{box-shadow:inset 4px 0 0 var(--red-deep);}
 table.pairings tbody tr.band-mid{box-shadow:inset 4px 0 0 var(--grey-band);}
@@ -243,7 +245,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 
 .table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
 
-/* ══ SKELETON PLACEHOLDERS  ══ */
+/* ══ SKELETON PLACEHOLDERS (sized to match final content so nothing jumps) ══ */
 .skel{
   display:inline-block;border-radius:6px;
   background:linear-gradient(90deg,#F1E4DB 25%,#FFEFE6 37%,#F1E4DB 63%);
@@ -271,6 +273,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 .legend-swatch.loss{background:#FFE4E1;border:1.5px solid #FFC5BE;color:var(--red-deep);}
 .legend-swatch.pending svg{fill:#9AA3AF;width:12px;height:12px;}
 .legend-swatch.live svg{fill:#3B82F6;width:12px;height:12px;}
+.legend-swatch.through,.legend-swatch.eliminated{width:7px;height:18px;border-radius:3px;}
 .legend-swatch.through{background:var(--blue);}
 .legend-swatch.eliminated{background:var(--red-deep);}
 
@@ -388,8 +391,8 @@ const TOURNAMENT_DATA = `
 Round 1					
 group 1					
 hot-chilli-checkmate	x	https://www.chess.com/club/matches/1983144	https://www.chess.com/club/matches/1983618	https://www.chess.com/club/matches/1983156	https://www.chess.com/club/matches/1983186
-the-royal-file	https://www.chess.com/club/matches/1983144	x		https://www.chess.com/club/matches/1983556	
-hybrid-chess-federation	https://www.chess.com/club/matches/1983618		x		
+the-royal-file	https://www.chess.com/club/matches/1983144	x	https://www.chess.com/club/matches/1983620	https://www.chess.com/club/matches/1983556	
+hybrid-chess-federation	https://www.chess.com/club/matches/1983618	https://www.chess.com/club/matches/1983620	x		
 chess-universe	https://www.chess.com/club/matches/1983156	https://www.chess.com/club/matches/1983556		x	
 the-hindu	https://www.chess.com/club/matches/1983186				x
 					
@@ -404,10 +407,12 @@ chess-like-a-tiger	https://www.chess.com/club/matches/chess-like-a-tiger/1983396
 
 const DEFAULT_CLUB_ICON = 'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
 
-
+// the club running the whole event — shown with a "Host Club" badge
 const HOST_CLUB_SLUG = 'hot-chilli-checkmate';
 
-
+// number of top spots that advance to the next round in every group,
+// and how many bottom spots are eliminated — same layout as the
+// Champions League league phase / domestic tables (blue = through, red = out)
 const ADVANCING_CLUBS_PER_GROUP = 2;
 const ELIMINATE_SPOTS = 3;
 
@@ -600,11 +605,32 @@ function parseTournamentData(text) {
 const popover = document.getElementById('matchPopover');
 let pinnedCellEl = null;
 
+// tracks whether the mouse is currently heading toward the open popover,
+// so hover handlers can freeze it in place instead of chasing the cursor
+let lastMouseX = 0, lastMouseY = 0;
+let headingToPopover = false;
+
+function updateHeadingToPopover(clientX, clientY) {
+  if (!popover.classList.contains('show')) { headingToPopover = false; return false; }
+  const rect = popover.getBoundingClientRect();
+  const targetX = Math.max(rect.left, Math.min(clientX, rect.right));
+  const targetY = Math.max(rect.top, Math.min(clientY, rect.bottom));
+  const dx = clientX - lastMouseX, dy = clientY - lastMouseY;
+  const toX = targetX - clientX, toY = targetY - clientY;
+  headingToPopover = (dx !== 0 || dy !== 0) && (dx * toX + dy * toY) > 0;
+  return headingToPopover;
+}
+
 document.addEventListener('click', (e) => {
   if (!pinnedCellEl) return;
   if (popover.contains(e.target) || e.target.closest('[data-a][data-b]')) return;
   hidePopover();
   pinnedCellEl = null;
+});
+
+// once the mouse actually leaves the popover itself, it's safe to close it
+popover.addEventListener('mouseleave', () => {
+  if (!pinnedCellEl) hidePopover();
 });
 
 function showPopover(x, y, html) {
@@ -796,6 +822,7 @@ function groupSkeletonHTML(group, gi, isLastRound) {
   `;
 }
 
+
 function qualificationBandClass(rank, clubCount) {
   if (rank < ADVANCING_CLUBS_PER_GROUP) return 'band-through';
   if (rank >= clubCount - ELIMINATE_SPOTS) return 'band-out';
@@ -909,7 +936,8 @@ async function fillGroup(group, gi, isLastRound) {
 
   tbody.querySelectorAll('[data-a][data-b]').forEach(el => {
     el.addEventListener('mouseenter', (e) => {
-      if (pinnedCellEl) return; 
+      if (pinnedCellEl) return; // a click already froze the popover — hover shouldn't steal it
+      lastMouseX = e.clientX; lastMouseY = e.clientY; headingToPopover = false;
       const a = el.dataset.a, b = el.dataset.b;
       const rec = getView(a, b);
       const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
@@ -921,14 +949,21 @@ async function fillGroup(group, gi, isLastRound) {
       const rect = e.currentTarget.getBoundingClientRect();
       showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
     });
-    el.addEventListener('mouseleave', () => { if (!pinnedCellEl) hidePopover(); });
+    el.addEventListener('mouseleave', (e) => {
+      if (pinnedCellEl) return;
+      // don't close it out from under the cursor if it's on its way there —
+      // the popover's own mouseleave (above) will close it once actually left
+      if (!updateHeadingToPopover(e.clientX, e.clientY)) hidePopover();
+    });
     el.addEventListener('mousemove', (e) => {
       if (pinnedCellEl) return; // frozen in place after a click, ignore further mouse movement
-      if (popover.classList.contains('show')) positionPopover(e.clientX, e.clientY - 10);
+      if (popover.classList.contains('show') && !updateHeadingToPopover(e.clientX, e.clientY)) {
+        positionPopover(e.clientX, e.clientY - 10);
+      }
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
     });
 
-    // board cells (pending/live, with a match link) get click-to-freeze /
-    // double-click-to-open instead of navigating straight away
+
     if (el.classList.contains('cell-board') && el.dataset.link) {
       el.addEventListener('click', (e) => {
         e.preventDefault();
@@ -976,7 +1011,7 @@ function boot() {
 }
 
 boot();
-// refresh live scores/status every 5 minutes 
+// refresh live scores/status every 5 minutes without touching the tournament structure
 setInterval(() => {
   Object.keys(matchCache).forEach(k => delete matchCache[k]);
   renderActiveRound();
