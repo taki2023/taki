@@ -290,7 +290,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
   transition:opacity .14s var(--ease),transform .14s var(--ease);
   font-family:'Nunito',sans-serif;
 }
-#matchPopover.show{opacity:1;transform:translateY(0) scale(1);}
+#matchPopover.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
 .mp-status{
   display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:900;
   text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:999px;
@@ -322,10 +322,12 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
   .event-title{font-size:18px;}
   .club-name{max-width:150px;}
   .club-cell{min-width:0;}
-  .round-bar{flex-direction:column;align-items:stretch;}
-  .round-stats{order:2;width:100%;justify-content:flex-start;}
-  .round-dropdown{order:1;margin-left:0;width:100%;}
-  .round-dropdown-btn{width:100%;}
+  .round-bar{flex-wrap:nowrap;gap:6px;}
+  .round-stats{gap:4px;flex-wrap:nowrap;}
+  .stat-pill{padding:5px 8px;font-size:8.5px;gap:3px;}
+  .round-dropdown{margin-left:auto;flex-shrink:0;}
+  .round-dropdown-btn{min-width:0;padding:8px 10px;font-size:12px;gap:5px;}
+  .round-dropdown-btn .chev{width:9px;height:9px;}
 }
 </style>
 </head>
@@ -601,6 +603,14 @@ function parseTournamentData(text) {
 }
 
 const popover = document.getElementById('matchPopover');
+let pinnedCellEl = null;
+
+document.addEventListener('click', (e) => {
+  if (!pinnedCellEl) return;
+  if (popover.contains(e.target) || e.target.closest('[data-a][data-b]')) return;
+  hidePopover();
+  pinnedCellEl = null;
+});
 
 function showPopover(x, y, html) {
   popover.innerHTML = html;
