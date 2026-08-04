@@ -189,9 +189,7 @@ table.pairings tbody tr{background:var(--paper);transition:background .15s;posit
 table.pairings tbody tr:nth-child(odd){background:#FFFAF7;}
 table.pairings tbody tr:hover{background:#FFF1EA;}
 
-/* qualification stripes on the left edge of each row, same idea as
-   Champions League / domestic league tables: blue = through to the
-   next round, grey = still alive, red = eliminated */
+
 table.pairings tbody tr.band-through{box-shadow:inset 4px 0 0 var(--blue);}
 table.pairings tbody tr.band-out{box-shadow:inset 4px 0 0 var(--red-deep);}
 table.pairings tbody tr.band-mid{box-shadow:inset 4px 0 0 var(--grey-band);}
@@ -245,7 +243,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 
 .table-empty{padding:26px 14px;text-align:center;font-size:12px;font-weight:800;color:var(--ink-faint);}
 
-/* ══ SKELETON PLACEHOLDERS (sized to match final content so nothing jumps) ══ */
+/* ══ SKELETON PLACEHOLDERS  ══ */
 .skel{
   display:inline-block;border-radius:6px;
   background:linear-gradient(90deg,#F1E4DB 25%,#FFEFE6 37%,#F1E4DB 63%);
@@ -406,12 +404,10 @@ chess-like-a-tiger	https://www.chess.com/club/matches/chess-like-a-tiger/1983396
 
 const DEFAULT_CLUB_ICON = 'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
 
-// the club running the whole event — shown with a "Host Club" badge
+
 const HOST_CLUB_SLUG = 'hot-chilli-checkmate';
 
-// number of top spots that advance to the next round in every group,
-// and how many bottom spots are eliminated — same layout as the
-// Champions League league phase / domestic tables (blue = through, red = out)
+
 const ADVANCING_CLUBS_PER_GROUP = 2;
 const ELIMINATE_SPOTS = 3;
 
@@ -421,11 +417,10 @@ const TROPHY_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
 const SCALE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0.399983 12L3.32998 3.83C3.89998 2.3 4.32998 2 5.92998 2H18.06C19.66 2 20.09 2.3 20.66 3.83L23.59 12C24.49 14.47 22.96 16.33 19.99 16.33C17.02 16.33 15.49 14.46 16.39 12L19.26 4H12.99V16.3C12.99 19.4 12.99 19.63 17.06 20.1C17.66 20.17 17.99 20.53 17.99 21.13V21.06C17.99 21.66 17.66 21.99 17.06 21.99H6.92998C6.32998 21.99 5.99998 21.66 5.99998 21.06V21.13C5.99998 20.53 6.32998 20.16 6.92998 20.1C11 19.63 11 19.4 11 16.3V4H4.72998L7.59998 12C8.49998 14.47 6.96998 16.33 3.99998 16.33C1.02998 16.33 -0.500017 14.46 0.399983 12ZM1.42998 12H6.55998L3.98998 4.83L1.42998 12ZM22.57 12L20 4.83L17.43 12H22.57Z"></path></svg>`;
 
-const clubCache  = {}; // slug -> resolved { name, icon, slug }
-const matchCache = {}; // matchId -> match json (or null on failure)
+const clubCache  = {}; 
+const matchCache = {}; 
 
-// chess.com's API doesn't like being hammered with parallel requests,
-// so every fetch runs through a small concurrency-limited queue
+
 function makeLimiter(concurrency) {
   let active = 0;
   const queue = [];
@@ -801,8 +796,6 @@ function groupSkeletonHTML(group, gi, isLastRound) {
   `;
 }
 
-// which qualification band a row lands in, based on its rank in the
-// group (0-indexed) and how many clubs are in that group
 function qualificationBandClass(rank, clubCount) {
   if (rank < ADVANCING_CLUBS_PER_GROUP) return 'band-through';
   if (rank >= clubCount - ELIMINATE_SPOTS) return 'band-out';
@@ -916,7 +909,7 @@ async function fillGroup(group, gi, isLastRound) {
 
   tbody.querySelectorAll('[data-a][data-b]').forEach(el => {
     el.addEventListener('mouseenter', (e) => {
-      if (pinnedCellEl) return; // a click already froze the popover — hover shouldn't steal it
+      if (pinnedCellEl) return; 
       const a = el.dataset.a, b = el.dataset.b;
       const rec = getView(a, b);
       const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
@@ -983,7 +976,7 @@ function boot() {
 }
 
 boot();
-// refresh live scores/status every 5 minutes without touching the tournament structure
+// refresh live scores/status every 5 minutes 
 setInterval(() => {
   Object.keys(matchCache).forEach(k => delete matchCache[k]);
   renderActiveRound();
