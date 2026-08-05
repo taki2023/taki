@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-05T00:54:05.369Z",
-  "totalMembers": 1524,
-  "activeToday": 24,
+  "updated": "2026-08-05T03:59:20.323Z",
+  "totalMembers": 1526,
+  "activeToday": 95,
   "players": [
     {
-      "username": "nixo30190",
-      "total_pts": 66,
-      "bullet_pts": 3,
-      "blitz_pts": 63,
-      "rapid_pts": 0,
-      "bullet_g": 1,
-      "blitz_g": 7,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/201065305.922fb718.200x200o.e9b40976d92a.jpg"
+      "username": "xuyen1786",
+      "total_pts": 139,
+      "bullet_pts": 79,
+      "blitz_pts": 0,
+      "rapid_pts": 60,
+      "bullet_g": 29,
+      "blitz_g": 0,
+      "rapid_g": 4,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
       "username": "aim_gatormonk",
-      "total_pts": 61,
+      "total_pts": 133,
       "bullet_pts": 16,
-      "blitz_pts": 45,
+      "blitz_pts": 117,
       "rapid_pts": 0,
       "bullet_g": 6,
-      "blitz_g": 5,
+      "blitz_g": 13,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
     },
     {
-      "username": "joaog2004",
-      "total_pts": 57,
+      "username": "chessunicorn_cn",
+      "total_pts": 126,
       "bullet_pts": 0,
-      "blitz_pts": 57,
+      "blitz_pts": 126,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 7,
+      "blitz_g": 14,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/65546316.ce417772.200x200o.9b2f1b66ab93.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/489061181.a57b0032.200x200o.0be6d9106b79.png"
     }
   ]
 }
