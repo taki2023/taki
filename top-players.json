@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-05T16:15:01.945Z",
-  "totalMembers": 1529,
-  "activeToday": 324,
+  "updated": "2026-08-05T18:03:47.872Z",
+  "totalMembers": 1531,
+  "activeToday": 374,
   "players": [
     {
       "username": "nikkotello",
-      "total_pts": 370,
-      "bullet_pts": 0,
+      "total_pts": 425,
+      "bullet_pts": 55,
       "blitz_pts": 0,
       "rapid_pts": 370,
-      "bullet_g": 0,
+      "bullet_g": 19,
       "blitz_g": 0,
       "rapid_g": 26,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 244,
-      "bullet_pts": 184,
-      "blitz_pts": 0,
-      "rapid_pts": 60,
-      "bullet_g": 66,
-      "blitz_g": 0,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "username": "damjan1989",
+      "total_pts": 301,
+      "bullet_pts": 0,
+      "blitz_pts": 111,
+      "rapid_pts": 190,
+      "bullet_g": 0,
+      "blitz_g": 13,
+      "rapid_g": 16,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
     {
-      "username": "mastergoogle",
-      "total_pts": 240,
+      "username": "swiss_paradise",
+      "total_pts": 297,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 240,
+      "blitz_pts": 297,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 16,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/429706373.35387bbc.200x200o.3b3c340b3498.jpg"
+      "blitz_g": 33,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/353569743.40fece1a.200x200o.73d9d1e3ec9c.jpg"
     }
   ]
 }
