@@ -457,17 +457,31 @@ function matchIdFromLink(link) {
   return '';
 }
 
+const CLUB_ICONS = {
+  'hot-chilli-checkmate':      'https://images.chesscomfiles.com/uploads/v1/group/856887.ca0c5404.160x160o.1b7d241b68be@2x.png',
+  'the-royal-file':            'https://images.chesscomfiles.com/uploads/v1/group/917905.fa369df3.160x160o.6a907c240f09@2x.png',
+  'hybrid-chess-federation':   'https://images.chesscomfiles.com/uploads/v1/group/599005.5f0f639f.160x160o.58ef7f15a931@2x.png',
+  'chess-universe':            'https://images.chesscomfiles.com/uploads/v1/group/10249.266e0df6.160x160o.fa04d9151260@2x.png',
+  'the-hindu':                 'https://images.chesscomfiles.com/uploads/v1/group/7289.0a9e40a7.160x160o.857c146cc699@2x.webp',
+  'the-eternal':                'https://images.chesscomfiles.com/uploads/v1/group/802974.6ec1c076.160x160o.316d25eb13a0@2x.png',
+  'chess-on-earth-2':          'https://images.chesscomfiles.com/uploads/v1/group/798446.cd88f307.160x160o.6e961f31cb24@2x.png',
+  'eminence-in-shadow':        'https://images.chesscomfiles.com/uploads/v1/group/869963.6f6b9f9f.160x160o.17f00fe1c011@2x.jpg',
+  'the-club-of-195-countries': 'https://images.chesscomfiles.com/uploads/v1/group/907907.2eef6a9e.160x160o.7e685e0bb3f2@2x.png',
+  'chess-like-a-tiger':        'https://images.chesscomfiles.com/uploads/v1/group/862719.52bd4e4e.160x160o.2e74f9c97832@2x.png'
+};
+
 async function fetchClub(slug) {
-  if (!slug) return { name: slug, icon: DEFAULT_CLUB_ICON, slug: slug };
+  const knownIcon = CLUB_ICONS[slug] || DEFAULT_CLUB_ICON;
+  if (!slug) return { name: slug, icon: knownIcon, slug: slug };
   if (clubCache[slug]) return clubCache[slug];
   const p = limit(async () => {
     try {
       const r = await fetch('https://api.chess.com/pub/club/' + encodeURIComponent(slug));
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const d = await r.json();
-      return { name: d.name || prettifySlug(slug), icon: d.icon || DEFAULT_CLUB_ICON, slug: slug };
+      return { name: d.name || prettifySlug(slug), icon: knownIcon, slug: slug };
     } catch (e) {
-      return { name: prettifySlug(slug), icon: DEFAULT_CLUB_ICON, slug: slug };
+      return { name: prettifySlug(slug), icon: knownIcon, slug: slug };
     }
   });
   clubCache[slug] = p;
@@ -1005,11 +1019,11 @@ function boot() {
 }
 
 boot();
-// refresh live scores/status every 5 minutes without touching the tournament structure
+// refresh live scores/status every 10 minutes without touching the tournament structure
 setInterval(() => {
   Object.keys(matchCache).forEach(k => delete matchCache[k]);
   renderActiveRound();
-}, 300000);
+}, 600000);
 </script>
 </body>
 </html>
