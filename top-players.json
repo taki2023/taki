@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-04T23:01:38.105Z",
+  "updated": "2026-08-05T00:54:05.369Z",
   "totalMembers": 1524,
-  "activeToday": 380,
+  "activeToday": 24,
   "players": [
     {
+      "username": "nixo30190",
+      "total_pts": 66,
+      "bullet_pts": 3,
+      "blitz_pts": 63,
+      "rapid_pts": 0,
+      "bullet_g": 1,
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/201065305.922fb718.200x200o.e9b40976d92a.jpg"
+    },
+    {
       "username": "aim_gatormonk",
-      "total_pts": 595,
-      "bullet_pts": 553,
-      "blitz_pts": 27,
-      "rapid_pts": 15,
-      "bullet_g": 199,
-      "blitz_g": 3,
-      "rapid_g": 1,
+      "total_pts": 61,
+      "bullet_pts": 16,
+      "blitz_pts": 45,
+      "rapid_pts": 0,
+      "bullet_g": 6,
+      "blitz_g": 5,
+      "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
     },
     {
-      "username": "nikkotello",
-      "total_pts": 455,
+      "username": "joaog2004",
+      "total_pts": 57,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 455,
+      "blitz_pts": 57,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 31,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "ossec_29",
-      "total_pts": 406,
-      "bullet_pts": 76,
-      "blitz_pts": 120,
-      "rapid_pts": 210,
-      "bullet_g": 28,
-      "blitz_g": 14,
-      "rapid_g": 14,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/221505101.a9916547.200x200o.ea4e66d0371d.png"
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/65546316.ce417772.200x200o.9b2f1b66ab93.png"
     }
   ]
 }
