@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-06T00:00:28.877Z",
-  "totalMembers": 1533,
-  "activeToday": 238,
+  "updated": "2026-08-06T03:27:29.335Z",
+  "totalMembers": 1534,
+  "activeToday": 73,
   "players": [
     {
-      "username": "damjan1989",
-      "total_pts": 388,
-      "bullet_pts": 0,
-      "blitz_pts": 198,
-      "rapid_pts": 190,
-      "bullet_g": 0,
-      "blitz_g": 24,
-      "rapid_g": 16,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+      "username": "aim_gatormonk",
+      "total_pts": 86,
+      "bullet_pts": 59,
+      "blitz_pts": 27,
+      "rapid_pts": 0,
+      "bullet_g": 21,
+      "blitz_g": 3,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
     },
     {
-      "username": "niki-sri",
-      "total_pts": 330,
-      "bullet_pts": 6,
-      "blitz_pts": 324,
-      "rapid_pts": 0,
-      "bullet_g": 2,
-      "blitz_g": 40,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382876445.69edb2c2.200x200o.6e49f049fe44.png"
-    },
-    {
-      "username": "swiss_paradise",
-      "total_pts": 318,
+      "username": "isabelcibrian",
+      "total_pts": 84,
       "bullet_pts": 0,
-      "blitz_pts": 318,
+      "blitz_pts": 84,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 36,
+      "blitz_g": 10,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/353569743.40fece1a.200x200o.73d9d1e3ec9c.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/319105535.64b40884.200x200o.afe21a5b45b6.jpg"
+    },
+    {
+      "username": "austinaccounted",
+      "total_pts": 80,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 80,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 6,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/381273949.6f75e88f.200x200o.d1aa174532e2.png"
     }
   ]
 }
