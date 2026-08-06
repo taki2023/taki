@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-06T09:21:33.084Z",
+  "updated": "2026-08-06T11:40:10.045Z",
   "totalMembers": 1536,
-  "activeToday": 181,
+  "activeToday": 209,
   "players": [
     {
       "username": "freepawn75",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/449778192.366ea7c3.200x200o.5cebeba5f488.png"
     },
     {
+      "username": "slickey1701",
+      "total_pts": 270,
+      "bullet_pts": 0,
+      "blitz_pts": 270,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 32,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
+    },
+    {
       "username": "isabelcibrian",
       "total_pts": 229,
       "bullet_pts": 58,
@@ -24,17 +35,6 @@
       "blitz_g": 21,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/319105535.64b40884.200x200o.afe21a5b45b6.jpg"
-    },
-    {
-      "username": "aim_gatormonk",
-      "total_pts": 227,
-      "bullet_pts": 200,
-      "blitz_pts": 27,
-      "rapid_pts": 0,
-      "bullet_g": 70,
-      "blitz_g": 3,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
     }
   ]
 }
