@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-07T18:11:22.870Z",
+  "updated": "2026-08-07T19:29:07.021Z",
   "totalMembers": 1545,
-  "activeToday": 376,
+  "activeToday": 384,
   "players": [
     {
-      "username": "ahad5389",
-      "total_pts": 321,
+      "username": "erac001",
+      "total_pts": 357,
       "bullet_pts": 0,
-      "blitz_pts": 216,
+      "blitz_pts": 252,
       "rapid_pts": 105,
       "bullet_g": 0,
-      "blitz_g": 26,
+      "blitz_g": 30,
       "rapid_g": 7,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
+    },
+    {
+      "username": "ahad5389",
+      "total_pts": 326,
+      "bullet_pts": 0,
+      "blitz_pts": 216,
+      "rapid_pts": 110,
+      "bullet_g": 0,
+      "blitz_g": 26,
+      "rapid_g": 8,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/339457789.ba1eded4.200x200o.5e534f2a1a8e.jpg"
     },
     {
-      "username": "vikingviking1984",
-      "total_pts": 312,
-      "bullet_pts": 0,
-      "blitz_pts": 312,
+      "username": "kiyochess7",
+      "total_pts": 321,
+      "bullet_pts": 51,
+      "blitz_pts": 270,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 36,
+      "bullet_g": 17,
+      "blitz_g": 30,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/361141051.c2f9429c.200x200o.5b76c74b2ea4.jpg"
-    },
-    {
-      "username": "erac001",
-      "total_pts": 270,
-      "bullet_pts": 0,
-      "blitz_pts": 165,
-      "rapid_pts": 105,
-      "bullet_g": 0,
-      "blitz_g": 19,
-      "rapid_g": 7,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176478435.ffb5645d.200x200o.b3dd2ccadd62.jpg"
     }
   ]
 }
