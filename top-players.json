@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-08T05:41:43.223Z",
-  "totalMembers": 1547,
-  "activeToday": 138,
+  "updated": "2026-08-08T06:48:17.673Z",
+  "totalMembers": 1548,
+  "activeToday": 161,
   "players": [
+    {
+      "username": "road2sgm0418",
+      "total_pts": 154,
+      "bullet_pts": 82,
+      "blitz_pts": 72,
+      "rapid_pts": 0,
+      "bullet_g": 28,
+      "blitz_g": 8,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/295109369.49489011.200x200o.80713e2c97a3.png"
+    },
     {
       "username": "queiser",
       "total_pts": 138,
@@ -24,17 +35,6 @@
       "blitz_g": 16,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/466931568.7abe8616.200x200o.197e685ebeff.jpg"
-    },
-    {
-      "username": "bosticoart",
-      "total_pts": 133,
-      "bullet_pts": 133,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 45,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
     }
   ]
 }
