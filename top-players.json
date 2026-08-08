@@ -1,18 +1,29 @@
 {
-  "updated": "2026-08-08T06:48:17.673Z",
-  "totalMembers": 1548,
-  "activeToday": 161,
+  "updated": "2026-08-08T07:47:41.200Z",
+  "totalMembers": 1549,
+  "activeToday": 183,
   "players": [
     {
       "username": "road2sgm0418",
-      "total_pts": 154,
+      "total_pts": 172,
       "bullet_pts": 82,
-      "blitz_pts": 72,
+      "blitz_pts": 90,
       "rapid_pts": 0,
       "bullet_g": 28,
-      "blitz_g": 8,
+      "blitz_g": 10,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/295109369.49489011.200x200o.80713e2c97a3.png"
+    },
+    {
+      "username": "kandasamybalaji1983",
+      "total_pts": 150,
+      "bullet_pts": 150,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 50,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146022919.9a5aa91b.200x200o.e50050f3a8de.jpg"
     },
     {
       "username": "queiser",
@@ -24,17 +35,6 @@
       "blitz_g": 16,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
-    },
-    {
-      "username": "shadowmooncat",
-      "total_pts": 138,
-      "bullet_pts": 0,
-      "blitz_pts": 138,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 16,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/466931568.7abe8616.200x200o.197e685ebeff.jpg"
     }
   ]
 }
