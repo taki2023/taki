@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-08T03:24:50.555Z",
-  "totalMembers": 1546,
-  "activeToday": 88,
+  "updated": "2026-08-08T04:35:27.133Z",
+  "totalMembers": 1547,
+  "activeToday": 115,
   "players": [
+    {
+      "username": "queiser",
+      "total_pts": 138,
+      "bullet_pts": 0,
+      "blitz_pts": 138,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 16,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
     {
       "username": "colinkatoa",
       "total_pts": 105,
@@ -16,25 +27,14 @@
     },
     {
       "username": "clebsonram0n",
-      "total_pts": 81,
+      "total_pts": 99,
       "bullet_pts": 0,
-      "blitz_pts": 81,
+      "blitz_pts": 99,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 9,
+      "blitz_g": 11,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/196143631.209fcd99.200x200o.6b4e55a2e629.png"
-    },
-    {
-      "username": "ahmmed_m",
-      "total_pts": 75,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 75,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 5,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/36751868.5580fefd.200x200o.35164f6769f1.jpg"
     }
   ]
 }
