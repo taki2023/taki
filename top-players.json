@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-08T08:38:00.097Z",
+  "updated": "2026-08-08T09:35:32.202Z",
   "totalMembers": 1549,
-  "activeToday": 194,
+  "activeToday": 212,
   "players": [
+    {
+      "username": "financial_dragon",
+      "total_pts": 186,
+      "bullet_pts": 0,
+      "blitz_pts": 186,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 22,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
+    },
     {
       "username": "kandasamybalaji1983",
       "total_pts": 174,
@@ -24,17 +35,6 @@
       "blitz_g": 10,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/295109369.49489011.200x200o.80713e2c97a3.png"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 168,
-      "bullet_pts": 0,
-      "blitz_pts": 168,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 20,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
     }
   ]
 }
