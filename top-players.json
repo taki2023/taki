@@ -1,28 +1,28 @@
 {
-  "updated": "2026-08-08T17:58:00.879Z",
-  "totalMembers": 1551,
-  "activeToday": 338,
+  "updated": "2026-08-08T18:42:14.833Z",
+  "totalMembers": 1552,
+  "activeToday": 377,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 774,
+      "total_pts": 822,
       "bullet_pts": 0,
-      "blitz_pts": 774,
+      "blitz_pts": 822,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 88,
+      "blitz_g": 94,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
       "username": "damjan1989",
-      "total_pts": 345,
+      "total_pts": 375,
       "bullet_pts": 43,
       "blitz_pts": 27,
-      "rapid_pts": 275,
+      "rapid_pts": 305,
       "bullet_g": 15,
       "blitz_g": 3,
-      "rapid_g": 19,
+      "rapid_g": 21,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
     {
