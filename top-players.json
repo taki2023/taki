@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-08T04:35:27.133Z",
+  "updated": "2026-08-08T05:41:43.223Z",
   "totalMembers": 1547,
-  "activeToday": 115,
+  "activeToday": 138,
   "players": [
     {
       "username": "queiser",
@@ -15,26 +15,26 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
-      "username": "colinkatoa",
-      "total_pts": 105,
+      "username": "shadowmooncat",
+      "total_pts": 138,
       "bullet_pts": 0,
-      "blitz_pts": 90,
-      "rapid_pts": 15,
-      "bullet_g": 0,
-      "blitz_g": 12,
-      "rapid_g": 1,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "clebsonram0n",
-      "total_pts": 99,
-      "bullet_pts": 0,
-      "blitz_pts": 99,
+      "blitz_pts": 138,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 11,
+      "blitz_g": 16,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/196143631.209fcd99.200x200o.6b4e55a2e629.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/466931568.7abe8616.200x200o.197e685ebeff.jpg"
+    },
+    {
+      "username": "bosticoart",
+      "total_pts": 133,
+      "bullet_pts": 133,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 45,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
     }
   ]
 }
