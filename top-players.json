@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-07T23:58:42.886Z",
+  "updated": "2026-08-08T01:56:45.078Z",
   "totalMembers": 1546,
-  "activeToday": 434,
+  "activeToday": 57,
   "players": [
     {
-      "username": "erac001",
-      "total_pts": 447,
+      "username": "colinkatoa",
+      "total_pts": 75,
       "bullet_pts": 0,
-      "blitz_pts": 342,
-      "rapid_pts": 105,
+      "blitz_pts": 60,
+      "rapid_pts": 15,
       "bullet_g": 0,
-      "blitz_g": 40,
-      "rapid_g": 7,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/376334637.2f593298.200x200o.84cb73c2dc0d.jpg"
+      "blitz_g": 8,
+      "rapid_g": 1,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "ayar9",
-      "total_pts": 423,
+      "username": "queiser",
+      "total_pts": 63,
       "bullet_pts": 0,
-      "blitz_pts": 378,
+      "blitz_pts": 63,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
+    {
+      "username": "dior-eluchil",
+      "total_pts": 45,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
       "rapid_pts": 45,
       "bullet_g": 0,
-      "blitz_g": 46,
+      "blitz_g": 0,
       "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/547775753.fd9eeb38.200x200o.fcb7e910639a.jpg"
-    },
-    {
-      "username": "kiyochess7",
-      "total_pts": 386,
-      "bullet_pts": 107,
-      "blitz_pts": 279,
-      "rapid_pts": 0,
-      "bullet_g": 37,
-      "blitz_g": 31,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176478435.ffb5645d.200x200o.b3dd2ccadd62.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/439251667.4b15cdce.200x200o.dfc019190b85.png"
     }
   ]
 }
