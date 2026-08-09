@@ -1,1 +1,25 @@
- { "rounds": [], "ranking": [] }
+{
+  "rounds": [],
+  "ranking": [
+    {
+      "username": "Daniel2040",
+      "rating": 2254,
+      "flagged": false
+    },
+    {
+      "username": "Taki",
+      "rating": 1952,
+      "flagged": false
+    },
+    {
+      "username": "TALented_Vasee_18",
+      "rating": 1606,
+      "flagged": false
+    },
+    {
+      "username": "IAMPLAYEROFCHESS",
+      "rating": 1481,
+      "flagged": false
+    }
+  ]
+}
