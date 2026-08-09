@@ -42,6 +42,12 @@ body{display:block;font-family:'Nunito',sans-serif;}
   background:rgba(255,255,255,.65);backdrop-filter:blur(10px) saturate(1.3);padding:6px 11px;border-radius:999px;white-space:nowrap;flex-shrink:0;
   box-shadow:0 0 0 1px rgba(255,220,201,.7) inset,0 4px 10px -6px rgba(179,35,15,.25);}
 .stat-pill .stat-num{color:var(--red-mid);font-weight:900;}
+.stat-pill.refresh-btn{cursor:pointer;border:none;font-family:inherit;transition:background .15s var(--ease),transform .15s var(--spring);}
+.stat-pill.refresh-btn:hover{background:#FFF1EA;}
+.stat-pill.refresh-btn:active{transform:scale(.94);}
+.stat-pill.refresh-btn.spinning .refresh-ico{animation:spin .7s linear infinite;}
+.refresh-ico{width:11px;height:11px;fill:var(--red-mid);flex-shrink:0;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
 .round-dropdown{position:relative;z-index:6;margin-left:auto;}
 .round-dropdown-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:auto;min-width:150px;padding:11px 16px;border-radius:18px;border:none;cursor:pointer;
@@ -63,6 +69,15 @@ body{display:block;font-family:'Nunito',sans-serif;}
 .table-scroll{overflow-x:auto;border-radius:18px;-webkit-overflow-scrolling:touch;}
 .table-scroll::-webkit-scrollbar{height:6px;}
 .table-scroll::-webkit-scrollbar-thumb{background:var(--peach);border-radius:3px;}
+
+/* Multi-group rounds: groups sit side-by-side in a horizontal scroll strip
+   instead of stacking endlessly down the page. Single-group (final) rounds
+   render full-width with no scroll wrapper. */
+.groups-scroll{display:flex;gap:16px;overflow-x:auto;padding:2px 2px 12px;margin:0 -2px 4px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;}
+.groups-scroll::-webkit-scrollbar{height:8px;}
+.groups-scroll::-webkit-scrollbar-thumb{background:var(--peach);border-radius:4px;}
+.groups-scroll .group-card{flex:0 0 360px;width:360px;margin-bottom:0;scroll-snap-align:start;}
+.groups-scroll-hint{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800;color:var(--ink-faint);margin:-8px 0 10px;padding:0 2px;}
 
 table.pairings{width:100%;border-collapse:separate;border-spacing:0;}
 table.pairings thead th{background:linear-gradient(135deg,#3a2018,#241009);color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:12.5px;padding:11px 5px;text-align:center;white-space:nowrap;}
@@ -158,6 +173,7 @@ table.final-round .player-rank.r3{background:linear-gradient(135deg,var(--bronze
   .round-stats{gap:4px;flex-wrap:nowrap;}
   .stat-pill{padding:5px 8px;font-size:8.5px;gap:3px;}
   .round-dropdown-btn{min-width:0;padding:8px 10px;font-size:12px;gap:5px;}
+  .groups-scroll .group-card{flex:0 0 300px;width:300px;}
 }
 </style>
 </head>
@@ -173,6 +189,10 @@ table.final-round .player-rank.r3{background:linear-gradient(135deg,var(--bronze
       <div class="round-stats" id="roundStats" style="display:none;">
         <span class="stat-pill" id="statMatches">– / – matchups</span>
         <span class="stat-pill" id="statGames">– / – games</span>
+        <button class="stat-pill refresh-btn" id="refreshBtn" type="button" title="Reload latest data from GitHub">
+          <svg class="refresh-ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.75 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"></path></svg>
+          Refresh
+        </button>
       </div>
       <div id="roundDropdown" class="round-dropdown" style="display:none;">
         <button class="round-dropdown-btn" id="roundDropdownBtn" type="button">
@@ -203,21 +223,42 @@ table.final-round .player-rank.r3{background:linear-gradient(135deg,var(--bronze
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   PASTE the sheet's Round/group/player matrix here, exactly as
-   copied from Sheet1. Each pair-cell contains either nothing (not
-   fetched yet) or up to 2 game entries formatted as
-   "url::scoreRow-scoreCol | url::scoreRow-scoreCol" — that's exactly
-   what SheetWriterBlitz.gs / blitz-admin.html write into the sheet.
-   ════════════════════════════════════════════════════════════════ */
-const TOURNAMENT_DATA = `
-Round 1										
-group 1										
-Daniel2040	x	https://www.chess.com/game/live/165776405352::1-0 | https://www.chess.com/game/live/165935498632::1-0	https://www.chess.com/game/live/172711178746::1-0 | https://www.chess.com/game/live/172711306242::1-0	https://www.chess.com/game/live/165776405352::1-0 | https://www.chess.com/game/live/165935498632::1-0						
-Taki		x	https://www.chess.com/game/live/165776405352::1-0 | https://www.chess.com/game/live/165935498632::1-0	https://www.chess.com/game/live/162638828245::1-0 | https://www.chess.com/game/live/162639428995::1-0						
-TALented_Vasee_18			x	https://www.chess.com/game/live/165776405352::1-0 | https://www.chess.com/game/live/165935498632::1-0						
-IAMPLAYEROFCHESS				x								
+   DATA SOURCE — this file lives in the PUBLIC pairings repo. The
+   tournament data itself is a plain JSON file committed to that same
+   public repo (the Bracket Admin panel — running from the separate
+   PRIVATE admin repo — writes to it via the GitHub API). This page
+   just fetches the raw file straight off GitHub's CDN, no server of
+   its own required.
 
-`;
+   Fill these in to match your repo:
+   ════════════════════════════════════════════════════════════════ */
+// Just paste the raw file URL — click the JSON file on GitHub, click
+// "Raw", copy that address. Looks like:
+// https://raw.githubusercontent.com/OWNER/REPO/BRANCH/path/to/tournament-data.json
+const DATA_URL = 'https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/hot-chilli-pairings/main/data/tournament-data.json';
+
+// Expected JSON shape at DATA_URL:
+// {
+//   "rounds": [
+//     {
+//       "name": "Round 1",
+//       "groups": [
+//         {
+//           "name": "group 1",
+//           "players": ["player1", "player2", ...],
+//           "matches": [
+//             { "playerA": "player1", "playerB": "player2", "link": "url::1-0 | url::1-0" },
+//             ...
+//           ]
+//         }
+//       ]
+//     }
+//   ]
+// }
+// "players" is the ordered list of player usernames in that group. Each
+// match's "link" holds up to 2 game entries formatted as
+// "url::scoreRow-scoreCol | url::scoreRow-scoreCol" (scoreRow refers to
+// playerA, scoreCol to playerB) — an empty string means not fetched yet.
 
 const DEFAULT_AVATAR = 'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
 const HOST_PLAYER = ''; // optional: chess.com username to tag as "Host"
@@ -267,9 +308,8 @@ function resultPoints(resultStr) {
 function pointsLabel(p) { return p === 1 ? '1' : p === 0 ? '0' : p === 0.5 ? '½' : ''; }
 function pointsClass(p) { return p === 1 ? 'win' : p === 0 ? 'loss' : 'draw'; }
 
-// Parses a cell's raw text into [{link, scoreA, scoreB}], where
-// scoreA/scoreB are already from the row-player/col-player perspective
-// for THIS specific cell position (see SheetWriterBlitz.gs write side).
+// Parses a match's raw "link" text into [{link, scoreA, scoreB}], where
+// scoreA/scoreB are from playerA/playerB's perspective respectively.
 function parseCellGames(cellText) {
   if (!cellText) return [];
   return cellText.split('|').map(s => s.trim()).filter(Boolean).map(entry => {
@@ -279,55 +319,33 @@ function parseCellGames(cellText) {
   });
 }
 
-/* Turns TOURNAMENT_DATA into { rounds: [...] } — same shape/parsing
-   convention as the club-tournament visualizer, one extra: each
-   match's "link" field holds the RAW (unparsed) cell text. */
-function parseTournamentData(text) {
-  const rounds = [];
-  let currentRound = null, currentGroup = null, groupRows = [];
-
-  function flushGroup() {
-    if (!currentGroup) return;
-    const clubs = groupRows.map(r => r.slug);
-    const matches = [];
-    for (let i = 0; i < clubs.length; i++) {
-      for (let j = i + 1; j < clubs.length; j++) {
-        const cellIJ = (groupRows[i].cells[j] || '').trim();
-        const cellJI = (groupRows[j].cells[i] || '').trim();
-        let link = '';
-        [cellIJ, cellJI].forEach(c => { if (c && c.toLowerCase() !== 'x') link = c; });
-        matches.push({ clubA: clubs[i], clubB: clubs[j], link: link });
-      }
-    }
-    currentGroup.clubs = clubs;
-    currentGroup.matches = matches;
-    currentRound.groups.push(currentGroup);
-    currentGroup = null; groupRows = [];
+// Validates the fetched JSON matches the shape documented above so a
+// malformed/mid-write file fails with a clear error instead of a blank
+// page or a cryptic exception deep in rendering.
+function validateTournamentData(obj) {
+  if (!obj || !Array.isArray(obj.rounds)) {
+    throw new Error('Expected an object with a "rounds" array');
   }
-
-  text.split('\n').forEach(rawLine => {
-    const line = rawLine.replace(/\r$/, '');
-    if (!line.trim()) return;
-    const cells = line.split('\t');
-    const first = (cells[0] || '').trim();
-    if (/^round\b/i.test(first)) {
-      flushGroup();
-      if (currentRound) rounds.push(currentRound);
-      currentRound = { name: first, groups: [] };
-      return;
+  obj.rounds.forEach((r, ri) => {
+    if (!r || typeof r.name !== 'string' || !Array.isArray(r.groups)) {
+      throw new Error('Round ' + (ri + 1) + ' is missing "name" or "groups"');
     }
-    if (/^group\b/i.test(first)) {
-      flushGroup();
-      if (!currentRound) currentRound = { name: 'Round 1', groups: [] };
-      currentGroup = { name: first };
-      return;
-    }
-    if (!currentGroup) return;
-    groupRows.push({ slug: first, cells: cells.slice(1) });
+    r.groups.forEach((g, gi) => {
+      if (!g || typeof g.name !== 'string' || !Array.isArray(g.players) || !Array.isArray(g.matches)) {
+        throw new Error('Round ' + (ri + 1) + ', group ' + (gi + 1) + ' is missing "name", "players", or "matches"');
+      }
+    });
   });
-  flushGroup();
-  if (currentRound) rounds.push(currentRound);
-  return { rounds };
+  return obj;
+}
+
+async function fetchTournamentData() {
+  const r = await fetch(DATA_URL + (DATA_URL.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now(), { cache: 'no-store' });
+  if (!r.ok) {
+    throw new Error('HTTP ' + r.status + ' fetching ' + DATA_URL + ' — has the data file been published to that path yet?');
+  }
+  const obj = await r.json();
+  return validateTournamentData(obj);
 }
 
 const popover = document.getElementById('matchPopover');
@@ -389,6 +407,12 @@ function popoverHTML(playerA, playerB, game, gameLabel) {
 
 let TOURNAMENT = { rounds: [] };
 let activeRoundIdx = 0;
+let hasLoadedOnce = false;
+
+// A round is treated as the Final Round the moment only one group is
+// left in it, regardless of whatever name it was given in the data.
+function isFinalRound(round) { return !!round && Array.isArray(round.groups) && round.groups.length === 1; }
+function displayRoundName(round) { return isFinalRound(round) ? 'Final Round' : (round ? round.name : 'Round'); }
 
 function renderRoundNav() {
   const wrap = document.getElementById('roundDropdown');
@@ -397,9 +421,9 @@ function renderRoundNav() {
   if (!TOURNAMENT.rounds.length) { wrap.style.display = 'none'; return; }
   wrap.style.display = 'block';
   const current = TOURNAMENT.rounds[activeRoundIdx];
-  label.textContent = current ? current.name : 'Round';
+  label.textContent = displayRoundName(current);
   list.innerHTML = TOURNAMENT.rounds.map((r, i) =>
-    `<div class="round-dropdown-item ${i === activeRoundIdx ? 'active' : ''}" data-idx="${i}">${r.name}</div>`
+    `<div class="round-dropdown-item ${i === activeRoundIdx ? 'active' : ''}" data-idx="${i}">${displayRoundName(r)}</div>`
   ).join('');
   list.querySelectorAll('.round-dropdown-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -432,7 +456,7 @@ async function renderActiveRound() {
   const content = document.getElementById('content');
   const round = TOURNAMENT.rounds[activeRoundIdx];
   if (!round) {
-    content.innerHTML = '<div class="load-msg">No round data found. Check the TOURNAMENT_DATA matrix at the top of the script.</div>';
+    content.innerHTML = '<div class="load-msg">No round data found in the tournament data file.</div>';
     document.getElementById('roundStats').style.display = 'none';
     return;
   }
@@ -441,8 +465,13 @@ async function renderActiveRound() {
     document.getElementById('roundStats').style.display = 'none';
     return;
   }
-  const isLastRound = round.groups.length === 1;
-  content.innerHTML = round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('');
+  const isLastRound = isFinalRound(round);
+  const cardsHTML = round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('');
+  // Multiple groups → horizontal scroll strip. Single (final) group →
+  // full-width, no wrapper needed.
+  content.innerHTML = isLastRound
+    ? cardsHTML
+    : `<div class="groups-scroll-hint">↔ Scroll to see all groups</div><div class="groups-scroll">${cardsHTML}</div>`;
   const matchesTotal = round.groups.reduce((sum, g) => sum + g.matches.length, 0);
   resetRoundStats(matchesTotal);
 
@@ -469,8 +498,8 @@ function playerRowSkeletonHTML(playerCount) {
   return html;
 }
 function groupSkeletonHTML(group, gi, isLastRound) {
-  const n = group.clubs.length;
-  const rows = group.clubs.map(() => playerRowSkeletonHTML(n)).join('');
+  const n = group.players.length;
+  const rows = group.players.map(() => playerRowSkeletonHTML(n)).join('');
   return `<div class="group-card" id="group-${gi}"><div class="table-scroll"><table class="pairings${isLastRound ? ' final-round' : ''}">
     <thead id="ghead-${gi}">${headerRowHTML(n, prettifyGroupName(group.name))}</thead>
     <tbody id="gbody-${gi}">${rows}</tbody></table></div></div>`;
@@ -483,17 +512,17 @@ function qualificationBandClass(rank, playerCount) {
 }
 
 async function fillGroup(group, gi, isLastRound) {
-  const players = group.clubs;
+  const players = group.players;
   const infos = {};
   await Promise.all(players.map(async p => { infos[p] = await fetchPlayer(p); }));
 
   const gamesByPair = {}; // "a|b" (in matrix i<j order) -> {games:[...], link raw}
   group.matches.forEach(m => {
     const games = parseCellGames(m.link);
-    gamesByPair[m.clubA + '|' + m.clubB] = { clubA: m.clubA, clubB: m.clubB, games };
-    gamesByPair[m.clubB + '|' + m.clubA] = { clubA: m.clubA, clubB: m.clubB, games, flipped: true };
+    gamesByPair[m.playerA + '|' + m.playerB] = { playerA: m.playerA, playerB: m.playerB, games };
+    gamesByPair[m.playerB + '|' + m.playerA] = { playerA: m.playerA, playerB: m.playerB, games, flipped: true };
   });
-  function getPair(a, b) { return gamesByPair[a + '|' + b] || { clubA: a, clubB: b, games: [] }; }
+  function getPair(a, b) { return gamesByPair[a + '|' + b] || { playerA: a, playerB: b, games: [] }; }
 
   const score = {}, oppResult = {};
   players.forEach(p => { score[p] = 0; oppResult[p] = {}; });
@@ -509,12 +538,12 @@ async function fillGroup(group, gi, isLastRound) {
       if (!isNaN(g.scoreB)) scoreB += g.scoreB;
       gamesDone++;
     });
-    score[m.clubA] += scoreA; score[m.clubB] += scoreB;
+    score[m.playerA] += scoreA; score[m.playerB] += scoreB;
     if (games.length >= 2) {
       matchesDone++;
       const result = scoreA > scoreB ? 1 : (scoreA < scoreB ? 0 : 0.5);
-      oppResult[m.clubA][m.clubB] = result;
-      oppResult[m.clubB][m.clubA] = 1 - result;
+      oppResult[m.playerA][m.playerB] = result;
+      oppResult[m.playerB][m.playerA] = 1 - result;
     }
   });
 
@@ -602,18 +631,42 @@ async function fillGroup(group, gi, isLastRound) {
   return { matchesDone, matchesTotal, gamesDone, gamesTotal };
 }
 
-function boot() {
+async function boot() {
   const content = document.getElementById('content');
-  try { TOURNAMENT = parseTournamentData(TOURNAMENT_DATA); }
-  catch (e) { content.innerHTML = '<div class="error-msg">⚠️ Could not parse TOURNAMENT_DATA: ' + (e.message || e) + '</div>'; return; }
-  if (!TOURNAMENT.rounds.length) {
-    content.innerHTML = '<div class="error-msg">⚠️ No rounds found. Check the TOURNAMENT_DATA matrix at the top of the script.</div>';
+  const refreshBtn = document.getElementById('refreshBtn');
+  if (refreshBtn) refreshBtn.classList.add('spinning');
+  if (!hasLoadedOnce) content.innerHTML = '<div class="load-msg">🔥 Loading tournament data…</div>';
+
+  try {
+    TOURNAMENT = await fetchTournamentData();
+  } catch (e) {
+    content.innerHTML = '<div class="error-msg">⚠️ Could not load tournament data: ' + (e.message || e) + '</div>';
+    document.getElementById('roundDropdown').style.display = 'none';
+    if (refreshBtn) refreshBtn.classList.remove('spinning');
     return;
   }
-  activeRoundIdx = Math.max(0, TOURNAMENT.rounds.length - 1);
+
+  if (!TOURNAMENT.rounds.length) {
+    content.innerHTML = '<div class="error-msg">⚠️ No rounds found yet in the tournament data file.</div>';
+    document.getElementById('roundDropdown').style.display = 'none';
+    document.getElementById('roundStats').style.display = 'none';
+    if (refreshBtn) refreshBtn.classList.remove('spinning');
+    return;
+  }
+
+  if (!hasLoadedOnce) {
+    activeRoundIdx = TOURNAMENT.rounds.length - 1; // default to the newest round on first load
+    hasLoadedOnce = true;
+  } else {
+    activeRoundIdx = Math.min(activeRoundIdx, TOURNAMENT.rounds.length - 1); // keep the round the user was viewing, on refresh
+  }
+
   renderRoundNav();
-  renderActiveRound();
+  await renderActiveRound();
+  if (refreshBtn) refreshBtn.classList.remove('spinning');
 }
+
+document.getElementById('refreshBtn').addEventListener('click', boot);
 boot();
 </script>
 </body>
