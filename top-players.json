@@ -1,15 +1,26 @@
 {
-  "updated": "2026-08-09T04:46:53.973Z",
+  "updated": "2026-08-09T05:45:19.801Z",
   "totalMembers": 1553,
-  "activeToday": 121,
+  "activeToday": 140,
   "players": [
     {
+      "username": "yael981",
+      "total_pts": 156,
+      "bullet_pts": 0,
+      "blitz_pts": 156,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 18,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
+    },
+    {
       "username": "sara24jefic",
-      "total_pts": 130,
-      "bullet_pts": 130,
+      "total_pts": 142,
+      "bullet_pts": 142,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 46,
+      "bullet_g": 50,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/398120571.64e5d3c6.200x200o.cdd4368d1a49.jpg"
@@ -24,17 +35,6 @@
       "blitz_g": 15,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477580466.764813ff.200x200o.97a016f0b1d3.png"
-    },
-    {
-      "username": "yael981",
-      "total_pts": 111,
-      "bullet_pts": 0,
-      "blitz_pts": 111,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 13,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
     }
   ]
 }
