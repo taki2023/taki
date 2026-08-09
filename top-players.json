@@ -1,38 +1,38 @@
 {
-  "updated": "2026-08-09T17:29:23.158Z",
+  "updated": "2026-08-09T18:01:16.366Z",
   "totalMembers": 1554,
-  "activeToday": 360,
+  "activeToday": 373,
   "players": [
     {
       "username": "traker-86",
-      "total_pts": 597,
+      "total_pts": 651,
       "bullet_pts": 0,
-      "blitz_pts": 597,
+      "blitz_pts": 651,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 71,
+      "blitz_g": 77,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     },
     {
       "username": "damjan1989",
-      "total_pts": 392,
+      "total_pts": 410,
       "bullet_pts": 0,
-      "blitz_pts": 267,
+      "blitz_pts": 285,
       "rapid_pts": 125,
       "bullet_g": 0,
-      "blitz_g": 33,
+      "blitz_g": 35,
       "rapid_g": 11,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
     {
       "username": "queiser",
-      "total_pts": 381,
+      "total_pts": 408,
       "bullet_pts": 21,
-      "blitz_pts": 360,
+      "blitz_pts": 387,
       "rapid_pts": 0,
       "bullet_g": 7,
-      "blitz_g": 42,
+      "blitz_g": 45,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     }
