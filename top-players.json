@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-09T08:39:42.273Z",
+  "updated": "2026-08-09T09:37:25.416Z",
   "totalMembers": 1553,
-  "activeToday": 214,
+  "activeToday": 233,
   "players": [
     {
       "username": "queiser",
@@ -15,26 +15,26 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
-      "username": "londonsystemlegend",
-      "total_pts": 170,
+      "username": "financial_dragon",
+      "total_pts": 207,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 170,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/352995733.6a1c3fd5.200x200o.2b9cf90b7fff.png"
-    },
-    {
-      "username": "ernandou",
-      "total_pts": 168,
-      "bullet_pts": 0,
-      "blitz_pts": 168,
+      "blitz_pts": 207,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 20,
+      "blitz_g": 25,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/172820553.e7b22a39.200x200o.9086f534c619.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
+    },
+    {
+      "username": "yael981",
+      "total_pts": 207,
+      "bullet_pts": 0,
+      "blitz_pts": 207,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 25,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.af5b7388.200x200o.83ec08f00984.png"
     }
   ]
 }
