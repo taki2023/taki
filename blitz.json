@@ -1,5 +1,53 @@
 {
-  "rounds": [],
+  "rounds": [
+    {
+      "number": 1,
+      "name": "Final Round",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "Daniel2040",
+            "Taki",
+            "TALented_Vasee_18",
+            "IAMPLAYEROFCHESS"
+          ],
+          "matches": [
+            {
+              "playerA": "Daniel2040",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "IAMPLAYEROFCHESS",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "IAMPLAYEROFCHESS",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "IAMPLAYEROFCHESS",
+              "link": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "ranking": [
     {
       "username": "Daniel2040",
