@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-09T01:27:53.688Z",
+  "updated": "2026-08-09T03:18:05.561Z",
   "totalMembers": 1553,
-  "activeToday": 46,
+  "activeToday": 90,
   "players": [
     {
-      "username": "mike_chai",
-      "total_pts": 63,
-      "bullet_pts": 63,
+      "username": "sara24jefic",
+      "total_pts": 85,
+      "bullet_pts": 85,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 21,
+      "bullet_g": 29,
       "blitz_g": 0,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/343059259.a7ebeca0.200x200o.50603e543a29.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/398120571.64e5d3c6.200x200o.cdd4368d1a49.jpg"
     },
     {
-      "username": "sebastian-space",
-      "total_pts": 54,
+      "username": "abdelhak003",
+      "total_pts": 78,
       "bullet_pts": 0,
-      "blitz_pts": 9,
-      "rapid_pts": 45,
+      "blitz_pts": 78,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 1,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/453464172.3674cbd6.200x200o.e445fbb6c5ba.jpg"
+      "blitz_g": 10,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/238843441.cc8658fa.200x200o.d1c13e448141.jpg"
     },
     {
-      "username": "pikachu_playz3",
-      "total_pts": 50,
-      "bullet_pts": 0,
+      "username": "vannamcovua",
+      "total_pts": 77,
+      "bullet_pts": 77,
       "blitz_pts": 0,
-      "rapid_pts": 50,
-      "bullet_g": 0,
+      "rapid_pts": 0,
+      "bullet_g": 27,
       "blitz_g": 0,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/445935762.944f43dd.200x200o.6ed4091f730e.jpg"
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/523120267.3ad49cd1.200x200o.c255db2dd45e.png"
     }
   ]
 }
