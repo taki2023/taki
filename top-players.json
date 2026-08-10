@@ -1,29 +1,29 @@
 {
-  "updated": "2026-08-10T17:55:11.359Z",
+  "updated": "2026-08-10T18:54:23.927Z",
   "totalMembers": 1554,
-  "activeToday": 399,
+  "activeToday": 394,
   "players": [
     {
-      "username": "mastergoogle",
-      "total_pts": 440,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 440,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 32,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/429706373.35387bbc.200x200o.3b3c340b3498.jpg"
-    },
-    {
       "username": "ayar9",
-      "total_pts": 418,
+      "total_pts": 466,
       "bullet_pts": 55,
-      "blitz_pts": 348,
+      "blitz_pts": 396,
       "rapid_pts": 15,
       "bullet_g": 19,
-      "blitz_g": 42,
+      "blitz_g": 48,
       "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/547775753.eacca9fe.200x200o.9e2db9f6ca57.jpg"
+    },
+    {
+      "username": "mastergoogle",
+      "total_pts": 445,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 445,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 33,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/429706373.35387bbc.200x200o.3b3c340b3498.jpg"
     },
     {
       "username": "silent-sniper",
