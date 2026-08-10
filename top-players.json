@@ -1,17 +1,17 @@
 {
-  "updated": "2026-08-10T12:12:33.620Z",
-  "totalMembers": 1555,
-  "activeToday": 275,
+  "updated": "2026-08-10T13:55:30.966Z",
+  "totalMembers": 1554,
+  "activeToday": 305,
   "players": [
     {
       "username": "mastergoogle",
-      "total_pts": 330,
+      "total_pts": 350,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 330,
+      "rapid_pts": 350,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 22,
+      "rapid_g": 24,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/429706373.35387bbc.200x200o.3b3c340b3498.jpg"
     },
     {
@@ -27,12 +27,12 @@
     },
     {
       "username": "abner-aaron",
-      "total_pts": 219,
+      "total_pts": 273,
       "bullet_pts": 0,
-      "blitz_pts": 204,
+      "blitz_pts": 258,
       "rapid_pts": 15,
       "bullet_g": 0,
-      "blitz_g": 24,
+      "blitz_g": 30,
       "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/549589123.127a880d.200x200o.88ca8b11d822.png"
     }
