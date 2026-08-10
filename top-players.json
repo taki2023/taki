@@ -1,8 +1,30 @@
 {
-  "updated": "2026-08-10T08:58:46.171Z",
-  "totalMembers": 1556,
-  "activeToday": 218,
+  "updated": "2026-08-10T10:22:05.934Z",
+  "totalMembers": 1555,
+  "activeToday": 247,
   "players": [
+    {
+      "username": "silent-sniper",
+      "total_pts": 297,
+      "bullet_pts": 21,
+      "blitz_pts": 261,
+      "rapid_pts": 15,
+      "bullet_g": 7,
+      "blitz_g": 29,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
+    },
+    {
+      "username": "mastergoogle",
+      "total_pts": 255,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 255,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 17,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/429706373.35387bbc.200x200o.3b3c340b3498.jpg"
+    },
     {
       "username": "aim_gatormonk",
       "total_pts": 212,
@@ -13,28 +35,6 @@
       "blitz_g": 10,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
-    },
-    {
-      "username": "silent-sniper",
-      "total_pts": 207,
-      "bullet_pts": 21,
-      "blitz_pts": 171,
-      "rapid_pts": 15,
-      "bullet_g": 7,
-      "blitz_g": 19,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
-    },
-    {
-      "username": "anphuc0402",
-      "total_pts": 192,
-      "bullet_pts": 0,
-      "blitz_pts": 162,
-      "rapid_pts": 30,
-      "bullet_g": 0,
-      "blitz_g": 18,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/441599513.d3e31ec1.200x200o.a024bd96c26b.jpg"
     }
   ]
 }
