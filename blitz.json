@@ -1,5 +1,322 @@
 {
-  "rounds": [],
+  "rounds": [
+    {
+      "number": 1,
+      "name": "Round 1",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "DaTreeOfFives",
+            "queiser",
+            "TrofAndy",
+            "cello_jello",
+            "Giraffe1100"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "queiser",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "TrofAndy",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Giraffe1100",
+              "link": ""
+            },
+            {
+              "playerA": "queiser",
+              "playerB": "TrofAndy",
+              "link": ""
+            },
+            {
+              "playerA": "queiser",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "queiser",
+              "playerB": "Giraffe1100",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "Giraffe1100",
+              "link": ""
+            },
+            {
+              "playerA": "cello_jello",
+              "playerB": "Giraffe1100",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 2",
+          "players": [
+            "Freddy1201",
+            "Taki",
+            "Oo_Arabi",
+            "RKamalanayanan",
+            "Sukuna_Loyalist"
+          ],
+          "matches": [
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Oo_Arabi",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "RKamalanayanan",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Sukuna_Loyalist",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "Oo_Arabi",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "RKamalanayanan",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "Sukuna_Loyalist",
+              "link": ""
+            },
+            {
+              "playerA": "Oo_Arabi",
+              "playerB": "RKamalanayanan",
+              "link": ""
+            },
+            {
+              "playerA": "Oo_Arabi",
+              "playerB": "Sukuna_Loyalist",
+              "link": ""
+            },
+            {
+              "playerA": "RKamalanayanan",
+              "playerB": "Sukuna_Loyalist",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 3",
+          "players": [
+            "Daniel2040",
+            "vednu",
+            "TALented_Vasee_18",
+            "RayDuqueIII",
+            "lokesh-gamer-18"
+          ],
+          "matches": [
+            {
+              "playerA": "Daniel2040",
+              "playerB": "vednu",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "RayDuqueIII",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "lokesh-gamer-18",
+              "link": ""
+            },
+            {
+              "playerA": "vednu",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "vednu",
+              "playerB": "RayDuqueIII",
+              "link": ""
+            },
+            {
+              "playerA": "vednu",
+              "playerB": "lokesh-gamer-18",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "RayDuqueIII",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "lokesh-gamer-18",
+              "link": ""
+            },
+            {
+              "playerA": "RayDuqueIII",
+              "playerB": "lokesh-gamer-18",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 4",
+          "players": [
+            "Hectorcista",
+            "RevToMate2",
+            "Iamplayerofchess",
+            "AarjavSamaiya",
+            "DrKapablanca"
+          ],
+          "matches": [
+            {
+              "playerA": "Hectorcista",
+              "playerB": "RevToMate2",
+              "link": ""
+            },
+            {
+              "playerA": "Hectorcista",
+              "playerB": "Iamplayerofchess",
+              "link": ""
+            },
+            {
+              "playerA": "Hectorcista",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Hectorcista",
+              "playerB": "DrKapablanca",
+              "link": ""
+            },
+            {
+              "playerA": "RevToMate2",
+              "playerB": "Iamplayerofchess",
+              "link": ""
+            },
+            {
+              "playerA": "RevToMate2",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "RevToMate2",
+              "playerB": "DrKapablanca",
+              "link": ""
+            },
+            {
+              "playerA": "Iamplayerofchess",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Iamplayerofchess",
+              "playerB": "DrKapablanca",
+              "link": ""
+            },
+            {
+              "playerA": "AarjavSamaiya",
+              "playerB": "DrKapablanca",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 5",
+          "players": [
+            "Xx_Vanilla_xX",
+            "SoloIndie",
+            "ReefRhino26",
+            "Tengen",
+            "roheemo_h"
+          ],
+          "matches": [
+            {
+              "playerA": "Xx_Vanilla_xX",
+              "playerB": "SoloIndie",
+              "link": ""
+            },
+            {
+              "playerA": "Xx_Vanilla_xX",
+              "playerB": "ReefRhino26",
+              "link": ""
+            },
+            {
+              "playerA": "Xx_Vanilla_xX",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "Xx_Vanilla_xX",
+              "playerB": "roheemo_h",
+              "link": ""
+            },
+            {
+              "playerA": "SoloIndie",
+              "playerB": "ReefRhino26",
+              "link": ""
+            },
+            {
+              "playerA": "SoloIndie",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "SoloIndie",
+              "playerB": "roheemo_h",
+              "link": ""
+            },
+            {
+              "playerA": "ReefRhino26",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "ReefRhino26",
+              "playerB": "roheemo_h",
+              "link": ""
+            },
+            {
+              "playerA": "Tengen",
+              "playerB": "roheemo_h",
+              "link": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "ranking": [
     {
       "username": "DaTreeOfFives",
