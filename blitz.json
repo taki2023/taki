@@ -1,53 +1,5 @@
 {
-  "rounds": [
-    {
-      "number": 1,
-      "name": "Final Round",
-      "groups": [
-        {
-          "name": "group 1",
-          "players": [
-            "Daniel2040",
-            "Taki",
-            "TALented_Vasee_18",
-            "IAMPLAYEROFCHESS"
-          ],
-          "matches": [
-            {
-              "playerA": "Daniel2040",
-              "playerB": "Taki",
-              "link": "https://www.chess.com/game/live/165776405352::1-0 | https://www.chess.com/game/live/165935498632::1-0"
-            },
-            {
-              "playerA": "Daniel2040",
-              "playerB": "TALented_Vasee_18",
-              "link": "https://www.chess.com/game/live/172711178746::1-0 | https://www.chess.com/game/live/172711306242::1-0"
-            },
-            {
-              "playerA": "Daniel2040",
-              "playerB": "IAMPLAYEROFCHESS",
-              "link": "https://www.chess.com/game/live/168055081540::0.5-0.5"
-            },
-            {
-              "playerA": "Taki",
-              "playerB": "TALented_Vasee_18",
-              "link": "https://www.chess.com/game/live/174456338685::0-1"
-            },
-            {
-              "playerA": "Taki",
-              "playerB": "IAMPLAYEROFCHESS",
-              "link": "https://www.chess.com/game/live/162638828245::1-0 | https://www.chess.com/game/live/162639428995::1-0"
-            },
-            {
-              "playerA": "TALented_Vasee_18",
-              "playerB": "IAMPLAYEROFCHESS",
-              "link": "https://www.chess.com/game/live/174479138239::0-1"
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "rounds": [],
   "ranking": [
     {
       "username": "Daniel2040",
