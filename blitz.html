@@ -16,7 +16,8 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   width:100%;
   margin:0;
   padding:0;
@@ -70,9 +71,9 @@ body{
   isolation:isolate;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    HEADER
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .sb-top{
   background:
@@ -129,7 +130,6 @@ body{
   margin-top:10px;
   position:relative;
   z-index:1;
-
   background:rgba(255,255,255,.22);
   padding:5px 12px;
   border-radius:999px;
@@ -142,9 +142,9 @@ body{
   font-size:10px;
 }
 
-/* ═══════════════════════════════════════════════════════
-   MAIN INNER AREA
-   ═══════════════════════════════════════════════════════ */
+/* =========================
+   MAIN CONTENT
+========================= */
 
 .inner{
   width:100%;
@@ -152,9 +152,9 @@ body{
   padding:0 16px 20px;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    ROUND BAR
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .round-bar{
   display:flex;
@@ -162,7 +162,7 @@ body{
   justify-content:space-between;
   gap:10px;
   margin:-16px 0 16px;
-  z-index:6;
+  z-index:20;
   position:relative;
   flex-wrap:wrap;
   row-gap:10px;
@@ -180,19 +180,15 @@ body{
   display:inline-flex;
   align-items:center;
   gap:5px;
-
   font-size:10px;
   font-weight:800;
   color:var(--ink-soft);
-
   background:rgba(255,255,255,.65);
   backdrop-filter:blur(10px) saturate(1.3);
-
   padding:6px 11px;
   border-radius:999px;
   white-space:nowrap;
   flex-shrink:0;
-
   box-shadow:
     0 0 0 1px rgba(255,220,201,.7) inset,
     0 4px 10px -6px rgba(179,35,15,.25);
@@ -203,13 +199,9 @@ body{
   font-weight:900;
 }
 
-/* ═══════════════════════════════════════════════════════
-   ROUND DROPDOWN
-   ═══════════════════════════════════════════════════════ */
-
 .round-dropdown{
   position:relative;
-  z-index:6;
+  z-index:30;
   margin-left:auto;
 }
 
@@ -218,27 +210,21 @@ body{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-
   width:auto;
   min-width:150px;
-
   padding:11px 16px;
   border-radius:18px;
   border:none;
   cursor:pointer;
-
   background:rgba(255,255,255,.75);
   backdrop-filter:blur(14px) saturate(1.4);
-
   box-shadow:
     0 10px 26px -10px rgba(179,35,15,.35),
     0 0 0 1px rgba(255,220,201,.7) inset;
-
   font-family:'Fredoka',sans-serif;
   font-weight:600;
   font-size:14px;
   color:var(--red-mid);
-
   transition:background .18s var(--ease);
 }
 
@@ -262,11 +248,9 @@ body{
   position:absolute;
   top:calc(100% + 8px);
   right:0;
-
   width:max-content;
   min-width:100%;
   max-width:240px;
-
   background:var(--paper);
   border-radius:18px;
   overflow:hidden;
@@ -311,30 +295,38 @@ body{
 }
 
 .round-dropdown-item.active{
-  background:linear-gradient(135deg,#FF5B3D,var(--red-mid));
+  background:linear-gradient(
+    135deg,
+    #FF5B3D,
+    var(--red-mid)
+  );
   color:#fff;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    GROUPS SCROLL AREA
-   ONLY THIS SECTION SCROLLS VERTICALLY
-   ═══════════════════════════════════════════════════════ */
+   ONLY THIS AREA SCROLLS
+========================= */
 
 #content{
-  height:520px;
-
+  max-height:620px;
   overflow-y:auto;
   overflow-x:hidden;
 
-  padding:0 5px 10px 0;
+  padding:4px 8px 10px 4px;
 
-  -webkit-overflow-scrolling:touch;
-
+  /*
+    Keeps the scrollbar inside the Groups section.
+    Header, stats, legend and footer remain outside.
+  */
   scrollbar-width:thin;
-  scrollbar-color:var(--peach) transparent;
+  scrollbar-color:var(--orange) transparent;
 
   overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
 }
+
+/* Chrome / Edge / Safari scrollbar */
 
 #content::-webkit-scrollbar{
   width:8px;
@@ -342,93 +334,82 @@ body{
 
 #content::-webkit-scrollbar-track{
   background:transparent;
-  border-radius:999px;
+  border-radius:20px;
 }
 
 #content::-webkit-scrollbar-thumb{
-  background:var(--peach);
-  border-radius:999px;
+  background:linear-gradient(
+    180deg,
+    #FF8A50,
+    #E0301F
+  );
+  border-radius:20px;
+  border:2px solid var(--cream);
 }
 
 #content::-webkit-scrollbar-thumb:hover{
-  background:var(--orange);
+  background:linear-gradient(
+    180deg,
+    #FF6B3D,
+    #C92818
+  );
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    GROUP CARDS
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .group-card{
   background:var(--paper);
   border-radius:24px;
-
   box-shadow:
     0 1px 0 rgba(255,255,255,.7) inset,
     0 8px 22px -10px rgba(224,48,31,.32);
 
   padding:6px;
   margin-bottom:16px;
-
   overflow:visible;
 }
 
-/* ═══════════════════════════════════════════════════════
-   HORIZONTAL TABLE SCROLL
-   Each group can independently scroll horizontally.
-   ═══════════════════════════════════════════════════════ */
+.group-card:last-child{
+  margin-bottom:4px;
+}
 
 .table-scroll{
-  width:100%;
-
   overflow-x:auto;
-  overflow-y:hidden;
-
   border-radius:18px;
-
   -webkit-overflow-scrolling:touch;
-
-  scrollbar-width:thin;
-  scrollbar-color:var(--peach) transparent;
-
-  touch-action:pan-x;
 }
 
 .table-scroll::-webkit-scrollbar{
-  height:7px;
-}
-
-.table-scroll::-webkit-scrollbar-track{
-  background:transparent;
+  height:6px;
 }
 
 .table-scroll::-webkit-scrollbar-thumb{
   background:var(--peach);
-  border-radius:999px;
+  border-radius:3px;
 }
 
-.table-scroll::-webkit-scrollbar-thumb:hover{
-  background:var(--orange);
-}
-
-/* ═══════════════════════════════════════════════════════
+/* =========================
    TABLE
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 table.pairings{
-  width:max-content;
-  min-width:100%;
+  width:100%;
   border-collapse:separate;
   border-spacing:0;
 }
 
 table.pairings thead th{
-  background:linear-gradient(135deg,#3a2018,#241009);
+  background:linear-gradient(
+    135deg,
+    #3a2018,
+    #241009
+  );
   color:#fff;
-
   font-family:'Fredoka',sans-serif;
   font-weight:600;
   font-size:12.5px;
-
   padding:11px 5px;
   text-align:center;
   white-space:nowrap;
@@ -444,19 +425,6 @@ table.pairings thead th:last-child{
   border-radius:0 16px 0 0;
 }
 
-table.pairings thead th .col-ico{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-}
-
-table.pairings thead th .col-ico svg{
-  fill:#fff;
-  width:17px;
-  height:17px;
-}
-
 .th-group-label{
   display:flex;
   align-items:center;
@@ -469,7 +437,11 @@ table.pairings thead th .col-ico svg{
   height:8px;
   border-radius:50%;
   flex-shrink:0;
-  background:linear-gradient(135deg,var(--red),var(--orange));
+  background:linear-gradient(
+    135deg,
+    var(--red),
+    var(--orange)
+  );
 }
 
 table.pairings tbody tr{
@@ -496,11 +468,9 @@ table.pairings tbody tr.band-out{
 table.pairings tbody td{
   padding:9px 4px;
   text-align:center;
-
   font-size:12px;
   font-weight:800;
   color:var(--ink);
-
   border-top:1px solid var(--cream-deep);
   white-space:nowrap;
 }
@@ -510,22 +480,20 @@ table.pairings tbody td:first-child{
   padding-left:14px;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    PLAYER
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .player-cell{
   display:flex;
   align-items:center;
   gap:9px;
-
   min-width:190px;
 }
 
 .player-rank{
   width:22px;
   height:22px;
-
   border-radius:50%;
   flex-shrink:0;
 
@@ -538,20 +506,36 @@ table.pairings tbody td:first-child{
   font-size:11px;
   color:#fff;
 
-  background:linear-gradient(135deg,var(--peach),var(--orange));
+  background:linear-gradient(
+    135deg,
+    var(--peach),
+    var(--orange)
+  );
 }
 
 table.final-round .player-rank.r1{
-  background:linear-gradient(135deg,var(--gold),#E0301F);
+  background:linear-gradient(
+    135deg,
+    var(--gold),
+    #E0301F
+  );
   box-shadow:0 2px 8px -2px rgba(255,176,32,.6);
 }
 
 table.final-round .player-rank.r2{
-  background:linear-gradient(135deg,var(--silver),#8E97A8);
+  background:linear-gradient(
+    135deg,
+    var(--silver),
+    #8E97A8
+  );
 }
 
 table.final-round .player-rank.r3{
-  background:linear-gradient(135deg,var(--bronze),#96591F);
+  background:linear-gradient(
+    135deg,
+    var(--bronze),
+    #96591F
+  );
 }
 
 .player-avatar-link{
@@ -563,15 +547,11 @@ table.final-round .player-rank.r3{
 .player-avatar{
   width:32px;
   height:32px;
-
   border-radius:9px;
   border:2px solid #fff;
-
   box-shadow:0 0 0 1.5px var(--peach);
-
   object-fit:cover;
   background:#FFE9DF;
-
   display:block;
 }
 
@@ -579,11 +559,9 @@ table.final-round .player-rank.r3{
   font-size:12px;
   font-weight:800;
   color:var(--red-mid);
-
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-
   max-width:150px;
 }
 
@@ -596,9 +574,9 @@ table.final-round .player-rank.r3{
   text-decoration:underline;
 }
 
-/* ═══════════════════════════════════════════════════════
-   GAME CELLS
-   ═══════════════════════════════════════════════════════ */
+/* =========================
+   CELLS
+========================= */
 
 .cell-x{
   color:var(--ink-faint);
@@ -616,7 +594,6 @@ table.final-round .player-rank.r3{
 .game-badge{
   width:19px;
   height:19px;
-
   border-radius:6px;
 
   display:inline-flex;
@@ -651,25 +628,33 @@ table.final-round .player-rank.r3{
   cursor:default;
 }
 
+/*
+  IMPORTANT:
+  No outline, no stroke, no border.
+  The board is a simple filled SVG,
+  matching the cleaner Spicy Tournament style.
+*/
+
 .game-badge.pending svg{
   width:13px;
   height:13px;
   fill:currentColor;
+  stroke:none;
+  outline:none;
+  border:none;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    STANDINGS
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .standing-val{
   display:inline-flex;
   align-items:center;
   gap:4px;
-
   font-family:'Fredoka',sans-serif;
   font-weight:600;
   font-size:16px;
-
   color:var(--red-mid);
 }
 
@@ -680,14 +665,13 @@ table.final-round .player-rank.r3{
   color:var(--ink-soft);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    LEGEND
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .legend-card{
   background:var(--paper);
   border-radius:18px;
-
   padding:13px 14px;
 
   box-shadow:
@@ -697,7 +681,6 @@ table.final-round .player-rank.r3{
   display:flex;
   flex-wrap:wrap;
   gap:10px 16px;
-
   margin-bottom:14px;
 }
 
@@ -705,7 +688,6 @@ table.final-round .player-rank.r3{
   display:flex;
   align-items:center;
   gap:6px;
-
   font-size:10.5px;
   font-weight:800;
   color:var(--ink-soft);
@@ -714,9 +696,7 @@ table.final-round .player-rank.r3{
 .legend-swatch{
   width:16px;
   height:16px;
-
   border-radius:6px;
-
   flex-shrink:0;
 
   display:flex;
@@ -754,6 +734,7 @@ table.final-round .player-rank.r3{
   width:12px;
   height:12px;
   fill:currentColor;
+  stroke:none;
 }
 
 .legend-swatch.through,
@@ -771,14 +752,13 @@ table.final-round .player-rank.r3{
   background:var(--red-deep);
 }
 
-/* ═══════════════════════════════════════════════════════
-   FOOTER / LOADING / ERRORS
-   ═══════════════════════════════════════════════════════ */
+/* =========================
+   FOOTER / MESSAGES
+========================= */
 
 .footer{
   text-align:center;
   margin-top:6px;
-
   font-size:11px;
   font-weight:800;
   color:var(--ink-faint);
@@ -787,7 +767,6 @@ table.final-round .player-rank.r3{
 .load-msg{
   text-align:center;
   padding:30px 14px;
-
   font-size:13px;
   font-weight:800;
   color:var(--ink-soft);
@@ -796,31 +775,25 @@ table.final-round .player-rank.r3{
 .error-msg{
   text-align:center;
   padding:20px 14px;
-
   font-size:12px;
   font-weight:800;
-
   color:var(--red-deep);
   background:#FFF1EE;
-
   border-radius:14px;
   margin-bottom:14px;
 }
 
 .table-empty{
   padding:26px 14px;
-
   text-align:center;
-
   font-size:12px;
   font-weight:800;
-
   color:var(--ink-faint);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    SKELETON
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 .skel{
   display:inline-block;
@@ -835,7 +808,6 @@ table.final-round .player-rank.r3{
     );
 
   background-size:400% 100%;
-
   animation:skel-shimmer 1.4s ease infinite;
 }
 
@@ -887,9 +859,9 @@ table.final-round .player-rank.r3{
   border-radius:5px;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    MATCH POPOVER
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
 #matchPopover{
   position:fixed;
@@ -897,10 +869,8 @@ table.final-round .player-rank.r3{
   pointer-events:none;
 
   width:220px;
-
   background:var(--paper);
   border-radius:18px;
-
   padding:14px;
 
   box-shadow:
@@ -908,7 +878,6 @@ table.final-round .player-rank.r3{
     0 0 0 1px var(--peach);
 
   opacity:0;
-
   transform:translateY(6px) scale(.97);
 
   transition:
@@ -920,9 +889,7 @@ table.final-round .player-rank.r3{
 
 #matchPopover.show{
   opacity:1;
-
   transform:translateY(0) scale(1);
-
   pointer-events:auto;
 }
 
@@ -939,7 +906,6 @@ table.final-round .player-rank.r3{
 
   padding:3px 9px;
   border-radius:999px;
-
   margin-bottom:10px;
 }
 
@@ -957,7 +923,6 @@ table.final-round .player-rank.r3{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:6px;
   margin-bottom:10px;
 }
@@ -966,9 +931,7 @@ table.final-round .player-rank.r3{
   display:flex;
   flex-direction:column;
   align-items:center;
-
   gap:5px;
-
   flex:1;
   min-width:0;
 }
@@ -976,26 +939,20 @@ table.final-round .player-rank.r3{
 .mp-team img{
   width:44px;
   height:44px;
-
   border-radius:10px;
   border:2px solid #fff;
-
   box-shadow:0 0 0 1.5px var(--peach);
-
   object-fit:cover;
 }
 
 .mp-team-name{
   font-size:9px;
   font-weight:800;
-
   color:var(--ink);
   text-align:center;
-
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-
   max-width:75px;
 }
 
@@ -1003,11 +960,8 @@ table.final-round .player-rank.r3{
   font-family:'Fredoka',sans-serif;
   font-weight:600;
   font-size:11px;
-
   color:var(--ink-faint);
-
   flex-shrink:0;
-
   padding-top:14px;
 }
 
@@ -1015,7 +969,6 @@ table.final-round .player-rank.r3{
   display:flex;
   align-items:center;
   justify-content:center;
-
   gap:8px;
 
   font-family:'Fredoka',sans-serif;
@@ -1044,56 +997,39 @@ table.final-round .player-rank.r3{
 
 .mp-game-label{
   text-align:center;
-
   font-size:9px;
   font-weight:800;
-
   color:var(--ink-faint);
-
   margin-bottom:10px;
 }
 
 .mp-watch{
   display:block;
-
   width:100%;
-
   text-align:center;
 
   padding:8px;
-
   border-radius:999px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #FF5B3D,
-      var(--red-mid)
-    );
+  background:linear-gradient(
+    135deg,
+    #FF5B3D,
+    var(--red-mid)
+  );
 
   color:#fff;
-
   font-size:11px;
   font-weight:900;
-
   text-decoration:none;
 
   box-shadow:0 4px 0 var(--red-deep);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =========================
    MOBILE
-   ═══════════════════════════════════════════════════════ */
+========================= */
 
-@media(max-width:600px){
-
-  .sb{
-    border-radius:24px;
-  }
-
-  .sb-top{
-    border-radius:24px 24px 0 0;
-  }
+@media(max-width:480px){
 
   .event-title{
     font-size:17px;
@@ -1130,55 +1066,30 @@ table.final-round .player-rank.r3{
     gap:5px;
   }
 
-  /* Smaller vertical viewport on phones */
-  #content{
-    height:460px;
-    padding-right:4px;
-  }
-
   /*
-     Keep tables wide enough to remain readable.
-     The individual .table-scroll handles horizontal scrolling.
+    Slightly smaller groups viewport on mobile
+    so the scrollbar remains clearly visible.
   */
-  table.pairings{
-    width:max-content;
-    min-width:720px;
+  #content{
+    max-height:58vh;
+    padding-right:7px;
   }
 
-  table.pairings th:first-child,
-  table.pairings td:first-child{
-    min-width:190px;
-  }
-
-  table.pairings th:not(:first-child):not(:last-child),
-  table.pairings td:not(:first-child):not(:last-child){
-    min-width:48px;
-  }
-
-  table.pairings th:last-child,
-  table.pairings td:last-child{
-    min-width:55px;
+  #content::-webkit-scrollbar{
+    width:7px;
   }
 }
 
-/* Very small phones */
-@media(max-width:380px){
+/* Very small screens */
+@media(max-width:360px){
 
   #content{
-    height:420px;
+    max-height:55vh;
   }
 
   .inner{
     padding-left:10px;
     padding-right:10px;
-  }
-
-  .event-title{
-    font-size:16px;
-  }
-
-  table.pairings{
-    min-width:680px;
   }
 }
 </style>
@@ -1188,12 +1099,8 @@ table.final-round .player-rank.r3{
 
 <div class="sb">
 
-  <!-- ═══════════════════════════════════════════════════
-       HEADER
-       ═══════════════════════════════════════════════════ -->
-
+  <!-- HEADER -->
   <div class="sb-top">
-
     <div class="event-title">
       🔥⚡ Hot Chilli Blitz Championship
     </div>
@@ -1201,15 +1108,12 @@ table.final-round .player-rank.r3{
     <div class="event-sub">
       Pairings &amp; Live Standings
     </div>
-
   </div>
+
 
   <div class="inner">
 
-    <!-- ═════════════════════════════════════════════════
-         ROUND BAR
-         ═════════════════════════════════════════════════ -->
-
+    <!-- ROUND BAR -->
     <div class="round-bar">
 
       <div
@@ -1217,22 +1121,15 @@ table.final-round .player-rank.r3{
         id="roundStats"
         style="display:none;"
       >
-
-        <span
-          class="stat-pill"
-          id="statMatches"
-        >
+        <span class="stat-pill" id="statMatches">
           –
         </span>
 
-        <span
-          class="stat-pill"
-          id="statGames"
-        >
+        <span class="stat-pill" id="statGames">
           –
         </span>
-
       </div>
+
 
       <div
         id="roundDropdown"
@@ -1245,7 +1142,6 @@ table.final-round .player-rank.r3{
           id="roundDropdownBtn"
           type="button"
         >
-
           <span id="roundDropdownLabel">
             Round 1
           </span>
@@ -1257,8 +1153,8 @@ table.final-round .player-rank.r3{
           >
             <path d="M12 15.5L4.5 8l1.4-1.4L12 12.7l6.1-6.1L19.5 8z"></path>
           </svg>
-
         </button>
+
 
         <div
           class="round-dropdown-list"
@@ -1269,22 +1165,19 @@ table.final-round .player-rank.r3{
 
     </div>
 
-    <!-- ═════════════════════════════════════════════════
-         ONLY THIS AREA SCROLLS VERTICALLY
-         ═════════════════════════════════════════════════ -->
 
+    <!--
+      ONLY THIS SECTION SCROLLS VERTICALLY.
+      The round selector, legend and footer stay outside.
+    -->
     <div id="content">
-
       <div class="load-msg">
         🔥 Loading tournament data…
       </div>
-
     </div>
 
-    <!-- ═════════════════════════════════════════════════
-         LEGEND
-         ═════════════════════════════════════════════════ -->
 
+    <!-- LEGEND -->
     <div class="legend-card">
 
       <div class="legend-item">
@@ -1306,62 +1199,61 @@ table.final-round .player-rank.r3{
 
         <span class="legend-swatch pending">
 
+          <!-- Clean filled board icon: no outline/stroke -->
           <svg
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path>
+            <path
+              fill="currentColor"
+              stroke="none"
+              d="M19.33 22H4.66C2.66 22 2 21.33 2 19.33V4.66C2 2.66 2.66 2 4.66 2H19.33C21.33 2 22 2.66 22 4.66V19.33C22 21.33 21.33 22 19.33 22ZM4 20H8V16H4V20ZM12 20H16V16H12V20ZM8 16H12V12H8V16ZM4 12H8V8H4V12ZM16 16H20V12H16V16ZM12 12H16V8H12V12ZM8 8H12V4H8V8ZM16 8H20V4H16V8Z"
+            ></path>
           </svg>
 
         </span>
 
         Not fetched yet
-
       </div>
 
       <div class="legend-item">
-
         <span class="legend-swatch through"></span>
-
         Qualifies for next round
-
       </div>
 
       <div class="legend-item">
-
         <span class="legend-swatch eliminated"></span>
-
         Eliminated
-
       </div>
 
       <div class="legend-item">
-
-        Each cell shows both blitz games of that pairing —
-        tap for details, tap again to open
-
+        Each cell shows both blitz games of that pairing — tap for details, tap again to open
       </div>
 
     </div>
 
+
+    <!-- FOOTER -->
     <div class="footer">
       🔥 Hot Chilli CheckMate © 2026 ♞
     </div>
 
   </div>
-
 </div>
+
 
 <div id="matchPopover"></div>
 
+
 <script>
 
-/* ════════════════════════════════════════════════════════════════
+/* ============================================================
    DATA SOURCE
-   ════════════════════════════════════════════════════════════════ */
+============================================================ */
 
 const DATA_URL =
   'https://raw.githubusercontent.com/taki2023/taki/refs/heads/main/blitz.json';
+
 
 const DEFAULT_AVATAR =
   'https://www.chess.com/bundles/web/images/user-image.007dad08.svg';
@@ -1370,14 +1262,26 @@ const HOST_PLAYER = '';
 
 const ADVANCING_PLAYERS_PER_GROUP = 2;
 
+
+/* ============================================================
+   CLEAN BOARD SVG
+   No outline / no stroke.
+============================================================ */
+
 const BOARD_SVG = `
 <svg
   viewBox="0 0 24 24"
   xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
 >
-  <path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path>
+  <path
+    fill="currentColor"
+    stroke="none"
+    d="M19.33 22H4.66C2.66 22 2 21.33 2 19.33V4.66C2 2.66 2.66 2 4.66 2H19.33C21.33 2 22 2.66 22 4.66V19.33C22 21.33 21.33 22 19.33 22ZM4 20H8V16H4V20ZM12 20H16V16H12V20ZM8 16H12V12H8V16ZM4 12H8V8H4V12ZM16 16H20V12H16V16ZM12 12H16V8H12V12ZM8 8H12V4H8V8ZM16 8H20V4H16V8Z"
+  ></path>
 </svg>
 `;
+
 
 const DRAW_RESULTS = new Set([
   'agreed',
@@ -1388,9 +1292,10 @@ const DRAW_RESULTS = new Set([
   'timevsinsufficient'
 ]);
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    CONCURRENCY LIMITER
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function makeLimiter(concurrency){
 
@@ -1402,7 +1307,9 @@ function makeLimiter(concurrency){
     if(
       active >= concurrency ||
       queue.length === 0
-    ) return;
+    ){
+      return;
+    }
 
     active++;
 
@@ -1414,39 +1321,42 @@ function makeLimiter(concurrency){
 
     fn().then(
 
-      v => {
+      value => {
         active--;
-        resolve(v);
+        resolve(value);
         runNext();
       },
 
-      e => {
+      error => {
         active--;
-        reject(e);
+        reject(error);
         runNext();
       }
 
     );
   }
 
-  return fn => new Promise((resolve,reject)=>{
+  return fn =>
+    new Promise((resolve,reject)=>{
 
-    queue.push({
-      fn,
-      resolve,
-      reject
+      queue.push({
+        fn,
+        resolve,
+        reject
+      });
+
+      runNext();
+
     });
-
-    runNext();
-
-  });
 }
+
 
 const limit = makeLimiter(3);
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    HELPERS
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function prettifyUsername(u){
 
@@ -1456,6 +1366,7 @@ function prettifyUsername(u){
 
 }
 
+
 function prettifyGroupName(name){
 
   return (name || '')
@@ -1463,11 +1374,13 @@ function prettifyGroupName(name){
 
 }
 
-/* ═══════════════════════════════════════════════════════
-   PLAYER DATA
-   ═══════════════════════════════════════════════════════ */
+
+/* ============================================================
+   PLAYER CACHE
+============================================================ */
 
 const playerCache = {};
+
 
 async function fetchPlayer(username){
 
@@ -1481,9 +1394,11 @@ async function fetchPlayer(username){
 
   }
 
+
   if(playerCache[username]){
     return playerCache[username];
   }
+
 
   const p = limit(async()=>{
 
@@ -1498,7 +1413,9 @@ async function fetchPlayer(username){
         throw new Error('HTTP ' + r.status);
       }
 
+
       const d = await r.json();
+
 
       return {
         name:
@@ -1524,18 +1441,22 @@ async function fetchPlayer(username){
 
   });
 
+
   playerCache[username] = p;
 
   return p;
 }
 
-/* ═══════════════════════════════════════════════════════
-   SCORE HELPERS
-   ═══════════════════════════════════════════════════════ */
+
+/* ============================================================
+   RESULTS
+============================================================ */
 
 function resultPoints(resultStr){
 
-  if(resultStr === 'win') return 1;
+  if(resultStr === 'win'){
+    return 1;
+  }
 
   if(DRAW_RESULTS.has(resultStr)){
     return 0.5;
@@ -1544,35 +1465,36 @@ function resultPoints(resultStr){
   return 0;
 }
 
+
 function pointsLabel(p){
 
-  return p === 1
-    ? '1'
-    : p === 0
-    ? '0'
-    : p === 0.5
-    ? '½'
-    : '';
+  if(p === 1) return '1';
+  if(p === 0) return '0';
+  if(p === 0.5) return '½';
 
+  return '';
 }
+
 
 function pointsClass(p){
 
-  return p === 1
-    ? 'win'
-    : p === 0
-    ? 'loss'
-    : 'draw';
+  if(p === 1) return 'win';
+  if(p === 0) return 'loss';
 
+  return 'draw';
 }
 
-/* ═══════════════════════════════════════════════════════
-   PARSE GAMES
-   ═══════════════════════════════════════════════════════ */
+
+/* ============================================================
+   PARSE MATCH CELL
+============================================================ */
 
 function parseCellGames(cellText){
 
-  if(!cellText) return [];
+  if(!cellText){
+    return [];
+  }
+
 
   return cellText
     .split('|')
@@ -1598,9 +1520,10 @@ function parseCellGames(cellText){
 
 }
 
-/* ═══════════════════════════════════════════════════════
-   VALIDATE DATA
-   ═══════════════════════════════════════════════════════ */
+
+/* ============================================================
+   VALIDATION
+============================================================ */
 
 function validateTournamentData(obj){
 
@@ -1608,12 +1531,11 @@ function validateTournamentData(obj){
     !obj ||
     !Array.isArray(obj.rounds)
   ){
-
     throw new Error(
       'Expected an object with a "rounds" array'
     );
-
   }
+
 
   obj.rounds.forEach((r,ri)=>{
 
@@ -1630,6 +1552,7 @@ function validateTournamentData(obj){
       );
 
     }
+
 
     r.groups.forEach((g,gi)=>{
 
@@ -1654,12 +1577,14 @@ function validateTournamentData(obj){
 
   });
 
+
   return obj;
 }
 
-/* ═══════════════════════════════════════════════════════
-   FETCH TOURNAMENT DATA
-   ═══════════════════════════════════════════════════════ */
+
+/* ============================================================
+   FETCH TOURNAMENT
+============================================================ */
 
 async function fetchTournamentData(){
 
@@ -1673,6 +1598,7 @@ async function fetchTournamentData(){
     }
   );
 
+
   if(!r.ok){
 
     throw new Error(
@@ -1685,14 +1611,16 @@ async function fetchTournamentData(){
 
   }
 
+
   const obj = await r.json();
 
   return validateTournamentData(obj);
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    POPOVER
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 const popover =
   document.getElementById('matchPopover');
@@ -1703,6 +1631,7 @@ let lastMouseX = 0;
 let lastMouseY = 0;
 let headingToPopover = false;
 
+
 function updateHeadingToPopover(
   clientX,
   clientY
@@ -1711,12 +1640,14 @@ function updateHeadingToPopover(
   if(!popover.classList.contains('show')){
 
     headingToPopover = false;
-    return false;
 
+    return false;
   }
+
 
   const rect =
     popover.getBoundingClientRect();
+
 
   const targetX =
     Math.max(
@@ -1724,11 +1655,13 @@ function updateHeadingToPopover(
       Math.min(clientX,rect.right)
     );
 
+
   const targetY =
     Math.max(
       rect.top,
       Math.min(clientY,rect.bottom)
     );
+
 
   const dx =
     clientX - lastMouseX;
@@ -1742,27 +1675,38 @@ function updateHeadingToPopover(
   const toY =
     targetY - clientY;
 
+
   headingToPopover =
     (dx !== 0 || dy !== 0) &&
     (dx * toX + dy * toY) > 0;
 
+
   return headingToPopover;
 }
 
+
 document.addEventListener('click',e=>{
 
-  if(!pinnedCellEl) return;
+  if(!pinnedCellEl){
+    return;
+  }
+
 
   if(
     popover.contains(e.target) ||
     e.target.closest('[data-a][data-b]')
-  ) return;
+  ){
+
+    return;
+  }
+
 
   hidePopover();
 
   pinnedCellEl = null;
 
 });
+
 
 popover.addEventListener(
   'mouseleave',
@@ -1773,6 +1717,7 @@ popover.addEventListener(
   }
 );
 
+
 function showPopover(x,y,html){
 
   popover.innerHTML = html;
@@ -1782,6 +1727,7 @@ function showPopover(x,y,html){
   positionPopover(x,y);
 }
 
+
 function positionPopover(x,y){
 
   const pad = 14;
@@ -1789,11 +1735,13 @@ function positionPopover(x,y){
   const rect =
     popover.getBoundingClientRect();
 
+
   let left =
     x - rect.width / 2;
 
   let top =
     y - rect.height - 16;
+
 
   left =
     Math.max(
@@ -1806,17 +1754,19 @@ function positionPopover(x,y){
       )
     );
 
+
   if(top < pad){
     top = y + 20;
   }
+
 
   popover.style.left =
     left + 'px';
 
   popover.style.top =
     top + 'px';
-
 }
+
 
 function hidePopover(){
 
@@ -1824,9 +1774,10 @@ function hidePopover(){
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    SCORE COMPARISON
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function scoreCompareClasses(
   scoreA,
@@ -1847,6 +1798,7 @@ function scoreCompareClasses(
 
   }
 
+
   if(scoreA > scoreB){
 
     return {
@@ -1855,6 +1807,7 @@ function scoreCompareClasses(
     };
 
   }
+
 
   if(scoreA < scoreB){
 
@@ -1865,16 +1818,17 @@ function scoreCompareClasses(
 
   }
 
+
   return {
     a:'tie',
     b:'tie'
   };
-
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    POPOVER HTML
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function popoverHTML(
   playerA,
@@ -1885,15 +1839,18 @@ function popoverHTML(
 
   const finished = !!game;
 
+
   const scoreA =
     finished
       ? pointsLabel(game.scoreA)
       : '–';
 
+
   const scoreB =
     finished
       ? pointsLabel(game.scoreB)
       : '–';
+
 
   const cls =
     finished
@@ -1906,10 +1863,12 @@ function popoverHTML(
           b:'tie'
         };
 
+
   const watchUrl =
     finished
       ? game.link
       : '';
+
 
   return `
 
@@ -1927,9 +1886,11 @@ function popoverHTML(
 
     </div>
 
+
     <div class="mp-game-label">
       ${gameLabel}
     </div>
+
 
     <div class="mp-teams-row">
 
@@ -1946,9 +1907,11 @@ function popoverHTML(
 
       </div>
 
+
       <div class="mp-vs">
         vs
       </div>
+
 
       <div class="mp-team">
 
@@ -1965,6 +1928,7 @@ function popoverHTML(
 
     </div>
 
+
     <div class="mp-score-row">
 
       <span class="mp-score-num ${cls.a}">
@@ -1980,6 +1944,7 @@ function popoverHTML(
       </span>
 
     </div>
+
 
     ${
       watchUrl
@@ -2000,9 +1965,10 @@ function popoverHTML(
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    TOURNAMENT STATE
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 let TOURNAMENT = {
   rounds:[]
@@ -2012,9 +1978,10 @@ let activeRoundIdx = 0;
 
 let hasLoadedOnce = false;
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    ROUND HELPERS
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function isFinalRound(round){
 
@@ -2024,19 +1991,19 @@ function isFinalRound(round){
 
 }
 
+
 function displayRoundName(round){
 
   return isFinalRound(round)
     ? 'Final Round'
-    : round
-    ? round.name
-    : 'Round';
+    : (round ? round.name : 'Round');
 
 }
 
-/* ═══════════════════════════════════════════════════════
-   ROUND NAVIGATION
-   ═══════════════════════════════════════════════════════ */
+
+/* ============================================================
+   ROUND NAV
+============================================================ */
 
 function renderRoundNav(){
 
@@ -2045,33 +2012,39 @@ function renderRoundNav(){
       'roundDropdown'
     );
 
+
   const label =
     document.getElementById(
       'roundDropdownLabel'
     );
+
 
   const list =
     document.getElementById(
       'roundDropdownList'
     );
 
+
   if(!TOURNAMENT.rounds.length){
 
     wrap.style.display = 'none';
 
     return;
-
   }
 
+
   wrap.style.display = 'block';
+
 
   const current =
     TOURNAMENT.rounds[
       activeRoundIdx
     ];
 
+
   label.textContent =
     displayRoundName(current);
+
 
   list.innerHTML =
     TOURNAMENT.rounds
@@ -2091,6 +2064,7 @@ function renderRoundNav(){
       `)
       .join('');
 
+
   list
     .querySelectorAll(
       '.round-dropdown-item'
@@ -2107,22 +2081,13 @@ function renderRoundNav(){
               10
             );
 
+
           wrap.classList.remove(
             'open'
           );
 
+
           renderRoundNav();
-
-          /*
-           * Reset the groups scrollbar
-           * whenever the user changes round.
-           */
-          const content =
-            document.getElementById(
-              'content'
-            );
-
-          content.scrollTop = 0;
 
           renderActiveRound();
 
@@ -2133,6 +2098,11 @@ function renderRoundNav(){
 
 }
 
+
+/* ============================================================
+   DROPDOWN TOGGLE
+============================================================ */
+
 (function initRoundDropdownToggle(){
 
   const wrap =
@@ -2140,10 +2110,12 @@ function renderRoundNav(){
       'roundDropdown'
     );
 
+
   const btn =
     document.getElementById(
       'roundDropdownBtn'
     );
+
 
   btn.addEventListener(
     'click',
@@ -2151,12 +2123,11 @@ function renderRoundNav(){
 
       e.stopPropagation();
 
-      wrap.classList.toggle(
-        'open'
-      );
+      wrap.classList.toggle('open');
 
     }
   );
+
 
   document.addEventListener(
     'click',
@@ -2175,19 +2146,24 @@ function renderRoundNav(){
 
 })();
 
-/* ═══════════════════════════════════════════════════════
-   ROUND STATS
-   ═══════════════════════════════════════════════════════ */
 
-function resetRoundStats(matchesTotal){
+/* ============================================================
+   ROUND STATS
+============================================================ */
+
+function resetRoundStats(
+  matchesTotal
+){
 
   const statsWrap =
     document.getElementById(
       'roundStats'
     );
 
+
   statsWrap.style.display =
     'flex';
+
 
   document.getElementById(
     'statMatches'
@@ -2206,6 +2182,7 @@ function resetRoundStats(matchesTotal){
     matchups
 
   `;
+
 
   document.getElementById(
     'statGames'
@@ -2226,6 +2203,7 @@ function resetRoundStats(matchesTotal){
   `;
 
 }
+
 
 function renderRoundStats(stats){
 
@@ -2247,6 +2225,7 @@ function renderRoundStats(stats){
 
   `;
 
+
   document.getElementById(
     'statGames'
   ).innerHTML = `
@@ -2267,9 +2246,10 @@ function renderRoundStats(stats){
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    RENDER ACTIVE ROUND
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 async function renderActiveRound(){
 
@@ -2278,23 +2258,26 @@ async function renderActiveRound(){
       'content'
     );
 
+
   /*
-   * Always start at the top
-   * when a new round is rendered.
-   */
+    Start the Groups scrollbar
+    from the top whenever a new round
+    is selected.
+  */
   content.scrollTop = 0;
+
 
   const round =
     TOURNAMENT.rounds[
       activeRoundIdx
     ];
 
+
   if(!round){
 
     content.innerHTML = `
       <div class="load-msg">
-        No round data found in
-        the tournament data file.
+        No round data found in the tournament data file.
       </div>
     `;
 
@@ -2304,6 +2287,7 @@ async function renderActiveRound(){
 
     return;
   }
+
 
   if(!round.groups.length){
 
@@ -2320,8 +2304,10 @@ async function renderActiveRound(){
     return;
   }
 
+
   const isLastRound =
     isFinalRound(round);
+
 
   const cardsHTML =
     round.groups
@@ -2335,8 +2321,10 @@ async function renderActiveRound(){
       )
       .join('');
 
+
   content.innerHTML =
     cardsHTML;
+
 
   const matchesTotal =
     round.groups.reduce(
@@ -2345,9 +2333,11 @@ async function renderActiveRound(){
       0
     );
 
+
   resetRoundStats(
     matchesTotal
   );
+
 
   const groupStats =
     await Promise.all(
@@ -2360,6 +2350,7 @@ async function renderActiveRound(){
           )
       )
     );
+
 
   const roundStats =
     groupStats.reduce(
@@ -2382,6 +2373,7 @@ async function renderActiveRound(){
           s.gamesTotal
 
       }),
+
       {
         matchesDone:0,
         matchesTotal:0,
@@ -2390,15 +2382,17 @@ async function renderActiveRound(){
       }
     );
 
+
   renderRoundStats(
     roundStats
   );
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    TABLE HEADER
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function headerRowHTML(
   playerCount,
@@ -2423,6 +2417,7 @@ function headerRowHTML(
 
   `;
 
+
   for(
     let col = 0;
     col < playerCount;
@@ -2436,6 +2431,7 @@ function headerRowHTML(
     `;
 
   }
+
 
   html += `
 
@@ -2451,12 +2447,14 @@ function headerRowHTML(
 
   `;
 
+
   return html;
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    SKELETON ROW
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function playerRowSkeletonHTML(
   playerCount
@@ -2482,6 +2480,7 @@ function playerRowSkeletonHTML(
 
   `;
 
+
   for(
     let col = 0;
     col < playerCount;
@@ -2500,6 +2499,7 @@ function playerRowSkeletonHTML(
 
   }
 
+
   html += `
 
       <td>
@@ -2514,12 +2514,14 @@ function playerRowSkeletonHTML(
 
   `;
 
+
   return html;
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    GROUP SKELETON
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function groupSkeletonHTML(
   group,
@@ -2530,6 +2532,7 @@ function groupSkeletonHTML(
   const n =
     group.players.length;
 
+
   const rows =
     group.players
       .map(
@@ -2537,6 +2540,7 @@ function groupSkeletonHTML(
           playerRowSkeletonHTML(n)
       )
       .join('');
+
 
   return `
 
@@ -2548,9 +2552,9 @@ function groupSkeletonHTML(
       <div class="table-scroll">
 
         <table
-          class="pairings ${
+          class="pairings${
             isLastRound
-              ? 'final-round'
+              ? ' final-round'
               : ''
           }"
         >
@@ -2565,6 +2569,7 @@ function groupSkeletonHTML(
             )}
 
           </thead>
+
 
           <tbody id="gbody-${gi}">
 
@@ -2582,22 +2587,26 @@ function groupSkeletonHTML(
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    QUALIFICATION
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 function qualificationBandClass(rank){
 
   return rank <
     ADVANCING_PLAYERS_PER_GROUP
-      ? 'band-through'
-      : 'band-out';
+
+    ? 'band-through'
+
+    : 'band-out';
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    FILL GROUP
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 async function fillGroup(
   group,
@@ -2608,23 +2617,30 @@ async function fillGroup(
   const players =
     group.players;
 
+
   const infos = {};
+
 
   await Promise.all(
     players.map(
       async p=>{
+
         infos[p] =
           await fetchPlayer(p);
+
       }
     )
   );
 
+
   const gamesByPair = {};
+
 
   group.matches.forEach(m=>{
 
     const games =
       parseCellGames(m.link);
+
 
     gamesByPair[
       m.playerA +
@@ -2637,6 +2653,7 @@ async function fillGroup(
       games
 
     };
+
 
     gamesByPair[
       m.playerB +
@@ -2653,6 +2670,7 @@ async function fillGroup(
 
   });
 
+
   function getPair(a,b){
 
     return gamesByPair[
@@ -2667,15 +2685,19 @@ async function fillGroup(
 
   }
 
+
   const score = {};
   const oppResult = {};
+
 
   players.forEach(p=>{
 
     score[p] = 0;
+
     oppResult[p] = {};
 
   });
+
 
   let matchesDone = 0;
   let gamesDone = 0;
@@ -2684,49 +2706,67 @@ async function fillGroup(
   const matchesTotal =
     group.matches.length;
 
+
   group.matches.forEach(m=>{
 
     const games =
       parseCellGames(m.link);
 
+
     gamesTotal += 2;
+
 
     let scoreA = 0;
     let scoreB = 0;
 
+
     games.forEach(g=>{
 
       if(!isNaN(g.scoreA)){
+
         scoreA += g.scoreA;
+
       }
 
+
       if(!isNaN(g.scoreB)){
+
         scoreB += g.scoreB;
+
       }
+
 
       gamesDone++;
 
     });
 
-    score[m.playerA] += scoreA;
-    score[m.playerB] += scoreB;
+
+    score[m.playerA] +=
+      scoreA;
+
+    score[m.playerB] +=
+      scoreB;
+
 
     if(games.length >= 2){
 
       matchesDone++;
 
+
       const result =
         scoreA > scoreB
           ? 1
           : scoreA < scoreB
-          ? 0
-          : 0.5;
+            ? 0
+            : 0.5;
+
 
       oppResult[
         m.playerA
       ][
         m.playerB
       ] = result;
+
 
       oppResult[
         m.playerB
@@ -2738,11 +2778,14 @@ async function fillGroup(
 
   });
 
+
   const tiebreak = {};
+
 
   players.forEach(p=>{
 
     let tb = 0;
+
 
     Object.keys(
       oppResult[p]
@@ -2754,9 +2797,11 @@ async function fillGroup(
 
     });
 
+
     tiebreak[p] = tb;
 
   });
+
 
   const order =
     players
@@ -2766,6 +2811,7 @@ async function fillGroup(
           (score[y] - score[x]) ||
           (tiebreak[y] - tiebreak[x])
       );
+
 
   document.getElementById(
     'ghead-' + gi
@@ -2777,33 +2823,42 @@ async function fillGroup(
       )
     );
 
+
   const tbody =
     document.getElementById(
       'gbody-' + gi
     );
 
+
   let bodyHTML = '';
+
 
   order.forEach(
     (rowSlug,rank)=>{
 
       const info =
-        infos[rowSlug] ||
-        {
-          name:prettifyUsername(
-            rowSlug
-          ),
-          avatar:DEFAULT_AVATAR
+        infos[rowSlug] || {
+
+          name:
+            prettifyUsername(
+              rowSlug
+            ),
+
+          avatar:
+            DEFAULT_AVATAR
+
         };
+
 
       const rankClass =
         rank === 0
           ? 'r1'
           : rank === 1
-          ? 'r2'
-          : rank === 2
-          ? 'r3'
-          : '';
+            ? 'r2'
+            : rank === 2
+              ? 'r3'
+              : '';
+
 
       const bandClass =
         isLastRound
@@ -2811,6 +2866,7 @@ async function fillGroup(
           : qualificationBandClass(
               rank
             );
+
 
       bodyHTML += `
 
@@ -2826,9 +2882,10 @@ async function fillGroup(
                 ${rank + 1}
               </div>
 
+
               <a
                 class="player-avatar-link"
-                href="https://www.chess.com/member/${encodeURIComponent(rowSlug)}"
+                href="https://www.chess.com/member/${rowSlug}"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -2841,10 +2898,11 @@ async function fillGroup(
 
               </a>
 
+
               <div class="player-name">
 
                 <a
-                  href="https://www.chess.com/member/${encodeURIComponent(rowSlug)}"
+                  href="https://www.chess.com/member/${rowSlug}"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -2859,113 +2917,123 @@ async function fillGroup(
 
       `;
 
-      order.forEach(
-        colSlug=>{
 
-          if(colSlug === rowSlug){
+      order.forEach(colSlug=>{
 
-            bodyHTML += `
-
-              <td>
-
-                <span class="cell-x">
-                  ✕
-                </span>
-
-              </td>
-
-            `;
-
-            return;
-          }
-
-          const rec =
-            getPair(
-              rowSlug,
-              colSlug
-            );
-
-          const games =
-            rec.games.map(
-              g =>
-                rec.flipped
-                  ? {
-                      link:g.link,
-                      scoreA:g.scoreB,
-                      scoreB:g.scoreA
-                    }
-                  : g
-            );
-
-          let inner =
-            '<div class="cell-games">';
-
-          for(
-            let gi2 = 0;
-            gi2 < 2;
-            gi2++
-          ){
-
-            const g =
-              games[gi2];
-
-            if(g){
-
-              const pts =
-                pointsLabel(
-                  g.scoreA
-                );
-
-              inner += `
-
-                <a
-                  class="game-badge ${pointsClass(g.scoreA)}"
-                  data-a="${rowSlug}"
-                  data-b="${colSlug}"
-                  data-game="${gi2}"
-                  href="${g.link}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ${pts}
-                </a>
-
-              `;
-
-            }else{
-
-              inner += `
-
-                <span
-                  class="game-badge pending"
-                  data-a="${rowSlug}"
-                  data-b="${colSlug}"
-                  data-game="${gi2}"
-                >
-
-                  ${BOARD_SVG}
-
-                </span>
-
-              `;
-
-            }
-
-          }
-
-          inner +=
-            '</div>';
+        if(colSlug === rowSlug){
 
           bodyHTML += `
 
             <td>
-              ${inner}
+
+              <span class="cell-x">
+                ✕
+              </span>
+
             </td>
 
           `;
 
+          return;
         }
-      );
+
+
+        const rec =
+          getPair(
+            rowSlug,
+            colSlug
+          );
+
+
+        const games =
+          rec.games.map(
+            g =>
+              rec.flipped
+                ? {
+
+                    link:g.link,
+
+                    scoreA:g.scoreB,
+
+                    scoreB:g.scoreA
+
+                  }
+                : g
+          );
+
+
+        let inner =
+          '<div class="cell-games">';
+
+
+        for(
+          let gi2 = 0;
+          gi2 < 2;
+          gi2++
+        ){
+
+          const g =
+            games[gi2];
+
+
+          if(g){
+
+            const pts =
+              pointsLabel(
+                g.scoreA
+              );
+
+
+            inner += `
+
+              <a
+                class="game-badge ${pointsClass(g.scoreA)}"
+                data-a="${rowSlug}"
+                data-b="${colSlug}"
+                data-game="${gi2}"
+                href="${g.link}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ${pts}
+              </a>
+
+            `;
+
+          }else{
+
+            inner += `
+
+              <span
+                class="game-badge pending"
+                data-a="${rowSlug}"
+                data-b="${colSlug}"
+                data-game="${gi2}"
+              >
+                ${BOARD_SVG}
+              </span>
+
+            `;
+
+          }
+
+        }
+
+
+        inner +=
+          '</div>';
+
+
+        bodyHTML += `
+
+          <td>
+            ${inner}
+          </td>
+
+        `;
+
+      });
+
 
       bodyHTML += `
 
@@ -2976,6 +3044,7 @@ async function fillGroup(
             </span>
 
           </td>
+
 
           <td>
 
@@ -2990,6 +3059,7 @@ async function fillGroup(
 
           </td>
 
+
         </tr>
 
       `;
@@ -2997,12 +3067,14 @@ async function fillGroup(
     }
   );
 
+
   tbody.innerHTML =
     bodyHTML;
 
-  /* ═══════════════════════════════════════════════════
+
+  /* ========================================================
      CELL INTERACTIONS
-     ═══════════════════════════════════════════════════ */
+  ======================================================== */
 
   tbody
     .querySelectorAll(
@@ -3014,7 +3086,10 @@ async function fillGroup(
         'mouseenter',
         e=>{
 
-          if(pinnedCellEl) return;
+          if(pinnedCellEl){
+            return;
+          }
+
 
           lastMouseX =
             e.clientX;
@@ -3024,6 +3099,7 @@ async function fillGroup(
 
           headingToPopover =
             false;
+
 
           const a =
             el.dataset.a;
@@ -3037,43 +3113,64 @@ async function fillGroup(
               10
             );
 
+
           const rec =
             getPair(a,b);
+
 
           const games =
             rec.games.map(
               g =>
                 rec.flipped
                   ? {
+
                       link:g.link,
+
                       scoreA:g.scoreB,
+
                       scoreB:g.scoreA
+
                     }
                   : g
             );
 
+
           const playerA =
-            infos[a] ||
-            {
-              name:prettifyUsername(a),
-              avatar:DEFAULT_AVATAR
+            infos[a] || {
+
+              name:
+                prettifyUsername(a),
+
+              avatar:
+                DEFAULT_AVATAR
+
             };
 
+
           const playerB =
-            infos[b] ||
-            {
-              name:prettifyUsername(b),
-              avatar:DEFAULT_AVATAR
+            infos[b] || {
+
+              name:
+                prettifyUsername(b),
+
+              avatar:
+                DEFAULT_AVATAR
+
             };
+
 
           const rect =
             e.currentTarget
               .getBoundingClientRect();
 
+
           showPopover(
+
             rect.left +
-              rect.width / 2,
+            rect.width / 2,
+
             rect.top,
+
             popoverHTML(
               playerA,
               playerB,
@@ -3082,16 +3179,21 @@ async function fillGroup(
               (gIdx + 1) +
               ' of 2'
             )
+
           );
 
         }
       );
 
+
       el.addEventListener(
         'mouseleave',
         e=>{
 
-          if(pinnedCellEl) return;
+          if(pinnedCellEl){
+            return;
+          }
+
 
           if(
             !updateHeadingToPopover(
@@ -3107,11 +3209,15 @@ async function fillGroup(
         }
       );
 
+
       el.addEventListener(
         'mousemove',
         e=>{
 
-          if(pinnedCellEl) return;
+          if(pinnedCellEl){
+            return;
+          }
+
 
           if(
             popover.classList.contains(
@@ -3130,6 +3236,7 @@ async function fillGroup(
 
           }
 
+
           lastMouseX =
             e.clientX;
 
@@ -3138,6 +3245,7 @@ async function fillGroup(
 
         }
       );
+
 
       if(
         el.classList.contains(
@@ -3150,7 +3258,9 @@ async function fillGroup(
           e=>{
 
             e.preventDefault();
+
             e.stopPropagation();
+
 
             const a =
               el.dataset.a;
@@ -3164,27 +3274,42 @@ async function fillGroup(
                 10
               );
 
+
             const playerA =
-              infos[a] ||
-              {
-                name:prettifyUsername(a),
-                avatar:DEFAULT_AVATAR
+              infos[a] || {
+
+                name:
+                  prettifyUsername(a),
+
+                avatar:
+                  DEFAULT_AVATAR
+
               };
 
+
             const playerB =
-              infos[b] ||
-              {
-                name:prettifyUsername(b),
-                avatar:DEFAULT_AVATAR
+              infos[b] || {
+
+                name:
+                  prettifyUsername(b),
+
+                avatar:
+                  DEFAULT_AVATAR
+
               };
+
 
             const rect =
               el.getBoundingClientRect();
 
+
             showPopover(
+
               rect.left +
-                rect.width / 2,
+              rect.width / 2,
+
               rect.top,
+
               popoverHTML(
                 playerA,
                 playerB,
@@ -3193,9 +3318,12 @@ async function fillGroup(
                 (gIdx + 1) +
                 ' of 2'
               )
+
             );
 
-            pinnedCellEl = el;
+
+            pinnedCellEl =
+              el;
 
           }
         );
@@ -3203,6 +3331,7 @@ async function fillGroup(
       }
 
     });
+
 
   return {
 
@@ -3215,9 +3344,10 @@ async function fillGroup(
 
 }
 
-/* ═══════════════════════════════════════════════════════
+
+/* ============================================================
    BOOT
-   ═══════════════════════════════════════════════════════ */
+============================================================ */
 
 async function boot(){
 
@@ -3225,6 +3355,7 @@ async function boot(){
     document.getElementById(
       'content'
     );
+
 
   if(!hasLoadedOnce){
 
@@ -3237,6 +3368,7 @@ async function boot(){
     `;
 
   }
+
 
   try{
 
@@ -3251,47 +3383,48 @@ async function boot(){
 
         ⚠️ Could not load tournament data:
 
-        ${
-          e.message || e
-        }
+        ${e.message || e}
 
       </div>
 
     `;
 
+
     document.getElementById(
       'roundDropdown'
-    ).style.display =
-      'none';
+    ).style.display = 'none';
+
 
     return;
-
   }
 
-  if(!TOURNAMENT.rounds.length){
+
+  if(
+    !TOURNAMENT.rounds.length
+  ){
 
     content.innerHTML = `
 
       <div class="error-msg">
-        ⚠️ No rounds found yet
-        in the tournament data file.
+        ⚠️ No rounds found yet in the tournament data file.
       </div>
 
     `;
 
+
     document.getElementById(
       'roundDropdown'
-    ).style.display =
-      'none';
+    ).style.display = 'none';
+
 
     document.getElementById(
       'roundStats'
-    ).style.display =
-      'none';
+    ).style.display = 'none';
+
 
     return;
-
   }
+
 
   if(!hasLoadedOnce){
 
@@ -3310,11 +3443,17 @@ async function boot(){
 
   }
 
+
   renderRoundNav();
 
   await renderActiveRound();
 
 }
+
+
+/* ============================================================
+   START
+============================================================ */
 
 boot();
 
