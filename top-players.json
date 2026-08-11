@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-11T07:03:45.314Z",
-  "totalMembers": 1553,
-  "activeToday": 158,
+  "updated": "2026-08-11T08:30:33.837Z",
+  "totalMembers": 1556,
+  "activeToday": 187,
   "players": [
     {
       "username": "silent-sniper",
-      "total_pts": 280,
+      "total_pts": 298,
       "bullet_pts": 10,
-      "blitz_pts": 270,
+      "blitz_pts": 288,
       "rapid_pts": 0,
       "bullet_g": 4,
-      "blitz_g": 30,
+      "blitz_g": 32,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
     },
     {
-      "username": "nikkotello",
-      "total_pts": 221,
-      "bullet_pts": 0,
-      "blitz_pts": 36,
-      "rapid_pts": 185,
-      "bullet_g": 0,
-      "blitz_g": 4,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
       "username": "aim_gatormonk",
-      "total_pts": 220,
-      "bullet_pts": 157,
+      "total_pts": 258,
+      "bullet_pts": 195,
       "blitz_pts": 63,
       "rapid_pts": 0,
-      "bullet_g": 55,
+      "bullet_g": 69,
       "blitz_g": 7,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
+    },
+    {
+      "username": "nikkotello",
+      "total_pts": 257,
+      "bullet_pts": 0,
+      "blitz_pts": 72,
+      "rapid_pts": 185,
+      "bullet_g": 0,
+      "blitz_g": 8,
+      "rapid_g": 13,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
