@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-11T09:34:16.086Z",
-  "totalMembers": 1556,
-  "activeToday": 214,
+  "updated": "2026-08-11T10:48:44.129Z",
+  "totalMembers": 1557,
+  "activeToday": 223,
   "players": [
+    {
+      "username": "xuyen1786",
+      "total_pts": 348,
+      "bullet_pts": 225,
+      "blitz_pts": 123,
+      "rapid_pts": 0,
+      "bullet_g": 87,
+      "blitz_g": 15,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+    },
     {
       "username": "aim_gatormonk",
       "total_pts": 303,
@@ -24,17 +35,6 @@
       "blitz_g": 32,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
-    },
-    {
-      "username": "xuyen1786",
-      "total_pts": 288,
-      "bullet_pts": 174,
-      "blitz_pts": 114,
-      "rapid_pts": 0,
-      "bullet_g": 68,
-      "blitz_g": 14,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     }
   ]
 }
