@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-11T23:37:38.888Z",
-  "totalMembers": 1558,
-  "activeToday": 423,
+  "updated": "2026-08-12T01:45:14.019Z",
+  "totalMembers": 1557,
+  "activeToday": 60,
   "players": [
     {
-      "username": "nikkotello",
-      "total_pts": 548,
+      "username": "simpleclips",
+      "total_pts": 81,
       "bullet_pts": 0,
-      "blitz_pts": 363,
-      "rapid_pts": 185,
+      "blitz_pts": 81,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 41,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "blitz_g": 9,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/9215582.50705f91.200x200o.890f3b1ed21a.jpg"
     },
     {
-      "username": "financial_dragon",
-      "total_pts": 445,
-      "bullet_pts": 7,
-      "blitz_pts": 423,
-      "rapid_pts": 15,
-      "bullet_g": 3,
-      "blitz_g": 53,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.2a888fd3.200x200o.e438c0a06815.jpg"
+      "username": "chessbender1025",
+      "total_pts": 69,
+      "bullet_pts": 60,
+      "blitz_pts": 9,
+      "rapid_pts": 0,
+      "bullet_g": 20,
+      "blitz_g": 1,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/91107426.50cd5ba8.200x200o.e32def9e4303.jpg"
     },
     {
-      "username": "kiyochess7",
-      "total_pts": 353,
-      "bullet_pts": 338,
-      "blitz_pts": 0,
-      "rapid_pts": 15,
-      "bullet_g": 118,
-      "blitz_g": 0,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176478435.ffb5645d.200x200o.b3dd2ccadd62.jpg"
+      "username": "jaden_dsa",
+      "total_pts": 63,
+      "bullet_pts": 0,
+      "blitz_pts": 63,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/352835219.79ad2688.200x200o.1ff2dc01da2a.png"
     }
   ]
 }
