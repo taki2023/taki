@@ -1,18 +1,29 @@
 {
-  "updated": "2026-08-12T04:06:17.702Z",
+  "updated": "2026-08-12T05:54:49.862Z",
   "totalMembers": 1557,
-  "activeToday": 102,
+  "activeToday": 124,
   "players": [
     {
       "username": "xuyen1786",
-      "total_pts": 126,
-      "bullet_pts": 81,
+      "total_pts": 146,
+      "bullet_pts": 101,
       "blitz_pts": 45,
       "rapid_pts": 0,
-      "bullet_g": 29,
+      "bullet_g": 37,
       "blitz_g": 5,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "vannamcovua",
+      "total_pts": 133,
+      "bullet_pts": 90,
+      "blitz_pts": 18,
+      "rapid_pts": 25,
+      "bullet_g": 30,
+      "blitz_g": 2,
+      "rapid_g": 3,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/523120267.3ad49cd1.200x200o.c255db2dd45e.png"
     },
     {
       "username": "king2275f",
@@ -24,17 +35,6 @@
       "blitz_g": 13,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505763515.5142caef.200x200o.6bf2bc38e5de.jpg"
-    },
-    {
-      "username": "samidaalmnswb",
-      "total_pts": 99,
-      "bullet_pts": 0,
-      "blitz_pts": 84,
-      "rapid_pts": 15,
-      "bullet_g": 0,
-      "blitz_g": 10,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     }
   ]
 }
