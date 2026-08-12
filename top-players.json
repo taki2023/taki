@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-12T07:21:34.732Z",
+  "updated": "2026-08-12T08:47:36.097Z",
   "totalMembers": 1557,
-  "activeToday": 147,
+  "activeToday": 182,
   "players": [
     {
       "username": "vannamcovua",
@@ -16,22 +16,22 @@
     },
     {
       "username": "xuyen1786",
-      "total_pts": 149,
-      "bullet_pts": 104,
-      "blitz_pts": 45,
+      "total_pts": 185,
+      "bullet_pts": 110,
+      "blitz_pts": 75,
       "rapid_pts": 0,
-      "bullet_g": 38,
-      "blitz_g": 5,
+      "bullet_g": 40,
+      "blitz_g": 9,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
       "username": "aim_gatormonk",
-      "total_pts": 148,
-      "bullet_pts": 148,
+      "total_pts": 174,
+      "bullet_pts": 174,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 56,
+      "bullet_g": 68,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
