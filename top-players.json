@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-13T07:24:02.908Z",
-  "totalMembers": 1561,
-  "activeToday": 152,
+  "updated": "2026-08-13T08:51:07.221Z",
+  "totalMembers": 1562,
+  "activeToday": 183,
   "players": [
+    {
+      "username": "slickey1701",
+      "total_pts": 247,
+      "bullet_pts": 0,
+      "blitz_pts": 27,
+      "rapid_pts": 220,
+      "bullet_g": 0,
+      "blitz_g": 3,
+      "rapid_g": 16,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
+    },
     {
       "username": "silent-sniper",
       "total_pts": 234,
@@ -13,17 +24,6 @@
       "blitz_g": 21,
       "rapid_g": 3,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
-    },
-    {
-      "username": "slickey1701",
-      "total_pts": 223,
-      "bullet_pts": 0,
-      "blitz_pts": 18,
-      "rapid_pts": 205,
-      "bullet_g": 0,
-      "blitz_g": 2,
-      "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
     },
     {
       "username": "yael981",
