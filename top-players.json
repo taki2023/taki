@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-13T04:10:18.681Z",
+  "updated": "2026-08-13T05:56:53.367Z",
   "totalMembers": 1563,
-  "activeToday": 100,
+  "activeToday": 113,
   "players": [
+    {
+      "username": "silent-sniper",
+      "total_pts": 234,
+      "bullet_pts": 0,
+      "blitz_pts": 189,
+      "rapid_pts": 45,
+      "bullet_g": 0,
+      "blitz_g": 21,
+      "rapid_g": 3,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
+    },
     {
       "username": "yael981",
       "total_pts": 195,
@@ -15,26 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.2038d28f.200x200o.5fedb6f38df1.jpg"
     },
     {
-      "username": "silent-sniper",
-      "total_pts": 189,
+      "username": "slickey1701",
+      "total_pts": 158,
       "bullet_pts": 0,
-      "blitz_pts": 144,
-      "rapid_pts": 45,
+      "blitz_pts": 18,
+      "rapid_pts": 140,
       "bullet_g": 0,
-      "blitz_g": 16,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
-    },
-    {
-      "username": "smorkusporkus",
-      "total_pts": 114,
-      "bullet_pts": 0,
-      "blitz_pts": 114,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 14,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.c900b30a.200x200o.906bd687f7fd.jpg"
+      "blitz_g": 2,
+      "rapid_g": 10,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
     }
   ]
 }
