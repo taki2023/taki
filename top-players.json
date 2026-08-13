@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-13T19:35:15.916Z",
+  "updated": "2026-08-13T20:39:42.080Z",
   "totalMembers": 1563,
-  "activeToday": 399,
+  "activeToday": 413,
   "players": [
     {
       "username": "financial_dragon",
@@ -16,12 +16,12 @@
     },
     {
       "username": "smorkusporkus",
-      "total_pts": 351,
+      "total_pts": 396,
       "bullet_pts": 0,
-      "blitz_pts": 351,
+      "blitz_pts": 396,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 45,
+      "blitz_g": 50,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.c900b30a.200x200o.906bd687f7fd.jpg"
     },
