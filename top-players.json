@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-13T21:42:42.010Z",
-  "totalMembers": 1564,
-  "activeToday": 414,
+  "updated": "2026-08-13T22:39:14.723Z",
+  "totalMembers": 1563,
+  "activeToday": 405,
   "players": [
     {
       "username": "smorkusporkus",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
     },
     {
-      "username": "damjan1989",
-      "total_pts": 345,
+      "username": "fet149",
+      "total_pts": 374,
       "bullet_pts": 0,
-      "blitz_pts": 270,
-      "rapid_pts": 75,
+      "blitz_pts": 84,
+      "rapid_pts": 290,
       "bullet_g": 0,
-      "blitz_g": 32,
-      "rapid_g": 7,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+      "blitz_g": 10,
+      "rapid_g": 20,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/323134369.10feec29.200x200o.3e3e83e9a538.png"
     }
   ]
 }
