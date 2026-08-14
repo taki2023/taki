@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-14T16:51:08.023Z",
-  "totalMembers": 1562,
-  "activeToday": 380,
+  "updated": "2026-08-14T17:51:12.461Z",
+  "totalMembers": 1563,
+  "activeToday": 372,
   "players": [
     {
       "username": "rish1710",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.9b8e4d97.200x200o.39ad8e3c1c84.jpg"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 326,
-      "bullet_pts": 137,
-      "blitz_pts": 189,
-      "rapid_pts": 0,
-      "bullet_g": 49,
-      "blitz_g": 27,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "username": "silencedseeker",
+      "total_pts": 312,
+      "bullet_pts": 0,
+      "blitz_pts": 117,
+      "rapid_pts": 195,
+      "bullet_g": 0,
+      "blitz_g": 13,
+      "rapid_g": 13,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/512133167.4a9e5c80.200x200o.46b218d5318f.jpg"
     }
   ]
 }
