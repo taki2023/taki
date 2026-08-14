@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-14T17:51:12.461Z",
+  "updated": "2026-08-14T18:51:17.930Z",
   "totalMembers": 1563,
-  "activeToday": 372,
+  "activeToday": 409,
   "players": [
     {
       "username": "rish1710",
@@ -27,12 +27,12 @@
     },
     {
       "username": "silencedseeker",
-      "total_pts": 312,
+      "total_pts": 330,
       "bullet_pts": 0,
-      "blitz_pts": 117,
+      "blitz_pts": 135,
       "rapid_pts": 195,
       "bullet_g": 0,
-      "blitz_g": 13,
+      "blitz_g": 15,
       "rapid_g": 13,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/512133167.4a9e5c80.200x200o.46b218d5318f.jpg"
     }
