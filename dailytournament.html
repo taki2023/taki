@@ -534,11 +534,9 @@ function prettifyGroupName(name) {
   return (name || '').replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// How many players a team actually fielded, per the match API's roster.
 function teamPlayerCount(team) {
   return (team && Array.isArray(team.players)) ? team.players.length : null;
 }
-
 
 function matchMinTeamPlayers(matchJson) {
   const s = matchJson && matchJson.settings;
@@ -569,7 +567,6 @@ function matchView(matchJson, slugA, slugB) {
   let scoreA = teamA ? Number(teamA.score) : null;
   let scoreB = teamB ? Number(teamB.score) : null;
   let forfeited = false;
-
 
   if (status === 'finished') {
     const countA = teamPlayerCount(teamA);
@@ -670,7 +667,6 @@ function parseTournamentData(text) {
 const popover = document.getElementById('matchPopover');
 let pinnedCellEl = null;
 
-
 let lastMouseX = 0, lastMouseY = 0;
 let headingToPopover = false;
 
@@ -691,7 +687,6 @@ document.addEventListener('click', (e) => {
   hidePopover();
   pinnedCellEl = null;
 });
-
 
 popover.addEventListener('mouseleave', () => {
   if (!pinnedCellEl) hidePopover();
@@ -834,10 +829,6 @@ async function renderActiveRound() {
 
   const isLastRound = round.groups.length === 1;
 
-  // All group cards live inside a fixed-height, vertically-scrollable
-  // wrapper so the widget's overall height stays capped no matter how
-  // many groups a round has; each group's own .table-scroll still
-  // handles horizontal scrolling independently.
   content.innerHTML = '<div class="groups-scroll" id="groupsScroll">'
     + round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('')
     + '</div>';
@@ -935,9 +926,11 @@ async function fillGroup(group, gi, isLastRound) {
     const rec = matchViews[m.clubA + '|' + m.clubB];
     const view = rec && rec.view;
     if (view && view.status === 'finished') matchesDone++;
-    if (view && view.boards) gamesTotal += (Number(view.boards) || 0) * 2;
-    if (view && view.scoreA != null && view.scoreB != null && !isNaN(view.scoreA) && !isNaN(view.scoreB)) {
-      gamesDone += (Number(view.scoreA) + Number(view.scoreB));
+    if (view && !view.forfeited) {
+      if (view.boards) gamesTotal += (Number(view.boards) || 0) * 2;
+      if (view.scoreA != null && view.scoreB != null && !isNaN(view.scoreA) && !isNaN(view.scoreB)) {
+        gamesDone += (Number(view.scoreA) + Number(view.scoreB));
+      }
     }
   });
 
@@ -1018,10 +1011,9 @@ async function fillGroup(group, gi, isLastRound) {
     return view;
   }
 
-  
-  tbody.querySelectorAll('.badge[data-a][data-b]').forEach(el => {
+  tbody.querySelectorAll('[data-a][data-b]').forEach(el => {
     el.addEventListener('mouseenter', (e) => {
-      if (pinnedCellEl) return; 
+      if (pinnedCellEl) return;
       lastMouseX = e.clientX; lastMouseY = e.clientY; headingToPopover = false;
       const a = el.dataset.a, b = el.dataset.b;
       const rec = getView(a, b);
@@ -1033,34 +1025,29 @@ async function fillGroup(group, gi, isLastRound) {
     });
     el.addEventListener('mouseleave', (e) => {
       if (pinnedCellEl) return;
-
       if (!updateHeadingToPopover(e.clientX, e.clientY)) hidePopover();
     });
     el.addEventListener('mousemove', (e) => {
-      if (pinnedCellEl) return; // frozen in place after a click, ignore further mouse movement
+      if (pinnedCellEl) return;
       if (popover.classList.contains('show') && !updateHeadingToPopover(e.clientX, e.clientY)) {
         positionPopover(e.clientX, e.clientY - 10);
       }
       lastMouseX = e.clientX; lastMouseY = e.clientY;
     });
-  });
 
-  // Board (pending/live) cells no longer respond to hover at all — the
-  // popover only appears on click now, for both linked and link-less cells.
-  tbody.querySelectorAll('.cell-board[data-a][data-b]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const a = el.dataset.a, b = el.dataset.b;
-      const rec = getView(a, b);
-      const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
-      const clubB = clubInfos[b] || { name: prettifySlug(b), icon: DEFAULT_CLUB_ICON };
-      const view = buildFlippedView(rec);
-      const rect = el.getBoundingClientRect();
-      showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
-      pinnedCellEl = el; // freeze it here — clicking elsewhere is what dismisses it
-    });
-    if (el.dataset.link) {
+    if (el.classList.contains('cell-board') && el.dataset.link) {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const a = el.dataset.a, b = el.dataset.b;
+        const rec = getView(a, b);
+        const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
+        const clubB = clubInfos[b] || { name: prettifySlug(b), icon: DEFAULT_CLUB_ICON };
+        const view = buildFlippedView(rec);
+        const rect = el.getBoundingClientRect();
+        showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
+        pinnedCellEl = el;
+      });
       el.addEventListener('dblclick', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -1092,7 +1079,6 @@ function boot() {
 }
 
 boot();
-// refresh live scores/status every 10 minutes without touching the tournament structure
 setInterval(() => {
   Object.keys(matchCache).forEach(k => delete matchCache[k]);
   renderActiveRound();
