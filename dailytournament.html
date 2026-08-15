@@ -160,12 +160,28 @@ body{display:block;font-family:'Nunito',sans-serif;}
   background:linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent);
 }
 
+/* ══ GROUPS SCROLL WRAPPER — caps the visible height and scrolls
+   vertically through the group cards, independent of each group's
+   own horizontal table scroll ══ */
+.groups-scroll{
+  max-height:520px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:4px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--peach) transparent;
+}
+.groups-scroll::-webkit-scrollbar{width:6px;}
+.groups-scroll::-webkit-scrollbar-thumb{background:var(--peach);border-radius:3px;}
+.groups-scroll::-webkit-scrollbar-track{background:transparent;}
+
 /* ══ GROUP CARD ══ */
 .group-card{
   background:var(--paper);border-radius:24px;border:none;
   box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 22px -10px rgba(224,48,31,.32);
   padding:6px;margin-bottom:16px;overflow:visible;
 }
+.group-card:last-child{margin-bottom:2px;}
 
 .table-scroll{overflow-x:auto;border-radius:18px;-webkit-overflow-scrolling:touch;}
 .table-scroll::-webkit-scrollbar{height:6px;}
@@ -211,7 +227,7 @@ table.pairings tbody td:first-child{text-align:left;padding-left:14px;}
 table.final-round .club-rank.r1{background:linear-gradient(135deg,var(--gold),#E0301F);box-shadow:0 2px 8px -2px rgba(255,176,32,.6);}
 table.final-round .club-rank.r2{background:linear-gradient(135deg,var(--silver),#8E97A8);}
 table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),#96591F);}
-.club-avatar-link{display:inline-flex;flex-shrink:0;border-radius:11px;}
+.club-avatar-link{display:inline-flex;flex-shrink:0;border-radius:11px;outline:none;}
 .club-avatar{width:32px;height:32px;border-radius:9px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--peach);object-fit:cover;flex-shrink:0;background:#FFE9DF;display:block;}
 .club-name-wrap{display:flex;flex-direction:column;text-align:left;min-width:0;}
 .club-host-tag{
@@ -227,15 +243,18 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
 
 .cell-x{color:var(--ink-faint);font-size:16px;font-weight:900;}
 
-.cell-board{display:inline-flex;align-items:center;justify-content:center;}
+.cell-board{display:inline-flex;align-items:center;justify-content:center;outline:none;cursor:pointer;}
 .cell-board svg{fill:#9AA3AF;width:19px;height:19px;opacity:.9;}
 .cell-board.live svg{fill:#3B82F6;}
-.cell-link{text-decoration:none;display:inline-flex;cursor:pointer;}
+.cell-link{text-decoration:none;display:inline-flex;cursor:pointer;outline:none;}
+.cell-link:focus,.cell-link:focus-visible,.cell-board:focus,.cell-board:focus-visible{outline:none;box-shadow:none;}
 
-.badge{display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;font-family:'Nunito',sans-serif;cursor:pointer;text-decoration:none;}
+.badge{display:inline-flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;font-family:'Nunito',sans-serif;cursor:pointer;text-decoration:none;outline:none;}
+.badge:focus,.badge:focus-visible{outline:none;box-shadow:none;}
 .badge.win{color:var(--blue);}
 .badge.draw{color:var(--ink-soft);}
 .badge.loss{color:var(--red-deep);}
+.badge sup{font-size:8px;font-weight:900;margin-left:1px;color:var(--ink-faint);}
 
 .standing-val{display:inline-flex;align-items:center;gap:4px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:16px;color:var(--red-mid);}
 .tiebreak-val{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;color:var(--ink-soft);}
@@ -326,6 +345,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
   .round-dropdown{margin-left:auto;flex-shrink:0;}
   .round-dropdown-btn{min-width:0;padding:8px 10px;font-size:12px;gap:5px;}
   .round-dropdown-btn .chev{width:9px;height:9px;}
+  .groups-scroll{max-height:420px;}
 }
 </style>
 </head>
@@ -370,6 +390,7 @@ table.final-round .club-rank.r3{background:linear-gradient(135deg,var(--bronze),
       <div class="legend-item"><span class="legend-swatch live"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg></span> Live / in progress</div>
       <div class="legend-item"><span class="legend-swatch through"></span> Qualifies for next round</div>
       <div class="legend-item"><span class="legend-swatch eliminated"></span> Eliminated</div>
+      <div class="legend-item"><span class="legend-swatch win">1<sup style="font-size:8px;">F</sup></span> Forfeit win — opponent under player minimum</div>
       <div class="legend-item">Tap board once for a preview, twice to open the match</div>
     </div>
 
@@ -513,6 +534,23 @@ function prettifyGroupName(name) {
   return (name || '').replace(/\b\w/g, c => c.toUpperCase());
 }
 
+// How many players a team actually fielded, per the match API's roster.
+function teamPlayerCount(team) {
+  return (team && Array.isArray(team.players)) ? team.players.length : null;
+}
+
+
+function matchMinTeamPlayers(matchJson) {
+  const s = matchJson && matchJson.settings;
+  if (!s) return null;
+  const raw = s.min_team_players != null ? s.min_team_players
+    : s.minTeamPlayers != null ? s.minTeamPlayers
+    : s.min_required_players != null ? s.min_required_players
+    : null;
+  const n = Number(raw);
+  return isNaN(n) ? null : n;
+}
+
 function matchView(matchJson, slugA, slugB) {
   if (!matchJson || !matchJson.teams) return null;
   const t1 = matchJson.teams.team1, t2 = matchJson.teams.team2;
@@ -526,13 +564,32 @@ function matchView(matchJson, slugA, slugB) {
   } else {
     teamA = t1; teamB = t2;
   }
+
+  const status = matchJson.status || 'registered';
+  let scoreA = teamA ? Number(teamA.score) : null;
+  let scoreB = teamB ? Number(teamB.score) : null;
+  let forfeited = false;
+
+
+  if (status === 'finished') {
+    const countA = teamPlayerCount(teamA);
+    const countB = teamPlayerCount(teamB);
+    const minReq = matchMinTeamPlayers(matchJson);
+    if (minReq != null && countA != null && countB != null && countA !== countB && (countA < minReq || countB < minReq)) {
+      scoreA = countA;
+      scoreB = countB;
+      forfeited = true;
+    }
+  }
+
   return {
-    status: matchJson.status || 'registered',
+    status: status,
     boards: matchJson.boards,
     timeClass: (matchJson.settings && matchJson.settings.time_class) || 'daily',
     url: matchJson.url,
-    scoreA: teamA ? Number(teamA.score) : null,
-    scoreB: teamB ? Number(teamB.score) : null
+    scoreA: scoreA,
+    scoreB: scoreB,
+    forfeited: forfeited
   };
 }
 
@@ -613,8 +670,7 @@ function parseTournamentData(text) {
 const popover = document.getElementById('matchPopover');
 let pinnedCellEl = null;
 
-// tracks whether the mouse is currently heading toward the open popover,
-// so hover handlers can freeze it in place instead of chasing the cursor
+
 let lastMouseX = 0, lastMouseY = 0;
 let headingToPopover = false;
 
@@ -636,7 +692,7 @@ document.addEventListener('click', (e) => {
   pinnedCellEl = null;
 });
 
-// once the mouse actually leaves the popover itself, it's safe to close it
+
 popover.addEventListener('mouseleave', () => {
   if (!pinnedCellEl) hidePopover();
 });
@@ -675,12 +731,15 @@ function matchStage(view) {
 
 function popoverHTML(clubA, clubB, view) {
   const stage = matchStage(view);
+  const forfeited = !!(view && view.forfeited);
   const STAGE_META = {
     pending:  { statusClass: 'pending',  statusText: 'Not started', buttonText: 'Join match'  },
     live:     { statusClass: 'live',     statusText: 'Live',        buttonText: 'Watch match'  },
     finished: { statusClass: 'finished', statusText: 'Finished',    buttonText: 'Check match'  }
   };
-  const meta = STAGE_META[stage];
+  const meta = forfeited
+    ? { statusClass: 'finished', statusText: 'Forfeit win', buttonText: 'Check match' }
+    : STAGE_META[stage];
 
   const rawScoreA = view && view.scoreA != null && !isNaN(view.scoreA) ? view.scoreA : null;
   const rawScoreB = view && view.scoreB != null && !isNaN(view.scoreB) ? view.scoreB : null;
@@ -690,6 +749,7 @@ function popoverHTML(clubA, clubB, view) {
   const boards = view && view.boards ? view.boards : '?';
   const timeClass = view && view.timeClass ? (view.timeClass[0].toUpperCase() + view.timeClass.slice(1)) : 'Daily';
   const watchUrl = view && view.url ? view.url : '';
+  const metaLine = forfeited ? 'Player headcount · not actually played' : `${timeClass} · ${boards} boards`;
 
   return `
     <div class="mp-status ${meta.statusClass}">${meta.statusClass === 'live' ? '<span class="mp-dot"></span>' : ''}${meta.statusText}</div>
@@ -699,7 +759,7 @@ function popoverHTML(clubA, clubB, view) {
       <div class="mp-team"><img src="${clubB.icon}" onerror="this.src='${DEFAULT_CLUB_ICON}'"><div class="mp-team-name">${clubB.name}</div></div>
     </div>
     <div class="mp-score-row"><span class="mp-score-num ${cls.a}">${scoreA}</span><span class="mp-score-sep">–</span><span class="mp-score-num ${cls.b}">${scoreB}</span></div>
-    <div class="mp-meta">${timeClass} · ${boards} boards</div>
+    <div class="mp-meta">${metaLine}</div>
     ${watchUrl ? `<a class="mp-watch" href="${watchUrl}" target="_blank" rel="noopener noreferrer">${meta.buttonText}</a>` : ''}
   `;
 }
@@ -774,7 +834,13 @@ async function renderActiveRound() {
 
   const isLastRound = round.groups.length === 1;
 
-  content.innerHTML = round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('');
+  // All group cards live inside a fixed-height, vertically-scrollable
+  // wrapper so the widget's overall height stays capped no matter how
+  // many groups a round has; each group's own .table-scroll still
+  // handles horizontal scrolling independently.
+  content.innerHTML = '<div class="groups-scroll" id="groupsScroll">'
+    + round.groups.map((g, gi) => groupSkeletonHTML(g, gi, isLastRound)).join('')
+    + '</div>';
   const matchesTotal = round.groups.reduce((sum, g) => sum + g.matches.length, 0);
   resetRoundStats(matchesTotal);
 
@@ -882,7 +948,7 @@ async function fillGroup(group, gi, isLastRound) {
       if (!rec.view) return;
       const flippedA = rec.flipped ? rec.view.scoreB : rec.view.scoreA;
       const flippedB = rec.flipped ? rec.view.scoreA : rec.view.scoreB;
-      if (flippedA != null) tiebreak[a] += flippedA;
+      if (flippedA != null && flippedB != null) tiebreak[a] += (flippedA - flippedB);
       if (rec.view.status === 'finished') {
         const pts = pointsFromScores(flippedA, flippedB);
         if (pts != null) score[a] += pts;
@@ -925,7 +991,9 @@ async function fillGroup(group, gi, isLastRound) {
       let cellInner;
       if (rec.view && rec.view.status === 'finished') {
         const pts = pointsFromScores(flippedA, flippedB);
-        cellInner = `<a class="badge ${pointsClass(pts)}" data-a="${rowSlug}" data-b="${colSlug}" ${link ? `href="${link}" target="_blank" rel="noopener noreferrer"` : ''}>${pointsLabel(pts)}</a>`;
+        const isForfeit = !!rec.view.forfeited;
+        const forfeitTitle = isForfeit ? ' title="Forfeit win — opponent didn\'t meet the minimum player requirement"' : '';
+        cellInner = `<a class="badge ${pointsClass(pts)}${isForfeit ? ' forfeit' : ''}" data-a="${rowSlug}" data-b="${colSlug}"${forfeitTitle} ${link ? `href="${link}" target="_blank" rel="noopener noreferrer"` : ''}>${pointsLabel(pts)}${isForfeit ? '<sup>F</sup>' : ''}</a>`;
       } else {
         const liveClass = link ? ' live' : '';
         cellInner = link
@@ -942,25 +1010,30 @@ async function fillGroup(group, gi, isLastRound) {
   });
   tbody.innerHTML = bodyHTML;
 
-  tbody.querySelectorAll('[data-a][data-b]').forEach(el => {
+  function buildFlippedView(rec) {
+    let view = rec.view;
+    if (view && rec.flipped) {
+      view = { status: view.status, boards: view.boards, timeClass: view.timeClass, url: view.url, scoreA: view.scoreB, scoreB: view.scoreA, forfeited: view.forfeited };
+    }
+    return view;
+  }
+
+  
+  tbody.querySelectorAll('.badge[data-a][data-b]').forEach(el => {
     el.addEventListener('mouseenter', (e) => {
-      if (pinnedCellEl) return; // a click already froze the popover — hover shouldn't steal it
+      if (pinnedCellEl) return; 
       lastMouseX = e.clientX; lastMouseY = e.clientY; headingToPopover = false;
       const a = el.dataset.a, b = el.dataset.b;
       const rec = getView(a, b);
       const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
       const clubB = clubInfos[b] || { name: prettifySlug(b), icon: DEFAULT_CLUB_ICON };
-      let view = rec.view;
-      if (view && rec.flipped) {
-        view = { status: view.status, boards: view.boards, timeClass: view.timeClass, url: view.url, scoreA: view.scoreB, scoreB: view.scoreA };
-      }
+      const view = buildFlippedView(rec);
       const rect = e.currentTarget.getBoundingClientRect();
       showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
     });
     el.addEventListener('mouseleave', (e) => {
       if (pinnedCellEl) return;
-      // don't close it out from under the cursor if it's on its way there —
-      // the popover's own mouseleave (above) will close it once actually left
+
       if (!updateHeadingToPopover(e.clientX, e.clientY)) hidePopover();
     });
     el.addEventListener('mousemove', (e) => {
@@ -970,24 +1043,24 @@ async function fillGroup(group, gi, isLastRound) {
       }
       lastMouseX = e.clientX; lastMouseY = e.clientY;
     });
+  });
 
-
-    if (el.classList.contains('cell-board') && el.dataset.link) {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const a = el.dataset.a, b = el.dataset.b;
-        const rec = getView(a, b);
-        const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
-        const clubB = clubInfos[b] || { name: prettifySlug(b), icon: DEFAULT_CLUB_ICON };
-        let view = rec.view;
-        if (view && rec.flipped) {
-          view = { status: view.status, boards: view.boards, timeClass: view.timeClass, url: view.url, scoreA: view.scoreB, scoreB: view.scoreA };
-        }
-        const rect = el.getBoundingClientRect();
-        showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
-        pinnedCellEl = el; // freeze it here — mousemove/mouseleave won't move or hide it now
-      });
+  // Board (pending/live) cells no longer respond to hover at all — the
+  // popover only appears on click now, for both linked and link-less cells.
+  tbody.querySelectorAll('.cell-board[data-a][data-b]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const a = el.dataset.a, b = el.dataset.b;
+      const rec = getView(a, b);
+      const clubA = clubInfos[a] || { name: prettifySlug(a), icon: DEFAULT_CLUB_ICON };
+      const clubB = clubInfos[b] || { name: prettifySlug(b), icon: DEFAULT_CLUB_ICON };
+      const view = buildFlippedView(rec);
+      const rect = el.getBoundingClientRect();
+      showPopover(rect.left + rect.width / 2, rect.top, popoverHTML(clubA, clubB, view));
+      pinnedCellEl = el; // freeze it here — clicking elsewhere is what dismisses it
+    });
+    if (el.dataset.link) {
       el.addEventListener('dblclick', (e) => {
         e.preventDefault();
         e.stopPropagation();
