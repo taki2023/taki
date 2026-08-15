@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-15T05:28:46.796Z",
+  "updated": "2026-08-15T05:53:15.672Z",
   "totalMembers": 1560,
-  "activeToday": 143,
+  "activeToday": 149,
   "players": [
     {
       "username": "flabbi",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
-      "username": "mohamed_chahine",
-      "total_pts": 140,
-      "bullet_pts": 104,
-      "blitz_pts": 36,
+      "username": "balze_end1337",
+      "total_pts": 171,
+      "bullet_pts": 0,
+      "blitz_pts": 171,
       "rapid_pts": 0,
-      "bullet_g": 36,
-      "blitz_g": 4,
+      "bullet_g": 0,
+      "blitz_g": 19,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.81107396.200x200o.59eb87edd6a0.png"
     }
   ]
 }
