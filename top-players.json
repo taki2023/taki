@@ -1,37 +1,37 @@
 {
-  "updated": "2026-08-15T11:18:25.004Z",
+  "updated": "2026-08-15T11:44:56.407Z",
   "totalMembers": 1559,
-  "activeToday": 270,
+  "activeToday": 285,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 579,
+      "total_pts": 633,
       "bullet_pts": 0,
-      "blitz_pts": 579,
+      "blitz_pts": 633,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 65,
+      "blitz_g": 71,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
       "username": "balze_end1337",
-      "total_pts": 291,
+      "total_pts": 300,
       "bullet_pts": 0,
-      "blitz_pts": 291,
+      "blitz_pts": 300,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 33,
+      "blitz_g": 34,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.81107396.200x200o.59eb87edd6a0.png"
     },
     {
       "username": "kandasamybalaji1983",
-      "total_pts": 253,
-      "bullet_pts": 253,
+      "total_pts": 265,
+      "bullet_pts": 265,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 85,
+      "bullet_g": 89,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146022919.9a5aa91b.200x200o.e50050f3a8de.jpg"
