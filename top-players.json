@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-15T15:18:33.696Z",
+  "updated": "2026-08-15T15:45:30.118Z",
   "totalMembers": 1560,
-  "activeToday": 344,
+  "activeToday": 364,
   "players": [
     {
       "username": "queiser",
@@ -16,13 +16,13 @@
     },
     {
       "username": "flabbi",
-      "total_pts": 429,
+      "total_pts": 459,
       "bullet_pts": 0,
       "blitz_pts": 429,
-      "rapid_pts": 0,
+      "rapid_pts": 30,
       "bullet_g": 0,
       "blitz_g": 49,
-      "rapid_g": 0,
+      "rapid_g": 2,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/3907324.3af46c6b.200x200o.da6204a56491.jpg"
     },
     {
