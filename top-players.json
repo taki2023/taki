@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-15T01:05:59.156Z",
-  "totalMembers": 1561,
-  "activeToday": 41,
+  "updated": "2026-08-15T02:32:29.421Z",
+  "totalMembers": 1560,
+  "activeToday": 76,
   "players": [
     {
-      "username": "samidaalmnswb",
-      "total_pts": 63,
+      "username": "rafallaobedi-210",
+      "total_pts": 90,
       "bullet_pts": 0,
-      "blitz_pts": 63,
+      "blitz_pts": 90,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 7,
+      "blitz_g": 10,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     },
     {
-      "username": "willdawiller2012",
-      "total_pts": 46,
-      "bullet_pts": 6,
-      "blitz_pts": 0,
-      "rapid_pts": 40,
-      "bullet_g": 2,
-      "blitz_g": 0,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/527729963.4bd91fce.200x200o.f55a66e08ef1.png"
-    },
-    {
-      "username": "bellasterling55",
-      "total_pts": 45,
+      "username": "simpleclips",
+      "total_pts": 90,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 45,
+      "blitz_pts": 90,
+      "rapid_pts": 0,
       "bullet_g": 0,
+      "blitz_g": 10,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/9215582.50705f91.200x200o.890f3b1ed21a.jpg"
+    },
+    {
+      "username": "mohamed_chahine",
+      "total_pts": 89,
+      "bullet_pts": 89,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 31,
       "blitz_g": 0,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/581510050.f4f29cac.200x200o.67a512c9cc21.png"
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
     }
   ]
 }
