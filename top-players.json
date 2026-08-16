@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-16T18:25:37.346Z",
+  "updated": "2026-08-16T18:56:39.080Z",
   "totalMembers": 1572,
-  "activeToday": 399,
+  "activeToday": 406,
   "players": [
     {
       "username": "slickey1701",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     },
     {
-      "username": "obozevalec21",
-      "total_pts": 495,
+      "username": "queiser",
+      "total_pts": 525,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 495,
+      "blitz_pts": 525,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 37,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "blitz_g": 59,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     }
   ]
 }
