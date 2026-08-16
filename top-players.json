@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-16T04:33:46.531Z",
+  "updated": "2026-08-16T05:26:00.643Z",
   "totalMembers": 1564,
-  "activeToday": 119,
+  "activeToday": 139,
   "players": [
     {
       "username": "hashinkaa",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.6dd11922.200x200o.1414af5286ec.jpg"
     },
     {
+      "username": "flabbi",
+      "total_pts": 165,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 165,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 11,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/3907324.3af46c6b.200x200o.da6204a56491.jpg"
+    },
+    {
       "username": "rafallaobedi-210",
       "total_pts": 162,
       "bullet_pts": 0,
@@ -24,17 +35,6 @@
       "blitz_g": 18,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
-    },
-    {
-      "username": "niki-sri",
-      "total_pts": 159,
-      "bullet_pts": 9,
-      "blitz_pts": 0,
-      "rapid_pts": 150,
-      "bullet_g": 3,
-      "blitz_g": 0,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382876445.69edb2c2.200x200o.6e49f049fe44.png"
     }
   ]
 }
