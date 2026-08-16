@@ -32,10 +32,6 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
-/* =========================================================
-   ROOT COLORS
-   ========================================================= */
-
 :root {
   --cream: #FFF7F1;
   --cream-deep: #FFEADC;
@@ -67,16 +63,11 @@ body {
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
-/* =========================================================
-   MAIN WIDGET
-   ========================================================= */
-
 .sb {
   font-family: 'Nunito', sans-serif;
   width: 100%;
   max-width: 900px;
 
-  /* IMPORTANT: removes empty space above widget */
   margin: 0 auto !important;
   padding: 0 !important;
 
@@ -90,10 +81,6 @@ body {
   overflow: visible;
   isolation: isolate;
 }
-
-/* =========================================================
-   HEADER
-   ========================================================= */
 
 .sb-top {
   background:
@@ -180,19 +167,11 @@ body {
   font-size: 10px;
 }
 
-/* =========================================================
-   INNER
-   ========================================================= */
-
 .inner {
   width: 100%;
   margin: 0 auto;
   padding: 0 16px 20px;
 }
-
-/* =========================================================
-   ROUND BAR
-   ========================================================= */
 
 .round-bar {
   display: flex;
@@ -251,10 +230,6 @@ body {
   color: var(--red-mid);
   font-weight: 900;
 }
-
-/* =========================================================
-   ROUND DROPDOWN
-   ========================================================= */
 
 .round-dropdown {
   position: relative;
@@ -391,18 +366,9 @@ body {
   color: #fff;
 }
 
-/* =========================================================
-   GROUPS SCROLLER
-   ONLY THIS SECTION SCROLLS VERTICALLY
-   ========================================================= */
-
 .groups-scroll {
   width: 100%;
 
-  /*
-     This is the ONLY vertical scrolling area.
-     Adjust 620px if you want it taller/shorter.
-  */
   max-height: 450px;
 
   overflow-y: auto;
@@ -410,16 +376,11 @@ body {
 
   padding-right: 4px;
 
-  /*
-     Keeps the scrollbar smooth on mobile.
-  */
   -webkit-overflow-scrolling: touch;
 
   scrollbar-width: thin;
   scrollbar-color: var(--peach) transparent;
 }
-
-/* Chrome / Edge / Safari */
 
 .groups-scroll::-webkit-scrollbar {
   width: 7px;
@@ -437,10 +398,6 @@ body {
 .groups-scroll::-webkit-scrollbar-thumb:hover {
   background: var(--orange);
 }
-
-/* =========================================================
-   GROUP CARD
-   ========================================================= */
 
 .group-card {
   background: var(--paper);
@@ -461,10 +418,6 @@ body {
 .group-card:last-child {
   margin-bottom: 4px;
 }
-
-/* =========================================================
-   HORIZONTAL TABLE SCROLL
-   ========================================================= */
 
 .table-scroll {
   overflow-x: auto;
@@ -488,10 +441,6 @@ body {
 .table-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
-
-/* =========================================================
-   TABLE
-   ========================================================= */
 
 table.pairings {
   width: 100%;
@@ -560,10 +509,6 @@ table.pairings thead th:last-child {
     );
 }
 
-/* =========================================================
-   TABLE BODY
-   ========================================================= */
-
 table.pairings tbody tr {
   background: var(--paper);
 
@@ -607,10 +552,6 @@ table.pairings tbody td:first-child {
 
   padding-left: 14px;
 }
-
-/* =========================================================
-   PLAYER
-   ========================================================= */
 
 .player-cell {
   display: flex;
@@ -730,10 +671,6 @@ table.final-round .player-rank.r3 {
   text-decoration: underline;
 }
 
-/* =========================================================
-   GAME CELLS
-   ========================================================= */
-
 .cell-x {
   color: var(--ink-faint);
 
@@ -742,87 +679,44 @@ table.final-round .player-rank.r3 {
   font-weight: 900;
 }
 
-.cell-games {
+.cell-board {
   display: inline-flex;
-
-  gap: 3px;
-
   align-items: center;
   justify-content: center;
+  outline: none;
+  cursor: pointer;
 }
 
-.game-badge {
+.cell-board svg {
+  fill: #9AA3AF;
   width: 19px;
   height: 19px;
-
-  border-radius: 6px;
-
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  font-size: 10.5px;
-
-  font-weight: 900;
-
-  cursor: pointer;
-
-  text-decoration: none;
+  opacity: .9;
 }
 
-.game-badge.win {
-  background: #E1EEFF;
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+.badge.win {
   color: var(--blue);
 }
 
-.game-badge.draw {
-  background: #F1EEEE;
+.badge.draw {
   color: var(--ink-soft);
 }
 
-.game-badge.loss {
-  background: #FFE4E1;
+.badge.loss {
   color: var(--red-deep);
 }
-
-/* =========================================================
-   PENDING GAME ICON
-   CLEAN SVG — NO OUTER OUTLINE
-   ========================================================= */
-
-.game-badge.pending {
-  background: #F1EEEE;
-
-  color: #9AA3AF;
-
-  cursor: default;
-
-  border: none;
-
-  outline: none;
-
-  box-shadow: none;
-}
-
-.game-badge.pending svg {
-  width: 13px;
-  height: 13px;
-
-  display: block;
-
-  fill: currentColor;
-
-  stroke: none;
-
-  border: none;
-
-  outline: none;
-}
-
-/* =========================================================
-   STANDINGS
-   ========================================================= */
 
 .standing-val {
   display: inline-flex;
@@ -849,10 +743,6 @@ table.final-round .player-rank.r3 {
 
   color: var(--ink-soft);
 }
-
-/* =========================================================
-   LEGEND
-   ========================================================= */
 
 .legend-card {
   background: var(--paper);
@@ -906,44 +796,21 @@ table.final-round .player-rank.r3 {
 }
 
 .legend-swatch.win {
-  background: #E1EEFF;
-
-  border: 1.5px solid #BBD3FF;
-
   color: var(--blue);
 }
 
 .legend-swatch.draw {
-  background: #F1EEEE;
-
-  border: 1.5px solid #DCD3D0;
-
   color: var(--ink-soft);
 }
 
 .legend-swatch.loss {
-  background: #FFE4E1;
-
-  border: 1.5px solid #FFC5BE;
-
   color: var(--red-deep);
 }
 
-.legend-swatch.pending {
-  background: #F1EEEE;
-
-  border: 1.5px solid #DCD3D0;
-
-  color: #9AA3AF;
-}
-
 .legend-swatch.pending svg {
-  width: 12px;
-  height: 12px;
-
-  fill: currentColor;
-
-  stroke: none;
+  fill: #9AA3AF;
+  width: 14px;
+  height: 14px;
 }
 
 .legend-swatch.through,
@@ -962,10 +829,6 @@ table.final-round .player-rank.r3 {
   background: var(--red-deep);
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
 .footer {
   text-align: center;
 
@@ -977,10 +840,6 @@ table.final-round .player-rank.r3 {
 
   color: var(--ink-faint);
 }
-
-/* =========================================================
-   MESSAGES
-   ========================================================= */
 
 .load-msg {
   text-align: center;
@@ -1024,10 +883,6 @@ table.final-round .player-rank.r3 {
   color: var(--ink-faint);
 }
 
-/* =========================================================
-   SKELETON
-   ========================================================= */
-
 .skel {
   display: inline-block;
 
@@ -1043,8 +898,7 @@ table.final-round .player-rank.r3 {
 
   background-size: 400% 100%;
 
-  animation:
-    skel-shimmer 1.4s ease infinite;
+  animation: skel-shimmer 1.4s ease infinite;
 }
 
 @keyframes skel-shimmer {
@@ -1102,10 +956,6 @@ table.final-round .player-rank.r3 {
 
   border-radius: 5px;
 }
-
-/* =========================================================
-   MATCH POPOVER
-   ========================================================= */
 
 #matchPopover {
   position: fixed;
@@ -1179,6 +1029,11 @@ table.final-round .player-rank.r3 {
 .mp-status.pending {
   background: #F1EEEE;
   color: var(--ink-soft);
+}
+
+.mp-status.partial {
+  background: #FFE9DF;
+  color: var(--red-mid);
 }
 
 .mp-teams-row {
@@ -1301,10 +1156,16 @@ table.final-round .player-rank.r3 {
   margin-bottom: 10px;
 }
 
+.mp-games-row {
+  display: flex;
+
+  gap: 8px;
+}
+
 .mp-watch {
   display: block;
 
-  width: 100%;
+  flex: 1;
 
   text-align: center;
 
@@ -1331,9 +1192,15 @@ table.final-round .player-rank.r3 {
     0 4px 0 var(--red-deep);
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+.mp-watch.disabled {
+  background: #F1EEEE;
+
+  color: var(--ink-faint);
+
+  box-shadow: none;
+
+  pointer-events: none;
+}
 
 @media (max-width: 480px) {
 
@@ -1387,9 +1254,6 @@ table.final-round .player-rank.r3 {
     gap: 5px;
   }
 
-  /*
-     Slightly shorter groups viewport on phones.
-  */
   .groups-scroll {
     max-height: 520px;
 
@@ -1400,10 +1264,6 @@ table.final-round .player-rank.r3 {
     margin-bottom: 12px;
   }
 }
-
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
 
 @media (max-width: 360px) {
 
@@ -1431,10 +1291,6 @@ table.final-round .player-rank.r3 {
 
 <div class="sb">
 
-  <!-- =====================================================
-       HEADER
-       ===================================================== -->
-
   <div class="sb-top">
 
     <div class="event-title">
@@ -1449,10 +1305,6 @@ table.final-round .player-rank.r3 {
 
 
   <div class="inner">
-
-    <!-- ===================================================
-         ROUND BAR
-         =================================================== -->
 
     <div class="round-bar">
 
@@ -1516,11 +1368,6 @@ table.final-round .player-rank.r3 {
     </div>
 
 
-    <!-- ===================================================
-         GROUPS SCROLL AREA
-         ONLY THIS SECTION VERTICALLY SCROLLS
-         =================================================== -->
-
     <div class="groups-scroll">
 
       <div id="content">
@@ -1533,10 +1380,6 @@ table.final-round .player-rank.r3 {
 
     </div>
 
-
-    <!-- ===================================================
-         LEGEND
-         =================================================== -->
 
     <div class="legend-card">
 
@@ -1565,29 +1408,12 @@ table.final-round .player-rank.r3 {
 
         <span class="legend-swatch pending">
 
-          <!-- CLEAN BOARD SVG — NO OUTER OUTLINE -->
           <svg
-            viewBox="0 0 16 16"
+            viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <rect x="1" y="1" width="3" height="3"></rect>
-            <rect x="7" y="1" width="3" height="3"></rect>
-            <rect x="13" y="1" width="2" height="3"></rect>
-
-            <rect x="4" y="4" width="3" height="3"></rect>
-            <rect x="10" y="4" width="3" height="3"></rect>
-
-            <rect x="1" y="7" width="3" height="3"></rect>
-            <rect x="7" y="7" width="3" height="3"></rect>
-            <rect x="13" y="7" width="2" height="3"></rect>
-
-            <rect x="4" y="10" width="3" height="3"></rect>
-            <rect x="10" y="10" width="3" height="3"></rect>
-
-            <rect x="1" y="13" width="3" height="2"></rect>
-            <rect x="7" y="13" width="3" height="2"></rect>
-            <rect x="13" y="13" width="2" height="2"></rect>
+            <path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path>
           </svg>
 
         </span>
@@ -1617,17 +1443,13 @@ table.final-round .player-rank.r3 {
 
       <div class="legend-item">
 
-        Each cell shows both blitz games of that pairing —
-        tap for details, tap again to open
+        Each cell shows the combined score of both blitz games —
+        tap for details
 
       </div>
 
     </div>
 
-
-    <!-- ===================================================
-         FOOTER
-         =================================================== -->
 
     <div class="footer">
       🔥 Hot Chilli CheckMate © 2026 ♞
@@ -1638,18 +1460,10 @@ table.final-round .player-rank.r3 {
 </div>
 
 
-<!-- =======================================================
-     POPOVER
-     ======================================================= -->
-
 <div id="matchPopover"></div>
 
 
 <script>
-
-/* =========================================================
-   DATA SOURCE
-   ========================================================= */
 
 const DATA_URL =
   'https://raw.githubusercontent.com/taki2023/taki/refs/heads/main/blitz.json';
@@ -1661,38 +1475,7 @@ const HOST_PLAYER = '';
 
 const ADVANCING_PLAYERS_PER_GROUP = 2;
 
-
-/* =========================================================
-   CLEAN PENDING BOARD SVG
-   NO OUTER OUTLINE
-   ========================================================= */
-
-const BOARD_SVG = `
-<svg
-  viewBox="0 0 16 16"
-  xmlns="http://www.w3.org/2000/svg"
-  aria-hidden="true"
->
-  <rect x="1" y="1" width="3" height="3"></rect>
-  <rect x="7" y="1" width="3" height="3"></rect>
-  <rect x="13" y="1" width="2" height="3"></rect>
-
-  <rect x="4" y="4" width="3" height="3"></rect>
-  <rect x="10" y="4" width="3" height="3"></rect>
-
-  <rect x="1" y="7" width="3" height="3"></rect>
-  <rect x="7" y="7" width="3" height="3"></rect>
-  <rect x="13" y="7" width="2" height="3"></rect>
-
-  <rect x="4" y="10" width="3" height="3"></rect>
-  <rect x="10" y="10" width="3" height="3"></rect>
-
-  <rect x="1" y="13" width="3" height="2"></rect>
-  <rect x="7" y="13" width="3" height="2"></rect>
-  <rect x="13" y="13" width="2" height="2"></rect>
-</svg>
-`;
-
+const BOARD_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg>`;
 
 const DRAW_RESULTS = new Set([
   'agreed',
@@ -1702,11 +1485,6 @@ const DRAW_RESULTS = new Set([
   '50move',
   'timevsinsufficient'
 ]);
-
-
-/* =========================================================
-   CONCURRENCY LIMITER
-   ========================================================= */
 
 function makeLimiter(concurrency) {
 
@@ -1772,11 +1550,6 @@ function makeLimiter(concurrency) {
 
 const limit = makeLimiter(3);
 
-
-/* =========================================================
-   HELPERS
-   ========================================================= */
-
 function prettifyUsername(u) {
 
   return (u || '')
@@ -1790,11 +1563,6 @@ function prettifyGroupName(name) {
   return (name || '')
     .replace(/\b\w/g, c => c.toUpperCase());
 }
-
-
-/* =========================================================
-   PLAYER CACHE
-   ========================================================= */
 
 const playerCache = {};
 
@@ -1871,11 +1639,6 @@ async function fetchPlayer(username) {
   return p;
 }
 
-
-/* =========================================================
-   SCORING
-   ========================================================= */
-
 function resultPoints(resultStr) {
 
   if (resultStr === 'win') {
@@ -1915,10 +1678,13 @@ function pointsClass(p) {
       : 'draw';
 }
 
+function formatSum(p) {
 
-/* =========================================================
-   PARSE GAME CELL
-   ========================================================= */
+  return (
+    Math.round(p * 2) / 2
+  ).toString();
+
+}
 
 function parseCellGames(cellText) {
 
@@ -1959,11 +1725,6 @@ function parseCellGames(cellText) {
 
     });
 }
-
-
-/* =========================================================
-   VALIDATE TOURNAMENT
-   ========================================================= */
 
 function validateTournamentData(obj) {
 
@@ -2020,11 +1781,6 @@ function validateTournamentData(obj) {
   return obj;
 }
 
-
-/* =========================================================
-   FETCH TOURNAMENT
-   ========================================================= */
-
 async function fetchTournamentData() {
 
   const r = await fetch(
@@ -2058,11 +1814,6 @@ async function fetchTournamentData() {
 
   return validateTournamentData(obj);
 }
-
-
-/* =========================================================
-   POPOVER
-   ========================================================= */
 
 const popover =
   document.getElementById('matchPopover');
@@ -2234,11 +1985,6 @@ function hidePopover() {
 
 }
 
-
-/* =========================================================
-   SCORE CLASSES
-   ========================================================= */
-
 function scoreCompareClasses(
   scoreA,
   scoreB
@@ -2282,54 +2028,112 @@ function scoreCompareClasses(
   };
 }
 
+function matchStageLabel(
+  playedCount
+) {
 
-/* =========================================================
-   POPOVER HTML
-   ========================================================= */
+  if (playedCount === 0) {
+
+    return {
+      cls: 'pending',
+      text: 'Not started'
+    };
+
+  }
+
+  if (playedCount === 1) {
+
+    return {
+      cls: 'partial',
+      text: 'In progress'
+    };
+
+  }
+
+  return {
+    cls: 'finished',
+    text: 'Finished'
+  };
+}
 
 function popoverHTML(
   playerA,
   playerB,
-  game,
-  gameLabel
+  games
 ) {
 
-  const finished = !!game;
+  const g1 =
+    games[0];
+
+  const g2 =
+    games[1];
+
+  const playedCount =
+    (g1 ? 1 : 0) +
+    (g2 ? 1 : 0);
+
+  const stage =
+    matchStageLabel(
+      playedCount
+    );
+
+  const totalA =
+    (g1 ? g1.scoreA : 0) +
+    (g2 ? g2.scoreA : 0);
+
+  const totalB =
+    (g1 ? g1.scoreB : 0) +
+    (g2 ? g2.scoreB : 0);
 
   const scoreA =
-    finished
-      ? pointsLabel(game.scoreA)
+    playedCount
+      ? formatSum(totalA)
       : '–';
 
   const scoreB =
-    finished
-      ? pointsLabel(game.scoreB)
+    playedCount
+      ? formatSum(totalB)
       : '–';
 
   const cls =
-    finished
+    playedCount
       ? scoreCompareClasses(
-          game.scoreA,
-          game.scoreB
+          totalA,
+          totalB
         )
       : {
           a: 'tie',
           b: 'tie'
         };
 
-  const watchUrl =
-    finished
-      ? game.link
-      : '';
+  const gameBtn = (
+    g,
+    label
+  ) =>
+
+    g
+
+      ? `
+        <a
+          class="mp-watch"
+          href="${g.link}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${label}
+        </a>
+      `
+
+      : `
+        <span class="mp-watch disabled">
+          ${label}
+        </span>
+      `;
 
   return `
 
-    <div class="mp-status ${finished ? 'finished' : 'pending'}">
-      ${finished ? 'Finished' : 'Not fetched yet'}
-    </div>
-
-    <div class="mp-game-label">
-      ${gameLabel}
+    <div class="mp-status ${stage.cls}">
+      ${stage.text}
     </div>
 
     <div class="mp-teams-row">
@@ -2382,28 +2186,13 @@ function popoverHTML(
 
     </div>
 
-    ${
-      watchUrl
-        ? `
-          <a
-            class="mp-watch"
-            href="${watchUrl}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Check game
-          </a>
-        `
-        : ''
-    }
+    <div class="mp-games-row">
+      ${gameBtn(g1, 'Game 1')}
+      ${gameBtn(g2, 'Game 2')}
+    </div>
 
   `;
 }
-
-
-/* =========================================================
-   TOURNAMENT STATE
-   ========================================================= */
 
 let TOURNAMENT = {
   rounds: []
@@ -2412,11 +2201,6 @@ let TOURNAMENT = {
 let activeRoundIdx = 0;
 
 let hasLoadedOnce = false;
-
-
-/* =========================================================
-   FINAL ROUND
-   ========================================================= */
 
 function isFinalRound(round) {
 
@@ -2434,11 +2218,6 @@ function displayRoundName(round) {
     : (round ? round.name : 'Round');
 
 }
-
-
-/* =========================================================
-   ROUND NAVIGATION
-   ========================================================= */
 
 function renderRoundNav() {
 
@@ -2528,11 +2307,6 @@ function renderRoundNav() {
 
 }
 
-
-/* =========================================================
-   DROPDOWN TOGGLE
-   ========================================================= */
-
 (function initRoundDropdownToggle() {
 
   const wrap =
@@ -2576,11 +2350,6 @@ function renderRoundNav() {
   );
 
 })();
-
-
-/* =========================================================
-   ROUND STATS
-   ========================================================= */
 
 function resetRoundStats(
   matchesTotal
@@ -2673,11 +2442,6 @@ function renderRoundStats(
   `;
 }
 
-
-/* =========================================================
-   RENDER ACTIVE ROUND
-   ========================================================= */
-
 async function renderActiveRound() {
 
   const content =
@@ -2695,10 +2459,6 @@ async function renderActiveRound() {
       activeRoundIdx
     ];
 
-  /*
-     Always return the groups scroll position
-     to the top when switching rounds.
-  */
   if (groupsScroll) {
 
     groupsScroll.scrollTop = 0;
@@ -2816,11 +2576,6 @@ async function renderActiveRound() {
   );
 }
 
-
-/* =========================================================
-   TABLE HEADER
-   ========================================================= */
-
 function headerRowHTML(
   playerCount,
   groupName
@@ -2874,11 +2629,6 @@ function headerRowHTML(
 
   return html;
 }
-
-
-/* =========================================================
-   SKELETON ROW
-   ========================================================= */
 
 function playerRowSkeletonHTML(
   playerCount
@@ -2943,11 +2693,6 @@ function playerRowSkeletonHTML(
   return html;
 }
 
-
-/* =========================================================
-   GROUP SKELETON
-   ========================================================= */
-
 function groupSkeletonHTML(
   group,
   gi,
@@ -3008,11 +2753,6 @@ function groupSkeletonHTML(
   `;
 }
 
-
-/* =========================================================
-   QUALIFICATION
-   ========================================================= */
-
 function qualificationBandClass(
   rank
 ) {
@@ -3024,11 +2764,6 @@ function qualificationBandClass(
 
     : 'band-out';
 }
-
-
-/* =========================================================
-   FILL GROUP
-   ========================================================= */
 
 async function fillGroup(
   group,
@@ -3053,11 +2788,6 @@ async function fillGroup(
     )
 
   );
-
-
-  /* =======================================================
-     MATCH DATA
-     ======================================================= */
 
   const gamesByPair = {};
 
@@ -3122,21 +2852,16 @@ async function fillGroup(
 
   }
 
-
-  /* =======================================================
-     SCORES
-     ======================================================= */
-
   const score = {};
 
-  const oppResult = {};
+  const sbTiebreak = {};
 
 
   players.forEach(p => {
 
     score[p] = 0;
 
-    oppResult[p] = {};
+    sbTiebreak[p] = 0;
 
   });
 
@@ -3149,11 +2874,6 @@ async function fillGroup(
 
   const matchesTotal =
     group.matches.length;
-
-
-  /* =======================================================
-     CALCULATE MATCHES
-     ======================================================= */
 
   group.matches.forEach(m => {
 
@@ -3199,62 +2919,62 @@ async function fillGroup(
 
       matchesDone++;
 
-      const result =
-        scoreA > scoreB
-          ? 1
-          : scoreA < scoreB
-            ? 0
-            : 0.5;
-
-
-      oppResult[
-        m.playerA
-      ][
-        m.playerB
-      ] = result;
-
-
-      oppResult[
-        m.playerB
-      ][
-        m.playerA
-      ] = 1 - result;
-
     }
 
   });
-
-
-  /* =======================================================
-     TIEBREAK
-     ======================================================= */
-
-  const tiebreak = {};
-
 
   players.forEach(p => {
 
     let tb = 0;
 
-    Object.keys(
-      oppResult[p]
-    ).forEach(opp => {
+    players.forEach(opp => {
 
-      tb +=
-        oppResult[p][opp] *
-        score[opp];
+      if (opp === p) {
+
+        return;
+
+      }
+
+      const rec =
+        getPair(p, opp);
+
+      const games =
+        rec.games.map(
+          g =>
+            rec.flipped
+
+              ? {
+                  scoreA:
+                    g.scoreB,
+
+                  scoreB:
+                    g.scoreA
+                }
+
+              : g
+        );
+
+      games.forEach(g => {
+
+        if (
+          !isNaN(g.scoreA) &&
+          !isNaN(g.scoreB)
+        ) {
+
+          tb +=
+            g.scoreA *
+            score[opp];
+
+        }
+
+      });
 
     });
 
-    tiebreak[p] =
-      tb;
+    sbTiebreak[p] = tb;
 
   });
 
-
-  /* =======================================================
-     SORT
-     ======================================================= */
 
   const order =
     players
@@ -3266,15 +2986,10 @@ async function fillGroup(
             score[x]
           ) ||
           (
-            tiebreak[y] -
-            tiebreak[x]
+            sbTiebreak[y] -
+            sbTiebreak[x]
           )
       );
-
-
-  /* =======================================================
-     UPDATE HEADER
-     ======================================================= */
 
   document.getElementById(
     'ghead-' + gi
@@ -3294,11 +3009,6 @@ async function fillGroup(
 
 
   let bodyHTML = '';
-
-
-  /* =======================================================
-     BUILD PLAYER ROWS
-     ======================================================= */
 
   order.forEach(
     (rowSlug, rank) => {
@@ -3383,11 +3093,6 @@ async function fillGroup(
 
       `;
 
-
-      /* =====================================================
-         MATRIX
-         ===================================================== */
-
       order.forEach(
         colSlug => {
 
@@ -3438,77 +3143,69 @@ async function fillGroup(
             );
 
 
-          let inner =
-            '<div class="cell-games">';
+          const playedCount =
+            games.filter(
+              g =>
+                !isNaN(g.scoreA) &&
+                !isNaN(g.scoreB)
+            ).length;
 
 
-          for (
-            let gi2 = 0;
-            gi2 < 2;
-            gi2++
-          ) {
+          let cellInner;
 
-            const g =
-              games[gi2];
+          if (playedCount >= 2) {
 
+            const totalA =
+              games.reduce(
+                (sum, g) =>
+                  sum +
+                  (
+                    isNaN(g.scoreA)
+                      ? 0
+                      : g.scoreA
+                  ),
+                0
+              );
 
-            if (g) {
+            cellInner = `
 
-              const pts =
-                pointsLabel(
-                  g.scoreA
-                );
+              <span
+                class="badge ${pointsClass(
+                  totalA === 2
+                    ? 1
+                    : totalA === 0
+                      ? 0
+                      : 0.5
+                )}"
+                data-a="${rowSlug}"
+                data-b="${colSlug}"
+              >
+                ${formatSum(totalA)}
+              </span>
 
+            `;
 
-              inner += `
+          } else {
 
-                <a
-                  class="game-badge ${pointsClass(g.scoreA)}"
-                  data-a="${rowSlug}"
-                  data-b="${colSlug}"
-                  data-game="${gi2}"
-                  href="${g.link}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ${pts}
-                </a>
+            cellInner = `
 
-              `;
+              <span
+                class="cell-board"
+                data-a="${rowSlug}"
+                data-b="${colSlug}"
+              >
+                ${BOARD_SVG}
+              </span>
 
-            } else {
-
-              /*
-                 CLEAN PENDING ICON.
-                 No outer SVG outline.
-              */
-
-              inner += `
-
-                <span
-                  class="game-badge pending"
-                  data-a="${rowSlug}"
-                  data-b="${colSlug}"
-                  data-game="${gi2}"
-                >
-                  ${BOARD_SVG}
-                </span>
-
-              `;
-
-            }
+            `;
 
           }
-
-
-          inner +=
-            '</div>';
 
 
           bodyHTML += `
 
             <td>
-              ${inner}
+              ${cellInner}
             </td>
 
           `;
@@ -3533,7 +3230,7 @@ async function fillGroup(
             <span class="tiebreak-val">
               ${
                 Math.round(
-                  tiebreak[rowSlug] *
+                  sbTiebreak[rowSlug] *
                   100
                 ) / 100
               }
@@ -3552,11 +3249,6 @@ async function fillGroup(
 
   tbody.innerHTML =
     bodyHTML;
-
-
-  /* =======================================================
-     GAME EVENTS
-     ======================================================= */
 
   tbody
     .querySelectorAll(
@@ -3591,12 +3283,6 @@ async function fillGroup(
 
           const b =
             el.dataset.b;
-
-          const gIdx =
-            parseInt(
-              el.dataset.game,
-              10
-            );
 
 
           const rec =
@@ -3662,11 +3348,7 @@ async function fillGroup(
 
               playerB,
 
-              games[gIdx],
-
-              'Game ' +
-              (gIdx + 1) +
-              ' of 2'
+              games
 
             )
 
@@ -3740,95 +3422,96 @@ async function fillGroup(
       );
 
 
-      /* =====================================================
-         PENDING CLICK
-         ===================================================== */
+      el.addEventListener(
+        'click',
+        e => {
 
-      if (
-        el.classList.contains(
-          'pending'
-        )
-      ) {
+          e.preventDefault();
 
-        el.addEventListener(
-          'click',
-          e => {
-
-            e.preventDefault();
-
-            e.stopPropagation();
+          e.stopPropagation();
 
 
-            const a =
-              el.dataset.a;
+          const a =
+            el.dataset.a;
 
-            const b =
-              el.dataset.b;
-
-            const gIdx =
-              parseInt(
-                el.dataset.game,
-                10
-              );
+          const b =
+            el.dataset.b;
 
 
-            const playerA =
-              infos[a] ||
-              {
-                name:
-                  prettifyUsername(a),
-
-                avatar:
-                  DEFAULT_AVATAR
-              };
+          const rec =
+            getPair(a, b);
 
 
-            const playerB =
-              infos[b] ||
-              {
-                name:
-                  prettifyUsername(b),
+          const games =
+            rec.games.map(
+              g =>
+                rec.flipped
 
-                avatar:
-                  DEFAULT_AVATAR
-              };
+                  ? {
+                      link: g.link,
 
+                      scoreA:
+                        g.scoreB,
 
-            const rect =
-              el.getBoundingClientRect();
+                      scoreB:
+                        g.scoreA
+                    }
 
-
-            showPopover(
-
-              rect.left +
-              rect.width / 2,
-
-              rect.top,
-
-              popoverHTML(
-
-                playerA,
-
-                playerB,
-
-                null,
-
-                'Game ' +
-                (gIdx + 1) +
-                ' of 2'
-
-              )
-
+                  : g
             );
 
 
-            pinnedCellEl =
-              el;
+          const playerA =
+            infos[a] ||
+            {
+              name:
+                prettifyUsername(a),
 
-          }
-        );
+              avatar:
+                DEFAULT_AVATAR
+            };
 
-      }
+
+          const playerB =
+            infos[b] ||
+            {
+              name:
+                prettifyUsername(b),
+
+              avatar:
+                DEFAULT_AVATAR
+            };
+
+
+          const rect =
+            el.getBoundingClientRect();
+
+
+          showPopover(
+
+            rect.left +
+            rect.width / 2,
+
+            rect.top,
+
+            popoverHTML(
+
+              playerA,
+
+              playerB,
+
+              games
+
+            )
+
+          );
+
+
+          pinnedCellEl =
+            el;
+
+        }
+      );
 
     });
 
@@ -3846,11 +3529,6 @@ async function fillGroup(
   };
 
 }
-
-
-/* =========================================================
-   BOOT
-   ========================================================= */
 
 async function boot() {
 
@@ -3939,23 +3617,12 @@ async function boot() {
 
   if (!hasLoadedOnce) {
 
-    /*
-       First load:
-       open newest round.
-    */
-
     activeRoundIdx =
       TOURNAMENT.rounds.length - 1;
 
     hasLoadedOnce = true;
 
   } else {
-
-    /*
-       Refresh:
-       keep the round the user
-       was currently viewing.
-    */
 
     activeRoundIdx =
       Math.min(
@@ -3971,11 +3638,6 @@ async function boot() {
   await renderActiveRound();
 
 }
-
-
-/* =========================================================
-   START
-   ========================================================= */
 
 boot();
 
