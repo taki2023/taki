@@ -1,18 +1,29 @@
 {
-  "updated": "2026-08-16T03:46:47.281Z",
+  "updated": "2026-08-16T04:33:46.531Z",
   "totalMembers": 1564,
-  "activeToday": 85,
+  "activeToday": 119,
   "players": [
     {
       "username": "hashinkaa",
-      "total_pts": 163,
+      "total_pts": 208,
       "bullet_pts": 67,
-      "blitz_pts": 96,
+      "blitz_pts": 141,
       "rapid_pts": 0,
       "bullet_g": 23,
-      "blitz_g": 12,
+      "blitz_g": 17,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.6dd11922.200x200o.1414af5286ec.jpg"
+    },
+    {
+      "username": "rafallaobedi-210",
+      "total_pts": 162,
+      "bullet_pts": 0,
+      "blitz_pts": 162,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 18,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     },
     {
       "username": "niki-sri",
@@ -24,17 +35,6 @@
       "blitz_g": 0,
       "rapid_g": 12,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/382876445.69edb2c2.200x200o.6e49f049fe44.png"
-    },
-    {
-      "username": "reefrhino26",
-      "total_pts": 147,
-      "bullet_pts": 0,
-      "blitz_pts": 117,
-      "rapid_pts": 30,
-      "bullet_g": 0,
-      "blitz_g": 13,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/508764961.a99386be.200x200o.06fa20690ab8.jpg"
     }
   ]
 }
