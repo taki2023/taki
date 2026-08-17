@@ -1,16 +1,16 @@
 {
-  "updated": "2026-08-17T04:39:49.521Z",
+  "updated": "2026-08-17T05:33:46.953Z",
   "totalMembers": 1569,
-  "activeToday": 102,
+  "activeToday": 119,
   "players": [
     {
       "username": "silent-sniper",
-      "total_pts": 201,
+      "total_pts": 255,
       "bullet_pts": 3,
-      "blitz_pts": 198,
+      "blitz_pts": 252,
       "rapid_pts": 0,
       "bullet_g": 1,
-      "blitz_g": 22,
+      "blitz_g": 28,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
     },
