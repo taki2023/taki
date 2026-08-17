@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-17T19:52:09.091Z",
+  "updated": "2026-08-17T20:24:23.523Z",
   "totalMembers": 1570,
-  "activeToday": 392,
+  "activeToday": 403,
   "players": [
+    {
+      "username": "financial_dragon",
+      "total_pts": 374,
+      "bullet_pts": 65,
+      "blitz_pts": 294,
+      "rapid_pts": 15,
+      "bullet_g": 25,
+      "blitz_g": 36,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
+    },
     {
       "username": "abner-aaron",
       "total_pts": 369,
@@ -13,17 +24,6 @@
       "blitz_g": 41,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/549589123.127a880d.200x200o.88ca8b11d822.png"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 350,
-      "bullet_pts": 65,
-      "blitz_pts": 285,
-      "rapid_pts": 0,
-      "bullet_g": 25,
-      "blitz_g": 35,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
     },
     {
       "username": "xtornadoxxx",
