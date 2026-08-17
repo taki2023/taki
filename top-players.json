@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-17T10:30:16.348Z",
+  "updated": "2026-08-17T10:59:40.116Z",
   "totalMembers": 1571,
-  "activeToday": 214,
+  "activeToday": 233,
   "players": [
     {
       "username": "silent-sniper",
@@ -16,23 +16,23 @@
     },
     {
       "username": "financial_dragon",
-      "total_pts": 206,
+      "total_pts": 236,
       "bullet_pts": 32,
-      "blitz_pts": 174,
+      "blitz_pts": 204,
       "rapid_pts": 0,
       "bullet_g": 12,
-      "blitz_g": 20,
+      "blitz_g": 24,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
     },
     {
       "username": "abner-aaron",
-      "total_pts": 198,
+      "total_pts": 207,
       "bullet_pts": 0,
-      "blitz_pts": 198,
+      "blitz_pts": 207,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 22,
+      "blitz_g": 23,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/549589123.127a880d.200x200o.88ca8b11d822.png"
     }
