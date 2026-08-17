@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-16T23:44:09.079Z",
+  "updated": "2026-08-17T01:07:07.724Z",
   "totalMembers": 1572,
-  "activeToday": 443,
+  "activeToday": 42,
   "players": [
     {
-      "username": "slickey1701",
-      "total_pts": 727,
-      "bullet_pts": 0,
-      "blitz_pts": 552,
-      "rapid_pts": 175,
-      "bullet_g": 0,
-      "blitz_g": 64,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
-    },
-    {
-      "username": "queiser",
-      "total_pts": 612,
-      "bullet_pts": 0,
-      "blitz_pts": 612,
+      "username": "jessicaslidale",
+      "total_pts": 64,
+      "bullet_pts": 64,
+      "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 70,
+      "bullet_g": 22,
+      "blitz_g": 0,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146045165.42c16352.200x200o.52fcd24cba33.jpg"
     },
     {
-      "username": "traker-86",
-      "total_pts": 564,
+      "username": "silent-sniper",
+      "total_pts": 57,
+      "bullet_pts": 3,
+      "blitz_pts": 54,
+      "rapid_pts": 0,
+      "bullet_g": 1,
+      "blitz_g": 6,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
+    },
+    {
+      "username": "aiikoh",
+      "total_pts": 30,
       "bullet_pts": 0,
-      "blitz_pts": 504,
-      "rapid_pts": 60,
+      "blitz_pts": 0,
+      "rapid_pts": 30,
       "bullet_g": 0,
-      "blitz_g": 58,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
+      "blitz_g": 0,
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/75348440.94bde01f.200x200o.8f83ed00045e.jpg"
     }
   ]
 }
