@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-17T21:50:47.057Z",
+  "updated": "2026-08-17T22:22:27.515Z",
   "totalMembers": 1572,
   "activeToday": 419,
   "players": [
@@ -27,13 +27,13 @@
     },
     {
       "username": "xtornadoxxx",
-      "total_pts": 327,
+      "total_pts": 357,
       "bullet_pts": 12,
       "blitz_pts": 0,
-      "rapid_pts": 315,
+      "rapid_pts": 345,
       "bullet_g": 4,
       "blitz_g": 0,
-      "rapid_g": 23,
+      "rapid_g": 25,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/174170265.2519983a.200x200o.8838122047cf.jpg"
     }
   ]
