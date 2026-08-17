@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-17T18:35:43.642Z",
-  "totalMembers": 1571,
-  "activeToday": 366,
+  "updated": "2026-08-17T19:26:19.556Z",
+  "totalMembers": 1570,
+  "activeToday": 384,
   "players": [
+    {
+      "username": "abner-aaron",
+      "total_pts": 369,
+      "bullet_pts": 0,
+      "blitz_pts": 369,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 41,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/549589123.127a880d.200x200o.88ca8b11d822.png"
+    },
     {
       "username": "financial_dragon",
       "total_pts": 347,
@@ -24,17 +35,6 @@
       "blitz_g": 0,
       "rapid_g": 23,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/174170265.2519983a.200x200o.8838122047cf.jpg"
-    },
-    {
-      "username": "abner-aaron",
-      "total_pts": 324,
-      "bullet_pts": 0,
-      "blitz_pts": 324,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 36,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/549589123.127a880d.200x200o.88ca8b11d822.png"
     }
   ]
 }
