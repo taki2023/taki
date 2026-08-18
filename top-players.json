@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-18T21:22:16.378Z",
-  "totalMembers": 1575,
-  "activeToday": 412,
+  "updated": "2026-08-18T21:48:24.680Z",
+  "totalMembers": 1576,
+  "activeToday": 417,
   "players": [
     {
       "username": "samidaalmnswb",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
-      "username": "wizzyno",
-      "total_pts": 310,
+      "username": "smorkusporkus",
+      "total_pts": 333,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 310,
+      "blitz_pts": 333,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 22,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/81239370.966223b8.200x200o.eb5dd52c4881.png"
+      "blitz_g": 41,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.c900b30a.200x200o.906bd687f7fd.jpg"
     }
   ]
 }
