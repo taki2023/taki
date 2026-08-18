@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-18T15:29:43.869Z",
+  "updated": "2026-08-18T15:59:52.973Z",
   "totalMembers": 1575,
-  "activeToday": 325,
+  "activeToday": 341,
   "players": [
+    {
+      "username": "samidaalmnswb",
+      "total_pts": 393,
+      "bullet_pts": 0,
+      "blitz_pts": 393,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 45,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
+    },
     {
       "username": "xuyen1786",
       "total_pts": 387,
@@ -13,17 +24,6 @@
       "blitz_g": 6,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
-    },
-    {
-      "username": "samidaalmnswb",
-      "total_pts": 366,
-      "bullet_pts": 0,
-      "blitz_pts": 366,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 42,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     },
     {
       "username": "rejoice_05",
