@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-18T01:05:33.722Z",
+  "updated": "2026-08-18T02:36:19.810Z",
   "totalMembers": 1572,
-  "activeToday": 47,
+  "activeToday": 80,
   "players": [
     {
       "username": "samidaalmnswb",
-      "total_pts": 75,
+      "total_pts": 156,
       "bullet_pts": 0,
-      "blitz_pts": 75,
+      "blitz_pts": 156,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 9,
+      "blitz_g": 18,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     },
     {
-      "username": "yael981",
-      "total_pts": 57,
+      "username": "rafallaobedi-210",
+      "total_pts": 72,
       "bullet_pts": 0,
-      "blitz_pts": 57,
+      "blitz_pts": 72,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 7,
+      "blitz_g": 8,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.2038d28f.200x200o.5fedb6f38df1.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     },
     {
-      "username": "bellasterling55",
-      "total_pts": 45,
+      "username": "becky-incheck",
+      "total_pts": 66,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 45,
+      "blitz_pts": 66,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/581510050.f4f29cac.200x200o.67a512c9cc21.png"
+      "blitz_g": 8,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
