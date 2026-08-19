@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-19T09:32:18.770Z",
-  "totalMembers": 1577,
-  "activeToday": 196,
+  "updated": "2026-08-19T10:26:26.043Z",
+  "totalMembers": 1575,
+  "activeToday": 224,
   "players": [
     {
       "username": "mike_chai",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
     },
     {
-      "username": "rafallaobedi-210",
-      "total_pts": 192,
-      "bullet_pts": 0,
-      "blitz_pts": 192,
+      "username": "bughouse_partner",
+      "total_pts": 222,
+      "bullet_pts": 129,
+      "blitz_pts": 93,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 22,
+      "bullet_g": 45,
+      "blitz_g": 11,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
     }
   ]
 }
