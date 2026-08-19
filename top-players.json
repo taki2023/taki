@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-18T23:47:08.616Z",
+  "updated": "2026-08-19T01:06:50.256Z",
   "totalMembers": 1576,
-  "activeToday": 415,
+  "activeToday": 33,
   "players": [
     {
-      "username": "samidaalmnswb",
-      "total_pts": 516,
+      "username": "cr7_mentality_gm",
+      "total_pts": 60,
       "bullet_pts": 0,
-      "blitz_pts": 501,
-      "rapid_pts": 15,
+      "blitz_pts": 0,
+      "rapid_pts": 60,
       "bullet_g": 0,
-      "blitz_g": 57,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
+      "blitz_g": 0,
+      "rapid_g": 4,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/458217508.ae66f598.200x200o.d1128ee019b3.jpg"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 387,
-      "bullet_pts": 345,
-      "blitz_pts": 42,
+      "username": "kiyochess7",
+      "total_pts": 45,
+      "bullet_pts": 45,
+      "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 123,
-      "blitz_g": 6,
+      "bullet_g": 17,
+      "blitz_g": 0,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176478435.ffb5645d.200x200o.b3dd2ccadd62.jpg"
     },
     {
-      "username": "smorkusporkus",
-      "total_pts": 333,
+      "username": "rafallaobedi-210",
+      "total_pts": 36,
       "bullet_pts": 0,
-      "blitz_pts": 333,
+      "blitz_pts": 36,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 41,
+      "blitz_g": 4,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/370944437.c900b30a.200x200o.906bd687f7fd.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
