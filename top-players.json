@@ -1,37 +1,37 @@
 {
-  "updated": "2026-08-19T02:38:37.101Z",
+  "updated": "2026-08-19T03:44:28.210Z",
   "totalMembers": 1576,
-  "activeToday": 61,
+  "activeToday": 80,
   "players": [
     {
+      "username": "mike_chai",
+      "total_pts": 126,
+      "bullet_pts": 0,
+      "blitz_pts": 126,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 14,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/343059259.a7ebeca0.200x200o.50603e543a29.jpg"
+    },
+    {
       "username": "reefrhino26",
-      "total_pts": 115,
-      "bullet_pts": 55,
+      "total_pts": 124,
+      "bullet_pts": 64,
       "blitz_pts": 0,
       "rapid_pts": 60,
-      "bullet_g": 19,
+      "bullet_g": 22,
       "blitz_g": 0,
       "rapid_g": 4,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/508764961.a99386be.200x200o.06fa20690ab8.jpg"
     },
     {
-      "username": "mike_chai",
-      "total_pts": 90,
-      "bullet_pts": 0,
-      "blitz_pts": 90,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 10,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/343059259.a7ebeca0.200x200o.50603e543a29.jpg"
-    },
-    {
       "username": "aim_gatormonk",
-      "total_pts": 81,
-      "bullet_pts": 81,
+      "total_pts": 117,
+      "bullet_pts": 117,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 29,
+      "bullet_g": 41,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/17201214.eaccf39a.200x200o.61167fdc374d.jpg"
