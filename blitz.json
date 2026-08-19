@@ -17,7 +17,7 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "queiser",
-              "link": ""
+              "link": "::1-0 | ::1-0"
             },
             {
               "playerA": "DaTreeOfFives",
@@ -32,7 +32,7 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "Giraffe1100",
-              "link": ""
+              "link": "::1-0 | ::1-0"
             },
             {
               "playerA": "queiser",
@@ -42,12 +42,12 @@
             {
               "playerA": "queiser",
               "playerB": "cello_jello",
-              "link": ""
+              "link": "::0-1 | ::0-1"
             },
             {
               "playerA": "queiser",
               "playerB": "Giraffe1100",
-              "link": ""
+              "link": "::0.5-0.5 | ::0.5-0.5"
             },
             {
               "playerA": "TrofAndy",
@@ -62,7 +62,7 @@
             {
               "playerA": "cello_jello",
               "playerB": "Giraffe1100",
-              "link": ""
+              "link": "::1-0 | ::1-0"
             }
           ]
         },
