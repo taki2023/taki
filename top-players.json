@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-19T16:34:32.209Z",
+  "updated": "2026-08-19T17:25:00.778Z",
   "totalMembers": 1576,
-  "activeToday": 344,
+  "activeToday": 354,
   "players": [
     {
       "username": "igbur",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/21963594.6e203a3d.200x200o.95295f228b6f.jpeg"
     },
     {
+      "username": "steellasking77",
+      "total_pts": 276,
+      "bullet_pts": 63,
+      "blitz_pts": 198,
+      "rapid_pts": 15,
+      "bullet_g": 23,
+      "blitz_g": 24,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
+    },
+    {
       "username": "mike_chai",
       "total_pts": 270,
       "bullet_pts": 0,
@@ -24,17 +35,6 @@
       "blitz_g": 30,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/343059259.a7ebeca0.200x200o.50603e543a29.jpg"
-    },
-    {
-      "username": "bughouse_partner",
-      "total_pts": 268,
-      "bullet_pts": 166,
-      "blitz_pts": 102,
-      "rapid_pts": 0,
-      "bullet_g": 58,
-      "blitz_g": 12,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
     }
   ]
 }
