@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T21:23:50.998Z",
+  "updated": "2026-08-19T21:51:15.870Z",
   "totalMembers": 1576,
   "activeToday": 414,
   "players": [
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
     {
-      "username": "queiser",
-      "total_pts": 303,
-      "bullet_pts": 0,
-      "blitz_pts": 303,
+      "username": "kiyochess7",
+      "total_pts": 311,
+      "bullet_pts": 311,
+      "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 35,
+      "bullet_g": 107,
+      "blitz_g": 0,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/176478435.ffb5645d.200x200o.b3dd2ccadd62.jpg"
     }
   ]
 }
