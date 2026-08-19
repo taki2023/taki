@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-19T19:23:53.418Z",
+  "updated": "2026-08-19T19:49:48.685Z",
   "totalMembers": 1576,
-  "activeToday": 376,
+  "activeToday": 384,
   "players": [
     {
       "username": "igbur",
@@ -16,12 +16,12 @@
     },
     {
       "username": "damjan1989",
-      "total_pts": 318,
+      "total_pts": 327,
       "bullet_pts": 0,
-      "blitz_pts": 273,
+      "blitz_pts": 282,
       "rapid_pts": 45,
       "bullet_g": 0,
-      "blitz_g": 31,
+      "blitz_g": 32,
       "rapid_g": 3,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     },
