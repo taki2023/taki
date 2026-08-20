@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-20T16:33:12.601Z",
+  "updated": "2026-08-20T17:27:03.098Z",
   "totalMembers": 1578,
-  "activeToday": 335,
+  "activeToday": 359,
   "players": [
     {
       "username": "silent-sniper",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
     },
     {
+      "username": "ayar9",
+      "total_pts": 258,
+      "bullet_pts": 168,
+      "blitz_pts": 90,
+      "rapid_pts": 0,
+      "bullet_g": 58,
+      "blitz_g": 10,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/547775753.bc1df920.200x200o.4db6ab6f6913.jpg"
+    },
+    {
       "username": "steellasking77",
       "total_pts": 257,
       "bullet_pts": 239,
@@ -24,17 +35,6 @@
       "blitz_g": 2,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
-    },
-    {
-      "username": "canidatemaster",
-      "total_pts": 255,
-      "bullet_pts": 0,
-      "blitz_pts": 255,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 29,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
