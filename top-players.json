@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-20T19:29:49.521Z",
+  "updated": "2026-08-20T19:58:13.903Z",
   "totalMembers": 1578,
-  "activeToday": 392,
+  "activeToday": 395,
   "players": [
+    {
+      "username": "rafallaobedi-210",
+      "total_pts": 354,
+      "bullet_pts": 0,
+      "blitz_pts": 354,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 40,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+    },
     {
       "username": "silent-sniper",
       "total_pts": 333,
@@ -16,25 +27,14 @@
     },
     {
       "username": "ayar9",
-      "total_pts": 322,
-      "bullet_pts": 232,
+      "total_pts": 332,
+      "bullet_pts": 242,
       "blitz_pts": 90,
       "rapid_pts": 0,
-      "bullet_g": 80,
+      "bullet_g": 84,
       "blitz_g": 10,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/547775753.bc1df920.200x200o.4db6ab6f6913.jpg"
-    },
-    {
-      "username": "rafallaobedi-210",
-      "total_pts": 318,
-      "bullet_pts": 0,
-      "blitz_pts": 318,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 36,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
