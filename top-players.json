@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-20T17:27:03.098Z",
+  "updated": "2026-08-20T17:57:07.877Z",
   "totalMembers": 1578,
-  "activeToday": 359,
+  "activeToday": 348,
   "players": [
     {
       "username": "silent-sniper",
@@ -16,25 +16,25 @@
     },
     {
       "username": "ayar9",
-      "total_pts": 258,
-      "bullet_pts": 168,
+      "total_pts": 267,
+      "bullet_pts": 177,
       "blitz_pts": 90,
       "rapid_pts": 0,
-      "bullet_g": 58,
+      "bullet_g": 61,
       "blitz_g": 10,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/547775753.bc1df920.200x200o.4db6ab6f6913.jpg"
     },
     {
-      "username": "steellasking77",
-      "total_pts": 257,
-      "bullet_pts": 239,
-      "blitz_pts": 18,
+      "username": "rafallaobedi-210",
+      "total_pts": 264,
+      "bullet_pts": 0,
+      "blitz_pts": 264,
       "rapid_pts": 0,
-      "bullet_g": 81,
-      "blitz_g": 2,
+      "bullet_g": 0,
+      "blitz_g": 30,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
