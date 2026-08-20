@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-20T08:36:18.120Z",
+  "updated": "2026-08-20T09:32:52.030Z",
   "totalMembers": 1576,
-  "activeToday": 166,
+  "activeToday": 183,
   "players": [
     {
       "username": "silent-sniper",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     },
     {
-      "username": "nikkotello",
-      "total_pts": 190,
+      "username": "slickey1701",
+      "total_pts": 218,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 190,
+      "blitz_pts": 108,
+      "rapid_pts": 110,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 14,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "blitz_g": 12,
+      "rapid_g": 8,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/522126731.028483e0.200x200o.8a4d22ac628e.png"
     }
   ]
 }
