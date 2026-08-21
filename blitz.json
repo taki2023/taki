@@ -339,32 +339,32 @@
     },
     {
       "username": "Daniel2040",
-      "rating": 2278,
+      "rating": 2271,
       "flagged": false
     },
     {
       "username": "Hectorcista",
-      "rating": 2093,
+      "rating": 2108,
       "flagged": false
     },
     {
       "username": "Xx_Vanilla_xX",
-      "rating": 2092,
+      "rating": 2076,
       "flagged": false
     },
     {
       "username": "SoloIndie",
-      "rating": 2010,
-      "flagged": false
-    },
-    {
-      "username": "RevToMate2",
-      "rating": 2001,
+      "rating": 2002,
       "flagged": false
     },
     {
       "username": "vednu",
-      "rating": 1987,
+      "rating": 1966,
+      "flagged": false
+    },
+    {
+      "username": "RevToMate2",
+      "rating": 1966,
       "flagged": false
     },
     {
@@ -374,7 +374,7 @@
     },
     {
       "username": "queiser",
-      "rating": 1888,
+      "rating": 1918,
       "flagged": false
     },
     {
@@ -383,28 +383,28 @@
       "flagged": false
     },
     {
-      "username": "Oo_Arabi",
-      "rating": 1626,
+      "username": "ReefRhino26",
+      "rating": 1692,
       "flagged": false
     },
     {
       "username": "TALented_Vasee_18",
-      "rating": 1606,
+      "rating": 1590,
+      "flagged": false
+    },
+    {
+      "username": "Oo_Arabi",
+      "rating": 1581,
       "flagged": false
     },
     {
       "username": "Iamplayerofchess",
-      "rating": 1496,
-      "flagged": false
-    },
-    {
-      "username": "ReefRhino26",
-      "rating": 1494,
+      "rating": 1527,
       "flagged": false
     },
     {
       "username": "Tengen",
-      "rating": 1401,
+      "rating": 1456,
       "flagged": false
     },
     {
@@ -414,12 +414,17 @@
     },
     {
       "username": "RayDuqueIII",
-      "rating": 1366,
+      "rating": 1340,
       "flagged": false
     },
     {
       "username": "RKamalanayanan",
-      "rating": 1336,
+      "rating": 1330,
+      "flagged": false
+    },
+    {
+      "username": "Giraffe1100",
+      "rating": 1205,
       "flagged": false
     },
     {
@@ -428,28 +433,23 @@
       "flagged": false
     },
     {
-      "username": "Giraffe1100",
-      "rating": 1166,
-      "flagged": false
-    },
-    {
       "username": "Sukuna_Loyalist",
-      "rating": 941,
+      "rating": 1003,
       "flagged": false
     },
     {
       "username": "lokesh-gamer-18",
-      "rating": 849,
+      "rating": 777,
       "flagged": false
     },
     {
       "username": "DrKapablanca",
-      "rating": 740,
+      "rating": 760,
       "flagged": false
     },
     {
       "username": "roheemo_h",
-      "rating": 616,
+      "rating": 618,
       "flagged": false
     }
   ]
