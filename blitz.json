@@ -141,7 +141,7 @@
             {
               "playerA": "Daniel2040",
               "playerB": "vednu",
-              "link": "::1-0 | ::1-0"
+              "link": ""
             },
             {
               "playerA": "Daniel2040",
@@ -156,22 +156,22 @@
             {
               "playerA": "Daniel2040",
               "playerB": "lokesh-gamer-18",
-              "link": "::1-0 | ::1-0"
+              "link": ""
             },
             {
               "playerA": "vednu",
               "playerB": "TALented_Vasee_18",
-              "link": "::0-1 | ::0-1"
+              "link": ""
             },
             {
               "playerA": "vednu",
               "playerB": "RayDuqueIII",
-              "link": "::0.5-0.5 | ::0.5-0.5"
+              "link": ""
             },
             {
               "playerA": "vednu",
               "playerB": "lokesh-gamer-18",
-              "link": "::0.5-0.5 | ::0.5-0.5"
+              "link": ""
             },
             {
               "playerA": "TALented_Vasee_18",
@@ -181,12 +181,12 @@
             {
               "playerA": "TALented_Vasee_18",
               "playerB": "lokesh-gamer-18",
-              "link": "::1-0 | ::1-0"
+              "link": ""
             },
             {
               "playerA": "RayDuqueIII",
               "playerB": "lokesh-gamer-18",
-              "link": "::0.5-0.5 | ::0.5-0.5"
+              "link": ""
             }
           ]
         },
@@ -322,7 +322,9 @@
     "Iamplayerofchess",
     "DrKapablanca",
     "Xx_Vanilla_xX",
-    "SoloIndie"
+    "SoloIndie",
+    "Vednu"
+    "lokesh-gamer-18"
   ],
   "ranking": [
     {
