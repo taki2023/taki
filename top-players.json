@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-21T06:01:35.360Z",
+  "updated": "2026-08-21T07:24:37.095Z",
   "totalMembers": 1578,
-  "activeToday": 141,
+  "activeToday": 165,
   "players": [
+    {
+      "username": "omarhamada2025",
+      "total_pts": 213,
+      "bullet_pts": 0,
+      "blitz_pts": 213,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 25,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505233671.6b717956.200x200o.7c1d8b694201.jpg"
+    },
     {
       "username": "silent-sniper",
       "total_pts": 171,
@@ -24,17 +35,6 @@
       "blitz_g": 0,
       "rapid_g": 12,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/498458081.9719a97a.200x200o.e31b371b98a9.jpg"
-    },
-    {
-      "username": "rafallaobedi-210",
-      "total_pts": 138,
-      "bullet_pts": 0,
-      "blitz_pts": 138,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 16,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
