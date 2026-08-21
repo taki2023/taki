@@ -469,6 +469,12 @@ table.final-round .player-rank.r3 {
 .player-name a:hover {
   text-decoration: underline;
 }
+.withdraw-icon {
+  color: var(--red-deep);
+  margin-left: 4px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
 .cell-x {
   color: var(--ink-faint);
   font-size: 16px;
@@ -1018,6 +1024,7 @@ const DEFAULT_AVATAR =
 const HOST_PLAYER = '';
 const ADVANCING_PLAYERS_PER_GROUP = 2;
 const BOARD_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"></path></svg>`;
+const WITHDRAW_SVG = `<svg class="withdraw-icon" width="14" height="14" viewBox="0 0 24 24" data-glyph="arrow-triangle-exit-left" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M4.89993 16.4L0.269932 12.43C-0.100068 12.13 -0.100068 11.86 0.269932 11.56L4.89993 7.59C5.69993 6.92 5.99993 7.06 5.99993 8.09V15.89C5.99993 16.92 5.69993 17.06 4.89993 16.39V16.4ZM16.0699 10.5C16.8399 10.5 17.1399 10.73 17.1399 11.33L17.1699 12.66C17.1699 13.26 16.8699 13.49 16.0999 13.49H4.36993V10.49L16.0699 10.5ZM11.9999 2H19.9999C22.4699 2 23.9999 3.53 23.9999 6V18C23.9999 20.47 22.4699 22 19.9999 22H11.9999C9.52993 22 7.99993 20.47 7.99993 18V16.9C7.99993 16.3 8.32993 15.97 8.92993 15.97H9.05993C9.65993 15.97 9.98993 16.3 9.98993 16.9V17.6C9.98993 19.6 10.3899 20 12.3899 20H19.5899C21.5899 20 21.9899 19.6 21.9899 17.6V6.4C21.9899 4.4 21.5899 4 19.5899 4H12.3899C10.3899 4 9.98993 4.4 9.98993 6.4V7.03C9.98993 7.63 9.65993 7.96 9.05993 7.96H8.92993C8.32993 7.96 7.99993 7.63 7.99993 7.03V6C7.99993 3.53 9.52993 2 11.9999 2Z"></path></svg>`;
 const DRAW_RESULTS = new Set([
   'agreed',
   'repetition',
@@ -1119,6 +1126,9 @@ async function fetchPlayer(username) {
   playerCache[username] = p;
   return p;
 }
+function isWithdrawn(u) {
+  return WITHDRAWN_SET.has((u || '').toLowerCase());
+}
 function resultPoints(resultStr) {
   if (resultStr === 'win') {
     return 1;
@@ -1175,6 +1185,25 @@ function parseCellGames(cellText) {
           parts[1]
       };
     });
+}
+function resolveMatchGames(playerA, playerB, games) {
+  const withdrawnA = isWithdrawn(playerA);
+  const withdrawnB = isWithdrawn(playerB);
+  if (!withdrawnA && !withdrawnB) {
+    return { games, bothWithdrawn: false };
+  }
+  if (withdrawnA && withdrawnB) {
+    return { games, bothWithdrawn: true };
+  }
+  const resolved = games.slice();
+  while (resolved.length < 2) {
+    resolved.push(
+      withdrawnA
+        ? { link: '', scoreA: 0, scoreB: 1, dueToWithdrawal: true }
+        : { link: '', scoreA: 1, scoreB: 0, dueToWithdrawal: true }
+    );
+  }
+  return { games: resolved, bothWithdrawn: false };
 }
 function isForfeitGame(g) {
   return !!g &&
@@ -1422,8 +1451,49 @@ function matchStageLabel(
 function popoverHTML(
   playerA,
   playerB,
-  games
+  games,
+  bothWithdrawn
 ) {
+  const withdrawnA =
+    isWithdrawn(playerA.username);
+  const withdrawnB =
+    isWithdrawn(playerB.username);
+  const teamsRowHTML = `
+    <div class="mp-teams-row">
+      <div class="mp-team">
+        <img
+          src="${playerA.avatar}"
+          onerror="this.src='${DEFAULT_AVATAR}'"
+        >
+        <div class="mp-team-name">
+          ${playerA.name}
+        </div>
+      </div>
+      <div class="mp-vs">
+        vs
+      </div>
+      <div class="mp-team">
+        <img
+          src="${playerB.avatar}"
+          onerror="this.src='${DEFAULT_AVATAR}'"
+        >
+        <div class="mp-team-name">
+          ${playerB.name}
+        </div>
+      </div>
+    </div>
+  `;
+  if (bothWithdrawn) {
+    return `
+      <div class="mp-status forfeit">
+        Withdrew
+      </div>
+      ${teamsRowHTML}
+      <div class="mp-forfeit-note">
+        Both players withdrew from the tournament
+      </div>
+    `;
+  }
   const g1 =
     games[0];
   const g2 =
@@ -1437,12 +1507,28 @@ function popoverHTML(
     isForfeitGame(g2);
   const bothForfeit =
     forfeit1 && forfeit2;
-  const stage =
-    bothForfeit
-      ? { cls: 'forfeit', text: 'Forfeit' }
-      : matchStageLabel(
-          playedCount
+  const withdrawalForfeit1 =
+    !!(g1 && g1.dueToWithdrawal);
+  const withdrawalForfeit2 =
+    !!(g2 && g2.dueToWithdrawal);
+  const bothWithdrawalForfeit =
+    withdrawalForfeit1 && withdrawalForfeit2;
+  const withdrawnName =
+    withdrawnA
+      ? playerA.name
+      : (
+          withdrawnB
+            ? playerB.name
+            : ''
         );
+  const stage =
+    bothWithdrawalForfeit
+      ? { cls: 'forfeit', text: 'Withdrew' }
+      : bothForfeit
+        ? { cls: 'forfeit', text: 'Forfeit' }
+        : matchStageLabel(
+            playedCount
+          );
   const totalA =
     (g1 ? g1.scoreA : 0) +
     (g2 ? g2.scoreA : 0);
@@ -1471,6 +1557,13 @@ function popoverHTML(
     g,
     label
   ) => {
+    if (g && g.dueToWithdrawal) {
+      return `
+        <span class="mp-watch forfeit">
+          ${withdrawnName} withdrew
+        </span>
+      `;
+    }
     if (g && isForfeitGame(g)) {
       const winnerName =
         forfeitWinnerName(g, playerA, playerB);
@@ -1498,49 +1591,33 @@ function popoverHTML(
       `;
   };
   const gamesRowHTML =
-    bothForfeit
+    bothWithdrawalForfeit
       ? `
         <div class="mp-forfeit-note">
-          ${
-            forfeitWinnerName(g1, playerA, playerB)
-              ? forfeitWinnerName(g1, playerA, playerB) + ' won by forfeit'
-              : 'Draw by forfeit'
-          }
+          ${withdrawnName} withdrew from the tournament
         </div>
       `
-      : `
-        <div class="mp-games-row">
-          ${gameBtn(g1, 'Game 1')}
-          ${gameBtn(g2, 'Game 2')}
-        </div>
-      `;
+      : bothForfeit
+        ? `
+          <div class="mp-forfeit-note">
+            ${
+              forfeitWinnerName(g1, playerA, playerB)
+                ? forfeitWinnerName(g1, playerA, playerB) + ' won by forfeit'
+                : 'Draw by forfeit'
+            }
+          </div>
+        `
+        : `
+          <div class="mp-games-row">
+            ${gameBtn(g1, 'Game 1')}
+            ${gameBtn(g2, 'Game 2')}
+          </div>
+        `;
   return `
     <div class="mp-status ${stage.cls}">
       ${stage.text}
     </div>
-    <div class="mp-teams-row">
-      <div class="mp-team">
-        <img
-          src="${playerA.avatar}"
-          onerror="this.src='${DEFAULT_AVATAR}'"
-        >
-        <div class="mp-team-name">
-          ${playerA.name}
-        </div>
-      </div>
-      <div class="mp-vs">
-        vs
-      </div>
-      <div class="mp-team">
-        <img
-          src="${playerB.avatar}"
-          onerror="this.src='${DEFAULT_AVATAR}'"
-        >
-        <div class="mp-team-name">
-          ${playerB.name}
-        </div>
-      </div>
-    </div>
+    ${teamsRowHTML}
     <div class="mp-score-row">
       <span class="mp-score-num ${cls.a}">
         ${scoreA}
@@ -1558,6 +1635,7 @@ function popoverHTML(
 let TOURNAMENT = {
   rounds: []
 };
+let WITHDRAWN_SET = new Set();
 let activeRoundIdx = 0;
 let hasLoadedOnce = false;
 function isFinalRound(round) {
@@ -1971,9 +2049,15 @@ async function fillGroup(
   );
   const gamesByPair = {};
   group.matches.forEach(m => {
-    const games =
+    const rawGames =
       parseCellGames(
         m.link
+      );
+    const resolved =
+      resolveMatchGames(
+        m.playerA,
+        m.playerB,
+        rawGames
       );
     gamesByPair[
       m.playerA +
@@ -1984,7 +2068,10 @@ async function fillGroup(
         m.playerA,
       playerB:
         m.playerB,
-      games
+      games:
+        resolved.games,
+      bothWithdrawn:
+        resolved.bothWithdrawn
     };
     gamesByPair[
       m.playerB +
@@ -1995,7 +2082,10 @@ async function fillGroup(
         m.playerA,
       playerB:
         m.playerB,
-      games,
+      games:
+        resolved.games,
+      bothWithdrawn:
+        resolved.bothWithdrawn,
       flipped: true
     };
   });
@@ -2007,7 +2097,8 @@ async function fillGroup(
       {
         playerA: a,
         playerB: b,
-        games: []
+        games: [],
+        bothWithdrawn: false
       }
     );
   }
@@ -2023,10 +2114,14 @@ async function fillGroup(
   const matchesTotal =
     group.matches.length;
   group.matches.forEach(m => {
+    const rec =
+      gamesByPair[
+        m.playerA +
+        '|' +
+        m.playerB
+      ];
     const games =
-      parseCellGames(
-        m.link
-      );
+      rec.games;
     gamesTotal += 2;
     let scoreA = 0;
     let scoreB = 0;
@@ -2163,6 +2258,11 @@ async function fillGroup(
                 >
                   ${info.name}
                 </a>
+                ${
+                  isWithdrawn(rowSlug)
+                    ? WITHDRAW_SVG
+                    : ''
+                }
               </div>
             </div>
           </td>
@@ -2195,7 +2295,9 @@ async function fillGroup(
                       scoreA:
                         g.scoreB,
                       scoreB:
-                        g.scoreA
+                        g.scoreA,
+                      dueToWithdrawal:
+                        g.dueToWithdrawal
                     }
                   : g
             );
@@ -2206,7 +2308,17 @@ async function fillGroup(
                 !isNaN(g.scoreB)
             ).length;
           let cellInner;
-          if (playedCount >= 2) {
+          if (rec.bothWithdrawn) {
+            cellInner = `
+              <span
+                class="badge draw"
+                data-a="${rowSlug}"
+                data-b="${colSlug}"
+              >
+                WD
+              </span>
+            `;
+          } else if (playedCount >= 2) {
             const totalA =
               games.reduce(
                 (sum, g) =>
@@ -2305,7 +2417,9 @@ async function fillGroup(
                       scoreA:
                         g.scoreB,
                       scoreB:
-                        g.scoreA
+                        g.scoreA,
+                      dueToWithdrawal:
+                        g.dueToWithdrawal
                     }
                   : g
             );
@@ -2315,7 +2429,8 @@ async function fillGroup(
               name:
                 prettifyUsername(a),
               avatar:
-                DEFAULT_AVATAR
+                DEFAULT_AVATAR,
+              username: a
             };
           const playerB =
             infos[b] ||
@@ -2323,7 +2438,8 @@ async function fillGroup(
               name:
                 prettifyUsername(b),
               avatar:
-                DEFAULT_AVATAR
+                DEFAULT_AVATAR,
+              username: b
             };
           const rect =
             e.currentTarget
@@ -2335,7 +2451,8 @@ async function fillGroup(
             popoverHTML(
               playerA,
               playerB,
-              games
+              games,
+              rec.bothWithdrawn
             )
           );
         }
@@ -2402,7 +2519,9 @@ async function fillGroup(
                       scoreA:
                         g.scoreB,
                       scoreB:
-                        g.scoreA
+                        g.scoreA,
+                      dueToWithdrawal:
+                        g.dueToWithdrawal
                     }
                   : g
             );
@@ -2412,7 +2531,8 @@ async function fillGroup(
               name:
                 prettifyUsername(a),
               avatar:
-                DEFAULT_AVATAR
+                DEFAULT_AVATAR,
+              username: a
             };
           const playerB =
             infos[b] ||
@@ -2420,7 +2540,8 @@ async function fillGroup(
               name:
                 prettifyUsername(b),
               avatar:
-                DEFAULT_AVATAR
+                DEFAULT_AVATAR,
+              username: b
             };
           const rect =
             el.getBoundingClientRect();
@@ -2431,7 +2552,8 @@ async function fillGroup(
             popoverHTML(
               playerA,
               playerB,
-              games
+              games,
+              rec.bothWithdrawn
             )
           );
           pinnedCellEl =
@@ -2476,6 +2598,12 @@ async function boot() {
       'none';
     return;
   }
+  WITHDRAWN_SET =
+    new Set(
+      (TOURNAMENT.withdrawn || []).map(
+        u => (u || '').toLowerCase()
+      )
+    );
   if (
     !TOURNAMENT.rounds.length
   ) {
