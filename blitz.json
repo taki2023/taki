@@ -315,6 +315,136 @@
           ]
         }
       ]
+    },
+    {
+      "number": 2,
+      "name": "Round 2",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "DaTreeOfFives",
+            "RevToMate2",
+            "Taki",
+            "TALented_Vasee_18",
+            "Tengen"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "RevToMate2",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "RevToMate2",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "RevToMate2",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "RevToMate2",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "Tengen",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 2",
+          "players": [
+            "Freddy1201",
+            "Daniel2040",
+            "TrofAndy",
+            "ReefRhino26",
+            "AarjavSamaiya"
+          ],
+          "matches": [
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Daniel2040",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "TrofAndy",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "ReefRhino26",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "TrofAndy",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "ReefRhino26",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "ReefRhino26",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "ReefRhino26",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            }
+          ]
+        }
+      ]
     }
   ],
   "withdrawn": [
