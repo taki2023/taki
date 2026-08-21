@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-21T20:23:48.447Z",
+  "updated": "2026-08-21T20:50:38.825Z",
   "totalMembers": 1581,
-  "activeToday": 405,
+  "activeToday": 411,
   "players": [
     {
       "username": "damjan1989",
@@ -27,14 +27,14 @@
     },
     {
       "username": "rafallaobedi-210",
-      "total_pts": 276,
+      "total_pts": 285,
       "bullet_pts": 0,
-      "blitz_pts": 276,
+      "blitz_pts": 285,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 32,
+      "blitz_g": 33,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
