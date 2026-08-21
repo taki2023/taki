@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-21T01:09:29.553Z",
+  "updated": "2026-08-21T02:44:02.958Z",
   "totalMembers": 1578,
-  "activeToday": 43,
+  "activeToday": 77,
   "players": [
     {
-      "username": "gladeoac",
-      "total_pts": 48,
-      "bullet_pts": 0,
-      "blitz_pts": 48,
+      "username": "silent-sniper",
+      "total_pts": 84,
+      "bullet_pts": 3,
+      "blitz_pts": 81,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 6,
+      "bullet_g": 1,
+      "blitz_g": 9,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/352460821.c2cfc1f6.200x200o.443d654afd1c.png"
-    },
-    {
-      "username": "eziobovero",
-      "total_pts": 45,
-      "bullet_pts": 0,
-      "blitz_pts": 45,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 5,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/8480218.967cefb6.200x200o.72a313f71026.jpeg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
     },
     {
       "username": "reefrhino26",
-      "total_pts": 36,
-      "bullet_pts": 36,
-      "blitz_pts": 0,
+      "total_pts": 66,
+      "bullet_pts": 39,
+      "blitz_pts": 27,
       "rapid_pts": 0,
-      "bullet_g": 12,
-      "blitz_g": 0,
+      "bullet_g": 13,
+      "blitz_g": 3,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/508764961.a99386be.200x200o.06fa20690ab8.jpg"
+    },
+    {
+      "username": "nikkotello",
+      "total_pts": 65,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 65,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 5,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
