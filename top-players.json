@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-21T19:48:33.520Z",
+  "updated": "2026-08-21T20:23:48.447Z",
   "totalMembers": 1581,
-  "activeToday": 402,
+  "activeToday": 405,
   "players": [
+    {
+      "username": "damjan1989",
+      "total_pts": 301,
+      "bullet_pts": 0,
+      "blitz_pts": 171,
+      "rapid_pts": 130,
+      "bullet_g": 0,
+      "blitz_g": 19,
+      "rapid_g": 10,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+    },
     {
       "username": "xuyen1786",
       "total_pts": 288,
@@ -15,26 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     },
     {
-      "username": "damjan1989",
-      "total_pts": 283,
+      "username": "rafallaobedi-210",
+      "total_pts": 276,
       "bullet_pts": 0,
-      "blitz_pts": 153,
-      "rapid_pts": 130,
+      "blitz_pts": 276,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 17,
-      "rapid_g": 10,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
-    {
-      "username": "abd_allah_libyan",
-      "total_pts": 262,
-      "bullet_pts": 0,
-      "blitz_pts": 57,
-      "rapid_pts": 205,
-      "bullet_g": 0,
-      "blitz_g": 7,
-      "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.9b8e4d97.200x200o.39ad8e3c1c84.jpg"
+      "blitz_g": 32,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
