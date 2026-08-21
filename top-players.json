@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-21T15:31:46.674Z",
-  "totalMembers": 1581,
-  "activeToday": 348,
+  "updated": "2026-08-21T16:02:10.746Z",
+  "totalMembers": 1582,
+  "activeToday": 355,
   "players": [
     {
       "username": "xuyen1786",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505233671.6b717956.200x200o.7c1d8b694201.jpg"
     },
     {
-      "username": "bughouse_partner",
-      "total_pts": 203,
-      "bullet_pts": 131,
-      "blitz_pts": 72,
+      "username": "igbur",
+      "total_pts": 210,
+      "bullet_pts": 0,
+      "blitz_pts": 210,
       "rapid_pts": 0,
-      "bullet_g": 47,
-      "blitz_g": 8,
+      "bullet_g": 0,
+      "blitz_g": 26,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/21963594.6e203a3d.200x200o.95295f228b6f.jpeg"
     }
   ]
 }
