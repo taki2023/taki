@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-21T16:02:10.746Z",
+  "updated": "2026-08-21T17:02:33.352Z",
   "totalMembers": 1582,
-  "activeToday": 355,
+  "activeToday": 358,
   "players": [
     {
       "username": "xuyen1786",
@@ -27,12 +27,12 @@
     },
     {
       "username": "igbur",
-      "total_pts": 210,
+      "total_pts": 213,
       "bullet_pts": 0,
-      "blitz_pts": 210,
+      "blitz_pts": 213,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 26,
+      "blitz_g": 27,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/21963594.6e203a3d.200x200o.95295f228b6f.jpeg"
     }
