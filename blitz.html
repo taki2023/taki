@@ -2152,21 +2152,26 @@ async function fillGroup(
     gamesTotal += 2;
     let scoreA = 0;
     let scoreB = 0;
-    games.forEach(g => {
-      if (!isNaN(g.scoreA)) {
-        scoreA += g.scoreA;
-      }
-      if (!isNaN(g.scoreB)) {
-        scoreB += g.scoreB;
-      }
-      gamesDone++;
-    });
-    score[m.playerA] +=
-      scoreA;
-    score[m.playerB] +=
-      scoreB;
-    if (games.length >= 2) {
+    if (rec.bothWithdrawn) {
+      gamesDone += 2;
       matchesDone++;
+    } else {
+      games.forEach(g => {
+        if (!isNaN(g.scoreA)) {
+          scoreA += g.scoreA;
+        }
+        if (!isNaN(g.scoreB)) {
+          scoreB += g.scoreB;
+        }
+        gamesDone++;
+      });
+      score[m.playerA] +=
+        scoreA;
+      score[m.playerB] +=
+        scoreB;
+      if (games.length >= 2) {
+        matchesDone++;
+      }
     }
   });
   players.forEach(p => {
