@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-21T13:43:48.347Z",
-  "totalMembers": 1582,
-  "activeToday": 300,
+  "updated": "2026-08-21T14:33:11.053Z",
+  "totalMembers": 1581,
+  "activeToday": 317,
   "players": [
+    {
+      "username": "xuyen1786",
+      "total_pts": 288,
+      "bullet_pts": 171,
+      "blitz_pts": 117,
+      "rapid_pts": 0,
+      "bullet_g": 61,
+      "blitz_g": 15,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+    },
     {
       "username": "omarhamada2025",
       "total_pts": 222,
@@ -15,26 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/505233671.6b717956.200x200o.7c1d8b694201.jpg"
     },
     {
-      "username": "silent-sniper",
-      "total_pts": 192,
-      "bullet_pts": 12,
-      "blitz_pts": 180,
+      "username": "bughouse_partner",
+      "total_pts": 203,
+      "bullet_pts": 131,
+      "blitz_pts": 72,
       "rapid_pts": 0,
-      "bullet_g": 4,
-      "blitz_g": 20,
+      "bullet_g": 47,
+      "blitz_g": 8,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.b6d4ba47.200x200o.06cd999b7d8a.png"
-    },
-    {
-      "username": "rafallaobedi-210",
-      "total_pts": 186,
-      "bullet_pts": 0,
-      "blitz_pts": 186,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 22,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.5c120d27.200x200o.43a48b76c152.jpg"
     }
   ]
 }
