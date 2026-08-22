@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-22T09:35:12.593Z",
+  "updated": "2026-08-22T10:21:23.720Z",
   "totalMembers": 1583,
-  "activeToday": 193,
+  "activeToday": 242,
   "players": [
+    {
+      "username": "nickadvocate",
+      "total_pts": 420,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 420,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 28,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
+    },
     {
       "username": "right_to_fight",
       "total_pts": 385,
@@ -15,26 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
     },
     {
-      "username": "nickadvocate",
-      "total_pts": 270,
+      "username": "jbowling18",
+      "total_pts": 369,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 270,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 18,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
-    },
-    {
-      "username": "nin_chessy",
-      "total_pts": 201,
-      "bullet_pts": 12,
-      "blitz_pts": 189,
+      "blitz_pts": 369,
       "rapid_pts": 0,
-      "bullet_g": 4,
-      "blitz_g": 23,
+      "bullet_g": 0,
+      "blitz_g": 45,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/473789458.f9606cca.200x200o.44b5385eaf1d.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/289874515.c2e2c81b.200x200o.da5320dd8d99.jpg"
     }
   ]
 }
