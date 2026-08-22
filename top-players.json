@@ -1,18 +1,29 @@
 {
-  "updated": "2026-08-22T05:53:23.519Z",
+  "updated": "2026-08-22T06:36:47.598Z",
   "totalMembers": 1582,
-  "activeToday": 116,
+  "activeToday": 157,
   "players": [
     {
       "username": "right_to_fight",
-      "total_pts": 270,
+      "total_pts": 370,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 270,
+      "rapid_pts": 370,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 18,
+      "rapid_g": 26,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
+    },
+    {
+      "username": "jbowling18",
+      "total_pts": 207,
+      "bullet_pts": 0,
+      "blitz_pts": 207,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 25,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/289874515.c2e2c81b.200x200o.da5320dd8d99.jpg"
     },
     {
       "username": "rafallaobedi-210",
@@ -24,17 +35,6 @@
       "blitz_g": 21,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
-    },
-    {
-      "username": "mohamed_chahine",
-      "total_pts": 131,
-      "bullet_pts": 26,
-      "blitz_pts": 45,
-      "rapid_pts": 60,
-      "bullet_g": 10,
-      "blitz_g": 5,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
     }
   ]
 }
