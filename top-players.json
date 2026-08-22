@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-22T08:30:51.988Z",
+  "updated": "2026-08-22T09:00:35.832Z",
   "totalMembers": 1583,
-  "activeToday": 177,
+  "activeToday": 203,
   "players": [
     {
       "username": "right_to_fight",
@@ -16,24 +16,24 @@
     },
     {
       "username": "jbowling18",
-      "total_pts": 267,
+      "total_pts": 315,
       "bullet_pts": 0,
-      "blitz_pts": 267,
+      "blitz_pts": 315,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 33,
+      "blitz_g": 39,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/289874515.c2e2c81b.200x200o.da5320dd8d99.jpg"
     },
     {
       "username": "nickadvocate",
-      "total_pts": 210,
+      "total_pts": 270,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 210,
+      "rapid_pts": 270,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 14,
+      "rapid_g": 18,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
     }
   ]
