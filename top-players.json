@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-22T01:05:51.178Z",
+  "updated": "2026-08-22T02:35:10.575Z",
   "totalMembers": 1581,
-  "activeToday": 41,
+  "activeToday": 73,
   "players": [
     {
-      "username": "nixo30190",
-      "total_pts": 63,
-      "bullet_pts": 0,
+      "username": "mohamed_chahine",
+      "total_pts": 104,
+      "bullet_pts": 26,
+      "blitz_pts": 18,
+      "rapid_pts": 60,
+      "bullet_g": 10,
+      "blitz_g": 2,
+      "rapid_g": 4,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
+    },
+    {
+      "username": "hashinkaa",
+      "total_pts": 102,
+      "bullet_pts": 39,
       "blitz_pts": 63,
       "rapid_pts": 0,
-      "bullet_g": 0,
+      "bullet_g": 13,
       "blitz_g": 7,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/201065305.922fb718.200x200o.e9b40976d92a.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.32fe5eda.200x200o.d7533eb76cf8.jpg"
     },
     {
-      "username": "mike_chai",
-      "total_pts": 60,
-      "bullet_pts": 60,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 20,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/343059259.a7ebeca0.200x200o.50603e543a29.jpg"
-    },
-    {
-      "username": "mohamed_chahine",
-      "total_pts": 54,
+      "username": "samidaalmnswb",
+      "total_pts": 93,
       "bullet_pts": 0,
-      "blitz_pts": 9,
-      "rapid_pts": 45,
+      "blitz_pts": 93,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 1,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
+      "blitz_g": 11,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
     }
   ]
 }
