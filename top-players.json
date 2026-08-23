@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-23T14:49:09.859Z",
+  "updated": "2026-08-23T15:20:36.238Z",
   "totalMembers": 1588,
-  "activeToday": 311,
+  "activeToday": 338,
   "players": [
+    {
+      "username": "traker-86",
+      "total_pts": 519,
+      "bullet_pts": 0,
+      "blitz_pts": 519,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 59,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
+    },
     {
       "username": "nickadvocate",
       "total_pts": 480,
@@ -24,17 +35,6 @@
       "blitz_g": 51,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
-    },
-    {
-      "username": "traker-86",
-      "total_pts": 408,
-      "bullet_pts": 0,
-      "blitz_pts": 408,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 46,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     }
   ]
 }
