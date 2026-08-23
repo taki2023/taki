@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-23T01:11:42.626Z",
-  "totalMembers": 1585,
-  "activeToday": 36,
+  "updated": "2026-08-23T02:44:54.030Z",
+  "totalMembers": 1586,
+  "activeToday": 64,
   "players": [
     {
-      "username": "samidaalmnswb",
-      "total_pts": 81,
+      "username": "colinkatoa",
+      "total_pts": 120,
       "bullet_pts": 0,
-      "blitz_pts": 81,
+      "blitz_pts": 120,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 9,
+      "blitz_g": 14,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "queiser",
+      "total_pts": 111,
+      "bullet_pts": 0,
+      "blitz_pts": 111,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 13,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
       "username": "guilhermerodriguesbr",
-      "total_pts": 72,
+      "total_pts": 108,
       "bullet_pts": 0,
-      "blitz_pts": 72,
+      "blitz_pts": 108,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 8,
+      "blitz_g": 12,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/577234732.4f0dee7b.200x200o.b7b061eafa47.jpg"
-    },
-    {
-      "username": "reefrhino26",
-      "total_pts": 69,
-      "bullet_pts": 21,
-      "blitz_pts": 18,
-      "rapid_pts": 30,
-      "bullet_g": 7,
-      "blitz_g": 2,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/508764961.a99386be.200x200o.06fa20690ab8.jpg"
     }
   ]
 }
