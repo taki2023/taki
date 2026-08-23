@@ -1,8 +1,30 @@
 {
-  "updated": "2026-08-23T05:55:50.956Z",
+  "updated": "2026-08-23T06:37:59.997Z",
   "totalMembers": 1588,
-  "activeToday": 120,
+  "activeToday": 159,
   "players": [
+    {
+      "username": "queiser",
+      "total_pts": 210,
+      "bullet_pts": 0,
+      "blitz_pts": 210,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 24,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
+    {
+      "username": "nickadvocate",
+      "total_pts": 195,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 195,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 13,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
+    },
     {
       "username": "right_to_fight",
       "total_pts": 185,
@@ -13,28 +35,6 @@
       "blitz_g": 0,
       "rapid_g": 13,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
-    },
-    {
-      "username": "guilhermerodriguesbr",
-      "total_pts": 162,
-      "bullet_pts": 0,
-      "blitz_pts": 162,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 18,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/577234732.4f0dee7b.200x200o.b7b061eafa47.jpg"
-    },
-    {
-      "username": "queiser",
-      "total_pts": 156,
-      "bullet_pts": 0,
-      "blitz_pts": 156,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 18,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     }
   ]
 }
