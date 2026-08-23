@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-23T11:45:52.349Z",
+  "updated": "2026-08-23T12:35:25.825Z",
   "totalMembers": 1588,
-  "activeToday": 234,
+  "activeToday": 284,
   "players": [
     {
       "username": "queiser",
@@ -16,23 +16,23 @@
     },
     {
       "username": "nickadvocate",
-      "total_pts": 345,
+      "total_pts": 450,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 345,
+      "rapid_pts": 450,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 23,
+      "rapid_g": 30,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
     },
     {
       "username": "traker-86",
-      "total_pts": 234,
+      "total_pts": 354,
       "bullet_pts": 0,
-      "blitz_pts": 234,
+      "blitz_pts": 354,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 26,
+      "blitz_g": 40,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     }
