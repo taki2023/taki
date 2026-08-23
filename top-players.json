@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-23T10:21:20.171Z",
+  "updated": "2026-08-23T10:50:49.013Z",
   "totalMembers": 1588,
-  "activeToday": 194,
+  "activeToday": 244,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 417,
+      "total_pts": 453,
       "bullet_pts": 0,
-      "blitz_pts": 417,
+      "blitz_pts": 453,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 47,
+      "blitz_g": 51,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
       "username": "nickadvocate",
-      "total_pts": 225,
+      "total_pts": 345,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 225,
+      "rapid_pts": 345,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 15,
+      "rapid_g": 23,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
     },
     {
-      "username": "right_to_fight",
-      "total_pts": 185,
+      "username": "traker-86",
+      "total_pts": 234,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 185,
+      "blitz_pts": 234,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
+      "blitz_g": 26,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     }
   ]
 }
