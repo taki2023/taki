@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-24T01:09:12.140Z",
+  "updated": "2026-08-24T02:45:17.073Z",
   "totalMembers": 1585,
-  "activeToday": 44,
+  "activeToday": 74,
   "players": [
     {
-      "username": "samidaalmnswb",
-      "total_pts": 54,
-      "bullet_pts": 0,
-      "blitz_pts": 54,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 6,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
-    },
-    {
-      "username": "badr113101",
-      "total_pts": 52,
-      "bullet_pts": 52,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 18,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/333299295.27913ba9.200x200o.4a1374f11017.jpg"
-    },
-    {
-      "username": "jerome734",
-      "total_pts": 45,
+      "username": "right_to_fight",
+      "total_pts": 150,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 45,
+      "rapid_pts": 150,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/380770955.f49405f8.200x200o.2083ff0c548a.jpg"
+      "rapid_g": 10,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
+    },
+    {
+      "username": "mohamed_chahine",
+      "total_pts": 120,
+      "bullet_pts": 0,
+      "blitz_pts": 120,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 14,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
+    },
+    {
+      "username": "rafallaobedi-210",
+      "total_pts": 75,
+      "bullet_pts": 0,
+      "blitz_pts": 75,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 9,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
