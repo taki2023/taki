@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 Hot Chilli CheckMate 🌶️ - City Map 🗺️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-peach: #FFF5F0;
+      --path-orange: #E85535;
+      --accent-orange: #D93020;
+      --card-bg: #FFE4DC;
+      --border-orange: #E8553A;
+      --text-dark: #9A2010;
+      --white: #FFFFFF;
+      --river-blue: #4FA8D8;
+      --river-deep: #2E7EB0;
+      --gold: #F1C40F;
+      --shadow: 0 10px 25px rgba(217, 48, 32, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-peach);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .title-wrap {
+      position: relative;
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+
+    h1.map-title {
+      font-family: 'Fredoka One', cursive;
+      color: var(--accent-orange);
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 0.3rem;
+      text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
+      position: relative;
+      display: inline-block;
+    }
+
+    h1.map-title::after {
+      content: '';
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: -6px;
+      height: 6px;
+      background: repeating-linear-gradient(90deg, var(--border-orange) 0 10px, transparent 10px 18px);
+      border-radius: 3px;
+      opacity: 0.6;
+    }
+
+    p.subtitle {
+      color: var(--text-dark);
+      opacity: 0.85;
+      text-align: center;
+      margin-bottom: 0.9rem;
+      font-weight: 700;
+    }
+
+    .quest-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .quest-pill {
+      font-family: 'Fredoka One', cursive;
+      background: var(--card-bg);
+      border: 2px solid var(--border-orange);
+      color: var(--accent-orange);
+      font-size: 0.82rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      box-shadow: 0 3px 8px rgba(217,48,32,0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .quest-pill.secret-found {
+      background: linear-gradient(135deg, #FCE38A, #F38181);
+      color: #6b1206;
+      border-color: var(--gold);
+    }
+
+    .reset-link {
+      background: none;
+      border: none;
+      color: var(--accent-orange);
+      opacity: 0.65;
+      font-size: 0.78rem;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .reset-link:hover { opacity: 1; }
+
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 950px;
+      height: 950px;
+      background-color: #FFF8F5;
+      background-image: 
+        radial-gradient(#FFE0D6 2px, transparent 2px),
+        radial-gradient(#FFE0D6 2px, #FFF8F5 2px);
+      background-size: 36px 36px;
+      background-position: 0 0, 18px 18px;
+      border: 7px solid #E85535;
+      border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+      box-shadow: 0 15px 35px rgba(217, 48, 32, 0.2), inset 0 0 90px rgba(217,48,32,0.07);
+      overflow: visible;
+    }
+
+    .map-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* --- ambient sky clouds --- */
+    .cloud {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.55;
+      filter: blur(0.5px);
+      animation: drift 60s linear infinite;
+    }
+    .cloud.c2 { animation-duration: 80s; animation-delay: -20s; }
+    .cloud.c3 { animation-duration: 100s; animation-delay: -50s; }
+    @keyframes drift {
+      0% { transform: translateX(-40px); }
+      50% { transform: translateX(30px); }
+      100% { transform: translateX(-40px); }
+    }
+
+    .decor-prop {
+      position: absolute;
+      font-size: 1.6rem;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+    }
+
+    .decor-prop.sway { animation: sway 5s ease-in-out infinite; }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+
+    .decor-prop.flicker { animation: flicker 2.2s ease-in-out infinite; }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(0.94); }
+    }
+
+    /* --- hidden treasure --- */
+    .secret-chilli {
+      pointer-events: auto;
+      cursor: pointer;
+      animation: shimmer 4.5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 1; filter: drop-shadow(0 0 4px rgba(255, 200, 0, 0.6)); }
+    }
+    .secret-chilli.found {
+      animation: none;
+      opacity: 0.5;
+      filter: grayscale(0.6);
+    }
+
+    .sparkle-burst {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.4rem;
+      z-index: 50;
+      animation: sparkle-out 0.9s ease-out forwards;
+    }
+    @keyframes sparkle-out {
+      0% { transform: translate(-50%,-50%) scale(0.3) rotate(0deg); opacity: 1; }
+      100% { transform: translate(-50%,-160%) scale(1.3) rotate(40deg); opacity: 0; }
+    }
+
+    .waypoint {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .waypoint:hover,
+    .waypoint:focus,
+    .waypoint:focus-within {
+      z-index: 1000;
+    }
+
+    .pin {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      background: var(--card-bg);
+      border: 4px solid var(--border-orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s, border-color 0.3s;
+      overflow: hidden;
+    }
+
+    .pin img.pin-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .waypoint:not(.discovered) .pin::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--border-orange);
+      opacity: 0.55;
+      animation: invite-pulse 2.6s ease-out infinite;
+    }
+    @keyframes invite-pulse {
+      0% { transform: scale(0.9); opacity: 0.55; }
+      70% { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+
+    .waypoint.discovered .pin {
+      border-color: var(--gold);
+      background: #FFF6D8;
+    }
+
+    /* --- steam rising from the cooking pot --- */
+    .steam {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 10px;
+      height: 18px;
+      pointer-events: none;
+    }
+    .steam span {
+      position: absolute;
+      bottom: 0;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.75);
+      border-radius: 50%;
+      filter: blur(1.5px);
+      animation: steam-rise 2.4s ease-in infinite;
+    }
+    .steam span:nth-child(2) { left: -7px; animation-delay: 0.8s; }
+    .steam span:nth-child(3) { left: 7px; animation-delay: 1.5s; }
+    @keyframes steam-rise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      30% { opacity: 0.8; }
+      100% { transform: translateY(-26px) scale(1.2); opacity: 0; }
+    }
+
+    .badge-check {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      border: 2px solid var(--white);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transform: scale(0);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .waypoint.discovered .badge-check { transform: scale(1); }
+
+    .waypoint:hover .pin,
+    .waypoint:focus .pin {
+      transform: scale(1.22) rotate(-4deg);
+      border-color: var(--accent-orange);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .waypoint.discovered:hover .pin,
+    .waypoint.discovered:focus .pin {
+      border-color: var(--gold);
+    }
+
+    .tip-window {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      bottom: 85px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      width: 230px;
+      background-color: var(--white);
+      border: 3px solid var(--border-orange);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.25s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .tip-window::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 9px;
+      border-style: solid;
+      border-color: var(--border-orange) transparent transparent transparent;
+    }
+
+    .waypoint:hover .tip-window,
+    .waypoint:focus .tip-window {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    .tip-title {
+      font-family: 'Fredoka One', cursive;
+      color: var(--accent-orange);
+      font-size: 0.98rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .tip-intro {
+      font-size: 0.84rem;
+      color: #555;
+      margin-bottom: 0.8rem;
+      line-height: 1.35;
+    }
+
+    .btn-join {
+      display: inline-block;
+      width: 100%;
+      padding: 0.45rem 0;
+      background-color: var(--border-orange);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-join:hover {
+      background-color: var(--accent-orange);
+    }
+
+    /* --- river flow animation --- */
+    .river-flow {
+      stroke-dasharray: 14 10;
+      animation: flow 2.2s linear infinite;
+    }
+    @keyframes flow {
+      to { stroke-dashoffset: -48; }
+    }
+
+    /* --- mascot guide --- */
+    .mascot-guide {
+      position: absolute;
+      bottom: -18px;
+      left: -14px;
+      width: 200px;
+      z-index: 5;
+    }
+
+    .mascot-img {
+      width: 200px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.25));
+      cursor: pointer;
+      transform-origin: bottom center;
+      animation: mascot-idle 3.6s ease-in-out infinite;
+    }
+    @keyframes mascot-idle {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(-1.5deg); }
+    }
+
+    .speech-bubble {
+      position: absolute;
+      bottom: 158px;
+      left: 78px;
+      width: 230px;
+      background: var(--white);
+      border: 3px solid var(--border-orange);
+      border-radius: 18px 18px 18px 4px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-dark);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(8px) scale(0.92);
+      transform-origin: bottom left;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .speech-bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 26px;
+      border-width: 8px 8px 0 0;
+      border-style: solid;
+      border-color: var(--border-orange) transparent transparent transparent;
+    }
+
+    @media (max-width: 650px) {
+      .map-wrapper { height: 800px; }
+      .pin { width: 52px; height: 52px; font-size: 1.4rem; }
+      .tip-window { width: 200px; }
+      .mascot-guide { width: 150px; }
+      .mascot-img { width: 150px; }
+      .speech-bubble { width: 175px; left: 58px; bottom: 118px; font-size: 0.76rem; }
+      .speech-bubble::after { bottom: -12px; left: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mascot-img, .cloud, .decor-prop.sway, .decor-prop.flicker, .secret-chilli,
+      .waypoint:not(.discovered) .pin::before, .river-flow {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title-wrap">
+    <h1 class="map-title">🔥 Hot Chilli CheckMate 🌶️ - City Map 🗺️</h1>
+  </div>
+  <p class="subtitle">Navigate the city alleyways to find your way around our events!</p>
+
+  <div class="quest-bar">
+    <span class="quest-pill" id="progress-pill">🧭 0/15 Explored</span>
+    <span class="quest-pill" id="secret-pill" style="display:none;">🌶️ Secret Found!</span>
+    <button class="reset-link" id="reset-btn" type="button">↺ reset my map</button>
+  </div>
+
+  <div class="map-wrapper" id="map-wrapper">
+
+    <!-- sky -->
+    <svg class="cloud" style="top:2%; left:8%; width:110px;" viewBox="0 0 200 80"><ellipse cx="100" cy="45" rx="90" ry="28" fill="#fff"/><ellipse cx="60" cy="35" rx="45" ry="24" fill="#fff"/><ellipse cx="140" cy="35" rx="45" ry="24" fill="#fff"/></svg>
+    <svg class="cloud c2" style="top:1%; left:55%; width:90px;" viewBox="0 0 200 80"><ellipse cx="100" cy="45" rx="90" ry="28" fill="#fff"/><ellipse cx="60" cy="35" rx="45" ry="24" fill="#fff"/><ellipse cx="140" cy="35" rx="45" ry="24" fill="#fff"/></svg>
+    <svg class="cloud c3" style="top:6%; left:80%; width:70px;" viewBox="0 0 200 80"><ellipse cx="100" cy="45" rx="90" ry="28" fill="#fff"/><ellipse cx="60" cy="35" rx="45" ry="24" fill="#fff"/><ellipse cx="140" cy="35" rx="45" ry="24" fill="#fff"/></svg>
+
+    <!-- ground layer: paths, ridges, river and built structures all sit behind the
+         foliage/icon layer below, so trees and pins read as sitting on top of the terrain -->
+    <svg class="map-svg" viewBox="0 0 950 950" preserveAspectRatio="none">
+      <circle cx="475" cy="485" r="420" fill="none" stroke="#E85535" stroke-width="7" stroke-dasharray="10 8" stroke-linecap="round"/>
+      <circle cx="475" cy="485" r="245" fill="none" stroke="#E85535" stroke-width="5" stroke-dasharray="6 6" opacity="0.8"/>
+      <circle cx="475" cy="485" r="110" fill="none" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+
+      <!-- spokes radiating from the courses hub to each outer waypoint -->
+      <line x1="475" y1="485" x2="209" y2="190" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="408" y2="76"  stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="475" y2="200" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="808" y2="200" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="665" y2="332" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="817" y2="466" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="817" y2="618" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="618" y2="665" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="475" y2="855" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="162" y2="722" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="295" y2="618" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="162" y2="466" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+      <line x1="475" y1="485" x2="76"  y2="466" stroke="#E85535" stroke-width="6" stroke-dasharray="8 8"/>
+
+      <!-- mountain ridge silhouette, sized and positioned to match the reference,
+           snow-capped so the peak emoji sit on a real range -->
+      <path d="M -10,230 L 50,60 L 95,145 L 150,20 L 190,135 L 215,75 L 260,230 Z"
+            fill="#C89A72" stroke="#A47850" stroke-width="3"/>
+      <path d="M 38,90 L 50,60 L 62,90 Z" fill="#F7F3EE"/>
+      <path d="M 132,55 L 150,20 L 168,55 Z" fill="#F7F3EE"/>
+      <path d="M 200,105 L 215,75 L 230,105 Z" fill="#F7F3EE"/>
+
+      <!-- watchtower keeping lookout over the northern peaks -->
+      <g transform="translate(190,55)">
+        <line x1="-14" y1="34" x2="-4" y2="-8" stroke="#7a3f0f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="14" y1="34" x2="4" y2="-8" stroke="#7a3f0f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="-9" y1="16" x2="9" y2="16" stroke="#7a3f0f" stroke-width="3"/>
+        <rect x="-15" y="-18" width="30" height="9" fill="#B5651D" stroke="#5c3210" stroke-width="2"/>
+        <path d="M -17,-18 L0,-36 L17,-18 Z" fill="#8B4513" stroke="#5c3210" stroke-width="2"/>
+      </g>
+
+      <!-- river: flows in from off-map at the top (marked with an arrowhead),
+           winds down past the mountains and through the city, and empties
+           into the lake at the south-east corner via a widening river mouth -->
+      <path d="M 380,-20 C 340,60 260,110 230,195 C 195,275 140,320 160,400 C 180,480 230,500 228,551 C 226,600 260,590 295,620 C 340,655 200,660 190,700 C 175,745 260,760 300,800 C 350,850 420,860 480,868 C 560,878 600,850 650,845 C 700,840 730,820 760,815"
+            fill="none" stroke="var(--river-deep)" stroke-width="26" stroke-linecap="round" opacity="0.9"/>
+      <path class="river-flow" d="M 380,-20 C 340,60 260,110 230,195 C 195,275 140,320 160,400 C 180,480 230,500 228,551 C 226,600 260,590 295,620 C 340,655 200,660 190,700 C 175,745 260,760 300,800 C 350,850 420,860 480,868 C 560,878 600,850 650,845 C 700,840 730,820 760,815"
+            fill="none" stroke="var(--river-blue)" stroke-width="18" stroke-linecap="round"/>
+      <path d="M 378,-18 C 340,58 262,108 232,193 C 200,268 148,312 165,388"
+            fill="none" stroke="#EAF6FC" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+      <!-- arrowhead marking where the river flows in from off-map -->
+      <path d="M 380,-30 L 362,4 L 380,-10 L 398,4 Z" fill="var(--river-blue)" stroke="var(--river-deep)" stroke-width="2"/>
+      <!-- river mouth: a soft triangular widening where the channel opens into the lake -->
+      <path d="M 690,795 C 715,800 745,808 772,820 C 740,822 705,822 675,818 Z"
+            fill="var(--river-deep)" opacity="0.5"/>
+
+      <!-- lake the river flows into, bottom-right corner: enlarged and made
+           more asymmetric/organic so it doesn't read as a simple circle -->
+      <path d="M 735,795 C 745,745 800,700 875,695 C 950,690 1010,730 1030,800 C 1048,865 1020,935 950,965 C 880,995 790,985 745,935 C 710,895 705,860 715,830 C 720,815 728,805 735,795 Z"
+            fill="var(--river-deep)" opacity="0.9"/>
+      <path d="M 748,792 C 758,748 806,710 872,706 C 938,702 990,738 1008,798 C 1024,853 1000,912 940,940 C 880,966 800,958 760,915 C 730,880 726,850 735,822 C 739,809 743,800 748,792 Z"
+            fill="var(--river-blue)"/>
+      <ellipse cx="820" cy="800" rx="40" ry="12" fill="#EAF6FC" opacity="0.5"/>
+      <ellipse cx="900" cy="850" rx="30" ry="9" fill="#EAF6FC" opacity="0.4"/>
+      <ellipse cx="930" cy="770" rx="16" ry="9" fill="#6fae5c" opacity="0.85"/>
+      <circle cx="930" cy="768" r="2.5" fill="#fff0f5"/>
+      <ellipse cx="960" cy="900" rx="14" ry="8" fill="#6fae5c" opacity="0.85"/>
+      <ellipse cx="775" cy="900" rx="12" ry="7" fill="#6fae5c" opacity="0.8"/>
+
+      <!-- stone well, positioned in the open ground left of the courses pin -->
+      <g transform="translate(370,485)">
+        <ellipse cx="0" cy="15" rx="20" ry="6" fill="rgba(0,0,0,0.12)"/>
+        <ellipse cx="0" cy="0" rx="18" ry="9" fill="#D9D9D9" stroke="#8c8c8c" stroke-width="2"/>
+        <ellipse cx="0" cy="-2" rx="12" ry="5" fill="#5c6b73"/>
+        <line x1="-16" y1="-6" x2="-16" y2="-26" stroke="#7a3f0f" stroke-width="3"/>
+        <line x1="16" y1="-6" x2="16" y2="-26" stroke="#7a3f0f" stroke-width="3"/>
+        <path d="M -18,-26 L0,-36 L18,-26" fill="none" stroke="#5c3210" stroke-width="3"/>
+        <line x1="0" y1="-30" x2="0" y2="-8" stroke="#5c3210" stroke-width="1.5"/>
+        <rect x="-6" y="-10" width="12" height="9" fill="#8c8c8c" stroke="#5c3210" stroke-width="1.5"/>
+      </g>
+
+      <!-- small fenced flower bed, matching the reference's position between
+           the noobs and calendar pins -->
+      <g stroke="#7a3f0f" stroke-width="3" fill="none">
+        <line x1="565" y1="120" x2="565" y2="88"/>
+        <line x1="585" y1="120" x2="585" y2="84"/>
+        <line x1="605" y1="120" x2="605" y2="88"/>
+        <line x1="625" y1="120" x2="625" y2="84"/>
+        <line x1="645" y1="120" x2="645" y2="88"/>
+        <line x1="560" y1="100" x2="650" y2="100"/>
+      </g>
+
+      <!-- compass rose -->
+      <g transform="translate(890,60)" opacity="0.85">
+        <circle r="34" fill="#FFF8F5" stroke="var(--border-orange)" stroke-width="3"/>
+        <path d="M0,-26 L7,0 L0,26 L-7,0 Z" fill="var(--accent-orange)"/>
+        <path d="M-26,0 L0,7 L26,0 L0,-7 Z" fill="var(--border-orange)" opacity="0.8"/>
+        <text x="0" y="-32" text-anchor="middle" font-size="11" fill="var(--accent-orange)" font-weight="bold">N</text>
+      </g>
+    </svg>
+
+    <!-- corner accents -->
+    <span class="decor-prop" style="top: 2%; left: 2%;">🌶️</span>
+    <span class="decor-prop flicker" style="top: 2%; left: 96%;">🔥</span>
+
+    <!-- Northern Peaks: pine treeline at the base of the ridge, top-left -->
+    <span class="decor-prop" style="top: 6%; left: 5%; font-size:1.6rem;">🌲</span>
+    <span class="decor-prop sway" style="top: 11%; left: 4%;">🌲</span>
+    <span class="decor-prop sway" style="top: 17%; left: 4%;">🌲</span>
+    <span class="decor-prop sway" style="top: 20%; left: 9%;">🌲</span>
+    <span class="decor-prop" style="top: 24%; left: 4%;">🪨</span>
+    <span class="decor-prop" style="top: 25%; left: 10%;">🪨</span>
+    <span class="decor-prop" style="top: 7%; left: 29%;">🦋</span>
+
+    <!-- pines flanking the fenced flower bed, top-center-right -->
+    <span class="decor-prop sway" style="top: 6%; left: 71%;">🌲</span>
+    <span class="decor-prop sway" style="top: 7%; left: 76%;">🌲</span>
+    <span class="decor-prop sway" style="top: 5%; left: 81%;">🌲</span>
+    <span class="decor-prop" style="top: 9%; left: 61%;">🌸</span>
+    <span class="decor-prop" style="top: 8%; left: 64%;">🌼</span>
+
+    <!-- tree beside the calendar tower, top-right -->
+    <span class="decor-prop sway" style="top: 8%; left: 94%;">🌳</span>
+    <span class="decor-prop" style="top: 15%; left: 91%;">🌱</span>
+
+    <!-- tent tucked beside the announce/calendar path -->
+    <span class="decor-prop" style="top: 16%; left: 78%;">⛺</span>
+    <span class="decor-prop" style="top: 14%; left: 41%;">🌱</span>
+    <span class="decor-prop sway" style="top: 26%; left: 58%;">🌲</span>
+
+    <!-- small tufts near the center dashed rings -->
+    <span class="decor-prop" style="top: 41%; left: 44%; font-size:1.2rem;">🌱</span>
+    <span class="decor-prop" style="top: 46%; left: 35%; font-size:1.2rem;">🌸</span>
+
+    <!-- greenery flanking the announce/tiger path, right side -->
+    <span class="decor-prop" style="top: 30%; left: 79%; font-size:1.2rem;">🌸</span>
+    <span class="decor-prop sway" style="top: 41%; left: 92%;">🌴</span>
+    <span class="decor-prop" style="top: 45%; left: 97%;">🌶️</span>
+    <span class="decor-prop" style="top: 49%; left: 97%; font-size:1.3rem;">🪨</span>
+    <span class="decor-prop" style="top: 66%; left: 96%; font-size:1.2rem;">🌸</span>
+
+    <!-- left side, near the picture/star pins -->
+    <span class="decor-prop sway" style="top: 38%; left: 4%;">🌴</span>
+    <span class="decor-prop" style="top: 43%; left: 6%; font-size:1.2rem;">🌸</span>
+    <span class="decor-prop sway" style="top: 54%; left: 3%;">🌴</span>
+    <span class="decor-prop" style="top: 51%; left: 27%; font-size:1.2rem;">🌸</span>
+
+    <!-- Knight's Grove: light forest ring around the Hybrid Federation pin -->
+    <span class="decor-prop sway" style="top: 66%; left: 40%;">🌲</span>
+    <span class="decor-prop" style="top: 68%; left: 25%; font-size:1.2rem;">🌿</span>
+
+    <!-- Schizzarotto / bottom-left greenery near the votechess pin -->
+    <span class="decor-prop sway" style="top: 68%; left: 8%;">🌴</span>
+    <span class="decor-prop" style="top: 72%; left: 6%; font-size:1.3rem;">🪨</span>
+    <span class="decor-prop" style="top: 82%; left: 6%; font-size:1.2rem;">🌸</span>
+
+    <!-- bottom-center path to the sun pin -->
+    <span class="decor-prop sway" style="top: 87%; left: 22%;">🌴</span>
+    <span class="decor-prop" style="top: 92%; left: 68%; font-size:1.2rem;">🌱</span>
+
+    <!-- Lakeside, spaced around the lake edge to match the reference -->
+    <span class="decor-prop sway" style="top: 73%; left: 79%;">🌴</span>
+    <span class="decor-prop" style="top: 76%; left: 83%; font-size:1.3rem;">🪨</span>
+    <span class="decor-prop" style="top: 92%; left: 71%; font-size:1.2rem;">🪨</span>
+    <span class="decor-prop" style="top: 93%; left: 87%;">🦆</span>
+    <span class="decor-prop sway" style="top: 90%; left: 96%; font-size:1.3rem;">🌿</span>
+
+    <!-- hidden treasure, disguised among the scenery near the lakeside palm -->
+    <span class="decor-prop secret-chilli" id="secret-chilli" style="top: 79%; left: 76%; font-size: 1.3rem;" title="?">🌶️</span>
+
+    <!-- waypoints are injected here by JS from the WAYPOINTS config below -->
+
+    <div class="mascot-guide" id="mascot-guide">
+      <div class="speech-bubble" id="speech-bubble"></div>
+      <img class="mascot-img" id="mascot-img" src="https://raw.githubusercontent.com/taki2023/taki/main/map.png" alt="Hot Chilli Explorer Mascot" />
+    </div>
+  </div>
+
+<script>
+/* ============================================================
+   WAYPOINTS CONFIG
+   To add a new stop on the map: copy one object below, give it
+   a unique id, position (top/left as %), icon, tooltip text,
+   link, and the two mascot lines (hover + discover).
+   Use "image" instead of / in addition to "icon" to show a
+   custom picture inside the pin (e.g. the blitzfire cook pot).
+   ============================================================ */
+const WAYPOINTS = [
+  {
+    id: 'traps', top: 26, left: 30, icon: '♟️',
+    title: '♟️ Tricky Opening Traps!',
+    intro: 'Learn interesting and tricky Chess traps to shock your opponent and yourself!',
+    link: 'https://www.chess.com/clubs/forum/view/tricky-opening-trap-by-iamplayerofchess', linkLabel: 'Explore Traps',
+    hover: "Careful, that alley is full of sneaky opening traps... ♟️",
+    discover: "Nice! You made it through the Trap District without getting caught 😈"
+  },
+  {
+    id: 'elo', top: 21, left: 50, icon: '🤔',
+    title: '🤔 Guess the Elo',
+    intro: 'Guess the ratings of the players who played the games!',
+    link: 'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform', linkLabel: 'Guess Now',
+    hover: "Hmm... think you can guess what's hiding here? 🤔",
+    discover: "You found the Guessing Grounds! Sharp eyes, detective 🔍"
+  },
+  {
+    id: 'calendar', top: 21, left: 85, icon: '🗓️',
+    title: '🗓️ Event Calendar',
+    intro: 'Follow the Calendar to keep track of upcoming events!',
+    link: 'https://www.chess.com/announcements/view/hot-chilli-calendar', linkLabel: 'View Calendar',
+    hover: "That tower up there keeps track of everything happening in town 🗓️",
+    discover: "You found the Calendar Tower! Never miss an event again ⏰"
+  },
+  {
+    id: 'heatmap', top: 65, left: 86, icon: '🔥',
+    title: '🔥 Heat Map',
+    intro: 'Hot Chilli Heat Map! Check active zones.',
+    link: 'https://www.chess.com/announcements/view/heat-map', linkLabel: 'Check Heat',
+    hover: "It's getting hot around here... 🔥",
+    discover: "Whoa, the Heat Map District! Careful, it's spicy in there 🌶️🔥"
+  },
+  {
+    id: 'courses', top: 51, left: 50, icon: '📚',
+    title: '📚 Hot Chilli Courses',
+    intro: "It's great to learn a new opening, have a look!",
+    link: 'https://www.chess.com/announcements/view/hot-chilli-opening-courses', linkLabel: 'Browse Courses',
+    hover: "The old library at the center holds all our chilli wisdom 📚",
+    discover: "You discovered the Chess Library 📚"
+  },
+  {
+    id: 'rate', top: 49, left: 21, icon: '⭐',
+    title: '⭐ Rate our Club!',
+    intro: 'Rate our club and share your feedback!',
+    link: 'https://smartpolls.co.uk/p/145078/results', linkLabel: 'Leave Review',
+    hover: "They say leaving a star over there brings good luck ⭐",
+    discover: "Found the Wishing Star! Thanks for the luck ✨"
+  },
+  {
+    id: 'votechess', top: 76, left: 17, icon: '🗳️',
+    title: '🗳️ Vote Chess',
+    intro: 'Discuss, learn, vote! Spicy Vote Chess games!',
+    link: 'https://www.chess.com/club/votechess/hot-chilli-checkmate', linkLabel: 'Cast Vote',
+    hover: "Democracy, chilli-style, happens over there 🗳️",
+    discover: "You found the Voting Hall! Every voice counts here 🗳️"
+  },
+  {
+    id: 'daily', top: 84, left: 50, icon: '☀️',
+    title: '☀️ Daily Matches',
+    intro: 'Take as much time as you want, slow paced, accurate chess!',
+    link: 'https://www.chess.com/clubs/matches/hot-chilli-checkmate', linkLabel: 'Play Daily',
+    hover: "Cross the bridge... slow and steady wins under that sun ☀️",
+    discover: "You found Sunny Fields, home of the patient grinders ☀️"
+  },
+  {
+    id: 'announce', top: 35, left: 70, icon: '📢',
+    title: '📢 Announcements',
+    intro: "Spicy announcements, don't forget to check!",
+    link: 'https://www.chess.com/club/hot-chilli-checkmate/announcements', linkLabel: 'Read News',
+    hover: "That megaphone tower never stops shouting news 📢",
+    discover: "You found the Announcement Tower! Stay tuned 📢"
+  },
+  {
+    id: 'rules', top: 32, left: 50, icon: '📜',
+    title: '📜 Club Rules',
+    intro: 'Check our club rules here!',
+    link: 'https://www.chess.com/clubs/forum/view/rules-for-the-competitive-side-of-the-club', linkLabel: 'View Rules',
+    hover: "Better not skip the scroll over there 📜",
+    discover: "You found the Rules Scroll! Now you know the law 📜"
+  },
+
+  /* --- partner clubs, tucked into the jungle --- */
+  {
+    id: 'tiger', top: 49, left: 86, icon: '🐯',
+    title: '🐯 Chess Like a Tiger',
+    intro: 'One of our partner clubs — sharp, fierce, and always hunting for the best move!',
+    link: 'https://www.chess.com/club/chess-like-a-tiger', linkLabel: 'Visit Their Club',
+    hover: "Shh... a tiger prowls this part of the jungle. Our friends at Chess Like a Tiger 🐯",
+    discover: "You found the Tiger's Den! Say hi to our partners at Chess Like a Tiger 🐯"
+  },
+  {
+    id: 'hybrid', top: 63, left: 35, icon: '♞',
+    title: '♞ Hybrid Chess Federation',
+    intro: 'A partner club blending styles and ideas — allies of Hot Chilli CheckMate.',
+    link: 'https://www.chess.com/club/hybrid-chess-federation', linkLabel: 'Visit Their Club',
+    hover: "A lone knight stands guard here, loyal to our partners at Hybrid Chess Federation ♞",
+    discover: "You found the Knight's Outpost! Our partners at Hybrid Chess Federation say hello ♞"
+  },
+  {
+    id: 'noobs', top: 8, left: 43, icon: '🎓',
+    title: '🎓 Noobs to GMs Club',
+    intro: 'A partner club dedicated to the journey from total beginner to grandmaster.',
+    link: 'https://www.chess.com/club/noobs-to-gms-club', linkLabel: 'Visit Their Club',
+    hover: "Everyone starts as a noob... our partners here are proof you can go all the way 🎓",
+    discover: "You found the Academy! That's our partners at Noobs to GMs Club 🎓"
+  },
+  {
+    id: 'schizzarotto', top: 49, left: 8, icon: '🃏',
+    title: '🃏 Schizzarotto Fan Club',
+    intro: 'A partner fan club, always good for a laugh and some chaotic chess energy.',
+    link: 'https://www.chess.com/club/schizzarotto-fan-club', linkLabel: 'Visit Their Club',
+    hover: "Something feels a little chaotic near this rock... classic Schizzarotto Fan Club energy 🃏",
+    discover: "You found the Joker's Corner! Our partners at the Schizzarotto Fan Club 🃏"
+  },
+  {
+    id: 'blitzfire', top: 70, left: 65, icon: '🍲',
+    image: 'https://raw.githubusercontent.com/taki2023/taki/refs/heads/main/cook.png',
+    title: "🔥 Something's Cooking...",
+    intro: "Oh, it's the Hot Chilli Blitz Championship!",
+    link: 'https://www.chess.com/clubs/forum/view/pairings-for-the-hot-chilli-blitz-championship', linkLabel: 'here !',
+    hover: "Mmm... what are they cooking over here? 👀🔥",
+    discover: "Turns out it's the Hot Chilli Blitz Championship pairings, sizzling hot! 🔥♟️"
+  }
+];
+
+const IDLE_LINES = [
+  "Psst... I heard there is a secret treasure hidden somewhere in the city 👀🌶️",
+  "Careful! The Tricky Opening District is dangerous ♟️",
+  "It's getting hot around here... 🔥",
+  "Rumor says a hidden chilli appears after midnight 🌶️👀",
+  "Ten spots to explore... have you found them all?",
+  "The library never closes, you know 📚",
+  "I once got lost near the Voting Hall for three days 🗳️😅",
+  "Come on, click around, the map won't bite! 🗺️",
+  "Every alley here has a story. Go find one 🌶️"
+];
+
+const SECRET_LINES = [
+  "WAIT. You actually found it?! The secret chilli! 🌶️✨ Nobody ever looks behind the palm trees...",
+];
+
+/* ---------- build waypoint pins from config ---------- */
+const mapWrapper = document.getElementById('map-wrapper');
+const mascotGuide = document.getElementById('mascot-guide');
+
+WAYPOINTS.forEach(wp => {
+  const el = document.createElement('div');
+  el.className = 'waypoint';
+  el.tabIndex = 0;
+  el.style.top = wp.top + '%';
+  el.style.left = wp.left + '%';
+  el.dataset.id = wp.id;
+  const pinContent = wp.image
+    ? `<img class="pin-img" src="${wp.image}" alt="${wp.title}">`
+    : wp.icon;
+  el.innerHTML = `
+    <div class="pin">${pinContent}<span class="badge-check">✓</span>${wp.id === 'blitzfire' ? '<span class="steam"><span></span><span></span><span></span></span>' : ''}</div>
+    <div class="tip-window">
+      <span class="tip-title">${wp.title}</span>
+      <span class="tip-intro">${wp.intro}</span>
+      <a href="${wp.link}" target="_blank" rel="noopener" class="btn-join">${wp.linkLabel}</a>
+    </div>
+  `;
+  mapWrapper.insertBefore(el, mascotGuide);
+
+  el.addEventListener('mouseenter', () => sayHover(wp));
+  el.addEventListener('focus', () => sayHover(wp));
+  el.addEventListener('mouseleave', scheduleIdle);
+  el.addEventListener('blur', scheduleIdle);
+  el.querySelector('a').addEventListener('click', () => discover(wp));
+});
+
+/* ---------- persistence ---------- */
+const STORAGE_KEY = 'hcc_map_discovered';
+const SECRET_KEY = 'hcc_map_secret_found';
+
+function loadDiscovered() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch (e) { return []; }
+}
+function saveDiscovered(list) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+}
+
+function updateProgressPill() {
+  const list = loadDiscovered();
+  document.getElementById('progress-pill').textContent = `🧭 ${list.length}/${WAYPOINTS.length} Explored`;
+  document.getElementById('secret-pill').style.display = localStorage.getItem(SECRET_KEY) ? 'inline-block' : 'none';
+}
+
+function applySavedState() {
+  const list = loadDiscovered();
+  list.forEach(id => {
+    const el = mapWrapper.querySelector(`.waypoint[data-id="${id}"]`);
+    if (el) el.classList.add('discovered');
+  });
+  if (localStorage.getItem(SECRET_KEY)) {
+    document.getElementById('secret-chilli').classList.add('found');
+  }
+  updateProgressPill();
+}
+
+function discover(wp) {
+  const el = mapWrapper.querySelector(`.waypoint[data-id="${wp.id}"]`);
+  const already = el.classList.contains('discovered');
+  el.classList.add('discovered');
+  if (!already) {
+    const list = loadDiscovered();
+    if (!list.includes(wp.id)) {
+      list.push(wp.id);
+      saveDiscovered(list);
+      updateProgressPill();
+    }
+  }
+  say(wp.discover, 4200);
+}
+
+/* ---------- mascot speech ---------- */
+const bubble = document.getElementById('speech-bubble');
+let idleTimer = null;
+let hoverActive = false;
+
+function say(text, holdMs) {
+  bubble.textContent = text;
+  bubble.classList.add('show');
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    bubble.classList.remove('show');
+    if (!hoverActive) scheduleIdle(true);
+  }, holdMs || 6000);
+}
+
+function sayHover(wp) {
+  hoverActive = true;
+  clearTimeout(idleTimer);
+  bubble.textContent = wp.hover;
+  bubble.classList.add('show');
+}
+
+function scheduleIdle(immediate) {
+  hoverActive = false;
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    if (hoverActive) return;
+    const line = IDLE_LINES[Math.floor(Math.random() * IDLE_LINES.length)];
+    say(line, 5500);
+  }, immediate ? 3000 : 800);
+}
+
+/* click mascot for an on-demand hint */
+document.getElementById('mascot-img').addEventListener('click', () => {
+  const line = IDLE_LINES[Math.floor(Math.random() * IDLE_LINES.length)];
+  say(line, 5000);
+});
+
+/* ---------- hidden treasure ---------- */
+const secretEl = document.getElementById('secret-chilli');
+secretEl.addEventListener('click', (e) => {
+  if (!localStorage.getItem(SECRET_KEY)) {
+    try { localStorage.setItem(SECRET_KEY, '1'); } catch (err) {}
+    secretEl.classList.add('found');
+    updateProgressPill();
+    burstSparkles(e);
+    say(SECRET_LINES[0], 6000);
+  } else {
+    burstSparkles(e);
+    say("You already claimed this one, champion 🌶️🏆", 4000);
+  }
+});
+
+function burstSparkles(e) {
+  const rect = mapWrapper.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const symbols = ['✨', '🌟', '💥', '🎉'];
+  for (let i = 0; i < 6; i++) {
+    const s = document.createElement('span');
+    s.className = 'sparkle-burst';
+    s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    s.style.left = (x + (Math.random() * 60 - 30)) + 'px';
+    s.style.top = (y + (Math.random() * 20 - 10)) + 'px';
+    mapWrapper.appendChild(s);
+    setTimeout(() => s.remove(), 950);
+  }
+}
+
+/* ---------- reset ---------- */
+document.getElementById('reset-btn').addEventListener('click', () => {
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(SECRET_KEY);
+  mapWrapper.querySelectorAll('.waypoint.discovered').forEach(el => el.classList.remove('discovered'));
+  secretEl.classList.remove('found');
+  updateProgressPill();
+  say("Fresh start! The whole city is waiting to be explored again 🗺️", 4500);
+});
+
+/* ---------- init ---------- */
+applySavedState();
+setTimeout(() => say(IDLE_LINES[0], 6000), 900);
+scheduleIdle(true);
+</script>
+
+</body>
+</html>
