@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-24T12:45:16.158Z",
+  "updated": "2026-08-24T13:50:44.997Z",
   "totalMembers": 1585,
-  "activeToday": 267,
+  "activeToday": 288,
   "players": [
     {
       "username": "right_to_fight",
@@ -15,26 +15,26 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
     },
     {
-      "username": "nikkotello",
-      "total_pts": 305,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 305,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 21,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
       "username": "steellasking77",
-      "total_pts": 282,
-      "bullet_pts": 282,
+      "total_pts": 331,
+      "bullet_pts": 331,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 100,
+      "bullet_g": 117,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
+    },
+    {
+      "username": "nikkotello",
+      "total_pts": 325,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 325,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 23,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
