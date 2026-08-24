@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-24T06:54:24.150Z",
+  "updated": "2026-08-24T07:57:28.924Z",
   "totalMembers": 1585,
-  "activeToday": 146,
+  "activeToday": 168,
   "players": [
     {
       "username": "right_to_fight",
-      "total_pts": 310,
+      "total_pts": 370,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 310,
+      "rapid_pts": 370,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 22,
+      "rapid_g": 26,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
     },
     {
       "username": "nikkotello",
-      "total_pts": 245,
+      "total_pts": 260,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 245,
+      "rapid_pts": 260,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 17,
+      "rapid_g": 18,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 148,
-      "bullet_pts": 118,
-      "blitz_pts": 30,
-      "rapid_pts": 0,
-      "bullet_g": 40,
-      "blitz_g": 4,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "username": "balze_end1337",
+      "total_pts": 149,
+      "bullet_pts": 0,
+      "blitz_pts": 9,
+      "rapid_pts": 140,
+      "bullet_g": 0,
+      "blitz_g": 1,
+      "rapid_g": 10,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.df117ce3.200x200o.0c594a6f377f.jpg"
     }
   ]
 }
