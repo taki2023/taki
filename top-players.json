@@ -1,28 +1,28 @@
 {
-  "updated": "2026-08-24T05:37:16.587Z",
+  "updated": "2026-08-24T06:54:24.150Z",
   "totalMembers": 1585,
-  "activeToday": 123,
+  "activeToday": 146,
   "players": [
     {
       "username": "right_to_fight",
-      "total_pts": 250,
+      "total_pts": 310,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 250,
+      "rapid_pts": 310,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 18,
+      "rapid_g": 22,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
     },
     {
       "username": "nikkotello",
-      "total_pts": 215,
+      "total_pts": 245,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 215,
+      "rapid_pts": 245,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 15,
+      "rapid_g": 17,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
