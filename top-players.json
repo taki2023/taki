@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-25T11:24:51.482Z",
-  "totalMembers": 1588,
-  "activeToday": 223,
+  "updated": "2026-08-25T11:55:45.003Z",
+  "totalMembers": 1587,
+  "activeToday": 257,
   "players": [
     {
       "username": "right_to_fight",
@@ -27,12 +27,12 @@
     },
     {
       "username": "financial_dragon",
-      "total_pts": 207,
+      "total_pts": 219,
       "bullet_pts": 0,
-      "blitz_pts": 207,
+      "blitz_pts": 219,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 25,
+      "blitz_g": 27,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
     }
