@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-25T16:34:36.472Z",
-  "totalMembers": 1587,
-  "activeToday": 320,
+  "updated": "2026-08-25T17:32:21.848Z",
+  "totalMembers": 1588,
+  "activeToday": 379,
   "players": [
     {
       "username": "uniqueboyakigmailcom",
@@ -16,23 +16,23 @@
     },
     {
       "username": "nikkotello",
-      "total_pts": 303,
+      "total_pts": 378,
       "bullet_pts": 0,
       "blitz_pts": 198,
-      "rapid_pts": 105,
+      "rapid_pts": 180,
       "bullet_g": 0,
       "blitz_g": 22,
-      "rapid_g": 7,
+      "rapid_g": 12,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
       "username": "steellasking77",
-      "total_pts": 275,
-      "bullet_pts": 218,
-      "blitz_pts": 57,
+      "total_pts": 307,
+      "bullet_pts": 247,
+      "blitz_pts": 60,
       "rapid_pts": 0,
-      "bullet_g": 78,
-      "blitz_g": 7,
+      "bullet_g": 89,
+      "blitz_g": 8,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     }
