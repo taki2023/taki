@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-24T23:47:20.906Z",
+  "updated": "2026-08-25T01:08:08.582Z",
   "totalMembers": 1588,
-  "activeToday": 426,
+  "activeToday": 41,
   "players": [
     {
-      "username": "right_to_fight",
-      "total_pts": 650,
+      "username": "ahad5389",
+      "total_pts": 75,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 650,
+      "rapid_pts": 75,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 46,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
+      "rapid_g": 5,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/339457789.ba1eded4.200x200o.5e534f2a1a8e.jpg"
     },
     {
-      "username": "steellasking77",
-      "total_pts": 449,
-      "bullet_pts": 449,
+      "username": "crown-venus",
+      "total_pts": 48,
+      "bullet_pts": 0,
+      "blitz_pts": 18,
+      "rapid_pts": 30,
+      "bullet_g": 0,
+      "blitz_g": 2,
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/434105903.929376bf.200x200o.1ad100a573dc.jpg"
+    },
+    {
+      "username": "goldenchessstar911",
+      "total_pts": 35,
+      "bullet_pts": 35,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 159,
+      "bullet_g": 13,
       "blitz_g": 0,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
-    },
-    {
-      "username": "gladeoac",
-      "total_pts": 351,
-      "bullet_pts": 6,
-      "blitz_pts": 45,
-      "rapid_pts": 300,
-      "bullet_g": 2,
-      "blitz_g": 5,
-      "rapid_g": 20,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/352460821.c2cfc1f6.200x200o.443d654afd1c.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/226199899.d6a74b04.200x200o.fdc60fe8b57e.jpg"
     }
   ]
 }
