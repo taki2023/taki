@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-25T10:00:32.754Z",
+  "updated": "2026-08-25T10:42:28.716Z",
   "totalMembers": 1588,
-  "activeToday": 191,
+  "activeToday": 239,
   "players": [
     {
       "username": "right_to_fight",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "becky-incheck",
-      "total_pts": 198,
+      "username": "financial_dragon",
+      "total_pts": 207,
       "bullet_pts": 0,
-      "blitz_pts": 198,
+      "blitz_pts": 207,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 22,
+      "blitz_g": 25,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
     }
   ]
 }
