@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-25T14:42:30.068Z",
+  "updated": "2026-08-25T15:41:05.243Z",
   "totalMembers": 1587,
-  "activeToday": 275,
+  "activeToday": 344,
   "players": [
     {
       "username": "uniqueboyakigmailcom",
-      "total_pts": 363,
+      "total_pts": 480,
       "bullet_pts": 57,
-      "blitz_pts": 96,
+      "blitz_pts": 213,
       "rapid_pts": 210,
       "bullet_g": 19,
-      "blitz_g": 12,
+      "blitz_g": 25,
       "rapid_g": 14,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "nikkotello",
-      "total_pts": 276,
+      "total_pts": 303,
       "bullet_pts": 0,
-      "blitz_pts": 171,
+      "blitz_pts": 198,
       "rapid_pts": 105,
       "bullet_g": 0,
-      "blitz_g": 19,
+      "blitz_g": 22,
       "rapid_g": 7,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     },
     {
-      "username": "financial_dragon",
-      "total_pts": 264,
-      "bullet_pts": 0,
-      "blitz_pts": 264,
+      "username": "steellasking77",
+      "total_pts": 275,
+      "bullet_pts": 218,
+      "blitz_pts": 57,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 32,
+      "bullet_g": 78,
+      "blitz_g": 7,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.7e3dad40.200x200o.0e09cafadada.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     }
   ]
 }
