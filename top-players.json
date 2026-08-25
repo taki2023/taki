@@ -1,8 +1,30 @@
 {
-  "updated": "2026-08-25T07:02:10.132Z",
+  "updated": "2026-08-25T08:08:08.621Z",
   "totalMembers": 1588,
-  "activeToday": 159,
+  "activeToday": 183,
   "players": [
+    {
+      "username": "right_to_fight",
+      "total_pts": 215,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 215,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 15,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
+    },
+    {
+      "username": "nikkotello",
+      "total_pts": 213,
+      "bullet_pts": 0,
+      "blitz_pts": 108,
+      "rapid_pts": 105,
+      "bullet_g": 0,
+      "blitz_g": 12,
+      "rapid_g": 7,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
     {
       "username": "becky-incheck",
       "total_pts": 198,
@@ -13,28 +35,6 @@
       "blitz_g": 22,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "nikkotello",
-      "total_pts": 195,
-      "bullet_pts": 0,
-      "blitz_pts": 90,
-      "rapid_pts": 105,
-      "bullet_g": 0,
-      "blitz_g": 10,
-      "rapid_g": 7,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "right_to_fight",
-      "total_pts": 170,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 170,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/204137009.3a062a6d.200x200o.51e9cde35d38.jpg"
     }
   ]
 }
