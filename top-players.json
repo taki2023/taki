@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-26T05:33:28.103Z",
+  "updated": "2026-08-26T06:44:56.553Z",
   "totalMembers": 1587,
-  "activeToday": 130,
+  "activeToday": 153,
   "players": [
+    {
+      "username": "valeriamoony",
+      "total_pts": 175,
+      "bullet_pts": 175,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 61,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
+    },
     {
       "username": "rafallaobedi-210",
       "total_pts": 171,
@@ -24,17 +35,6 @@
       "blitz_g": 18,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
-    },
-    {
-      "username": "valeriamoony",
-      "total_pts": 159,
-      "bullet_pts": 159,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 55,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
     }
   ]
 }
