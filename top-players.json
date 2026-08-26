@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-26T11:27:36.498Z",
+  "updated": "2026-08-26T11:58:37.036Z",
   "totalMembers": 1588,
-  "activeToday": 240,
+  "activeToday": 270,
   "players": [
     {
       "username": "valeriamoony",
@@ -26,15 +26,15 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 210,
-      "bullet_pts": 183,
-      "blitz_pts": 27,
+      "username": "steellasking77",
+      "total_pts": 219,
+      "bullet_pts": 6,
+      "blitz_pts": 213,
       "rapid_pts": 0,
-      "bullet_g": 69,
-      "blitz_g": 3,
+      "bullet_g": 2,
+      "blitz_g": 25,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     }
   ]
 }
