@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-26T08:40:52.316Z",
+  "updated": "2026-08-26T09:38:15.180Z",
   "totalMembers": 1587,
-  "activeToday": 194,
+  "activeToday": 192,
   "players": [
     {
       "username": "uniqueboyakigmailcom",
@@ -16,25 +16,25 @@
     },
     {
       "username": "valeriamoony",
-      "total_pts": 208,
-      "bullet_pts": 208,
+      "total_pts": 253,
+      "bullet_pts": 253,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 72,
+      "bullet_g": 87,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
     },
     {
-      "username": "rafallaobedi-210",
-      "total_pts": 171,
-      "bullet_pts": 0,
-      "blitz_pts": 171,
+      "username": "xuyen1786",
+      "total_pts": 177,
+      "bullet_pts": 150,
+      "blitz_pts": 27,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 19,
+      "bullet_g": 58,
+      "blitz_g": 3,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
     }
   ]
 }
