@@ -1,29 +1,18 @@
 {
-  "updated": "2026-08-26T13:54:14.857Z",
+  "updated": "2026-08-26T14:42:12.006Z",
   "totalMembers": 1589,
-  "activeToday": 309,
+  "activeToday": 291,
   "players": [
     {
       "username": "valeriamoony",
-      "total_pts": 335,
-      "bullet_pts": 335,
+      "total_pts": 386,
+      "bullet_pts": 386,
       "blitz_pts": 0,
       "rapid_pts": 0,
-      "bullet_g": 115,
+      "bullet_g": 132,
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
-    },
-    {
-      "username": "uniqueboyakigmailcom",
-      "total_pts": 303,
-      "bullet_pts": 42,
-      "blitz_pts": 261,
-      "rapid_pts": 0,
-      "bullet_g": 16,
-      "blitz_g": 31,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "borderwatch",
@@ -35,6 +24,17 @@
       "blitz_g": 0,
       "rapid_g": 21,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "steellasking77",
+      "total_pts": 279,
+      "bullet_pts": 66,
+      "blitz_pts": 213,
+      "rapid_pts": 0,
+      "bullet_g": 22,
+      "blitz_g": 25,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
     }
   ]
 }
