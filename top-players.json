@@ -1,8 +1,19 @@
 {
-  "updated": "2026-08-26T10:34:09.928Z",
-  "totalMembers": 1587,
-  "activeToday": 243,
+  "updated": "2026-08-26T11:27:36.498Z",
+  "totalMembers": 1588,
+  "activeToday": 240,
   "players": [
+    {
+      "username": "valeriamoony",
+      "total_pts": 298,
+      "bullet_pts": 298,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 102,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
+    },
     {
       "username": "uniqueboyakigmailcom",
       "total_pts": 264,
@@ -15,23 +26,12 @@
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "valeriamoony",
-      "total_pts": 253,
-      "bullet_pts": 253,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 87,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
-    },
-    {
       "username": "xuyen1786",
-      "total_pts": 177,
-      "bullet_pts": 150,
+      "total_pts": 210,
+      "bullet_pts": 183,
       "blitz_pts": 27,
       "rapid_pts": 0,
-      "bullet_g": 58,
+      "bullet_g": 69,
       "blitz_g": 3,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
