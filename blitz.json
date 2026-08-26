@@ -445,6 +445,53 @@
           ]
         }
       ]
+    },
+    {
+      "number": 3,
+      "name": "Final Round",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "DaTreeOfFives",
+            "Freddy1201",
+            "Daniel2040",
+            "RevToMate2"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Freddy1201",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Daniel2040",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "RevToMate2",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Daniel2040",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "RevToMate2",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "RevToMate2",
+              "link": ""
+            }
+          ]
+        }
+      ]
     }
   ],
   "withdrawn": [
