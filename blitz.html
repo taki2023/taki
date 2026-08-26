@@ -282,6 +282,37 @@ body {
 .groups-scroll::-webkit-scrollbar-thumb:hover {
   background: var(--orange);
 }
+#content.final-centered {
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.champion-title-plain {
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--red-mid);
+  margin-bottom: 12px;
+}
+.champion-stats-plain {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.champion-stats-plain .stat-sep {
+  color: var(--ink-faint);
+  margin: 0 8px;
+}
+.champion-stats-plain .stat-hl {
+  color: var(--red-mid);
+  font-weight: 900;
+}
 .group-card {
   background: var(--paper);
   border-radius: 24px;
@@ -897,8 +928,23 @@ table.final-round .player-rank.r3 {
     max-height: 520px;
     padding-right: 2px;
   }
+  #content.final-centered {
+    min-height: 520px;
+  }
   .group-card {
     margin-bottom: 12px;
+  }
+  .champion-title-plain {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .champion-stats-plain {
+    font-size: 10px;
+    line-height: 1.9;
+    margin-top: 10px;
+  }
+  .champion-stats-plain .stat-sep {
+    margin: 0 5px;
   }
 }
 @media (max-width: 360px) {
@@ -911,6 +957,9 @@ table.final-round .player-rank.r3 {
   }
   .groups-scroll {
     max-height: 480px;
+  }
+  #content.final-centered {
+    min-height: 480px;
   }
   .player-name {
     max-width: 90px;
@@ -1665,6 +1714,226 @@ let TOURNAMENT = {
 let WITHDRAWN_SET = new Set();
 let activeRoundIdx = 0;
 let hasLoadedOnce = false;
+let TOURNAMENT_STATS = null;
+let tournamentStatsPromise = null;
+const ratingCache = {};
+async function fetchPlayerRating(username) {
+  if (!username) {
+    return null;
+  }
+  if (ratingCache[username]) {
+    return ratingCache[username];
+  }
+  const p = limit(async () => {
+    try {
+      const r = await fetch(
+        'https://api.chess.com/pub/player/' +
+        encodeURIComponent(username) +
+        '/stats'
+      );
+      if (!r.ok) {
+        throw new Error(
+          'HTTP ' + r.status
+        );
+      }
+      const d = await r.json();
+      const rating =
+        (
+          d.chess_blitz &&
+          d.chess_blitz.last &&
+          d.chess_blitz.last.rating
+        ) ||
+        (
+          d.chess_rapid &&
+          d.chess_rapid.last &&
+          d.chess_rapid.last.rating
+        ) ||
+        (
+          d.chess_bullet &&
+          d.chess_bullet.last &&
+          d.chess_bullet.last.rating
+        ) ||
+        null;
+      return rating;
+    } catch (e) {
+      return null;
+    }
+  });
+  ratingCache[username] = p;
+  return p;
+}
+function matchOutcome(m) {
+  if (!m || !m.link || !m.link.trim()) {
+    return null;
+  }
+  const games =
+    parseCellGames(m.link);
+  let totalA = 0;
+  let totalB = 0;
+  let counted = 0;
+  games.forEach(g => {
+    if (
+      !isNaN(g.scoreA) &&
+      !isNaN(g.scoreB)
+    ) {
+      totalA += g.scoreA;
+      totalB += g.scoreB;
+      counted++;
+    }
+  });
+  if (counted < 2) {
+    return null;
+  }
+  if (totalA === totalB) {
+    return {
+      winner: null,
+      loser: null
+    };
+  }
+  return totalA > totalB
+    ? {
+        winner: m.playerA,
+        loser: m.playerB
+      }
+    : {
+        winner: m.playerB,
+        loser: m.playerA
+      };
+}
+async function computeTournamentStats() {
+  const allMatches = [];
+  TOURNAMENT.rounds.forEach(r => {
+    r.groups.forEach(g => {
+      g.matches.forEach(
+        m => allMatches.push(m)
+      );
+    });
+  });
+  const playedMatches =
+    allMatches.filter(
+      m => !!(m.link && m.link.trim())
+    );
+  const matchesPlayedCount =
+    playedMatches.length;
+  const winCounts = {};
+  const decisive = [];
+  playedMatches.forEach(m => {
+    const outcome =
+      matchOutcome(m);
+    if (outcome && outcome.winner) {
+      winCounts[outcome.winner] =
+        (
+          winCounts[outcome.winner] ||
+          0
+        ) + 1;
+      decisive.push(outcome);
+    }
+  });
+  let mostWinsPlayer = null;
+  let mostWinsCount = 0;
+  Object.keys(winCounts).forEach(
+    p => {
+      if (
+        winCounts[p] >
+        mostWinsCount
+      ) {
+        mostWinsCount =
+          winCounts[p];
+        mostWinsPlayer = p;
+      }
+    }
+  );
+  const uniquePlayers = new Set();
+  decisive.forEach(o => {
+    uniquePlayers.add(o.winner);
+    uniquePlayers.add(o.loser);
+  });
+  const ratings = {};
+  await Promise.all(
+    Array.from(uniquePlayers).map(
+      async p => {
+        ratings[p] =
+          await fetchPlayerRating(p);
+      }
+    )
+  );
+  let biggestUpset = null;
+  decisive.forEach(o => {
+    const winnerRating =
+      ratings[o.winner];
+    const loserRating =
+      ratings[o.loser];
+    if (
+      winnerRating != null &&
+      loserRating != null &&
+      winnerRating < loserRating
+    ) {
+      const diff =
+        loserRating - winnerRating;
+      if (
+        !biggestUpset ||
+        diff > biggestUpset.diff
+      ) {
+        biggestUpset = {
+          winnerRating,
+          loserRating,
+          diff
+        };
+      }
+    }
+  });
+  return {
+    matchesPlayedCount,
+    mostWinsPlayer,
+    mostWinsCount,
+    biggestUpset
+  };
+}
+function championTitleHTML() {
+  return `
+    <div class="champion-title-plain">
+      🌶️ Who will be crowned our first ever Blitz Champion? 🏆
+    </div>
+  `;
+}
+function championStatsHTML(
+  stats
+) {
+  const loading = !stats;
+  const matchesVal =
+    loading
+      ? '…'
+      : stats.matchesPlayedCount;
+  const winsText =
+    loading
+      ? '… wins'
+      : (
+          stats.mostWinsPlayer
+            ? stats.mostWinsCount +
+              ' wins by @' +
+              stats.mostWinsPlayer
+            : '–'
+        );
+  const upsetText =
+    loading
+      ? '…'
+      : (
+          stats.biggestUpset
+            ? stats.biggestUpset.winnerRating +
+              ' beat ' +
+              stats.biggestUpset.loserRating
+            : '–'
+        );
+  return `
+    <div class="champion-stats-plain" id="championStats">
+      <span class="stat-hl">${matchesVal}</span> matches played
+      <span class="stat-sep">•</span>
+      Most wins: <span class="stat-hl">${winsText}</span>
+      <span class="stat-sep">•</span>
+      Biggest upset: <span class="stat-hl">${upsetText}</span>
+    </div>
+  `;
+}
 function isFinalRound(round) {
   return !!round &&
     Array.isArray(round.groups) &&
@@ -1850,6 +2119,9 @@ async function renderActiveRound() {
     groupsScroll.scrollTop = 0;
   }
   if (!round) {
+    content.classList.remove(
+      'final-centered'
+    );
     content.innerHTML = `
       <div class="load-msg">
         No round data found in the tournament data file.
@@ -1861,6 +2133,9 @@ async function renderActiveRound() {
     return;
   }
   if (!round.groups.length) {
+    content.classList.remove(
+      'final-centered'
+    );
     content.innerHTML = `
       <div class="table-empty">
         No groups in this round yet.
@@ -1873,7 +2148,16 @@ async function renderActiveRound() {
   }
   const isLastRound =
     isFinalRound(round);
+  content.classList.toggle(
+    'final-centered',
+    isLastRound
+  );
   const cardsHTML =
+    (
+      isLastRound
+        ? championTitleHTML()
+        : ''
+    ) +
     round.groups
       .map(
         (g, gi) =>
@@ -1883,9 +2167,48 @@ async function renderActiveRound() {
             isLastRound
           )
       )
-      .join('');
+      .join('') +
+    (
+      isLastRound
+        ? championStatsHTML(
+            TOURNAMENT_STATS
+          )
+        : ''
+    );
   content.innerHTML =
     cardsHTML;
+  if (
+    isLastRound &&
+    !TOURNAMENT_STATS
+  ) {
+    if (!tournamentStatsPromise) {
+      tournamentStatsPromise =
+        computeTournamentStats();
+    }
+    tournamentStatsPromise.then(
+      stats => {
+        TOURNAMENT_STATS = stats;
+        const stillFinal =
+          TOURNAMENT.rounds[
+            activeRoundIdx
+          ] === round &&
+          isFinalRound(round);
+        const statsEl =
+          document.getElementById(
+            'championStats'
+          );
+        if (
+          statsEl &&
+          stillFinal
+        ) {
+          statsEl.outerHTML =
+            championStatsHTML(
+              stats
+            );
+        }
+      }
+    );
+  }
   const matchesTotal =
     round.groups.reduce(
       (sum, g) =>
