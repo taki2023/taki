@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-26T12:55:13.545Z",
+  "updated": "2026-08-26T13:54:14.857Z",
   "totalMembers": 1589,
-  "activeToday": 251,
+  "activeToday": 309,
   "players": [
     {
       "username": "valeriamoony",
@@ -16,25 +16,25 @@
     },
     {
       "username": "uniqueboyakigmailcom",
-      "total_pts": 264,
+      "total_pts": 303,
       "bullet_pts": 42,
-      "blitz_pts": 222,
+      "blitz_pts": 261,
       "rapid_pts": 0,
       "bullet_g": 16,
-      "blitz_g": 26,
+      "blitz_g": 31,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "xuyen1786",
-      "total_pts": 252,
-      "bullet_pts": 189,
-      "blitz_pts": 63,
-      "rapid_pts": 0,
-      "bullet_g": 71,
-      "blitz_g": 7,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "username": "borderwatch",
+      "total_pts": 285,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 285,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 21,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
