@@ -1716,6 +1716,7 @@ let activeRoundIdx = 0;
 let hasLoadedOnce = false;
 let TOURNAMENT_STATS = null;
 let tournamentStatsPromise = null;
+let TOURNAMENT_CHAMPION = null;
 const ratingCache = {};
 async function fetchPlayerRating(username) {
   if (!username) {
@@ -1889,9 +1890,18 @@ async function computeTournamentStats() {
     biggestUpset
   };
 }
-function championTitleHTML() {
+function championTitleHTML(
+  champion
+) {
+  if (champion) {
+    return `
+      <div class="champion-title-plain" id="championTitle">
+        🏆 Congrats to <span class="stat-hl">@${champion}</span> — our first ever Hot Chilli Blitz Champion! 🌶️
+      </div>
+    `;
+  }
   return `
-    <div class="champion-title-plain">
+    <div class="champion-title-plain" id="championTitle">
       🌶️ Who will be crowned our first ever Blitz Champion? 🏆
     </div>
   `;
@@ -2155,7 +2165,9 @@ async function renderActiveRound() {
   const cardsHTML =
     (
       isLastRound
-        ? championTitleHTML()
+        ? championTitleHTML(
+            TOURNAMENT_CHAMPION
+          )
         : ''
     ) +
     round.groups
@@ -2544,6 +2556,74 @@ async function fillGroup(
             sbTiebreak[x]
           )
       );
+  if (isLastRound) {
+    const maxPossible = {};
+    players.forEach(p => {
+      maxPossible[p] =
+        score[p];
+    });
+    group.matches.forEach(
+      m => {
+        const rec =
+          gamesByPair[
+            m.playerA +
+            '|' +
+            m.playerB
+          ];
+        if (!rec) {
+          return;
+        }
+        const playedCount =
+          rec.bothWithdrawn
+            ? 2
+            : rec.games.filter(
+                g =>
+                  !isNaN(
+                    g.scoreA
+                  ) &&
+                  !isNaN(
+                    g.scoreB
+                  )
+              ).length;
+        const remaining =
+          Math.max(
+            0,
+            2 - playedCount
+          );
+        if (remaining > 0) {
+          maxPossible[
+            m.playerA
+          ] += remaining;
+          maxPossible[
+            m.playerB
+          ] += remaining;
+        }
+      }
+    );
+    const leader = order[0];
+    const clinched =
+      order
+        .slice(1)
+        .every(
+          p =>
+            score[leader] >
+            maxPossible[p]
+        );
+    TOURNAMENT_CHAMPION =
+      clinched
+        ? leader
+        : null;
+    const titleEl =
+      document.getElementById(
+        'championTitle'
+      );
+    if (titleEl) {
+      titleEl.outerHTML =
+        championTitleHTML(
+          TOURNAMENT_CHAMPION
+        );
+    }
+  }
   document.getElementById(
     'ghead-' + gi
   ).innerHTML =
