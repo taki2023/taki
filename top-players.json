@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-27T00:28:11.187Z",
-  "totalMembers": 1589,
-  "activeToday": 21,
+  "updated": "2026-08-27T10:09:42.182Z",
+  "totalMembers": 1590,
+  "activeToday": 228,
   "players": [
     {
-      "username": "xtornadoxxx",
-      "total_pts": 32,
-      "bullet_pts": 2,
-      "blitz_pts": 0,
-      "rapid_pts": 30,
-      "bullet_g": 2,
-      "blitz_g": 0,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/174170265.2519983a.200x200o.8838122047cf.jpg"
-    },
-    {
-      "username": "thisguyisgreat3",
-      "total_pts": 30,
+      "username": "mohamed_chahine",
+      "total_pts": 203,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 30,
+      "blitz_pts": 18,
+      "rapid_pts": 185,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/332788383.01215b17.200x200o.0e297f6b2e1c.webp"
+      "blitz_g": 2,
+      "rapid_g": 13,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
     },
     {
-      "username": "stas999999999",
-      "total_pts": 27,
-      "bullet_pts": 0,
-      "blitz_pts": 27,
+      "username": "xuyen1786",
+      "total_pts": 189,
+      "bullet_pts": 81,
+      "blitz_pts": 108,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 3,
+      "bullet_g": 31,
+      "blitz_g": 12,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/415005431.3cae920c.200x200o.9547714bfe1f.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+    },
+    {
+      "username": "badr113101",
+      "total_pts": 176,
+      "bullet_pts": 176,
+      "blitz_pts": 0,
+      "rapid_pts": 0,
+      "bullet_g": 60,
+      "blitz_g": 0,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/333299295.27913ba9.200x200o.4a1374f11017.jpg"
     }
   ]
 }
