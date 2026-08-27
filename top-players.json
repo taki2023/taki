@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-26T20:34:33.417Z",
-  "totalMembers": 1590,
-  "activeToday": 410,
+  "updated": "2026-08-27T00:28:11.187Z",
+  "totalMembers": 1589,
+  "activeToday": 21,
   "players": [
     {
-      "username": "rish1710",
-      "total_pts": 445,
-      "bullet_pts": 445,
+      "username": "xtornadoxxx",
+      "total_pts": 32,
+      "bullet_pts": 2,
       "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 153,
+      "rapid_pts": 30,
+      "bullet_g": 2,
       "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/309021607.c338b89f.200x200o.2775ab328f9b.webp"
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/174170265.2519983a.200x200o.8838122047cf.jpg"
     },
     {
-      "username": "valeriamoony",
-      "total_pts": 395,
-      "bullet_pts": 395,
+      "username": "thisguyisgreat3",
+      "total_pts": 30,
+      "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 135,
+      "rapid_pts": 30,
+      "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/484426125.019610de.200x200o.22efc0a16300.jpg"
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/332788383.01215b17.200x200o.0e297f6b2e1c.webp"
     },
     {
-      "username": "uniqueboyakigmailcom",
-      "total_pts": 375,
-      "bullet_pts": 42,
-      "blitz_pts": 333,
+      "username": "stas999999999",
+      "total_pts": 27,
+      "bullet_pts": 0,
+      "blitz_pts": 27,
       "rapid_pts": 0,
-      "bullet_g": 16,
-      "blitz_g": 39,
+      "bullet_g": 0,
+      "blitz_g": 3,
       "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/415005431.3cae920c.200x200o.9547714bfe1f.jpg"
     }
   ]
 }
