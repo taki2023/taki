@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-27T10:09:42.182Z",
-  "totalMembers": 1590,
-  "activeToday": 228,
+  "updated": "2026-08-27T20:42:01.268Z",
+  "totalMembers": 1591,
+  "activeToday": 409,
   "players": [
     {
-      "username": "mohamed_chahine",
-      "total_pts": 203,
-      "bullet_pts": 0,
-      "blitz_pts": 18,
-      "rapid_pts": 185,
-      "bullet_g": 0,
-      "blitz_g": 2,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504303029.ebb7c151.200x200o.944c3f89659f.jpg"
-    },
-    {
-      "username": "xuyen1786",
-      "total_pts": 189,
+      "username": "uniqueboyakigmailcom",
+      "total_pts": 452,
       "bullet_pts": 81,
-      "blitz_pts": 108,
-      "rapid_pts": 0,
-      "bullet_g": 31,
-      "blitz_g": 12,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/506548327.8c023650.200x200o.3a2266bfe83f.jpg"
+      "blitz_pts": 366,
+      "rapid_pts": 5,
+      "bullet_g": 27,
+      "blitz_g": 42,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463985152.abe8a865.200x200o.7734d0a61a0d.jpg"
     },
     {
-      "username": "badr113101",
-      "total_pts": 176,
-      "bullet_pts": 176,
+      "username": "damjan1989",
+      "total_pts": 425,
+      "bullet_pts": 0,
+      "blitz_pts": 180,
+      "rapid_pts": 245,
+      "bullet_g": 0,
+      "blitz_g": 22,
+      "rapid_g": 19,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+    },
+    {
+      "username": "xtornadoxxx",
+      "total_pts": 332,
+      "bullet_pts": 2,
       "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 60,
+      "rapid_pts": 330,
+      "bullet_g": 2,
       "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/333299295.27913ba9.200x200o.4a1374f11017.jpg"
+      "rapid_g": 22,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/174170265.2519983a.200x200o.8838122047cf.jpg"
     }
   ]
 }
