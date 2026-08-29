@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-29T01:29:05.508Z",
+  "updated": "2026-08-29T08:13:38.207Z",
   "totalMembers": 1594,
-  "activeToday": 57,
+  "activeToday": 213,
   "players": [
     {
-      "username": "aiikoh",
-      "total_pts": 72,
+      "username": "nickadvocate",
+      "total_pts": 330,
       "bullet_pts": 0,
-      "blitz_pts": 72,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 8,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/75348440.27419a1d.200x200o.0de4370f0cb6.png"
-    },
-    {
-      "username": "joaog2004",
-      "total_pts": 52,
-      "bullet_pts": 52,
       "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 18,
+      "rapid_pts": 330,
+      "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/65546316.ab1aacc1.200x200o.c6819e1158ab.png"
+      "rapid_g": 22,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
     },
     {
-      "username": "jedstuart",
-      "total_pts": 48,
-      "bullet_pts": 0,
-      "blitz_pts": 48,
+      "username": "tanyouthestalemater",
+      "total_pts": 264,
+      "bullet_pts": 12,
+      "blitz_pts": 177,
+      "rapid_pts": 75,
+      "bullet_g": 4,
+      "blitz_g": 21,
+      "rapid_g": 5,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "financial_dragon",
+      "total_pts": 261,
+      "bullet_pts": 3,
+      "blitz_pts": 258,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 6,
+      "bullet_g": 1,
+      "blitz_g": 32,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/2296206.dfd9c10f.200x200o.0558366a6dde.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
     }
   ]
 }
