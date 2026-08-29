@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-28T17:37:53.393Z",
-  "totalMembers": 1590,
-  "activeToday": 375,
+  "updated": "2026-08-29T01:29:05.508Z",
+  "totalMembers": 1594,
+  "activeToday": 57,
   "players": [
     {
-      "username": "uniqueboyakigmailcom",
-      "total_pts": 508,
-      "bullet_pts": 148,
-      "blitz_pts": 270,
-      "rapid_pts": 90,
-      "bullet_g": 50,
-      "blitz_g": 32,
-      "rapid_g": 6,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463985152.abe8a865.200x200o.7734d0a61a0d.jpg"
-    },
-    {
-      "username": "abd_allah_libyan",
-      "total_pts": 388,
+      "username": "aiikoh",
+      "total_pts": 72,
       "bullet_pts": 0,
-      "blitz_pts": 18,
-      "rapid_pts": 370,
+      "blitz_pts": 72,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 2,
-      "rapid_g": 26,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/365674939.e4a4ac9b.200x200o.d5faae6fb51e.jpg"
+      "blitz_g": 8,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/75348440.27419a1d.200x200o.0de4370f0cb6.png"
     },
     {
-      "username": "nikkotello",
-      "total_pts": 338,
-      "bullet_pts": 33,
+      "username": "joaog2004",
+      "total_pts": 52,
+      "bullet_pts": 52,
       "blitz_pts": 0,
-      "rapid_pts": 305,
-      "bullet_g": 11,
+      "rapid_pts": 0,
+      "bullet_g": 18,
       "blitz_g": 0,
-      "rapid_g": 23,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/65546316.ab1aacc1.200x200o.c6819e1158ab.png"
+    },
+    {
+      "username": "jedstuart",
+      "total_pts": 48,
+      "bullet_pts": 0,
+      "blitz_pts": 48,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 6,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/2296206.dfd9c10f.200x200o.0558366a6dde.png"
     }
   ]
 }
