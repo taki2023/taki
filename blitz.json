@@ -630,5 +630,32 @@
       "rating": 618,
       "flagged": false
     }
-  ]
+  ],
+  "stats": {
+    "matchesPlayedCount": 36,
+    "mostWinsPlayer": "Freddy1201",
+    "mostWinsCount": 5,
+    "biggestUpset": {
+      "winner": "TALented_Vasee_18",
+      "loser": "Daniel2040",
+      "winnerRating": 1590,
+      "loserRating": 2240,
+      "diff": 650
+    },
+    "podium": [
+      {
+        "username": "Daniel2040",
+        "score": 4.5
+      },
+      {
+        "username": "Freddy1201",
+        "score": 4.5
+      },
+      {
+        "username": "DaTreeOfFives",
+        "score": 3
+      }
+    ],
+    "champion": "Daniel2040"
+  }
 }
