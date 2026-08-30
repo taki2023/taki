@@ -632,6 +632,89 @@ table.final-round .player-rank.r3 {
 .legend-swatch.eliminated {
   background: var(--red-deep);
 }
+.podium-wrap {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+.podium-title {
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+  color: var(--red-mid);
+  margin-bottom: 10px;
+}
+.podium-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 8px 6px;
+}
+.podium-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 84px;
+}
+.podium-medal {
+  font-size: 18px;
+  line-height: 1;
+}
+.podium-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1.5px var(--peach);
+  object-fit: cover;
+  background: #FFE9DF;
+  display: block;
+}
+.podium-name {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84px;
+}
+.podium-step {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 6px 4px 8px;
+  font-family: 'Fredoka', sans-serif;
+}
+.podium-place {
+  font-size: 9px;
+  font-weight: 800;
+  color: rgba(255,255,255,.85);
+}
+.podium-score {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+.podium-block.p1 .podium-step {
+  height: 62px;
+  background: linear-gradient(135deg, var(--gold), #E0301F);
+}
+.podium-block.p2 .podium-step {
+  height: 46px;
+  background: linear-gradient(135deg, var(--silver), #8E97A8);
+}
+.podium-block.p3 .podium-step {
+  height: 34px;
+  background: linear-gradient(135deg, var(--bronze), #96591F);
+}
 .footer {
   text-align: center;
   margin-top: 6px;
@@ -1714,182 +1797,6 @@ let TOURNAMENT = {
 let WITHDRAWN_SET = new Set();
 let activeRoundIdx = 0;
 let hasLoadedOnce = false;
-let TOURNAMENT_STATS = null;
-let tournamentStatsPromise = null;
-let TOURNAMENT_CHAMPION = null;
-const ratingCache = {};
-async function fetchPlayerRating(username) {
-  if (!username) {
-    return null;
-  }
-  if (ratingCache[username]) {
-    return ratingCache[username];
-  }
-  const p = limit(async () => {
-    try {
-      const r = await fetch(
-        'https://api.chess.com/pub/player/' +
-        encodeURIComponent(username) +
-        '/stats'
-      );
-      if (!r.ok) {
-        throw new Error(
-          'HTTP ' + r.status
-        );
-      }
-      const d = await r.json();
-      const rating =
-        (
-          d.chess_blitz &&
-          d.chess_blitz.last &&
-          d.chess_blitz.last.rating
-        ) ||
-        (
-          d.chess_rapid &&
-          d.chess_rapid.last &&
-          d.chess_rapid.last.rating
-        ) ||
-        (
-          d.chess_bullet &&
-          d.chess_bullet.last &&
-          d.chess_bullet.last.rating
-        ) ||
-        null;
-      return rating;
-    } catch (e) {
-      return null;
-    }
-  });
-  ratingCache[username] = p;
-  return p;
-}
-function matchOutcome(m) {
-  if (!m || !m.link || !m.link.trim()) {
-    return null;
-  }
-  const games =
-    parseCellGames(m.link);
-  let totalA = 0;
-  let totalB = 0;
-  let counted = 0;
-  games.forEach(g => {
-    if (
-      !isNaN(g.scoreA) &&
-      !isNaN(g.scoreB)
-    ) {
-      totalA += g.scoreA;
-      totalB += g.scoreB;
-      counted++;
-    }
-  });
-  if (counted < 2) {
-    return null;
-  }
-  if (totalA === totalB) {
-    return {
-      winner: null,
-      loser: null
-    };
-  }
-  return totalA > totalB
-    ? {
-        winner: m.playerA,
-        loser: m.playerB
-      }
-    : {
-        winner: m.playerB,
-        loser: m.playerA
-      };
-}
-async function computeTournamentStats() {
-  const allMatches = [];
-  TOURNAMENT.rounds.forEach(r => {
-    r.groups.forEach(g => {
-      g.matches.forEach(
-        m => allMatches.push(m)
-      );
-    });
-  });
-  const playedMatches =
-    allMatches.filter(
-      m => !!(m.link && m.link.trim())
-    );
-  const matchesPlayedCount =
-    playedMatches.length;
-  const winCounts = {};
-  const decisive = [];
-  playedMatches.forEach(m => {
-    const outcome =
-      matchOutcome(m);
-    if (outcome && outcome.winner) {
-      winCounts[outcome.winner] =
-        (
-          winCounts[outcome.winner] ||
-          0
-        ) + 1;
-      decisive.push(outcome);
-    }
-  });
-  let mostWinsPlayer = null;
-  let mostWinsCount = 0;
-  Object.keys(winCounts).forEach(
-    p => {
-      if (
-        winCounts[p] >
-        mostWinsCount
-      ) {
-        mostWinsCount =
-          winCounts[p];
-        mostWinsPlayer = p;
-      }
-    }
-  );
-  const uniquePlayers = new Set();
-  decisive.forEach(o => {
-    uniquePlayers.add(o.winner);
-    uniquePlayers.add(o.loser);
-  });
-  const ratings = {};
-  await Promise.all(
-    Array.from(uniquePlayers).map(
-      async p => {
-        ratings[p] =
-          await fetchPlayerRating(p);
-      }
-    )
-  );
-  let biggestUpset = null;
-  decisive.forEach(o => {
-    const winnerRating =
-      ratings[o.winner];
-    const loserRating =
-      ratings[o.loser];
-    if (
-      winnerRating != null &&
-      loserRating != null &&
-      winnerRating < loserRating
-    ) {
-      const diff =
-        loserRating - winnerRating;
-      if (
-        !biggestUpset ||
-        diff > biggestUpset.diff
-      ) {
-        biggestUpset = {
-          winnerRating,
-          loserRating,
-          diff
-        };
-      }
-    }
-  });
-  return {
-    matchesPlayedCount,
-    mostWinsPlayer,
-    mostWinsCount,
-    biggestUpset
-  };
-}
 function championTitleHTML(
   champion
 ) {
@@ -1909,31 +1816,23 @@ function championTitleHTML(
 function championStatsHTML(
   stats
 ) {
-  const loading = !stats;
+  const s = stats || {};
   const matchesVal =
-    loading
-      ? '…'
-      : stats.matchesPlayedCount;
+    (s.matchesPlayedCount != null)
+      ? s.matchesPlayedCount
+      : 0;
   const winsText =
-    loading
-      ? '… wins'
-      : (
-          stats.mostWinsPlayer
-            ? stats.mostWinsCount +
-              ' wins by @' +
-              stats.mostWinsPlayer
-            : '–'
-        );
+    s.mostWinsPlayer
+      ? s.mostWinsCount +
+        ' wins by @' +
+        s.mostWinsPlayer
+      : '–';
   const upsetText =
-    loading
-      ? '…'
-      : (
-          stats.biggestUpset
-            ? stats.biggestUpset.winnerRating +
-              ' beat ' +
-              stats.biggestUpset.loserRating
-            : '–'
-        );
+    s.biggestUpset
+      ? s.biggestUpset.winnerRating +
+        ' beat ' +
+        s.biggestUpset.loserRating
+      : '–';
   return `
     <div class="champion-stats-plain" id="championStats">
       <span class="stat-hl">${matchesVal}</span> matches played
@@ -1941,6 +1840,87 @@ function championStatsHTML(
       Most wins: <span class="stat-hl">${winsText}</span>
       <span class="stat-sep">•</span>
       Biggest upset: <span class="stat-hl">${upsetText}</span>
+    </div>
+  `;
+}
+function podiumBlockHTML(
+  rank,
+  info,
+  score
+) {
+  const rankClass =
+    rank === 1
+      ? 'p1'
+      : rank === 2
+        ? 'p2'
+        : 'p3';
+  const medal =
+    rank === 1
+      ? '🥇'
+      : rank === 2
+        ? '🥈'
+        : '🥉';
+  return `
+    <div class="podium-block ${rankClass}">
+      <div class="podium-medal">
+        ${medal}
+      </div>
+      <img
+        class="podium-avatar"
+        src="${info.avatar}"
+        onerror="this.src='${DEFAULT_AVATAR}'"
+      >
+      <div class="podium-name">
+        ${info.name}
+      </div>
+      <div class="podium-step">
+        <span class="podium-place">
+          #${rank}
+        </span>
+        <span class="podium-score">
+          ${score}
+        </span>
+      </div>
+    </div>
+  `;
+}
+function podiumHTML(
+  podium,
+  infos
+) {
+  if (!podium || !podium.length) {
+    return '';
+  }
+  const visualOrder =
+    [2, 1, 3].filter(
+      rank => podium[rank - 1]
+    );
+  const blocks =
+    visualOrder
+      .map(rank => {
+        const p =
+          podium[rank - 1];
+        const info =
+          (infos && infos[p.username]) ||
+          {
+            name:
+              prettifyUsername(p.username),
+            avatar:
+              DEFAULT_AVATAR
+          };
+        return podiumBlockHTML(
+          rank,
+          info,
+          formatSum(p.score)
+        );
+      })
+      .join('');
+  return `
+    <div class="podium-title">
+      🏅 Podium
+    </div>
+    <div class="podium-row">
+      ${blocks}
     </div>
   `;
 }
@@ -2162,11 +2142,14 @@ async function renderActiveRound() {
     'final-centered',
     isLastRound
   );
+  const statsData =
+    TOURNAMENT.stats || null;
   const cardsHTML =
     (
       isLastRound
         ? championTitleHTML(
-            TOURNAMENT_CHAMPION
+            statsData &&
+            statsData.champion
           )
         : ''
     ) +
@@ -2183,44 +2166,12 @@ async function renderActiveRound() {
     (
       isLastRound
         ? championStatsHTML(
-            TOURNAMENT_STATS
+            statsData
           )
         : ''
     );
   content.innerHTML =
     cardsHTML;
-  if (
-    isLastRound &&
-    !TOURNAMENT_STATS
-  ) {
-    if (!tournamentStatsPromise) {
-      tournamentStatsPromise =
-        computeTournamentStats();
-    }
-    tournamentStatsPromise.then(
-      stats => {
-        TOURNAMENT_STATS = stats;
-        const stillFinal =
-          TOURNAMENT.rounds[
-            activeRoundIdx
-          ] === round &&
-          isFinalRound(round);
-        const statsEl =
-          document.getElementById(
-            'championStats'
-          );
-        if (
-          statsEl &&
-          stillFinal
-        ) {
-          statsEl.outerHTML =
-            championStatsHTML(
-              stats
-            );
-        }
-      }
-    );
-  }
   const matchesTotal =
     round.groups.reduce(
       (sum, g) =>
@@ -2382,6 +2333,11 @@ function groupSkeletonHTML(
           </tbody>
         </table>
       </div>
+      ${
+        isLastRound
+          ? `<div class="podium-wrap" id="podium-${gi}"></div>`
+          : ''
+      }
     </div>
   `;
 }
@@ -2557,70 +2513,22 @@ async function fillGroup(
           )
       );
   if (isLastRound) {
-    const maxPossible = {};
-    players.forEach(p => {
-      maxPossible[p] =
-        score[p];
-    });
-    group.matches.forEach(
-      m => {
-        const rec =
-          gamesByPair[
-            m.playerA +
-            '|' +
-            m.playerB
-          ];
-        if (!rec) {
-          return;
-        }
-        const playedCount =
-          rec.bothWithdrawn
-            ? 2
-            : rec.games.filter(
-                g =>
-                  !isNaN(
-                    g.scoreA
-                  ) &&
-                  !isNaN(
-                    g.scoreB
-                  )
-              ).length;
-        const remaining =
-          Math.max(
-            0,
-            2 - playedCount
-          );
-        if (remaining > 0) {
-          maxPossible[
-            m.playerA
-          ] += remaining;
-          maxPossible[
-            m.playerB
-          ] += remaining;
-        }
-      }
-    );
-    const leader = order[0];
-    const clinched =
-      order
-        .slice(1)
-        .every(
-          p =>
-            score[leader] >
-            maxPossible[p]
-        );
-    TOURNAMENT_CHAMPION =
-      clinched
-        ? leader
-        : null;
-    const titleEl =
+    const podiumEl =
       document.getElementById(
-        'championTitle'
+        'podium-' + gi
       );
-    if (titleEl) {
-      titleEl.outerHTML =
-        championTitleHTML(
-          TOURNAMENT_CHAMPION
+    const podiumData =
+      TOURNAMENT.stats &&
+      TOURNAMENT.stats.podium;
+    if (
+      podiumEl &&
+      podiumData &&
+      podiumData.length
+    ) {
+      podiumEl.innerHTML =
+        podiumHTML(
+          podiumData,
+          infos
         );
     }
   }
