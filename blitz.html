@@ -1813,6 +1813,8 @@ function championTitleHTML(
     </div>
   `;
 }
+// Tournament-wide statistics are precomputed by the admin page and stored in blitz.json.
+// This public page only reads TOURNAMENT.stats; it does not recompute these tournament stats.
 function championStatsHTML(
   stats
 ) {
@@ -1835,7 +1837,7 @@ function championStatsHTML(
       : '–';
   return `
     <div class="champion-stats-plain" id="championStats">
-      <span class="stat-hl">${matchesVal}</span> matches played
+      <span class="stat-hl">${matchesVal}</span> linked matches played
       <span class="stat-sep">•</span>
       Most wins: <span class="stat-hl">${winsText}</span>
       <span class="stat-sep">•</span>
