@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-30T13:08:36.117Z",
+  "updated": "2026-08-30T17:42:10.375Z",
   "totalMembers": 1590,
-  "activeToday": 305,
+  "activeToday": 396,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 579,
+      "total_pts": 615,
       "bullet_pts": 0,
-      "blitz_pts": 579,
+      "blitz_pts": 615,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 65,
+      "blitz_g": 69,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
       "username": "financial_dragon",
-      "total_pts": 424,
-      "bullet_pts": 13,
-      "blitz_pts": 411,
+      "total_pts": 452,
+      "bullet_pts": 23,
+      "blitz_pts": 429,
       "rapid_pts": 0,
-      "bullet_g": 5,
-      "blitz_g": 49,
+      "bullet_g": 9,
+      "blitz_g": 51,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
     },
     {
-      "username": "nickadvocate",
-      "total_pts": 410,
+      "username": "the_lonely_manof_thenight",
+      "total_pts": 420,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 410,
+      "rapid_pts": 420,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 28,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/7104035.f5a6b135.200x200o.d8c5c285ae0d.jpeg"
+      "rapid_g": 30,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504500653.7dbc865a.200x200o.e09f78ca34bf.jpg"
     }
   ]
 }
