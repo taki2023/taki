@@ -472,7 +472,7 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "RevToMate2",
-              "link": ""
+              "link": "::0-1 | ::0-1"
             },
             {
               "playerA": "Freddy1201",
@@ -482,12 +482,12 @@
             {
               "playerA": "Freddy1201",
               "playerB": "RevToMate2",
-              "link": ""
+              "link": "::0-1 | ::0-1"
             },
             {
               "playerA": "Daniel2040",
               "playerB": "RevToMate2",
-              "link": "https://www.chess.com/game/live/173590502918::1-0"
+              "link": "https://www.chess.com/game/live/173590502918::1-0 | ::0-1"
             }
           ]
         }
