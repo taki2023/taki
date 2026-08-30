@@ -1,17 +1,17 @@
 {
-  "updated": "2026-08-30T20:34:39.385Z",
-  "totalMembers": 1590,
-  "activeToday": 429,
+  "updated": "2026-08-30T23:11:18.927Z",
+  "totalMembers": 1591,
+  "activeToday": 445,
   "players": [
     {
       "username": "queiser",
-      "total_pts": 633,
+      "total_pts": 747,
       "bullet_pts": 0,
-      "blitz_pts": 633,
-      "rapid_pts": 0,
+      "blitz_pts": 732,
+      "rapid_pts": 15,
       "bullet_g": 0,
-      "blitz_g": 71,
-      "rapid_g": 0,
+      "blitz_g": 82,
+      "rapid_g": 1,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
