@@ -1,40 +1,40 @@
 {
-  "updated": "2026-08-30T23:11:18.927Z",
-  "totalMembers": 1591,
-  "activeToday": 445,
+  "updated": "2026-08-31T01:29:35.109Z",
+  "totalMembers": 1590,
+  "activeToday": 42,
   "players": [
     {
-      "username": "queiser",
-      "total_pts": 747,
-      "bullet_pts": 0,
-      "blitz_pts": 732,
-      "rapid_pts": 15,
-      "bullet_g": 0,
-      "blitz_g": 82,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 473,
-      "bullet_pts": 23,
-      "blitz_pts": 450,
-      "rapid_pts": 0,
-      "bullet_g": 9,
-      "blitz_g": 54,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
-    },
-    {
-      "username": "the_lonely_manof_thenight",
-      "total_pts": 435,
+      "username": "samidaalmnswb",
+      "total_pts": 65,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 435,
+      "rapid_pts": 65,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 31,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/504500653.7dbc865a.200x200o.e09f78ca34bf.jpg"
+      "rapid_g": 5,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/282756363.2777e35d.200x200o.1b7f9787ec73.png"
+    },
+    {
+      "username": "becky-incheck",
+      "total_pts": 57,
+      "bullet_pts": 0,
+      "blitz_pts": 57,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 7,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/329613813.0df9f3db.200x200o.a5804339c7f1.jpg"
+    },
+    {
+      "username": "reefrhino26",
+      "total_pts": 54,
+      "bullet_pts": 0,
+      "blitz_pts": 54,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 6,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/508764961.e97678e4.200x200o.7f90a5c70f56.png"
     }
   ]
 }
