@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-01T15:04:48.799Z",
+  "updated": "2026-09-01T18:43:45.480Z",
   "totalMembers": 1591,
-  "activeToday": 189,
+  "activeToday": 259,
   "players": [
     {
       "username": "the-chess_is_life",
-      "total_pts": 162,
+      "total_pts": 207,
       "bullet_pts": 0,
-      "blitz_pts": 162,
+      "blitz_pts": 207,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 18,
+      "blitz_g": 23,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/260651285.119db8d9.200x200o.c75e7c31eb25.jpg"
     },
     {
-      "username": "bughouse_partner",
-      "total_pts": 138,
+      "username": "rabid_attacker",
+      "total_pts": 186,
       "bullet_pts": 0,
-      "blitz_pts": 138,
-      "rapid_pts": 0,
+      "blitz_pts": 171,
+      "rapid_pts": 15,
       "bullet_g": 0,
-      "blitz_g": 16,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "blitz_g": 19,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/571566632.97e3f47c.200x200o.72707c074118.png"
     },
     {
-      "username": "irivansh",
-      "total_pts": 135,
+      "username": "izannn09",
+      "total_pts": 171,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 135,
+      "blitz_pts": 81,
+      "rapid_pts": 90,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 9,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/455882540.fb13e3c3.200x200o.36aec92b35fa.jpg"
+      "blitz_g": 9,
+      "rapid_g": 6,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
