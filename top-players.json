@@ -1,40 +1,6 @@
 {
-  "updated": "2026-08-31T20:59:12.902Z",
-  "totalMembers": 1589,
-  "activeToday": 410,
-  "players": [
-    {
-      "username": "rish1710",
-      "total_pts": 394,
-      "bullet_pts": 394,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 140,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/309021607.c338b89f.200x200o.2775ab328f9b.webp"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 349,
-      "bullet_pts": 34,
-      "blitz_pts": 315,
-      "rapid_pts": 0,
-      "bullet_g": 12,
-      "blitz_g": 39,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
-    },
-    {
-      "username": "steellasking77",
-      "total_pts": 312,
-      "bullet_pts": 60,
-      "blitz_pts": 252,
-      "rapid_pts": 0,
-      "bullet_g": 20,
-      "blitz_g": 30,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/502691493.dd50823f.200x200o.39ea004f5c1a.png"
-    }
-  ]
+  "updated": "2026-09-01T00:27:27.818Z",
+  "totalMembers": 1588,
+  "activeToday": 0,
+  "players": []
 }
