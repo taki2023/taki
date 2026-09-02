@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-02T16:59:38.102Z",
+  "updated": "2026-09-02T19:41:27.243Z",
   "totalMembers": 1591,
-  "activeToday": 303,
+  "activeToday": 360,
   "players": [
     {
       "username": "balze_end1337",
@@ -27,13 +27,13 @@
     },
     {
       "username": "nikkotello",
-      "total_pts": 370,
+      "total_pts": 420,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 370,
+      "rapid_pts": 420,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 26,
+      "rapid_g": 30,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
