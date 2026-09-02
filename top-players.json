@@ -1,39 +1,39 @@
 {
-  "updated": "2026-09-02T02:51:56.959Z",
+  "updated": "2026-09-02T07:37:59.331Z",
   "totalMembers": 1591,
-  "activeToday": 70,
+  "activeToday": 107,
   "players": [
     {
-      "username": "ravi64chess",
-      "total_pts": 84,
-      "bullet_pts": 0,
-      "blitz_pts": 84,
+      "username": "nin_chessy",
+      "total_pts": 207,
+      "bullet_pts": 6,
+      "blitz_pts": 201,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 12,
+      "bullet_g": 2,
+      "blitz_g": 23,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "becky-incheck",
-      "total_pts": 81,
+      "username": "balze_end1337",
+      "total_pts": 195,
       "bullet_pts": 0,
-      "blitz_pts": 81,
+      "blitz_pts": 195,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 9,
+      "blitz_g": 23,
       "rapid_g": 0,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "smorkusporkus",
-      "total_pts": 81,
+      "username": "engluca",
+      "total_pts": 170,
       "bullet_pts": 0,
-      "blitz_pts": 81,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 170,
       "bullet_g": 0,
-      "blitz_g": 9,
-      "rapid_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 12,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
