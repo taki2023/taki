@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-02T12:32:43.731Z",
+  "updated": "2026-09-02T16:59:38.102Z",
   "totalMembers": 1591,
-  "activeToday": 243,
+  "activeToday": 303,
   "players": [
     {
       "username": "balze_end1337",
-      "total_pts": 420,
+      "total_pts": 501,
       "bullet_pts": 0,
-      "blitz_pts": 420,
+      "blitz_pts": 501,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 48,
+      "blitz_g": 57,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/477395624.df117ce3.200x200o.0c594a6f377f.jpg"
     },
     {
       "username": "financial_dragon",
-      "total_pts": 338,
-      "bullet_pts": 216,
-      "blitz_pts": 57,
+      "total_pts": 482,
+      "bullet_pts": 294,
+      "blitz_pts": 123,
       "rapid_pts": 65,
-      "bullet_g": 76,
-      "blitz_g": 7,
+      "bullet_g": 104,
+      "blitz_g": 15,
       "rapid_g": 5,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
     },
     {
-      "username": "queiser",
-      "total_pts": 303,
+      "username": "nikkotello",
+      "total_pts": 370,
       "bullet_pts": 0,
-      "blitz_pts": 303,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 370,
       "bullet_g": 0,
-      "blitz_g": 35,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+      "blitz_g": 0,
+      "rapid_g": 26,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
     }
   ]
 }
