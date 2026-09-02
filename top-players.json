@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-01T23:47:21.073Z",
-  "totalMembers": 1590,
-  "activeToday": 355,
+  "updated": "2026-09-02T02:51:56.959Z",
+  "totalMembers": 1591,
+  "activeToday": 70,
   "players": [
     {
-      "username": "queiser",
-      "total_pts": 360,
+      "username": "ravi64chess",
+      "total_pts": 84,
       "bullet_pts": 0,
-      "blitz_pts": 360,
+      "blitz_pts": 84,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 40,
+      "blitz_g": 12,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "lludipram",
-      "total_pts": 285,
+      "username": "becky-incheck",
+      "total_pts": 81,
       "bullet_pts": 0,
-      "blitz_pts": 285,
+      "blitz_pts": 81,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 33,
+      "blitz_g": 9,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/302149201.f84612c3.200x200o.c8b9a9911b5e.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "rabid_attacker",
-      "total_pts": 284,
+      "username": "smorkusporkus",
+      "total_pts": 81,
       "bullet_pts": 0,
-      "blitz_pts": 219,
-      "rapid_pts": 65,
+      "blitz_pts": 81,
+      "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 25,
-      "rapid_g": 5,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/571566632.97e3f47c.200x200o.72707c074118.png"
+      "blitz_g": 9,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
