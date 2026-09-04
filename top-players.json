@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-03T22:46:37.435Z",
+  "updated": "2026-09-04T00:46:17.339Z",
   "totalMembers": 1587,
-  "activeToday": 407,
+  "activeToday": 32,
   "players": [
     {
-      "username": "financial_dragon",
-      "total_pts": 424,
-      "bullet_pts": 304,
-      "blitz_pts": 120,
-      "rapid_pts": 0,
-      "bullet_g": 112,
-      "blitz_g": 14,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
+      "username": "kandasamybalaji1983",
+      "total_pts": 90,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 90,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 6,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146022919.9a5aa91b.200x200o.e50050f3a8de.jpg"
     },
     {
-      "username": "queiser",
-      "total_pts": 291,
+      "username": "silent-sniper",
+      "total_pts": 54,
       "bullet_pts": 0,
-      "blitz_pts": 291,
+      "blitz_pts": 54,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 33,
+      "blitz_g": 6,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.ebf30bde.200x200o.b109c112e884.jpg"
     },
     {
-      "username": "damjan1989",
-      "total_pts": 281,
-      "bullet_pts": 0,
-      "blitz_pts": 126,
-      "rapid_pts": 155,
-      "bullet_g": 0,
-      "blitz_g": 16,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+      "username": "vihaanthegreatofchess",
+      "total_pts": 39,
+      "bullet_pts": 3,
+      "blitz_pts": 36,
+      "rapid_pts": 0,
+      "bullet_g": 1,
+      "blitz_g": 4,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/468293390.0ea870ad.200x200o.e22a7a328da2.png"
     }
   ]
 }
