@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-04T20:16:52.750Z",
+  "updated": "2026-09-04T22:27:51.995Z",
   "totalMembers": 1594,
-  "activeToday": 368,
+  "activeToday": 402,
   "players": [
     {
       "username": "kandasamybalaji1983",
@@ -15,6 +15,17 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146022919.9a5aa91b.200x200o.e50050f3a8de.jpg"
     },
     {
+      "username": "damjan1989",
+      "total_pts": 388,
+      "bullet_pts": 0,
+      "blitz_pts": 228,
+      "rapid_pts": 160,
+      "bullet_g": 0,
+      "blitz_g": 26,
+      "rapid_g": 12,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
+    },
+    {
       "username": "queiser",
       "total_pts": 381,
       "bullet_pts": 6,
@@ -24,17 +35,6 @@
       "blitz_g": 45,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
-    },
-    {
-      "username": "damjan1989",
-      "total_pts": 370,
-      "bullet_pts": 0,
-      "blitz_pts": 210,
-      "rapid_pts": 160,
-      "bullet_g": 0,
-      "blitz_g": 24,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
     }
   ]
 }
