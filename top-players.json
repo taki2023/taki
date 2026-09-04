@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-04T05:29:58.692Z",
-  "totalMembers": 1591,
-  "activeToday": 129,
+  "updated": "2026-09-04T09:54:09.048Z",
+  "totalMembers": 1592,
+  "activeToday": 192,
   "players": [
     {
-      "username": "silent-sniper",
-      "total_pts": 237,
-      "bullet_pts": 48,
-      "blitz_pts": 189,
+      "username": "queiser",
+      "total_pts": 318,
+      "bullet_pts": 0,
+      "blitz_pts": 318,
       "rapid_pts": 0,
-      "bullet_g": 16,
-      "blitz_g": 21,
+      "bullet_g": 0,
+      "blitz_g": 38,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
+    },
+    {
+      "username": "silent-sniper",
+      "total_pts": 315,
+      "bullet_pts": 54,
+      "blitz_pts": 261,
+      "rapid_pts": 0,
+      "bullet_g": 18,
+      "blitz_g": 29,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/378471651.785b6d7a.200x200o.967342e58566.png"
     },
     {
       "username": "kandasamybalaji1983",
-      "total_pts": 195,
+      "total_pts": 315,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 195,
+      "rapid_pts": 315,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 13,
+      "rapid_g": 21,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146022919.9a5aa91b.200x200o.e50050f3a8de.jpg"
-    },
-    {
-      "username": "rafallaobedi-210",
-      "total_pts": 163,
-      "bullet_pts": 0,
-      "blitz_pts": 18,
-      "rapid_pts": 145,
-      "bullet_g": 0,
-      "blitz_g": 2,
-      "rapid_g": 11,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
