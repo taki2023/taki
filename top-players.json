@@ -1,18 +1,29 @@
 {
-  "updated": "2026-09-05T04:48:48.869Z",
-  "totalMembers": 1593,
-  "activeToday": 126,
+  "updated": "2026-09-05T08:49:09.013Z",
+  "totalMembers": 1595,
+  "activeToday": 219,
   "players": [
     {
       "username": "adya3_3",
-      "total_pts": 200,
-      "bullet_pts": 0,
+      "total_pts": 226,
+      "bullet_pts": 11,
       "blitz_pts": 0,
-      "rapid_pts": 200,
-      "bullet_g": 0,
+      "rapid_pts": 215,
+      "bullet_g": 5,
       "blitz_g": 0,
-      "rapid_g": 14,
+      "rapid_g": 15,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/479959538.cd99c341.200x200o.b07296cd3eb7.jpg"
+    },
+    {
+      "username": "uniqueboyakigmailcom",
+      "total_pts": 210,
+      "bullet_pts": 66,
+      "blitz_pts": 144,
+      "rapid_pts": 0,
+      "bullet_g": 22,
+      "blitz_g": 16,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463985152.abe8a865.200x200o.7734d0a61a0d.jpg"
     },
     {
       "username": "rafallaobedi-210",
@@ -24,17 +35,6 @@
       "blitz_g": 1,
       "rapid_g": 14,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
-    },
-    {
-      "username": "vannamcovua",
-      "total_pts": 165,
-      "bullet_pts": 156,
-      "blitz_pts": 9,
-      "rapid_pts": 0,
-      "bullet_g": 56,
-      "blitz_g": 1,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/523120267.3ad49cd1.200x200o.c255db2dd45e.png"
     }
   ]
 }
