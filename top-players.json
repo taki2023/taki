@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-05T00:17:50.232Z",
-  "totalMembers": 1594,
-  "activeToday": 18,
+  "updated": "2026-09-05T04:48:48.869Z",
+  "totalMembers": 1593,
+  "activeToday": 126,
   "players": [
     {
-      "username": "danielzheng2014",
-      "total_pts": 18,
-      "bullet_pts": 18,
-      "blitz_pts": 0,
-      "rapid_pts": 0,
-      "bullet_g": 6,
-      "blitz_g": 0,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/84697264.0dfa1cef.200x200o.d449fdc63b20.jpg"
-    },
-    {
-      "username": "damjan1989",
-      "total_pts": 18,
-      "bullet_pts": 0,
-      "blitz_pts": 18,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 2,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/145826935.78cc33cb.200x200o.68adf09ed4b5.png"
-    },
-    {
-      "username": "rookskywalker2018",
-      "total_pts": 15,
+      "username": "adya3_3",
+      "total_pts": 200,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 15,
+      "rapid_pts": 200,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/218397757.12e88201.200x200o.611e6d6a6eb2.jpg"
+      "rapid_g": 14,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/479959538.cd99c341.200x200o.b07296cd3eb7.jpg"
+    },
+    {
+      "username": "rafallaobedi-210",
+      "total_pts": 189,
+      "bullet_pts": 0,
+      "blitz_pts": 9,
+      "rapid_pts": 180,
+      "bullet_g": 0,
+      "blitz_g": 1,
+      "rapid_g": 14,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+    },
+    {
+      "username": "vannamcovua",
+      "total_pts": 165,
+      "bullet_pts": 156,
+      "blitz_pts": 9,
+      "rapid_pts": 0,
+      "bullet_g": 56,
+      "blitz_g": 1,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/523120267.3ad49cd1.200x200o.c255db2dd45e.png"
     }
   ]
 }
