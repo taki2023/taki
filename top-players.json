@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-05T23:12:28.274Z",
+  "updated": "2026-09-06T01:13:04.594Z",
   "totalMembers": 1590,
-  "activeToday": 415,
+  "activeToday": 29,
   "players": [
     {
-      "username": "queiser",
-      "total_pts": 615,
+      "username": "takemiqueen",
+      "total_pts": 75,
       "bullet_pts": 0,
-      "blitz_pts": 615,
+      "blitz_pts": 0,
+      "rapid_pts": 75,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 5,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/237242245.b5be4b53.200x200o.ba3676908cfb.jpg"
+    },
+    {
+      "username": "iejoueurdechecs",
+      "total_pts": 60,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 60,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 4,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146785025.0fc816d4.200x200o.5fe23cc4cd71.png"
+    },
+    {
+      "username": "licon_chess",
+      "total_pts": 54,
+      "bullet_pts": 0,
+      "blitz_pts": 54,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 71,
+      "blitz_g": 6,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
-    },
-    {
-      "username": "uniqueboyakigmailcom",
-      "total_pts": 485,
-      "bullet_pts": 242,
-      "blitz_pts": 243,
-      "rapid_pts": 0,
-      "bullet_g": 82,
-      "blitz_g": 27,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463985152.abe8a865.200x200o.7734d0a61a0d.jpg"
-    },
-    {
-      "username": "allwaspplay",
-      "total_pts": 413,
-      "bullet_pts": 381,
-      "blitz_pts": 27,
-      "rapid_pts": 5,
-      "bullet_g": 129,
-      "blitz_g": 3,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/463604962.615ec0ed.200x200o.739f09b7d60c.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306659633.e5259ac1.200x200o.132e138fe6ee.jpg"
     }
   ]
 }
