@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-07T01:15:38.083Z",
+  "updated": "2026-09-07T06:26:22.020Z",
   "totalMembers": 1595,
-  "activeToday": 30,
+  "activeToday": 97,
   "players": [
     {
-      "username": "desert_recon",
-      "total_pts": 51,
-      "bullet_pts": 33,
-      "blitz_pts": 18,
-      "rapid_pts": 0,
-      "bullet_g": 11,
-      "blitz_g": 2,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.a4b7bfc2.200x200o.4b93333aaa26.jpg"
-    },
-    {
-      "username": "yachess97",
-      "total_pts": 44,
-      "bullet_pts": 14,
+      "username": "bosticoart",
+      "total_pts": 205,
+      "bullet_pts": 205,
       "blitz_pts": 0,
-      "rapid_pts": 30,
-      "bullet_g": 6,
+      "rapid_pts": 0,
+      "bullet_g": 69,
       "blitz_g": 0,
-      "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/322049893.3e8ba2a8.200x200o.459c018eb1c7.jpg"
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
     },
     {
-      "username": "abdelhak003",
-      "total_pts": 39,
+      "username": "nikkotello",
+      "total_pts": 195,
       "bullet_pts": 0,
-      "blitz_pts": 39,
-      "rapid_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 195,
       "bullet_g": 0,
-      "blitz_g": 5,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/238843441.cc8658fa.200x200o.d1c13e448141.jpg"
+      "blitz_g": 0,
+      "rapid_g": 13,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
+    {
+      "username": "rafallaobedi-210",
+      "total_pts": 170,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 170,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 12,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
