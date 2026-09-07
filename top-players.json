@@ -1,8 +1,30 @@
 {
-  "updated": "2026-09-07T06:26:22.020Z",
-  "totalMembers": 1595,
-  "activeToday": 97,
+  "updated": "2026-09-07T12:55:36.882Z",
+  "totalMembers": 1594,
+  "activeToday": 223,
   "players": [
+    {
+      "username": "nikkotello",
+      "total_pts": 310,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 310,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 22,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
+    {
+      "username": "financial_dragon",
+      "total_pts": 253,
+      "bullet_pts": 25,
+      "blitz_pts": 213,
+      "rapid_pts": 15,
+      "bullet_g": 9,
+      "blitz_g": 25,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
+    },
     {
       "username": "bosticoart",
       "total_pts": 205,
@@ -13,28 +35,6 @@
       "blitz_g": 0,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
-    },
-    {
-      "username": "nikkotello",
-      "total_pts": 195,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 195,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 13,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
-    },
-    {
-      "username": "rafallaobedi-210",
-      "total_pts": 170,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 170,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 12,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     }
   ]
 }
