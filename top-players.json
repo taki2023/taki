@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-07T21:42:49.126Z",
+  "updated": "2026-09-07T23:59:50.805Z",
   "totalMembers": 1594,
-  "activeToday": 394,
+  "activeToday": 420,
   "players": [
     {
       "username": "nikkotello",
@@ -16,13 +16,13 @@
     },
     {
       "username": "romane_ee",
-      "total_pts": 435,
+      "total_pts": 468,
       "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 435,
+      "blitz_pts": 18,
+      "rapid_pts": 450,
       "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 31,
+      "blitz_g": 2,
+      "rapid_g": 32,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/459227602.34b6ef30.200x200o.f57f2d19df4d.jpg"
     },
     {
