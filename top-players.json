@@ -1,10 +1,32 @@
 {
-  "updated": "2026-09-08T08:59:26.853Z",
+  "updated": "2026-09-08T13:28:10.545Z",
   "totalMembers": 1594,
-  "activeToday": 174,
+  "activeToday": 262,
   "players": [
     {
-      "username": "rafallaobedi-210",
+      "username": "financial_dragon",
+      "total_pts": 307,
+      "bullet_pts": 22,
+      "blitz_pts": 285,
+      "rapid_pts": 0,
+      "bullet_g": 8,
+      "blitz_g": 33,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
+    },
+    {
+      "username": "bughouse_partner",
+      "total_pts": 255,
+      "bullet_pts": 0,
+      "blitz_pts": 255,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 29,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "arildt6",
       "total_pts": 215,
       "bullet_pts": 0,
       "blitz_pts": 0,
@@ -12,29 +34,7 @@
       "bullet_g": 0,
       "blitz_g": 0,
       "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
-    },
-    {
-      "username": "yael981",
-      "total_pts": 150,
-      "bullet_pts": 0,
-      "blitz_pts": 150,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 18,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.8d95fd8b.200x200o.992b76994d66.png"
-    },
-    {
-      "username": "polynomial-c",
-      "total_pts": 141,
-      "bullet_pts": 0,
-      "blitz_pts": 126,
-      "rapid_pts": 15,
-      "bullet_g": 0,
-      "blitz_g": 14,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/14840558.f26cd658.200x200o.88827bd2d167.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
