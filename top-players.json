@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-08T20:05:02.411Z",
-  "totalMembers": 1595,
-  "activeToday": 389,
+  "updated": "2026-09-08T22:53:57.779Z",
+  "totalMembers": 1598,
+  "activeToday": 382,
   "players": [
     {
       "username": "hangarin",
@@ -12,7 +12,7 @@
       "bullet_g": 0,
       "blitz_g": 38,
       "rapid_g": 3,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490678557.11c490ca.200x200o.c1747e43cbfe.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "financial_dragon",
@@ -23,17 +23,17 @@
       "bullet_g": 8,
       "blitz_g": 34,
       "rapid_g": 2,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "arildt6",
-      "total_pts": 310,
+      "total_pts": 340,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 310,
+      "rapid_pts": 340,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 22,
+      "rapid_g": 24,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
