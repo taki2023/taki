@@ -1,8 +1,19 @@
 {
-  "updated": "2026-09-09T19:05:20.442Z",
-  "totalMembers": 1595,
-  "activeToday": 376,
+  "updated": "2026-09-09T21:49:59.858Z",
+  "totalMembers": 1599,
+  "activeToday": 374,
   "players": [
+    {
+      "username": "yael981",
+      "total_pts": 480,
+      "bullet_pts": 0,
+      "blitz_pts": 480,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 56,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
     {
       "username": "financial_dragon",
       "total_pts": 451,
@@ -12,18 +23,7 @@
       "bullet_g": 36,
       "blitz_g": 16,
       "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
-    },
-    {
-      "username": "yael981",
-      "total_pts": 381,
-      "bullet_pts": 0,
-      "blitz_pts": 381,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 45,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.8d95fd8b.200x200o.992b76994d66.png"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "nikkotello",
@@ -34,7 +34,7 @@
       "bullet_g": 0,
       "blitz_g": 0,
       "rapid_g": 27,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
