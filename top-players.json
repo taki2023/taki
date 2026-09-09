@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-09T01:03:22.041Z",
-  "totalMembers": 1598,
-  "activeToday": 26,
+  "updated": "2026-09-09T06:22:21.645Z",
+  "totalMembers": 1597,
+  "activeToday": 114,
   "players": [
     {
-      "username": "florisjensen2589",
-      "total_pts": 72,
+      "username": "yael981",
+      "total_pts": 243,
       "bullet_pts": 0,
-      "blitz_pts": 72,
+      "blitz_pts": 243,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 8,
+      "blitz_g": 29,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/357116593.d0d893c9.200x200o.f03373b6190f.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.8d95fd8b.200x200o.992b76994d66.png"
     },
     {
-      "username": "goldenchessstar911",
-      "total_pts": 48,
+      "username": "financial_dragon",
+      "total_pts": 210,
       "bullet_pts": 0,
-      "blitz_pts": 48,
+      "blitz_pts": 45,
+      "rapid_pts": 165,
+      "bullet_g": 0,
+      "blitz_g": 5,
+      "rapid_g": 11,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
+    },
+    {
+      "username": "becky-incheck",
+      "total_pts": 165,
+      "bullet_pts": 0,
+      "blitz_pts": 165,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 6,
+      "blitz_g": 19,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/226199899.d6a74b04.200x200o.fdc60fe8b57e.jpg"
-    },
-    {
-      "username": "rafallaobedi-210",
-      "total_pts": 40,
-      "bullet_pts": 0,
-      "blitz_pts": 0,
-      "rapid_pts": 40,
-      "bullet_g": 0,
-      "blitz_g": 0,
-      "rapid_g": 4,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/329613813.0df9f3db.200x200o.a5804339c7f1.jpg"
     }
   ]
 }
