@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-09T11:42:41.523Z",
-  "totalMembers": 1598,
-  "activeToday": 213,
+  "updated": "2026-09-09T15:56:08.684Z",
+  "totalMembers": 1595,
+  "activeToday": 307,
   "players": [
     {
       "username": "financial_dragon",
-      "total_pts": 403,
-      "bullet_pts": 64,
-      "blitz_pts": 114,
+      "total_pts": 442,
+      "bullet_pts": 100,
+      "blitz_pts": 117,
       "rapid_pts": 225,
-      "bullet_g": 24,
-      "blitz_g": 14,
+      "bullet_g": 36,
+      "blitz_g": 15,
       "rapid_g": 15,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
     },
     {
-      "username": "yael981",
-      "total_pts": 354,
-      "bullet_pts": 0,
-      "blitz_pts": 354,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 42,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.8d95fd8b.200x200o.992b76994d66.png"
-    },
-    {
       "username": "nikkotello",
-      "total_pts": 325,
+      "total_pts": 375,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 325,
+      "rapid_pts": 375,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 23,
+      "rapid_g": 27,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+    },
+    {
+      "username": "yael981",
+      "total_pts": 363,
+      "bullet_pts": 0,
+      "blitz_pts": 363,
+      "rapid_pts": 0,
+      "bullet_g": 0,
+      "blitz_g": 43,
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.8d95fd8b.200x200o.992b76994d66.png"
     }
   ]
 }
