@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-09T23:50:11.115Z",
+  "updated": "2026-09-10T03:05:00.696Z",
   "totalMembers": 1599,
-  "activeToday": 398,
+  "activeToday": 75,
   "players": [
     {
-      "username": "yael981",
-      "total_pts": 480,
-      "bullet_pts": 0,
-      "blitz_pts": 480,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 56,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/306633269.8d95fd8b.200x200o.992b76994d66.png"
-    },
-    {
-      "username": "financial_dragon",
-      "total_pts": 451,
-      "bullet_pts": 100,
-      "blitz_pts": 126,
-      "rapid_pts": 225,
-      "bullet_g": 36,
-      "blitz_g": 16,
-      "rapid_g": 15,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/490428617.49921e2f.200x200o.58b065846bb5.jpg"
-    },
-    {
-      "username": "nikkotello",
-      "total_pts": 375,
+      "username": "rafallaobedi-210",
+      "total_pts": 180,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 375,
+      "rapid_pts": 180,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 27,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/524057635.dc0a666b.200x200o.1e3e3b675179.jpg"
+      "rapid_g": 12,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "goldenchessstar911",
+      "total_pts": 150,
+      "bullet_pts": 34,
+      "blitz_pts": 36,
+      "rapid_pts": 80,
+      "bullet_g": 12,
+      "blitz_g": 4,
+      "rapid_g": 6,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+    },
+    {
+      "username": "erac001",
+      "total_pts": 105,
+      "bullet_pts": 0,
+      "blitz_pts": 0,
+      "rapid_pts": 105,
+      "bullet_g": 0,
+      "blitz_g": 0,
+      "rapid_g": 7,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
