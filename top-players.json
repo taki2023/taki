@@ -1,29 +1,29 @@
 {
-  "updated": "2026-09-10T17:05:07.797Z",
-  "totalMembers": 1604,
-  "activeToday": 339,
+  "updated": "2026-09-10T19:57:06.239Z",
+  "totalMembers": 1603,
+  "activeToday": 383,
   "players": [
     {
       "username": "arildt6",
-      "total_pts": 365,
+      "total_pts": 455,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 365,
+      "rapid_pts": 455,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 27,
+      "rapid_g": 33,
       "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "stockpileshoptv",
-      "total_pts": 355,
-      "bullet_pts": 0,
+      "username": "emir_yoel",
+      "total_pts": 369,
+      "bullet_pts": 369,
       "blitz_pts": 0,
-      "rapid_pts": 355,
-      "bullet_g": 0,
+      "rapid_pts": 0,
+      "bullet_g": 123,
       "blitz_g": 0,
-      "rapid_g": 27,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/37675286.6b463bc6.200x200o.a9a12299e2fd.jpg"
+      "rapid_g": 0,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/202119843.e5f71caf.200x200o.4deda839907f.jpg"
     },
     {
       "username": "bughouse_partner",
