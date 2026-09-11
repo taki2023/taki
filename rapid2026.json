@@ -1,6 +1,137 @@
 {
   "rounds": [],
-  "ranking": [],
+  "ranking": [
+    {
+      "username": "Daniel2040",
+      "rating": 2362,
+      "flagged": false
+    },
+    {
+      "username": "DaTreeOfFives",
+      "rating": 2304,
+      "flagged": false
+    },
+    {
+      "username": "Freddy1201",
+      "rating": 2301,
+      "flagged": false
+    },
+    {
+      "username": "Desert_Recon",
+      "rating": 2254,
+      "flagged": false
+    },
+    {
+      "username": "Taki",
+      "rating": 1952,
+      "flagged": false
+    },
+    {
+      "username": "TrofAndy",
+      "rating": 1822,
+      "flagged": false
+    },
+    {
+      "username": "Oo_Arabi",
+      "rating": 1610,
+      "flagged": false
+    },
+    {
+      "username": "TALented_Vasee_18",
+      "rating": 1587,
+      "flagged": false
+    },
+    {
+      "username": "Tengen",
+      "rating": 1506,
+      "flagged": false
+    },
+    {
+      "username": "ChesssRedBelt",
+      "rating": 1500,
+      "flagged": false
+    },
+    {
+      "username": "DanielMelbou",
+      "rating": 1407,
+      "flagged": false
+    },
+    {
+      "username": "AarjavSamaiya",
+      "rating": 1381,
+      "flagged": false
+    },
+    {
+      "username": "RKamalanayanan",
+      "rating": 1350,
+      "flagged": false
+    },
+    {
+      "username": "RayDuqueIII",
+      "rating": 1331,
+      "flagged": false
+    },
+    {
+      "username": "Avieroon",
+      "rating": 1291,
+      "flagged": false
+    },
+    {
+      "username": "cello_jello",
+      "rating": 1279,
+      "flagged": false
+    },
+    {
+      "username": "IvanBoevski",
+      "rating": 1270,
+      "flagged": false
+    },
+    {
+      "username": "RIP_People_in_Chess",
+      "rating": 1187,
+      "flagged": false
+    },
+    {
+      "username": "Moment_Before_Realization",
+      "rating": 912,
+      "flagged": false
+    },
+    {
+      "username": "incecure",
+      "rating": 852,
+      "flagged": false
+    },
+    {
+      "username": "Munchter_Madguy_Eric",
+      "rating": 741,
+      "flagged": false
+    },
+    {
+      "username": "Jar_the_Lyd",
+      "rating": 727,
+      "flagged": false
+    },
+    {
+      "username": "CornettoM",
+      "rating": 703,
+      "flagged": false
+    },
+    {
+      "username": "Bhenejme",
+      "rating": 642,
+      "flagged": false
+    },
+    {
+      "username": "Juliana3377",
+      "rating": 610,
+      "flagged": false
+    },
+    {
+      "username": "sahilkumar950",
+      "rating": 526,
+      "flagged": false
+    }
+  ],
   "withdrawn": [],
   "stats": null
 }
