@@ -506,6 +506,11 @@
   ],
   "ranking": [
     {
+      "username": "Daniel2040",
+      "rating": 2362,
+      "flagged": false
+    },
+    {
       "username": "DaTreeOfFives",
       "rating": 2304,
       "flagged": false
@@ -516,18 +521,23 @@
       "flagged": false
     },
     {
-      "username": "Daniel2040",
-      "rating": 2240,
-      "flagged": false
-    },
-    {
       "username": "Hectorcista",
-      "rating": 2108,
+      "rating": 2089,
       "flagged": false
     },
     {
       "username": "Xx_Vanilla_xX",
-      "rating": 2076,
+      "rating": 2057,
+      "flagged": false
+    },
+    {
+      "username": "RevToMate2",
+      "rating": 2011,
+      "flagged": false
+    },
+    {
+      "username": "queiser",
+      "rating": 2004,
       "flagged": false
     },
     {
@@ -537,12 +547,7 @@
     },
     {
       "username": "vednu",
-      "rating": 1966,
-      "flagged": false
-    },
-    {
-      "username": "RevToMate2",
-      "rating": 1966,
+      "rating": 1971,
       "flagged": false
     },
     {
@@ -551,68 +556,63 @@
       "flagged": false
     },
     {
-      "username": "queiser",
-      "rating": 1918,
-      "flagged": false
-    },
-    {
       "username": "TrofAndy",
-      "rating": 1714,
+      "rating": 1822,
       "flagged": false
     },
     {
       "username": "ReefRhino26",
-      "rating": 1692,
-      "flagged": false
-    },
-    {
-      "username": "TALented_Vasee_18",
-      "rating": 1590,
+      "rating": 1747,
       "flagged": false
     },
     {
       "username": "Oo_Arabi",
-      "rating": 1581,
+      "rating": 1610,
+      "flagged": false
+    },
+    {
+      "username": "TALented_Vasee_18",
+      "rating": 1587,
       "flagged": false
     },
     {
       "username": "Iamplayerofchess",
-      "rating": 1527,
+      "rating": 1513,
       "flagged": false
     },
     {
       "username": "Tengen",
-      "rating": 1456,
+      "rating": 1506,
       "flagged": false
     },
     {
       "username": "AarjavSamaiya",
-      "rating": 1401,
-      "flagged": false
-    },
-    {
-      "username": "RayDuqueIII",
-      "rating": 1340,
+      "rating": 1381,
       "flagged": false
     },
     {
       "username": "RKamalanayanan",
-      "rating": 1330,
+      "rating": 1350,
       "flagged": false
     },
     {
-      "username": "Giraffe1100",
-      "rating": 1205,
+      "username": "RayDuqueIII",
+      "rating": 1331,
       "flagged": false
     },
     {
       "username": "cello_jello",
-      "rating": 1202,
+      "rating": 1279,
+      "flagged": false
+    },
+    {
+      "username": "Giraffe1100",
+      "rating": 1214,
       "flagged": false
     },
     {
       "username": "Sukuna_Loyalist",
-      "rating": 1003,
+      "rating": 852,
       "flagged": false
     },
     {
@@ -622,12 +622,12 @@
     },
     {
       "username": "DrKapablanca",
-      "rating": 760,
+      "rating": 769,
       "flagged": false
     },
     {
       "username": "roheemo_h",
-      "rating": 618,
+      "rating": 657,
       "flagged": false
     }
   ],
