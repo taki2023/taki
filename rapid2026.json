@@ -1,5 +1,300 @@
 {
-  "rounds": [],
+  "rounds": [
+    {
+      "number": 1,
+      "name": "Round 1",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "Daniel2040",
+            "AarjavSamaiya",
+            "RKamalanayanan",
+            "Bhenejme",
+            "Juliana3377"
+          ],
+          "matches": [
+            {
+              "playerA": "Daniel2040",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "RKamalanayanan",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "Bhenejme",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "Juliana3377",
+              "link": ""
+            },
+            {
+              "playerA": "AarjavSamaiya",
+              "playerB": "RKamalanayanan",
+              "link": ""
+            },
+            {
+              "playerA": "AarjavSamaiya",
+              "playerB": "Bhenejme",
+              "link": ""
+            },
+            {
+              "playerA": "AarjavSamaiya",
+              "playerB": "Juliana3377",
+              "link": ""
+            },
+            {
+              "playerA": "RKamalanayanan",
+              "playerB": "Bhenejme",
+              "link": ""
+            },
+            {
+              "playerA": "RKamalanayanan",
+              "playerB": "Juliana3377",
+              "link": ""
+            },
+            {
+              "playerA": "Bhenejme",
+              "playerB": "Juliana3377",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 2",
+          "players": [
+            "DaTreeOfFives",
+            "DanielMelbou",
+            "RayDuqueIII",
+            "CornettoM",
+            "sahilkumar950"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "DanielMelbou",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "RayDuqueIII",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "CornettoM",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "sahilkumar950",
+              "link": ""
+            },
+            {
+              "playerA": "DanielMelbou",
+              "playerB": "RayDuqueIII",
+              "link": ""
+            },
+            {
+              "playerA": "DanielMelbou",
+              "playerB": "CornettoM",
+              "link": ""
+            },
+            {
+              "playerA": "DanielMelbou",
+              "playerB": "sahilkumar950",
+              "link": ""
+            },
+            {
+              "playerA": "RayDuqueIII",
+              "playerB": "CornettoM",
+              "link": ""
+            },
+            {
+              "playerA": "RayDuqueIII",
+              "playerB": "sahilkumar950",
+              "link": ""
+            },
+            {
+              "playerA": "CornettoM",
+              "playerB": "sahilkumar950",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 3",
+          "players": [
+            "Freddy1201",
+            "ChesssRedBelt",
+            "Avieroon",
+            "Jar_the_Lyd"
+          ],
+          "matches": [
+            {
+              "playerA": "Freddy1201",
+              "playerB": "ChesssRedBelt",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Avieroon",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Jar_the_Lyd",
+              "link": ""
+            },
+            {
+              "playerA": "ChesssRedBelt",
+              "playerB": "Avieroon",
+              "link": ""
+            },
+            {
+              "playerA": "ChesssRedBelt",
+              "playerB": "Jar_the_Lyd",
+              "link": ""
+            },
+            {
+              "playerA": "Avieroon",
+              "playerB": "Jar_the_Lyd",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 4",
+          "players": [
+            "Desert_Recon",
+            "Tengen",
+            "cello_jello",
+            "Munchter_Madguy_Eric"
+          ],
+          "matches": [
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "Tengen",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "Munchter_Madguy_Eric",
+              "link": ""
+            },
+            {
+              "playerA": "Tengen",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "Tengen",
+              "playerB": "Munchter_Madguy_Eric",
+              "link": ""
+            },
+            {
+              "playerA": "cello_jello",
+              "playerB": "Munchter_Madguy_Eric",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 5",
+          "players": [
+            "Taki",
+            "TALented_Vasee_18",
+            "IvanBoevski",
+            "incecure"
+          ],
+          "matches": [
+            {
+              "playerA": "Taki",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "IvanBoevski",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "incecure",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "IvanBoevski",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "incecure",
+              "link": ""
+            },
+            {
+              "playerA": "IvanBoevski",
+              "playerB": "incecure",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 6",
+          "players": [
+            "TrofAndy",
+            "Oo_Arabi",
+            "RIP_People_in_Chess",
+            "Moment_Before_Realization"
+          ],
+          "matches": [
+            {
+              "playerA": "TrofAndy",
+              "playerB": "Oo_Arabi",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "Moment_Before_Realization",
+              "link": ""
+            },
+            {
+              "playerA": "Oo_Arabi",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            },
+            {
+              "playerA": "Oo_Arabi",
+              "playerB": "Moment_Before_Realization",
+              "link": ""
+            },
+            {
+              "playerA": "RIP_People_in_Chess",
+              "playerB": "Moment_Before_Realization",
+              "link": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "ranking": [
     {
       "username": "Daniel2040",
