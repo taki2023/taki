@@ -24,7 +24,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -37,7 +37,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -50,7 +50,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -63,7 +63,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -76,7 +76,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -89,7 +89,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -102,7 +102,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -115,7 +115,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -128,7 +128,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -141,7 +141,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
@@ -208,7 +208,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -221,7 +221,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -234,7 +234,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -247,7 +247,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -260,7 +260,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -273,7 +273,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -286,7 +286,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -299,7 +299,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -312,7 +312,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -325,7 +325,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
@@ -391,7 +391,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -404,7 +404,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -417,7 +417,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -430,7 +430,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -443,7 +443,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -456,7 +456,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
@@ -515,7 +515,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -528,7 +528,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -541,7 +541,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -554,7 +554,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -567,7 +567,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -580,7 +580,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
@@ -639,7 +639,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -652,7 +652,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -665,7 +665,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -678,7 +678,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -691,7 +691,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -704,7 +704,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
@@ -763,7 +763,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -776,7 +776,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -789,7 +789,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -802,7 +802,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -815,7 +815,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -828,7 +828,7 @@
               "scoreA": 0,
               "scoreB": 0,
               "finished": false,
-              "status": "forfeit",
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
