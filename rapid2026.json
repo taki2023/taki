@@ -808,14 +808,27 @@
             {
               "playerA": "TrofAndy",
               "playerB": "Moment_Before_Realization",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174372756090::1-0 | https://www.chess.com/game/live/174373040242::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174372756090",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174373040242",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -873,45 +886,45 @@
           ],
           "standings": [
             {
-              "username": "Moment_Before_Realization",
+              "username": "TrofAndy",
               "rank": 1,
-              "score": 1,
-              "tiebreak": 0.5,
+              "score": 2,
+              "tiebreak": 1,
               "qualified": true
             },
             {
-              "username": "RIP_People_in_Chess",
+              "username": "Moment_Before_Realization",
               "rank": 2,
               "score": 1,
               "tiebreak": 0.5,
               "qualified": true
             },
             {
-              "username": "Oo_Arabi",
+              "username": "RIP_People_in_Chess",
               "rank": 3,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": false
             },
             {
-              "username": "TrofAndy",
+              "username": "Oo_Arabi",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
               "qualified": false
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 2,
+          "gamesFinished": 4,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 3,
+        "matchesFinished": 4,
         "matchesTotal": 44,
-        "gamesFinished": 6,
+        "gamesFinished": 8,
         "gamesTotal": 88
       }
     }
@@ -1181,7 +1194,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 3,
+    "matchesPlayedCount": 4,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 1,
     "biggestUpset": null,
