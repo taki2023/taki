@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hot Chilli Rapid Championship — Pairings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="preconnect" href="https://api.chess.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -44,7 +46,7 @@ body{display:block!important;position:relative;top:0!important;font-family:Nunit
 .round-dropdown-item:first-child{border-top:0}
 .round-dropdown-item:hover{background:#EAF5E2}
 .round-dropdown-item.active{background:linear-gradient(135deg,#FF5B3D,var(--red-mid));color:#fff}
-.groups-scroll{width:100%;max-height:450px;padding-top:2px;overflow-y:auto;overflow-x:hidden;padding-right:4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--peach) transparent}
+.groups-scroll{width:100%;min-height:260px;max-height:450px;padding-top:2px;overflow-y:auto;overflow-x:hidden;padding-right:4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--peach) transparent}
 .groups-scroll::-webkit-scrollbar{width:7px}
 .groups-scroll::-webkit-scrollbar-thumb{background:var(--peach);border-radius:999px}
 #content.final-centered{min-height:450px;display:flex;flex-direction:column;justify-content:center}
@@ -127,6 +129,18 @@ table.final-round .player-rank.r3{background:linear-gradient(135deg,var(--bronze
 .mp-watch.forfeit{background:#FFE4E1;color:var(--red-deep);box-shadow:none;pointer-events:none;font-size:9.5px;padding:8px 4px}
 .mp-forfeit-note{text-align:center;font-size:10.5px;font-weight:900;color:var(--red-deep);background:#FFE4E1;border-radius:999px;padding:8px 10px}
 
+@keyframes skelPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.skel-card{background:var(--paper);border-radius:24px;padding:10px;margin-bottom:16px;box-shadow:0 1px 0 #fff9 inset,0 8px 22px -10px rgba(60,120,40,.32)}
+.skel-card:last-child{margin-bottom:4px}
+.skel-line,.skel-avatar,.skel-cell,.skel-pill{background-color:#E7EFDF;animation:skelPulse 1.3s ease-in-out infinite}
+.skel-line{height:12px;border-radius:6px}
+.skel-card-head{width:110px;height:16px;margin:6px 0 10px 10px}
+.skel-row{display:flex;align-items:center;gap:9px;padding:9px 8px}
+.skel-avatar{width:32px;height:36px;border-radius:9px;flex-shrink:0}
+.skel-name{flex:1;max-width:150px}
+.skel-cell{width:24px;height:14px;border-radius:6px;flex-shrink:0}
+.skel-pill{display:inline-block;border-radius:999px}
+
 @media(max-width:480px){
 .sb{border-radius:24px}.sb-top{border-radius:24px 24px 0 0}
 .rapid-brand{gap:6px}
@@ -178,12 +192,12 @@ Pairings &amp; Live Standings
 
 <div class="inner">
 <div class="round-bar">
-<div class="round-stats" id="roundStats" style="display:none">
-<span class="stat-pill" id="statMatches">–</span>
-<span class="stat-pill" id="statGames">–</span>
+<div class="round-stats" id="roundStats">
+<span class="stat-pill skel-pill" id="statMatches" style="width:92px;height:14px">&nbsp;</span>
+<span class="stat-pill skel-pill" id="statGames" style="width:78px;height:14px">&nbsp;</span>
 </div>
 
-<div id="roundDropdown" class="round-dropdown" style="display:none">
+<div id="roundDropdown" class="round-dropdown">
 <button class="round-dropdown-btn" id="roundDropdownBtn" type="button">
 <span id="roundDropdownLabel">Round 1</span>
 <svg class="chev" viewBox="0 0 24 24"><path d="M12 15.5L4.5 8l1.4-1.4L12 12.7l6.1-6.1L19.5 8z"/></svg>
@@ -193,7 +207,7 @@ Pairings &amp; Live Standings
 </div>
 
 <div class="groups-scroll">
-<div id="content"><div class="load-msg">🔥 Loading tournament data…</div></div>
+<div id="content"><div class="skel-card"><div class="skel-line skel-card-head"></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div></div><div class="skel-card"><div class="skel-line skel-card-head"></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div><div class="skel-row"><div class="skel-avatar"></div><div class="skel-line skel-name"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div><div class="skel-cell"></div></div></div></div>
 </div>
 
 <div class="legend-card">
@@ -218,7 +232,7 @@ const DEFAULT_AVATAR='https://www.chess.com/bundles/web/images/user-image.007dad
 const BOARD_SVG='<svg viewBox="0 0 24 24"><path d="M19.33 22H4.65999C2.65999 22 1.98999 21.33 1.98999 19.33V4.65999C1.98999 2.65999 2.65999 1.98999 4.65999 1.98999H19.33C21.33 1.98999 22 2.65999 22 4.65999V19.33C22 21.33 21.33 22 19.33 22ZM3.99999 20H7.99999V16H3.99999V20ZM12 20H16V16H12V20ZM7.99999 16H12V12H7.99999V16ZM3.99999 12H7.99999V7.99999H3.99999V12ZM16 16H20V12H16V16ZM12 12H16V7.99999H12V12ZM7.99999 7.99999H12V3.99999H7.99999V7.99999ZM16 7.99999H20V3.99999H16V7.99999Z"/></svg>';
 const WITHDRAW_SVG='<svg class="withdraw-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M4.89993 16.4L0.269932 12.43C-0.100068 12.13 -0.100068 11.86 0.269932 11.56L4.89993 7.59C5.69993 6.92 5.99993 7.06 5.99993 8.09V15.89C5.99993 16.92 5.69993 17.06 4.89993 16.39V16.4ZM16.0699 10.5C16.8399 10.5 17.1399 10.73 17.1399 11.33L17.1699 12.66C17.1699 13.26 16.8699 13.49 16.0999 13.49H4.36993V10.49L16.0699 10.5ZM11.9999 2H19.9999C22.4699 2 23.9999 3.53 23.9999 6V18C23.9999 20.47 22.4699 22 19.9999 22H11.9999C9.52993 22 7.99993 20.47 7.99993 18V16.9C7.99993 16.3 8.32993 15.97 8.92993 15.97H9.05993C9.65993 15.97 9.98993 16.3 9.98993 16.9V17.6C9.98993 19.6 10.3899 20 12.3899 20H19.5899C21.5899 20 21.9899 19.6 21.9899 17.6V6.4C21.9899 4.4 21.5899 4 19.5899 4H12.3899C10.3899 4 9.9899 4.4 9.9899 4V6.4C9.9899 4.4 10.3899 4 12.3899 4Z"/></svg>';
 
-let TOURNAMENT={rounds:[],playerInfo:{},stats:null},WITHDRAWN_SET=new Set(),activeRoundIdx=0,hasLoadedOnce=false;
+let TOURNAMENT={rounds:[],playerInfo:{},stats:null},WITHDRAWN_SET=new Set(),activeRoundIdx=0,hasLoadedOnce=false,pinnedEl=null,hideTimer=null;
 const popover=document.getElementById('matchPopover');
 
 const esc=v=>String(v==null?'':v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
@@ -264,9 +278,16 @@ popover.style.left=left+'px';popover.style.top=top+'px';
 }
 
 function showPopover(x,y,html){
+clearTimeout(hideTimer);
 popover.innerHTML=html;popover.classList.add('show');positionPopover(x,y);
 }
 function hidePopover(){popover.classList.remove('show')}
+function scheduleHide(){hideTimer=setTimeout(hidePopover,150)}
+
+function anchorPointFor(el){
+const r=el.getBoundingClientRect();
+return{x:r.left+r.width/2,y:r.top};
+}
 
 function findMatch(round,a,b){
 const g=round.groups.find(x=>x.matches.some(m=>(m.playerA===a&&m.playerB===b)||(m.playerA===b&&m.playerB===a)));
@@ -283,8 +304,12 @@ list.querySelectorAll('.round-dropdown-item').forEach(el=>el.onclick=()=>{active
 
 const wrap=document.getElementById('roundDropdown');
 document.getElementById('roundDropdownBtn').onclick=e=>{e.stopPropagation();wrap.classList.toggle('open')};
-document.addEventListener('click',e=>{if(!wrap.contains(e.target))wrap.classList.remove('open')});
-popover.addEventListener('mouseleave',()=>{hidePopover()});
+document.addEventListener('click',e=>{
+if(!wrap.contains(e.target))wrap.classList.remove('open');
+if(pinnedEl&&!popover.contains(e.target)&&!e.target.closest('[data-a][data-b]')){pinnedEl=null;hidePopover()}
+});
+popover.addEventListener('mouseenter',()=>{clearTimeout(hideTimer)});
+popover.addEventListener('mouseleave',()=>{if(!pinnedEl)hidePopover()});
 
 function renderRoundStats(round){
 const matches=(round?.groups||[]).flatMap(g=>Array.isArray(g.matches)?g.matches:[]);
@@ -295,9 +320,12 @@ if(m.status==='withdrawn'||m.status==='forfeit')return n+2;
 const explicit=(m.games||[]).filter(g=>g&&(g.result!=null||g.score!=null||g.status==='finished'||g.finished===true||g.link!=null)).length;
 return n+Math.min(2,Math.max(Number(m.playedCount||0),explicit));
 },0);
+const statMatchesEl=document.getElementById('statMatches'),statGamesEl=document.getElementById('statGames');
 document.getElementById('roundStats').style.display='flex';
-document.getElementById('statMatches').innerHTML=`<span class="stat-num">${finished}</span> / <span class="stat-num">${matches.length}</span> matchups`;
-document.getElementById('statGames').innerHTML=`<span class="stat-num">${finishedGames}</span> / <span class="stat-num">${totalGames}</span> games`;
+statMatchesEl.classList.remove('skel-pill');statMatchesEl.removeAttribute('style');
+statGamesEl.classList.remove('skel-pill');statGamesEl.removeAttribute('style');
+statMatchesEl.innerHTML=`<span class="stat-num">${finished}</span> / <span class="stat-num">${matches.length}</span> matchups`;
+statGamesEl.innerHTML=`<span class="stat-num">${finishedGames}</span> / <span class="stat-num">${totalGames}</span> games`;
 }
 
 function championTitleHTML(c){
@@ -339,10 +367,10 @@ const m=group.matches.find(x=>(x.playerA===row.username&&x.playerB===col.usernam
 if(!m){body+='<td><span class="cell-board">'+BOARD_SVG+'</span></td>';return}
 const total=m.playerA===row.username?m.scoreA:m.scoreB;
 let inside;
-if(m.bothWithdrawn)inside=`<span class="badge draw" data-a="${esc(row.username)}" data-b="${esc(col.username)}">0</span>`;
-else if(m.playedCount>=2)inside=`<span class="badge ${pointsClass(total===2?1:total===0?0:.5)}" data-a="${esc(row.username)}" data-b="${esc(col.username)}">${formatSum(total)}</span>`;
-else inside=`<span class="cell-board" data-a="${esc(row.username)}" data-b="${esc(col.username)}">${BOARD_SVG}</span>`;
-body+=`<td>${inside}</td>`;
+if(m.bothWithdrawn)inside=`<span class="badge draw">0</span>`;
+else if(m.playedCount>=2)inside=`<span class="badge ${pointsClass(total===2?1:total===0?0:.5)}">${formatSum(total)}</span>`;
+else inside=`<span class="cell-board">${BOARD_SVG}</span>`;
+body+=`<td data-a="${esc(row.username)}" data-b="${esc(col.username)}">${inside}</td>`;
 });
 body+=`<td><span class="standing-val">${formatSum(row.score)}</span></td><td><span class="tiebreak-val">${formatSum(row.tiebreak)}</span></td></tr>`;
 });
@@ -351,14 +379,28 @@ return`<div class="group-card"><div class="table-scroll"><table class="pairings 
 
 function bindCells(round){
 document.querySelectorAll('[data-a][data-b]').forEach(el=>{
-el.onmouseenter=e=>{const m=findMatch(round,el.dataset.a,el.dataset.b);if(m)showPopover(e.clientX,e.clientY,popoverHTML(el.dataset.a,el.dataset.b,m))};
-el.onmousemove=e=>{if(popover.classList.contains('show'))positionPopover(e.clientX,e.clientY)};
-el.onmouseleave=hidePopover;
-el.onclick=e=>{e.stopPropagation();const m=findMatch(round,el.dataset.a,el.dataset.b);if(m)showPopover(e.clientX,e.clientY,popoverHTML(el.dataset.a,el.dataset.b,m))};
+el.onmouseenter=()=>{
+if(pinnedEl)return;
+clearTimeout(hideTimer);
+const m=findMatch(round,el.dataset.a,el.dataset.b);
+if(m){const pt=anchorPointFor(el);showPopover(pt.x,pt.y,popoverHTML(el.dataset.a,el.dataset.b,m))}
+};
+el.onmouseleave=()=>{if(!pinnedEl)scheduleHide()};
+el.onclick=e=>{
+e.stopPropagation();
+clearTimeout(hideTimer);
+if(pinnedEl===el){pinnedEl=null;hidePopover();return}
+const m=findMatch(round,el.dataset.a,el.dataset.b);
+if(!m)return;
+pinnedEl=el;
+const pt=anchorPointFor(el);
+showPopover(pt.x,pt.y,popoverHTML(el.dataset.a,el.dataset.b,m));
+};
 });
 }
 
 function renderActiveRound(){
+pinnedEl=null;hidePopover();
 const content=document.getElementById('content'),scroll=document.querySelector('.groups-scroll'),round=TOURNAMENT.rounds[activeRoundIdx];
 if(scroll)scroll.scrollTop=0;
 if(!round){content.classList.remove('final-centered');content.innerHTML='<div class="load-msg">No round data found in the tournament data file.</div>';return}
