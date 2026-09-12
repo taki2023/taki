@@ -645,14 +645,27 @@
             {
               "playerA": "Taki",
               "playerB": "TALented_Vasee_18",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174365344482::1-0 | https://www.chess.com/game/live/174366141108::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174365344482",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174366141108",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -723,21 +736,21 @@
           ],
           "standings": [
             {
-              "username": "incecure",
+              "username": "Taki",
               "rank": 1,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true
             },
             {
-              "username": "IvanBoevski",
+              "username": "incecure",
               "rank": 2,
               "score": 0,
               "tiebreak": 0,
               "qualified": true
             },
             {
-              "username": "Taki",
+              "username": "IvanBoevski",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -751,9 +764,9 @@
               "qualified": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 1,
           "matchesTotal": 6,
-          "gamesFinished": 0,
+          "gamesFinished": 2,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -896,9 +909,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 2,
+        "matchesFinished": 3,
         "matchesTotal": 44,
-        "gamesFinished": 4,
+        "gamesFinished": 6,
         "gamesTotal": 88
       }
     }
@@ -1168,7 +1181,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 2,
+    "matchesPlayedCount": 3,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 1,
     "biggestUpset": null,
