@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-12T09:01:48.612Z",
+  "updated": "2026-09-12T13:01:02.882Z",
   "totalMembers": 1601,
-  "activeToday": 219,
+  "activeToday": 285,
   "players": [
     {
-      "username": "freedyfazbearsigma",
-      "total_pts": 348,
-      "bullet_pts": 0,
-      "blitz_pts": 3,
-      "rapid_pts": 345,
-      "bullet_g": 0,
-      "blitz_g": 1,
-      "rapid_g": 23,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/393994277.0f966281.200x200o.e896c24e46c9.jpg"
-    },
-    {
       "username": "bughouse_partner",
-      "total_pts": 306,
-      "bullet_pts": 0,
-      "blitz_pts": 306,
+      "total_pts": 406,
+      "bullet_pts": 1,
+      "blitz_pts": 405,
       "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 34,
+      "bullet_g": 1,
+      "blitz_g": 45,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.55d5d230.200x200o.2a9b2327f968.png"
     },
     {
-      "username": "ivan5859",
-      "total_pts": 234,
+      "username": "freedyfazbearsigma",
+      "total_pts": 393,
       "bullet_pts": 0,
-      "blitz_pts": 234,
+      "blitz_pts": 3,
+      "rapid_pts": 390,
+      "bullet_g": 0,
+      "blitz_g": 1,
+      "rapid_g": 26,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/393994277.0f966281.200x200o.e896c24e46c9.jpg"
+    },
+    {
+      "username": "queiser",
+      "total_pts": 384,
+      "bullet_pts": 0,
+      "blitz_pts": 384,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 26,
+      "blitz_g": 44,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/555346555.4b3b98b6.200x200o.c9360cf8bb8b.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     }
   ]
 }
