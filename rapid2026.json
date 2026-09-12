@@ -782,14 +782,27 @@
             {
               "playerA": "TrofAndy",
               "playerB": "Oo_Arabi",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174374580830::1-0 | https://www.chess.com/game/live/174374990806::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174374580830",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174374990806",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -888,7 +901,7 @@
             {
               "username": "TrofAndy",
               "rank": 1,
-              "score": 2,
+              "score": 4,
               "tiebreak": 1,
               "qualified": true
             },
@@ -914,17 +927,17 @@
               "qualified": false
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 4,
+          "gamesFinished": 6,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 4,
+        "matchesFinished": 5,
         "matchesTotal": 44,
-        "gamesFinished": 8,
+        "gamesFinished": 10,
         "gamesTotal": 88
       }
     }
@@ -1194,9 +1207,9 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 4,
-    "mostWinsPlayer": "Daniel2040",
-    "mostWinsCount": 1,
+    "matchesPlayedCount": 5,
+    "mostWinsPlayer": "TrofAndy",
+    "mostWinsCount": 2,
     "biggestUpset": null,
     "podium": null,
     "champion": null
