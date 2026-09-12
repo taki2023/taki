@@ -214,14 +214,27 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "DanielMelbou",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174380236434::1-0 | https://www.chess.com/game/live/174380310374::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174380236434",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174380310374",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -279,14 +292,27 @@
             {
               "playerA": "DanielMelbou",
               "playerB": "CornettoM",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174379327576::1-0 | https://www.chess.com/game/live/174379834430::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174379327576",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174379834430",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -344,21 +370,21 @@
           ],
           "standings": [
             {
-              "username": "CornettoM",
+              "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 2,
+              "tiebreak": 2,
               "qualified": true
             },
             {
               "username": "DanielMelbou",
               "rank": 2,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true
             },
             {
-              "username": "DaTreeOfFives",
+              "username": "CornettoM",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -379,9 +405,9 @@
               "qualified": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 2,
           "matchesTotal": 10,
-          "gamesFinished": 0,
+          "gamesFinished": 4,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -935,9 +961,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 5,
+        "matchesFinished": 7,
         "matchesTotal": 44,
-        "gamesFinished": 10,
+        "gamesFinished": 14,
         "gamesTotal": 88
       }
     }
@@ -1207,7 +1233,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 5,
+    "matchesPlayedCount": 7,
     "mostWinsPlayer": "TrofAndy",
     "mostWinsCount": 2,
     "biggestUpset": null,
