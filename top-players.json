@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-12T18:35:32.084Z",
-  "totalMembers": 1603,
-  "activeToday": 401,
+  "updated": "2026-09-12T21:30:05.880Z",
+  "totalMembers": 1607,
+  "activeToday": 436,
   "players": [
     {
       "username": "freedyfazbearsigma",
@@ -26,15 +26,15 @@
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
     {
-      "username": "bughouse_partner",
-      "total_pts": 451,
-      "bullet_pts": 1,
-      "blitz_pts": 450,
+      "username": "traker-86",
+      "total_pts": 453,
+      "bullet_pts": 0,
+      "blitz_pts": 453,
       "rapid_pts": 0,
-      "bullet_g": 1,
-      "blitz_g": 50,
+      "bullet_g": 0,
+      "blitz_g": 53,
       "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/483612571.55d5d230.200x200o.2a9b2327f968.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/262433551.9465a503.200x200o.604dc5c5a690.png"
     }
   ]
 }
