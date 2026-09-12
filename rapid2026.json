@@ -31,13 +31,26 @@
               "playerA": "Daniel2040",
               "playerB": "RKamalanayanan",
               "link": "https://www.chess.com/game/live/174326133132::0.5-0.5 | https://www.chess.com/game/live/174326667318::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174326133132",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174326667318",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1.5,
+              "scoreB": 0.5,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -147,44 +160,44 @@
           ],
           "standings": [
             {
-              "username": "AarjavSamaiya",
-              "rank": 1,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": true
-            },
-            {
-              "username": "Bhenejme",
-              "rank": 2,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": true
-            },
-            {
               "username": "Daniel2040",
+              "rank": 1,
+              "score": 1.5,
+              "tiebreak": 0.5,
+              "qualified": true
+            },
+            {
+              "username": "RKamalanayanan",
+              "rank": 2,
+              "score": 0.5,
+              "tiebreak": 0,
+              "qualified": true
+            },
+            {
+              "username": "AarjavSamaiya",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
               "qualified": false
             },
             {
-              "username": "Juliana3377",
+              "username": "Bhenejme",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
               "qualified": false
             },
             {
-              "username": "RKamalanayanan",
+              "username": "Juliana3377",
               "rank": 5,
               "score": 0,
               "tiebreak": 0,
               "qualified": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 1,
           "matchesTotal": 10,
-          "gamesFinished": 0,
+          "gamesFinished": 2,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -822,13 +835,26 @@
               "playerA": "RIP_People_in_Chess",
               "playerB": "Moment_Before_Realization",
               "link": "https://www.chess.com/game/live/174341821558::1-0 | https://www.chess.com/game/live/174342239418::0-1",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174341821558",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174342239418",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             }
           ],
@@ -836,19 +862,19 @@
             {
               "username": "Moment_Before_Realization",
               "rank": 1,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": true
-            },
-            {
-              "username": "Oo_Arabi",
-              "rank": 2,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": true
             },
             {
               "username": "RIP_People_in_Chess",
+              "rank": 2,
+              "score": 1,
+              "tiebreak": 0.5,
+              "qualified": true
+            },
+            {
+              "username": "Oo_Arabi",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -862,17 +888,17 @@
               "qualified": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 1,
           "matchesTotal": 6,
-          "gamesFinished": 0,
+          "gamesFinished": 2,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 0,
+        "matchesFinished": 2,
         "matchesTotal": 44,
-        "gamesFinished": 0,
+        "gamesFinished": 4,
         "gamesTotal": 88
       }
     }
@@ -1012,7 +1038,7 @@
   "playerInfo": {
     "cello_jello": {
       "name": "cello_jello",
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/349443015.44271646.200x200o.61791ea24cc2.jpg",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/349443015.80e9a31a.200x200o.2c1ae4bc5637.jpg",
       "username": "cello_jello"
     },
     "incecure": {
@@ -1062,7 +1088,7 @@
     },
     "ChesssRedBelt": {
       "name": "chesssredbelt",
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/545077389.2a1ed51c.200x200o.e19a17f4438d.jpg",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/545077389.89509f20.200x200o.3b670852a079.jpg",
       "username": "ChesssRedBelt"
     },
     "TrofAndy": {
@@ -1142,9 +1168,9 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 0,
-    "mostWinsPlayer": null,
-    "mostWinsCount": 0,
+    "matchesPlayedCount": 2,
+    "mostWinsPlayer": "Daniel2040",
+    "mostWinsCount": 1,
     "biggestUpset": null,
     "podium": null,
     "champion": null
