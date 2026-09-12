@@ -697,14 +697,27 @@
             {
               "playerA": "Taki",
               "playerB": "IvanBoevski",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174382579966::1-0 | https://www.chess.com/game/live/174382864440::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174382579966",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174382864440",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -764,7 +777,7 @@
             {
               "username": "Taki",
               "rank": 1,
-              "score": 2,
+              "score": 4,
               "tiebreak": 0,
               "qualified": true
             },
@@ -790,9 +803,9 @@
               "qualified": false
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 2,
+          "gamesFinished": 4,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -961,9 +974,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 7,
+        "matchesFinished": 8,
         "matchesTotal": 44,
-        "gamesFinished": 14,
+        "gamesFinished": 16,
         "gamesTotal": 88
       }
     }
@@ -1233,8 +1246,8 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 7,
-    "mostWinsPlayer": "TrofAndy",
+    "matchesPlayedCount": 8,
+    "mostWinsPlayer": "Taki",
     "mostWinsCount": 2,
     "biggestUpset": null,
     "podium": null,
