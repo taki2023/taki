@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-12T21:30:05.880Z",
+  "updated": "2026-09-12T23:09:31.719Z",
   "totalMembers": 1607,
-  "activeToday": 436,
+  "activeToday": 425,
   "players": [
     {
       "username": "freedyfazbearsigma",
@@ -16,12 +16,12 @@
     },
     {
       "username": "queiser",
-      "total_pts": 465,
+      "total_pts": 519,
       "bullet_pts": 0,
-      "blitz_pts": 465,
+      "blitz_pts": 519,
       "rapid_pts": 0,
       "bullet_g": 0,
-      "blitz_g": 53,
+      "blitz_g": 59,
       "rapid_g": 0,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/52164932.75ea5019.200x200o.ebc383dc724b.png"
     },
