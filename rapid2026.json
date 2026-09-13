@@ -1252,5 +1252,6 @@
     "biggestUpset": null,
     "podium": null,
     "champion": null
-  }
+  },
+  "withdrawn": []
 }
