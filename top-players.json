@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-13T06:32:37.274Z",
-  "totalMembers": 1608,
-  "activeToday": 158,
+  "updated": "2026-09-13T12:32:55.708Z",
+  "totalMembers": 1606,
+  "activeToday": 286,
   "players": [
     {
       "username": "rafallaobedi-210",
-      "total_pts": 335,
+      "total_pts": 380,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 335,
+      "rapid_pts": 380,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 23,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
+      "rapid_g": 26,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
       "username": "bosticoart",
-      "total_pts": 281,
-      "bullet_pts": 176,
+      "total_pts": 293,
+      "bullet_pts": 188,
       "blitz_pts": 0,
       "rapid_pts": 105,
-      "bullet_g": 60,
+      "bullet_g": 64,
       "blitz_g": 0,
       "rapid_g": 7,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     },
     {
-      "username": "polynomial-c",
-      "total_pts": 152,
-      "bullet_pts": 0,
-      "blitz_pts": 147,
-      "rapid_pts": 5,
-      "bullet_g": 0,
-      "blitz_g": 17,
-      "rapid_g": 1,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/14840558.f26cd658.200x200o.88827bd2d167.jpg"
+      "username": "bughouse_partner",
+      "total_pts": 244,
+      "bullet_pts": 1,
+      "blitz_pts": 243,
+      "rapid_pts": 0,
+      "bullet_g": 1,
+      "blitz_g": 27,
+      "rapid_g": 0,
+      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
     }
   ]
 }
