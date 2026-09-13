@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-13T12:32:55.708Z",
-  "totalMembers": 1606,
-  "activeToday": 286,
+  "updated": "2026-09-13T16:49:59.850Z",
+  "totalMembers": 1608,
+  "activeToday": 387,
   "players": [
     {
       "username": "rafallaobedi-210",
@@ -12,29 +12,29 @@
       "bullet_g": 0,
       "blitz_g": 0,
       "rapid_g": 26,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     },
     {
       "username": "bosticoart",
-      "total_pts": 293,
-      "bullet_pts": 188,
+      "total_pts": 326,
+      "bullet_pts": 221,
       "blitz_pts": 0,
       "rapid_pts": 105,
-      "bullet_g": 64,
+      "bullet_g": 75,
       "blitz_g": 0,
       "rapid_g": 7,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
     },
     {
-      "username": "bughouse_partner",
-      "total_pts": 244,
-      "bullet_pts": 1,
-      "blitz_pts": 243,
-      "rapid_pts": 0,
-      "bullet_g": 1,
-      "blitz_g": 27,
-      "rapid_g": 0,
-      "avatar": "https://taki2023.github.io/taki/default-pawn.png"
+      "username": "kandasamybalaji1983",
+      "total_pts": 297,
+      "bullet_pts": 267,
+      "blitz_pts": 0,
+      "rapid_pts": 30,
+      "bullet_g": 89,
+      "blitz_g": 0,
+      "rapid_g": 2,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/146022919.9a5aa91b.200x200o.e50050f3a8de.jpg"
     }
   ]
 }
