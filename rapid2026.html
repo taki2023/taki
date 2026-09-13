@@ -70,6 +70,8 @@ table.pairings tbody tr:nth-child(odd){background:#FFFAF7}
 table.pairings tbody tr:hover{background:#EAF5E2}
 table.pairings tbody tr.band-through{box-shadow:inset 4px 0 var(--blue)}
 table.pairings tbody tr.band-out{box-shadow:inset 4px 0 var(--red-deep)}
+table.pairings tbody tr.band-withdrawn{box-shadow:inset 4px 0 var(--red-deep);background:#FFF1EE!important}
+table.pairings tbody tr.band-withdrawn:hover{background:#FFE4E1!important}
 table.pairings tbody td{padding:9px 4px;text-align:center;font-size:12px;font-weight:800;color:var(--ink);white-space:nowrap}
 table.pairings tbody td:first-child{text-align:left;padding-left:14px;width:200px;min-width:200px;max-width:200px}
 .player-cell{display:flex;align-items:center;gap:9px;min-width:0}
@@ -238,6 +240,7 @@ const popover=document.getElementById('matchPopover');
 const esc=v=>String(v==null?'':v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 const prettifyUsername=u=>(u||'').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 const isWithdrawn=u=>WITHDRAWN_SET.has((u||'').toLowerCase());
+const effectiveOrder=order=>order.filter(u=>!isWithdrawn(u));
 const formatSum=p=>(Math.round(Number(p||0)*2)/2).toString();
 const pointsClass=p=>p===1?'win':p===0?'loss':'draw';
 const playerInfo=u=>TOURNAMENT.playerInfo?.[u]||{name:prettifyUsername(u),avatar:DEFAULT_AVATAR,username:u};
@@ -359,7 +362,7 @@ const standings=group.standings||group.players.map((username,i)=>({username,rank
 const order=standings.slice().sort((a,b)=>a.rank-b.rank);
 let body='';
 order.forEach((row,rank)=>{
-const info=playerInfo(row.username),rankClass=rank===0?'r1':rank===1?'r2':rank===2?'r3':'',band=isFinal?'':row.qualified?'band-through':'band-out';
+const info=playerInfo(row.username),rankClass=rank===0?'r1':rank===1?'r2':rank===2?'r3':'',band=isWithdrawn(row.username)?'band-withdrawn':(isFinal?'':row.qualified?'band-through':'band-out');
 body+=`<tr class="${band}"><td><div class="player-cell"><div class="player-rank ${rankClass}">${rank+1}</div><a class="player-avatar-link" href="https://www.chess.com/member/${encodeURIComponent(row.username)}" target="_blank" rel="noopener noreferrer"><img class="player-avatar" src="${esc(info.avatar)}" onerror="this.src='${DEFAULT_AVATAR}'"></a><div class="player-name"><a href="https://www.chess.com/member/${encodeURIComponent(row.username)}" target="_blank" rel="noopener noreferrer">${esc(info.name)}</a></div>${isWithdrawn(row.username)?WITHDRAW_SVG:''}</div></td>`;
 order.forEach(col=>{
 if(col.username===row.username){body+='<td><span class="cell-x">✕</span></td>';return}
