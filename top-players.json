@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-13T01:17:40.228Z",
+  "updated": "2026-09-13T06:32:37.274Z",
   "totalMembers": 1608,
-  "activeToday": 39,
+  "activeToday": 158,
   "players": [
     {
       "username": "rafallaobedi-210",
-      "total_pts": 75,
+      "total_pts": 335,
       "bullet_pts": 0,
       "blitz_pts": 0,
-      "rapid_pts": 75,
+      "rapid_pts": 335,
       "bullet_g": 0,
       "blitz_g": 0,
-      "rapid_g": 5,
+      "rapid_g": 23,
       "avatar": "https://images.chesscomfiles.com/uploads/v1/user/431911317.376ed403.200x200o.25b5da87df7c.jpg"
     },
     {
-      "username": "aiikoh",
-      "total_pts": 54,
-      "bullet_pts": 0,
-      "blitz_pts": 54,
-      "rapid_pts": 0,
-      "bullet_g": 0,
-      "blitz_g": 6,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/75348440.6ccf7f1e.200x200o.c01be945c49c.png"
+      "username": "bosticoart",
+      "total_pts": 281,
+      "bullet_pts": 176,
+      "blitz_pts": 0,
+      "rapid_pts": 105,
+      "bullet_g": 60,
+      "blitz_g": 0,
+      "rapid_g": 7,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/187024677.7a58014c.200x200o.0286fb7b43d5.jpeg"
     },
     {
-      "username": "ed3r3337",
-      "total_pts": 54,
+      "username": "polynomial-c",
+      "total_pts": 152,
       "bullet_pts": 0,
-      "blitz_pts": 54,
-      "rapid_pts": 0,
+      "blitz_pts": 147,
+      "rapid_pts": 5,
       "bullet_g": 0,
-      "blitz_g": 6,
-      "rapid_g": 0,
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/407894133.a52587e6.200x200o.192831b43836.png"
+      "blitz_g": 17,
+      "rapid_g": 1,
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/14840558.f26cd658.200x200o.88827bd2d167.jpg"
     }
   ]
 }
