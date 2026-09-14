@@ -245,14 +245,21 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "RayDuqueIII",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174468515676::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174468515676",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
+              "scoreA": 1,
               "scoreB": 0,
               "finished": false,
-              "status": "pending",
+              "status": "partial",
               "bothWithdrawn": false
             },
             {
@@ -388,18 +395,18 @@
           ],
           "standings": [
             {
-              "username": "DanielMelbou",
+              "username": "DaTreeOfFives",
               "rank": 1,
               "score": 3,
-              "tiebreak": 0.5,
+              "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "DaTreeOfFives",
+              "username": "DanielMelbou",
               "rank": 2,
-              "score": 2,
-              "tiebreak": 3,
+              "score": 3,
+              "tiebreak": 0.5,
               "qualified": true,
               "withdrawn": false
             },
@@ -430,7 +437,7 @@
           ],
           "matchesFinished": 3,
           "matchesTotal": 10,
-          "gamesFinished": 6,
+          "gamesFinished": 7,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -1107,7 +1114,7 @@
       "stats": {
         "matchesFinished": 15,
         "matchesTotal": 44,
-        "gamesFinished": 32,
+        "gamesFinished": 33,
         "gamesTotal": 88
       }
     }
