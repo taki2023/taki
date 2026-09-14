@@ -581,27 +581,53 @@
             {
               "playerA": "Desert_Recon",
               "playerB": "Tengen",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174424880348::1-0 | https://www.chess.com/game/live/174425153072::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174424880348",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174425153072",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
               "playerA": "Desert_Recon",
               "playerB": "cello_jello",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174435083660::1-0 | https://www.chess.com/game/live/174435622704::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174435083660",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174435622704",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -659,15 +685,15 @@
           ],
           "standings": [
             {
-              "username": "cello_jello",
+              "username": "Desert_Recon",
               "rank": 1,
-              "score": 0,
+              "score": 4,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Desert_Recon",
+              "username": "cello_jello",
               "rank": 2,
               "score": 0,
               "tiebreak": 0,
@@ -691,9 +717,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 0,
+          "gamesFinished": 4,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -787,14 +813,21 @@
             {
               "playerA": "TALented_Vasee_18",
               "playerB": "IvanBoevski",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174449061550::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174449061550",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
+              "scoreA": 1,
               "scoreB": 0,
               "finished": false,
-              "status": "pending",
+              "status": "partial",
               "bothWithdrawn": false
             },
             {
@@ -855,20 +888,20 @@
               "username": "Taki",
               "rank": 1,
               "score": 6,
-              "tiebreak": 4,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "IvanBoevski",
-              "rank": 2,
-              "score": 2,
-              "tiebreak": 0,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
+              "rank": 2,
+              "score": 3,
+              "tiebreak": 0,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "IvanBoevski",
               "rank": 3,
               "score": 2,
               "tiebreak": 0,
@@ -886,7 +919,7 @@
           ],
           "matchesFinished": 5,
           "matchesTotal": 6,
-          "gamesFinished": 10,
+          "gamesFinished": 11,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -928,14 +961,21 @@
             {
               "playerA": "TrofAndy",
               "playerB": "RIP_People_in_Chess",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
+              "link": "https://www.chess.com/game/live/174423145402::0-1",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174423145402",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
               "scoreA": 0,
-              "scoreB": 0,
+              "scoreB": 1,
               "finished": false,
-              "status": "pending",
+              "status": "partial",
               "bothWithdrawn": false
             },
             {
@@ -1027,18 +1067,18 @@
               "withdrawn": false
             },
             {
-              "username": "Moment_Before_Realization",
+              "username": "RIP_People_in_Chess",
               "rank": 2,
-              "score": 1,
+              "score": 2,
               "tiebreak": 0.5,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "RIP_People_in_Chess",
+              "username": "Moment_Before_Realization",
               "rank": 3,
               "score": 1,
-              "tiebreak": 0.5,
+              "tiebreak": 1,
               "qualified": false,
               "withdrawn": false
             },
@@ -1053,15 +1093,15 @@
           ],
           "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 7,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 12,
+        "matchesFinished": 14,
         "matchesTotal": 44,
-        "gamesFinished": 25,
+        "gamesFinished": 31,
         "gamesTotal": 88
       }
     }
@@ -1331,8 +1371,8 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 9,
-    "mostWinsPlayer": "Taki",
+    "matchesPlayedCount": 11,
+    "mostWinsPlayer": "Desert_Recon",
     "mostWinsCount": 2,
     "biggestUpset": null,
     "podium": null,
