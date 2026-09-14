@@ -69,14 +69,27 @@
             {
               "playerA": "Daniel2040",
               "playerB": "Juliana3377",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/174481593214::1-0 | https://www.chess.com/game/live/174481785612::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/174481593214",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174481785612",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -162,7 +175,7 @@
             {
               "username": "Daniel2040",
               "rank": 1,
-              "score": 1.5,
+              "score": 3.5,
               "tiebreak": 0.5,
               "qualified": true,
               "withdrawn": false
@@ -200,9 +213,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 2,
           "matchesTotal": 10,
-          "gamesFinished": 2,
+          "gamesFinished": 4,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -245,21 +258,27 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "RayDuqueIII",
-              "link": "https://www.chess.com/game/live/174468515676::1-0",
+              "link": "https://www.chess.com/game/live/174468515676::1-0 | https://www.chess.com/game/live/174468781182::1-0",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/174468515676",
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174468781182",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 1,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -397,8 +416,8 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 3,
-              "tiebreak": 3,
+              "score": 4,
+              "tiebreak": 4,
               "qualified": true,
               "withdrawn": false
             },
@@ -435,9 +454,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 4,
           "matchesTotal": 10,
-          "gamesFinished": 7,
+          "gamesFinished": 8,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -479,21 +498,27 @@
             {
               "playerA": "Freddy1201",
               "playerB": "Jar_the_Lyd",
-              "link": "https://www.chess.com/game/live/174416424008::1-0",
+              "link": "https://www.chess.com/game/live/174416424008::1-0 | https://www.chess.com/game/live/174480329224::1-0",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/174416424008",
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174480329224",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 1,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -540,7 +565,7 @@
             {
               "username": "Freddy1201",
               "rank": 1,
-              "score": 1,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
@@ -570,9 +595,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 1,
           "matchesTotal": 6,
-          "gamesFinished": 1,
+          "gamesFinished": 2,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1112,9 +1137,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 15,
+        "matchesFinished": 18,
         "matchesTotal": 44,
-        "gamesFinished": 33,
+        "gamesFinished": 37,
         "gamesTotal": 88
       }
     }
@@ -1384,8 +1409,8 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 12,
-    "mostWinsPlayer": "Desert_Recon",
+    "matchesPlayedCount": 15,
+    "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 2,
     "biggestUpset": null,
     "podium": null,
