@@ -813,21 +813,27 @@
             {
               "playerA": "TALented_Vasee_18",
               "playerB": "IvanBoevski",
-              "link": "https://www.chess.com/game/live/174449061550::1-0",
+              "link": "https://www.chess.com/game/live/174449061550::1-0 | https://www.chess.com/game/live/174449146686::0.5-0.5",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/174449061550",
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174449146686",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 1,
-              "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1.5,
+              "scoreB": 0.5,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -888,22 +894,22 @@
               "username": "Taki",
               "rank": 1,
               "score": 6,
-              "tiebreak": 5,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
               "rank": 2,
-              "score": 3,
-              "tiebreak": 0,
+              "score": 3.5,
+              "tiebreak": 2.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "IvanBoevski",
               "rank": 3,
-              "score": 2,
+              "score": 2.5,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
@@ -917,11 +923,11 @@
               "withdrawn": true
             }
           ],
-          "matchesFinished": 5,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 11,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         },
         {
           "name": "group 6",
@@ -1099,9 +1105,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 14,
+        "matchesFinished": 15,
         "matchesTotal": 44,
-        "gamesFinished": 31,
+        "gamesFinished": 32,
         "gamesTotal": 88
       }
     }
@@ -1371,7 +1377,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 11,
+    "matchesPlayedCount": 12,
     "mostWinsPlayer": "Desert_Recon",
     "mostWinsCount": 2,
     "biggestUpset": null,
