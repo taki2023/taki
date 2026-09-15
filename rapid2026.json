@@ -121,21 +121,27 @@
             {
               "playerA": "AarjavSamaiya",
               "playerB": "Juliana3377",
-              "link": "https://www.chess.com/game/live/174497807666::1-0",
+              "link": "https://www.chess.com/game/live/174497807666::1-0 | https://www.chess.com/game/live/174498095688::1-0",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/174497807666",
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174498095688",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 1,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -190,7 +196,7 @@
             {
               "username": "AarjavSamaiya",
               "rank": 2,
-              "score": 1,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
@@ -220,9 +226,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 3,
           "matchesTotal": 10,
-          "gamesFinished": 5,
+          "gamesFinished": 6,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -1150,9 +1156,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 19,
+        "matchesFinished": 20,
         "matchesTotal": 44,
-        "gamesFinished": 39,
+        "gamesFinished": 40,
         "gamesTotal": 88
       }
     }
@@ -1422,7 +1428,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 16,
+    "matchesPlayedCount": 17,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 2,
     "biggestUpset": null,
