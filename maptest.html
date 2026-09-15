@@ -62,7 +62,7 @@
     h1.map-title {
       font-family: 'Fredoka One', cursive;
       color: var(--accent-orange);
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       text-align: center;
       margin-bottom: 0.3rem;
       text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
@@ -266,11 +266,13 @@
 
     .decor-prop {
       position: absolute;
-      font-size: 2rem !important;
+      font-size: 2.8rem !important;
       z-index: 1;
       pointer-events: none;
       user-select: none;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12)) drop-shadow(0 0 0 rgba(0,0,0,0.85));
+      -webkit-text-stroke: 1.3px rgba(0,0,0,0.6);
+      paint-order: stroke fill;
     }
 
     .decor-prop.sway {
@@ -387,18 +389,18 @@
     .pin {
       position: relative;
 
-      width: 78px;
-      height: 78px;
+      width: 100px;
+      height: 100px;
 
       background: var(--card-bg);
-      border: 4px solid var(--border-orange);
+      border: 7px solid var(--border-orange);
       border-radius: 50%;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      font-size: 2.2rem;
+      font-size: 3rem;
 
       box-shadow:
         0 6px 14px rgba(0,0,0,0.12);
@@ -593,14 +595,14 @@
         translateX(-50%)
         translateY(10px);
 
-      width: 230px;
+      width: 260px;
 
       background-color: var(--white);
 
       border: 3px solid var(--border-orange);
       border-radius: 14px;
 
-      padding: 1rem;
+      padding: 1.1rem;
 
       box-shadow: var(--shadow);
 
@@ -649,15 +651,16 @@
     .tip-title {
       font-family: 'Fredoka One', cursive;
       color: var(--accent-orange);
-      font-size: 0.98rem;
-      margin-bottom: 0.35rem;
+      font-size: 1.32rem;
+      margin-bottom: 0.4rem;
     }
 
     .tip-intro {
-      font-size: 0.84rem;
-      color: #555;
+      font-size: 1.12rem;
+      font-weight: 900;
+      color: #333;
       margin-bottom: 0.8rem;
-      line-height: 1.35;
+      line-height: 1.4;
     }
 
     .btn-join {
@@ -725,16 +728,20 @@
     }
 
     .rapid-svg {
-      width: 46px;
-      height: 46px;
+      width: 62px;
+      height: 62px;
       display: block;
       flex: 0 0 auto;
       fill: var(--rapid-green);
       color: var(--rapid-green);
+      stroke: #2E5C1A;
+      stroke-width: 0.8;
     }
 
     .rapid-svg path {
       fill: var(--rapid-green);
+      stroke: #2E5C1A;
+      stroke-width: 0.8;
     }
 
     /* =========================================================
@@ -860,7 +867,7 @@
       }
 
       h1.map-title {
-        font-size: 1.7rem;
+        font-size: 1.3rem;
       }
 
       p.subtitle {
@@ -1002,14 +1009,14 @@
              AUTOMATIC POLAR GUIDES
              =================================================== -->
 
-        <g id="polar-guides" class="polar-guides" fill="none" stroke="#E85535" stroke-linecap="round" opacity="0.72" pointer-events="none"><circle cx="475" cy="475" r="144.21" stroke-width="4" stroke-dasharray="3 9"></circle><circle cx="475" cy="475" r="288.42" stroke-width="4" stroke-dasharray="3 9"></circle><circle cx="475" cy="475" r="437" stroke-width="4" stroke-dasharray="3 9"></circle></g>
+        <g id="polar-guides" class="polar-guides" fill="none" stroke="#E85535" stroke-linecap="round" opacity="0.72" pointer-events="none"><circle cx="475" cy="475" r="144.21" stroke-width="8" stroke-dasharray="4 10"></circle><circle cx="475" cy="475" r="288.42" stroke-width="8" stroke-dasharray="4 10"></circle><circle cx="475" cy="475" r="437" stroke-width="8" stroke-dasharray="4 10"></circle></g>
 
 
         <!-- ===================================================
              AUTOMATIC POLAR RAYS
              =================================================== -->
 
-        <g id="polar-rays" class="polar-rays" fill="none" stroke="#E85535" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 9" opacity="0.62" pointer-events="none"><line x1="475" y1="475" x2="402.89500000000004" y2="350.1104765202461"></line><line x1="475" y1="475" x2="475" y2="38"></line><line x1="475" y1="475" x2="832.9694433542894" y2="224.34709731459287"></line><line x1="475" y1="475" x2="912" y2="475"></line><line x1="475" y1="475" x2="186.57999999999998" y2="474.99999999999994"></line><line x1="475" y1="475" x2="271.0562621701759" y2="678.943737829824"></line><line x1="475" y1="475" x2="547.105" y2="599.8895234797538"></line><line x1="475" y1="475" x2="724.7790469595078" y2="619.21"></line><line x1="475" y1="475" x2="474.99999999999994" y2="912"></line><line x1="475" y1="475" x2="64.35432471655804" y2="624.4628026333172"></line><line x1="475" y1="475" x2="725.6529026854072" y2="117.03055664571059"></line></g>
+        <g id="polar-rays" class="polar-rays" fill="none" stroke="#E85535" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 10" opacity="0.62" pointer-events="none"><line x1="475" y1="475" x2="402.89500000000004" y2="350.1104765202461"></line><line x1="475" y1="475" x2="475" y2="38"></line><line x1="475" y1="475" x2="832.9694433542894" y2="224.34709731459287"></line><line x1="475" y1="475" x2="912" y2="475"></line><line x1="475" y1="475" x2="186.57999999999998" y2="474.99999999999994"></line><line x1="475" y1="475" x2="271.0562621701759" y2="678.943737829824"></line><line x1="475" y1="475" x2="547.105" y2="599.8895234797538"></line><line x1="475" y1="475" x2="724.7790469595078" y2="619.21"></line><line x1="475" y1="475" x2="474.99999999999994" y2="912"></line><line x1="475" y1="475" x2="64.35432471655804" y2="624.4628026333172"></line><line x1="475" y1="475" x2="725.6529026854072" y2="117.03055664571059"></line></g>
 
 
         <!-- ================= MOUNTAINS ================= -->
@@ -1235,7 +1242,7 @@
            MOUNTAIN / ACADEMY
            ===================================================== -->
 
-      <span class="decor-prop" style="top: 7%; left: 5%; font-size:1.6rem;">
+      <span class="decor-prop" style="top: 7%; left: 5%; font-size:1.9rem;">
         🌲
       </span>
 
@@ -1280,7 +1287,7 @@
         🌴
       </span>
 
-      <span class="decor-prop" style="top: 40%; left: 9%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 40%; left: 9%; font-size:1.9rem;">
         🌸
       </span>
 
@@ -1288,7 +1295,7 @@
         🪨
       </span>
 
-      <span class="decor-prop" style="top: 54%; left: 23%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 54%; left: 23%; font-size:1.9rem;">
         🌿
       </span>
 
@@ -1301,7 +1308,7 @@
         🌳
       </span>
 
-      <span class="decor-prop" style="top: 29%; left: 82%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 29%; left: 82%; font-size:1.9rem;">
         🌸
       </span>
 
@@ -1313,7 +1320,7 @@
         🪨
       </span>
 
-      <span class="decor-prop" style="top: 55%; left: 96%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 55%; left: 96%; font-size:1.9rem;">
         🌸
       </span>
 
@@ -1326,7 +1333,7 @@
         🌴
       </span>
 
-      <span class="decor-prop" style="top: 73%; left: 19%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 73%; left: 19%; font-size:1.9rem;">
         🌿
       </span>
 
@@ -1334,7 +1341,7 @@
         🌲
       </span>
 
-      <span class="decor-prop" style="top: 83%; left: 58%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 83%; left: 58%; font-size:1.9rem;">
         🌱
       </span>
 
@@ -1347,7 +1354,7 @@
         🌴
       </span>
 
-      <span class="decor-prop" style="top: 73%; left: 93%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 73%; left: 93%; font-size:1.9rem;">
         🪨
       </span>
 
@@ -1355,7 +1362,7 @@
         🦆
       </span>
 
-      <span class="decor-prop" style="top: 92%; left: 75%; font-size:1.35rem;">
+      <span class="decor-prop" style="top: 92%; left: 75%; font-size:1.9rem;">
         🌿
       </span>
 
@@ -1364,7 +1371,7 @@
            SECRET CHILLI
            ===================================================== -->
 
-      <span class="decor-prop secret-chilli" id="secret-chilli" style="top: 77%; left: 69%; font-size: 1.45rem;" title="?">
+      <span class="decor-prop secret-chilli" id="secret-chilli" style="top: 77%; left: 69%; font-size: 2.1rem;" title="?">
         🌶️
       </span>
 
@@ -1373,444 +1380,7 @@
            MASCOT
            ===================================================== -->
 
-      <div class="waypoint" tabindex="0" data-id="traps" style="left: 42.41%; top: 36.8537%;">
-
-      <div class="pin">
-
-        ♟️
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          ♟️ Tricky Opening Traps!
-        </span>
-
-        <span class="tip-intro">
-          Learn interesting and tricky Chess traps to shock your opponent and yourself!
-        </span>
-
-        <a href="https://www.chess.com/clubs/forum/view/tricky-opening-trap-by-iamplayerofchess" target="_blank" rel="noopener" class="btn-join">
-          Explore Traps
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="elo" style="left: 50%; top: 19.64%;">
-
-      <div class="pin">
-
-        🤔
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🤔 Guess the Elo!
-        </span>
-
-        <span class="tip-intro">
-          Guess the ratings of the players who played the games!
-        </span>
-
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform" target="_blank" rel="noopener" class="btn-join">
-          Guess Now
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="calendar" style="left: 87.681%; top: 23.6155%;">
-
-      <div class="pin">
-
-        🗓️
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🗓️ Event Calendar
-        </span>
-
-        <span class="tip-intro">
-          Follow the Calendar to keep track of upcoming events!
-        </span>
-
-        <a href="https://www.chess.com/announcements/view/hot-chilli-calendar" target="_blank" rel="noopener" class="btn-join">
-          View Calendar
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="heatmap" style="left: 76.2925%; top: 65.18%;">
-
-      <div class="pin">
-
-        🔥
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🔥 Heat Map
-        </span>
-
-        <span class="tip-intro">
-          Hot Chilli Heat Map! Check active zones.
-        </span>
-
-        <a href="https://www.chess.com/announcements/view/heat-map" target="_blank" rel="noopener" class="btn-join">
-          Check Heat
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="courses" style="left: 50%; top: 50%;">
-
-      <div class="pin">
-
-        📚
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          📚 Hot Chilli Courses
-        </span>
-
-        <span class="tip-intro">
-          It's great to learn a new opening, have a look!
-        </span>
-
-        <a href="https://www.chess.com/announcements/view/hot-chilli-opening-courses" target="_blank" rel="noopener" class="btn-join">
-          Browse Courses
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="rate" style="left: 19.64%; top: 50%;">
-
-      <div class="pin">
-
-        ⭐
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          ⭐ Rate our Club!
-        </span>
-
-        <span class="tip-intro">
-          Rate our club and share your feedback!
-        </span>
-
-        <a href="https://smartpolls.co.uk/p/145078/results" target="_blank" rel="noopener" class="btn-join">
-          Leave Review
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="votechess" style="left: 6.77414%; top: 65.7329%;">
-
-      <div class="pin">
-
-        🗳️
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🗳️ Vote Chess
-        </span>
-
-        <span class="tip-intro">
-          Discuss, learn, vote! Spicy Vote Chess games!
-        </span>
-
-        <a href="https://www.chess.com/club/votechess/hot-chilli-checkmate" target="_blank" rel="noopener" class="btn-join">
-          Cast Vote
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="daily" style="left: 50%; top: 96%;">
-
-      <div class="pin">
-
-        ☀️
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          ☀️ Daily Matches
-        </span>
-
-        <span class="tip-intro">
-          Take as much time as you want, slow paced, accurate chess!
-        </span>
-
-        <a href="https://www.chess.com/clubs/matches/hot-chilli-checkmate" target="_blank" rel="noopener" class="btn-join">
-          Play Daily
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="announce" style="left: 74.8695%; top: 32.5862%;">
-
-      <div class="pin">
-
-        📢
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          📢 Announcements
-        </span>
-
-        <span class="tip-intro">
-          Spicy announcements, don't forget to check!
-        </span>
-
-        <a href="https://www.chess.com/club/hot-chilli-checkmate/announcements" target="_blank" rel="noopener" class="btn-join">
-          Read News
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="rules" style="left: 80.36%; top: 50%;">
-
-      <div class="pin">
-
-        📜
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          📜 Club Rules
-        </span>
-
-        <span class="tip-intro">
-          Check our club rules here!
-        </span>
-
-        <a href="https://www.chess.com/clubs/forum/view/rules-for-the-competitive-side-of-the-club" target="_blank" rel="noopener" class="btn-join">
-          View Rules
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="tiger" style="left: 96%; top: 50%;">
-
-      <div class="pin">
-
-        🐯
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🐯 Chess Like a Tiger
-        </span>
-
-        <span class="tip-intro">
-          One of our partner clubs — sharp, fierce, and always hunting for the best move!
-        </span>
-
-        <a href="https://www.chess.com/club/chess-like-a-tiger" target="_blank" rel="noopener" class="btn-join">
-          Visit Their Club
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="hybrid" style="left: 28.5322%; top: 71.4678%;">
-
-      <div class="pin">
-
-        ♞
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          ♞ Hybrid Chess Federation
-        </span>
-
-        <span class="tip-intro">
-          A partner club blending styles and ideas — allies of Hot Chilli CheckMate.
-        </span>
-
-        <a href="https://www.chess.com/club/hybrid-chess-federation" target="_blank" rel="noopener" class="btn-join">
-          Visit Their Club
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="noobs" style="left: 50%; top: 4%;">
-
-      <div class="pin">
-
-        🎓
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🎓 Noobs to GMs Club
-        </span>
-
-        <span class="tip-intro">
-          A partner club dedicated to the journey from total beginner to grandmaster.
-        </span>
-
-        <a href="https://www.chess.com/club/noobs-to-gms-club" target="_blank" rel="noopener" class="btn-join">
-          Visit Their Club
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="schizzarotto" style="left: 76.3845%; top: 12.319%;">
-
-      <div class="pin">
-
-        🃏
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🃏 Schizzarotto Fan Club
-        </span>
-
-        <span class="tip-intro">
-          A partner fan club, always good for a laugh and some chaotic chess energy.
-        </span>
-
-        <a href="https://www.chess.com/club/schizzarotto-fan-club" target="_blank" rel="noopener" class="btn-join">
-          Visit Their Club
-        </a>
-
-      </div>
-
-    </div><div class="waypoint" tabindex="0" data-id="blitzfire" style="left: 57.59%; top: 63.1463%;">
-
-      <div class="pin">
-
-        <svg class="rapid-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="m11.97 14.63c-.9 0-1.87-.73-1.5-2.23l1.03-4.4h1l1.03 4.37c.37 1.53-.63 2.27-1.57 2.27zm.03 7.87c-5.23 0-9.5-4.27-9.5-9.5s4.27-9.5 9.5-9.5 9.5 4.27 9.5 9.5-4.27 9.5-9.5 9.5zm0-3c4 0 6.5-2.5 6.5-6.5s-2.5-6.5-6.5-6.5-6.5 2.5-6.5 6.5 2.5 6.5 6.5 6.5zm-1.5-14.27v-4.23h3v4.23zm5-3.23h-7c0-1.7.43-2 3.5-2s3.5.3 3.5 2z"></path>
-      </svg>
-
-        <span class="badge-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <div class="tip-window">
-
-        <span class="tip-title">
-          🏆 Hot Chilli Rapid Championship
-        </span>
-
-        <span class="tip-intro">
-          The Rapid Championship pairings are ready!
-        </span>
-
-        <a href="https://www.chess.com/announcements/view/hot-chilli-rapid-championship-pairings" target="_blank" rel="noopener" class="btn-join">
-          Open Pairings
-        </a>
-
-      </div>
-
-    </div><div class="mascot-guide" id="mascot-guide">
+      <div class="mascot-guide" id="mascot-guide">
 
         <div class="speech-bubble show" id="speech-bubble">I once got lost near the Voting Hall for three days 🗳️😅</div>
 
@@ -2109,12 +1679,12 @@ function buildPolarGuides() {
 
       circle.setAttribute(
         'stroke-width',
-        '4'
+        '8'
       );
 
       circle.setAttribute(
         'stroke-dasharray',
-        '3 9'
+        '4 10'
       );
 
 
@@ -2762,6 +2332,101 @@ WAYPOINTS.forEach(
         'click',
         () => discover(wp)
       );
+
+
+    /*
+       Keep the tooltip inside the map bounds so it
+       never gets cropped at the edges.
+    */
+
+    const tipWindow =
+      el.querySelector(
+        '.tip-window'
+      );
+
+
+    function clampTooltip() {
+
+      tipWindow.style.left = '50%';
+      tipWindow.style.right = 'auto';
+      tipWindow.style.transform =
+        'translateX(-50%) translateY(0)';
+
+
+      const wrapperRect =
+        mapWrapper.getBoundingClientRect();
+
+      const scale =
+        parseFloat(
+          getComputedStyle(mapWrapper)
+            .getPropertyValue('--map-scale')
+        ) || 1;
+
+      const tipRect =
+        tipWindow.getBoundingClientRect();
+
+
+      let shiftPx = 0;
+
+      if (tipRect.left < wrapperRect.left) {
+
+        shiftPx =
+          wrapperRect.left - tipRect.left;
+
+      } else if (
+        tipRect.right >
+        wrapperRect.right
+      ) {
+
+        shiftPx =
+          wrapperRect.right -
+          tipRect.right;
+
+      }
+
+
+      if (shiftPx !== 0) {
+
+        const shiftUnscaled =
+          shiftPx / scale;
+
+        tipWindow.style.transform =
+          `translateX(calc(-50% + ${shiftUnscaled}px)) translateY(0)`;
+
+      }
+
+
+      /*
+         Also keep it from poking out the top —
+         flip it below the pin if there isn't
+         room above.
+      */
+
+      if (tipRect.top < wrapperRect.top) {
+
+        tipWindow.style.bottom = 'auto';
+        tipWindow.style.top = '85px';
+
+      } else {
+
+        tipWindow.style.bottom = '85px';
+        tipWindow.style.top = 'auto';
+
+      }
+
+    }
+
+
+    el.addEventListener(
+      'mouseenter',
+      clampTooltip
+    );
+
+
+    el.addEventListener(
+      'focus',
+      clampTooltip
+    );
 
   }
 );
