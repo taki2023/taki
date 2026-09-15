@@ -999,21 +999,27 @@
             {
               "playerA": "TrofAndy",
               "playerB": "RIP_People_in_Chess",
-              "link": "https://www.chess.com/game/live/174423145402::0-1",
+              "link": "https://www.chess.com/game/live/174423145402::0-1 | https://www.chess.com/game/live/174484177044::1-0",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/174423145402",
                   "scoreA": 0,
                   "scoreB": 1,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/174484177044",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 0,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
               "scoreB": 1,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1099,8 +1105,8 @@
             {
               "username": "TrofAndy",
               "rank": 1,
-              "score": 4,
-              "tiebreak": 1,
+              "score": 5,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
@@ -1108,7 +1114,7 @@
               "username": "RIP_People_in_Chess",
               "rank": 2,
               "score": 2,
-              "tiebreak": 0.5,
+              "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
@@ -1129,17 +1135,17 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 4,
           "matchesTotal": 6,
-          "gamesFinished": 7,
+          "gamesFinished": 8,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 18,
+        "matchesFinished": 19,
         "matchesTotal": 44,
-        "gamesFinished": 37,
+        "gamesFinished": 38,
         "gamesTotal": 88
       }
     }
@@ -1279,7 +1285,7 @@
   "playerInfo": {
     "cello_jello": {
       "name": "cello_jello",
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/349443015.80e9a31a.200x200o.2c1ae4bc5637.jpg",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/349443015.85bf3782.200x200o.23444919006c.jpg",
       "username": "cello_jello"
     },
     "incecure": {
@@ -1339,7 +1345,7 @@
     },
     "Tengen": {
       "name": "tengen",
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/466828074.a6836079.200x200o.a2dace18b332.jpg",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/466828074.a86029d2.200x200o.251ec7d1ed36.jpg",
       "username": "Tengen"
     },
     "RKamalanayanan": {
@@ -1409,7 +1415,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 15,
+    "matchesPlayedCount": 16,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 2,
     "biggestUpset": null,
