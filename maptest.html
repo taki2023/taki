@@ -32,6 +32,8 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 @keyframes sway{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
 .decor-prop.flicker{animation:flicker 2.2s ease-in-out infinite;}
 @keyframes flicker{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.75;transform:scale(0.94);}}
+.decor-prop.leaf-fall{animation:leaf-fall 6.5s ease-in-out infinite;}
+@keyframes leaf-fall{0%{transform:translateY(0) rotate(-8deg);}50%{transform:translateY(10px) rotate(10deg);}100%{transform:translateY(0) rotate(-8deg);}}
 .fog{position:absolute;pointer-events:none;z-index:2;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,0.65) 0%,rgba(255,255,255,0.3) 45%,rgba(255,255,255,0) 75%);filter:blur(5px);animation:fog-drift 20s ease-in-out infinite;}
 @keyframes fog-drift{0%,100%{transform:translateX(0) scale(1);opacity:0.45;}50%{transform:translateX(16px) scale(1.06);opacity:0.7;}}
 .secret-chilli{pointer-events:auto;cursor:pointer;animation:shimmer 4.5s ease-in-out infinite;}
@@ -41,6 +43,7 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 @keyframes sparkle-out{0%{transform:translate(-50%,-50%) scale(0.3) rotate(0deg);opacity:1;}100%{transform:translate(-50%,-160%) scale(1.3) rotate(40deg);opacity:0;}}
 .waypoint{position:absolute;transform:translate(-50%,-50%);z-index:20;outline:none;cursor:pointer;}
 .waypoint:hover,.waypoint:focus,.waypoint:focus-within{z-index:1000;}
+.waypoint.active-hover{z-index:1000;}
 .pin{position:relative;width:100px;height:100px;background:var(--card-bg);border:7px solid var(--border-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 6px 14px rgba(0,0,0,0.12);transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275),background 0.2s,border-color 0.3s;overflow:hidden;}
 .pin img.pin-img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
 .waypoint:not(.discovered) .pin::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--border-orange);opacity:0.55;animation:invite-pulse 2.6s ease-out infinite;}
@@ -48,8 +51,8 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 .waypoint.discovered .pin{border-color:var(--gold);background:#FFF6D8;}
 .badge-check{position:absolute;top:-6px;right:-6px;width:22px;height:22px;background:#4CAF50;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;border:2px solid var(--white);box-shadow:0 2px 5px rgba(0,0,0,0.2);transform:scale(0);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);}
 .waypoint.discovered .badge-check{transform:scale(1);}
-.waypoint:hover .pin,.waypoint:focus .pin{transform:scale(1.22) rotate(-4deg);border-color:var(--accent-orange);background:var(--white);box-shadow:var(--shadow);}
-.waypoint.discovered:hover .pin,.waypoint.discovered:focus .pin{border-color:var(--gold);}
+.waypoint:hover .pin,.waypoint:focus .pin,.waypoint.active-hover .pin{transform:scale(1.22) rotate(-4deg);border-color:var(--accent-orange);background:var(--white);box-shadow:var(--shadow);}
+.waypoint.discovered:hover .pin,.waypoint.discovered:focus .pin,.waypoint.discovered.active-hover .pin{border-color:var(--gold);}
 .btn-join{display:inline-block;padding:0.5rem 1.1rem;background-color:var(--border-orange);color:var(--white);text-decoration:none;font-weight:bold;font-size:0.9rem;border-radius:8px;transition:background 0.2s ease;align-self:flex-start;}
 .btn-join:hover{background-color:var(--accent-orange);}
 .river-flow{stroke-dasharray:14 10;animation:flow 2.2s linear infinite;}
@@ -72,7 +75,7 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 .tip-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-size:.98rem;}
 .tip-intro{font-size:0.82rem;font-weight:800;color:#333;line-height:1.4;}
 @media (max-width:650px){body{padding-left:0.5rem;padding-right:0.5rem;}h1.map-title{font-size:1.3rem;}.mascot-guide{flex-direction:row;align-items:flex-start;text-align:left;}.speech-bubble{margin-top:0.5rem;max-width:100%;}.waypoint-tooltip{align-items:flex-start;text-align:left;}}
-@media (prefers-reduced-motion:reduce){.mascot-img,.cloud,.decor-prop.sway,.decor-prop.flicker,.secret-chilli,.fog,.waypoint:not(.discovered) .pin::before,.river-flow,.river-highlight{animation:none!important;}}
+@media (prefers-reduced-motion:reduce){.mascot-img,.cloud,.decor-prop.sway,.decor-prop.flicker,.decor-prop.leaf-fall,.secret-chilli,.fog,.waypoint:not(.discovered) .pin::before,.river-flow,.river-highlight{animation:none!important;}}
 </style>
 </head>
 <body>
@@ -139,7 +142,7 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 <circle r="34" fill="#FFF8F5" stroke="var(--border-orange)" stroke-width="3"/>
 <path d="M0,-26 L7,0 L0,26 L-7,0 Z" fill="var(--accent-orange)"/>
 <path d="M-26,0 L0,7 L26,0 L0,-7 Z" fill="var(--border-orange)" opacity="0.8"/>
-<text x="0" y="-32" text-anchor="middle" font-size="11" fill="var(--accent-orange)" font-weight="bold">N</text>
+<text x="0" y="-34" text-anchor="middle" font-size="17" fill="var(--accent-orange)" font-weight="bold">N</text>
 </g>
 </svg>
 <span class="decor-prop" style="top: 2%; left: 2%;">🌶️</span>
@@ -170,7 +173,15 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 <span class="decor-prop" style="top: 73%; left: 93%; font-size:1.9rem;">🪨</span>
 <span class="decor-prop" style="top: 89%; left: 91%;">🦆</span>
 <span class="decor-prop" style="top: 92%; left: 75%; font-size:1.9rem;">🌿</span>
-<span class="decor-prop secret-chilli" id="secret-chilli" style="top: 77%; left: 69%; font-size: 2.1rem;" title="?">🌶️</span>
+<span class="decor-prop leaf-fall" style="top: 11%; left: 45%; font-size:1.7rem;">🍁</span>
+<span class="decor-prop" style="top: 62%; left: 33%; font-size:1.6rem;">🍂</span>
+<span class="decor-prop leaf-fall" style="top: 19%; left: 87%; font-size:1.6rem;">🍁</span>
+<span class="decor-prop" style="top: 87%; left: 42%; font-size:1.8rem;">🎃</span>
+<span class="decor-prop" style="top: 58%; left: 62%; font-size:1.5rem;">🍂</span>
+<span class="decor-prop" style="top: 30%; left: 48%; font-size:1.8rem;">🌶️</span>
+<span class="decor-prop" style="top: 66%; left: 27%; font-size:1.8rem;">🌶️</span>
+<span class="decor-prop" style="top: 15%; left: 18%; font-size:1.8rem;">🌶️</span>
+<span class="decor-prop secret-chilli" id="secret-chilli" style="font-size: 2.1rem;" title="?">🌶️</span>
 <span class="fog" style="top:10%;left:25%;width:180px;height:62px;animation-delay:-2s;animation-duration:23s"></span>
 <span class="fog" style="top:18%;left:67%;width:150px;height:54px;animation-delay:-9s;animation-duration:27s"></span>
 <span class="fog" style="top:29%;left:9%;width:175px;height:65px;animation-delay:-14s;animation-duration:21s"></span>
@@ -182,6 +193,19 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 <span class="fog" style="top:76%;left:65%;width:190px;height:66px;animation-delay:-15s;animation-duration:30s"></span>
 <span class="fog" style="top:84%;left:27%;width:165px;height:60px;animation-delay:-22s;animation-duration:24s"></span>
 <span class="fog" style="top:91%;left:76%;width:120px;height:45px;animation-delay:-4s;animation-duration:20s"></span>
+<span class="fog" style="top:5%;left:40%;width:140px;height:50px;animation-delay:-12s;animation-duration:23s"></span>
+<span class="fog" style="top:23%;left:58%;width:160px;height:56px;animation-delay:-3s;animation-duration:28s"></span>
+<span class="fog" style="top:47%;left:33%;width:135px;height:48px;animation-delay:-19s;animation-duration:22s"></span>
+<span class="fog" style="top:64%;left:80%;width:170px;height:60px;animation-delay:-8s;animation-duration:27s"></span>
+<span class="fog" style="top:80%;left:52%;width:150px;height:52px;animation-delay:-16s;animation-duration:25s"></span>
+<span class="fog" style="top:3%;left:60%;width:130px;height:46px;animation-delay:-6s;animation-duration:21s"></span>
+<span class="fog" style="top:13%;left:12%;width:150px;height:52px;animation-delay:-10s;animation-duration:26s"></span>
+<span class="fog" style="top:26%;left:75%;width:140px;height:50px;animation-delay:-18s;animation-duration:23s"></span>
+<span class="fog" style="top:39%;left:57%;width:160px;height:56px;animation-delay:-1s;animation-duration:28s"></span>
+<span class="fog" style="top:56%;left:88%;width:135px;height:48px;animation-delay:-13s;animation-duration:22s"></span>
+<span class="fog" style="top:70%;left:38%;width:155px;height:54px;animation-delay:-21s;animation-duration:27s"></span>
+<span class="fog" style="top:87%;left:15%;width:140px;height:50px;animation-delay:-9s;animation-duration:24s"></span>
+<span class="fog" style="top:95%;left:60%;width:120px;height:44px;animation-delay:-17s;animation-duration:20s"></span>
 </div>
 <div class="zoom-controls">
 <button class="zoom-btn" id="zoom-in" type="button">+</button>
@@ -312,6 +336,8 @@ const WAYPOINTS=[
 const IDLE_LINES=["Psst... I heard there is a secret treasure hidden somewhere in the city 👀🌶️","Careful! The Tricky Opening District is dangerous ♟️","It's getting hot around here... 🔥","Rumor says a hidden chilli appears after midnight 🌶️👀","Fifteen places to explore... have you found them all?","The library never closes, you know 📚","I once got lost near the Voting Hall for three days 🗳️😅","Come on, click around, the map won't bite! 🗺️","Every alley here has a story. Go find one 🌶️"];
 const SECRET_LINES=["WAIT. You actually found it?! The secret chilli! 🌶️✨ Nobody ever looks behind the palm trees..."];
 
+let activeWaypointEl=null;
+
 WAYPOINTS.forEach(wp=>{
   const el=document.createElement('div');
   el.className='waypoint';el.tabIndex=0;el.dataset.id=wp.id;
@@ -322,19 +348,39 @@ WAYPOINTS.forEach(wp=>{
   const pinContent=wp.image?`<img class="pin-img" src="${wp.image}" alt="${wp.title}">`:(wp.svg?wp.svg:wp.icon);
   el.innerHTML=`<div class="pin">${pinContent}<span class="badge-check">✓</span></div>`;
   mapWrapper.appendChild(el);
-  el.addEventListener('mouseenter',()=>{sayHover(wp);showTooltip(wp);});
-  el.addEventListener('focus',()=>{sayHover(wp);showTooltip(wp);});
-  el.addEventListener('mouseleave',()=>{scheduleIdle();hideTooltip();});
-  el.addEventListener('blur',()=>{scheduleIdle();hideTooltip();});
+  el.addEventListener('mouseenter',()=>{activateWaypoint(wp,el);});
+  el.addEventListener('focus',()=>{activateWaypoint(wp,el);});
 });
 
-const STORAGE_KEY='hcc_map_discovered',SECRET_KEY='hcc_map_secret_found';
+function activateWaypoint(wp,el){
+  if(activeWaypointEl&&activeWaypointEl!==el)activeWaypointEl.classList.remove('active-hover');
+  el.classList.add('active-hover');
+  activeWaypointEl=el;
+  sayHover(wp);
+  showTooltip(wp);
+}
+
+const STORAGE_KEY='hcc_map_discovered',SECRET_KEY='hcc_map_secret_found',SECRET_SPOT_KEY='hcc_map_secret_spot';
+const TODAY_KEY=new Date().toISOString().slice(0,10);
+const SECRET_SPOTS=[{top:44,left:14},{top:16,left:52},{top:63,left:8},{top:8,left:86},{top:36,left:76},{top:60,left:58},{top:81,left:24},{top:26,left:33},{top:70,left:69},{top:14,left:23},{top:50,left:90},{top:90,left:56}];
+function dailySeed(){
+  const d=new Date();
+  return d.getFullYear()*372+d.getMonth()*31+d.getDate();
+}
+function positionSecretChilli(){
+  const spot=SECRET_SPOTS[dailySeed()%SECRET_SPOTS.length];
+  const el=document.getElementById('secret-chilli');
+  el.style.top=spot.top+'%';
+  el.style.left=spot.left+'%';
+}
 function loadDiscovered(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[];}catch(e){return[];}}
 function saveDiscovered(list){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(list));}catch(e){}}
 function updateProgressPill(){}
 function applySavedState(){
   loadDiscovered().forEach(id=>{const el=mapWrapper.querySelector(`.waypoint[data-id="${id}"]`);if(el)el.classList.add('discovered');});
-  if(localStorage.getItem(SECRET_KEY))document.getElementById('secret-chilli').classList.add('found');
+  positionSecretChilli();
+  if(localStorage.getItem(SECRET_KEY)===TODAY_KEY)document.getElementById('secret-chilli').classList.add('found');
+  else document.getElementById('secret-chilli').classList.remove('found');
   updateProgressPill();
 }
 function discover(wp){
@@ -345,7 +391,6 @@ function discover(wp){
     const list=loadDiscovered();
     if(!list.includes(wp.id)){list.push(wp.id);saveDiscovered(list);updateProgressPill();}
   }
-  tooltip.classList.remove('show');
   say(wp.discover,4200);
 }
 
@@ -363,7 +408,7 @@ function fitBubbleText(){
 function say(text,holdMs){
   bubble.textContent=text;bubble.classList.add('show');fitBubbleText();
   clearTimeout(idleTimer);
-  idleTimer=setTimeout(()=>{bubble.classList.remove('show');if(!hoverActive)scheduleIdle(true);},holdMs||6000);
+  idleTimer=setTimeout(()=>{if(!hoverActive){bubble.classList.remove('show');scheduleIdle(true);}},holdMs||6000);
 }
 function sayHover(wp){hoverActive=true;clearTimeout(idleTimer);bubble.textContent=wp.hover;bubble.classList.add('show');fitBubbleText();}
 let bubbleResizeTimer=null;
@@ -374,22 +419,20 @@ function scheduleBubbleFit(){
 window.addEventListener('resize',scheduleBubbleFit);
 new ResizeObserver(scheduleBubbleFit).observe(mascotGuide);
 function scheduleIdle(immediate){
-  hoverActive=false;clearTimeout(idleTimer);
+  if(hoverActive)return;
+  clearTimeout(idleTimer);
   idleTimer=setTimeout(()=>{
     if(hoverActive)return;
     say(IDLE_LINES[Math.floor(Math.random()*IDLE_LINES.length)],5500);
   },immediate?3000:800);
 }
-document.getElementById('mascot-img').addEventListener('click',()=>say(IDLE_LINES[Math.floor(Math.random()*IDLE_LINES.length)],5000));
+document.getElementById('mascot-img').addEventListener('click',()=>{hoverActive=false;say(IDLE_LINES[Math.floor(Math.random()*IDLE_LINES.length)],5000);});
 
 const tooltip=document.getElementById('waypoint-tooltip');
 const tipTitleEl=document.getElementById('tip-title');
 const tipIntroEl=document.getElementById('tip-intro');
 const tipJoinEl=document.getElementById('tip-join');
-let hideTimer=null;
-function cancelHide(){if(hideTimer){clearTimeout(hideTimer);hideTimer=null;}}
 function showTooltip(wp){
-  cancelHide();
   tipTitleEl.textContent=wp.title;
   tipIntroEl.textContent=wp.intro;
   tipJoinEl.textContent=wp.linkLabel;
@@ -397,18 +440,13 @@ function showTooltip(wp){
   tipJoinEl.onclick=()=>discover(wp);
   tooltip.classList.add('show');
 }
-function hideTooltip(){cancelHide();hideTimer=setTimeout(()=>tooltip.classList.remove('show'),150);}
-tooltip.addEventListener('mouseenter',cancelHide);
-tooltip.addEventListener('mouseleave',hideTooltip);
-tipJoinEl.addEventListener('focus',cancelHide);
-tipJoinEl.addEventListener('blur',hideTooltip);
 
 const secretEl=document.getElementById('secret-chilli');
 secretEl.addEventListener('click',e=>{
-  if(!localStorage.getItem(SECRET_KEY)){
-    try{localStorage.setItem(SECRET_KEY,'1');}catch(err){}
-    secretEl.classList.add('found');updateProgressPill();burstSparkles(e);say(SECRET_LINES[0],6000);
-  }else{burstSparkles(e);say("You already claimed this one, champion 🌶️🏆",4000);}
+  if(localStorage.getItem(SECRET_KEY)!==TODAY_KEY){
+    try{localStorage.setItem(SECRET_KEY,TODAY_KEY);}catch(err){}
+    secretEl.classList.add('found');updateProgressPill();burstSparkles(e);hoverActive=false;say(SECRET_LINES[0],6000);
+  }else{burstSparkles(e);hoverActive=false;say("You already claimed today's chilli, champion 🌶️🏆 Come back tomorrow for a new spot!",4500);}
 });
 function burstSparkles(e){
   const rect=mapWrapper.getBoundingClientRect(),scale=baseScale*zoom;
