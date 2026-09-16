@@ -20,8 +20,8 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 .map-viewport.dragging{cursor:grabbing;}
 .map-wrapper{position:absolute;top:0;left:0;width:950px;height:950px;transform-origin:0 0;background-color:#FFF8F5;background-image:radial-gradient(#FFE0D6 2px,transparent 2px),radial-gradient(#FFE0D6 2px,#FFF8F5 2px);background-size:36px 36px;background-position:0 0,18px 18px;overflow:visible;}
 .map-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
-.zoom-controls{position:absolute;right:10px;bottom:10px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:auto;}
-.zoom-btn{width:38px;height:38px;border-radius:9px;border:2px solid var(--border-orange);background:#fff;color:var(--accent-orange);font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:var(--shadow);line-height:1;pointer-events:auto;}
+.zoom-controls{position:absolute;left:10px;bottom:10px;z-index:9999;display:flex;flex-direction:row;gap:5px;pointer-events:auto;}
+.zoom-btn{width:28px;height:28px;border-radius:7px;border:2px solid var(--border-orange);background:#fff;color:var(--accent-orange);font-size:1rem;font-weight:900;cursor:pointer;box-shadow:var(--shadow);line-height:1;pointer-events:auto;}
 .zoom-btn:active{transform:scale(0.93);}
 .cloud{position:absolute;z-index:1;pointer-events:none;opacity:0.55;filter:blur(0.5px);animation:drift 60s linear infinite;}
 .cloud.c2{animation-duration:80s;animation-delay:-20s;}
@@ -210,7 +210,7 @@ h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-s
 <div class="zoom-controls">
 <button class="zoom-btn" id="zoom-in" type="button">+</button>
 <button class="zoom-btn" id="zoom-out" type="button">−</button>
-<button class="zoom-btn" id="zoom-reset" type="button" style="font-size:1rem;">⤾</button>
+<button class="zoom-btn" id="zoom-reset" type="button" style="font-size:0.75rem;">⤾</button>
 </div>
 </div>
 <div class="mascot-guide" id="mascot-guide">
