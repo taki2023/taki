@@ -704,14 +704,27 @@
             {
               "playerA": "Tengen",
               "playerB": "cello_jello",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
+              "link": "https://www.chess.com/game/live/180008372120::0-1 | https://www.chess.com/game/live/180008763914::0-1",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/180008372120",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/180008763914",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
               "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreB": 2,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -759,22 +772,22 @@
               "username": "Desert_Recon",
               "rank": 1,
               "score": 4,
+              "tiebreak": 4,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "cello_jello",
+              "rank": 2,
+              "score": 2,
               "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Tengen",
-              "rank": 2,
-              "score": 2,
-              "tiebreak": 0,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "cello_jello",
               "rank": 3,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
@@ -788,9 +801,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 4,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 8,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1182,9 +1195,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 22,
+        "matchesFinished": 23,
         "matchesTotal": 44,
-        "gamesFinished": 44,
+        "gamesFinished": 46,
         "gamesTotal": 88
       }
     }
@@ -1454,10 +1467,16 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 19,
+    "matchesPlayedCount": 20,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 3,
-    "biggestUpset": null,
+    "biggestUpset": {
+      "winner": "cello_jello",
+      "loser": "Tengen",
+      "winnerRating": 1279,
+      "loserRating": 1506,
+      "diff": 227
+    },
     "podium": null,
     "champion": null
   },
