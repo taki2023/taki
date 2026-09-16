@@ -2,130 +2,93 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🔥 HCC City Map 🗺️</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FFF5F0;--orange:#D93020;--border:#E8553A;--card:#FFE4DC;--text:#9A2010;--white:#fff;--blue:#4FA8D8;--deep:#2E7EB0;--gold:#F1C40F;--green:#81B64C;--shadow:0 10px 25px rgba(217,48,32,.22)}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito','Segoe UI',sans-serif}
-html,body{width:100%;min-width:0}
-body{background:var(--bg);color:var(--text);display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:.65rem 1rem 1.5rem;overflow-x:hidden}
-.title-wrap{text-align:center;margin-bottom:.15rem;max-width:100%}
-h1.map-title{font-family:'Fredoka One',cursive;color:var(--orange);font-size:1.3rem;margin-bottom:.05rem;text-shadow:1px 1px 0 rgba(0,0,0,.05);display:inline-block;position:relative;max-width:100%}
-h1.map-title:after{content:'';position:absolute;left:10%;right:10%;bottom:-4px;height:4px;background:repeating-linear-gradient(90deg,var(--border) 0 10px,transparent 10px 18px);border-radius:3px;opacity:.6}
-.map-viewport{position:relative;width:100%;max-width:950px;aspect-ratio:1;border:7px solid var(--border);border-radius:255px 25px 225px 25px/25px 225px 25px 255px;box-shadow:0 15px 35px rgba(217,48,32,.2);cursor:grab;touch-action:none;background:#FFF8F5;overflow:hidden;user-select:none}
-.map-viewport *{user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
-.map-viewport.dragging{cursor:grabbing}
-.map-wrapper{position:absolute;top:0;left:0;width:950px;height:950px;transform-origin:0 0;background:#FFF8F5;background-image:radial-gradient(#FFE0D6 2px,transparent 2px),radial-gradient(#FFE0D6 2px,#FFF8F5 2px);background-size:36px 36px;background-position:0 0,18px 18px;overflow:visible}
-.map-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-.zoom-controls{position:absolute;right:10px;bottom:10px;z-index:200;display:flex;flex-direction:column;gap:6px}
-.zoom-btn{width:38px;height:38px;border-radius:9px;border:2px solid var(--border);background:#fff;color:var(--orange);font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:var(--shadow);line-height:1}
-.zoom-btn:active{transform:scale(.93)}
+:root{--bg-peach:#FFF5F0;--path-orange:#E85535;--accent-orange:#D93020;--card-bg:#FFE4DC;--border-orange:#E8553A;--text-dark:#9A2010;--white:#FFFFFF;--river-blue:#4FA8D8;--river-deep:#2E7EB0;--gold:#F1C40F;--rapid-green:#81B64C;--shadow:0 10px 25px rgba(217,48,32,0.22);}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+html,body{width:100%;min-width:0;}
+body{background-color:var(--bg-peach);color:var(--text-dark);display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:2rem 1rem;overflow-x:hidden;}
+.title-wrap{position:relative;text-align:center;margin-bottom:0.4rem;max-width:100%;}
+h1.map-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-size:1.4rem;text-align:center;margin-bottom:0.3rem;text-shadow:1px 1px 0px rgba(0,0,0,0.05);position:relative;display:inline-block;max-width:100%;}
 
-.cloud{position:absolute;z-index:3;pointer-events:none;opacity:.6;filter:blur(1.5px);animation:cloud-drift 80s ease-in-out infinite}
-.cloud.c2{animation-duration:100s;animation-delay:-30s;opacity:.5}
-.cloud.c3{animation-duration:120s;animation-delay:-65s;opacity:.42}
-@keyframes cloud-drift{0%,100%{transform:translateX(-25px) translateY(0)}50%{transform:translateX(35px) translateY(7px)}}
-
-.decor-prop{position:absolute;font-size:2.8rem!important;z-index:6;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.12));-webkit-text-stroke:1.3px rgba(0,0,0,.6);paint-order:stroke fill}
-.decor-prop.sway{animation:sway 5s ease-in-out infinite}
-@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-.decor-prop.flicker{animation:flicker 2.2s ease-in-out infinite}
-@keyframes flicker{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.75;transform:scale(.94)}}
-
-.fog{position:absolute;pointer-events:none;z-index:7;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.62) 0%,rgba(255,255,255,.43) 25%,rgba(255,255,255,.23) 52%,rgba(255,255,255,0) 78%);filter:blur(9px);opacity:.52;animation:fog-drift 27s ease-in-out infinite}
-.fog:before,.fog:after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.3);filter:blur(11px)}
-.fog:before{width:55%;height:70%;left:-12%;top:18%}
-.fog:after{width:48%;height:65%;right:-8%;top:8%}
-@keyframes fog-drift{0%,100%{transform:translateX(-10px) scale(1);opacity:.38}50%{transform:translateX(24px) scale(1.08);opacity:.66}}
-
-.secret-chilli{pointer-events:auto;cursor:pointer;animation:shimmer 4.5s ease-in-out infinite}
-@keyframes shimmer{0%,100%{opacity:.85}50%{opacity:1;filter:drop-shadow(0 0 4px rgba(255,200,0,.6))}}
-.secret-chilli.found{animation:none;opacity:.5;filter:grayscale(.6)}
-.sparkle-burst{position:absolute;pointer-events:none;font-size:1.4rem;z-index:50;animation:sparkle-out .9s ease-out forwards}
-@keyframes sparkle-out{0%{transform:translate(-50%,-50%) scale(.3) rotate(0);opacity:1}100%{transform:translate(-50%,-160%) scale(1.3) rotate(40deg);opacity:0}}
-
-.waypoint{position:absolute;transform:translate(-50%,-50%);z-index:20;outline:none;cursor:pointer}
-.waypoint:hover,.waypoint:focus,.waypoint:focus-within{z-index:1000}
-.pin{position:relative;width:100px;height:100px;background:var(--card);border:7px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 6px 14px rgba(0,0,0,.12);transition:transform .3s cubic-bezier(.175,.885,.32,1.275),background .2s,border-color .3s;overflow:hidden}
-.pin img.pin-img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.waypoint:not(.discovered) .pin:before{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--border);opacity:.55;animation:invite-pulse 2.6s ease-out infinite}
-@keyframes invite-pulse{0%{transform:scale(.9);opacity:.55}70%,100%{transform:scale(1.35);opacity:0}}
-.waypoint.discovered .pin{border-color:var(--gold);background:#FFF6D8}
-.badge-check{position:absolute;top:-6px;right:-6px;width:22px;height:22px;background:#4CAF50;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.2);transform:scale(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
-.waypoint.discovered .badge-check{transform:scale(1)}
-.waypoint:hover .pin,.waypoint:focus .pin{transform:scale(1.22) rotate(-4deg);border-color:var(--orange);background:#fff;box-shadow:var(--shadow)}
-.waypoint.discovered:hover .pin,.waypoint.discovered:focus .pin{border-color:var(--gold)}
-
-.btn-join{display:inline-block;padding:.5rem 1.1rem;background:var(--border);color:#fff;text-decoration:none;font-weight:bold;font-size:.9rem;border-radius:8px;transition:background .2s;align-self:flex-start}
-.btn-join:hover{background:var(--orange)}
-.river-flow{stroke-dasharray:14 10;animation:flow 2.2s linear infinite}
-@keyframes flow{to{stroke-dashoffset:-48}}
-.river-highlight{stroke-dasharray:10 18;animation:river-highlight-flow 3.2s linear infinite}
-@keyframes river-highlight-flow{to{stroke-dashoffset:-56}}
-.rapid-svg{width:62px;height:62px;display:block;fill:var(--green);color:var(--green);stroke:#2E5C1A;stroke-width:.8}
-.rapid-svg path{fill:var(--green);stroke:#2E5C1A;stroke-width:.8}
-
-.mascot-guide{width:100%;max-width:950px;display:flex;align-items:flex-start;gap:1rem;margin-top:.65rem}
-.mascot-img{width:33.333%;flex:0 0 33.333%;height:auto;display:block;filter:drop-shadow(0 10px 18px rgba(0,0,0,.25));cursor:pointer;transform-origin:bottom center;animation:mascot-idle 3.6s ease-in-out infinite}
-@keyframes mascot-idle{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-1.5deg)}}
-.speech-bubble{position:relative;flex:1;min-width:0;max-width:560px;margin-top:.35rem;background:#fff;border:3px solid var(--border);border-radius:18px 18px 18px 4px;padding:1rem 1.2rem;font-size:1.1rem;font-weight:700;line-height:1.45;color:var(--text);box-shadow:var(--shadow);opacity:0;transform:translateX(-8px) scale(.96);transform-origin:left center;transition:opacity .3s,transform .3s;overflow:hidden}
-.speech-bubble.show{opacity:1;transform:translateX(0) scale(1)}
-.speech-bubble:after{content:'';position:absolute;top:30px;left:-16px;border-width:8px 16px 8px 0;border-style:solid;border-color:transparent var(--border) transparent transparent}
-
-.waypoint-tooltip{width:100%;max-width:950px;margin-top:.55rem;background:#fff;border:3px solid var(--border);border-radius:16px;padding:1rem 1.3rem;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.45rem;min-height:72px}
-.tip-placeholder{font-size:.8rem;font-weight:700;color:#C98C7C}
-.waypoint-tooltip.show .tip-placeholder{display:none}
-.tip-title,.tip-intro,.waypoint-tooltip .btn-join{display:none;opacity:0;transition:opacity .2s}
-.waypoint-tooltip.show .tip-title,.waypoint-tooltip.show .tip-intro,.waypoint-tooltip.show .btn-join{display:inline-block;opacity:1}
-.tip-title{font-family:'Fredoka One',cursive;color:var(--orange);font-size:.98rem}
-.tip-intro{font-size:.82rem;font-weight:800;color:#333;line-height:1.4}
-
-@media(max-width:650px){
-body{padding:.45rem .5rem 1rem}
-h1.map-title{font-size:1.2rem}
-.mascot-guide{gap:.7rem}
-.mascot-img{width:33.333%;flex-basis:33.333%}
-.speech-bubble{margin-top:.25rem;padding:.8rem 1rem}
-.waypoint-tooltip{align-items:flex-start;text-align:left}
-}
-@media(prefers-reduced-motion:reduce){
-.mascot-img,.cloud,.decor-prop.sway,.decor-prop.flicker,.secret-chilli,.fog,.waypoint:not(.discovered) .pin:before,.river-flow,.river-highlight{animation:none!important}
-}
+.map-viewport{position:relative;width:100%;max-width:950px;aspect-ratio:1/1;overflow:hidden;border:7px solid #E85535;border-radius:255px 25px 225px 25px/25px 225px 25px 255px;box-shadow:0 15px 35px rgba(217,48,32,0.2);cursor:grab;touch-action:none;background:#FFF8F5;user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-touch-callout:none;}
+.map-viewport *{user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-user-drag:none;}
+.map-viewport.dragging{cursor:grabbing;}
+.map-wrapper{position:absolute;top:0;left:0;width:950px;height:950px;transform-origin:0 0;background-color:#FFF8F5;background-image:radial-gradient(#FFE0D6 2px,transparent 2px),radial-gradient(#FFE0D6 2px,#FFF8F5 2px);background-size:36px 36px;background-position:0 0,18px 18px;overflow:visible;}
+.map-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.zoom-controls{position:absolute;right:10px;bottom:10px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:auto;}
+.zoom-btn{width:38px;height:38px;border-radius:9px;border:2px solid var(--border-orange);background:#fff;color:var(--accent-orange);font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:var(--shadow);line-height:1;pointer-events:auto;}
+.zoom-btn:active{transform:scale(0.93);}
+.cloud{position:absolute;z-index:1;pointer-events:none;opacity:0.55;filter:blur(0.5px);animation:drift 60s linear infinite;}
+.cloud.c2{animation-duration:80s;animation-delay:-20s;}
+.cloud.c3{animation-duration:100s;animation-delay:-50s;}
+@keyframes drift{0%{transform:translateX(-40px);}50%{transform:translateX(30px);}100%{transform:translateX(-40px);}}
+.decor-prop{position:absolute;font-size:2.8rem!important;z-index:1;pointer-events:none;user-select:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.12));-webkit-text-stroke:1.3px rgba(0,0,0,0.6);paint-order:stroke fill;}
+.decor-prop.sway{animation:sway 5s ease-in-out infinite;}
+@keyframes sway{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
+.decor-prop.flicker{animation:flicker 2.2s ease-in-out infinite;}
+@keyframes flicker{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.75;transform:scale(0.94);}}
+.fog{position:absolute;pointer-events:none;z-index:2;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,0.65) 0%,rgba(255,255,255,0.3) 45%,rgba(255,255,255,0) 75%);filter:blur(5px);animation:fog-drift 20s ease-in-out infinite;}
+@keyframes fog-drift{0%,100%{transform:translateX(0) scale(1);opacity:0.45;}50%{transform:translateX(16px) scale(1.06);opacity:0.7;}}
+.secret-chilli{pointer-events:auto;cursor:pointer;animation:shimmer 4.5s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{opacity:0.85;}50%{opacity:1;filter:drop-shadow(0 0 4px rgba(255,200,0,0.6));}}
+.secret-chilli.found{animation:none;opacity:0.5;filter:grayscale(0.6);}
+.sparkle-burst{position:absolute;pointer-events:none;font-size:1.4rem;z-index:50;animation:sparkle-out 0.9s ease-out forwards;}
+@keyframes sparkle-out{0%{transform:translate(-50%,-50%) scale(0.3) rotate(0deg);opacity:1;}100%{transform:translate(-50%,-160%) scale(1.3) rotate(40deg);opacity:0;}}
+.waypoint{position:absolute;transform:translate(-50%,-50%);z-index:20;outline:none;cursor:pointer;}
+.waypoint:hover,.waypoint:focus,.waypoint:focus-within{z-index:1000;}
+.pin{position:relative;width:100px;height:100px;background:var(--card-bg);border:7px solid var(--border-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 6px 14px rgba(0,0,0,0.12);transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275),background 0.2s,border-color 0.3s;overflow:hidden;}
+.pin img.pin-img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.waypoint:not(.discovered) .pin::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--border-orange);opacity:0.55;animation:invite-pulse 2.6s ease-out infinite;}
+@keyframes invite-pulse{0%{transform:scale(0.9);opacity:0.55;}70%,100%{transform:scale(1.35);opacity:0;}}
+.waypoint.discovered .pin{border-color:var(--gold);background:#FFF6D8;}
+.badge-check{position:absolute;top:-6px;right:-6px;width:22px;height:22px;background:#4CAF50;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;border:2px solid var(--white);box-shadow:0 2px 5px rgba(0,0,0,0.2);transform:scale(0);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+.waypoint.discovered .badge-check{transform:scale(1);}
+.waypoint:hover .pin,.waypoint:focus .pin{transform:scale(1.22) rotate(-4deg);border-color:var(--accent-orange);background:var(--white);box-shadow:var(--shadow);}
+.waypoint.discovered:hover .pin,.waypoint.discovered:focus .pin{border-color:var(--gold);}
+.btn-join{display:inline-block;padding:0.5rem 1.1rem;background-color:var(--border-orange);color:var(--white);text-decoration:none;font-weight:bold;font-size:0.9rem;border-radius:8px;transition:background 0.2s ease;align-self:flex-start;}
+.btn-join:hover{background-color:var(--accent-orange);}
+.river-flow{stroke-dasharray:14 10;animation:flow 2.2s linear infinite;}
+@keyframes flow{to{stroke-dashoffset:-48;}}
+.river-highlight{stroke-dasharray:10 18;animation:river-highlight-flow 3.2s linear infinite;}
+@keyframes river-highlight-flow{to{stroke-dashoffset:-56;}}
+.rapid-svg{width:62px;height:62px;display:block;flex:0 0 auto;fill:var(--rapid-green);color:var(--rapid-green);stroke:#2E5C1A;stroke-width:0.8;}
+.rapid-svg path{fill:var(--rapid-green);stroke:#2E5C1A;stroke-width:0.8;}
+.mascot-guide{width:100%;max-width:950px;display:flex;align-items:flex-start;gap:1.2rem;margin-top:1.1rem;}
+.mascot-img{width:33.333%;flex:0 0 33.333%;height:auto;display:block;filter:drop-shadow(0 10px 18px rgba(0,0,0,0.25));cursor:pointer;transform-origin:bottom center;animation:mascot-idle 3.6s ease-in-out infinite;}
+@keyframes mascot-idle{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-5px) rotate(-1.5deg);}}
+.speech-bubble{position:relative;flex:1 1 auto;min-width:0;max-width:560px;margin-top:0.5rem;background:var(--white);border:3px solid var(--border-orange);border-radius:18px 18px 18px 4px;padding:1.1rem 1.4rem;font-size:1.1rem;font-weight:700;line-height:1.45;color:var(--text-dark);box-shadow:var(--shadow);opacity:0;transform:translateX(-8px) scale(0.96);transform-origin:left center;transition:opacity 0.3s ease,transform 0.3s ease;overflow:hidden;}
+.speech-bubble.show{opacity:1;transform:translateX(0) scale(1);}
+.speech-bubble::after{content:'';position:absolute;top:30px;left:-16px;border-width:8px 16px 8px 0;border-style:solid;border-color:transparent var(--border-orange) transparent transparent;}
+.waypoint-tooltip{width:100%;max-width:950px;margin-top:0.9rem;background:var(--white);border:3px solid var(--border-orange);border-radius:16px;padding:1.1rem 1.4rem;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:0.5rem;min-height:76px;}
+.tip-placeholder{font-size:0.8rem;font-weight:700;color:#C98C7C;transition:opacity 0.2s ease;}
+.waypoint-tooltip.show .tip-placeholder{display:none;}
+.tip-title,.tip-intro,.waypoint-tooltip .btn-join{display:none;opacity:0;transition:opacity 0.2s ease;}
+.waypoint-tooltip.show .tip-title,.waypoint-tooltip.show .tip-intro,.waypoint-tooltip.show .btn-join{display:inline-block;opacity:1;}
+.tip-title{font-family:'Fredoka One',cursive;color:var(--accent-orange);font-size:.98rem;}
+.tip-intro{font-size:0.82rem;font-weight:800;color:#333;line-height:1.4;}
+@media (max-width:650px){body{padding-left:0.5rem;padding-right:0.5rem;}h1.map-title{font-size:1.3rem;}.mascot-guide{flex-direction:row;align-items:flex-start;text-align:left;}.speech-bubble{margin-top:0.5rem;max-width:100%;}.waypoint-tooltip{align-items:flex-start;text-align:left;}}
+@media (prefers-reduced-motion:reduce){.mascot-img,.cloud,.decor-prop.sway,.decor-prop.flicker,.secret-chilli,.fog,.waypoint:not(.discovered) .pin::before,.river-flow,.river-highlight{animation:none!important;}}
 </style>
 </head>
 <body>
-
 <div class="title-wrap"><h1 class="map-title">🔥 HCC - City Map 🗺️</h1></div>
-
 <div class="map-viewport" id="map-viewport">
 <div class="map-wrapper" id="map-wrapper">
-
-<svg class="cloud" style="top:3%;left:3%;width:190px;height:75px" viewBox="0 0 260 100">
-<defs><filter id="cb1"><feGaussianBlur stdDeviation="2.5"/></filter><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#dfe8eb" stop-opacity=".5"/></linearGradient></defs>
-<g filter="url(#cb1)" fill="url(#cg1)"><ellipse cx="125" cy="58" rx="105" ry="28"/><ellipse cx="65" cy="50" rx="45" ry="30"/><ellipse cx="105" cy="34" rx="52" ry="37"/><ellipse cx="158" cy="43" rx="57" ry="34"/><ellipse cx="205" cy="55" rx="38" ry="24"/></g>
-</svg>
-
-<svg class="cloud c2" style="top:16%;left:53%;width:230px;height:85px" viewBox="0 0 300 110">
-<defs><filter id="cb2"><feGaussianBlur stdDeviation="3"/></filter><linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#d7e2e6" stop-opacity=".35"/></linearGradient></defs>
-<g filter="url(#cb2)" fill="url(#cg2)"><ellipse cx="150" cy="65" rx="125" ry="30"/><ellipse cx="70" cy="57" rx="50" ry="30"/><ellipse cx="118" cy="39" rx="62" ry="39"/><ellipse cx="175" cy="45" rx="60" ry="36"/><ellipse cx="230" cy="58" rx="48" ry="27"/></g>
-</svg>
-
-<svg class="cloud c3" style="top:5%;left:77%;width:155px;height:65px" viewBox="0 0 240 95">
-<defs><filter id="cb3"><feGaussianBlur stdDeviation="2.2"/></filter></defs>
-<g filter="url(#cb3)" fill="#fff"><ellipse cx="120" cy="58" rx="95" ry="25" opacity=".62"/><ellipse cx="75" cy="48" rx="40" ry="27" opacity=".68"/><ellipse cx="120" cy="34" rx="48" ry="32" opacity=".72"/><ellipse cx="168" cy="47" rx="46" ry="28" opacity=".6"/></g>
-</svg>
-
+<svg class="cloud" style="top:2%; left:8%; width:110px;" viewBox="0 0 200 80"><ellipse cx="100" cy="45" rx="90" ry="28" fill="#fff"/><ellipse cx="60" cy="35" rx="45" ry="24" fill="#fff"/><ellipse cx="140" cy="35" rx="45" ry="24" fill="#fff"/></svg>
+<svg class="cloud c2" style="top:1%; left:55%; width:90px;" viewBox="0 0 200 80"><ellipse cx="100" cy="45" rx="90" ry="28" fill="#fff"/><ellipse cx="60" cy="35" rx="45" ry="24" fill="#fff"/><ellipse cx="140" cy="35" rx="45" ry="24" fill="#fff"/></svg>
+<svg class="cloud c3" style="top:6%; left:80%; width:70px;" viewBox="0 0 200 80"><ellipse cx="100" cy="45" rx="90" ry="28" fill="#fff"/><ellipse cx="60" cy="35" rx="45" ry="24" fill="#fff"/><ellipse cx="140" cy="35" rx="45" ry="24" fill="#fff"/></svg>
 <svg class="map-svg" id="map-svg" viewBox="0 0 950 950" preserveAspectRatio="none">
-<path d="M35 250 Q165 215 305 255 Q365 285 350 365 Q330 430 250 445 Q130 455 45 410 Z" fill="#F6E7D8" opacity=".52"/>
-<path d="M365 285 Q475 245 590 285 Q650 315 625 405 Q600 470 505 475 Q405 470 355 415 Z" fill="#FFF1EA" opacity=".65"/>
-<path d="M610 180 Q760 125 910 190 L910 390 Q810 430 685 395 Q625 350 610 180 Z" fill="#F7EBDD" opacity=".48"/>
-<path d="M245 540 Q385 500 515 555 Q560 620 515 735 Q410 770 280 735 Q225 650 245 540 Z" fill="#F8EBDD" opacity=".46"/>
-<g id="polar-guides" fill="none" stroke="#E85535" stroke-linecap="round" opacity=".72" pointer-events="none"></g>
-<g id="polar-rays" fill="none" stroke="#E85535" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 10" opacity=".62" pointer-events="none"></g>
-
+<path d="M35 250 Q165 215 305 255 Q365 285 350 365 Q330 430 250 445 Q130 455 45 410 Z" fill="#F6E7D8" opacity="0.52"/>
+<path d="M365 285 Q475 245 590 285 Q650 315 625 405 Q600 470 505 475 Q405 470 355 415 Z" fill="#FFF1EA" opacity="0.65"/>
+<path d="M610 180 Q760 125 910 190 L910 390 Q810 430 685 395 Q625 350 610 180 Z" fill="#F7EBDD" opacity="0.48"/>
+<path d="M245 540 Q385 500 515 555 Q560 620 515 735 Q410 770 280 735 Q225 650 245 540 Z" fill="#F8EBDD" opacity="0.46"/>
+<g id="polar-guides" fill="none" stroke="#E85535" stroke-linecap="round" opacity="0.72" pointer-events="none"></g>
+<g id="polar-rays" fill="none" stroke="#E85535" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 10" opacity="0.62" pointer-events="none"></g>
 <path d="M -10,235 L 55,75 L 105,150 L 165,28 L 220,145 L 270,80 L 330,235 Z" fill="#C89A72" stroke="#A47850" stroke-width="3"/>
 <path d="M 38,115 L 55,75 L 72,115 Z" fill="#F7F3EE"/>
 <path d="M 145,70 L 165,28 L 185,70 Z" fill="#F7F3EE"/>
@@ -137,30 +100,29 @@ h1.map-title{font-size:1.2rem}
 <rect x="-15" y="-18" width="30" height="9" fill="#B5651D" stroke="#5c3210" stroke-width="2"/>
 <path d="M -17,-18 L0,-36 L17,-18 Z" fill="#8B4513" stroke="#5c3210" stroke-width="2"/>
 </g>
-
-<path d="M 360,-25 C 335,65 300,120 285,190 C 270,260 300,315 330,365 C 355,410 340,455 370,505 C 400,555 430,585 440,635 C 455,700 500,750 565,785 C 625,817 665,818 700,810" fill="none" stroke="var(--deep)" stroke-width="34" stroke-linecap="round"/>
-<path class="river-flow" d="M 360,-25 C 335,65 300,120 285,190 C 270,260 300,315 330,365 C 355,410 340,455 370,505 C 400,555 430,585 440,635 C 455,700 500,750 565,785 C 625,817 665,818 700,810" fill="none" stroke="var(--blue)" stroke-width="23" stroke-linecap="round"/>
-<path class="river-highlight" d="M 358,-20 C 335,65 304,120 291,187 C 278,255 305,312 325,350 C 347,392 344,447 370,505 C 400,555 430,585 440,635 C 455,700 500,750 565,785 C 625,817 665,818 700,810" fill="none" stroke="#EAF6FC" stroke-width="3.5" stroke-linecap="round" opacity=".82"/>
-
-<path d="M 715,745 C 750,700 805,680 858,690 C 905,699 935,730 943,780 C 952,835 932,887 895,918 C 855,950 790,950 747,923 C 708,898 687,855 691,815 C 694,786 701,765 715,745 Z" fill="var(--deep)" opacity=".95"/>
-<path d="M 728,752 C 760,715 806,699 852,707 C 892,714 919,739 927,783 C 935,830 918,872 886,898 C 849,929 797,931 758,908 C 724,888 705,850 708,816 C 710,790 716,770 728,752 Z" fill="var(--blue)"/>
-<ellipse cx="790" cy="770" rx="38" ry="10" fill="#EAF6FC" opacity=".5"/>
-<ellipse cx="870" cy="838" rx="30" ry="8" fill="#EAF6FC" opacity=".4"/>
-<ellipse cx="895" cy="760" rx="15" ry="8" fill="#6fae5c" opacity=".85"/>
-<ellipse cx="906" cy="884" rx="13" ry="7" fill="#6fae5c" opacity=".85"/>
-<ellipse cx="758" cy="895" rx="11" ry="7" fill="#6fae5c" opacity=".8"/>
+<path d="M 360,-25 C 335,65 300,120 285,190 C 270,260 300,315 330,365 C 355,410 340,455 370,505 C 400,555 430,585 440,635 C 455,700 500,750 565,785 C 625,817 665,818 700,810" fill="none" stroke="var(--river-deep)" stroke-width="34" stroke-linecap="round" opacity="0.9"/>
+<path class="river-flow" d="M 360,-25 C 335,65 300,120 285,190 C 270,260 300,315 330,365 C 355,410 340,455 370,505 C 400,555 430,585 440,635 C 455,700 500,750 565,785 C 625,817 665,818 700,810" fill="none" stroke="var(--river-blue)" stroke-width="23" stroke-linecap="round"/>
+<path class="river-highlight" d="M 358,-20 C 335,65 304,120 291,187 C 278,255 305,312 325,350 C 347,392 344,447 370,505 C 400,555 430,585 440,635 C 455,700 500,750 565,785 C 625,817 665,818 700,810" fill="none" stroke="#EAF6FC" stroke-width="3.5" stroke-linecap="round" opacity="0.82"/>
+<path d="M 715,745 C 750,700 805,680 858,690 C 905,699 935,730 943,780 C 952,835 932,887 895,918 C 855,950 790,950 747,923 C 708,898 687,855 691,815 C 694,786 701,765 715,745 Z" fill="var(--river-deep)" opacity="0.95"/>
+<path d="M 728,752 C 760,715 806,699 852,707 C 892,714 919,739 927,783 C 935,830 918,872 886,898 C 849,929 797,931 758,908 C 724,888 705,850 708,816 C 710,790 716,770 728,752 Z" fill="var(--river-blue)"/>
+<ellipse cx="790" cy="770" rx="38" ry="10" fill="#EAF6FC" opacity="0.5"/>
+<ellipse cx="870" cy="838" rx="30" ry="8" fill="#EAF6FC" opacity="0.4"/>
+<ellipse cx="895" cy="760" rx="15" ry="8" fill="#6fae5c" opacity="0.85"/>
+<ellipse cx="906" cy="884" rx="13" ry="7" fill="#6fae5c" opacity="0.85"/>
+<ellipse cx="758" cy="895" rx="11" ry="7" fill="#6fae5c" opacity="0.8"/>
 <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-<path d="M 715,745 C 750,700 805,680 858,690 C 905,699 935,730 943,780 C 952,835 932,887 895,918 C 855,950 790,950 747,923 C 718,904 700,878 697,850" stroke="#8B6A52" stroke-width="12" opacity=".96"/>
+<path d="M 715,745 C 750,700 805,680 858,690 C 905,699 935,730 943,780 C 952,835 932,887 895,918 C 855,950 790,950 747,923 C 718,904 700,878 697,850" stroke="#8B6A52" stroke-width="12" opacity="0.96"/>
 <path d="M 715,745 C 750,700 805,680 858,690 C 905,699 935,730 943,780 C 952,835 932,887 895,918 C 855,950 790,950 747,923 C 718,904 700,878 697,850" stroke="#D6B38A" stroke-width="5"/>
-<path d="M 715,745 C 701,764 696,778 697,790" stroke="#8B6A52" stroke-width="12" opacity=".96"/>
+<path d="M 715,745 C 701,764 696,778 697,790" stroke="#8B6A52" stroke-width="12" opacity="0.96"/>
 <path d="M 715,745 C 701,764 696,778 697,790" stroke="#D6B38A" stroke-width="5"/>
 <g stroke="#70451F" stroke-width="4">
 <line x1="715" y1="748" x2="715" y2="724"/><line x1="735" y1="725" x2="735" y2="701"/><line x1="760" y1="705" x2="760" y2="681"/><line x1="790" y1="695" x2="790" y2="671"/><line x1="822" y1="689" x2="822" y2="665"/><line x1="855" y1="692" x2="855" y2="668"/><line x1="887" y1="702" x2="887" y2="678"/><line x1="915" y1="725" x2="915" y2="701"/><line x1="934" y1="755" x2="934" y2="731"/><line x1="944" y1="790" x2="944" y2="766"/><line x1="946" y1="825" x2="946" y2="801"/><line x1="938" y1="861" x2="938" y2="837"/><line x1="922" y1="893" x2="922" y2="869"/><line x1="900" y1="918" x2="900" y2="894"/><line x1="872" y1="936" x2="872" y2="912"/><line x1="840" y1="946" x2="840" y2="922"/><line x1="806" y1="947" x2="806" y2="923"/><line x1="772" y1="938" x2="772" y2="914"/><line x1="744" y1="922" x2="744" y2="898"/><line x1="718" y1="900" x2="718" y2="876"/><line x1="702" y1="875" x2="702" y2="851"/><line x1="700" y1="785" x2="700" y2="761"/><line x1="705" y1="764" x2="705" y2="740"/>
 </g>
+<path d="M 715,748 C 701,766 697,780 697,790" stroke="#70451F" stroke-width="3"/>
+<path d="M 697,850 C 700,878 717,901 744,922" stroke="#70451F" stroke-width="3"/>
 </g>
-
 <g id="central-well">
-<ellipse cx="0" cy="15" rx="20" ry="6" fill="rgba(0,0,0,.12)"/>
+<ellipse cx="0" cy="15" rx="20" ry="6" fill="rgba(0,0,0,0.12)"/>
 <ellipse cx="0" cy="0" rx="18" ry="9" fill="#D9D9D9" stroke="#8c8c8c" stroke-width="2"/>
 <ellipse cx="0" cy="-2" rx="12" ry="5" fill="#5c6b73"/>
 <line x1="-16" y1="-6" x2="-16" y2="-26" stroke="#7a3f0f" stroke-width="3"/>
@@ -169,195 +131,273 @@ h1.map-title{font-size:1.2rem}
 <line x1="0" y1="-30" x2="0" y2="-8" stroke="#5c3210" stroke-width="1.5"/>
 <rect x="-6" y="-10" width="12" height="9" fill="#8c8c8c" stroke="#5c3210" stroke-width="1.5"/>
 </g>
-
 <g stroke="#7a3f0f" stroke-width="3" fill="none">
-<line x1="555" y1="150" x2="555" y2="118"/><line x1="575" y1="150" x2="575" y2="114"/><line x1="595" y1="150" x2="595" y2="118"/><line x1="615" y1="150" x2="615" y2="114"/><line x1="635" y1="150" x2="635" y2="118"/><line x1="550" y1="130" x2="640" y2="130"/>
+<line x1="555" y1="150" x2="555" y2="118"/><line x1="575" y1="150" x2="575" y2="114"/><line x1="595" y1="150" x2="595" y2="118"/><line x1="615" y1="150" x2="615" y2="114"/><line x1="635" y1="150" x2="635" y2="118"/>
+<line x1="550" y1="130" x2="640" y2="130"/>
 </g>
-
-<g transform="translate(885,70)" opacity=".85">
-<circle r="34" fill="#FFF8F5" stroke="var(--border)" stroke-width="3"/>
-<path d="M0,-26 L7,0 L0,26 L-7,0 Z" fill="var(--orange)"/>
-<path d="M-26,0 L0,7 L26,0 L0,-7 Z" fill="var(--border)" opacity=".8"/>
-<text x="0" y="-32" text-anchor="middle" font-size="11" fill="var(--orange)" font-weight="bold">N</text>
+<g transform="translate(885,70)" opacity="0.85">
+<circle r="34" fill="#FFF8F5" stroke="var(--border-orange)" stroke-width="3"/>
+<path d="M0,-26 L7,0 L0,26 L-7,0 Z" fill="var(--accent-orange)"/>
+<path d="M-26,0 L0,7 L26,0 L0,-7 Z" fill="var(--border-orange)" opacity="0.8"/>
+<text x="0" y="-32" text-anchor="middle" font-size="11" fill="var(--accent-orange)" font-weight="bold">N</text>
 </g>
 </svg>
-
-<span class="decor-prop" style="top:2%;left:2%">🌶️</span>
-<span class="decor-prop flicker" style="top:2%;left:96%">🔥</span>
-<span class="decor-prop" style="top:7%;left:5%;font-size:2rem">🌲</span>
-<span class="decor-prop sway" style="top:15%;left:7%">🌲</span>
-<span class="decor-prop sway" style="top:21%;left:14%">🌲</span>
-<span class="decor-prop" style="top:24%;left:5%">🪨</span>
-<span class="decor-prop" style="top:8%;left:32%">🦋</span>
-<span class="decor-prop" style="top:13%;left:59%">🌸</span>
-<span class="decor-prop" style="top:9%;left:65%">🌼</span>
-<span class="decor-prop sway" style="top:7%;left:73%">🌲</span>
-<span class="decor-prop sway" style="top:8%;left:79%">🌲</span>
-<span class="decor-prop sway" style="top:34%;left:6%">🌴</span>
-<span class="decor-prop" style="top:40%;left:9%;font-size:1.9rem">🌸</span>
-<span class="decor-prop" style="top:51%;left:7%">🪨</span>
-<span class="decor-prop" style="top:54%;left:23%;font-size:1.9rem">🌿</span>
-<span class="decor-prop" style="top:24%;left:91%">🌳</span>
-<span class="decor-prop" style="top:29%;left:82%;font-size:1.9rem">🌸</span>
-<span class="decor-prop sway" style="top:38%;left:94%">🌴</span>
-<span class="decor-prop" style="top:46%;left:91%">🪨</span>
-<span class="decor-prop" style="top:55%;left:96%;font-size:1.9rem">🌸</span>
-<span class="decor-prop sway" style="top:67%;left:11%">🌴</span>
-<span class="decor-prop" style="top:73%;left:19%;font-size:1.9rem">🌿</span>
-<span class="decor-prop sway" style="top:76%;left:42%">🌲</span>
-<span class="decor-prop" style="top:83%;left:58%;font-size:1.9rem">🌱</span>
-<span class="decor-prop sway" style="top:70%;left:87%">🌴</span>
-<span class="decor-prop" style="top:73%;left:93%;font-size:1.9rem">🪨</span>
-<span class="decor-prop" style="top:89%;left:91%">🦆</span>
-<span class="decor-prop" style="top:92%;left:75%;font-size:1.9rem">🌿</span>
-<span class="decor-prop secret-chilli" id="secret-chilli" style="top:77%;left:69%;font-size:2.1rem" title="?">🌶️</span>
-
-<span class="fog" style="top:10%;left:25%;width:180px;height:62px;animation-delay:-3s;animation-duration:28s"></span>
-<span class="fog" style="top:18%;left:67%;width:150px;height:54px;animation-delay:-15s;animation-duration:32s"></span>
-<span class="fog" style="top:29%;left:9%;width:175px;height:65px;animation-delay:-9s;animation-duration:25s"></span>
-<span class="fog" style="top:35%;left:43%;width:125px;height:48px;animation-delay:-20s;animation-duration:30s"></span>
-<span class="fog" style="top:44%;left:72%;width:190px;height:64px;animation-delay:-7s;animation-duration:27s"></span>
-<span class="fog" style="top:51%;left:18%;width:145px;height:55px;animation-delay:-17s;animation-duration:34s"></span>
-<span class="fog" style="top:61%;left:48%;width:185px;height:65px;animation-delay:-11s;animation-duration:29s"></span>
-<span class="fog" style="top:68%;left:4%;width:155px;height:58px;animation-delay:-24s;animation-duration:31s"></span>
-<span class="fog" style="top:76%;left:65%;width:190px;height:66px;animation-delay:-14s;animation-duration:35s"></span>
-<span class="fog" style="top:84%;left:27%;width:165px;height:60px;animation-delay:-21s;animation-duration:26s"></span>
-<span class="fog" style="top:91%;left:76%;width:120px;height:45px;animation-delay:-8s;animation-duration:30s"></span>
-
+<span class="decor-prop" style="top: 2%; left: 2%;">🌶️</span>
+<span class="decor-prop flicker" style="top: 2%; left: 96%;">🔥</span>
+<span class="decor-prop" style="top: 7%; left: 5%; font-size:2.0rem;">🌲</span>
+<span class="decor-prop sway" style="top: 15%; left: 7%;">🌲</span>
+<span class="decor-prop sway" style="top: 21%; left: 14%;">🌲</span>
+<span class="decor-prop" style="top: 24%; left: 5%;">🪨</span>
+<span class="decor-prop" style="top: 8%; left: 32%;">🦋</span>
+<span class="decor-prop" style="top: 13%; left: 59%;">🌸</span>
+<span class="decor-prop" style="top: 9%; left: 65%;">🌼</span>
+<span class="decor-prop sway" style="top: 7%; left: 73%;">🌲</span>
+<span class="decor-prop sway" style="top: 8%; left: 79%;">🌲</span>
+<span class="decor-prop sway" style="top: 34%; left: 6%;">🌴</span>
+<span class="decor-prop" style="top: 40%; left: 9%; font-size:1.9rem;">🌸</span>
+<span class="decor-prop" style="top: 51%; left: 7%;">🪨</span>
+<span class="decor-prop" style="top: 54%; left: 23%; font-size:1.9rem;">🌿</span>
+<span class="decor-prop" style="top: 24%; left: 91%;">🌳</span>
+<span class="decor-prop" style="top: 29%; left: 82%; font-size:1.9rem;">🌸</span>
+<span class="decor-prop sway" style="top: 38%; left: 94%;">🌴</span>
+<span class="decor-prop" style="top: 46%; left: 91%;">🪨</span>
+<span class="decor-prop" style="top: 55%; left: 96%; font-size:1.9rem;">🌸</span>
+<span class="decor-prop sway" style="top: 67%; left: 11%;">🌴</span>
+<span class="decor-prop" style="top: 73%; left: 19%; font-size:1.9rem;">🌿</span>
+<span class="decor-prop sway" style="top: 76%; left: 42%;">🌲</span>
+<span class="decor-prop" style="top: 83%; left: 58%; font-size:1.9rem;">🌱</span>
+<span class="decor-prop sway" style="top: 70%; left: 87%;">🌴</span>
+<span class="decor-prop" style="top: 73%; left: 93%; font-size:1.9rem;">🪨</span>
+<span class="decor-prop" style="top: 89%; left: 91%;">🦆</span>
+<span class="decor-prop" style="top: 92%; left: 75%; font-size:1.9rem;">🌿</span>
+<span class="decor-prop secret-chilli" id="secret-chilli" style="top: 77%; left: 69%; font-size: 2.1rem;" title="?">🌶️</span>
+<span class="fog" style="top:10%;left:25%;width:180px;height:62px;animation-delay:-2s;animation-duration:23s"></span>
+<span class="fog" style="top:18%;left:67%;width:150px;height:54px;animation-delay:-9s;animation-duration:27s"></span>
+<span class="fog" style="top:29%;left:9%;width:175px;height:65px;animation-delay:-14s;animation-duration:21s"></span>
+<span class="fog" style="top:35%;left:43%;width:125px;height:48px;animation-delay:-5s;animation-duration:24s"></span>
+<span class="fog" style="top:44%;left:72%;width:190px;height:64px;animation-delay:-17s;animation-duration:29s"></span>
+<span class="fog" style="top:51%;left:18%;width:145px;height:55px;animation-delay:-11s;animation-duration:22s"></span>
+<span class="fog" style="top:61%;left:48%;width:185px;height:65px;animation-delay:-20s;animation-duration:26s"></span>
+<span class="fog" style="top:68%;left:4%;width:155px;height:58px;animation-delay:-7s;animation-duration:25s"></span>
+<span class="fog" style="top:76%;left:65%;width:190px;height:66px;animation-delay:-15s;animation-duration:30s"></span>
+<span class="fog" style="top:84%;left:27%;width:165px;height:60px;animation-delay:-22s;animation-duration:24s"></span>
+<span class="fog" style="top:91%;left:76%;width:120px;height:45px;animation-delay:-4s;animation-duration:20s"></span>
 </div>
-
 <div class="zoom-controls">
 <button class="zoom-btn" id="zoom-in" type="button">+</button>
 <button class="zoom-btn" id="zoom-out" type="button">−</button>
-<button class="zoom-btn" id="zoom-reset" type="button" style="font-size:1rem">⤾</button>
+<button class="zoom-btn" id="zoom-reset" type="button" style="font-size:1rem;">⤾</button>
 </div>
 </div>
-
 <div class="mascot-guide" id="mascot-guide">
 <img class="mascot-img" id="mascot-img" src="https://raw.githubusercontent.com/taki2023/taki/main/map.png" alt="Hot Chilli Explorer Mascot" draggable="false">
 <div class="speech-bubble show" id="speech-bubble">I once got lost near the Voting Hall for three days 🗳️😅</div>
 </div>
-
 <div class="waypoint-tooltip" id="waypoint-tooltip">
 <span class="tip-placeholder">Hover or tap a spot on the map to see what's there 🗺️</span>
 <span class="tip-title" id="tip-title"></span>
 <span class="tip-intro" id="tip-intro"></span>
 <a href="#" target="_blank" rel="noopener" class="btn-join" id="tip-join">Open</a>
 </div>
-
 <script>
 const mapViewport=document.getElementById('map-viewport'),mapWrapper=document.getElementById('map-wrapper'),mascotGuide=document.getElementById('mascot-guide');
-const MAP_CENTER={x:50,y:50},R=46,SVG_SIZE=950,SVG_CENTER={x:475,y:475},SVG_R=437;
-let baseScale=1,zoom=1,panX=0,panY=0,initialized=false;
+const MAP_CENTER={x:50,y:50},R=46.0,SVG_SIZE=950,SVG_CENTER={x:SVG_SIZE*MAP_CENTER.x/100,y:SVG_SIZE*MAP_CENTER.y/100},SVG_R=SVG_SIZE*R/100;
+let baseScale=1,zoom=1,panX=0,panY=0;
 const MIN_ZOOM=1,MAX_ZOOM=4;
 
-function applyTransform(){mapWrapper.style.transform=`translate(${panX}px,${panY}px) scale(${baseScale*zoom})`}
-function clampPan(){const s=baseScale*zoom,cw=950*s,ch=950*s,vw=mapViewport.clientWidth,vh=mapViewport.clientHeight,minX=Math.min(0,vw-cw),minY=Math.min(0,vh-ch);panX=Math.max(minX,Math.min(0,panX));panY=Math.max(minY,Math.min(0,panY))}
-function clampZoom(z){return Math.min(MAX_ZOOM,Math.max(MIN_ZOOM,z))}
-function zoomAt(x,y,z){z=clampZoom(z);const r=mapViewport.getBoundingClientRect(),mx=x-r.left,my=y-r.top,s=baseScale*zoom,cx=(mx-panX)/s,cy=(my-panY)/s;zoom=z;s=baseScale*zoom;panX=mx-cx*s;panY=my-cy*s;clampPan();applyTransform()}
-function resizeMap(){baseScale=mapViewport.clientWidth/950;if(!initialized){initialized=true;zoom=clampZoom(1.4+Math.random()*.5);const s=baseScale*zoom,minX=Math.min(0,mapViewport.clientWidth-950*s),minY=Math.min(0,mapViewport.clientHeight-950*s);panX=minX*Math.random();panY=minY*Math.random()}clampPan();applyTransform()}
+function applyTransform(){mapWrapper.style.transform=`translate(${panX}px,${panY}px) scale(${baseScale*zoom})`;}
+function clampPan(){
+  const s=baseScale*zoom,cw=950*s,ch=950*s,vw=mapViewport.clientWidth,vh=mapViewport.clientHeight;
+  const minX=Math.min(0,vw-cw),minY=Math.min(0,vh-ch);
+  panX=Math.max(minX,Math.min(0,panX));
+  panY=Math.max(minY,Math.min(0,panY));
+}
+function clampZoom(z){return Math.min(MAX_ZOOM,Math.max(MIN_ZOOM,z));}
+function zoomAt(clientX,clientY,newZoom){
+  newZoom=clampZoom(newZoom);
+  const rect=mapViewport.getBoundingClientRect(),mx=clientX-rect.left,my=clientY-rect.top;
+  const scaleBefore=baseScale*zoom,contentX=(mx-panX)/scaleBefore,contentY=(my-panY)/scaleBefore;
+  zoom=newZoom;
+  const scaleAfter=baseScale*zoom;
+  panX=mx-contentX*scaleAfter;
+  panY=my-contentY*scaleAfter;
+  clampPan();applyTransform();
+}
+let initialized=false;
+function resizeMap(){
+  baseScale=mapViewport.clientWidth/950;
+  if(!initialized){
+    initialized=true;
+    zoom=clampZoom(1.4+Math.random()*0.5);
+    const s=baseScale*zoom,cw=950*s,ch=950*s,vw=mapViewport.clientWidth,vh=mapViewport.clientHeight;
+    const minX=Math.min(0,vw-cw),minY=Math.min(0,vh-ch);
+    panX=minX*Math.random();
+    panY=minY*Math.random();
+  }
+  clampPan();applyTransform();
+}
 new ResizeObserver(resizeMap).observe(mapViewport);
 
 const pointers=new Map();
 let dragging=false,lastX=0,lastY=0,pinchDist=0,pinchZoomStart=1,pinchMid={x:0,y:0};
-
+function zoomButton(factor){const r=mapViewport.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,zoom*factor);}
+document.getElementById('zoom-in').onclick=e=>{e.stopPropagation();zoomButton(1.4);};
+document.getElementById('zoom-out').onclick=e=>{e.stopPropagation();zoomButton(1/1.4);};
+document.getElementById('zoom-reset').onclick=e=>{e.stopPropagation();zoom=1;panX=0;panY=0;clampPan();applyTransform();};
 mapViewport.addEventListener('pointerdown',e=>{
-if(e.target.closest('.zoom-btn'))return;
-if(e.pointerType!=='touch')e.preventDefault();
-pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});mapViewport.setPointerCapture(e.pointerId);
-if(pointers.size===1){dragging=true;lastX=e.clientX;lastY=e.clientY;mapViewport.classList.add('dragging')}
-if(pointers.size===2){dragging=false;const[a,b]=[...pointers.values()];pinchDist=Math.hypot(a.x-b.x,a.y-b.y);pinchZoomStart=zoom;pinchMid={x:(a.x+b.x)/2,y:(a.y+b.y)/2}}
+  if(e.target.closest('.zoom-controls'))return;
+  e.preventDefault();
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size===1){dragging=true;lastX=e.clientX;lastY=e.clientY;mapViewport.classList.add('dragging');}
+  if(pointers.size===2){dragging=false;const[a,b]=[...pointers.values()];pinchDist=Math.hypot(a.x-b.x,a.y-b.y);pinchZoomStart=zoom;pinchMid={x:(a.x+b.x)/2,y:(a.y+b.y)/2};}
 });
-
 mapViewport.addEventListener('pointermove',e=>{
-if(!pointers.has(e.pointerId))return;
-pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-if(pointers.size===2){const[a,b]=[...pointers.values()],d=Math.hypot(a.x-b.x,a.y-b.y);zoomAt(pinchMid.x,pinchMid.y,pinchZoomStart*d/pinchDist);return}
-if(dragging){panX+=e.clientX-lastX;panY+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;clampPan();applyTransform()}
+  if(!pointers.has(e.pointerId))return;
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size===2){const[a,b]=[...pointers.values()],dist=Math.hypot(a.x-b.x,a.y-b.y);if(pinchDist>0)zoomAt(pinchMid.x,pinchMid.y,pinchZoomStart*(dist/pinchDist));return;}
+  if(dragging){panX+=e.clientX-lastX;panY+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;clampPan();applyTransform();}
 });
+function endPointer(e){pointers.delete(e.pointerId);if(pointers.size===0){dragging=false;mapViewport.classList.remove('dragging');}if(pointers.size===1){const p=[...pointers.values()][0];dragging=true;lastX=p.x;lastY=p.y;}}
+mapViewport.addEventListener('pointerup',endPointer);
+mapViewport.addEventListener('pointercancel',endPointer);
+mapViewport.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,zoom*(1-e.deltaY*.0015));},{passive:false});
 
-function endPointer(e){pointers.delete(e.pointerId);mapViewport.classList.remove('dragging');dragging=pointers.size===1;if(dragging){const p=[...pointers.values()][0];lastX=p.x;lastY=p.y}}
-['pointerup','pointercancel','pointerleave'].forEach(ev=>mapViewport.addEventListener(ev,endPointer));
+const POLAR_COORDS={courses:[0,0],traps:[0.33,120],elo:[0.66,90],calendar:[1,35],noobs:[1,90],rules:[0.66,0],announce:[0.66,35],rate:[0.66,180],tiger:[1,0],hybrid:[0.66,225],blitzfire:[0.33,-60],heatmap:[0.66,-30],daily:[1,270],votechess:[1,200],schizzarotto:[1,55]};
+function polarToSvg(rFraction,thetaDeg){const theta=thetaDeg*Math.PI/180,radius=rFraction*SVG_R;return{x:SVG_CENTER.x+radius*Math.cos(theta),y:SVG_CENTER.y-radius*Math.sin(theta)};}
 
-mapViewport.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,zoom*(1-e.deltaY*.0015))},{passive:false});
-document.getElementById('zoom-in').addEventListener('click',()=>{const r=mapViewport.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,zoom*1.4)});
-document.getElementById('zoom-out').addEventListener('click',()=>{const r=mapViewport.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,zoom/1.4)});
-document.getElementById('zoom-reset').addEventListener('click',()=>{zoom=1;panX=0;panY=0;clampPan();applyTransform()});
-
-const POLAR_COORDS={courses:[0,0],traps:[.33,120],elo:[.66,90],calendar:[1,35],noobs:[1,90],rules:[.66,0],announce:[.66,35],rate:[.66,180],tiger:[1,0],hybrid:[.66,225],blitzfire:[.33,-60],heatmap:[.66,-30],daily:[1,270],votechess:[1,200],schizzarotto:[1,55]};
-function polarToSvg(r,t){t*=Math.PI/180;return{x:SVG_CENTER.x+r*SVG_R*Math.cos(t),y:SVG_CENTER.y-r*SVG_R*Math.sin(t)}}
 function buildPolarGuides(){
-const guides=document.getElementById('polar-guides'),rays=document.getElementById('polar-rays');guides.innerHTML='';rays.innerHTML='';
-[...new Set(Object.values(POLAR_COORDS).map(x=>Number(x[0].toFixed(6))).filter(x=>x>0))].sort((a,b)=>a-b).forEach(r=>{const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',SVG_CENTER.x);c.setAttribute('cy',SVG_CENTER.y);c.setAttribute('r',r*SVG_R);c.setAttribute('stroke-width','8');c.setAttribute('stroke-dasharray','4 10');guides.appendChild(c)});
-const groups=new Map();
-Object.entries(POLAR_COORDS).forEach(([id,[r,t]])=>{if(r<=0)return;t=((t%360)+360)%360;if(!groups.has(t))groups.set(t,{theta:t,maxR:r});else groups.get(t).maxR=Math.max(groups.get(t).maxR,r)});
-groups.forEach(g=>{const e=polarToSvg(g.maxR,g.theta),l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',SVG_CENTER.x);l.setAttribute('y1',SVG_CENTER.y);l.setAttribute('x2',e.x);l.setAttribute('y2',e.y);rays.appendChild(l)})
+  const guides=document.getElementById('polar-guides'),rays=document.getElementById('polar-rays');
+  guides.innerHTML='';rays.innerHTML='';
+  const radii=[...new Set(Object.values(POLAR_COORDS).map(([r])=>Number(r.toFixed(6))).filter(r=>r>0))].sort((a,b)=>a-b);
+  radii.forEach(rFraction=>{
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',SVG_CENTER.x);c.setAttribute('cy',SVG_CENTER.y);c.setAttribute('r',rFraction*SVG_R);c.setAttribute('stroke-width','8');c.setAttribute('stroke-dasharray','4 10');
+    guides.appendChild(c);
+  });
+  const angleGroups=new Map();
+  Object.entries(POLAR_COORDS).forEach(([id,[rFraction,thetaDeg]])=>{
+    if(rFraction<=0)return;
+    let n=Math.round((((thetaDeg%360)+360)%360)*1000)/1000;
+    if(!angleGroups.has(n))angleGroups.set(n,{theta:thetaDeg,maxR:rFraction});
+    else{const g=angleGroups.get(n);if(rFraction>g.maxR)g.maxR=rFraction;}
+  });
+  angleGroups.forEach(group=>{
+    const end=polarToSvg(group.maxR,group.theta);
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',SVG_CENTER.x);line.setAttribute('y1',SVG_CENTER.y);line.setAttribute('x2',end.x);line.setAttribute('y2',end.y);
+    rays.appendChild(line);
+  });
 }
-function positionWell(){const p=polarToSvg(.33,0);document.getElementById('central-well').setAttribute('transform',`translate(${p.x},${p.y})`)}
+function positionWell(){const pos=polarToSvg(0.33,0);document.getElementById('central-well').setAttribute('transform',`translate(${pos.x},${pos.y})`);}
 buildPolarGuides();positionWell();
 
 const WAYPOINTS=[
-{id:'traps',icon:'♟️',title:'♟️ Tricky Opening Traps!',intro:'Learn interesting and tricky Chess traps to shock your opponent and yourself!',link:'https://www.chess.com/clubs/forum/view/tricky-opening-trap-by-iamplayerofchess',linkLabel:'Explore Traps',hover:'Careful, that alley is full of sneaky opening traps... ♟️',discover:'Nice! You made it through the Trap District without getting caught 😈'},
-{id:'elo',icon:'🤔',title:'🤔 Guess the Elo!',intro:'Guess the ratings of the players who played the games!',link:'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform',linkLabel:'Guess Now',hover:"Hmm... think you can guess what's hiding here? 🤔",discover:'You found the Guessing Grounds! Sharp eyes, detective 🔍'},
-{id:'calendar',icon:'🗓️',title:'🗓️ Event Calendar',intro:'Follow the Calendar to keep track of upcoming events!',link:'https://www.chess.com/announcements/view/hot-chilli-calendar',linkLabel:'View Calendar',hover:'That tower up there keeps track of everything happening in town 🗓️',discover:'You found the Calendar Tower! Never miss an event again ⏰'},
-{id:'heatmap',icon:'🔥',title:'🔥 Heat Map',intro:'Hot Chilli Heat Map! Check active zones.',link:'https://www.chess.com/announcements/view/heat-map',linkLabel:'Check Heat',hover:"It's getting hot around here... 🔥",discover:'Whoa, the Heat Map District! Careful, it’s spicy in there 🌶️🔥'},
+{id:'traps',icon:'♟️',title:'♟️ Tricky Opening Traps!',intro:'Learn interesting and tricky Chess traps to shock your opponent and yourself!',link:'https://www.chess.com/clubs/forum/view/tricky-opening-trap-by-iamplayerofchess',linkLabel:'Explore Traps',hover:"Careful, that alley is full of sneaky opening traps... ♟️",discover:"Nice! You made it through the Trap District without getting caught 😈"},
+{id:'elo',icon:'🤔',title:'🤔 Guess the Elo!',intro:'Guess the ratings of the players who played the games!',link:'https://docs.google.com/forms/d/e/1FAIpQLScq9rVAh3y4Qu5OTPh7YExqLvVU-O1u0_wcp5dE_hN4Pdl5cg/viewform',linkLabel:'Guess Now',hover:"Hmm... think you can guess what's hiding here? 🤔",discover:"You found the Guessing Grounds! Sharp eyes, detective 🔍"},
+{id:'calendar',icon:'🗓️',title:'🗓️ Event Calendar',intro:'Follow the Calendar to keep track of upcoming events!',link:'https://www.chess.com/announcements/view/hot-chilli-calendar',linkLabel:'View Calendar',hover:"That tower up there keeps track of everything happening in town 🗓️",discover:"You found the Calendar Tower! Never miss an event again ⏰"},
+{id:'heatmap',icon:'🔥',title:'🔥 Heat Map',intro:'Hot Chilli Heat Map! Check active zones.',link:'https://www.chess.com/announcements/view/heat-map',linkLabel:'Check Heat',hover:"It's getting hot around here... 🔥",discover:"Whoa, the Heat Map District! Careful, it's spicy in there 🌶️🔥"},
 {id:'courses',icon:'📚',title:'📚 Hot Chilli Courses',intro:"It's great to learn a new opening, have a look!",link:'https://www.chess.com/announcements/view/hot-chilli-opening-courses',linkLabel:'Browse Courses',hover:'The old library at the center holds all our chilli wisdom 📚',discover:'You discovered the Chess Library 📚'},
-{id:'rate',icon:'⭐',title:'⭐ Rate our Club!',intro:'Rate our club and share your feedback!',link:'https://smartpolls.co.uk/p/145078/results',linkLabel:'Leave Review',hover:'They say leaving a star over there brings good luck ⭐',discover:'Found the Wishing Star! Thanks for the luck ✨'},
+{id:'rate',icon:'⭐',title:'⭐ Rate our Club!',intro:'Rate our club and share your feedback!',link:'https://smartpolls.co.uk/p/145078/results',linkLabel:'Leave Review',hover:"They say leaving a star over there brings good luck ⭐",discover:'Found the Wishing Star! Thanks for the luck ✨'},
 {id:'votechess',icon:'🗳️',title:'🗳️ Vote Chess',intro:'Discuss, learn, vote! Spicy Vote Chess games!',link:'https://www.chess.com/club/votechess/hot-chilli-checkmate',linkLabel:'Cast Vote',hover:'Democracy, chilli-style, happens over there 🗳️',discover:'You found the Voting Hall! Every voice counts here 🗳️'},
 {id:'daily',icon:'☀️',title:'☀️ Daily Matches',intro:'Take as much time as you want, slow paced, accurate chess!',link:'https://www.chess.com/clubs/matches/hot-chilli-checkmate',linkLabel:'Play Daily',hover:'Slow and steady wins under that sun ☀️',discover:'You found Sunny Fields, home of the patient grinders ☀️'},
 {id:'announce',icon:'📢',title:'📢 Announcements',intro:"Spicy announcements, don't forget to check!",link:'https://www.chess.com/club/hot-chilli-checkmate/announcements',linkLabel:'Read News',hover:'That megaphone tower never stops shouting news 📢',discover:'You found the Announcement Tower! Stay tuned 📢'},
 {id:'rules',icon:'📜',title:'📜 Club Rules',intro:'Check our club rules here!',link:'https://www.chess.com/clubs/forum/view/rules-for-the-competitive-side-of-the-club',linkLabel:'View Rules',hover:'Better not skip the scroll over there 📜',discover:'You found the Rules Scroll! Now you know the law 📜'},
 {id:'tiger',icon:'🐯',title:'🐯 Chess Like a Tiger',intro:'One of our partner clubs — sharp, fierce, and always hunting for the best move!',link:'https://www.chess.com/club/chess-like-a-tiger',linkLabel:'Visit Their Club',hover:'Shh... a tiger prowls this part of the jungle. Our friends at Chess Like a Tiger 🐯',discover:"You found the Tiger's Den! Say hi to our partners at Chess Like a Tiger 🐯"},
-{id:'hybrid',icon:'♞',title:'♞ Hybrid Chess Federation',intro:'A partner club blending styles and ideas — allies of Hot Chilli CheckMate.',link:'https://www.chess.com/club/hybrid-chess-federation',linkLabel:'Visit Their Club',hover:'A lone knight stands guard here, loyal to our partners at Hybrid Chess Federation ♞',discover:'You found the Knight’s Outpost! Our partners at Hybrid Chess Federation say hello ♞'},
+{id:'hybrid',icon:'♞',title:'♞ Hybrid Chess Federation',intro:'A partner club blending styles and ideas — allies of Hot Chilli CheckMate.',link:'https://www.chess.com/club/hybrid-chess-federation',linkLabel:'Visit Their Club',hover:'A lone knight stands guard here, loyal to our partners at Hybrid Chess Federation ♞',discover:'You found the Knight\'s Outpost! Our partners at Hybrid Chess Federation say hello ♞'},
 {id:'noobs',icon:'🎓',title:'🎓 Noobs to GMs Club',intro:'A partner club dedicated to the journey from total beginner to grandmaster.',link:'https://www.chess.com/club/noobs-to-gms-club',linkLabel:'Visit Their Club',hover:'Everyone starts as a noob... our partners here are proof you can go all the way 🎓',discover:"You found the Academy! That's our partners at Noobs to GMs Club 🎓"},
 {id:'schizzarotto',icon:'🃏',title:'🃏 Schizzarotto Fan Club',intro:'A partner fan club, always good for a laugh and some chaotic chess energy.',link:'https://www.chess.com/club/schizzarotto-fan-club',linkLabel:'Visit Their Club',hover:'Something feels a little chaotic near this rock... classic Schizzarotto Fan Club energy 🃏',discover:"You found the Joker's Corner! Our partners at the Schizzarotto Fan Club 🃏"},
-{id:'blitzfire',svg:`<svg class="rapid-svg" viewBox="0 0 24 24"><path d="m11.97 14.63c-.9 0-1.87-.73-1.5-2.23l1.03-4.4h1l1.03 4.37c.37 1.53-.63 2.27-1.57 2.27zm.03 7.87c-5.23 0-9.5-4.27-9.5-9.5s4.27-9.5 9.5-9.5 9.5 4.27 9.5 9.5-4.27 9.5-9.5 9.5zm0-3c4 0 6.5-2.5 6.5-6.5s-2.5-6.5-6.5-6.5-6.5 2.5-6.5 6.5 2.5 6.5 6.5 6.5zm-1.5-14.27v-4.23h3v4.23zm5-3.23h-7c0-1.7.43-2 3.5-2s3.5.3 3.5 2z"/></svg>`,title:'🏆 Hot Chilli Rapid Championship',intro:'The Rapid Championship pairings are ready!',link:'https://www.chess.com/announcements/view/hot-chilli-rapid-championship-pairings',linkLabel:'Open Pairings',hover:'A new championship is heating up... Rapid style! 🟢🏆',discover:'You found the Hot Chilli Rapid Championship pairings! 🏆♟️'}
+{id:'blitzfire',svg:`<svg class="rapid-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m11.97 14.63c-.9 0-1.87-.73-1.5-2.23l1.03-4.4h1l1.03 4.37c.37 1.53-.63 2.27-1.57 2.27zm.03 7.87c-5.23 0-9.5-4.27-9.5-9.5s4.27-9.5 9.5-9.5 9.5 4.27 9.5 9.5-4.27 9.5-9.5 9.5zm0-3c4 0 6.5-2.5 6.5-6.5s-2.5-6.5-6.5-6.5-6.5 2.5-6.5 6.5 2.5 6.5 6.5 6.5zm-1.5-14.27v-4.23h3v4.23zm5-3.23h-7c0-1.7.43-2 3.5-2s3.5.3 3.5 2z"/></svg>`,title:"🏆 Hot Chilli Rapid Championship",intro:"The Rapid Championship pairings are ready!",link:'https://www.chess.com/announcements/view/hot-chilli-rapid-championship-pairings',linkLabel:'Open Pairings',hover:"A new championship is heating up... Rapid style! 🟢🏆",discover:"You found the Hot Chilli Rapid Championship pairings! 🏆♟️"}
 ];
 
-const IDLE_LINES=['Psst... I heard there is a secret treasure hidden somewhere in the city 👀🌶️','Careful! The Tricky Opening District is dangerous ♟️',"It's getting hot around here... 🔥",'Rumor says a hidden chilli appears after midnight 🌶️👀','Fifteen places to explore... have you found them all?','The library never closes, you know 📚','I once got lost near the Voting Hall for three days 🗳️😅',"Come on, click around, the map won't bite! 🗺️",'Every alley here has a story. Go find one 🌶️'];
-const SECRET_LINES=['WAIT. You actually found it?! The secret chilli! 🌶️✨ Nobody ever looks behind the palm trees...'];
+const IDLE_LINES=["Psst... I heard there is a secret treasure hidden somewhere in the city 👀🌶️","Careful! The Tricky Opening District is dangerous ♟️","It's getting hot around here... 🔥","Rumor says a hidden chilli appears after midnight 🌶️👀","Fifteen places to explore... have you found them all?","The library never closes, you know 📚","I once got lost near the Voting Hall for three days 🗳️😅","Come on, click around, the map won't bite! 🗺️","Every alley here has a story. Go find one 🌶️"];
+const SECRET_LINES=["WAIT. You actually found it?! The secret chilli! 🌶️✨ Nobody ever looks behind the palm trees..."];
 
 WAYPOINTS.forEach(wp=>{
-const el=document.createElement('div');el.className='waypoint';el.tabIndex=0;el.dataset.id=wp.id;
-const[r,t]=POLAR_COORDS[wp.id]||[0,0],a=t*Math.PI/180,rad=r*R;
-el.style.left=MAP_CENTER.x+rad*Math.cos(a)+'%';el.style.top=MAP_CENTER.y-rad*Math.sin(a)+'%';
-el.innerHTML=`<div class="pin">${wp.image?`<img class="pin-img" src="${wp.image}" alt="${wp.title}">`:wp.svg||wp.icon}<span class="badge-check">✓</span></div>`;
-mapWrapper.appendChild(el);
-el.addEventListener('mouseenter',()=>{sayHover(wp);showTooltip(wp)});
-el.addEventListener('focus',()=>{sayHover(wp);showTooltip(wp)});
-el.addEventListener('mouseleave',()=>{scheduleIdle();hideTooltip()});
-el.addEventListener('blur',()=>{scheduleIdle();hideTooltip()})
+  const el=document.createElement('div');
+  el.className='waypoint';el.tabIndex=0;el.dataset.id=wp.id;
+  const[rFraction,thetaDeg]=POLAR_COORDS[wp.id]||[0,0];
+  const theta=thetaDeg*Math.PI/180,radius=rFraction*R;
+  el.style.left=(MAP_CENTER.x+radius*Math.cos(theta))+'%';
+  el.style.top=(MAP_CENTER.y-radius*Math.sin(theta))+'%';
+  const pinContent=wp.image?`<img class="pin-img" src="${wp.image}" alt="${wp.title}">`:(wp.svg?wp.svg:wp.icon);
+  el.innerHTML=`<div class="pin">${pinContent}<span class="badge-check">✓</span></div>`;
+  mapWrapper.appendChild(el);
+  el.addEventListener('mouseenter',()=>{sayHover(wp);showTooltip(wp);});
+  el.addEventListener('focus',()=>{sayHover(wp);showTooltip(wp);});
+  el.addEventListener('mouseleave',()=>{scheduleIdle();hideTooltip();});
+  el.addEventListener('blur',()=>{scheduleIdle();hideTooltip();});
 });
 
 const STORAGE_KEY='hcc_map_discovered',SECRET_KEY='hcc_map_secret_found';
-function loadDiscovered(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){return[]}}
-function saveDiscovered(x){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(x))}catch(e){}}
+function loadDiscovered(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[];}catch(e){return[];}}
+function saveDiscovered(list){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(list));}catch(e){}}
 function updateProgressPill(){}
-function applySavedState(){loadDiscovered().forEach(id=>{const el=mapWrapper.querySelector(`.waypoint[data-id="${id}"]`);if(el)el.classList.add('discovered')});if(localStorage.getItem(SECRET_KEY))document.getElementById('secret-chilli').classList.add('found');updateProgressPill()}
+function applySavedState(){
+  loadDiscovered().forEach(id=>{const el=mapWrapper.querySelector(`.waypoint[data-id="${id}"]`);if(el)el.classList.add('discovered');});
+  if(localStorage.getItem(SECRET_KEY))document.getElementById('secret-chilli').classList.add('found');
+  updateProgressPill();
+}
 function discover(wp){
-const el=mapWrapper.querySelector(`.waypoint[data-id="${wp.id}"]`),already=el.classList.contains('discovered');el.classList.add('discovered');
-if(!already){const list=loadDiscovered();if(!list.includes(wp.id)){list.push(wp.id);saveDiscovered(list);updateProgressPill()}}
-tooltip.classList.remove('show');say(wp.discover,4200)
+  const el=mapWrapper.querySelector(`.waypoint[data-id="${wp.id}"]`);
+  const already=el.classList.contains('discovered');
+  el.classList.add('discovered');
+  if(!already){
+    const list=loadDiscovered();
+    if(!list.includes(wp.id)){list.push(wp.id);saveDiscovered(list);updateProgressPill();}
+  }
+  tooltip.classList.remove('show');
+  say(wp.discover,4200);
 }
 
 const bubble=document.getElementById('speech-bubble');
 let idleTimer=null,hoverActive=false;
 const BUBBLE_MAX_PX=17.6,BUBBLE_MIN_PX=10,BUBBLE_LINE_HEIGHT=1.45,BUBBLE_MAX_LINES=3;
-function fitBubbleText(){let s=BUBBLE_MAX_PX;bubble.style.fontSize=s+'px';while(bubble.scrollHeight>s*BUBBLE_LINE_HEIGHT*BUBBLE_MAX_LINES+2&&s>BUBBLE_MIN_PX){s=Math.max(BUBBLE_MIN_PX,s-.5);bubble.style.fontSize=s+'px'}}
-function say(text,holdMs){bubble.textContent=text;bubble.classList.add('show');fitBubbleText();clearTimeout(idleTimer);idleTimer=setTimeout(()=>{bubble.classList.remove('show');if(!hoverActive)scheduleIdle(true)},holdMs||6000)}
-function sayHover(wp){hoverActive=true;clearTimeout(idleTimer);bubble.textContent=wp.hover;bubble.classList.add('show');fitBubbleText()}
+function fitBubbleText(){
+  let size=BUBBLE_MAX_PX;
+  bubble.style.fontSize=size+'px';
+  while(bubble.scrollHeight>size*BUBBLE_LINE_HEIGHT*BUBBLE_MAX_LINES+2 && size>BUBBLE_MIN_PX){
+    size=Math.max(BUBBLE_MIN_PX,size-0.5);
+    bubble.style.fontSize=size+'px';
+  }
+}
+function say(text,holdMs){
+  bubble.textContent=text;bubble.classList.add('show');fitBubbleText();
+  clearTimeout(idleTimer);
+  idleTimer=setTimeout(()=>{bubble.classList.remove('show');if(!hoverActive)scheduleIdle(true);},holdMs||6000);
+}
+function sayHover(wp){hoverActive=true;clearTimeout(idleTimer);bubble.textContent=wp.hover;bubble.classList.add('show');fitBubbleText();}
 let bubbleResizeTimer=null;
-function scheduleBubbleFit(){clearTimeout(bubbleResizeTimer);bubbleResizeTimer=setTimeout(fitBubbleText,120)}
+function scheduleBubbleFit(){
+  clearTimeout(bubbleResizeTimer);
+  bubbleResizeTimer=setTimeout(fitBubbleText,120);
+}
 window.addEventListener('resize',scheduleBubbleFit);
 new ResizeObserver(scheduleBubbleFit).observe(mascotGuide);
-function scheduleIdle(immediate){hoverActive=false;clearTimeout(idleTimer);idleTimer=setTimeout(()=>{if(!hoverActive)say(IDLE_LINES[Math.floor(Math.random()*IDLE_LINES.length)],5500)},immediate?3000:800)}
+function scheduleIdle(immediate){
+  hoverActive=false;clearTimeout(idleTimer);
+  idleTimer=setTimeout(()=>{
+    if(hoverActive)return;
+    say(IDLE_LINES[Math.floor(Math.random()*IDLE_LINES.length)],5500);
+  },immediate?3000:800);
+}
 document.getElementById('mascot-img').addEventListener('click',()=>say(IDLE_LINES[Math.floor(Math.random()*IDLE_LINES.length)],5000));
 
-const tooltip=document.getElementById('waypoint-tooltip'),tipTitleEl=document.getElementById('tip-title'),tipIntroEl=document.getElementById('tip-intro'),tipJoinEl=document.getElementById('tip-join');
+const tooltip=document.getElementById('waypoint-tooltip');
+const tipTitleEl=document.getElementById('tip-title');
+const tipIntroEl=document.getElementById('tip-intro');
+const tipJoinEl=document.getElementById('tip-join');
 let hideTimer=null;
-function cancelHide(){if(hideTimer){clearTimeout(hideTimer);hideTimer=null}}
-function showTooltip(wp){cancelHide();tipTitleEl.textContent=wp.title;tipIntroEl.textContent=wp.intro;tipJoinEl.textContent=wp.linkLabel;tipJoinEl.href=wp.link;tipJoinEl.onclick=()=>discover(wp);tooltip.classList.add('show')}
-function hideTooltip(){cancelHide();hideTimer=setTimeout(()=>tooltip.classList.remove('show'),150)}
+function cancelHide(){if(hideTimer){clearTimeout(hideTimer);hideTimer=null;}}
+function showTooltip(wp){
+  cancelHide();
+  tipTitleEl.textContent=wp.title;
+  tipIntroEl.textContent=wp.intro;
+  tipJoinEl.textContent=wp.linkLabel;
+  tipJoinEl.href=wp.link;
+  tipJoinEl.onclick=()=>discover(wp);
+  tooltip.classList.add('show');
+}
+function hideTooltip(){cancelHide();hideTimer=setTimeout(()=>tooltip.classList.remove('show'),150);}
 tooltip.addEventListener('mouseenter',cancelHide);
 tooltip.addEventListener('mouseleave',hideTooltip);
 tipJoinEl.addEventListener('focus',cancelHide);
@@ -365,12 +405,22 @@ tipJoinEl.addEventListener('blur',hideTooltip);
 
 const secretEl=document.getElementById('secret-chilli');
 secretEl.addEventListener('click',e=>{
-if(!localStorage.getItem(SECRET_KEY)){try{localStorage.setItem(SECRET_KEY,'1')}catch(err){}secretEl.classList.add('found');updateProgressPill();burstSparkles(e);say(SECRET_LINES[0],6000)}
-else{burstSparkles(e);say('You already claimed this one, champion 🌶️🏆',4000)}
+  if(!localStorage.getItem(SECRET_KEY)){
+    try{localStorage.setItem(SECRET_KEY,'1');}catch(err){}
+    secretEl.classList.add('found');updateProgressPill();burstSparkles(e);say(SECRET_LINES[0],6000);
+  }else{burstSparkles(e);say("You already claimed this one, champion 🌶️🏆",4000);}
 });
 function burstSparkles(e){
-const rect=mapWrapper.getBoundingClientRect(),scale=baseScale*zoom,x=(e.clientX-rect.left)/scale,y=(e.clientY-rect.top)/scale,symbols=['✨','🌟','💥','🎉'];
-for(let i=0;i<6;i++){const s=document.createElement('span');s.className='sparkle-burst';s.textContent=symbols[Math.floor(Math.random()*symbols.length)];s.style.left=x+(Math.random()*60-30)+'px';s.style.top=y+(Math.random()*20-10)+'px';mapWrapper.appendChild(s);setTimeout(()=>s.remove(),950)}
+  const rect=mapWrapper.getBoundingClientRect(),scale=baseScale*zoom;
+  const x=(e.clientX-rect.left)/scale,y=(e.clientY-rect.top)/scale;
+  const symbols=['✨','🌟','💥','🎉'];
+  for(let i=0;i<6;i++){
+    const s=document.createElement('span');
+    s.className='sparkle-burst';s.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    s.style.left=(x+(Math.random()*60-30))+'px';s.style.top=(y+(Math.random()*20-10))+'px';
+    mapWrapper.appendChild(s);
+    setTimeout(()=>s.remove(),950);
+  }
 }
 
 applySavedState();
