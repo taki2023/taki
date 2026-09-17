@@ -122,26 +122,13 @@
               "playerA": "AarjavSamaiya",
               "playerB": "RKamalanayanan",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
-              "finished": true,
-              "status": "forfeit",
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -226,26 +213,13 @@
               "playerA": "RKamalanayanan",
               "playerB": "Juliana3377",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.0,
-                  "scoreB": 1.0,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.0,
-                  "scoreB": 1.0,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
               "scoreA": 0,
-              "scoreB": 2,
-              "finished": true,
-              "status": "forfeit",
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -280,48 +254,48 @@
               "username": "Daniel2040",
               "rank": 1,
               "score": 7.5,
-              "tiebreak": 12.5,
+              "tiebreak": 8.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "AarjavSamaiya",
               "rank": 2,
-              "score": 5.0,
-              "tiebreak": 5.75,
+              "score": 4,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Juliana3377",
+              "username": "RKamalanayanan",
               "rank": 3,
-              "score": 4.0,
-              "tiebreak": 3.5,
+              "score": 2.5,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "RKamalanayanan",
+              "username": "Juliana3377",
               "rank": 4,
-              "score": 3.5,
-              "tiebreak": 2.5,
+              "score": 2,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Bhenejme",
               "rank": 5,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
           ],
-          "matchesFinished": 10,
+          "matchesFinished": 8,
           "matchesTotal": 10,
           "gamesFinished": 16,
           "gamesTotal": 20,
-          "allFinished": true
+          "allFinished": false
         },
         {
           "name": "group 2",
@@ -389,26 +363,13 @@
               "playerA": "DaTreeOfFives",
               "playerB": "CornettoM",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 2,
+              "scoreA": 0,
               "scoreB": 0,
-              "finished": true,
-              "status": "forfeit",
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -519,26 +480,13 @@
               "playerA": "RayDuqueIII",
               "playerB": "CornettoM",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
-              "finished": true,
-              "status": "forfeit",
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -598,49 +546,49 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 8.0,
-              "tiebreak": 12.0,
+              "score": 6,
+              "tiebreak": 8,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "DanielMelbou",
               "rank": 2,
-              "score": 5.0,
-              "tiebreak": 5.0,
+              "score": 5,
+              "tiebreak": 3.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "RayDuqueIII",
               "rank": 3,
-              "score": 4.0,
-              "tiebreak": 4.0,
+              "score": 3,
+              "tiebreak": 2.5,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "CornettoM",
               "rank": 4,
-              "score": 3.0,
-              "tiebreak": 2.0,
+              "score": 2,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "sahilkumar950",
               "rank": 5,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
           ],
-          "matchesFinished": 10,
+          "matchesFinished": 8,
           "matchesTotal": 10,
           "gamesFinished": 16,
           "gamesTotal": 20,
-          "allFinished": true
+          "allFinished": false
         },
         {
           "name": "group 3",
@@ -655,26 +603,13 @@
               "playerA": "Freddy1201",
               "playerB": "ChesssRedBelt",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 2,
+              "scoreA": 0,
               "scoreB": 0,
-              "finished": true,
-              "status": "forfeit",
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -759,26 +694,13 @@
               "playerA": "ChesssRedBelt",
               "playerB": "Jar_the_Lyd",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
-              "finished": true,
-              "status": "forfeit",
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -812,37 +734,37 @@
             {
               "username": "Freddy1201",
               "rank": 1,
-              "score": 4.0,
-              "tiebreak": 3.0,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "ChesssRedBelt",
-              "rank": 2,
-              "score": 3.0,
-              "tiebreak": 1.5,
+              "score": 4,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Jar_the_Lyd",
+              "rank": 2,
+              "score": 2,
+              "tiebreak": 0,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "ChesssRedBelt",
               "rank": 3,
-              "score": 3.0,
-              "tiebreak": 1.5,
+              "score": 2,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Avieroon",
               "rank": 4,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
           ],
-          "matchesFinished": 5,
+          "matchesFinished": 4,
           "matchesTotal": 6,
           "gamesFinished": 8,
           "gamesTotal": 12,
@@ -913,26 +835,13 @@
               "playerA": "Desert_Recon",
               "playerB": "Munchter_Madguy_Eric",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 2,
+              "scoreA": 0,
               "scoreB": 0,
-              "finished": true,
-              "status": "forfeit",
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -991,26 +900,13 @@
               "playerA": "cello_jello",
               "playerB": "Munchter_Madguy_Eric",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
-              "finished": true,
-              "status": "forfeit",
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             }
           ],
@@ -1018,41 +914,41 @@
             {
               "username": "Desert_Recon",
               "rank": 1,
-              "score": 6.0,
-              "tiebreak": 6.0,
+              "score": 4,
+              "tiebreak": 4,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "cello_jello",
               "rank": 2,
-              "score": 3.0,
-              "tiebreak": 2.5,
+              "score": 2,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Tengen",
               "rank": 3,
-              "score": 2.0,
-              "tiebreak": 1.0,
+              "score": 2,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Munchter_Madguy_Eric",
               "rank": 4,
-              "score": 1.0,
-              "tiebreak": 1.5,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 6,
+          "matchesFinished": 4,
           "matchesTotal": 6,
           "gamesFinished": 8,
           "gamesTotal": 12,
-          "allFinished": true
+          "allFinished": false
         },
         {
           "name": "group 5",
@@ -1224,8 +1120,8 @@
             {
               "username": "Taki",
               "rank": 1,
-              "score": 6.0,
-              "tiebreak": 6.0,
+              "score": 6,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
@@ -1241,15 +1137,15 @@
               "username": "IvanBoevski",
               "rank": 3,
               "score": 2.5,
-              "tiebreak": 0.0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "incecure",
               "rank": 4,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
@@ -1351,52 +1247,26 @@
               "playerA": "Oo_Arabi",
               "playerB": "RIP_People_in_Chess",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
-              "finished": true,
-              "status": "forfeit",
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
               "playerA": "Oo_Arabi",
               "playerB": "Moment_Before_Realization",
               "link": "",
-              "games": [
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                },
-                {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": false
-                }
-              ],
+              "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
-              "finished": true,
-              "status": "forfeit",
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
               "bothWithdrawn": false
             },
             {
@@ -1430,45 +1300,45 @@
             {
               "username": "TrofAndy",
               "rank": 1,
-              "score": 5.0,
-              "tiebreak": 5.5,
+              "score": 5,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "RIP_People_in_Chess",
               "rank": 2,
-              "score": 3.0,
-              "tiebreak": 4.5,
+              "score": 2,
+              "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Moment_Before_Realization",
               "rank": 3,
-              "score": 2.0,
-              "tiebreak": 2.5,
+              "score": 1,
+              "tiebreak": 1,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Oo_Arabi",
               "rank": 4,
-              "score": 2.0,
-              "tiebreak": 2.5,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 6,
+          "matchesFinished": 4,
           "matchesTotal": 6,
           "gamesFinished": 8,
           "gamesTotal": 12,
-          "allFinished": true
+          "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 43,
+        "matchesFinished": 34,
         "matchesTotal": 44,
         "gamesFinished": 68,
         "gamesTotal": 88
