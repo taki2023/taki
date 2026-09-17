@@ -277,7 +277,7 @@ const A=Number((flipped?m.scoreB:m.scoreA)||0),B=Number((flipped?m.scoreA:m.scor
 const cls=scoreCompareClasses(A,B);
 const teams=`<div class="mp-teams-row"><div class="mp-team"><img src="${esc(pa.avatar)}" onerror="this.src='${DEFAULT_AVATAR}'"><div class="mp-team-name">${esc(pa.name)}</div></div><div class="mp-vs">vs</div><div class="mp-team"><img src="${esc(pb.avatar)}" onerror="this.src='${DEFAULT_AVATAR}'"><div class="mp-team-name">${esc(pb.name)}</div></div></div>`;
 if(m.bothWithdrawn)return`<div class="mp-status forfeit">Withdrew</div>${teams}<div class="mp-score-row"><span class="mp-score-num tie">0</span><span class="mp-score-sep">–</span><span class="mp-score-num tie">0</span></div><div class="mp-forfeit-note">Both players withdrew from the tournament</div>`;
-return`<div class="mp-status ${stage.cls}">${stage.text}</div>${teams}<div class="mp-score-row"><span class="mp-score-num ${m.playedCount?cls.a:'tie'}">${m.playedCount?formatSum(A):'–'}</span><span class="mp-score-sep">–</span><span class="mp-score-num ${m.playedCount?cls.b:'tie'}">${m.playedCount?formatSum(B):'–'}</span></div>${m.status==='forfeit'?'<div class="mp-forfeit-note">Forfeit result</div>':`<div class="mp-games-row">${gameBtn(games[0],'Game 1',a,b)}${gameBtn(games[1],'Game 2',a,b)}</div>`}`;
+return`<div class="mp-status ${stage.cls}">${stage.text}</div>${teams}<div class="mp-score-row"><span class="mp-score-num ${m.playedCount||m.status==='forfeit'?cls.a:'tie'}">${m.playedCount||m.status==='forfeit'?formatSum(A):'–'}</span><span class="mp-score-sep">–</span><span class="mp-score-num ${m.playedCount||m.status==='forfeit'?cls.b:'tie'}">${m.playedCount||m.status==='forfeit'?formatSum(B):'–'}</span></div>${m.status==='forfeit'?'<div class="mp-forfeit-note">Forfeit result</div>':`<div class="mp-games-row">${gameBtn(games[0],'Game 1',a,b)}${gameBtn(games[1],'Game 2',a,b)}</div>`}`;
 }
 
 function positionPopover(x,y){
@@ -368,7 +368,15 @@ return h+'<th>Pts</th><th>TB</th></tr>';
 /* FIX #3: show the live combined score once at least one game has been
    played, instead of waiting for both games (playedCount>=2). When only
    one game is in, `total` is already the normalized 0 / 0.5 / 1 for that
-   single game, so it can go straight into pointsClass. */
+   single game, so it can go straight into pointsClass.
+
+   FIX #4 (new): a match that was manually resolved without any linked
+   games (status "forfeit" from an admin-entered result, as opposed to an
+   automatic withdrawal forfeit) still has playedCount 0 by design, so it
+   used to fall through to the "not started" checkerboard here even though
+   it has a real, final score. Treat status "forfeit" the same as
+   playedCount>=2 for display purposes — this matches how renderRoundStats
+   already counts these matchups as finished. */
 function groupHTML(group,isFinal){
 const standings=group.standings||group.players.map((username,i)=>({username,rank:i+1,score:0,tiebreak:0,qualified:false}));
 const order=standings.slice().sort((a,b)=>a.rank-b.rank);
@@ -383,7 +391,7 @@ if(!m){body+='<td><span class="cell-board">'+BOARD_SVG+'</span></td>';return}
 const total=m.playerA===row.username?m.scoreA:m.scoreB;
 let inside;
 if(m.bothWithdrawn)inside=`<span class="badge draw">0</span>`;
-else if(m.playedCount>=2)inside=`<span class="badge ${pointsClass(total===2?1:total===0?0:.5)}">${formatSum(total)}</span>`;
+else if(m.playedCount>=2||m.status==='forfeit')inside=`<span class="badge ${pointsClass(total===2?1:total===0?0:.5)}">${formatSum(total)}</span>`;
 else if(m.playedCount===1)inside=`<span class="badge ${pointsClass(total)}">${formatSum(total)}</span>`;
 else inside=`<span class="cell-board">${BOARD_SVG}</span>`;
 body+=`<td data-a="${esc(row.username)}" data-b="${esc(col.username)}">${inside}</td>`;
