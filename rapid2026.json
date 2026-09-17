@@ -655,13 +655,26 @@
               "playerA": "Freddy1201",
               "playerB": "ChesssRedBelt",
               "link": "",
-              "games": [],
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1.0,
+                  "scoreB": 0.0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "",
+                  "scoreA": 1.0,
+                  "scoreB": 0.0,
+                  "dueToWithdrawal": false
+                }
+              ],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
