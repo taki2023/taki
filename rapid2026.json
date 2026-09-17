@@ -376,13 +376,26 @@
               "playerA": "DaTreeOfFives",
               "playerB": "sahilkumar950",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -441,13 +454,26 @@
               "playerA": "DanielMelbou",
               "playerB": "sahilkumar950",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -467,26 +493,52 @@
               "playerA": "RayDuqueIII",
               "playerB": "sahilkumar950",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
               "playerA": "CornettoM",
               "playerB": "sahilkumar950",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -494,31 +546,31 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 4,
-              "tiebreak": 4,
+              "score": 6,
+              "tiebreak": 8,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "DanielMelbou",
               "rank": 2,
-              "score": 3,
-              "tiebreak": 0.5,
+              "score": 5,
+              "tiebreak": 3.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "RayDuqueIII",
               "rank": 3,
-              "score": 1,
-              "tiebreak": 1.5,
+              "score": 3,
+              "tiebreak": 2.5,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "CornettoM",
               "rank": 4,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
@@ -529,12 +581,12 @@
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": false
+              "withdrawn": true
             }
           ],
-          "matchesFinished": 4,
+          "matchesFinished": 8,
           "matchesTotal": 10,
-          "gamesFinished": 8,
+          "gamesFinished": 16,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -1247,9 +1299,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 27,
+        "matchesFinished": 31,
         "matchesTotal": 44,
-        "gamesFinished": 54,
+        "gamesFinished": 62,
         "gamesTotal": 88
       }
     }
@@ -1534,6 +1586,7 @@
   },
   "withdrawn": [
     "incecure",
-    "Bhenejme"
+    "Bhenejme",
+    "sahilkumar950"
   ]
 }
