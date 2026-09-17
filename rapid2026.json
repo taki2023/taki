@@ -125,10 +125,10 @@
               "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
