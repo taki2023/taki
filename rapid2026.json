@@ -1473,6 +1473,135 @@
         "gamesFinished": 88,
         "gamesTotal": 88
       }
+    },
+    {
+      "number": 2,
+      "name": "Round 2",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "cello_jello",
+            "TrofAndy",
+            "TALented_Vasee_18",
+            "Jar_the_Lyd"
+          ],
+          "matches": [
+            {
+              "playerA": "cello_jello",
+              "playerB": "TrofAndy",
+              "link": ""
+            },
+            {
+              "playerA": "cello_jello",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "cello_jello",
+              "playerB": "Jar_the_Lyd",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "Jar_the_Lyd",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "Jar_the_Lyd",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 2",
+          "players": [
+            "DaTreeOfFives",
+            "Taki",
+            "Daniel2040",
+            "RIP_People_in_Chess"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Daniel2040",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "Daniel2040",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 3",
+          "players": [
+            "Freddy1201",
+            "Desert_Recon",
+            "AarjavSamaiya",
+            "DanielMelbou"
+          ],
+          "matches": [
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Desert_Recon",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "DanielMelbou",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "DanielMelbou",
+              "link": ""
+            },
+            {
+              "playerA": "AarjavSamaiya",
+              "playerB": "DanielMelbou",
+              "link": ""
+            }
+          ]
+        }
+      ]
     }
   ],
   "ranking": [
