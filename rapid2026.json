@@ -608,7 +608,7 @@
               "linkedGames": 0,
               "scoreA": 2,
               "scoreB": 0,
-              "finished": True,
+              "finished": true,
               "status": "forfeit",
               "bothWithdrawn": false
             },
