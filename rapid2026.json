@@ -606,10 +606,10 @@
               "games": [],
               "playedCount": 0,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": True,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
