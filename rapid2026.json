@@ -405,8 +405,8 @@
               ],
               "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 2,
-              "scoreB": 0,
+              "scoreA": 1,
+              "scoreB": 1,
               "finished": true,
               "status": "finished",
               "bothWithdrawn": false
@@ -658,21 +658,21 @@
               "games": [
                 {
                   "link": "",
-                  "scoreA": 1,
-                  "scoreB": 0,
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
                   "dueToWithdrawal": false
                 },
                 {
                   "link": "",
-                  "scoreA": 1,
-                  "scoreB": 0,
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
                   "dueToWithdrawal": false
                 }
               ],
               "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 2,
-              "scoreB": 0,
+              "scoreA": 1,
+              "scoreB": 1,
               "finished": true,
               "status": "finished",
               "bothWithdrawn": false
