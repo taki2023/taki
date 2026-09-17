@@ -136,12 +136,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 1,
               "scoreB": 1,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -240,12 +240,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 0,
               "scoreB": 2,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -319,7 +319,7 @@
           ],
           "matchesFinished": 10,
           "matchesTotal": 10,
-          "gamesFinished": 16,
+          "gamesFinished": 20,
           "gamesTotal": 20,
           "allFinished": true
         },
@@ -403,12 +403,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 2,
               "scoreB": 0,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -533,12 +533,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 1,
               "scoreB": 1,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -638,7 +638,7 @@
           ],
           "matchesFinished": 10,
           "matchesTotal": 10,
-          "gamesFinished": 16,
+          "gamesFinished": 20,
           "gamesTotal": 20,
           "allFinished": true
         },
@@ -669,12 +669,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 2,
               "scoreB": 0,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -773,12 +773,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 1,
               "scoreB": 1,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -812,13 +812,13 @@
             {
               "username": "Freddy1201",
               "rank": 1,
-              "score": 4,
-              "tiebreak": 3,
+              "score": 6,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "ChesssRedBelt",
+              "username": "Jar_the_Lyd",
               "rank": 2,
               "score": 3,
               "tiebreak": 1.5,
@@ -826,7 +826,7 @@
               "withdrawn": false
             },
             {
-              "username": "Jar_the_Lyd",
+              "username": "ChesssRedBelt",
               "rank": 3,
               "score": 3,
               "tiebreak": 1.5,
@@ -842,11 +842,11 @@
               "withdrawn": true
             }
           ],
-          "matchesFinished": 5,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 8,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         },
         {
           "name": "group 4",
@@ -927,12 +927,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 2,
               "scoreB": 0,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1005,12 +1005,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 1,
               "scoreB": 1,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             }
           ],
@@ -1050,7 +1050,7 @@
           ],
           "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 8,
+          "gamesFinished": 12,
           "gamesTotal": 12,
           "allFinished": true
         },
@@ -1365,12 +1365,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 1,
               "scoreB": 1,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1391,12 +1391,12 @@
                   "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 0,
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 1,
               "scoreB": 1,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1462,15 +1462,15 @@
           ],
           "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 8,
+          "gamesFinished": 12,
           "gamesTotal": 12,
           "allFinished": true
         }
       ],
       "stats": {
-        "matchesFinished": 43,
+        "matchesFinished": 44,
         "matchesTotal": 44,
-        "gamesFinished": 68,
+        "gamesFinished": 88,
         "gamesTotal": 88
       }
     }
@@ -1740,15 +1740,15 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 20,
+    "matchesPlayedCount": 44,
     "mostWinsPlayer": "Daniel2040",
-    "mostWinsCount": 3,
+    "mostWinsCount": 4,
     "biggestUpset": {
-      "winner": "cello_jello",
-      "loser": "Tengen",
-      "winnerRating": 1279,
-      "loserRating": 1506,
-      "diff": 227
+      "winner": "Juliana3377",
+      "loser": "RKamalanayanan",
+      "winnerRating": 610,
+      "loserRating": 1350,
+      "diff": 740
     },
     "podium": null,
     "champion": null
