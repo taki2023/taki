@@ -229,14 +229,14 @@
               "games": [
                 {
                   "link": "",
-                  "scoreA": 0.0,
-                  "scoreB": 1.0,
+                  "scoreA": 0,
+                  "scoreB": 1,
                   "dueToWithdrawal": false
                 },
                 {
                   "link": "",
-                  "scoreA": 0.0,
-                  "scoreB": 1.0,
+                  "scoreA": 0,
+                  "scoreB": 1,
                   "dueToWithdrawal": false
                 }
               ],
@@ -287,7 +287,7 @@
             {
               "username": "AarjavSamaiya",
               "rank": 2,
-              "score": 5.0,
+              "score": 5,
               "tiebreak": 5.75,
               "qualified": true,
               "withdrawn": false
@@ -295,7 +295,7 @@
             {
               "username": "Juliana3377",
               "rank": 3,
-              "score": 4.0,
+              "score": 4,
               "tiebreak": 3.5,
               "qualified": false,
               "withdrawn": false
@@ -311,8 +311,8 @@
             {
               "username": "Bhenejme",
               "rank": 5,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
@@ -392,14 +392,14 @@
               "games": [
                 {
                   "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": false
                 },
                 {
                   "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": false
                 }
               ],
@@ -598,40 +598,40 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 8.0,
-              "tiebreak": 12.0,
+              "score": 8,
+              "tiebreak": 12,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "DanielMelbou",
               "rank": 2,
-              "score": 5.0,
-              "tiebreak": 5.0,
+              "score": 5,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "RayDuqueIII",
               "rank": 3,
-              "score": 4.0,
-              "tiebreak": 4.0,
+              "score": 4,
+              "tiebreak": 4,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "CornettoM",
               "rank": 4,
-              "score": 3.0,
-              "tiebreak": 2.0,
+              "score": 3,
+              "tiebreak": 2,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "sahilkumar950",
               "rank": 5,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
@@ -658,14 +658,14 @@
               "games": [
                 {
                   "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": false
                 },
                 {
                   "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": false
                 }
               ],
@@ -812,15 +812,15 @@
             {
               "username": "Freddy1201",
               "rank": 1,
-              "score": 4.0,
-              "tiebreak": 3.0,
+              "score": 4,
+              "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "ChesssRedBelt",
               "rank": 2,
-              "score": 3.0,
+              "score": 3,
               "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
@@ -828,7 +828,7 @@
             {
               "username": "Jar_the_Lyd",
               "rank": 3,
-              "score": 3.0,
+              "score": 3,
               "tiebreak": 1.5,
               "qualified": false,
               "withdrawn": false
@@ -836,8 +836,8 @@
             {
               "username": "Avieroon",
               "rank": 4,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
@@ -916,14 +916,14 @@
               "games": [
                 {
                   "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": false
                 },
                 {
                   "link": "",
-                  "scoreA": 1.0,
-                  "scoreB": 0.0,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": false
                 }
               ],
@@ -1018,15 +1018,15 @@
             {
               "username": "Desert_Recon",
               "rank": 1,
-              "score": 6.0,
-              "tiebreak": 6.0,
+              "score": 6,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "cello_jello",
               "rank": 2,
-              "score": 3.0,
+              "score": 3,
               "tiebreak": 2.5,
               "qualified": true,
               "withdrawn": false
@@ -1034,15 +1034,15 @@
             {
               "username": "Tengen",
               "rank": 3,
-              "score": 2.0,
-              "tiebreak": 1.0,
+              "score": 2,
+              "tiebreak": 1,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Munchter_Madguy_Eric",
               "rank": 4,
-              "score": 1.0,
+              "score": 1,
               "tiebreak": 1.5,
               "qualified": false,
               "withdrawn": false
@@ -1224,8 +1224,8 @@
             {
               "username": "Taki",
               "rank": 1,
-              "score": 6.0,
-              "tiebreak": 6.0,
+              "score": 6,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
@@ -1241,15 +1241,15 @@
               "username": "IvanBoevski",
               "rank": 3,
               "score": 2.5,
-              "tiebreak": 0.0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "incecure",
               "rank": 4,
-              "score": 0.0,
-              "tiebreak": 0.0,
+              "score": 0,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
@@ -1430,7 +1430,7 @@
             {
               "username": "TrofAndy",
               "rank": 1,
-              "score": 5.0,
+              "score": 5,
               "tiebreak": 5.5,
               "qualified": true,
               "withdrawn": false
@@ -1438,7 +1438,7 @@
             {
               "username": "RIP_People_in_Chess",
               "rank": 2,
-              "score": 3.0,
+              "score": 3,
               "tiebreak": 4.5,
               "qualified": true,
               "withdrawn": false
@@ -1446,7 +1446,7 @@
             {
               "username": "Moment_Before_Realization",
               "rank": 3,
-              "score": 2.0,
+              "score": 2,
               "tiebreak": 2.5,
               "qualified": false,
               "withdrawn": false
@@ -1454,7 +1454,7 @@
             {
               "username": "Oo_Arabi",
               "rank": 4,
-              "score": 2.0,
+              "score": 2,
               "tiebreak": 2.5,
               "qualified": false,
               "withdrawn": false
