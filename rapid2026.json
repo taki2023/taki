@@ -1530,13 +1530,26 @@
               "playerA": "TrofAndy",
               "playerB": "TALented_Vasee_18",
               "link": "https://www.chess.com/game/live/183970790976::0-1 | https://www.chess.com/game/live/183971413394::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/183970790976",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/183971413394",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1568,23 +1581,23 @@
           ],
           "standings": [
             {
-              "username": "RIP_People_in_Chess",
-              "rank": 1,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
               "username": "TALented_Vasee_18",
-              "rank": 2,
-              "score": 0,
-              "tiebreak": 0,
+              "rank": 1,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TrofAndy",
+              "rank": 2,
+              "score": 1,
+              "tiebreak": 0.5,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "RIP_People_in_Chess",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -1600,9 +1613,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 1,
           "matchesTotal": 6,
-          "gamesFinished": 0,
+          "gamesFinished": 2,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1864,9 +1877,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 0,
+        "matchesFinished": 1,
         "matchesTotal": 18,
-        "gamesFinished": 0,
+        "gamesFinished": 2,
         "gamesTotal": 36
       }
     }
@@ -2136,7 +2149,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 44,
+    "matchesPlayedCount": 45,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 4,
     "biggestUpset": {
