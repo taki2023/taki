@@ -1588,7 +1588,7 @@
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
-              "qualified": true,
+              "qualified": false,
               "withdrawn": false
             },
             {
@@ -1716,7 +1716,7 @@
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
-              "qualified": true,
+              "qualified": false,
               "withdrawn": false
             },
             {
@@ -1844,7 +1844,7 @@
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
-              "qualified": true,
+              "qualified": false,
               "withdrawn": false
             },
             {
