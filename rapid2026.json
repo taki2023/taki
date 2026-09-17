@@ -1473,6 +1473,135 @@
         "gamesFinished": 88,
         "gamesTotal": 88
       }
+    },
+    {
+      "number": 2,
+      "name": "Round 2",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "Daniel2040",
+            "TrofAndy",
+            "TALented_Vasee_18",
+            "RIP_People_in_Chess"
+          ],
+          "matches": [
+            {
+              "playerA": "Daniel2040",
+              "playerB": "TrofAndy",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "RIP_People_in_Chess",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 2",
+          "players": [
+            "DaTreeOfFives",
+            "Taki",
+            "ChesssRedBelt",
+            "cello_jello"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "ChesssRedBelt",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "ChesssRedBelt",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "cello_jello",
+              "link": ""
+            },
+            {
+              "playerA": "ChesssRedBelt",
+              "playerB": "cello_jello",
+              "link": ""
+            }
+          ]
+        },
+        {
+          "name": "group 3",
+          "players": [
+            "Freddy1201",
+            "Desert_Recon",
+            "DanielMelbou",
+            "AarjavSamaiya"
+          ],
+          "matches": [
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Desert_Recon",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "DanielMelbou",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "DanielMelbou",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            },
+            {
+              "playerA": "DanielMelbou",
+              "playerB": "AarjavSamaiya",
+              "link": ""
+            }
+          ]
+        }
+      ]
     }
   ],
   "ranking": [
