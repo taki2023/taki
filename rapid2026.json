@@ -616,13 +616,26 @@
               "playerA": "Freddy1201",
               "playerB": "Avieroon",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -655,13 +668,26 @@
               "playerA": "ChesssRedBelt",
               "playerB": "Avieroon",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -681,13 +707,26 @@
               "playerA": "Avieroon",
               "playerB": "Jar_the_Lyd",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreB": 2,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -695,39 +734,39 @@
             {
               "username": "Freddy1201",
               "rank": 1,
+              "score": 4,
+              "tiebreak": 2,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "ChesssRedBelt",
+              "rank": 2,
               "score": 2,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Avieroon",
-              "rank": 2,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "ChesssRedBelt",
+              "username": "Jar_the_Lyd",
               "rank": 3,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "Jar_the_Lyd",
+              "username": "Avieroon",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": false
+              "withdrawn": true
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 4,
           "matchesTotal": 6,
-          "gamesFinished": 2,
+          "gamesFinished": 8,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1299,9 +1338,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 31,
+        "matchesFinished": 34,
         "matchesTotal": 44,
-        "gamesFinished": 62,
+        "gamesFinished": 68,
         "gamesTotal": 88
       }
     }
@@ -1587,6 +1626,7 @@
   "withdrawn": [
     "incecure",
     "Bhenejme",
-    "sahilkumar950"
+    "sahilkumar950",
+    "Avieroon"
   ]
 }
