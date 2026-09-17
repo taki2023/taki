@@ -70,13 +70,26 @@
               "playerA": "Daniel2040",
               "playerB": "Bhenejme",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -122,13 +135,26 @@
               "playerA": "AarjavSamaiya",
               "playerB": "Bhenejme",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -161,13 +187,26 @@
               "playerA": "RKamalanayanan",
               "playerB": "Bhenejme",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -187,13 +226,26 @@
               "playerA": "Bhenejme",
               "playerB": "Juliana3377",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreB": 2,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -201,47 +253,47 @@
             {
               "username": "Daniel2040",
               "rank": 1,
-              "score": 5.5,
-              "tiebreak": 2.5,
+              "score": 7.5,
+              "tiebreak": 8.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "AarjavSamaiya",
               "rank": 2,
-              "score": 2,
-              "tiebreak": 0,
+              "score": 4,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "RKamalanayanan",
               "rank": 3,
-              "score": 0.5,
-              "tiebreak": 0,
-              "qualified": false,
-              "withdrawn": false
-            },
-            {
-              "username": "Bhenejme",
-              "rank": 4,
-              "score": 0,
+              "score": 2.5,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Juliana3377",
+              "rank": 4,
+              "score": 2,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "Bhenejme",
               "rank": 5,
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": false
+              "withdrawn": true
             }
           ],
-          "matchesFinished": 4,
+          "matchesFinished": 8,
           "matchesTotal": 10,
-          "gamesFinished": 8,
+          "gamesFinished": 16,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -1195,9 +1247,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 23,
+        "matchesFinished": 27,
         "matchesTotal": 44,
-        "gamesFinished": 46,
+        "gamesFinished": 54,
         "gamesTotal": 88
       }
     }
@@ -1481,6 +1533,7 @@
     "champion": null
   },
   "withdrawn": [
-    "incecure"
+    "incecure",
+    "Bhenejme"
   ]
 }
