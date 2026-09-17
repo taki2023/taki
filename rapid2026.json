@@ -598,8 +598,8 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 8,
-              "tiebreak": 12,
+              "score": 7,
+              "tiebreak": 11,
               "qualified": true,
               "withdrawn": false
             },
@@ -607,23 +607,23 @@
               "username": "DanielMelbou",
               "rank": 2,
               "score": 5,
-              "tiebreak": 5,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "RayDuqueIII",
+              "username": "CornettoM",
               "rank": 3,
               "score": 4,
-              "tiebreak": 4,
+              "tiebreak": 5.5,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "CornettoM",
+              "username": "RayDuqueIII",
               "rank": 4,
-              "score": 3,
-              "tiebreak": 2,
+              "score": 4,
+              "tiebreak": 4.5,
               "qualified": false,
               "withdrawn": false
             },
@@ -812,24 +812,24 @@
             {
               "username": "Freddy1201",
               "rank": 1,
-              "score": 6,
-              "tiebreak": 6,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "Jar_the_Lyd",
-              "rank": 2,
-              "score": 3,
-              "tiebreak": 1.5,
+              "score": 5,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "ChesssRedBelt",
+              "rank": 2,
+              "score": 4,
+              "tiebreak": 4,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Jar_the_Lyd",
               "rank": 3,
               "score": 3,
-              "tiebreak": 1.5,
+              "tiebreak": 2,
               "qualified": false,
               "withdrawn": false
             },
