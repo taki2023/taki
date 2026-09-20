@@ -1523,14 +1523,20 @@
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184077773446",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 1,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1609,18 +1615,18 @@
               "withdrawn": false
             },
             {
-              "username": "TALented_Vasee_18",
+              "username": "Daniel2040",
               "rank": 2,
-              "score": 1,
-              "tiebreak": 1.25,
+              "score": 2,
+              "tiebreak": 0.5,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Daniel2040",
+              "username": "TALented_Vasee_18",
               "rank": 3,
               "score": 1,
-              "tiebreak": 0,
+              "tiebreak": 1.25,
               "qualified": false,
               "withdrawn": false
             },
@@ -1633,9 +1639,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 5,
+          "gamesFinished": 6,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1793,13 +1799,26 @@
               "playerA": "Freddy1201",
               "playerB": "Desert_Recon",
               "link": "https://www.chess.com/game/live/184076180090::0-1 | https://www.chess.com/game/live/184076950344::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184076180090",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184076950344",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1885,21 +1904,21 @@
             {
               "username": "Desert_Recon",
               "rank": 1,
-              "score": 2,
-              "tiebreak": 0,
+              "score": 3,
+              "tiebreak": 0.5,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Freddy1201",
+              "rank": 2,
+              "score": 1,
+              "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "DanielMelbou",
-              "rank": 2,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "AarjavSamaiya",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -1907,7 +1926,7 @@
               "withdrawn": false
             },
             {
-              "username": "Freddy1201",
+              "username": "AarjavSamaiya",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
@@ -1915,17 +1934,17 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 2,
+          "gamesFinished": 4,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 4,
+        "matchesFinished": 6,
         "matchesTotal": 18,
-        "gamesFinished": 9,
+        "gamesFinished": 12,
         "gamesTotal": 36
       }
     }
@@ -2195,9 +2214,9 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 48,
+    "matchesPlayedCount": 50,
     "mostWinsPlayer": "Daniel2040",
-    "mostWinsCount": 4,
+    "mostWinsCount": 5,
     "biggestUpset": {
       "winner": "Juliana3377",
       "loser": "RKamalanayanan",
