@@ -1825,13 +1825,26 @@
               "playerA": "Freddy1201",
               "playerB": "DanielMelbou",
               "link": "https://www.chess.com/game/live/184107626292::1-0 | https://www.chess.com/game/live/184108350006::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184107626292",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184108350006",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1905,14 +1918,14 @@
               "username": "Desert_Recon",
               "rank": 1,
               "score": 3,
-              "tiebreak": 0.5,
+              "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Freddy1201",
               "rank": 2,
-              "score": 1,
+              "score": 3,
               "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
@@ -1934,17 +1947,17 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 4,
+          "gamesFinished": 6,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 6,
+        "matchesFinished": 7,
         "matchesTotal": 18,
-        "gamesFinished": 12,
+        "gamesFinished": 14,
         "gamesTotal": 36
       }
     }
@@ -2214,7 +2227,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 50,
+    "matchesPlayedCount": 51,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 5,
     "biggestUpset": {
