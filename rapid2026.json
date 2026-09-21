@@ -1658,13 +1658,26 @@
               "playerA": "DaTreeOfFives",
               "playerB": "Taki",
               "link": "https://www.chess.com/game/live/184163099874::1-0 | https://www.chess.com/game/live/184163819854::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184163099874",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184163819854",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1761,15 +1774,15 @@
           ],
           "standings": [
             {
-              "username": "Taki",
+              "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 2,
-              "tiebreak": 0,
+              "score": 4,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "DaTreeOfFives",
+              "username": "Taki",
               "rank": 2,
               "score": 2,
               "tiebreak": 0,
@@ -1793,9 +1806,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 4,
+          "gamesFinished": 6,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1968,9 +1981,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 8,
+        "matchesFinished": 9,
         "matchesTotal": 18,
-        "gamesFinished": 16,
+        "gamesFinished": 18,
         "gamesTotal": 36
       }
     }
@@ -2240,7 +2253,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 52,
+    "matchesPlayedCount": 53,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 5,
     "biggestUpset": {
