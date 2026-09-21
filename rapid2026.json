@@ -1710,13 +1710,26 @@
               "playerA": "Taki",
               "playerB": "ChesssRedBelt",
               "link": "https://www.chess.com/game/live/184150439804::1-0 | https://www.chess.com/game/live/184150657170::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184150439804",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184150657170",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1748,7 +1761,7 @@
           ],
           "standings": [
             {
-              "username": "DaTreeOfFives",
+              "username": "Taki",
               "rank": 1,
               "score": 2,
               "tiebreak": 0,
@@ -1756,15 +1769,15 @@
               "withdrawn": false
             },
             {
-              "username": "ChesssRedBelt",
+              "username": "DaTreeOfFives",
               "rank": 2,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "cello_jello",
+              "username": "ChesssRedBelt",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -1772,7 +1785,7 @@
               "withdrawn": false
             },
             {
-              "username": "Taki",
+              "username": "cello_jello",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
@@ -1780,9 +1793,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 2,
+          "gamesFinished": 4,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1955,9 +1968,9 @@
         }
       ],
       "stats": {
-        "matchesFinished": 7,
+        "matchesFinished": 8,
         "matchesTotal": 18,
-        "gamesFinished": 14,
+        "gamesFinished": 16,
         "gamesTotal": 36
       }
     }
@@ -2227,7 +2240,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 51,
+    "matchesPlayedCount": 52,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 5,
     "biggestUpset": {
