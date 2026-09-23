@@ -1749,13 +1749,26 @@
               "playerA": "Taki",
               "playerB": "cello_jello",
               "link": "https://www.chess.com/game/live/184227132274::1-0 | https://www.chess.com/game/live/184227430236::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184227132274",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184227430236",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1777,14 +1790,14 @@
               "username": "DaTreeOfFives",
               "rank": 1,
               "score": 4,
-              "tiebreak": 2,
+              "tiebreak": 4,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Taki",
               "rank": 2,
-              "score": 2,
+              "score": 4,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
@@ -1806,9 +1819,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 4,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 8,
           "gamesTotal": 12,
           "allFinished": false
         },
@@ -1916,13 +1929,20 @@
               "playerA": "Desert_Recon",
               "playerB": "AarjavSamaiya",
               "link": "https://www.chess.com/game/live/184235312744::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184235312744",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
+              "scoreA": 1,
               "scoreB": 0,
               "finished": false,
-              "status": "pending",
+              "status": "partial",
               "bothWithdrawn": false
             },
             {
@@ -1943,7 +1963,7 @@
             {
               "username": "Desert_Recon",
               "rank": 1,
-              "score": 3,
+              "score": 4,
               "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
@@ -1952,7 +1972,7 @@
               "username": "Freddy1201",
               "rank": 2,
               "score": 3,
-              "tiebreak": 1.5,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
@@ -1975,15 +1995,15 @@
           ],
           "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 7,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 9,
+        "matchesFinished": 10,
         "matchesTotal": 18,
-        "gamesFinished": 18,
+        "gamesFinished": 21,
         "gamesTotal": 36
       }
     }
@@ -2253,7 +2273,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 53,
+    "matchesPlayedCount": 54,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 5,
     "biggestUpset": {
