@@ -2022,11 +2022,11 @@
                 }
               ],
               "playedCount": 2,
-              "linkedGames": 0,
+              "linkedGames": 1,
               "scoreA": 1.5,
               "scoreB": 0.5,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -2061,23 +2061,23 @@
               "username": "Freddy1201",
               "rank": 1,
               "score": 5,
-              "tiebreak": 5,
+              "tiebreak": 4.75,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Desert_Recon",
               "rank": 2,
-              "score": 4,
-              "tiebreak": 4.5,
+              "score": 4.5,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "AarjavSamaiya",
               "rank": 3,
-              "score": 2,
-              "tiebreak": 2.5,
+              "score": 1.5,
+              "tiebreak": 0.5,
               "qualified": false,
               "withdrawn": false
             },
@@ -2085,7 +2085,7 @@
               "username": "DanielMelbou",
               "rank": 4,
               "score": 1,
-              "tiebreak": 1,
+              "tiebreak": 0.75,
               "qualified": false,
               "withdrawn": false
             }
@@ -2388,6 +2388,5 @@
     "Bhenejme",
     "sahilkumar950",
     "Avieroon"
-    
   ]
 }
