@@ -1958,21 +1958,21 @@
               "games": [
                 {
                   "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": true
                 },
                 {
                   "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
+                  "scoreA": 1,
+                  "scoreB": 0,
                   "dueToWithdrawal": true
                 }
               ],
               "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
+              "scoreA": 2,
+              "scoreB": 0,
               "finished": true,
               "status": "forfeit",
               "bothWithdrawn": false
