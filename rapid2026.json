@@ -2009,10 +2009,10 @@
               "link": "",
               "games": [
                 {
-                  "link": "",
-                  "scoreA": 0.5,
-                  "scoreB": 0.5,
-                  "dueToWithdrawal": true
+                  "link": "https://www.chess.com/game/live/184235312744",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 },
                 {
                   "link": "",
@@ -2023,8 +2023,8 @@
               ],
               "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 1,
-              "scoreB": 1,
+              "scoreA": 1.5,
+              "scoreB": 0.5,
               "finished": true,
               "status": "forfeit",
               "bothWithdrawn": false
