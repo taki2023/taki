@@ -1640,31 +1640,31 @@
               "scoreA": 2,
               "scoreB": 0,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             }
           ],
           "standings": [
             {
-              "username": "Daniel2040",
+              "username": "TALented_Vasee_18",
               "rank": 1,
               "score": 4,
-              "tiebreak": 4.75,
+              "tiebreak": 4.25,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Daniel2040",
+              "rank": 2,
+              "score": 4,
+              "tiebreak": 4.25,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TrofAndy",
-              "rank": 2,
-              "score": 3.5,
-              "tiebreak": 5,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "TALented_Vasee_18",
               "rank": 3,
-              "score": 3,
+              "score": 3.5,
               "tiebreak": 4.5,
               "qualified": false,
               "withdrawn": false
@@ -1672,8 +1672,8 @@
             {
               "username": "RIP_People_in_Chess",
               "rank": 4,
-              "score": 1.5,
-              "tiebreak": 1.5,
+              "score": 0.5,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             }
