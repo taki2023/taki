@@ -2122,81 +2122,269 @@
             {
               "playerA": "Daniel2040",
               "playerB": "DaTreeOfFives",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Daniel2040",
               "playerB": "Freddy1201",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Daniel2040",
               "playerB": "Desert_Recon",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Daniel2040",
               "playerB": "Taki",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Daniel2040",
               "playerB": "TALented_Vasee_18",
-              "link": "https://www.chess.com/game/live/184305019952::1-0"
+              "link": "https://www.chess.com/game/live/184305019952::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184305019952",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
+              "scoreA": 1,
+              "scoreB": 0,
+              "finished": false,
+              "status": "partial",
+              "bothWithdrawn": false
             },
             {
               "playerA": "DaTreeOfFives",
               "playerB": "Freddy1201",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "DaTreeOfFives",
               "playerB": "Desert_Recon",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "DaTreeOfFives",
               "playerB": "Taki",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "DaTreeOfFives",
               "playerB": "TALented_Vasee_18",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Freddy1201",
               "playerB": "Desert_Recon",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Freddy1201",
               "playerB": "Taki",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Freddy1201",
               "playerB": "TALented_Vasee_18",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Desert_Recon",
               "playerB": "Taki",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Desert_Recon",
               "playerB": "TALented_Vasee_18",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             },
             {
               "playerA": "Taki",
               "playerB": "TALented_Vasee_18",
-              "link": ""
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
             }
-          ]
+          ],
+          "standings": [
+            {
+              "username": "Daniel2040",
+              "rank": 1,
+              "score": 1,
+              "tiebreak": 0,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "TALented_Vasee_18",
+              "rank": 2,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Taki",
+              "rank": 3,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "Desert_Recon",
+              "rank": 4,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "Freddy1201",
+              "rank": 5,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "DaTreeOfFives",
+              "rank": 6,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            }
+          ],
+          "matchesFinished": 0,
+          "matchesTotal": 15,
+          "gamesFinished": 1,
+          "gamesTotal": 30,
+          "allFinished": false
         }
-      ]
+      ],
+      "stats": {
+        "matchesFinished": 0,
+        "matchesTotal": 15,
+        "gamesFinished": 1,
+        "gamesTotal": 30
+      }
     }
   ],
   "ranking": [
@@ -2474,7 +2662,20 @@
       "loserRating": 1327,
       "diff": 701
     },
-    "podium": null,
+    "podium": [
+      {
+        "username": "Daniel2040",
+        "score": 1
+      },
+      {
+        "username": "TALented_Vasee_18",
+        "score": 0
+      },
+      {
+        "username": "Taki",
+        "score": 0
+      }
+    ],
     "champion": null
   },
   "withdrawn": [
