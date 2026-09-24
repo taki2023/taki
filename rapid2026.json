@@ -2103,6 +2103,100 @@
         "gamesFinished": 36,
         "gamesTotal": 36
       }
+    },
+    {
+      "number": 3,
+      "name": "Final Round",
+      "groups": [
+        {
+          "name": "group 1",
+          "players": [
+            "Daniel2040",
+            "DaTreeOfFives",
+            "Freddy1201",
+            "Desert_Recon",
+            "Taki",
+            "TALented_Vasee_18"
+          ],
+          "matches": [
+            {
+              "playerA": "Daniel2040",
+              "playerB": "DaTreeOfFives",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "Freddy1201",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "Desert_Recon",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "Daniel2040",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Freddy1201",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Desert_Recon",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Desert_Recon",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "Freddy1201",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "Taki",
+              "link": ""
+            },
+            {
+              "playerA": "Desert_Recon",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            },
+            {
+              "playerA": "Taki",
+              "playerB": "TALented_Vasee_18",
+              "link": ""
+            }
+          ]
+        }
+      ]
     }
   ],
   "ranking": [
