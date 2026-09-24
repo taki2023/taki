@@ -1491,26 +1491,52 @@
               "playerA": "Daniel2040",
               "playerB": "TrofAndy",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
               "playerA": "Daniel2040",
               "playerB": "TALented_Vasee_18",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -1595,13 +1621,26 @@
               "playerA": "TALented_Vasee_18",
               "playerB": "RIP_People_in_Chess",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -1710,13 +1749,26 @@
               "playerA": "DaTreeOfFives",
               "playerB": "cello_jello",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -1775,13 +1827,26 @@
               "playerA": "ChesssRedBelt",
               "playerB": "cello_jello",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -1890,13 +1955,26 @@
               "playerA": "Freddy1201",
               "playerB": "AarjavSamaiya",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -1928,34 +2006,53 @@
             {
               "playerA": "Desert_Recon",
               "playerB": "AarjavSamaiya",
-              "link": "https://www.chess.com/game/live/184235312744::1-0",
+              "link": "",
               "games": [
                 {
-                  "link": "https://www.chess.com/game/live/184235312744",
-                  "scoreA": 1,
-                  "scoreB": 0,
-                  "dueToWithdrawal": false
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
+              "playedCount": 2,
+              "linkedGames": 0,
               "scoreA": 1,
-              "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
               "playerA": "DanielMelbou",
               "playerB": "AarjavSamaiya",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
