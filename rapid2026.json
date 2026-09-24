@@ -1646,43 +1646,43 @@
           ],
           "standings": [
             {
-              "username": "TrofAndy",
+              "username": "Daniel2040",
               "rank": 1,
-              "score": 2.5,
-              "tiebreak": 1,
+              "score": 4,
+              "tiebreak": 4.75,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Daniel2040",
+              "username": "TrofAndy",
               "rank": 2,
-              "score": 2,
-              "tiebreak": 0.5,
+              "score": 3.5,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
               "rank": 3,
-              "score": 1,
-              "tiebreak": 1.25,
+              "score": 3,
+              "tiebreak": 4.5,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "RIP_People_in_Chess",
               "rank": 4,
-              "score": 0.5,
-              "tiebreak": 0,
+              "score": 1.5,
+              "tiebreak": 1.5,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         },
         {
           "name": "group 2",
@@ -1854,8 +1854,8 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 4,
-              "tiebreak": 4,
+              "score": 5,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
@@ -1863,32 +1863,32 @@
               "username": "Taki",
               "rank": 2,
               "score": 4,
-              "tiebreak": 0,
+              "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "ChesssRedBelt",
+              "username": "cello_jello",
               "rank": 3,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 2,
+              "tiebreak": 3,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "cello_jello",
+              "username": "ChesssRedBelt",
               "rank": 4,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 1,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 4,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 8,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         },
         {
           "name": "group 3",
@@ -2058,49 +2058,49 @@
           ],
           "standings": [
             {
-              "username": "Desert_Recon",
-              "rank": 1,
-              "score": 4,
-              "tiebreak": 1.5,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
               "username": "Freddy1201",
-              "rank": 2,
-              "score": 3,
-              "tiebreak": 2,
+              "rank": 1,
+              "score": 5,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "DanielMelbou",
-              "rank": 3,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": false,
+              "username": "Desert_Recon",
+              "rank": 2,
+              "score": 4,
+              "tiebreak": 4.5,
+              "qualified": true,
               "withdrawn": false
             },
             {
               "username": "AarjavSamaiya",
+              "rank": 3,
+              "score": 2,
+              "tiebreak": 2.5,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "DanielMelbou",
               "rank": 4,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 1,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 7,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         }
       ],
       "stats": {
-        "matchesFinished": 10,
+        "matchesFinished": 18,
         "matchesTotal": 18,
-        "gamesFinished": 21,
+        "gamesFinished": 36,
         "gamesTotal": 36
       }
     }
@@ -2370,7 +2370,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 54,
+    "matchesPlayedCount": 62,
     "mostWinsPlayer": "Daniel2040",
     "mostWinsCount": 5,
     "biggestUpset": {
