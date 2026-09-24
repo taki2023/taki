@@ -2019,7 +2019,7 @@
                   "link": "",
                   "scoreA": 0.5,
                   "scoreB": 0.5,
-                  "dueToWithdrawal": true
+                  "dueToWithdrawal": false
                 }
               ],
               "playedCount": 2,
