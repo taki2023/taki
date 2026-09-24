@@ -41,7 +41,7 @@ body{display:block!important;position:relative;top:0!important;font-family:Nunit
 .round-dropdown.open .chev{transform:rotate(180deg)}
 .round-dropdown-list{position:absolute;top:calc(100% + 8px);right:0;width:max-content;min-width:100%;max-width:240px;background:var(--paper);border-radius:18px;overflow-y:auto;box-shadow:0 16px 36px -10px rgba(60,120,40,.4),0 0 0 1px var(--peach);max-height:280px;opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;transition:opacity .16s var(--ease),transform .16s var(--ease)}
 .round-dropdown.open .round-dropdown-list{opacity:1;transform:none;pointer-events:auto}
-.round-dropdown-item{padding:12px 18px;font-size:9px;font-weight:800;color:var(--ink);cursor:pointer;border-top:1px solid var(--cream-deep)}
+.round-dropdown-item{padding:14px 20px;font-size:14px;font-weight:800;color:var(--ink);cursor:pointer;border-top:1px solid var(--cream-deep)}
 .round-dropdown-item:first-child{border-top:0}
 .round-dropdown-item:hover{background:#EAF5E2}
 .round-dropdown-item.active{background:linear-gradient(135deg,#FF5B3D,var(--red-mid));color:#fff}
@@ -229,6 +229,11 @@ const pointsClass=p=>p===1?'win':p===0?'loss':'draw';
 const playerInfo=u=>TOURNAMENT.playerInfo?.[u]||{name:prettifyUsername(u),avatar:DEFAULT_AVATAR,username:u};
 const isFinalRound=r=>r?.groups?.length===1;
 const displayRoundName=r=>isFinalRound(r)?'Final Round':(r.name||'Round '+r.number);
+function isRoundComplete(round){
+const matches=(round?.groups||[]).flatMap(g=>Array.isArray(g.matches)?g.matches:[]);
+if(!matches.length)return false;
+return matches.every(m=>m.bothWithdrawn||m.status==='withdrawn'||m.status==='forfeit'||Number(m.playedCount||0)>=2);
+}
 function matchStageLabel(m){
 if(m.status==='withdrawn'||m.status==='forfeit')return{cls:'forfeit',text:'Withdrew'};
 if(m.playedCount===0)return{cls:'pending',text:'Not started'};
@@ -372,9 +377,13 @@ const content=document.getElementById('content'),scroll=document.querySelector('
 if(scroll)scroll.scrollTop=0;
 if(!round){content.classList.remove('final-centered');content.innerHTML='<div class="load-msg">No round data found in the tournament data file.</div>';return}
 const final=isFinalRound(round);
-content.classList.toggle('final-centered',final);
-let html=final?championTitleHTML(TOURNAMENT.stats?.champion):'';
-if(final&&TOURNAMENT.stats?.podium?.length)html+=`<div class="podium-wrap">${podiumHTML(TOURNAMENT.stats.podium)}</div>${championStatsHTML(TOURNAMENT.stats)}`;
+const decided=final&&(TOURNAMENT.stats?.champion||TOURNAMENT.stats?.guaranteedWinner||isRoundComplete(round));
+content.classList.toggle('final-centered',final&&decided);
+let html='';
+if(final&&decided){
+html+=championTitleHTML(TOURNAMENT.stats?.champion);
+if(TOURNAMENT.stats?.podium?.length)html+=`<div class="podium-wrap">${podiumHTML(TOURNAMENT.stats.podium)}</div>${championStatsHTML(TOURNAMENT.stats)}`;
+}
 html+=(round.groups||[]).map(g=>groupHTML(g,final,round.number)).join('');
 content.innerHTML=html;
 renderRoundStats(round);
