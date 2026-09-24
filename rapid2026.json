@@ -2103,62 +2103,6 @@
         "gamesFinished": 36,
         "gamesTotal": 36
       }
-    },
-    {
-      "number": 3,
-      "name": "Round 3",
-      "groups": [
-        {
-          "name": "group 1",
-          "players": [
-            "Daniel2040",
-            "Desert_Recon",
-            "Taki"
-          ],
-          "matches": [
-            {
-              "playerA": "Daniel2040",
-              "playerB": "Desert_Recon",
-              "link": ""
-            },
-            {
-              "playerA": "Daniel2040",
-              "playerB": "Taki",
-              "link": ""
-            },
-            {
-              "playerA": "Desert_Recon",
-              "playerB": "Taki",
-              "link": ""
-            }
-          ]
-        },
-        {
-          "name": "group 2",
-          "players": [
-            "DaTreeOfFives",
-            "Freddy1201",
-            "TALented_Vasee_18"
-          ],
-          "matches": [
-            {
-              "playerA": "DaTreeOfFives",
-              "playerB": "Freddy1201",
-              "link": ""
-            },
-            {
-              "playerA": "DaTreeOfFives",
-              "playerB": "TALented_Vasee_18",
-              "link": ""
-            },
-            {
-              "playerA": "Freddy1201",
-              "playerB": "TALented_Vasee_18",
-              "link": ""
-            }
-          ]
-        }
-      ]
     }
   ],
   "ranking": [
