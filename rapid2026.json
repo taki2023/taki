@@ -2392,10 +2392,10 @@
               "link": "",
               "games": [
                 {
-                  "link": "",
+                  "link": "https://www.chess.com/game/live/184364743924",
                   "scoreA": 0,
                   "scoreB": 1,
-                  "dueToWithdrawal": true
+                  "dueToWithdrawal": false
                 },
                 {
                   "link": "",
