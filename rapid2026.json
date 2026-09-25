@@ -1138,8 +1138,8 @@
               "scoreA": 2,
               "scoreB": 0,
               "finished": true,
-              "status": "forfeit",
-              "bothWithdrawn": false
+              "status": "withdrawn",
+              "bothWithdrawn": true
             },
             {
               "playerA": "TALented_Vasee_18",
@@ -1224,10 +1224,10 @@
             {
               "username": "Taki",
               "rank": 1,
-              "score": 6,
+              "score": 4,
               "tiebreak": 6,
-              "qualified": true,
-              "withdrawn": false
+              "qualified": false,
+              "withdrawn": true
             },
             {
               "username": "TALented_Vasee_18",
@@ -1242,14 +1242,14 @@
               "rank": 3,
               "score": 2.5,
               "tiebreak": 0,
-              "qualified": false,
+              "qualified": true,
               "withdrawn": false
             },
             {
               "username": "incecure",
               "rank": 4,
               "score": 0,
-              "tiebreak": 0,
+              "tiebreak": 2,
               "qualified": false,
               "withdrawn": true
             }
@@ -1864,15 +1864,15 @@
               "rank": 2,
               "score": 4,
               "tiebreak": 3,
-              "qualified": true,
-              "withdrawn": false
+              "qualified": false,
+              "withdrawn": true
             },
             {
               "username": "cello_jello",
               "rank": 3,
               "score": 2,
               "tiebreak": 3,
-              "qualified": false,
+              "qualified": true,
               "withdrawn": false
             },
             {
@@ -2162,13 +2162,26 @@
               "playerA": "Daniel2040",
               "playerB": "Taki",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -2227,13 +2240,26 @@
               "playerA": "DaTreeOfFives",
               "playerB": "Taki",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -2279,13 +2305,26 @@
               "playerA": "Freddy1201",
               "playerB": "Taki",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -2305,13 +2344,26 @@
               "playerA": "Desert_Recon",
               "playerB": "Taki",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -2331,13 +2383,26 @@
               "playerA": "Taki",
               "playerB": "TALented_Vasee_18",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreB": 2,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -2345,63 +2410,63 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 2,
-              "tiebreak": 1,
+              "score": 4,
+              "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
               "rank": 2,
-              "score": 1,
-              "tiebreak": 0.5,
+              "score": 3,
+              "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Daniel2040",
               "rank": 3,
-              "score": 1,
-              "tiebreak": 0.5,
-              "qualified": false,
-              "withdrawn": false
-            },
-            {
-              "username": "Taki",
-              "rank": 4,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 3,
+              "tiebreak": 1.5,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Desert_Recon",
-              "rank": 5,
-              "score": 0,
+              "rank": 4,
+              "score": 2,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "Freddy1201",
+              "rank": 5,
+              "score": 2,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "Taki",
               "rank": 6,
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": false
+              "withdrawn": true
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 7,
           "matchesTotal": 15,
-          "gamesFinished": 4,
+          "gamesFinished": 14,
           "gamesTotal": 30,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 2,
+        "matchesFinished": 7,
         "matchesTotal": 15,
-        "gamesFinished": 4,
+        "gamesFinished": 14,
         "gamesTotal": 30
       }
     }
@@ -2671,9 +2736,9 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 64,
+    "matchesPlayedCount": 69,
     "mostWinsPlayer": "DaTreeOfFives",
-    "mostWinsCount": 6,
+    "mostWinsCount": 7,
     "biggestUpset": {
       "winner": "Juliana3377",
       "loser": "RKamalanayanan",
@@ -2684,15 +2749,15 @@
     "podium": [
       {
         "username": "DaTreeOfFives",
-        "score": 2
+        "score": 4
       },
       {
         "username": "TALented_Vasee_18",
-        "score": 1
+        "score": 3
       },
       {
         "username": "Daniel2040",
-        "score": 1
+        "score": 3
       }
     ],
     "champion": null
@@ -2701,6 +2766,7 @@
     "incecure",
     "Bhenejme",
     "sahilkumar950",
-    "Avieroon"
+    "Avieroon",
+    "Taki"
   ]
 }
