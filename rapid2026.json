@@ -2409,7 +2409,7 @@
               "scoreA": 0,
               "scoreB": 2,
               "finished": true,
-              "status": "forfeit",
+              "status": "finished",
               "bothWithdrawn": false
             }
           ],
