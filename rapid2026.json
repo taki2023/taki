@@ -2214,13 +2214,26 @@
               "playerA": "DaTreeOfFives",
               "playerB": "Freddy1201",
               "link": "https://www.chess.com/game/live/184368391652::1-0 | https://www.chess.com/game/live/184369275188::0-1",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184368391652",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184369275188",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -2338,13 +2351,20 @@
               "playerA": "Freddy1201",
               "playerB": "TALented_Vasee_18",
               "link": "https://www.chess.com/game/live/184366878678::1-0",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/184366878678",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
+              "scoreA": 1,
               "scoreB": 0,
               "finished": false,
-              "status": "pending",
+              "status": "partial",
               "bothWithdrawn": false
             },
             {
@@ -2405,7 +2425,7 @@
                 }
               ],
               "playedCount": 2,
-              "linkedGames": 0,
+              "linkedGames": 1,
               "scoreA": 0,
               "scoreB": 2,
               "finished": true,
@@ -2417,21 +2437,21 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 5,
+              "score": 6,
+              "tiebreak": 5,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Freddy1201",
+              "rank": 2,
+              "score": 4,
               "tiebreak": 3,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
-              "rank": 2,
-              "score": 3,
-              "tiebreak": 1.5,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "Daniel2040",
               "rank": 3,
               "score": 3,
               "tiebreak": 1.5,
@@ -2439,15 +2459,15 @@
               "withdrawn": false
             },
             {
-              "username": "Desert_Recon",
+              "username": "Daniel2040",
               "rank": 4,
-              "score": 2,
-              "tiebreak": 0,
+              "score": 3,
+              "tiebreak": 1.5,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "Freddy1201",
+              "username": "Desert_Recon",
               "rank": 5,
               "score": 2,
               "tiebreak": 0,
@@ -2463,17 +2483,17 @@
               "withdrawn": true
             }
           ],
-          "matchesFinished": 7,
+          "matchesFinished": 8,
           "matchesTotal": 15,
-          "gamesFinished": 15,
+          "gamesFinished": 18,
           "gamesTotal": 30,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 7,
+        "matchesFinished": 8,
         "matchesTotal": 15,
-        "gamesFinished": 15,
+        "gamesFinished": 18,
         "gamesTotal": 30
       }
     }
@@ -2713,7 +2733,7 @@
     },
     "Desert_Recon": {
       "name": "desert_recon",
-      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.aee37715.200x200o.53d1ef74e6ff.jpg",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/30267650.91bcb7e5.200x200o.19c13174fde4.jpg",
       "username": "Desert_Recon"
     },
     "RIP_People_in_Chess": {
@@ -2743,7 +2763,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 69,
+    "matchesPlayedCount": 70,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 7,
     "biggestUpset": {
@@ -2756,14 +2776,14 @@
     "podium": [
       {
         "username": "DaTreeOfFives",
-        "score": 5
+        "score": 6
+      },
+      {
+        "username": "Freddy1201",
+        "score": 4
       },
       {
         "username": "TALented_Vasee_18",
-        "score": 3
-      },
-      {
-        "username": "Daniel2040",
         "score": 3
       }
     ],
