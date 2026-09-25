@@ -1138,8 +1138,8 @@
               "scoreA": 2,
               "scoreB": 0,
               "finished": true,
-              "status": "withdrawn",
-              "bothWithdrawn": true
+              "status": "forfeit",
+              "bothWithdrawn": false
             },
             {
               "playerA": "TALented_Vasee_18",
@@ -1224,10 +1224,10 @@
             {
               "username": "Taki",
               "rank": 1,
-              "score": 4,
+              "score": 6,
               "tiebreak": 6,
-              "qualified": false,
-              "withdrawn": true
+              "qualified": true,
+              "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
@@ -1242,14 +1242,14 @@
               "rank": 3,
               "score": 2.5,
               "tiebreak": 0,
-              "qualified": true,
+              "qualified": false,
               "withdrawn": false
             },
             {
               "username": "incecure",
               "rank": 4,
               "score": 0,
-              "tiebreak": 2,
+              "tiebreak": 0,
               "qualified": false,
               "withdrawn": true
             }
@@ -1864,15 +1864,15 @@
               "rank": 2,
               "score": 4,
               "tiebreak": 3,
-              "qualified": false,
-              "withdrawn": true
+              "qualified": true,
+              "withdrawn": false
             },
             {
               "username": "cello_jello",
               "rank": 3,
               "score": 2,
               "tiebreak": 3,
-              "qualified": true,
+              "qualified": false,
               "withdrawn": false
             },
             {
@@ -2453,7 +2453,7 @@
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": true
+              "withdrawn": false
             }
           ],
           "matchesFinished": 7,
@@ -2766,7 +2766,6 @@
     "incecure",
     "Bhenejme",
     "sahilkumar950",
-    "Avieroon",
-    "Taki"
+    "Avieroon"
   ]
 }
