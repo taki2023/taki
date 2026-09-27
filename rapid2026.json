@@ -2389,14 +2389,20 @@
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/184391639534",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 1,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -2470,23 +2476,23 @@
               "username": "DaTreeOfFives",
               "rank": 1,
               "score": 8,
-              "tiebreak": 11,
-              "qualified": true,
-              "withdrawn": false
-            },
-            {
-              "username": "Desert_Recon",
-              "rank": 2,
-              "score": 4,
-              "tiebreak": 6,
+              "tiebreak": 11.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Freddy1201",
+              "rank": 2,
+              "score": 5,
+              "tiebreak": 7,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Desert_Recon",
               "rank": 3,
               "score": 4,
-              "tiebreak": 4,
+              "tiebreak": 6,
               "qualified": false,
               "withdrawn": false
             },
@@ -2515,17 +2521,17 @@
               "withdrawn": true
             }
           ],
-          "matchesFinished": 11,
+          "matchesFinished": 12,
           "matchesTotal": 15,
-          "gamesFinished": 23,
+          "gamesFinished": 24,
           "gamesTotal": 30,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 11,
+        "matchesFinished": 12,
         "matchesTotal": 15,
-        "gamesFinished": 23,
+        "gamesFinished": 24,
         "gamesTotal": 30
       }
     }
@@ -2795,7 +2801,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 73,
+    "matchesPlayedCount": 74,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 8,
     "biggestUpset": {
@@ -2811,11 +2817,11 @@
         "score": 8
       },
       {
-        "username": "Desert_Recon",
-        "score": 4
+        "username": "Freddy1201",
+        "score": 5
       },
       {
-        "username": "Freddy1201",
+        "username": "Desert_Recon",
         "score": 4
       }
     ],
