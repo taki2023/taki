@@ -1,7 +1,6 @@
 {
   "rounds": [
     {
-      
       "number": 1,
       "name": "Round 1",
       "groups": [
@@ -2149,7 +2148,7 @@
             {
               "playerA": "Daniel2040",
               "playerB": "Freddy1201",
-              "link": "",
+              "link": "https://www.chess.com/game/live/184521589124::0-1",
               "games": [],
               "playedCount": 0,
               "linkedGames": 0,
