@@ -2151,18 +2151,19 @@
               "playerB": "Freddy1201",
               "link": "https://www.chess.com/game/live/184521589124::0-1",
               "games": [
-                {
-                  "link": "https://www.chess.com/game/live/184521589124",
-                  "scoreA": 0,
-                  "scoreB": 1,
-                  "dueToWithdrawal": false
-                },
-                "link": "",
-                  "scoreA": 0,
-                  "scoreB": 1,
-                  "dueToWithdrawal": false
-                }
-              ],
+  {
+    "link": "https://www.chess.com/game/live/184521589124",
+    "scoreA": 0,
+    "scoreB": 1,
+    "dueToWithdrawal": false
+  },
+  {
+    "link": "",
+    "scoreA": 0,
+    "scoreB": 1,
+    "dueToWithdrawal": false
+  }
+],
               "playedCount": 1,
               "linkedGames": 1,
               "scoreA": 0,
