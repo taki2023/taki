@@ -2156,14 +2156,19 @@
                   "scoreA": 0,
                   "scoreB": 1,
                   "dueToWithdrawal": false
+                },
+                "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
                 }
               ],
               "playedCount": 1,
               "linkedGames": 1,
               "scoreA": 0,
-              "scoreB": 1,
-              "finished": false,
-              "status": "partial",
+              "scoreB": 2,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -2516,9 +2521,9 @@
             },
             {
               "username": "Freddy1201",
-              "rank": 2,
-              "score": 8,
-              "tiebreak": 13,
+              "rank": 1,
+              "score": 9,
+              "tiebreak": 15,
               "qualified": true,
               "withdrawn": false
             },
@@ -2847,11 +2852,11 @@
     },
     "podium": [
       {
-        "username": "DaTreeOfFives",
-        "score": 8
+        "username": "Freddy1201",
+        "score": 9
       },
       {
-        "username": "Freddy1201",
+        "username": "DaTreeOfFives",
         "score": 8
       },
       {
@@ -2859,7 +2864,7 @@
         "score": 6
       }
     ],
-    "champion": null
+    "champion": "Freddy1201"
   },
   "withdrawn": [
     "incecure",
