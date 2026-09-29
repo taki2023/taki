@@ -1,6 +1,5 @@
 {
   "rounds": [
-    
     {
       "number": 1,
       "name": "Round 1",
@@ -2151,20 +2150,20 @@
               "playerB": "Freddy1201",
               "link": "https://www.chess.com/game/live/184521589124::0-1",
               "games": [
-  {
-    "link": "https://www.chess.com/game/live/184521589124",
-    "scoreA": 0,
-    "scoreB": 1,
-    "dueToWithdrawal": false
-  },
-  {
-    "link": "",
-    "scoreA": 0,
-    "scoreB": 1,
-    "dueToWithdrawal": false
-  }
-],
-              "playedCount": 1,
+                {
+                  "link": "https://www.chess.com/game/live/184521589124",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 1,
               "scoreA": 0,
               "scoreB": 2,
@@ -2513,18 +2512,18 @@
           ],
           "standings": [
             {
-              "username": "DaTreeOfFives",
-              "rank": 2,
-              "score": 8,
-              "tiebreak": 14,
+              "username": "Freddy1201",
+              "rank": 1,
+              "score": 9,
+              "tiebreak": 17,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Freddy1201",
-              "rank": 1,
-              "score": 9,
-              "tiebreak": 15,
+              "username": "DaTreeOfFives",
+              "rank": 2,
+              "score": 8,
+              "tiebreak": 14.5,
               "qualified": true,
               "withdrawn": false
             },
@@ -2565,7 +2564,7 @@
           "matchesTotal": 15,
           "gamesFinished": 30,
           "gamesTotal": 30,
-          "allFinished": false
+          "allFinished": true
         }
       ],
       "stats": {
@@ -2841,7 +2840,7 @@
     }
   },
   "stats": {
-    "matchesPlayedCount": 76,
+    "matchesPlayedCount": 77,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 8,
     "biggestUpset": {
