@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Hot Chilli Bullet Championship</title>
 
@@ -14,10 +9,7 @@
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="preconnect" href="https://api.chess.com">
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;800;900&display=swap"
-  rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Nunito:wght@400;700;800;900&amp;display=swap" rel="stylesheet">
 
 <style>
 
@@ -701,6 +693,24 @@ tbody td:first-child{
    POPUP
 ====================================================== */
 
+/* ROUND TIMER + ROUND 0 REGISTRATION */
+.round-timer{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 16px;margin:0 0 14px;background:#1b1b1b;color:#fff;
+  border-radius:18px;box-shadow:0 8px 20px -12px rgba(0,0,0,.45);
+}
+.timer-copy{min-width:0}
+.timer-title{font-family:Fredoka;font-size:12px;font-weight:600;color:#FFD21F}
+.timer-sub{font-size:10px;font-weight:800;color:#d8d1b0;margin-top:3px}
+.timer-value{font-family:Fredoka;font-size:19px;font-weight:700;color:#FFD21F;white-space:nowrap}
+.registration-card{background:#fff;border-radius:23px;padding:14px;margin-bottom:14px;box-shadow:0 9px 23px -12px rgba(120,90,0,.3)}
+.registration-title{font-family:Fredoka;font-size:15px;color:var(--gold);margin-bottom:8px}
+.registration-note{font-size:11px;font-weight:800;color:var(--soft);margin-bottom:12px}
+.roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:7px}
+.roster-player{display:flex;align-items:center;gap:9px;padding:8px;border-radius:12px;background:#fffdf4;border:1px solid #f4e8b6;font-size:11px;font-weight:900;color:var(--ink)}
+.roster-player .avatar{width:28px;height:28px}
+.round-group-label{padding:8px 12px;margin:0 0 7px;background:#fff5c8;border-radius:12px;font:600 12px Fredoka;color:#8d6500}
+.timer-ended{color:#ff8d80}
 #popup{
 
   position:fixed;
@@ -928,12 +938,8 @@ tbody td:first-child{
 
   <div class="brand">
 
-    <svg
-      class="bullet-logo"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="m7.17 15.3 1.43 1.47-8.27 6.9zm-6.87 2.3 4.5-6 .9 2zm10.47-7.5c3.47-3.6 5.93-5.2 8.7-6.4-2.4 0-5.3.37-9.8 4.6.03.5.7 1.47 1.1 1.8zm11.06-7.93s.23 1.1.23 2.77c0 2.67-.67 6.83-4.17 10.33l-2.17 2.17c-.67.67-1.33.6-2.13.27l-7.47 6.3 9.8-12.17-5.23 4.03c-.43-.4-.93-.83-1.33-1.23-1.73-1.7-4.13-5-2.77-6.37l2.2-2.13c3.53-3.5 7.63-4.2 10.3-4.2 1.63 0 2.73.23 2.73.23z"/>
+    <svg class="bullet-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="m7.17 15.3 1.43 1.47-8.27 6.9zm-6.87 2.3 4.5-6 .9 2zm10.47-7.5c3.47-3.6 5.93-5.2 8.7-6.4-2.4 0-5.3.37-9.8 4.6.03.5.7 1.47 1.1 1.8zm11.06-7.93s.23 1.1.23 2.77c0 2.67-.67 6.83-4.17 10.33l-2.17 2.17c-.67.67-1.33.6-2.13.27l-7.47 6.3 9.8-12.17-5.23 4.03c-.43-.4-.93-.83-1.33-1.23-1.73-1.7-4.13-5-2.77-6.37l2.2-2.13c3.53-3.5 7.63-4.2 10.3-4.2 1.63 0 2.73.23 2.73.23z"></path>
     </svg>
 
     <span>BULLET</span>
@@ -945,7 +951,7 @@ tbody td:first-child{
   </div>
 
   <div class="sub">
-    ⚡ 1+1 • Pairings & Live Standings
+    ⚡ 1+1 • Pairings &amp; Live Standings
   </div>
 
 </header>
@@ -959,15 +965,15 @@ tbody td:first-child{
     <div class="stats">
 
       <div class="pill">
-        PLAYERS <b id="playersCount">—</b>
+        PLAYERS <b id="playersCount">10</b>
       </div>
 
       <div class="pill">
-        MATCHES <b id="matchesCount">—</b>
+        MATCHES <b id="matchesCount">0</b>
       </div>
 
       <div class="pill">
-        GAMES <b id="gamesCount">—</b>
+        GAMES <b id="gamesCount">0</b>
       </div>
 
     </div>
@@ -975,34 +981,57 @@ tbody td:first-child{
 
     <div class="round-select">
 
-      <button
-        class="round-button"
-        id="roundButton"
-      >
-        <span id="roundLabel">
-          Round 1
-        </span>
+      <button class="round-button" id="roundButton">
+        <span id="roundLabel">Round 0</span>
 
         ▾
       </button>
 
-      <div
-        class="round-list"
-        id="roundList"
-      ></div>
+      <div class="round-list" id="roundList"><div class="round-item active" onclick="chooseRound(0)">Round 0 · Registration</div></div>
 
     </div>
 
   </div>
 
+  <section class="round-timer" aria-live="polite">
+    <div class="timer-copy">
+      <div class="timer-title" id="timerTitle">REGISTRATION • ROUND 0</div>
+      <div class="timer-sub" id="timerSub">Set the start and end dates in the admin GUI.</div>
+    </div>
+    <div class="timer-value" id="timerValue">NOT SET</div>
+  </section>
 
   <div id="content">
-
-    <div class="loading">
-      Loading Bullet Championship...
-    </div>
-
-  </div>
+      <section class="registration-card">
+        <div class="registration-title">📝 Round 0 — Registration &amp; Player List</div>
+        <div class="registration-note">
+          10 registered active players.
+          Pairings for Round 1 will appear here once the admin generates the first round.
+        </div>
+        <div class="roster">
+          <div class="roster-player"><span class="rank">1</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>negneT</span></div><div class="roster-player"><span class="rank">2</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>TALented_Vasee_18</span></div><div class="roster-player"><span class="rank">3</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>TrofAndy</span></div><div class="roster-player"><span class="rank">4</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>IvanBoevski</span></div><div class="roster-player"><span class="rank">5</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>Anay-Samaiya</span></div><div class="roster-player"><span class="rank">6</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>Iamplayerofchess</span></div><div class="roster-player"><span class="rank">7</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>AarjavSamaiya</span></div><div class="roster-player"><span class="rank">8</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>Daniel_3513</span></div><div class="roster-player"><span class="rank">9</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>DaTreeOfFives</span></div><div class="roster-player"><span class="rank">10</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="">
+  <span>RKamalanayanan</span></div>
+        </div>
+      </section></div>
 
 
   <div class="legend">
@@ -1034,16 +1063,12 @@ tbody td:first-child{
     </div>
 
     <div class="legend-item">
-      <span
-        class="legend-dot blue"
-      ></span>
+      <span class="legend-dot blue"></span>
       Qualifies
     </div>
 
     <div class="legend-item">
-      <span
-        class="legend-dot red"
-      ></span>
+      <span class="legend-dot red"></span>
       Eliminated
     </div>
 
@@ -1080,7 +1105,8 @@ const DEFAULT_AVATAR =
 
 let DATA = null;
 
-let currentRound = 1;
+let currentRound = 0;
+let timerInterval = null;
 
 
 /* =========================================================
@@ -1113,15 +1139,18 @@ async function load(){
       DATA.players = [];
 
     if(DATA.rounds.length){
-
-      currentRound =
-        DATA.rounds[
-          DATA.rounds.length - 1
-        ].number;
-
+      currentRound = DATA.rounds[DATA.rounds.length - 1].number;
+    }else{
+      currentRound = 0;
     }
 
+    if(!DATA.registration || typeof DATA.registration !== "object"){
+      DATA.registration = {};
+    }
     render();
+    updateRoundTimer();
+    if(timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(updateRoundTimer, 1000);
 
   }catch(e){
 
@@ -1170,7 +1199,7 @@ function avatar(username){
 
 function rounds(){
 
-  return DATA.rounds
+  return (DATA.rounds || [])
     .slice()
     .sort(
       (a,b)=>
@@ -1180,11 +1209,57 @@ function rounds(){
 
 
 function getRound(){
+  if(currentRound === 0) return null;
+  return rounds().find(r => Number(r.number) === Number(currentRound));
+}
 
-  return rounds().find(
-    r =>
-      r.number === currentRound
-  );
+function toDate(value){
+  if(!value) return null;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function updateRoundTimer(){
+  if(!DATA) return;
+  const title = document.getElementById("timerTitle");
+  const sub = document.getElementById("timerSub");
+  const value = document.getElementById("timerValue");
+  let item, label;
+  if(currentRound === 0){
+    item = DATA.registration || {};
+    label = "REGISTRATION • ROUND 0";
+  }else{
+    item = getRound() || {};
+    label = `ROUND ${currentRound}`;
+  }
+  title.textContent = label;
+  const start = toDate(item.startAt || item.start);
+  const end = toDate(item.endAt || item.end);
+  const now = new Date();
+  let target, message;
+  if(start && now < start){
+    target = start; message = "Starts in";
+  }else if(end && now < end){
+    target = end; message = currentRound === 0 ? "Registration closes in" : "Round ends in";
+  }else if(end && now >= end){
+    value.textContent = "ENDED";
+    value.classList.add("timer-ended");
+    sub.textContent = `Ended ${end.toLocaleString()}`;
+    return;
+  }else{
+    value.textContent = "NOT SET";
+    value.classList.remove("timer-ended");
+    sub.textContent = "Set the start and end dates in the admin GUI.";
+    return;
+  }
+  value.classList.remove("timer-ended");
+  const seconds = Math.max(0, Math.floor((target-now)/1000));
+  const days = Math.floor(seconds/86400);
+  const hours = Math.floor((seconds%86400)/3600);
+  const minutes = Math.floor((seconds%3600)/60);
+  const secs = seconds%60;
+  value.textContent = days ? `${days}d ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}` : `${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  sub.textContent = `${message} • ${target.toLocaleString()}`;
 }
 
 
@@ -1549,52 +1624,57 @@ function shortName(name){
 ========================================================= */
 
 function render(){
+  const round = getRound();
 
-  const round =
-    getRound();
-
-  if(!round){
-
-    document.getElementById(
-      "content"
-    ).innerHTML = `
-      <div class="loading">
-        ⚡ The tournament has not started yet.
-      </div>
-    `;
-
+  if(currentRound === 0 || !round){
+    const players = (DATA.players || []).filter(p => !(DATA.withdrawn || []).includes(p));
+    document.getElementById("content").innerHTML = `
+      <section class="registration-card">
+        <div class="registration-title">📝 Round 0 — Registration & Player List</div>
+        <div class="registration-note">
+          ${players.length} registered active player${players.length===1?"":"s"}.
+          Pairings for Round 1 will appear here once the admin generates the first round.
+        </div>
+        <div class="roster">
+          ${players.map((p,i)=>`<div class="roster-player"><span class="rank">${i+1}</span>${avatar(p)}<span>${escapeHtml(p)}</span></div>`).join("") || '<div class="registration-note">No players have been added yet.</div>'}
+        </div>
+      </section>`;
     updateStats();
-
     renderRoundList();
-
+    document.getElementById("roundLabel").textContent = "Round 0";
+    updateRoundTimer();
     return;
   }
 
-  const players =
-    Array.from(
-      new Set(
-        round.matches.flatMap(
-          m => [m.a,m.b]
-        )
-      )
-    );
+  let groups = [];
+  if(Array.isArray(round.groups) && round.groups.length){
+    groups = round.groups.map((g,i)=>({
+      name:g.name || `Group ${i+1}`,
+      players:Array.isArray(g.players) ? g.players : []
+    }));
+  }else{
+    const inferred = {};
+    (round.matches || []).forEach(m=>{
+      const name = m.group || "Group 1";
+      if(!inferred[name]) inferred[name] = new Set();
+      if(m.a) inferred[name].add(m.a);
+      if(m.b) inferred[name].add(m.b);
+    });
+    groups = Object.entries(inferred).map(([name,set])=>({name,players:[...set]}));
+    if(!groups.length){
+      groups = [{name:"Group 1",players:[...new Set((DATA.players||[]).filter(p=>!(DATA.withdrawn||[]).includes(p)))]}];
+    }
+  }
 
-  document.getElementById(
-    "content"
-  ).innerHTML =
-    renderGroup(
-      round,
-      players
-    );
+  document.getElementById("content").innerHTML = groups.map(group => `
+    <div class="round-group-label">${escapeHtml(group.name)} · ${group.players.length} players · ${Number(round.advancesPerGroup || DATA.settings?.advancesPerGroup || 2)} advance${Number(round.advancesPerGroup || DATA.settings?.advancesPerGroup || 2)===1?"s":""}</div>
+    ${renderGroup(round, group.players)}
+  `).join("");
 
   updateStats();
-
   renderRoundList();
-
-  document.getElementById(
-    "roundLabel"
-  ).textContent =
-    `Round ${round.number}`;
+  document.getElementById("roundLabel").textContent = `Round ${round.number}`;
+  updateRoundTimer();
 }
 
 
@@ -1657,39 +1737,19 @@ function updateStats(){
 ========================================================= */
 
 function renderRoundList(){
-
-  const list =
-    document.getElementById(
-      "roundList"
-    );
-
-  list.innerHTML =
-    rounds().map(
-      r => `
-
-        <div
-          class="round-item ${
-            r.number === currentRound
-              ? "active"
-              : ""
-          }"
-          onclick="
-            chooseRound(${r.number})
-          "
-        >
-          Round ${r.number}
-        </div>
-
-      `
-    ).join("");
-
+  const list = document.getElementById("roundList");
+  list.innerHTML = `<div class="round-item ${currentRound===0?"active":""}" onclick="chooseRound(0)">Round 0 · Registration</div>` +
+    rounds().map(r => `
+      <div class="round-item ${Number(r.number)===Number(currentRound)?"active":""}" onclick="chooseRound(${Number(r.number)})">
+        Round ${Number(r.number)}
+      </div>
+    `).join("");
 }
 
 
 function chooseRound(number){
-
-  currentRound =
-    number;
+  currentRound = Number(number);
+  updateRoundTimer();
 
   document.getElementById(
     "roundList"
@@ -1885,5 +1945,5 @@ setInterval(
 
 </script>
 
-</body>
-</html>
+
+</body></html>
