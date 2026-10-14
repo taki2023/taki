@@ -1,1 +1,42 @@
-
+{
+  "players": [
+    "negneT",
+    "TALented_Vasee_18",
+    "TrofAndy",
+    "IvanBoevski",
+    "Anay-Samaiya",
+    "Iamplayerofchess",
+    "AarjavSamaiya",
+    "Daniel_3513",
+    "DaTreeOfFives",
+    "RKamalanayanan"
+  ],
+  "withdrawn": [],
+  "rounds": [
+    {
+      "number": 1,
+      "matches": [
+        {
+          "a": "negneT",
+          "b": "TALented_Vasee_18"
+        },
+        {
+          "a": "TrofAndy",
+          "b": "IvanBoevski"
+        },
+        {
+          "a": "Anay-Samaiya",
+          "b": "Iamplayerofchess"
+        },
+        {
+          "a": "AarjavSamaiya",
+          "b": "Daniel_3513"
+        },
+        {
+          "a": "DaTreeOfFives",
+          "b": "RKamalanayanan"
+        }
+      ]
+    }
+  ]
+}
