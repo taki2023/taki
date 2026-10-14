@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Hot Chilli Bullet Championship</title>
 
@@ -14,10 +9,7 @@
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="preconnect" href="https://api.chess.com">
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;800;900&display=swap"
-  rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Nunito:wght@400;700;800;900&amp;display=swap" rel="stylesheet">
 
 <style>
 
@@ -933,6 +925,38 @@ tbody td:first-child{
 
 }
 
+
+/* Restrained Championship palette: charcoal and cream, with small gold accents */
+:root{
+  --yellow:#d3b35b; --yellow2:#c5a34a; --gold:#9c7d32;
+  --cream:#f5f3ed; --cream2:#ece9df; --paper:#fff;
+  --ink:#282828; --soft:#777264; --faint:#aaa493; --line:#e4dfd2;
+}
+html,body{background:#191919}
+.app{background:var(--cream);box-shadow:0 0 48px rgba(0,0,0,.28)}
+.hero{
+  background:
+    radial-gradient(120% 160% at 15% -30%,rgba(255,255,255,.08),transparent 55%),
+    linear-gradient(135deg,#303030,#1e1e1e 72%,#292929);
+  border-bottom:3px solid #b99a43;
+}
+.hero:after{background:var(--cream)}
+.bullet-logo{fill:#d5b45c}
+.title{text-shadow:none;color:#fff}
+.sub{border:1px solid rgba(211,179,91,.38);background:rgba(211,179,91,.10);color:#ead9a4}
+.registration-card,.group-card,.standing-card,.round-card,.stat-card,.match-card{
+  border-color:var(--line);
+}
+.registration-title,.section-title,.group-title{color:#2d2d2d}
+.registration-note{color:#777264}
+.roster-player,.player-row,.standing-row{background:#fff;border-color:#e7e2d7}
+.rank,.round-number,.score{color:#8f742d}
+button,.round-nav button,.tab-button{background:#e5e0d4;color:#333;border-color:#d7d0c0}
+button.active,.round-nav button.active,.tab-button.active{background:#d2b25a;color:#29251a}
+a,.link{color:#8b702d}
+.error{background:#f4f1e9;color:#5d5648;border-color:#e4dfd2}
+.avatar{border-color:#e4dfd2}
+
 </style>
 </head>
 
@@ -946,12 +970,8 @@ tbody td:first-child{
 
   <div class="brand">
 
-    <svg
-      class="bullet-logo"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="m7.17 15.3 1.43 1.47-8.27 6.9zm-6.87 2.3 4.5-6 .9 2zm10.47-7.5c3.47-3.6 5.93-5.2 8.7-6.4-2.4 0-5.3.37-9.8 4.6.03.5.7 1.47 1.1 1.8zm11.06-7.93s.23 1.1.23 2.77c0 2.67-.67 6.83-4.17 10.33l-2.17 2.17c-.67.67-1.33.6-2.13.27l-7.47 6.3 9.8-12.17-5.23 4.03c-.43-.4-.93-.83-1.33-1.23-1.73-1.7-4.13-5-2.77-6.37l2.2-2.13c3.53-3.5 7.63-4.2 10.3-4.2 1.63 0 2.73.23 2.73.23z"/>
+    <svg class="bullet-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="m7.17 15.3 1.43 1.47-8.27 6.9zm-6.87 2.3 4.5-6 .9 2zm10.47-7.5c3.47-3.6 5.93-5.2 8.7-6.4-2.4 0-5.3.37-9.8 4.6.03.5.7 1.47 1.1 1.8zm11.06-7.93s.23 1.1.23 2.77c0 2.67-.67 6.83-4.17 10.33l-2.17 2.17c-.67.67-1.33.6-2.13.27l-7.47 6.3 9.8-12.17-5.23 4.03c-.43-.4-.93-.83-1.33-1.23-1.73-1.7-4.13-5-2.77-6.37l2.2-2.13c3.53-3.5 7.63-4.2 10.3-4.2 1.63 0 2.73.23 2.73.23z"></path>
     </svg>
 
     <span>BULLET</span>
@@ -963,7 +983,7 @@ tbody td:first-child{
   </div>
 
   <div class="sub">
-    ⚡ 1+1 • Pairings & Live Standings
+    ⚡ 1+1 • Pairings &amp; Live Standings
   </div>
 
 </header>
@@ -977,15 +997,15 @@ tbody td:first-child{
     <div class="stats">
 
       <div class="pill">
-        PLAYERS <b id="playersCount">—</b>
+        PLAYERS <b id="playersCount">10</b>
       </div>
 
       <div class="pill">
-        MATCHES <b id="matchesCount">—</b>
+        MATCHES <b id="matchesCount">0</b>
       </div>
 
       <div class="pill">
-        GAMES <b id="gamesCount">—</b>
+        GAMES <b id="gamesCount">0</b>
       </div>
 
     </div>
@@ -993,21 +1013,13 @@ tbody td:first-child{
 
     <div class="round-select">
 
-      <button
-        class="round-button"
-        id="roundButton"
-      >
-        <span id="roundLabel">
-          Round 1
-        </span>
+      <button class="round-button" id="roundButton">
+        <span id="roundLabel">Round 0</span>
 
         ▾
       </button>
 
-      <div
-        class="round-list"
-        id="roundList"
-      ></div>
+      <div class="round-list" id="roundList"><div class="round-item active" onclick="chooseRound(0)">Round 0 · Registration</div></div>
 
     </div>
 
@@ -1015,19 +1027,39 @@ tbody td:first-child{
 
   <section class="round-timer" aria-live="polite">
     <div class="timer-copy">
-      <div class="timer-title" id="timerTitle">CHAMPIONSHIP TIMER</div>
-      <div class="timer-sub" id="timerSub">Loading schedule…</div>
+      <div class="timer-title" id="timerTitle">REGISTRATION • ROUND 0</div>
+      <div class="timer-sub" id="timerSub">Schedule to be announced</div>
     </div>
-    <div class="timer-value" id="timerValue">—</div>
+    <div class="timer-value" id="timerValue">NOT SET</div>
   </section>
 
   <div id="content">
-
-    <div class="loading">
-      Loading Bullet Championship...
-    </div>
-
-  </div>
+      <section class="registration-card">
+        <div class="registration-title">Players</div>
+        <div class="roster">
+          <div class="roster-player"><span class="rank">1</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>negneT</span></div><div class="roster-player"><span class="rank">2</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>TALented_Vasee_18</span></div><div class="roster-player"><span class="rank">3</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>TrofAndy</span></div><div class="roster-player"><span class="rank">4</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>IvanBoevski</span></div><div class="roster-player"><span class="rank">5</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>Anay-Samaiya</span></div><div class="roster-player"><span class="rank">6</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>Iamplayerofchess</span></div><div class="roster-player"><span class="rank">7</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>AarjavSamaiya</span></div><div class="roster-player"><span class="rank">8</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>Daniel_3513</span></div><div class="roster-player"><span class="rank">9</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>DaTreeOfFives</span></div><div class="roster-player"><span class="rank">10</span>
+    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="" loading="lazy">
+  <span>RKamalanayanan</span></div>
+        </div>
+      </section></div>
 
 
   <div class="legend">
@@ -1059,16 +1091,12 @@ tbody td:first-child{
     </div>
 
     <div class="legend-item">
-      <span
-        class="legend-dot blue"
-      ></span>
+      <span class="legend-dot blue"></span>
       Qualifies
     </div>
 
     <div class="legend-item">
-      <span
-        class="legend-dot red"
-      ></span>
+      <span class="legend-dot red"></span>
       Eliminated
     </div>
 
@@ -1158,9 +1186,7 @@ async function load(){
       "content"
     ).innerHTML = `
       <div class="error">
-        ⚠️ Could not load the Bullet Championship data.
-        <br><br>
-        ${escapeHtml(e.message)}
+        Championship information is temporarily unavailable.
       </div>
     `;
 
@@ -1185,13 +1211,17 @@ function escapeHtml(s){
 
 
 function avatar(username){
-
+  const saved = DATA?.playerProfiles?.[username]?.avatarUrl;
+  const src = (typeof saved === "string" && saved.trim())
+    ? saved.trim()
+    : `https://www.chess.com/callback/member/${encodeURIComponent(username)}/image`;
   return `
     <img
       class="avatar"
-      src="https://www.chess.com/callback/member/${encodeURIComponent(username)}/image"
+      src="${escapeHtml(src)}"
       onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
       alt=""
+      loading="lazy"
     >
   `;
 }
@@ -1213,9 +1243,17 @@ function getRound(){
   return rounds().find(r => Number(r.number) === Number(currentRound));
 }
 
-function toDate(value){
+function toDate(value, isEnd = false){
   if(!value) return null;
-  const d = new Date(value);
+  const text = String(value).trim();
+  const dateOnly = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  let d;
+  if(dateOnly){
+    d = new Date(Number(dateOnly[1]), Number(dateOnly[2])-1, Number(dateOnly[3]));
+    if(isEnd) d.setHours(23,59,59,999);
+  }else{
+    d = new Date(text);
+  }
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
@@ -1234,7 +1272,7 @@ function updateRoundTimer(){
   }
   title.textContent = label;
   const start = toDate(item.startAt || item.start);
-  const end = toDate(item.endAt || item.end);
+  const end = toDate(item.endAt || item.end, true);
   const now = new Date();
   let target, message;
   if(start && now < start){
@@ -1249,7 +1287,7 @@ function updateRoundTimer(){
   }else{
     value.textContent = "NOT SET";
     value.classList.remove("timer-ended");
-    sub.textContent = "Set the start and end dates in the admin GUI.";
+    sub.textContent = "Schedule to be announced";
     return;
   }
   value.classList.remove("timer-ended");
@@ -1630,13 +1668,9 @@ function render(){
     const players = (DATA.players || []).filter(p => !(DATA.withdrawn || []).includes(p));
     document.getElementById("content").innerHTML = `
       <section class="registration-card">
-        <div class="registration-title">📝 Round 0 — Registration & Player List</div>
-        <div class="registration-note">
-          ${players.length} registered active player${players.length===1?"":"s"}.
-          Pairings for Round 1 will appear here once the admin generates the first round.
-        </div>
+        <div class="registration-title">Players</div>
         <div class="roster">
-          ${players.map((p,i)=>`<div class="roster-player"><span class="rank">${i+1}</span>${avatar(p)}<span>${escapeHtml(p)}</span></div>`).join("") || '<div class="registration-note">No players have been added yet.</div>'}
+          ${players.map((p,i)=>`<div class="roster-player"><span class="rank">${i+1}</span>${avatar(p)}<span>${escapeHtml(p)}</span></div>`).join("")}
         </div>
       </section>`;
     updateStats();
@@ -1940,10 +1974,10 @@ load();
 
 setInterval(
   load,
-  30000
+  60000
 );
 
 </script>
 
-</body>
-</html>
+
+</body></html>
