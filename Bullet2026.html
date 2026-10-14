@@ -957,6 +957,75 @@ a,.link{color:#8b702d}
 .error{background:#f4f1e9;color:#5d5648;border-color:#e4dfd2}
 .avatar{border-color:#e4dfd2}
 
+/* HCC identity: charcoal + chilli red, keeping Bullet's yellow/gold */
+:root{
+  --hcc-red:#d94332;
+  --hcc-red-dark:#a92d25;
+  --yellow:#ffd21f;
+  --yellow2:#ffb800;
+  --gold:#a97812;
+  --cream:#fff8ed;
+  --cream2:#ffefcf;
+  --paper:#ffffff;
+  --ink:#30251f;
+  --soft:#78645a;
+  --faint:#ad9a8d;
+  --line:#f0d9bb;
+}
+html,body{background:#171717}
+.app{background:var(--cream)}
+.hero{
+  border-bottom:4px solid var(--yellow2);
+  background:
+    radial-gradient(110% 130% at 8% -20%,rgba(255,210,31,.16),transparent 52%),
+    linear-gradient(125deg,#242424 0%,#30302d 60%,#3a2420 100%);
+}
+.hero:after{background:var(--cream)}
+.bullet-logo{fill:var(--yellow)}
+.title{color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2)}
+.sub{border-color:rgba(255,210,31,.4);background:rgba(255,210,31,.09);color:#ffe7a0}
+.registration-card,.group,.legend,#popup{border:1px solid var(--line)}
+.registration-title,.section-title,.group-title{color:var(--hcc-red-dark)}
+.registration-note{color:var(--soft)}
+.roster-player,.player-row,.standing-row{background:#fffdf8;border-color:#f0dfc9}
+.group{border-top:3px solid var(--yellow2);box-shadow:0 8px 22px -16px rgba(110,47,25,.38)}
+.group-head{color:var(--hcc-red-dark)}
+.group-info{background:#fff0bd;color:#785400}
+.round-group-label{background:linear-gradient(90deg,#ffe7a0,#fff3d0);color:#754a17;border-left:3px solid var(--hcc-red)}
+.rank{background:linear-gradient(135deg,#ffe45b,#ffb800);color:#45300a}
+button,.round-nav button,.tab-button{background:#fff0d4;color:#49372b;border-color:#ebd2ac}
+button:hover,.round-nav button:hover,.tab-button:hover{border-color:var(--hcc-red);transform:translateY(-1px)}
+button.active,.round-nav button.active,.tab-button.active{background:var(--yellow);color:#342714;border-color:#e6a900}
+a,.link{color:var(--hcc-red-dark)}
+.avatar{border:2px solid #fff;box-shadow:0 0 0 1px #edc87a,0 3px 8px rgba(80,45,20,.12)}
+
+/* Larger, clearly clickable Chess.com profile pictures and names */
+.player{gap:10px}
+.avatar{width:38px;height:38px;border-radius:12px;transition:transform .16s ease,box-shadow .16s ease}
+.avatar-link{display:inline-flex;flex-shrink:0;border-radius:13px;text-decoration:none;line-height:0}
+.avatar-link:hover .avatar,.avatar-link:focus-visible .avatar{transform:scale(1.07);box-shadow:0 0 0 2px var(--hcc-red),0 4px 12px rgba(80,35,20,.2)}
+.name,.player-link{display:block;min-width:0;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:900;color:var(--hcc-red-dark);text-decoration:none;border-radius:4px}
+.player-link:hover,.player-link:focus-visible,.popup-player-link:hover{text-decoration:underline;color:var(--hcc-red)}
+.cell{transition:transform .12s ease,box-shadow .12s ease;outline-offset:2px}
+.cell[onclick]{cursor:pointer}
+.cell[onclick]:hover{transform:translateY(-1px) scale(1.07);box-shadow:0 0 0 2px rgba(217,67,50,.18)}
+#popup{background:#fffaf1;border-top:4px solid var(--yellow2);box-shadow:0 18px 48px rgba(0,0,0,.38)}
+.popup-status{color:var(--hcc-red-dark)}
+.popup-players{gap:6px;font-size:12px}
+.popup-player-link{color:var(--hcc-red-dark);font-weight:700;text-decoration:none;overflow-wrap:anywhere}
+.popup-score{color:#966800}
+.game-link{background:linear-gradient(135deg,#ffe45b,#ffb800);border:1px solid #e9b02a;box-shadow:0 2px 0 rgba(133,82,0,.12);transition:transform .15s ease,filter .15s ease}
+.game-link:hover{filter:saturate(1.12);transform:translateY(-1px)}
+.roster-player .avatar{width:36px;height:36px}
+.roster-player a{color:var(--hcc-red-dark);text-decoration:none}
+.roster-player a:hover{text-decoration:underline}
+@media(max-width:600px){
+  .player{gap:7px}
+  .avatar{width:34px;height:34px}
+  .name,.player-link{max-width:112px}
+  .popup-players{font-size:10px}
+}
+
 </style>
 </head>
 
@@ -1028,9 +1097,9 @@ a,.link{color:#8b702d}
   <section class="round-timer" aria-live="polite">
     <div class="timer-copy">
       <div class="timer-title" id="timerTitle">REGISTRATION • ROUND 0</div>
-      <div class="timer-sub" id="timerSub">Registration closes in • 10/16/2026, 11:59:59 PM</div>
+      <div class="timer-sub" id="timerSub">Registration closes in • 10/15/2026, 11:59:59 PM</div>
     </div>
-    <div class="timer-value" id="timerValue">2d 13:37:57</div>
+    <div class="timer-value" id="timerValue">1d 13:21:43</div>
   </section>
 
   <div id="content">
@@ -1038,26 +1107,46 @@ a,.link{color:#8b702d}
         <div class="registration-title">Players</div>
         <div class="roster">
           <div class="roster-player"><span class="rank">1</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="negneT" loading="lazy">
-  <span>negneT</span></div><div class="roster-player"><span class="rank">2</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="TALented_Vasee_18" loading="lazy">
-  <span>TALented_Vasee_18</span></div><div class="roster-player"><span class="rank">3</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="TrofAndy" loading="lazy">
-  <span>TrofAndy</span></div><div class="roster-player"><span class="rank">4</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="IvanBoevski" loading="lazy">
-  <span>IvanBoevski</span></div><div class="roster-player"><span class="rank">5</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="Anay-Samaiya" loading="lazy">
-  <span>Anay-Samaiya</span></div><div class="roster-player"><span class="rank">6</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="Iamplayerofchess" loading="lazy">
-  <span>Iamplayerofchess</span></div><div class="roster-player"><span class="rank">7</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="AarjavSamaiya" loading="lazy">
-  <span>AarjavSamaiya</span></div><div class="roster-player"><span class="rank">8</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="Daniel_3513" loading="lazy">
-  <span>Daniel_3513</span></div><div class="roster-player"><span class="rank">9</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="DaTreeOfFives" loading="lazy">
-  <span>DaTreeOfFives</span></div><div class="roster-player"><span class="rank">10</span>
-    <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="RKamalanayanan" loading="lazy">
-  <span>RKamalanayanan</span></div>
+    <a class="avatar-link" href="https://www.chess.com/member/negneT" target="_blank" rel="noopener noreferrer" aria-label="Open negneT's Chess.com profile" title="Open negneT on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/466828074.d42c7aee.200x200o.5ed8d836202a.jpg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="negneT" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/negneT" target="_blank" rel="noopener noreferrer">negneT</a></div><div class="roster-player"><span class="rank">2</span>
+    <a class="avatar-link" href="https://www.chess.com/member/TALented_Vasee_18" target="_blank" rel="noopener noreferrer" aria-label="Open TALented_Vasee_18's Chess.com profile" title="Open TALented_Vasee_18 on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/417947819.33500cb5.200x200o.814dabe2db4a.jpg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="TALented_Vasee_18" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/TALented_Vasee_18" target="_blank" rel="noopener noreferrer">TALented_Vasee_18</a></div><div class="roster-player"><span class="rank">3</span>
+    <a class="avatar-link" href="https://www.chess.com/member/TrofAndy" target="_blank" rel="noopener noreferrer" aria-label="Open TrofAndy's Chess.com profile" title="Open TrofAndy on Chess.com">
+      <img class="avatar" src="https://www.chess.com/bundles/web/images/user-image.007dad08.svg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="TrofAndy" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/TrofAndy" target="_blank" rel="noopener noreferrer">TrofAndy</a></div><div class="roster-player"><span class="rank">4</span>
+    <a class="avatar-link" href="https://www.chess.com/member/IvanBoevski" target="_blank" rel="noopener noreferrer" aria-label="Open IvanBoevski's Chess.com profile" title="Open IvanBoevski on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/458154636.108ba7e5.200x200o.59824d2a5e5f.jpg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="IvanBoevski" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/IvanBoevski" target="_blank" rel="noopener noreferrer">IvanBoevski</a></div><div class="roster-player"><span class="rank">5</span>
+    <a class="avatar-link" href="https://www.chess.com/member/Anay-Samaiya" target="_blank" rel="noopener noreferrer" aria-label="Open Anay-Samaiya's Chess.com profile" title="Open Anay-Samaiya on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/418704935.b3b3e53a.200x200o.07cd74e583bb.jpg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="Anay-Samaiya" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/Anay-Samaiya" target="_blank" rel="noopener noreferrer">Anay-Samaiya</a></div><div class="roster-player"><span class="rank">6</span>
+    <a class="avatar-link" href="https://www.chess.com/member/Iamplayerofchess" target="_blank" rel="noopener noreferrer" aria-label="Open Iamplayerofchess's Chess.com profile" title="Open Iamplayerofchess on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/334087811.9b6a7501.200x200o.fa2dfbadd804.png" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="Iamplayerofchess" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/Iamplayerofchess" target="_blank" rel="noopener noreferrer">Iamplayerofchess</a></div><div class="roster-player"><span class="rank">7</span>
+    <a class="avatar-link" href="https://www.chess.com/member/AarjavSamaiya" target="_blank" rel="noopener noreferrer" aria-label="Open AarjavSamaiya's Chess.com profile" title="Open AarjavSamaiya on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/357342997.9c6237f2.200x200o.69d6d01a8c76.jpg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="AarjavSamaiya" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/AarjavSamaiya" target="_blank" rel="noopener noreferrer">AarjavSamaiya</a></div><div class="roster-player"><span class="rank">8</span>
+    <a class="avatar-link" href="https://www.chess.com/member/Daniel_3513" target="_blank" rel="noopener noreferrer" aria-label="Open Daniel_3513's Chess.com profile" title="Open Daniel_3513 on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/185232363.9a580e8e.200x200o.255a59397e05.jpeg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="Daniel_3513" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/Daniel_3513" target="_blank" rel="noopener noreferrer">Daniel_3513</a></div><div class="roster-player"><span class="rank">9</span>
+    <a class="avatar-link" href="https://www.chess.com/member/DaTreeOfFives" target="_blank" rel="noopener noreferrer" aria-label="Open DaTreeOfFives's Chess.com profile" title="Open DaTreeOfFives on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/74624564.dd922346.200x200o.cd8b1ce3c2ec.png" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="DaTreeOfFives" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/DaTreeOfFives" target="_blank" rel="noopener noreferrer">DaTreeOfFives</a></div><div class="roster-player"><span class="rank">10</span>
+    <a class="avatar-link" href="https://www.chess.com/member/RKamalanayanan" target="_blank" rel="noopener noreferrer" aria-label="Open RKamalanayanan's Chess.com profile" title="Open RKamalanayanan on Chess.com">
+      <img class="avatar" src="https://images.chesscomfiles.com/uploads/v1/user/473080950.79070e77.200x200o.056babccd443.jpg" onerror="this.onerror=null;this.src='https://www.chess.com/bundles/web/images/user-image.007dad08.svg'" alt="RKamalanayanan" loading="lazy">
+    </a>
+  <a href="https://www.chess.com/member/RKamalanayanan" target="_blank" rel="noopener noreferrer">RKamalanayanan</a></div>
         </div>
       </section></div>
 
@@ -1233,14 +1322,17 @@ function avatar(username){
     ? saved.trim()
     : `https://www.chess.com/callback/member/${encodeURIComponent(username)}/image`;
 
+  const profileUrl = `https://www.chess.com/member/${encodeURIComponent(username)}`;
   return `
-    <img
-      class="avatar"
-      src="${escapeHtml(src)}"
-      onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
-      alt="${escapeHtml(username)}"
-      loading="lazy"
-    >
+    <a class="avatar-link" href="${profileUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(username)}'s Chess.com profile" title="Open ${escapeHtml(username)} on Chess.com">
+      <img
+        class="avatar"
+        src="${escapeHtml(src)}"
+        onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
+        alt="${escapeHtml(username)}"
+        loading="lazy"
+      >
+    </a>
   `;
 }
 
@@ -1615,9 +1707,12 @@ function renderGroup(
 
                     ${avatar(player)}
 
-                    <div class="name">
+                    <a class="name player-link"
+                       href="https://www.chess.com/member/${encodeURIComponent(player)}"
+                       target="_blank" rel="noopener noreferrer"
+                       title="Open ${escapeHtml(player)} on Chess.com">
                       ${escapeHtml(player)}
-                    </div>
+                    </a>
 
                   </div>
 
@@ -1688,7 +1783,7 @@ function render(){
       <section class="registration-card">
         <div class="registration-title">Players</div>
         <div class="roster">
-          ${players.map((p,i)=>`<div class="roster-player"><span class="rank">${i+1}</span>${avatar(p)}<span>${escapeHtml(p)}</span></div>`).join("")}
+          ${players.map((p,i)=>`<div class="roster-player"><span class="rank">${i+1}</span>${avatar(p)}<a href="https://www.chess.com/member/${encodeURIComponent(p)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p)}</a></div>`).join("")}
         </div>
       </section>`;
     updateStats();
@@ -1909,15 +2004,15 @@ function showMatch(match){
 
     <div class="popup-players">
 
-      <span>
-        ${escapeHtml(match.a)}
-      </span>
+      <a class="popup-player-link" href="https://www.chess.com/member/${encodeURIComponent(match.a || '')}" target="_blank" rel="noopener noreferrer">
+        ${escapeHtml(match.a || 'Player A')}
+      </a>
 
       <b>VS</b>
 
-      <span>
-        ${escapeHtml(match.b)}
-      </span>
+      <a class="popup-player-link" href="https://www.chess.com/member/${encodeURIComponent(match.b || '')}" target="_blank" rel="noopener noreferrer">
+        ${escapeHtml(match.b || 'Player B')}
+      </a>
 
     </div>
 
