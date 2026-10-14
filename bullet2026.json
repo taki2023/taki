@@ -12,5 +12,26 @@
     "RKamalanayanan"
   ],
   "withdrawn": [],
+  "registration": {
+    "startAt": "",
+    "endAt": "",
+    "players": [
+      "negneT",
+      "TALented_Vasee_18",
+      "TrofAndy",
+      "IvanBoevski",
+      "Anay-Samaiya",
+      "Iamplayerofchess",
+      "AarjavSamaiya",
+      "Daniel_3513",
+      "DaTreeOfFives",
+      "RKamalanayanan"
+    ],
+    "generated": false
+  },
+  "settings": {
+    "groupSize": 10,
+    "advancesPerGroup": 2
+  },
   "rounds": []
 }
