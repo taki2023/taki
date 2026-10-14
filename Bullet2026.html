@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>Hot Chilli Bullet Championship</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="preconnect" href="https://api.chess.com">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;800;900&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  min-height:100%;
+  background:#181818;
+}
+
+body{
+  font-family:Nunito,sans-serif;
+}
+
+:root{
+
+  --yellow:#FFD21F;
+  --yellow2:#FFB800;
+  --gold:#D99400;
+
+  --cream:#FFFBE8;
+  --cream2:#FFF6C9;
+
+  --paper:#FFFFFF;
+
+  --ink:#423500;
+  --soft:#806E25;
+  --faint:#B8AA73;
+
+  --green:#16803A;
+  --blue:#2563EB;
+  --red:#C62828;
+
+  --line:#F1E4A8;
+}
+
+
+/* ======================================================
+   APP
+====================================================== */
+
+.app{
+
+  width:100%;
+  max-width:720px;
+  margin:auto;
+
+  min-height:100vh;
+
+  background:var(--cream);
+
+  box-shadow:
+    0 0 50px rgba(0,0,0,.3);
+}
+
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.hero{
+
+  position:relative;
+  overflow:hidden;
+
+  padding:20px 16px 38px;
+
+  text-align:center;
+  color:#fff;
+
+  background:
+    radial-gradient(
+      120% 160% at 15% -30%,
+      rgba(255,255,255,.35),
+      transparent 55%
+    ),
+    linear-gradient(
+      135deg,
+      #FFE64A,
+      #FFD21F 45%,
+      #E7A600
+    );
+}
+
+.hero:after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:-1px;
+  left:-10%;
+
+  width:120%;
+  height:28px;
+
+  background:var(--cream);
+
+  border-radius:50% 50% 0 0;
+}
+
+
+.brand{
+
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:9px;
+
+  font-family:Fredoka;
+  font-size:12px;
+  font-weight:700;
+
+  letter-spacing:1px;
+}
+
+.bullet-logo{
+
+  width:40px;
+  height:40px;
+
+  fill:#fff;
+}
+
+.title{
+
+  position:relative;
+  z-index:2;
+
+  margin-top:5px;
+
+  font-family:Fredoka;
+  font-size:21px;
+  font-weight:600;
+
+  text-shadow:
+    0 3px 0 rgba(130,80,0,.3);
+}
+
+.sub{
+
+  position:relative;
+  z-index:2;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  margin-top:9px;
+
+  padding:6px 13px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.22);
+
+  border:
+    1px solid
+    rgba(255,255,255,.35);
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.6px;
+  text-transform:uppercase;
+}
+
+
+/* ======================================================
+   CONTENT
+====================================================== */
+
+.content{
+
+  padding:0 15px 22px;
+}
+
+
+/* ======================================================
+   TOP BAR
+====================================================== */
+
+.topbar{
+
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:14px;
+
+  position:relative;
+  z-index:10;
+}
+
+.stats{
+
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.pill{
+
+  padding:6px 10px;
+
+  border-radius:999px;
+
+  background:#fff;
+
+  box-shadow:
+    0 4px 12px -8px rgba(120,90,0,.4);
+
+  font-size:9.5px;
+  font-weight:900;
+
+  color:var(--soft);
+}
+
+.pill b{
+  color:var(--gold);
+}
+
+
+/* ======================================================
+   ROUND DROPDOWN
+====================================================== */
+
+.round-select{
+
+  position:relative;
+}
+
+.round-button{
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:9px 12px;
+
+  border:0;
+  border-radius:15px;
+
+  cursor:pointer;
+
+  background:white;
+
+  color:var(--gold);
+
+  font-family:Fredoka;
+  font-size:13px;
+  font-weight:600;
+
+  box-shadow:
+    0 8px 18px -10px
+    rgba(120,90,0,.4);
+}
+
+.round-list{
+
+  position:absolute;
+
+  right:0;
+  top:calc(100% + 7px);
+
+  min-width:150px;
+
+  background:white;
+
+  border-radius:15px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 16px 35px -10px
+    rgba(0,0,0,.35);
+
+  display:none;
+
+  z-index:100;
+}
+
+.round-list.open{
+  display:block;
+}
+
+.round-item{
+
+  padding:12px 15px;
+
+  border-top:1px solid var(--line);
+
+  cursor:pointer;
+
+  font-size:12px;
+  font-weight:900;
+
+  color:var(--ink);
+}
+
+.round-item:first-child{
+  border-top:0;
+}
+
+.round-item:hover{
+  background:#FFF8D8;
+}
+
+.round-item.active{
+
+  background:
+    linear-gradient(
+      135deg,
+      #FFE34A,
+      #FFB800
+    );
+
+  color:#3D2D00;
+}
+
+
+/* ======================================================
+   GROUP
+====================================================== */
+
+.group{
+
+  background:white;
+
+  border-radius:23px;
+
+  padding:7px;
+
+  margin-bottom:14px;
+
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 9px 23px -12px
+    rgba(120,90,0,.3);
+
+  overflow:hidden;
+}
+
+.group-head{
+
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  padding:9px 12px 10px;
+
+  font-family:Fredoka;
+  font-size:13px;
+  font-weight:600;
+
+  color:var(--gold);
+}
+
+.group-info{
+
+  font-family:Nunito;
+  font-size:9px;
+  font-weight:900;
+
+  color:var(--faint);
+}
+
+
+/* ======================================================
+   TABLE
+====================================================== */
+
+.table-scroll{
+
+  overflow-x:auto;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+table{
+
+  width:100%;
+
+  min-width:590px;
+
+  border-collapse:separate;
+  border-spacing:0;
+
+  table-layout:fixed;
+}
+
+thead th{
+
+  padding:10px 5px;
+
+  background:#1A1A1A;
+
+  color:white;
+
+  font-family:Fredoka;
+  font-size:11px;
+  font-weight:600;
+
+  text-align:center;
+
+  white-space:nowrap;
+}
+
+thead th:first-child{
+
+  width:190px;
+
+  text-align:left;
+
+  padding-left:13px;
+
+  border-radius:14px 0 0 0;
+}
+
+thead th:last-child{
+
+  border-radius:0 14px 0 0;
+}
+
+tbody tr{
+
+  background:#fff;
+}
+
+tbody tr:nth-child(even){
+
+  background:#FFFDF4;
+}
+
+tbody tr:hover{
+
+  background:#FFF8D8;
+}
+
+tbody td{
+
+  padding:8px 4px;
+
+  text-align:center;
+
+  font-size:12px;
+  font-weight:900;
+
+  color:var(--ink);
+
+  border-top:1px solid #F7F0D0;
+}
+
+tbody td:first-child{
+
+  width:190px;
+
+  text-align:left;
+
+  padding-left:10px;
+}
+
+
+/* ======================================================
+   PLAYER
+====================================================== */
+
+.player{
+
+  display:flex;
+  align-items:center;
+
+  gap:8px;
+
+  min-width:0;
+}
+
+.rank{
+
+  width:22px;
+  height:22px;
+
+  flex-shrink:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #FFE34A,
+      #E5A500
+    );
+
+  color:white;
+
+  font-family:Fredoka;
+  font-size:10px;
+}
+
+.avatar{
+
+  width:30px;
+  height:30px;
+
+  flex-shrink:0;
+
+  border-radius:9px;
+
+  object-fit:cover;
+
+  background:#FFF8D8;
+
+  border:2px solid white;
+
+  box-shadow:
+    0 0 0 1px #EAD98D;
+}
+
+.name{
+
+  min-width:0;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+  color:var(--gold);
+
+  font-size:11px;
+}
+
+
+/* ======================================================
+   CELLS
+====================================================== */
+
+.cell{
+
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  min-width:25px;
+  min-height:25px;
+
+  border-radius:8px;
+
+  cursor:pointer;
+
+  font-family:Fredoka;
+  font-size:15px;
+  font-weight:600;
+}
+
+.cell.win{
+  color:var(--green);
+}
+
+.cell.draw{
+  color:#806E25;
+}
+
+.cell.loss{
+  color:var(--red);
+}
+
+.cell.pending{
+
+  color:#AAA17C;
+
+  font-size:17px;
+}
+
+.cell.self{
+
+  color:#D5CC9F;
+
+  cursor:default;
+}
+
+
+/* ======================================================
+   QUALIFICATION
+====================================================== */
+
+.qualifies{
+
+  box-shadow:
+    inset 4px 0 var(--blue);
+}
+
+.eliminated{
+
+  box-shadow:
+    inset 4px 0 var(--red);
+}
+
+.withdrawn{
+
+  opacity:.5;
+
+  box-shadow:
+    inset 4px 0 var(--red);
+}
+
+
+/* ======================================================
+   LEGEND
+====================================================== */
+
+.legend{
+
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:8px 14px;
+
+  padding:13px;
+
+  margin-top:10px;
+
+  border-radius:17px;
+
+  background:white;
+
+  box-shadow:
+    0 5px 15px -9px
+    rgba(120,90,0,.3);
+
+  font-size:9.5px;
+  font-weight:900;
+
+  color:var(--soft);
+}
+
+.legend-item{
+
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.legend-dot{
+
+  width:7px;
+  height:17px;
+
+  border-radius:4px;
+}
+
+.legend-dot.blue{
+  background:var(--blue);
+}
+
+.legend-dot.red{
+  background:var(--red);
+}
+
+
+/* ======================================================
+   POPUP
+====================================================== */
+
+#popup{
+
+  position:fixed;
+
+  z-index:9999;
+
+  width:245px;
+
+  padding:14px;
+
+  background:white;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 18px 40px -12px
+    rgba(0,0,0,.35);
+
+  display:none;
+}
+
+.popup-status{
+
+  display:inline-block;
+
+  padding:4px 8px;
+
+  border-radius:999px;
+
+  background:#FFF4C5;
+
+  color:#8A6500;
+
+  font-size:8px;
+  font-weight:900;
+
+  text-transform:uppercase;
+}
+
+.popup-players{
+
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:10px;
+
+  font-family:Fredoka;
+  font-size:11px;
+
+  color:var(--ink);
+
+  text-align:center;
+}
+
+.popup-score{
+
+  margin-top:7px;
+
+  text-align:center;
+
+  font-family:Fredoka;
+
+  font-size:22px;
+  font-weight:600;
+
+  color:var(--gold);
+}
+
+.games{
+
+  display:flex;
+
+  gap:7px;
+
+  margin-top:10px;
+}
+
+.game-link{
+
+  flex:1;
+
+  padding:8px;
+
+  border-radius:999px;
+
+  text-align:center;
+
+  text-decoration:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #FFE34A,
+      #FFB800
+    );
+
+  color:#3A2A00;
+
+  font-size:10px;
+  font-weight:900;
+}
+
+.game-link.disabled{
+
+  background:#F1EFE3;
+  color:#A8A38F;
+  pointer-events:none;
+}
+
+
+/* ======================================================
+   LOADING
+====================================================== */
+
+.loading{
+
+  padding:45px 15px;
+
+  text-align:center;
+
+  color:var(--soft);
+
+  font-size:12px;
+  font-weight:900;
+}
+
+.error{
+
+  padding:20px;
+
+  border-radius:15px;
+
+  background:#FFE4E1;
+
+  color:#A51D1D;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.footer{
+
+  padding:15px 0 5px;
+
+  text-align:center;
+
+  color:#B7A86D;
+
+  font-size:10px;
+  font-weight:900;
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:480px){
+
+  .content{
+    padding-left:9px;
+    padding-right:9px;
+  }
+
+  .topbar{
+    align-items:flex-start;
+  }
+
+  .stats{
+    gap:3px;
+  }
+
+  .pill{
+    padding:5px 7px;
+    font-size:8px;
+  }
+
+  .round-button{
+    padding:8px 9px;
+    font-size:11px;
+  }
+
+  .title{
+    font-size:19px;
+  }
+
+  .group{
+    border-radius:18px;
+  }
+
+  .player{
+    gap:6px;
+  }
+
+  .avatar{
+    width:27px;
+    height:27px;
+  }
+
+  .name{
+    max-width:100px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="hero">
+
+  <div class="brand">
+
+    <svg
+      class="bullet-logo"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="m7.17 15.3 1.43 1.47-8.27 6.9zm-6.87 2.3 4.5-6 .9 2zm10.47-7.5c3.47-3.6 5.93-5.2 8.7-6.4-2.4 0-5.3.37-9.8 4.6.03.5.7 1.47 1.1 1.8zm11.06-7.93s.23 1.1.23 2.77c0 2.67-.67 6.83-4.17 10.33l-2.17 2.17c-.67.67-1.33.6-2.13.27l-7.47 6.3 9.8-12.17-5.23 4.03c-.43-.4-.93-.83-1.33-1.23-1.73-1.7-4.13-5-2.77-6.37l2.2-2.13c3.53-3.5 7.63-4.2 10.3-4.2 1.63 0 2.73.23 2.73.23z"/>
+    </svg>
+
+    <span>BULLET</span>
+
+  </div>
+
+  <div class="title">
+    Hot Chilli Bullet Championship
+  </div>
+
+  <div class="sub">
+    ⚡ 1+1 • Pairings & Live Standings
+  </div>
+
+</header>
+
+
+<main class="content">
+
+
+  <div class="topbar">
+
+    <div class="stats">
+
+      <div class="pill">
+        PLAYERS <b id="playersCount">—</b>
+      </div>
+
+      <div class="pill">
+        MATCHES <b id="matchesCount">—</b>
+      </div>
+
+      <div class="pill">
+        GAMES <b id="gamesCount">—</b>
+      </div>
+
+    </div>
+
+
+    <div class="round-select">
+
+      <button
+        class="round-button"
+        id="roundButton"
+      >
+        <span id="roundLabel">
+          Round 1
+        </span>
+
+        ▾
+      </button>
+
+      <div
+        class="round-list"
+        id="roundList"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <div id="content">
+
+    <div class="loading">
+      Loading Bullet Championship...
+    </div>
+
+  </div>
+
+
+  <div class="legend">
+
+    <div class="legend-item">
+      <b style="color:var(--green)">
+        1
+      </b>
+      Win
+    </div>
+
+    <div class="legend-item">
+      <b style="color:#806E25">
+        ½
+      </b>
+      Draw
+    </div>
+
+    <div class="legend-item">
+      <b style="color:var(--red)">
+        0
+      </b>
+      Loss
+    </div>
+
+    <div class="legend-item">
+      <span>□</span>
+      Not played
+    </div>
+
+    <div class="legend-item">
+      <span
+        class="legend-dot blue"
+      ></span>
+      Qualifies
+    </div>
+
+    <div class="legend-item">
+      <span
+        class="legend-dot red"
+      ></span>
+      Eliminated
+    </div>
+
+    <div class="legend-item">
+      Each cell = combined 2-game score
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    ⚡🌶️ Hot Chilli CheckMate © 2026 ♞
+  </div>
+
+</main>
+
+</div>
+
+
+<div id="popup"></div>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const DATA_URL =
+  "https://raw.githubusercontent.com/taki2023/taki/refs/heads/main/bullet2026.json";
+
+const DEFAULT_AVATAR =
+  "https://www.chess.com/bundles/web/images/user-image.007dad08.svg";
+
+let DATA = null;
+
+let currentRound = 1;
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function load(){
+
+  try{
+
+    const r =
+      await fetch(
+        DATA_URL +
+        "?v=" +
+        Date.now()
+      );
+
+    if(!r.ok)
+      throw new Error(
+        `HTTP ${r.status}`
+      );
+
+    DATA =
+      await r.json();
+
+    if(!Array.isArray(DATA.rounds))
+      DATA.rounds = [];
+
+    if(!Array.isArray(DATA.players))
+      DATA.players = [];
+
+    if(DATA.rounds.length){
+
+      currentRound =
+        DATA.rounds[
+          DATA.rounds.length - 1
+        ].number;
+
+    }
+
+    render();
+
+  }catch(e){
+
+    document.getElementById(
+      "content"
+    ).innerHTML = `
+      <div class="error">
+        ⚠️ Could not load the Bullet Championship data.
+        <br><br>
+        ${escapeHtml(e.message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHtml(s){
+
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+function avatar(username){
+
+  return `
+    <img
+      class="avatar"
+      src="https://www.chess.com/callback/member/${encodeURIComponent(username)}/image"
+      onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"
+      alt=""
+    >
+  `;
+}
+
+
+function rounds(){
+
+  return DATA.rounds
+    .slice()
+    .sort(
+      (a,b)=>
+        a.number-b.number
+    );
+}
+
+
+function getRound(){
+
+  return rounds().find(
+    r =>
+      r.number === currentRound
+  );
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+function scoreFor(match,player){
+
+  if(!match.result)
+    return null;
+
+  const p =
+    match.result.split("-");
+
+  if(p.length !== 2)
+    return null;
+
+  const a =
+    Number(p[0]);
+
+  const b =
+    Number(p[1]);
+
+  if(!Number.isFinite(a) ||
+     !Number.isFinite(b))
+    return null;
+
+  return match.a === player
+    ? a
+    : b;
+}
+
+
+function resultAgainst(
+  round,
+  player,
+  opponent
+){
+
+  const match =
+    round.matches.find(
+      m =>
+        (
+          m.a === player &&
+          m.b === opponent
+        ) ||
+        (
+          m.a === opponent &&
+          m.b === player
+        )
+    );
+
+  if(!match)
+    return null;
+
+  return {
+    match,
+
+    score:
+      scoreFor(
+        match,
+        player
+      )
+  };
+}
+
+
+/* =========================================================
+   STANDINGS
+========================================================= */
+
+function standing(round){
+
+  const rows =
+    round.matches.reduce(
+      (acc,m)=>{
+
+        if(!acc[m.a])
+          acc[m.a] = 0;
+
+        if(!acc[m.b])
+          acc[m.b] = 0;
+
+        if(m.result){
+
+          const p =
+            m.result.split("-");
+
+          if(p.length === 2){
+
+            const a =
+              Number(p[0]);
+
+            const b =
+              Number(p[1]);
+
+            acc[m.a] += a;
+            acc[m.b] += b;
+          }
+        }
+
+        return acc;
+
+      },
+      {}
+    );
+
+  /*
+    Players can exist in the round even
+    if they haven't played yet.
+  */
+
+  for(
+    const p of DATA.players
+  ){
+
+    if(
+      !DATA.withdrawn ||
+      !DATA.withdrawn.includes(p)
+    ){
+
+      if(rows[p] === undefined)
+        rows[p] = 0;
+
+    }
+
+  }
+
+  return rows;
+}
+
+
+function orderedPlayers(round){
+
+  const scores =
+    standing(round);
+
+  return Object.keys(scores)
+    .sort(
+      (a,b)=>
+        scores[b] -
+        scores[a] ||
+        a.localeCompare(b)
+    );
+}
+
+
+/* =========================================================
+   CELL
+========================================================= */
+
+function makeCell(
+  round,
+  player,
+  opponent
+){
+
+  if(player === opponent){
+
+    return `
+      <span class="cell self">
+        ·
+      </span>
+    `;
+  }
+
+  const data =
+    resultAgainst(
+      round,
+      player,
+      opponent
+    );
+
+  if(!data){
+
+    return `
+      <span class="cell pending">
+        □
+      </span>
+    `;
+  }
+
+  const score =
+    data.score;
+
+  if(score === null){
+
+    return `
+      <span class="cell pending">
+        □
+      </span>
+    `;
+  }
+
+  let cls =
+    score === 1
+      ? "win"
+      : score === .5
+        ? "draw"
+        : "loss";
+
+  return `
+    <span
+      class="cell ${cls}"
+      onclick='showMatch(
+        ${JSON.stringify(
+          data.match
+        ).replaceAll("'","&#39;")}
+      )'
+    >
+      ${score === .5 ? "½" : score}
+    </span>
+  `;
+}
+
+
+/* =========================================================
+   GROUP TABLE
+========================================================= */
+
+function renderGroup(
+  round,
+  players
+){
+
+  const scores =
+    standing(round);
+
+  const ordered =
+    players.slice().sort(
+      (a,b)=>
+        scores[b] -
+        scores[a] ||
+        a.localeCompare(b)
+    );
+
+  return `
+
+    <section class="group">
+
+      <div class="group-head">
+
+        <span>
+          ⚡ Round ${round.number}
+        </span>
+
+        <span class="group-info">
+          ${ordered.length} players
+        </span>
+
+      </div>
+
+      <div class="table-scroll">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Player
+              </th>
+
+              ${ordered.map(
+                p =>
+                  `<th>
+                    ${escapeHtml(
+                      shortName(p)
+                    )}
+                  </th>`
+              ).join("")}
+
+              <th>
+                Pts
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            ${ordered.map(
+              (player,i)=>`
+
+              <tr>
+
+                <td>
+
+                  <div class="player">
+
+                    <div class="rank">
+                      ${i+1}
+                    </div>
+
+                    ${avatar(player)}
+
+                    <div class="name">
+                      ${escapeHtml(player)}
+                    </div>
+
+                  </div>
+
+                </td>
+
+                ${ordered.map(
+                  opponent =>
+                    `<td>
+                      ${makeCell(
+                        round,
+                        player,
+                        opponent
+                      )}
+                    </td>`
+                ).join("")}
+
+                <td>
+
+                  <span
+                    style="
+                      font-family:Fredoka;
+                      color:var(--gold);
+                      font-size:15px;
+                    "
+                  >
+                    ${scores[player]}
+                  </span>
+
+                </td>
+
+              </tr>
+
+            `).join("")}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+  `;
+}
+
+
+function shortName(name){
+
+  if(name.length <= 8)
+    return name;
+
+  return (
+    name.slice(0,7) +
+    "…"
+  );
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(){
+
+  const round =
+    getRound();
+
+  if(!round){
+
+    document.getElementById(
+      "content"
+    ).innerHTML = `
+      <div class="loading">
+        ⚡ The tournament has not started yet.
+      </div>
+    `;
+
+    updateStats();
+
+    renderRoundList();
+
+    return;
+  }
+
+  const players =
+    Array.from(
+      new Set(
+        round.matches.flatMap(
+          m => [m.a,m.b]
+        )
+      )
+    );
+
+  document.getElementById(
+    "content"
+  ).innerHTML =
+    renderGroup(
+      round,
+      players
+    );
+
+  updateStats();
+
+  renderRoundList();
+
+  document.getElementById(
+    "roundLabel"
+  ).textContent =
+    `Round ${round.number}`;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const round =
+    getRound();
+
+  const matches =
+    round
+      ? round.matches.length
+      : 0;
+
+  let games = 0;
+
+  if(round){
+
+    round.matches.forEach(
+      m => {
+
+        if(
+          Array.isArray(
+            m.games
+          )
+        ){
+
+          games +=
+            m.games.length;
+
+        }
+
+      }
+    );
+
+  }
+
+  document.getElementById(
+    "playersCount"
+  ).textContent =
+    DATA.players.length;
+
+  document.getElementById(
+    "matchesCount"
+  ).textContent =
+    matches;
+
+  document.getElementById(
+    "gamesCount"
+  ).textContent =
+    games;
+}
+
+
+/* =========================================================
+   ROUND LIST
+========================================================= */
+
+function renderRoundList(){
+
+  const list =
+    document.getElementById(
+      "roundList"
+    );
+
+  list.innerHTML =
+    rounds().map(
+      r => `
+
+        <div
+          class="round-item ${
+            r.number === currentRound
+              ? "active"
+              : ""
+          }"
+          onclick="
+            chooseRound(${r.number})
+          "
+        >
+          Round ${r.number}
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+function chooseRound(number){
+
+  currentRound =
+    number;
+
+  document.getElementById(
+    "roundList"
+  ).classList.remove(
+    "open"
+  );
+
+  render();
+}
+
+
+document.getElementById(
+  "roundButton"
+).onclick = () => {
+
+  document.getElementById(
+    "roundList"
+  ).classList.toggle(
+    "open"
+  );
+
+};
+
+
+/* =========================================================
+   MATCH POPUP
+========================================================= */
+
+function showMatch(match){
+
+  const popup =
+    document.getElementById(
+      "popup"
+    );
+
+  const type =
+    match.type ||
+    (
+      match.result
+        ? "match"
+        : "pending"
+    );
+
+  let status =
+    type === "forfeit"
+      ? "Forfeit"
+      : type === "withdrawal"
+        ? "Withdrawal"
+        : match.result
+          ? "Finished"
+          : "Not started";
+
+  let gamesHTML = "";
+
+  if(
+    Array.isArray(match.games) &&
+    match.games.length
+  ){
+
+    gamesHTML =
+      match.games.map(
+        (link,i)=>`
+
+          <a
+            class="game-link"
+            href="${escapeHtml(link)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Game ${i+1}
+          </a>
+
+        `
+      ).join("");
+
+  }else{
+
+    gamesHTML =
+      `<div
+        style="
+          width:100%;
+          text-align:center;
+          color:#A8A38F;
+          font-size:9px;
+          font-weight:900;
+          padding:8px;
+          background:#F5F2E7;
+          border-radius:999px;
+        "
+      >
+        ${type === "forfeit"
+          ? "⚠ Forfeit"
+          : type === "withdrawal"
+            ? "🚪 Withdrawal"
+            : "No games yet"}
+      </div>`;
+
+  }
+
+  popup.innerHTML = `
+
+    <div class="popup-status">
+      ${status}
+    </div>
+
+    <div class="popup-players">
+
+      <span>
+        ${escapeHtml(match.a)}
+      </span>
+
+      <b>VS</b>
+
+      <span>
+        ${escapeHtml(match.b)}
+      </span>
+
+    </div>
+
+    <div class="popup-score">
+
+      ${
+        match.result ||
+        "—"
+      }
+
+    </div>
+
+    <div class="games">
+      ${gamesHTML}
+    </div>
+
+  `;
+
+  popup.style.display =
+    "block";
+
+  const x =
+    Math.min(
+      window.innerWidth - 260,
+      window.innerWidth / 2 - 122
+    );
+
+  const y =
+    Math.min(
+      window.innerHeight - 210,
+      window.innerHeight / 2 - 100
+    );
+
+  popup.style.left =
+    Math.max(8,x) + "px";
+
+  popup.style.top =
+    Math.max(8,y) + "px";
+}
+
+
+document.addEventListener(
+  "click",
+  e => {
+
+    const popup =
+      document.getElementById(
+        "popup"
+      );
+
+    if(
+      popup.style.display ===
+      "block" &&
+      !popup.contains(e.target) &&
+      !e.target.closest(".cell")
+    ){
+
+      popup.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   START + AUTO REFRESH
+========================================================= */
+
+load();
+
+setInterval(
+  load,
+  30000
+);
+
+</script>
+
+</body>
+</html>
