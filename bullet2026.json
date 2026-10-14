@@ -11,6 +11,38 @@
     "DaTreeOfFives",
     "RKamalanayanan"
   ],
+  "playerProfiles": {
+    "negneT": {
+      "avatarUrl": "https://www.chess.com/callback/member/negneT/image"
+    },
+    "TALented_Vasee_18": {
+      "avatarUrl": "https://www.chess.com/callback/member/TALented_Vasee_18/image"
+    },
+    "TrofAndy": {
+      "avatarUrl": "https://www.chess.com/callback/member/TrofAndy/image"
+    },
+    "IvanBoevski": {
+      "avatarUrl": "https://www.chess.com/callback/member/IvanBoevski/image"
+    },
+    "Anay-Samaiya": {
+      "avatarUrl": "https://www.chess.com/callback/member/Anay-Samaiya/image"
+    },
+    "Iamplayerofchess": {
+      "avatarUrl": "https://www.chess.com/callback/member/Iamplayerofchess/image"
+    },
+    "AarjavSamaiya": {
+      "avatarUrl": "https://www.chess.com/callback/member/AarjavSamaiya/image"
+    },
+    "Daniel_3513": {
+      "avatarUrl": "https://www.chess.com/callback/member/Daniel_3513/image"
+    },
+    "DaTreeOfFives": {
+      "avatarUrl": "https://www.chess.com/callback/member/DaTreeOfFives/image"
+    },
+    "RKamalanayanan": {
+      "avatarUrl": "https://www.chess.com/callback/member/RKamalanayanan/image"
+    }
+  },
   "withdrawn": [],
   "registration": {
     "startAt": "",
