@@ -1,6 +1,5 @@
 {
   "players": [
-    
     "negneT",
     "TALented_Vasee_18",
     "TrofAndy",
@@ -474,14 +473,27 @@
             {
               "playerA": "TrofAndy",
               "playerB": "Daniel_3513",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/185484959510::1-0 | https://www.chess.com/game/live/185485041146::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/185484959510",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/185485041146",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -560,15 +572,15 @@
               "withdrawn": false
             },
             {
-              "username": "Daniel_3513",
+              "username": "TrofAndy",
               "rank": 2,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "TrofAndy",
+              "username": "Daniel_3513",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -584,23 +596,23 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 1,
+          "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 3,
+          "gamesFinished": 5,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 4,
+        "matchesFinished": 5,
         "matchesTotal": 22,
-        "gamesFinished": 9,
+        "gamesFinished": 11,
         "gamesTotal": 44
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 4,
+    "matchesPlayedCount": 5,
     "mostWinsPlayer": "Char_Dragon",
     "mostWinsCount": 2,
     "biggestUpset": null,
