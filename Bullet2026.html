@@ -406,15 +406,24 @@ function renderRegistration(){
 const content=document.getElementById('content');
 content.classList.remove('final-centered');
 const players=Array.from(new Set([...(Array.isArray(TOURNAMENT.registration?.players)?TOURNAMENT.registration.players:[]),...(Array.isArray(TOURNAMENT.players)?TOURNAMENT.players:[])].map(p=>String(p||'').trim()).filter(Boolean)));
+const ratingRows=Array.isArray(TOURNAMENT.ranking)?TOURNAMENT.ranking:[];
+const ratingByUser={};
+ratingRows.forEach(r=>{if(r&&r.username)ratingByUser[String(r.username).trim().toLowerCase()]=r.rating;});
+players.sort((a,b)=>{
+const ra=Number(ratingByUser[a.toLowerCase()]),rb=Number(ratingByUser[b.toLowerCase()]);
+const va=Number.isFinite(ra)?ra:-1,vb=Number.isFinite(rb)?rb:-1;
+return vb-va||a.localeCompare(b);
+});
 const[a,b]=unskelPills();
 a.innerHTML=`<span class="stat-num">${players.length}</span> registered players`;
 b.style.display='none';
 let body='';
 players.forEach((u,i)=>{
-const info=playerInfo(u);
-body+=`<tr><td><div class="player-cell"><div class="player-rank">${i+1}</div><a class="player-avatar-link" href="https://www.chess.com/member/${encodeURIComponent(u)}" target="_blank" rel="noopener noreferrer"><img class="player-avatar" src="${esc(info.avatar)}" onerror="this.src='${DEFAULT_AVATAR}'"></a><div class="player-name"><a href="https://www.chess.com/member/${encodeURIComponent(u)}" target="_blank" rel="noopener noreferrer">${esc(info.name)}</a></div></div></td></tr>`;
+const info=playerInfo(u),rating=ratingByUser[u.toLowerCase()];
+const ratingText=rating===null||rating===undefined||!Number.isFinite(Number(rating))?'—':Math.round(Number(rating));
+body+=`<tr><td><div class="player-cell"><div class="player-rank">${i+1}</div><a class="player-avatar-link" href="https://www.chess.com/member/${encodeURIComponent(u)}" target="_blank" rel="noopener noreferrer"><img class="player-avatar" src="${esc(info.avatar)}" onerror="this.src='${DEFAULT_AVATAR}'"></a><div class="player-name"><a href="https://www.chess.com/member/${encodeURIComponent(u)}" target="_blank" rel="noopener noreferrer">${esc(info.name)}</a></div></div></td><td>${ratingText}</td></tr>`;
 });
-content.innerHTML=`<div class="group-card"><div class="table-scroll"><table class="pairings"><thead><tr><th><div class="th-group-label"><span class="th-dot"></span>Registered players</div></th></tr></thead><tbody>${body}</tbody></table></div></div><div class="load-msg">Pairings will appear here once Round 1 is generated.</div>`;
+content.innerHTML=`<div class="group-card"><div class="table-scroll"><table class="pairings"><thead><tr><th><div class="th-group-label"><span class="th-dot"></span>Registered players</div></th><th>Best Elo<br><span style="font-size:10px;font-weight:600">Bullet / Blitz / Rapid</span></th></tr></thead><tbody>${body}</tbody></table></div></div><div class="load-msg">Seeding uses each player's highest current rating across Chess.com Bullet, Blitz and Rapid. Pairings will appear here once Round 1 is generated.</div>`;
 }
 async function boot(){
 const content=document.getElementById('content');
