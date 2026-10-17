@@ -15,7 +15,7 @@
   ],
   "playerProfiles": {
     "negneT": {
-      "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/466828074.d42c7aee.200x200o.5ed8d836202a.jpg"
+      "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/466828074.5d615381.200x200o.c73485dd1506.jpg"
     },
     "TALented_Vasee_18": {
       "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/417947819.33500cb5.200x200o.814dabe2db4a.jpg"
@@ -44,8 +44,12 @@
     "RKamalanayanan": {
       "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/473080950.79070e77.200x200o.056babccd443.jpg"
     },
-    "Sukuna_Loyalist": {},
-    "Char_Dragon": {}
+    "Sukuna_Loyalist": {
+      "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/574344486.c25e1ea1.200x200o.4705b40b9118.jpg"
+    },
+    "Char_Dragon": {
+      "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/357397593.2cdc9ac8.200x200o.df550a11409b.png"
+    }
   },
   "withdrawn": [],
   "registration": {
