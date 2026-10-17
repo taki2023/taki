@@ -81,9 +81,9 @@
   "rounds": [
     {
       "number": 1,
-      "startAt": "",
-      "endAt": "",
-      "groupSize": 10,
+      "startAt": "2026-10-17",
+      "endAt": "2026-10-21",
+      "groupSize": 4,
       "advancesPerGroup": 2,
       "groups": [
         {
@@ -92,21 +92,25 @@
             "negneT",
             "TALented_Vasee_18",
             "TrofAndy",
-            "IvanBoevski",
-            "Anay-Samaiya",
-            "Iamplayerofchess",
-            "AarjavSamaiya",
-            "Daniel_3513",
-            "DaTreeOfFives",
-            "RKamalanayanan"
+            "IvanBoevski"
           ]
         },
         {
           "name": "Group 2",
           "players": [
+            "Anay-Samaiya",
+            "Iamplayerofchess",
+            "AarjavSamaiya",
+            "Daniel_3513"
+          ]
+        },
+        {
+          "name": "Group 3",
+          "players": [
+            "DaTreeOfFives",
+            "RKamalanayanan",
             "Sukuna_Loyalist",
-            "Char_Dragon",
-            "sssssskko"
+            "Char_Dragon"
           ]
         }
       ],
@@ -124,22 +128,22 @@
         {
           "a": "Anay-Samaiya",
           "b": "Iamplayerofchess",
-          "group": "Group 1"
+          "group": "Group 2"
         },
         {
           "a": "AarjavSamaiya",
           "b": "Daniel_3513",
-          "group": "Group 1"
+          "group": "Group 2"
         },
         {
           "a": "DaTreeOfFives",
           "b": "RKamalanayanan",
-          "group": "Group 1"
+          "group": "Group 3"
         },
         {
           "a": "Sukuna_Loyalist",
           "b": "Char_Dragon",
-          "group": "Group 2"
+          "group": "Group 3"
         }
       ]
     }
