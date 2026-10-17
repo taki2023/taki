@@ -88,5 +88,119 @@
     "biggestUpset": null,
     "podium": null,
     "champion": null
+  },
+  "ranking": [
+    {
+      "username": "DaTreeOfFives",
+      "rating": 2231,
+      "flagged": false
+    },
+    {
+      "username": "TrofAndy",
+      "rating": 1689,
+      "flagged": false
+    },
+    {
+      "username": "Daniel_3513",
+      "rating": 1407,
+      "flagged": false
+    },
+    {
+      "username": "Anay-Samaiya",
+      "rating": 1363,
+      "flagged": false
+    },
+    {
+      "username": "AarjavSamaiya",
+      "rating": 1357,
+      "flagged": false
+    },
+    {
+      "username": "Iamplayerofchess",
+      "rating": 1304,
+      "flagged": false
+    },
+    {
+      "username": "negneT",
+      "rating": 1293,
+      "flagged": false
+    },
+    {
+      "username": "TALented_Vasee_18",
+      "rating": 1212,
+      "flagged": false
+    },
+    {
+      "username": "RKamalanayanan",
+      "rating": 1191,
+      "flagged": false
+    },
+    {
+      "username": "IvanBoevski",
+      "rating": 843,
+      "flagged": false
+    },
+    {
+      "username": "sssssskko",
+      "rating": 100,
+      "flagged": false
+    }
+  ],
+  "playerInfo": {
+    "negneT": {
+      "name": "negnet",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/466828074.5d615381.200x200o.c73485dd1506.jpg",
+      "username": "negneT"
+    },
+    "TALented_Vasee_18": {
+      "name": "talented_vasee_18",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/417947819.33500cb5.200x200o.814dabe2db4a.jpg",
+      "username": "TALented_Vasee_18"
+    },
+    "Anay-Samaiya": {
+      "name": "anay-samaiya",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/418704935.b3b3e53a.200x200o.07cd74e583bb.jpg",
+      "username": "Anay-Samaiya"
+    },
+    "Iamplayerofchess": {
+      "name": "iamplayerofchess",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/334087811.9b6a7501.200x200o.fa2dfbadd804.png",
+      "username": "Iamplayerofchess"
+    },
+    "AarjavSamaiya": {
+      "name": "aarjavsamaiya",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/357342997.9c6237f2.200x200o.69d6d01a8c76.jpg",
+      "username": "AarjavSamaiya"
+    },
+    "DaTreeOfFives": {
+      "name": "datreeoffives",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/74624564.dd922346.200x200o.cd8b1ce3c2ec.png",
+      "username": "DaTreeOfFives"
+    },
+    "TrofAndy": {
+      "name": "trofandy",
+      "avatar": "https://www.chess.com/bundles/web/images/user-image.007dad08.svg",
+      "username": "TrofAndy"
+    },
+    "IvanBoevski": {
+      "name": "ivanboevski",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/458154636.108ba7e5.200x200o.59824d2a5e5f.jpg",
+      "username": "IvanBoevski"
+    },
+    "Daniel_3513": {
+      "name": "daniel_3513",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/185232363.9a580e8e.200x200o.255a59397e05.jpeg",
+      "username": "Daniel_3513"
+    },
+    "RKamalanayanan": {
+      "name": "rkamalanayanan",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/473080950.79070e77.200x200o.056babccd443.jpg",
+      "username": "RKamalanayanan"
+    },
+    "sssssskko": {
+      "name": "sssssskko",
+      "avatar": "https://images.chesscomfiles.com/uploads/v1/user/415934797.5326d2e2.200x200o.aa86be3850b3.png",
+      "username": "sssssskko"
+    }
   }
 }
