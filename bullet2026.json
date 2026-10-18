@@ -1,7 +1,6 @@
 {
   "players": [
     "negneT",
-    
     "TALented_Vasee_18",
     "TrofAndy",
     "IvanBoevski",
@@ -539,14 +538,21 @@
             {
               "playerA": "TALented_Vasee_18",
               "playerB": "AarjavSamaiya",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/185510517918::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/185510517918",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 1,
+              "linkedGames": 1,
+              "scoreA": 1,
               "scoreB": 0,
               "finished": false,
-              "status": "pending",
+              "status": "partial",
               "bothWithdrawn": false
             },
             {
@@ -567,7 +573,7 @@
             {
               "username": "TALented_Vasee_18",
               "rank": 1,
-              "score": 3,
+              "score": 4,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
@@ -599,7 +605,7 @@
           ],
           "matchesFinished": 2,
           "matchesTotal": 6,
-          "gamesFinished": 5,
+          "gamesFinished": 6,
           "gamesTotal": 12,
           "allFinished": false
         }
@@ -607,7 +613,7 @@
       "stats": {
         "matchesFinished": 5,
         "matchesTotal": 22,
-        "gamesFinished": 11,
+        "gamesFinished": 12,
         "gamesTotal": 44
       }
     }
