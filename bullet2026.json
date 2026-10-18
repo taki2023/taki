@@ -2,7 +2,6 @@
   "players": [
     "negneT",
     "TALented_Vasee_18",
-    
     "TrofAndy",
     "IvanBoevski",
     "Anay-Samaiya",
@@ -99,14 +98,27 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "Iamplayerofchess",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/185536605058::1-0 | https://www.chess.com/game/live/185536772186::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/185536605058",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/185536772186",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -151,14 +163,27 @@
             {
               "playerA": "Iamplayerofchess",
               "playerB": "negneT",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "link": "https://www.chess.com/game/live/185537651470::0-1 | https://www.chess.com/game/live/185537757712::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/185537651470",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/185537757712",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -229,31 +254,31 @@
           ],
           "standings": [
             {
-              "username": "sssssskko",
+              "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 2,
+              "tiebreak": 1,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Sukuna_Loyalist",
+              "username": "Iamplayerofchess",
               "rank": 2,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "negneT",
               "rank": 3,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "Iamplayerofchess",
+              "username": "sssssskko",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
@@ -261,7 +286,7 @@
               "withdrawn": false
             },
             {
-              "username": "DaTreeOfFives",
+              "username": "Sukuna_Loyalist",
               "rank": 5,
               "score": 0,
               "tiebreak": 0,
@@ -269,9 +294,9 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 2,
           "matchesTotal": 10,
-          "gamesFinished": 0,
+          "gamesFinished": 4,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -454,21 +479,27 @@
             {
               "playerA": "TrofAndy",
               "playerB": "TALented_Vasee_18",
-              "link": "https://www.chess.com/game/live/185470024474::0-1",
+              "link": "https://www.chess.com/game/live/185470024474::0-1 | https://www.chess.com/game/live/185537386130::1-0",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/185470024474",
                   "scoreA": 0,
                   "scoreB": 1,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/185537386130",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
-              "linkedGames": 1,
-              "scoreA": 0,
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 1,
               "scoreB": 1,
-              "finished": false,
-              "status": "partial",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -575,15 +606,15 @@
               "username": "TALented_Vasee_18",
               "rank": 1,
               "score": 4,
-              "tiebreak": 0,
+              "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TrofAndy",
               "rank": 2,
-              "score": 2,
-              "tiebreak": 0,
+              "score": 3,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
@@ -604,23 +635,23 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 2,
+          "matchesFinished": 3,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 7,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 5,
+        "matchesFinished": 8,
         "matchesTotal": 22,
-        "gamesFinished": 12,
+        "gamesFinished": 17,
         "gamesTotal": 44
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 5,
+    "matchesPlayedCount": 8,
     "mostWinsPlayer": "Char_Dragon",
     "mostWinsCount": 2,
     "biggestUpset": null,
