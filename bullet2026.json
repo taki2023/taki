@@ -1069,14 +1069,27 @@
             {
               "playerA": "TALented_Vasee_18",
               "playerB": "Iamplayerofchess",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
+              "link": "https://www.chess.com/game/live/185750012012::0-1 | https://www.chess.com/game/live/185750191404::0-1",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/185750012012",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/185750191404",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
               "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreB": 2,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1134,15 +1147,15 @@
           ],
           "standings": [
             {
-              "username": "negneT",
+              "username": "Iamplayerofchess",
               "rank": 1,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Iamplayerofchess",
+              "username": "TALented_Vasee_18",
               "rank": 2,
               "score": 0,
               "tiebreak": 0,
@@ -1150,7 +1163,7 @@
               "withdrawn": false
             },
             {
-              "username": "Anay-Samaiya",
+              "username": "negneT",
               "rank": 3,
               "score": 0,
               "tiebreak": 0,
@@ -1158,7 +1171,7 @@
               "withdrawn": false
             },
             {
-              "username": "TALented_Vasee_18",
+              "username": "Anay-Samaiya",
               "rank": 4,
               "score": 0,
               "tiebreak": 0,
@@ -1190,23 +1203,23 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 0,
+          "matchesFinished": 1,
           "matchesTotal": 21,
-          "gamesFinished": 0,
+          "gamesFinished": 2,
           "gamesTotal": 42,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 0,
+        "matchesFinished": 1,
         "matchesTotal": 21,
-        "gamesFinished": 0,
+        "gamesFinished": 2,
         "gamesTotal": 42
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 22,
+    "matchesPlayedCount": 23,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 4,
     "biggestUpset": {
@@ -1218,15 +1231,15 @@
     },
     "podium": [
       {
-        "username": "negneT",
-        "score": 0
-      },
-      {
         "username": "Iamplayerofchess",
+        "score": 2
+      },
+      {
+        "username": "TALented_Vasee_18",
         "score": 0
       },
       {
-        "username": "Anay-Samaiya",
+        "username": "negneT",
         "score": 0
       }
     ],
