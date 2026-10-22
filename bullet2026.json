@@ -750,14 +750,27 @@
             {
               "playerA": "Daniel_3513",
               "playerB": "AarjavSamaiya",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
+              "link": "::0.5-0.5 | ::0.5-0.5",
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreA": 1,
+              "scoreB": 1,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             }
           ],
@@ -766,7 +779,7 @@
               "username": "TrofAndy",
               "rank": 1,
               "score": 5,
-              "tiebreak": 2,
+              "tiebreak": 4,
               "qualified": true,
               "withdrawn": false
             },
@@ -774,44 +787,44 @@
               "username": "TALented_Vasee_18",
               "rank": 2,
               "score": 4,
-              "tiebreak": 2.5,
+              "tiebreak": 3.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Daniel_3513",
               "rank": 3,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "AarjavSamaiya",
               "rank": 4,
-              "score": 0,
-              "tiebreak": 0,
+              "score": 1,
+              "tiebreak": 0.5,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 4,
+          "matchesFinished": 5,
           "matchesTotal": 6,
-          "gamesFinished": 9,
+          "gamesFinished": 11,
           "gamesTotal": 12,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 20,
+        "matchesFinished": 21,
         "matchesTotal": 22,
-        "gamesFinished": 41,
+        "gamesFinished": 43,
         "gamesTotal": 44
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 20,
+    "matchesPlayedCount": 21,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 4,
     "biggestUpset": {
