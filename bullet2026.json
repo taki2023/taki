@@ -841,6 +841,368 @@
         "gamesFinished": 44,
         "gamesTotal": 44
       }
+    },
+    {
+      "number": 2,
+      "name": "Final Round",
+      "groups": [
+        {
+          "name": "Group 1",
+          "players": [
+            "DaTreeOfFives",
+            "Char_Dragon",
+            "TrofAndy",
+            "TALented_Vasee_18",
+            "Anay-Samaiya",
+            "Iamplayerofchess",
+            "negneT"
+          ],
+          "matches": [
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Char_Dragon",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "TrofAndy",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "TALented_Vasee_18",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Anay-Samaiya",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "Iamplayerofchess",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "DaTreeOfFives",
+              "playerB": "negneT",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Char_Dragon",
+              "playerB": "TrofAndy",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Char_Dragon",
+              "playerB": "TALented_Vasee_18",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Char_Dragon",
+              "playerB": "Anay-Samaiya",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Char_Dragon",
+              "playerB": "Iamplayerofchess",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Char_Dragon",
+              "playerB": "negneT",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "TALented_Vasee_18",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "Anay-Samaiya",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "Iamplayerofchess",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TrofAndy",
+              "playerB": "negneT",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "Anay-Samaiya",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "Iamplayerofchess",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "TALented_Vasee_18",
+              "playerB": "negneT",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Anay-Samaiya",
+              "playerB": "Iamplayerofchess",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Anay-Samaiya",
+              "playerB": "negneT",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            },
+            {
+              "playerA": "Iamplayerofchess",
+              "playerB": "negneT",
+              "link": "",
+              "games": [],
+              "playedCount": 0,
+              "linkedGames": 0,
+              "scoreA": 0,
+              "scoreB": 0,
+              "finished": false,
+              "status": "pending",
+              "bothWithdrawn": false
+            }
+          ],
+          "standings": [
+            {
+              "username": "negneT",
+              "rank": 1,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Iamplayerofchess",
+              "rank": 2,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": true,
+              "withdrawn": false
+            },
+            {
+              "username": "Anay-Samaiya",
+              "rank": 3,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "TALented_Vasee_18",
+              "rank": 4,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "TrofAndy",
+              "rank": 5,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "Char_Dragon",
+              "rank": 6,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "DaTreeOfFives",
+              "rank": 7,
+              "score": 0,
+              "tiebreak": 0,
+              "qualified": false,
+              "withdrawn": false
+            }
+          ],
+          "matchesFinished": 0,
+          "matchesTotal": 21,
+          "gamesFinished": 0,
+          "gamesTotal": 42,
+          "allFinished": false
+        }
+      ],
+      "stats": {
+        "matchesFinished": 0,
+        "matchesTotal": 21,
+        "gamesFinished": 0,
+        "gamesTotal": 42
+      }
     }
   ],
   "stats": {
@@ -854,7 +1216,20 @@
       "loserRating": 596,
       "diff": 477
     },
-    "podium": null,
+    "podium": [
+      {
+        "username": "negneT",
+        "score": 0
+      },
+      {
+        "username": "Iamplayerofchess",
+        "score": 0
+      },
+      {
+        "username": "Anay-Samaiya",
+        "score": 0
+      }
+    ],
     "champion": null
   },
   "ranking": [
