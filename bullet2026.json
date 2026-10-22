@@ -730,21 +730,27 @@
             {
               "playerA": "TALented_Vasee_18",
               "playerB": "AarjavSamaiya",
-              "link": "https://www.chess.com/game/live/185510517918::1-0",
+              "link": "https://www.chess.com/game/live/185510517918::1-0 | ::0.5-0.5",
               "games": [
                 {
                   "link": "https://www.chess.com/game/live/185510517918",
                   "scoreA": 1,
                   "scoreB": 0,
                   "dueToWithdrawal": false
+                },
+                {
+                  "link": "",
+                  "scoreA": 0.5,
+                  "scoreB": 0.5,
+                  "dueToWithdrawal": false
                 }
               ],
-              "playedCount": 1,
+              "playedCount": 2,
               "linkedGames": 1,
-              "scoreA": 1,
-              "scoreB": 0,
-              "finished": false,
-              "status": "partial",
+              "scoreA": 1.5,
+              "scoreB": 0.5,
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -779,52 +785,52 @@
               "username": "TrofAndy",
               "rank": 1,
               "score": 5,
-              "tiebreak": 4,
+              "tiebreak": 4.75,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "TALented_Vasee_18",
               "rank": 2,
-              "score": 4,
-              "tiebreak": 3.5,
+              "score": 4.5,
+              "tiebreak": 5,
               "qualified": true,
               "withdrawn": false
             },
             {
-              "username": "Daniel_3513",
+              "username": "AarjavSamaiya",
               "rank": 3,
-              "score": 1,
+              "score": 1.5,
               "tiebreak": 0.5,
               "qualified": false,
               "withdrawn": false
             },
             {
-              "username": "AarjavSamaiya",
+              "username": "Daniel_3513",
               "rank": 4,
               "score": 1,
-              "tiebreak": 0.5,
+              "tiebreak": 0.75,
               "qualified": false,
               "withdrawn": false
             }
           ],
-          "matchesFinished": 5,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 11,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         }
       ],
       "stats": {
-        "matchesFinished": 21,
+        "matchesFinished": 22,
         "matchesTotal": 22,
-        "gamesFinished": 43,
+        "gamesFinished": 44,
         "gamesTotal": 44
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 21,
+    "matchesPlayedCount": 22,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 4,
     "biggestUpset": {
