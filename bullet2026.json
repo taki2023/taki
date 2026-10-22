@@ -55,7 +55,9 @@
       "avatarUrl": "https://images.chesscomfiles.com/uploads/v1/user/415934797.5326d2e2.200x200o.aa86be3850b3.png"
     }
   },
-  "withdrawn": [],
+  "withdrawn": [
+    "Sukuna_Loyalist"
+  ],
   "registration": {
     "startAt": "2026-10-14",
     "endAt": "2026-10-15",
@@ -151,13 +153,26 @@
               "playerA": "DaTreeOfFives",
               "playerB": "Sukuna_Loyalist",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -203,13 +218,26 @@
               "playerA": "Iamplayerofchess",
               "playerB": "Sukuna_Loyalist",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -229,13 +257,26 @@
               "playerA": "negneT",
               "playerB": "Sukuna_Loyalist",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -255,13 +296,26 @@
               "playerA": "Sukuna_Loyalist",
               "playerB": "sssssskko",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 0,
+                  "scoreB": 1,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
               "scoreA": 0,
-              "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "scoreB": 2,
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -269,31 +323,31 @@
             {
               "username": "DaTreeOfFives",
               "rank": 1,
-              "score": 4,
-              "tiebreak": 2,
+              "score": 6,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "negneT",
               "rank": 2,
-              "score": 1,
-              "tiebreak": 0.5,
+              "score": 3,
+              "tiebreak": 1.5,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Iamplayerofchess",
               "rank": 3,
-              "score": 1,
-              "tiebreak": 0.5,
+              "score": 3,
+              "tiebreak": 1.5,
               "qualified": false,
               "withdrawn": false
             },
             {
               "username": "sssssskko",
               "rank": 4,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
@@ -304,12 +358,12 @@
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": false
+              "withdrawn": true
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 7,
           "matchesTotal": 10,
-          "gamesFinished": 6,
+          "gamesFinished": 14,
           "gamesTotal": 20,
           "allFinished": false
         },
@@ -669,18 +723,24 @@
         }
       ],
       "stats": {
-        "matchesFinished": 10,
+        "matchesFinished": 14,
         "matchesTotal": 22,
-        "gamesFinished": 21,
+        "gamesFinished": 29,
         "gamesTotal": 44
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 10,
+    "matchesPlayedCount": 14,
     "mostWinsPlayer": "DaTreeOfFives",
-    "mostWinsCount": 2,
-    "biggestUpset": null,
+    "mostWinsCount": 3,
+    "biggestUpset": {
+      "winner": "sssssskko",
+      "loser": "Sukuna_Loyalist",
+      "winnerRating": 119,
+      "loserRating": 596,
+      "diff": 477
+    },
     "podium": null,
     "champion": null
   },
