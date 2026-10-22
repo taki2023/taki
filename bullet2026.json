@@ -12,7 +12,6 @@
     "RKamalanayanan",
     "Sukuna_Loyalist",
     "Char_Dragon",
-    
     "sssssskko"
   ],
   "playerProfiles": {
@@ -383,7 +382,7 @@
               "rank": 3,
               "score": 5,
               "tiebreak": 2.5,
-              "qualified": false,
+              "qualified": true,
               "withdrawn": false
             },
             {
