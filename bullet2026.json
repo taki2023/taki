@@ -57,7 +57,8 @@
   },
   "withdrawn": [
     "Sukuna_Loyalist",
-    "sssssskko"
+    "sssssskko",
+    "IvanBoevski"
   ],
   "registration": {
     "startAt": "2026-10-14",
@@ -472,13 +473,26 @@
               "playerA": "Char_Dragon",
               "playerB": "IvanBoevski",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
@@ -511,26 +525,52 @@
               "playerA": "Anay-Samaiya",
               "playerB": "IvanBoevski",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             },
             {
               "playerA": "RKamalanayanan",
               "playerB": "IvanBoevski",
               "link": "",
-              "games": [],
-              "playedCount": 0,
+              "games": [
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                },
+                {
+                  "link": "",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": true
+                }
+              ],
+              "playedCount": 2,
               "linkedGames": 0,
-              "scoreA": 0,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "forfeit",
               "bothWithdrawn": false
             }
           ],
@@ -538,23 +578,23 @@
             {
               "username": "Char_Dragon",
               "rank": 1,
-              "score": 4,
-              "tiebreak": 2,
+              "score": 6,
+              "tiebreak": 6,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "Anay-Samaiya",
               "rank": 2,
-              "score": 2,
-              "tiebreak": 0,
+              "score": 4,
+              "tiebreak": 2,
               "qualified": true,
               "withdrawn": false
             },
             {
               "username": "RKamalanayanan",
               "rank": 3,
-              "score": 0,
+              "score": 2,
               "tiebreak": 0,
               "qualified": false,
               "withdrawn": false
@@ -565,14 +605,14 @@
               "score": 0,
               "tiebreak": 0,
               "qualified": false,
-              "withdrawn": false
+              "withdrawn": true
             }
           ],
-          "matchesFinished": 3,
+          "matchesFinished": 6,
           "matchesTotal": 6,
-          "gamesFinished": 6,
+          "gamesFinished": 12,
           "gamesTotal": 12,
-          "allFinished": false
+          "allFinished": true
         },
         {
           "name": "Group 3",
@@ -763,15 +803,15 @@
         }
       ],
       "stats": {
-        "matchesFinished": 17,
+        "matchesFinished": 20,
         "matchesTotal": 22,
-        "gamesFinished": 35,
+        "gamesFinished": 41,
         "gamesTotal": 44
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 17,
+    "matchesPlayedCount": 20,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 4,
     "biggestUpset": {
