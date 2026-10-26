@@ -991,14 +991,27 @@
             {
               "playerA": "Char_Dragon",
               "playerB": "negneT",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/185919400988::1-0 | https://www.chess.com/game/live/185919478156::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/185919400988",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/185919478156",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1202,8 +1215,16 @@
               "withdrawn": false
             },
             {
-              "username": "Iamplayerofchess",
+              "username": "Char_Dragon",
               "rank": 3,
+              "score": 2,
+              "tiebreak": 1,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "Iamplayerofchess",
+              "rank": 4,
               "score": 2,
               "tiebreak": 0,
               "qualified": false,
@@ -1211,7 +1232,7 @@
             },
             {
               "username": "negneT",
-              "rank": 4,
+              "rank": 5,
               "score": 1,
               "tiebreak": 1,
               "qualified": false,
@@ -1219,14 +1240,6 @@
             },
             {
               "username": "TALented_Vasee_18",
-              "rank": 5,
-              "score": 0,
-              "tiebreak": 0,
-              "qualified": false,
-              "withdrawn": false
-            },
-            {
-              "username": "Char_Dragon",
               "rank": 6,
               "score": 0,
               "tiebreak": 0,
@@ -1242,23 +1255,23 @@
               "withdrawn": false
             }
           ],
-          "matchesFinished": 4,
+          "matchesFinished": 5,
           "matchesTotal": 21,
-          "gamesFinished": 8,
+          "gamesFinished": 10,
           "gamesTotal": 42,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 4,
+        "matchesFinished": 5,
         "matchesTotal": 21,
-        "gamesFinished": 8,
+        "gamesFinished": 10,
         "gamesTotal": 42
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 26,
+    "matchesPlayedCount": 27,
     "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 4,
     "biggestUpset": {
@@ -1278,7 +1291,7 @@
         "score": 2
       },
       {
-        "username": "Iamplayerofchess",
+        "username": "Char_Dragon",
         "score": 2
       }
     ],
