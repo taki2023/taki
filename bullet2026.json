@@ -2,7 +2,6 @@
   "players": [
     "negneT",
     "TALented_Vasee_18",
-    
     "TrofAndy",
     "IvanBoevski",
     "Anay-Samaiya",
@@ -940,14 +939,27 @@
             {
               "playerA": "DaTreeOfFives",
               "playerB": "negneT",
-              "link": "",
-              "games": [],
-              "playedCount": 0,
-              "linkedGames": 0,
-              "scoreA": 0,
+              "link": "https://www.chess.com/game/live/186102815232::1-0 | https://www.chess.com/game/live/186102934968::1-0",
+              "games": [
+                {
+                  "link": "https://www.chess.com/game/live/186102815232",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                },
+                {
+                  "link": "https://www.chess.com/game/live/186102934968",
+                  "scoreA": 1,
+                  "scoreB": 0,
+                  "dueToWithdrawal": false
+                }
+              ],
+              "playedCount": 2,
+              "linkedGames": 2,
+              "scoreA": 2,
               "scoreB": 0,
-              "finished": false,
-              "status": "pending",
+              "finished": true,
+              "status": "finished",
               "bothWithdrawn": false
             },
             {
@@ -1301,7 +1313,7 @@
               "username": "Char_Dragon",
               "rank": 1,
               "score": 6.5,
-              "tiebreak": 9,
+              "tiebreak": 10,
               "qualified": true,
               "withdrawn": false
             },
@@ -1330,8 +1342,16 @@
               "withdrawn": false
             },
             {
-              "username": "negneT",
+              "username": "DaTreeOfFives",
               "rank": 5,
+              "score": 3,
+              "tiebreak": 6.25,
+              "qualified": false,
+              "withdrawn": false
+            },
+            {
+              "username": "negneT",
+              "rank": 6,
               "score": 3,
               "tiebreak": 5.5,
               "qualified": false,
@@ -1339,39 +1359,31 @@
             },
             {
               "username": "TALented_Vasee_18",
-              "rank": 6,
+              "rank": 7,
               "score": 2,
               "tiebreak": 3.5,
               "qualified": false,
               "withdrawn": false
-            },
-            {
-              "username": "DaTreeOfFives",
-              "rank": 7,
-              "score": 1,
-              "tiebreak": 3.25,
-              "qualified": false,
-              "withdrawn": false
             }
           ],
-          "matchesFinished": 12,
+          "matchesFinished": 13,
           "matchesTotal": 21,
-          "gamesFinished": 25,
+          "gamesFinished": 27,
           "gamesTotal": 42,
           "allFinished": false
         }
       ],
       "stats": {
-        "matchesFinished": 12,
+        "matchesFinished": 13,
         "matchesTotal": 21,
-        "gamesFinished": 25,
+        "gamesFinished": 27,
         "gamesTotal": 42
       }
     }
   ],
   "stats": {
-    "matchesPlayedCount": 34,
-    "mostWinsPlayer": "Char_Dragon",
+    "matchesPlayedCount": 35,
+    "mostWinsPlayer": "DaTreeOfFives",
     "mostWinsCount": 5,
     "biggestUpset": {
       "winner": "sssssskko",
